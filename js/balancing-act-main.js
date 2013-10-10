@@ -10,10 +10,10 @@ require( [
   'SCENERY/nodes/Rectangle',
   'BALLOONS_AND_STATIC_ELECTRICITY/Strings',
   'JOIST/Sim',
-  'BALLOONS_AND_STATIC_ELECTRICITY/model/BalloonsAndStaticElectricityModel',
-  'BALLOONS_AND_STATIC_ELECTRICITY/view/BalloonsAndStaticElectricityView',
+  'BALANCING_ACT/tempModel',
+  'BALANCING_ACT/view/tempView',
   'JOIST/SimLauncher'
-], function( Text, Rectangle, Strings, Sim, BalloonsAndStaticElectricityModel, BalloonsAndStaticElectricityView, SimLauncher ) {
+], function( Text, Rectangle, Strings, Sim, BalancingActTempModel, BalancingActTempView, SimLauncher ) {
   'use strict';
 
   SimLauncher.launch( function() {
