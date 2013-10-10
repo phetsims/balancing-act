@@ -23,9 +23,23 @@ require( [
     };
 
     //Create and start the sim
-    new Sim( Strings['balloons.name'], [
+    new Sim( Strings['balancing-act.name'], [
       {
-        name: Strings['balloons.name'],
+        name: Strings['balanceLab'],
+        icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
+        createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
+        createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
+        backgroundColor: "#9ddcf8"
+      },
+      {
+        name: Strings['balanceLab'],
+        icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
+        createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
+        createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
+        backgroundColor: "#9ddcf8"
+      },
+      {
+        name: Strings['balanceLab'],
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
         createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
         createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
