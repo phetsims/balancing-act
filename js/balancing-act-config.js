@@ -16,23 +16,33 @@ require.config( {
   // Path mappings for module names not found directly under baseUrl. The path settings are assumed to be
   // relative to baseUrl unless the paths setting starts with a '/' or has a URL protocol.
   paths: {
-    AXON: '../../axon/js',
 
-    // common directories, uppercase names to identify them in require imports
+
+    // third party libs
+    text: '../../sherpa/text',
+
+    // plugins
+    audio: '../../chipper/requirejs-plugins/audio',
+    image: '../../chipper/requirejs-plugins/image',
+    string: '../../chipper/requirejs-plugins/string',
+
+    // PhET libs, uppercase names to identify them in require.js imports
+    ASSERT: '../../assert/js',
+    AXON: '../../axon/js',
+    DOT: '../../dot/js',
+    JOIST: '../../joist/js',
+    KITE: '../../kite/js',
     PHETCOMMON: '../../phetcommon/js',
+    PHET_CORE: '../../phet-core/js',
     SCENERY: '../../scenery/js',
     SCENERY_PHET: '../../scenery-phet/js',
-    KITE: '../../kite/js',
-    PHET_CORE: '../../phet-core/js',
-    DOT: '../../dot/js',
-    ASSERT: '../../assert/js',
+    SHERPA: '../../sherpa',
     SUN: '../../sun/js',
-    JOIST: '../../joist/js',
-    BALANCING_ACT: '../../balancing-act/js',
+    VEGAS: '../../vegas/js',
+    VIBE: '../../vibe/js',
 
-    // local contrib dependencies
-    i18n: '../../sherpa/i18n-2.0.4',
-    image: '../../chipper/requirejs-plugins/image'
+    // this sim
+    BALANCING_ACT: '../../balancing-act/js',
   },
 
   urlArgs: new Date().getTime()  // cache buster to make browser reload all included scripts

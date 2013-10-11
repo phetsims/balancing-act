@@ -8,12 +8,12 @@
 require( [
   'SCENERY/nodes/Text',
   'SCENERY/nodes/Rectangle',
-  'BALLOONS_AND_STATIC_ELECTRICITY/Strings',
   'JOIST/Sim',
-  'BALANCING_ACT/tempModel',
-  'BALANCING_ACT/view/tempView',
-  'JOIST/SimLauncher'
-], function( Text, Rectangle, Strings, Sim, BalancingActTempModel, BalancingActTempView, SimLauncher ) {
+  'BALANCING_ACT/BalancingActTempModel',
+  'BALANCING_ACT/BalancingActTempView',
+  'JOIST/SimLauncher',
+  'string!BALANCING_ACT/balancing-act.name'
+], function( Text, Rectangle, Sim, BalancingActTempModel, BalancingActTempView, SimLauncher, simTitle ) {
   'use strict';
 
   SimLauncher.launch( function() {
@@ -23,26 +23,26 @@ require( [
     };
 
     //Create and start the sim
-    new Sim( Strings['balancing-act.name'], [
+    new Sim( simTitle, [
       {
-        name: Strings['balanceLab'],
+        name: simTitle,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
-        createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
-        createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
+        createModel: function() {return new BalancingActTempModel( 768, 504 );},
+        createView: function( model ) {return new BalancingActTempView( model );},
         backgroundColor: "#9ddcf8"
       },
       {
-        name: Strings['balanceLab'],
+        name: simTitle,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
-        createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
-        createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
+        createModel: function() {return new BalancingActTempModel( 768, 504 );},
+        createView: function( model ) {return new BalancingActTempView( model );},
         backgroundColor: "#9ddcf8"
       },
       {
-        name: Strings['balanceLab'],
+        name: simTitle,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
-        createModel: function() {return new BalloonsAndStaticElectricityModel( 768, 504 );},
-        createView: function( model ) {return new BalloonsAndStaticElectricityView( model );},
+        createModel: function() {return new BalancingActTempModel( 768, 504 );},
+        createView: function( model ) {return new BalancingActTempView( model );},
         backgroundColor: "#9ddcf8"
       }
     ], simOptions ).start();
