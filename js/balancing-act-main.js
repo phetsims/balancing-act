@@ -12,8 +12,11 @@ require( [
   'BALANCING_ACT/BalancingActTempModel',
   'BALANCING_ACT/BalancingActTempView',
   'JOIST/SimLauncher',
-  'string!BALANCING_ACT/balancing-act.name'
-], function( Text, Rectangle, Sim, BalancingActTempModel, BalancingActTempView, SimLauncher, simTitle ) {
+  'string!BALANCING_ACT/balancing-act.name',
+  'string!BALANCING_ACT/intro',
+  'string!BALANCING_ACT/balanceLab',
+  'string!BALANCING_ACT/game'
+], function( Text, Rectangle, Sim, BalancingActTempModel, BalancingActTempView, SimLauncher, simTitleString, introString, balanceLabString, gameString  ) {
   'use strict';
 
   SimLauncher.launch( function() {
@@ -23,23 +26,23 @@ require( [
     };
 
     //Create and start the sim
-    new Sim( simTitle, [
+    new Sim( simTitleString, [
       {
-        name: simTitle,
+        name: introString,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
         createModel: function() {return new BalancingActTempModel( 768, 504 );},
         createView: function( model ) {return new BalancingActTempView( model );},
         backgroundColor: "#9ddcf8"
       },
       {
-        name: simTitle,
+        name: balanceLabString,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
         createModel: function() {return new BalancingActTempModel( 768, 504 );},
         createView: function( model ) {return new BalancingActTempView( model );},
         backgroundColor: "#9ddcf8"
       },
       {
-        name: simTitle,
+        name: gameString,
         icon: new Rectangle( 0, 0, 50, 50, {fill: 'blue'} ),
         createModel: function() {return new BalancingActTempModel( 768, 504 );},
         createView: function( model ) {return new BalancingActTempView( model );},
