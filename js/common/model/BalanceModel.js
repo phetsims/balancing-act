@@ -1,8 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Basic model for depicting masses on a balance, used as a base type for
- * several of the models.
+ * Basic model for depicting masses on a balance, meant to be used as a base
+ * type.
  *
  * @author John Blanco
  */
@@ -43,22 +43,22 @@ define( function( require ) {
     // Step function, called by the framework, clocks time-dependent behavior.
     step: function( dt ) {
       this.plank.stepInTime( dt );
-      this.massList.forEach( function( mass ){
+      this.massList.forEach( function( mass ) {
         mass.stepInTime( dt );
-      })
+      } )
     },
 
     // Add a mass to the model.  Subclasses generally do additional things.
-    addMass: function( mass ){
+    addMass: function( mass ) {
       this.massList.push( mass );
     },
 
     // Remove a mass from the model.  Subclasses generally do additional things.
-    removeMass: function( mass ){
+    removeMass: function( mass ) {
       this.massList = _.without( this.massList, mass );
     },
 
-    reset: function(){
+    reset: function() {
       this.plank.removeAllMasses();
       this.columnState.reset();
     }

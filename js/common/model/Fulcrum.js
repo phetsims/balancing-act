@@ -12,13 +12,14 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var ShapeModelElement = require( 'ShapeModelElement' );
+  var Property = require( 'AXON/Property' );
+  var Shape = require( 'KITE/Shape' );
 
   // Constants
   var LEG_THICKNESS_FACTOR = 0.08; // Thickness of legs proportional to overall width, empirically determined.
 
   /**
-   * @param {Dimension2} size
+   * @param {Dimension2} size - width and height of the fulcrum.
    * @constructor
    */
   function Fulcrum( size ) {
@@ -27,7 +28,13 @@ define( function( require ) {
     thisFulcrum.size = size;
     var legThickness = LEG_THICKNESS_FACTOR * size.width;
 
-    // Create the shape of the fulcrum.
+    // Define the basic shape of the fulcrum.
+    thisFulcrum.shape = new Shape();
+    thisFulcrum.shape.moveTo( -SYMBOL_WIDTH / 2, -SYMBOL_LINE_WIDTH / 2 );
+    thisFulcrum.shape.lineTo( SYMBOL_WIDTH / 2, -SYMBOL_LINE_WIDTH / 2 );
+    thisFulcrum.shape.lineTo( SYMBOL_WIDTH / 2, SYMBOL_LINE_WIDTH / 2 );
+    thisFulcrum.shape.lineTo( -SYMBOL_WIDTH / 2, SYMBOL_LINE_WIDTH / 2 );
+    thisFulcrum.shape.close();
 
 
   }
