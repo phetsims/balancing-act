@@ -6,6 +6,8 @@
  * <p/>
  * This assumes that the horizon is at Y=0.
  *
+ * TODO: Move this to common code once it is fully debugged.
+ *
  * @author John Blanco
  * @author Sam Reid
  */
