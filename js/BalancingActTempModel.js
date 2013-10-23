@@ -6,5 +6,9 @@ define( function( require ) {
   function BalancingActTempModel() {
   }
 
+  BalancingActTempModel.prototype = {
+     step: function() {}
+  };
+
   return BalancingActTempModel;
 } );
