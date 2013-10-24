@@ -41,11 +41,13 @@ define( function( require ) {
 
     if ( options.modelRect.getMinY() < 0 ) {
       // Add the ground first, because we're earthy people.
-      this.addChild( new GroundNode( mvt, options.modelRect, groundGradientBottomY ) );
+      var groundRect = new Rectangle( options.modelRect.minX, options.modelRect.minY, options.modelRect.width, -options.modelRect.minY );
+      this.addChild( new GroundNode( mvt, groundRect, groundGradientBottomY ) );
     }
     if ( options.modelRect.getMaxY() > 0 ) {
       // Add the sky.
-      this.addChild( new SkyNode( mvt, options.modelRect, skyGradientTopY ) );
+      var skyRect = new Rectangle( options.modelRect.x, 0, options.modelRect.width, options.modelRect.maxY );
+      this.addChild( new SkyNode( mvt, skyRect, skyGradientTopY ) );
     }
   }
 

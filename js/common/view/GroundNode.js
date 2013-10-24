@@ -25,8 +25,8 @@ define( function( require ) {
   function GroundNode( mvt, modelRect, modelGradientHeight, options ) {
     options = _.extend(
       {
-        topColor: new Color( 1, 172, 228 ),
-        bottomColor: new Color( 1, 172, 228 )
+        topColor: new Color( 144, 199, 86 ),
+        bottomColor: new Color( 103, 162, 87 )
       }, options );
     GradientBackgroundNode.call( this, mvt, modelRect, options.bottomColor, options.topColor, 0, modelGradientHeight );
   }
