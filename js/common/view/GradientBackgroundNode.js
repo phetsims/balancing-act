@@ -16,6 +16,15 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
+  /**
+   * @param mvt
+   * @param modelRect
+   * @param color1
+   * @param color2
+   * @param y1
+   * @param y2
+   * @constructor
+   */
   function GradientBackgroundNode( mvt, modelRect, color1, color2, y1, y2 ) {
     Node.call( this );
     var viewShape = mvt.modelToViewShape( modelRect );

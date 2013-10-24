@@ -12,8 +12,8 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var GradientBackgroundNode = require( 'GradientBackgroundNode' );
-  var Color = require( 'Scenery/util/Color' );
+  var GradientBackgroundNode = require( 'BALANCING_ACT/common/view/GradientBackgroundNode' );
+  var Color = require( 'SCENERY/util/Color' );
 
   /**
    * @param {ModelViewTransform2} mvt Model/View transform
@@ -28,7 +28,7 @@ define( function( require ) {
         topColor: new Color( 1, 172, 228 ),
         bottomColor: new Color( 1, 172, 228 )
       }, options );
-    GradientBackgroundNode.call( mvt, modelRect, options.bottomColor, options.topColor, 0, modelGradientHeight );
+    GradientBackgroundNode.call( this, mvt, modelRect, options.bottomColor, options.topColor, 0, modelGradientHeight );
   }
 
   return inherit( GradientBackgroundNode, GroundNode );
