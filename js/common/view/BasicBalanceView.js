@@ -37,7 +37,7 @@ define( function( require ) {
       150 );
 
     // Add the background, which portrays the sky and ground.
-    thisView.addChild( new OutsideBackgroundNode( mvt, 3, 1 ) );
+    thisView.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
   }
 
   return inherit( ScreenView, BasicBalanceView, {
