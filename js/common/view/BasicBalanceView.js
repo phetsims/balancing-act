@@ -12,7 +12,9 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
+  var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -38,6 +40,35 @@ define( function( require ) {
 
     // Add the background, which portrays the sky and ground.
     thisView.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
+
+    // Set up a layer for non-mass model elements.
+    var nonMassLayer = new Node();
+    thisView.addChild( nonMassLayer );
+
+    // Set up a separate layer for the masses so that they will be out in
+    // front of the other elements of the model.
+    var massesLayer = new Node();
+    thisView.addChild( massesLayer );
+
+    // TODO: Add the listener that will add/remove masses to/from the screen.
+
+    // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
+    nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
+//    nonMassLayer.addChild( new PlankNode( mvt, model.getPlank(), this ) );
+//    nonMassLayer.addChild( new AttachmentBarNode( mvt, model.getAttachmentBar() ) );
+//    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
+//      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );
+//    }
+
+    // TODO: Add the ruler.
+
+    // TODO: Add the level indicator.
+
+    // TODO: Add the force vectors and the code that updates them.
+
+    // TODO: Add everything else from BasicBalanceCanvas in Java.
+
+
   }
 
   return inherit( ScreenView, BasicBalanceView, {

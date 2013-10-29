@@ -10,7 +10,7 @@ require( [
   'SCENERY/nodes/Rectangle',
   'JOIST/Sim',
   'JOIST/Screen',
-  'BALANCING_ACT/BalancingActTempModel',
+  'BALANCING_ACT/common/model/BalanceModel',
   'BALANCING_ACT/common/view/BasicBalanceView',
   'JOIST/SimLauncher',
   'SCENERY/nodes/Image',
@@ -21,7 +21,7 @@ require( [
   'image!BALANCING_ACT/first-tab-icon.png',
   'image!BALANCING_ACT/second-tab-icon.png',
   'image!BALANCING_ACT/third-tab-icon.png'
-], function( Text, Rectangle, Sim, Screen, BalancingActTempModel, BasicBalanceView, SimLauncher, Image, simTitleString, introString, balanceLabString, gameString, firstTabIcon, secondTabIcon, thirdTabIcon ) {
+], function( Text, Rectangle, Sim, Screen, BalanceModel, BasicBalanceView, SimLauncher, Image, simTitleString, introString, balanceLabString, gameString, firstTabIcon, secondTabIcon, thirdTabIcon ) {
   'use strict';
 
   SimLauncher.launch( function() {
@@ -33,17 +33,17 @@ require( [
     //Create and start the sim
     new Sim( simTitleString, [
       new Screen( introString, new Image( firstTabIcon ),
-        function() { return new BalancingActTempModel( 768, 504 ); },
+        function() { return new BalanceModel(); },
         function( model ) { return new BasicBalanceView( model ); },
         { backgroundColor: "#9ddcf8" }
       ),
       new Screen( balanceLabString, new Image( secondTabIcon ),
-        function() {return new BalancingActTempModel( 768, 504 );},
+        function() {return new BalanceModel();},
         function( model ) {return new BasicBalanceView( model );},
         { backgroundColor: "#9ddcf8" }
       ),
       new Screen( gameString, new Image( thirdTabIcon ),
-        function() {return new BalancingActTempModel( 768, 504 );},
+        function() {return new BalanceModel();},
         function( model ) {return new BasicBalanceView( model );},
         { backgroundColor: "#9ddcf8" }
       )

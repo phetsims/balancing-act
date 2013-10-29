@@ -23,23 +23,21 @@ define( function( require ) {
    * @constructor
    */
   function Fulcrum( size ) {
-    ShapeModelElement.call( this );
     var thisFulcrum = this;
     thisFulcrum.size = size;
     var legThickness = LEG_THICKNESS_FACTOR * size.width;
 
-    // Define the basic shape of the fulcrum.
-    thisFulcrum.shape = new Shape();
-    thisFulcrum.shape.moveTo( -SYMBOL_WIDTH / 2, -SYMBOL_LINE_WIDTH / 2 );
-    thisFulcrum.shape.lineTo( SYMBOL_WIDTH / 2, -SYMBOL_LINE_WIDTH / 2 );
-    thisFulcrum.shape.lineTo( SYMBOL_WIDTH / 2, SYMBOL_LINE_WIDTH / 2 );
-    thisFulcrum.shape.lineTo( -SYMBOL_WIDTH / 2, SYMBOL_LINE_WIDTH / 2 );
-    thisFulcrum.shape.close();
+    // Define the basic shape of the fulcrum.  The fulcrum is assumed to be
+    // centered horizontally around x = 0.
+    var fulcrumShape = new Shape();
+    fulcrumShape.moveTo( -size.width / 2, 0 );
+    fulcrumShape.lineTo( 0, size.height );
+    fulcrumShape.lineTo( size.width / 2, 0 );
+    fulcrumShape.close();
 
-
+    // The shape property is what will define the shape in the view.
+    thisFulcrum.shape = new Property( fulcrumShape );
   }
 
-  return inherit( ShapeModelElement, Fulcrum, {
-    //TODO prototypes
-  } );
+  return Fulcrum;
 } );

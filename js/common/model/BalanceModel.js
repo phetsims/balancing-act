@@ -11,8 +11,8 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var AttachmentBar = require( 'BALANCING_ACT/common/model/AttachmentBar' );
-  var FulcrumAbovePlank = require( 'BALANCING_ACT/common/model/FulcrumAbovePlank' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var FulcrumAbovePlank = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Property = require( 'AXON/Property' );
@@ -30,11 +30,11 @@ define( function( require ) {
     var thisModel = this;
 
     // Model elements
-    thisModel.fulcrum = new FulcrumAbovePlank( 1, FULCRUM_HEIGHT );
+    thisModel.fulcrum = new FulcrumAbovePlank( new Dimension2( 1, FULCRUM_HEIGHT ) );
     thisModel.massList = new ObservableArray();
     thisModel.columnState = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumn.
     thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnState );
-    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
+//    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
     thisModel.supportColumns = [];
   }
 
@@ -42,9 +42,9 @@ define( function( require ) {
 
     // Step function, called by the framework, clocks time-dependent behavior.
     step: function( dt ) {
-      this.plank.stepInTime( dt );
+      this.plank.step( dt );
       this.massList.forEach( function( mass ) {
-        mass.stepInTime( dt );
+        mass.step( dt );
       } )
     },
 
