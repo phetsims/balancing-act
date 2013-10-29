@@ -27,12 +27,17 @@ define( function( require ) {
     thisFulcrum.size = size;
     var legThickness = LEG_THICKNESS_FACTOR * size.width;
 
-    // Define the basic shape of the fulcrum.  The fulcrum is assumed to be
-    // centered horizontally around x = 0.
+    // Define the basic shape of the fulcrum, which is an A-frame sort of
+    // thing that is centered horizontally around x = 0.
     var fulcrumShape = new Shape();
+    // Start at leftmost point.
     fulcrumShape.moveTo( -size.width / 2, 0 );
-    fulcrumShape.lineTo( 0, size.height );
+    fulcrumShape.lineTo( -legThickness / 2, size.height );
+    fulcrumShape.lineTo( legThickness / 2, size.height );
     fulcrumShape.lineTo( size.width / 2, 0 );
+    fulcrumShape.lineTo( size.width / 2 - legThickness, 0 );
+    fulcrumShape.lineTo( 0, size.height - ( legThickness * size.height / ( size.width - legThickness ) ) );
+    fulcrumShape.lineTo( -size.width / 2 + legThickness, 0 );
     fulcrumShape.close();
 
     // The shape property is what will define the shape in the view.

@@ -30,7 +30,7 @@ define( function( require ) {
 
     shapeProperty.link( function( newShape ) {
       rootNode.removeAllChildren();
-      rootNode.addChild( new Path( mvt.modelToViewShape( newShape ), { fill: fill } ) );
+      rootNode.addChild( new Path( mvt.modelToViewShape( newShape ), { fill: fill, stroke: 'black', lineThickness: 1 } ) );
     } );
   }
 
