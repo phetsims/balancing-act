@@ -27,7 +27,9 @@ require( [
   SimLauncher.launch( function() {
 
     var simOptions = {
-      credits: '\n'
+      credits: {
+        //TODO
+      }
     };
 
     //Create and start the sim
