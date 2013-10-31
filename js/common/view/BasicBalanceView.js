@@ -30,7 +30,8 @@ define( function( require ) {
    * @constructor
    */
   function BasicBalanceView( model ) {
-    ScreenView.call( this, { renderer: 'svg' } );
+//    ScreenView.call( this, { renderer: 'svg' } );
+    ScreenView.call( this, { renderer: 'canvas' } );
     var thisView = this;
     this.model = model;
 
