@@ -21,6 +21,10 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // TODO: Temp for demo
+  var fireExtinguisherImage = require( 'image!BALANCING_ACT/fire-extinguisher.png' )
+  var Image = require( 'SCENERY/nodes/Image' );
+
   /**
    * @param {BalanceModel} model
    * @constructor
@@ -61,6 +65,25 @@ define( function( require ) {
 //    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
 //      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );
 //    }
+
+    // TODO: Temp - add a couple images for demo.
+    massesLayer.addChild( new Image( fireExtinguisherImage,
+      {
+        scale: 0.65,
+        centerX: mvt.modelToViewX( 2.5 ),
+        bottom: mvt.modelToViewY( 0 ),
+        pickable: true,
+        cursor: 'pointer'
+      } ) );
+    massesLayer.addChild( new Image( fireExtinguisherImage,
+      {
+        scale: 0.65,
+        centerX: mvt.modelToViewX( 2.8 ),
+        bottom: mvt.modelToViewY( 0 ),
+        pickable: true,
+        cursor: 'pointer'
+      } ) );
+
 
     // TODO: Add the ruler.
 
