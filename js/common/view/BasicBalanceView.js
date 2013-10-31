@@ -16,6 +16,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
+  var ResetAllButtonDrawn = require( 'SCENERY_PHET/ResetAllButtonDrawn' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -67,6 +68,13 @@ define( function( require ) {
     // TODO: Add the force vectors and the code that updates them.
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
+
+    nonMassLayer.addChild( new ResetAllButtonDrawn( function() { model.reset() },
+      {
+        radius: 24,
+        centerX: mvt.modelToViewX( 2 ),
+        centerY: mvt.modelToViewY( -0.5 )
+      } ) );
 
 
   }
