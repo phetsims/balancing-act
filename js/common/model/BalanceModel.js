@@ -32,7 +32,8 @@ define( function( require ) {
     // Model elements
     thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
     thisModel.massList = new ObservableArray();
-    thisModel.columnState = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumn.
+//    thisModel.columnState = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumn.
+    thisModel.columnState = new Property( 'none' ); // Valid values are doubleColumns, singleColumn, noColumn.
     thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnState );
 //    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
     thisModel.supportColumns = [];

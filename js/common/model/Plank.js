@@ -96,6 +96,9 @@ define( function( require ) {
     // Maintain the tick mark positions here, since they represent the
     // locations where masses can be placed.
     thisPlank.tickMarks = [];
+
+    // TODO: Temp for testing.
+    thisPlank.turningRight = true;
   }
 
   // Inherit from base class and define the methods for this object.
@@ -180,10 +183,10 @@ define( function( require ) {
       if ( distanceFromCenter <= PLANK_LENGTH / 2 ) {
         throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
       }
-      var vectorToLocation = this.getPlankSurfaceCenter().plus( new Vector2( distanceFromCenter, 0 ).rotate( this.tiltAngle ) );
+      var vectorToLocation = this.getPlankSurfaceCenter().plus( new Vector2( distanceFromCenter, 0 ).rotated( this.tiltAngle ) );
       // Set the position of the mass to be just above the plank at the
       // appropriate distance so that it will drop to the correct place.
-      mass.setPosition( vectorToLocation.getX(), vectorToLocation.getY() + 0.01 );
+      mass.setPosition( vectorToLocation.x, vectorToLocation.y + 0.01 );
       assert( this.isPointAbovePlank( mass.position ) );  // Need to fix this if mass isn't above the surface.
       this.addMassToSurface( mass );
     },
@@ -193,11 +196,10 @@ define( function( require ) {
       this.massesOnSurface.forEach( function( mass ) {
         // Compute the vector from the center of the plank's surface to
         // the center of the mass, in meters.
-        var vectorFromCenterToMass = new Vector2( this.getMassDistanceFromCenter( mass ), 0 ).rotate( this.tiltAngle );
+        var vectorFromCenterToMass = new Vector2( this.getMassDistanceFromCenter( mass ), 0 ).rotated( this.tiltAngle );
 
         // Set the position and rotation of the mass.
         mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
-        ;
         mass.rotationAngle = thisPlank.tiltAngle;
       } );
 
@@ -258,9 +260,9 @@ define( function( require ) {
       if ( this.pivotPoint.y >= this.unrotatedShape.minY ) {
         throw new Error( 'Pivot point cannot be below the plank.' )
       }
-      this.shape = this.unrotatedShape.transformed( Matrix3.rotateAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y ) );
-      var attachmentBarVector = new Vector2( 0, this.unrotatedShape.y - this.pivotPoint.getY() );
-      attachmentBarVector.rotate( this.tiltAngle );
+      this.shape = this.unrotatedShape.transformed( Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y ) );
+      var attachmentBarVector = new Vector2( 0, this.unrotatedShape.y - this.pivotPoint.y );
+      attachmentBarVector = attachmentBarVector.rotated( this.tiltAngle );
       this.bottomCenterPoint = this.pivotPoint.plus( attachmentBarVector );
     },
 
@@ -356,7 +358,7 @@ define( function( require ) {
       // Start at the absolute location of the attachment point, and add the
       // relative location of the top of the plank, accounting for its
       // rotation angle
-      return new Vector2( this.bottomCenterLocation ).plus( new Vector2( 0, PLANK_THICKNESS ).rotate( this.tiltAngle ) );
+      return new Vector2( this.bottomCenterLocation ).plus( new Vector2( 0, PLANK_THICKNESS ).rotated( this.tiltAngle ) );
     },
 
     // Obtain the Y value for the surface of the plank for the specified X
@@ -392,13 +394,19 @@ define( function( require ) {
 
     updateNetTorque: function() {
       this.currentNetTorque = 0;
-      if ( this.columnState === 'none' ) {
+      if ( this.columnState.value === 'none' ) {
 
         // Add the torque due to the masses on the surface of the plank.
-        this.currentNetTorque += this.getTorqueDueToMasses();
+//        this.currentNetTorque += this.getTorqueDueToMasses();
 
         // Add in torque due to plank.
-        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
+//        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
+        // TODO: Temp for test and demo
+        if ( ( this.turningRight && this.maxTiltAngle - this.tiltAngle < 0.001 ) ||
+             ( !this.turningRight && this.maxTiltAngle + this.tiltAngle < 0.001 ) ) {
+          this.turningRight = !this.turningRight;
+        }
+        this.currentNetTorque = .5 * this.turningRight ? 1 : -1;
       }
     },
 
@@ -413,7 +421,7 @@ define( function( require ) {
 
     getSnapToLocations: function() {
       var snapToLocations = new Array( NUM_SNAP_TO_LOCATIONS );
-      var rotationTransform = Matrix3.rotateAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y );
+      var rotationTransform = Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y );
       var unrotatedY = this.unrotatedShape.bounds.maxY;
       var unrotatedMinX = this.unrotatedShape.bounds.minX;
       for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
