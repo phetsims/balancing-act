@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * View representation for the fulcrum.
+ * View representation for the plank.
  *
  * @author John Blanco
  */
@@ -13,11 +13,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ModelObjectNode = require( 'BALANCING_ACT/common/view/ModelObjectNode' );
 
-  function FulcrumNode( mvt, fulcrum ) {
-    ModelObjectNode.call( this, mvt, fulcrum.shape, new Color( 240, 240, 0 ) );
+  function PlankNode( mvt, plank ) {
+    ModelObjectNode.call( this, mvt, plank.shapeProperty, new Color( 243, 203, 127 ) );
   }
 
-  return inherit( ModelObjectNode, FulcrumNode, {
+  return inherit( ModelObjectNode, PlankNode, {
     //TODO prototypes
   } );
 } );

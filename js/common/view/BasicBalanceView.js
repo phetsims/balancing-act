@@ -16,6 +16,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
+  var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var ResetAllButtonDrawn = require( 'SCENERY_PHET/ResetAllButtonDrawn' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -55,7 +56,7 @@ define( function( require ) {
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
-//    nonMassLayer.addChild( new PlankNode( mvt, model.getPlank(), this ) );
+    nonMassLayer.addChild( new PlankNode( mvt, model.plank, this ) );
 //    nonMassLayer.addChild( new AttachmentBarNode( mvt, model.getAttachmentBar() ) );
 //    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
 //      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );

@@ -11,7 +11,7 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
-  var ObservableList = require( 'AXON/ObservableList' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -72,8 +72,8 @@ define( function( require ) {
       } );
 
     // Externally visible observable lists.
-    thisPlank.massesOnSurface = new ObservableList();
-    thisPlank.forceVectors = new ObservableList();
+    thisPlank.massesOnSurface = new ObservableArray();
+    thisPlank.forceVectors = new ObservableArray();
 
     //------------------------------------------------------------------------
     // Variables that need to be retained for dynamic behavior, but are not
@@ -98,7 +98,8 @@ define( function( require ) {
     thisPlank.tickMarks = [];
   }
 
-  Plank.prototype = {
+  // Inherit from base class and define the methods for this object.
+  return inherit( PropertySet, Plank, {
 
     step: function( dt ) {
       if ( !this.userControlled ) {
@@ -422,7 +423,6 @@ define( function( require ) {
 
       return snapToLocations;
     }
-  };
+  } );
 
-  return Plank;
 } );
