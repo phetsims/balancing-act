@@ -22,16 +22,16 @@ define( function( require ) {
     BalanceModel.call( this );
 
     // Add the initial masses and save their initial positions.
-    this.addMass( new FireExtinguisher( new Vector2( 2.7, 0 ), false ) );
-    this.addMass( new FireExtinguisher( new Vector2( 3.2, 0 ), false ) );
-    this.addMass( new SmallTrashCan( new Vector2( 3.7, 0 ), false ) );
+//    this.addMass( new FireExtinguisher( new Vector2( 2.7, 0 ), false ) );
+//    this.addMass( new FireExtinguisher( new Vector2( 3.2, 0 ), false ) );
+//    this.addMass( new SmallTrashCan( new Vector2( 3.7, 0 ), false ) );
   }
 
   return inherit( BalanceModel, IntroModel, {
     reset: function() {
-      massList.forEach( function( mass ) {
+      this.massList.forEach( function( mass ) {
         mass.resetPosition();
-      } )
+      } );
     }
   } );
 } );

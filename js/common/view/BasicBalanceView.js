@@ -22,7 +22,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // TODO: Temp for demo
-  var fireExtinguisherImage = require( 'image!BALANCING_ACT/fire-extinguisher.png' )
+  var fireExtinguisherImage = require( 'image!BALANCING_ACT/fire-extinguisher.png' );
   var Image = require( 'SCENERY/nodes/Image' );
 
   /**
@@ -93,7 +93,7 @@ define( function( require ) {
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
 
-    nonMassLayer.addChild( new ResetAllButtonDrawn( function() { model.reset() },
+    nonMassLayer.addChild( new ResetAllButtonDrawn( function() { model.reset(); },
       {
         radius: 24,
         centerX: mvt.modelToViewX( 2 ),

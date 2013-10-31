@@ -46,7 +46,7 @@ define( function( require ) {
       this.plank.step( dt );
       this.massList.forEach( function( mass ) {
         mass.step( dt );
-      } )
+      } );
     },
 
     // Add a mass to the model.  Subclasses generally do additional things.

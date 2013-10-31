@@ -56,8 +56,8 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, Mass, {
-    translate: function() { console.log( 'Translate function not implemented.' )}, // TODO: Implement this.
-    getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ) },
+    translate: function() { console.log( 'Translate function not implemented.' ); }, // TODO: Implement this.
+    getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ); },
     initiateAnimation: function() {
       // In this default implementation the signal is sent that says that
       // the animation is complete, but no actual animation is done.
@@ -73,9 +73,9 @@ define( function( require ) {
       // Handle any changes that need to happen when added to the plank,
       // such as changes to shape or image.  By default, this does nothing.
     },
-    release: function() { this.userControlled = false },
-    step: function() { console.log( 'step should be implemented in descendant types.' ) },
-    createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ) }
+    release: function() { this.userControlled = false; },
+    step: function() { console.log( 'step should be implemented in descendant types.' ); },
+    createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); }
   } );
 } )
 ;

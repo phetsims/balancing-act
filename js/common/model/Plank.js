@@ -10,6 +10,7 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
+  var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -135,13 +136,14 @@ define( function( require ) {
 
         // Update the shape of the plank and the positions of the masses on
         // the surface, but only if the tilt angle has changed.
-        if ( this.tiltAngle != previousTiltAngle ) {
+        if ( this.tiltAngle !== previousTiltAngle ) {
           this.updatePlank();
           this.updateMassPositions();
         }
 
         // Simulate friction by slowing down the rotation a little.
-        this.angularVelocity *= 0.91;
+        // TODO: Put this back in when shape testing complete.
+//        this.angularVelocity *= 0.91;
       }
     },
 
@@ -149,7 +151,7 @@ define( function( require ) {
     addMassToSurface: function( mass ) {
       var massAdded = false;
       var closestOpenLocation = this.getOpenMassDroppedLocation( mass.position );
-      if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation != null ) {
+      if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
         mass.position = closestOpenLocation;
         mass.onPlank = true;
         this.massDistancePairs[ mass ] = this.getPlankSurfaceCenter().distance( mass.position ) * ( mass.position.x > this.getPlankSurfaceCenter().x ? 1 : -1 );
@@ -244,7 +246,7 @@ define( function( require ) {
       var massesCopy = this.massesOnSurface.slice( 0 );
       massesCopy.forEach( function( mass ) {
         thisPlank.removeMass( mass );
-      } )
+      } );
     },
 
     getMassDistanceFromCenter: function( mass ) {
@@ -258,7 +260,7 @@ define( function( require ) {
 
     updatePlank: function() {
       if ( this.pivotPoint.y >= this.unrotatedShape.minY ) {
-        throw new Error( 'Pivot point cannot be below the plank.' )
+        throw new Error( 'Pivot point cannot be below the plank.' );
       }
       this.shape = this.unrotatedShape.transformed( Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y ) );
       var attachmentBarVector = new Vector2( 0, this.unrotatedShape.y - this.pivotPoint.y );
@@ -271,11 +273,11 @@ define( function( require ) {
     getOpenMassDroppedLocation: function( p ) {
       var closestOpenLocation = null;
       var candidateOpenLocations = this.getSnapToLocations();
-      if ( NUM_SNAP_TO_LOCATIONS % 2 == 1 ) {
+      if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
         // Remove the location at the center of the plank from the set of
         // candidates, since we don't want to allow users to place things
         // there.
-        candidateOpenLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 )
+        candidateOpenLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 );
       }
 
       // Sort through the locations and eliminate those that are already
@@ -317,7 +319,7 @@ define( function( require ) {
      * when the single big support column is put into place.
      */
     forceToMaxAndStill: function() {
-      this.forceAngle( getMaxTiltAngle() );
+      this.forceAngle( this.maxTiltAngle );
     },
 
     forceAngle: function( angle ) {
@@ -349,7 +351,7 @@ define( function( require ) {
 
     updateTickMarks: function() {
       // TODO: Stubbed until I figure out whether to do tick marks the same way as in the Java sim.
-      console.log( 'updateTickMarks not implemented yet.' )
+      console.log( 'updateTickMarks not implemented yet.' );
     },
 
     // Obtain the absolute position (in meters) of the center surface (top)
@@ -406,7 +408,7 @@ define( function( require ) {
              ( !this.turningRight && this.maxTiltAngle + this.tiltAngle < 0.001 ) ) {
           this.turningRight = !this.turningRight;
         }
-        this.currentNetTorque = .5 * this.turningRight ? 1 : -1;
+        this.currentNetTorque = 1 * this.turningRight ? 1 : -1;
       }
     },
 

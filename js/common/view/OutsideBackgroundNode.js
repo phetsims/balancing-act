@@ -36,8 +36,7 @@ define( function( require ) {
       {
         // Defaults.
         modelRect: new Rectangle( -1000, -2000, 2000, 4000 )
-      }
-      , options );
+      }, options );
 
     if ( options.modelRect.getMinY() < 0 ) {
       // Add the ground first, because we're earthy people.

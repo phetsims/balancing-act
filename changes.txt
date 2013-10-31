@@ -1,2 +1,4 @@
+10/30/2013 Added much of the basic model and view for the plank.
+10/28/2013 Added much of the basic model and view for the fulcrum.
 10/2/2013 Added basic project structure.
 10/2/2013 Repository created.
