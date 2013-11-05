@@ -1,28 +1,27 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Main entry point for the sim.
- *
- * @author John Blanco
+ * Main entry point for the Balancing Act simulation.
  */
-require( [
-  'SCENERY/nodes/Text',
-  'SCENERY/nodes/Rectangle',
-  'JOIST/Sim',
-  'JOIST/Screen',
-  'BALANCING_ACT/common/model/BalanceModel',
-  'BALANCING_ACT/common/view/BasicBalanceView',
-  'JOIST/SimLauncher',
-  'SCENERY/nodes/Image',
-  'string!BALANCING_ACT/balancing-act.name',
-  'string!BALANCING_ACT/intro',
-  'string!BALANCING_ACT/balanceLab',
-  'string!BALANCING_ACT/game',
-  'image!BALANCING_ACT/first-tab-icon.png',
-  'image!BALANCING_ACT/second-tab-icon.png',
-  'image!BALANCING_ACT/third-tab-icon.png'
-], function( Text, Rectangle, Sim, Screen, BalanceModel, BasicBalanceView, SimLauncher, Image, simTitleString, introString, balanceLabString, gameString, firstTabIcon, secondTabIcon, thirdTabIcon ) {
+define( function( require ) {
   'use strict';
+
+  // Imports
+  var Text = require( 'SCENERY/nodes/Text' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Sim = require( 'JOIST/Sim' );
+  var Screen = require( 'JOIST/Screen' );
+  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
+  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
+  var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var simTitleString = require( 'string!BALANCING_ACT/balancing-act.name' );
+  var introString = require( 'string!BALANCING_ACT/intro' );
+  var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
+  var gameString = require( 'string!BALANCING_ACT/game' );
+  var firstTabIcon = require( 'image!BALANCING_ACT/first-tab-icon.png' );
+  var secondTabIcon = require( 'image!BALANCING_ACT/second-tab-icon.png' );
+  var thirdTabIcon = require( 'image!BALANCING_ACT/third-tab-icon.png' );
 
   SimLauncher.launch( function() {
 
