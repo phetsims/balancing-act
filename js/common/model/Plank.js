@@ -198,7 +198,7 @@ define( function( require ) {
       this.massesOnSurface.forEach( function( mass ) {
         // Compute the vector from the center of the plank's surface to
         // the center of the mass, in meters.
-        var vectorFromCenterToMass = new Vector2( this.getMassDistanceFromCenter( mass ), 0 ).rotated( this.tiltAngle );
+        var vectorFromCenterToMass = new Vector2( this.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
 
         // Set the position and rotation of the mass.
         mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
@@ -242,11 +242,7 @@ define( function( require ) {
     },
 
     removeAllMasses: function() {
-      var thisPlank = this;
-      var massesCopy = this.massesOnSurface.slice( 0 );
-      massesCopy.forEach( function( mass ) {
-        thisPlank.removeMass( mass );
-      } );
+      this.massesOnSurface.clear();
     },
 
     getMassDistanceFromCenter: function( mass ) {
