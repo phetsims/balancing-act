@@ -13,11 +13,6 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants - TODO - Probably need to be made public.
-  var MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
-  var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
-  var DEFAULT_INITIAL_LOCATION = new Vector2( 0, 0 );
-
   function Mass( mass, initialPosition, isMystery ) {
     var thisMass = mass;
     PropertySet.call( this,
@@ -43,7 +38,7 @@ define( function( require ) {
       } );
 
     //------------------------------------------------------------------------
-    // Externally used (i.e. public) attributes that do not change after construction.
+    // Externally used (i.e. public) attributes that don't need to be properties.
     //------------------------------------------------------------------------
     thisMass.mass = mass;
     thisMass.animationDestination = null;
@@ -52,13 +47,21 @@ define( function( require ) {
     thisMass.expectedAnimationTime = 0;
     thisMass.isMystery = isMystery;
 
-
+    // Since not all objects are symmetrical, some may need to have an offset
+    // that indicates where their center of mass is when placed on a balance.
+    // This is the horizontal offset from the center of the shape or image.
+    thisMass.centerOfMassXOffset = 0;
   }
 
   return inherit( PropertySet, Mass, {
-    translate: function() { console.log( 'Translate function not implemented.' ); }, // TODO: Implement this.
+    translate: function( translationVector ) {
+      this.position = this.position.plus( translationVector );
+    },
+
     getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ); },
+
     initiateAnimation: function() {
+
       // In this default implementation the signal is sent that says that
       // the animation is complete, but no actual animation is done.
       // Override to implement the subclass-specific animation.  This is
@@ -69,13 +72,21 @@ define( function( require ) {
       this.animating = true;
       this.animating = false;
     },
+
     setOnPlank: function() {
       // Handle any changes that need to happen when added to the plank,
       // such as changes to shape or image.  By default, this does nothing.
     },
+
     release: function() { this.userControlled = false; },
+
     step: function() { console.log( 'step should be implemented in descendant types.' ); },
-    createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); }
+
+    createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
+
+    // Public constants - TODO - Probably need to be made public.
+    MIN_ANIMATION_VELOCITY: 3, // In meters/sec.
+    MAX_REMOVAL_ANIMATION_DURATION: 0.75, // In seconds.
+    DEFAULT_INITIAL_LOCATION: new Vector2( 0, 0 )
   } );
-} )
-;
+} );
