@@ -18,7 +18,7 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  // Strings
+  // Strings & Images
   var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
   var firstTabIcon = require( 'image!BALANCING_ACT/first-tab-icon.png' );
   var gameString = require( 'string!BALANCING_ACT/game' );

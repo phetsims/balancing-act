@@ -17,13 +17,9 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var Mass = require( 'Mass' );
+  var Mass = require( 'BALANCING_ACT/common/model/Mass' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // Constants
-  var MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
-  var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
   /**
    * @param mass
