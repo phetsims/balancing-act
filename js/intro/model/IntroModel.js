@@ -12,7 +12,7 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var BalanceModel = require( 'BALANCING_ACT/common/BalanceModel' );
+  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
