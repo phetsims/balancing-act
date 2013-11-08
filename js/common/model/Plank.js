@@ -424,7 +424,7 @@ define( function( require ) {
       var unrotatedMinX = this.unrotatedShape.bounds.minX;
       for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
         var unrotatedPoint = new Vector2( unrotatedMinX + ( i + 1 ) * INTER_SNAP_TO_MARKER_DISTANCE, unrotatedY );
-        snapToLocations.add( rotationTransform.transformed( unrotatedPoint ) );
+        snapToLocations[i] = rotationTransform.timesVector2( unrotatedPoint );
       }
 
       return snapToLocations;

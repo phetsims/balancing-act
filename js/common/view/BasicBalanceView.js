@@ -47,6 +47,7 @@ define( function( require ) {
       Vector2.ZERO,
       new Vector2( thisView.layoutBounds.width * 0.4, thisView.layoutBounds.height * 0.75 ),
       150 );
+    thisView.mvt = mvt; // Make mvt available to descendant types.
 
     // Add the background, which portrays the sky and ground.
     thisView.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
