@@ -1,3 +1,4 @@
+# 0.0.0-dev.2
 11/8/2013 Got basic dragging and dropping of model objects working (drop on ground only).
 11/6/2013 Integrated drawn reset all button.
 11/6/2013 Made the plank move back and forth continuously in order to test shape-change performance on various platforms.
