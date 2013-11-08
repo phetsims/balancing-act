@@ -31,7 +31,7 @@ define( function( require ) {
   return inherit( BalanceModel, IntroModel, {
     reset: function() {
       this.massList.forEach( function( mass ) {
-        mass.resetPosition();
+        mass.positionProperty.reset();
       } );
     }
   } );

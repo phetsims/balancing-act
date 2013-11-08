@@ -11,9 +11,13 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
+  var MysteryMass = require( 'BALANCING_ACT/common/model/MysteryMass' );
+  var MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var ShapeMass = require( 'BALANCING_ACT/common/model/ShapeMass' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   return{

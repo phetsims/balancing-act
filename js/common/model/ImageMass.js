@@ -60,7 +60,7 @@ define( function( require ) {
     initiateAnimation: function() {
       // Calculate velocity.  A higher velocity is used if the model element
       // has a long way to travel, otherwise it takes too long.
-      debugger; // Make sure the constants in the next line are really accessible in this way.
+      // TODO: Make sure the constants in the next line are really accessible in this way.
       var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
       this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
       // Calculate the animation motion vector.
@@ -93,7 +93,7 @@ define( function( require ) {
     },
 
     createCopy: function() {
-      var copy = new ImageMass( this.mass, this.image, this.height, this.position, this.isMyster )
+      var copy = new ImageMass( this.mass, this.image, this.height, this.position, this.isMystery );
     }
   } );
 } );
