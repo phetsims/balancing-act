@@ -1,3 +1,7 @@
+11/8/2013 Got basic dragging and dropping of model objects working (drop on ground only).
+11/6/2013 Integrated drawn reset all button.
+11/6/2013 Made the plank move back and forth continuously in order to test shape-change performance on various platforms.
+# 0.0.0-dev.1
 10/30/2013 Added much of the basic model and view for the plank.
 10/28/2013 Added much of the basic model and view for the fulcrum.
 10/2/2013 Added basic project structure.
