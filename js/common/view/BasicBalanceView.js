@@ -13,27 +13,30 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
+  var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
+  var Property = require( 'AXON/Property' );
   var ResetAllButtonDrawn = require( 'SCENERY_PHET/ResetAllButtonDrawn' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // TODO: Temp for demo
-  var fireExtinguisherImage = require( 'image!BALANCING_ACT/fire-extinguisher.png' );
-  var Image = require( 'SCENERY/nodes/Image' );
 
   /**
    * @param {BalanceModel} model
    * @constructor
    */
   function BasicBalanceView( model ) {
-//    ScreenView.call( this, { renderer: 'svg' } );
-    ScreenView.call( this, { renderer: 'canvas' } );
+    ScreenView.call( this, { renderer: 'svg' } );
     var thisView = this;
-    this.model = model;
+    thisView.model = model;
+
+    // Define the properties that control visibility of various display elements.
+    thisView.massLabelsVisible = new Property( true );
+    thisView.distancesVisible = new Property( false );
+    thisView.forceVectorsFromObjectsVisible = new Property( false );
+    thisView.levelIndicatorVisible = new Property( false );
 
     // Create the model-view transform.  The primary units used in the model
     // are meters, so significant zoom is used.  The multipliers for the 2nd
@@ -57,7 +60,26 @@ define( function( require ) {
     var massesLayer = new Node();
     thisView.addChild( massesLayer );
 
-    // TODO: Add the listener that will add/remove masses to/from the screen.
+    function handleMassAdded( addedMass ) {
+      debugger;
+      // Create and add the view representation for this mass.
+      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, thisView.massLabelsVisible );
+      massesLayer.addChild( massNode );
+
+      // Add the removal listener for if and when this mass is removed from the model.
+      var removalListener = function( removedMass ) {
+        assert( removedMass === addedMass );
+        massesLayer.removeChild( massNode );
+        model.massList.removeItemRemovedListener( removalListener );
+      };
+      model.massList.addItemRemovedListener( removalListener );
+    }
+
+    // Add initial mass representations.
+    model.massList.forEach( handleMassAdded );
+
+    // Whenever a mass is added to the model, create a graphic for it.
+    model.massList.addItemAddedListener( handleMassAdded );
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
@@ -66,25 +88,6 @@ define( function( require ) {
 //    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
 //      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );
 //    }
-
-    // TODO: Temp - add a couple images for demo.
-    massesLayer.addChild( new Image( fireExtinguisherImage,
-      {
-        scale: 0.65,
-        centerX: mvt.modelToViewX( 2.5 ),
-        bottom: mvt.modelToViewY( 0 ),
-        pickable: true,
-        cursor: 'pointer'
-      } ) );
-    massesLayer.addChild( new Image( fireExtinguisherImage,
-      {
-        scale: 0.65,
-        centerX: mvt.modelToViewX( 2.8 ),
-        bottom: mvt.modelToViewY( 0 ),
-        pickable: true,
-        cursor: 'pointer'
-      } ) );
-
 
     // TODO: Add the ruler.
 

@@ -14,7 +14,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   function Mass( mass, initialPosition, isMystery ) {
-    var thisMass = mass;
+    var thisMass = this;
     PropertySet.call( this,
       {
         // Property that indicates whether this mass is currently user controlled,

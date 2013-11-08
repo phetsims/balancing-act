@@ -3,6 +3,7 @@ blue-bucket.png source=PhET author=jblanco
 boy-sitting.png source=PhET author=jblanco
 boy-standing.png source=PhET author=jblanco
 cinder-block.png source=PhET author=jblanco
+default-image.png source=PhET author=jblanco
 fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco
 fire-hydrant.png source=PhET author=jblanco
 flower-pot.png source=PhET author=jblanco
