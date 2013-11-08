@@ -16,29 +16,27 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   function MassDragHandler( mass, mvt ) {
-    SimpleDragHandler.call( this );
-    this.mass = mass;
-    this.mvt = mvt;
+    SimpleDragHandler.call( this, {
+
+      // Allow moving a finger (touch) across a node to pick it up.
+      allowTouchSnag: true,
+
+      // Handler that moves the particle in model space.
+      translate: function( translationParams ) {
+        mass.position = mass.position.plus( mvt.viewToModelDelta( translationParams.delta ) );
+        return translationParams.position;
+      },
+
+      start: function( event, trail ) {
+        mass.userControlled = true;
+      },
+
+      end: function( event, trail ) {
+        mass.userControlled = false;
+      }
+    } );
   }
 
-  return inherit( SimpleDragHandler, MassDragHandler, {
-
-    // Allow moving a finger (touch) across a node to pick it up.
-    allowTouchSnag: true,
-
-    // Handler that moves the particle in model space.
-    translate: function( translationParams ) {
-      this.mass.position = this.mass.position.plus( this.mvt.viewToModelDelta( translationParams.delta ) );
-      return translationParams.position;
-    },
-
-    start: function( event, trail ) {
-      this.mass.userControlled = true;
-    },
-
-    end: function( event, trail ) {
-      this.mass.userControlled = false;
-    }
-  } );
+  return inherit( SimpleDragHandler, MassDragHandler );
 } );
 

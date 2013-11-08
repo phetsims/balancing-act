@@ -33,7 +33,7 @@ define( function( require ) {
    * @constructor
    */
   function ImageMassNode( mvt, imageMass, massLabelVisibleProperty ) {
-    Node.call( this, { cursor: 'pointer' } );
+    Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;
 
     // Add the mass indicator label.  Note that it is positioned elsewhere.
@@ -90,11 +90,11 @@ define( function( require ) {
     }
 
     // Add the image node.
-    this.addChild( imageNode );
+    thisNode.addChild( imageNode );
 
     // Observe height changes.
     imageMass.heightProperty.link( function( newHeight ) {
-      imageNode.scale( 1 ); // TODO: Does this set scale to 1, or just scale back to current scale?
+      imageNode.setScaleMagnitude( 1 );
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( newHeight ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       updatePositionAndAngle();
@@ -111,7 +111,7 @@ define( function( require ) {
     } );
 
     // Add the mouse event handler.
-    this.addInputListener( new MassDragHandler( imageMass, mvt ) );
+    thisNode.addInputListener( new MassDragHandler( imageMass, mvt ) );
   }
 
   return inherit( Node, ImageMassNode );

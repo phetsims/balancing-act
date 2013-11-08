@@ -61,7 +61,6 @@ define( function( require ) {
     thisView.addChild( massesLayer );
 
     function handleMassAdded( addedMass ) {
-      debugger;
       // Create and add the view representation for this mass.
       var massNode = MassNodeFactory.createMassNode( addedMass, mvt, thisView.massLabelsVisible );
       massesLayer.addChild( massNode );
