@@ -105,14 +105,21 @@ define( function( require ) {
       } ) );
 
     // TODO: Temp for testing button
-    //
+    var SimpleClockIcon = require( 'SCENERY_PHET/SimpleClockIcon' );
     var PushButtonNew = require( 'SCENERY_PHET/PushButtonNew' );
-    nonMassLayer.addChild( new PushButtonNew( function() { model.reset(); },
+    var Text = require( 'SCENERY/nodes/Text' );
+    var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+    nonMassLayer.addChild( new PushButtonNew(
+      function() { model.reset(); },
+      new SimpleClockIcon( 15 ),
       {
         centerX: mvt.modelToViewX( 2.4 ),
         centerY: mvt.modelToViewY( -0.5 )
       } ) );
-
+    nonMassLayer.addChild( new PushButtonNew(
+      function() { model.reset(); },
+      new Text( 'Test Button', { font: new PhetFont( { size: 16, weight: 'bold' } ) } ),
+      { centerX: mvt.modelToViewX( 2.2 ), centerY: mvt.modelToViewY( -0.8 ) } ) );
   }
 
   return inherit( ScreenView, BasicBalanceView, {
