@@ -19,7 +19,7 @@ define( function( require ) {
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var Property = require( 'AXON/Property' );
-  var ResetAllButtonDrawn = require( 'SCENERY_PHET/ResetAllButtonDrawn' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -97,13 +97,21 @@ define( function( require ) {
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
 
-    nonMassLayer.addChild( new ResetAllButtonDrawn( function() { model.reset(); },
+    nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
       {
         radius: 24,
         centerX: mvt.modelToViewX( 2 ),
         centerY: mvt.modelToViewY( -0.5 )
       } ) );
 
+    // TODO: Temp for testing button
+    //
+    var PushButtonNew = require( 'SCENERY_PHET/PushButtonNew' );
+    nonMassLayer.addChild( new PushButtonNew( function() { model.reset(); },
+      {
+        centerX: mvt.modelToViewX( 2.4 ),
+        centerY: mvt.modelToViewY( -0.5 )
+      } ) );
 
   }
 
