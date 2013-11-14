@@ -46,7 +46,7 @@ define( function( require ) {
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( thisView.layoutBounds.width * 0.4, thisView.layoutBounds.height * 0.75 ),
-      150 );
+      120 );
     thisView.mvt = mvt; // Make mvt available to descendant types.
 
     // Add the background, which portrays the sky and ground.
@@ -99,7 +99,7 @@ define( function( require ) {
 
     nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
       {
-        radius: 24,
+        radius: 20,
         centerX: mvt.modelToViewX( 2 ),
         centerY: mvt.modelToViewY( -0.5 )
       } ) );
@@ -111,14 +111,14 @@ define( function( require ) {
     var PhetFont = require( 'SCENERY_PHET/PhetFont' );
     nonMassLayer.addChild( new PushButtonNew(
       function() { model.reset(); },
-      new SimpleClockIcon( 15 ),
+      new SimpleClockIcon( 12 ),
       {
         centerX: mvt.modelToViewX( 2.4 ),
         centerY: mvt.modelToViewY( -0.5 )
       } ) );
     nonMassLayer.addChild( new PushButtonNew(
       function() { model.reset(); },
-      new Text( 'Test Button', { font: new PhetFont( { size: 16, weight: 'bold' } ) } ),
+      new Text( 'Test Button', { font: new PhetFont( { size: 14 } ) } ),
       { centerX: mvt.modelToViewX( 2.2 ), centerY: mvt.modelToViewY( -0.8 ) } ) );
   }
 
