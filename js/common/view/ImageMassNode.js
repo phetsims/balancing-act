@@ -85,7 +85,6 @@ define( function( require ) {
       thisNode.centerX = mvt.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
       thisNode.bottom = mvt.modelToViewY( imageMass.position.y );
 
-      if ( imageMass.rotationAngle !== 0 ) { console.log( "imageMass.rotationAngle = " + imageMass.rotationAngle ) }
       // Set the rotation.  Rotation point is the center bottom.
       thisNode.rotateAround( new Vector2( thisNode.centerX, thisNode.bottom ), -imageMass.rotationAngle );
     }

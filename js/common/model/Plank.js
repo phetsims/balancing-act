@@ -203,8 +203,6 @@ define( function( require ) {
 
         // Set the position and rotation of the mass.
         mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
-        if ( thisPlank.tiltAngle !== 0 ) { console.log( "thisPlank.tiltAngle = " + thisPlank.tiltAngle ) }
-        ;
         mass.rotationAngle = thisPlank.tiltAngle;
       } );
 
@@ -403,6 +401,7 @@ define( function( require ) {
 
         // Add in torque due to plank.
         this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
+
       }
     },
 
