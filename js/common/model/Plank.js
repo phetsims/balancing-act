@@ -151,7 +151,11 @@ define( function( require ) {
       if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
         mass.position = closestOpenLocation;
         mass.onPlank = true;
-        this.massDistancePairs[ mass ] = this.getPlankSurfaceCenter().distance( mass.position ) * ( mass.position.x > this.getPlankSurfaceCenter().x ? 1 : -1 );
+        this.massDistancePairs.push(
+          {
+            mass: mass,
+            distance: this.getPlankSurfaceCenter().distance( mass.position ) * ( mass.position.x > this.getPlankSurfaceCenter().x ? 1 : -1 )
+          } );
 
         // Add the force vector for this mass.
         this.forceVectors.push( new MassForceVector( mass ) );
@@ -194,7 +198,7 @@ define( function( require ) {
       var thisPlank = this;
       this.massesOnSurface.forEach( function( mass ) {
         // Compute the vector from the center of the plank's surface to
-        // the center of the mass, in meters.
+        // the bottom of the mass, in meters.
         var vectorFromCenterToMass = new Vector2( thisPlank.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
 
         // Set the position and rotation of the mass.
@@ -227,9 +231,9 @@ define( function( require ) {
       mass.onPlank = false;
 
       // Remove the force vector associated with this mass.
-      for ( var j = 0; j < this.massDistancePairs.length; j++ ) {
-        if ( this.forceVectors[j].mass === mass ) {
-          this.forceVectors.splice( j, 1 );
+      for ( var j = 0; j < this.forceVectors.length; j++ ) {
+        if ( this.forceVectors.get( j ).mass === mass ) {
+          this.forceVectors.remove( j, 1 );
           break;
         }
       }
@@ -243,7 +247,7 @@ define( function( require ) {
     },
 
     getMassDistanceFromCenter: function( mass ) {
-      for ( var i = 0; i < this.massDistancePairs; i++ ) {
+      for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
         if ( this.massDistancePairs[i].mass === mass ) {
           return this.massDistancePairs[i].distance;
         }
