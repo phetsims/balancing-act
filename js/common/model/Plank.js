@@ -97,9 +97,6 @@ define( function( require ) {
     // Maintain the tick mark positions here, since they represent the
     // locations where masses can be placed.
     thisPlank.tickMarks = [];
-
-    // TODO: Temp for testing.
-    thisPlank.turningRight = true;
   }
 
   // Inherit from base class and define the methods for this object.
@@ -395,16 +392,10 @@ define( function( require ) {
       if ( this.columnState.value === 'none' ) {
 
         // Add the torque due to the masses on the surface of the plank.
-//        this.currentNetTorque += this.getTorqueDueToMasses();
+        this.currentNetTorque += this.getTorqueDueToMasses();
 
         // Add in torque due to plank.
-//        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
-        // TODO: Temp for test and demo
-        if ( ( this.turningRight && this.maxTiltAngle - this.tiltAngle < 0.001 ) ||
-             ( !this.turningRight && this.maxTiltAngle + this.tiltAngle < 0.001 ) ) {
-          this.turningRight = !this.turningRight;
-        }
-        this.currentNetTorque = 1 * this.turningRight ? 1 : -1;
+        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
       }
     },
 
