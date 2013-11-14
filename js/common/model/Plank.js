@@ -139,8 +139,7 @@ define( function( require ) {
         }
 
         // Simulate friction by slowing down the rotation a little.
-        // TODO: Put this back in when shape testing complete.
-//        this.angularVelocity *= 0.91;
+        this.angularVelocity *= 0.91;
       }
     },
 
@@ -260,9 +259,9 @@ define( function( require ) {
         throw new Error( 'Pivot point cannot be below the plank.' );
       }
       this.shape = this.unrotatedShape.transformed( Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y ) );
-      var attachmentBarVector = new Vector2( 0, this.unrotatedShape.y - this.pivotPoint.y );
+      var attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
       attachmentBarVector = attachmentBarVector.rotated( this.tiltAngle );
-      this.bottomCenterPoint = this.pivotPoint.plus( attachmentBarVector );
+      this.bottomCenterLocation = this.pivotPoint.plus( attachmentBarVector );
     },
 
     // Find the best open location for a mass that was dropped at the given
@@ -401,7 +400,6 @@ define( function( require ) {
 
         // Add in torque due to plank.
         this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
-
       }
     },
 
