@@ -163,11 +163,11 @@ define( function( require ) {
             // The user has picked up this mass, so it is no longer
             // on the surface.
             thisPlank.removeMassFromSurface( mass );
-            mass.unlink( userControlledObserver );
+            mass.userControlledProperty.unlink( userControlledObserver );
           }
         };
 
-        mass.userControlled.link( userControlledObserver );
+        mass.userControlledProperty.link( userControlledObserver );
         this.massesOnSurface.push( mass );
         this.updateMassPositions();
         this.updateNetTorque();
@@ -195,7 +195,7 @@ define( function( require ) {
       this.massesOnSurface.forEach( function( mass ) {
         // Compute the vector from the center of the plank's surface to
         // the center of the mass, in meters.
-        var vectorFromCenterToMass = new Vector2( this.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
+        var vectorFromCenterToMass = new Vector2( thisPlank.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
 
         // Set the position and rotation of the mass.
         mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
@@ -212,7 +212,7 @@ define( function( require ) {
     removeMassFromSurface: function( mass ) {
 
       // Remove the mass.
-      this.massesOnSurface = this.massesOnSurface.splice( this.massesOnSurface.indexOf( mass ), 1 );
+      this.massesOnSurface.remove( mass );
 
       // Remove the mass-distance pair for this mass.
       for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
@@ -353,7 +353,7 @@ define( function( require ) {
       // Start at the absolute location of the attachment point, and add the
       // relative location of the top of the plank, accounting for its
       // rotation angle
-      return new Vector2( this.bottomCenterLocation ).plus( new Vector2( 0, PLANK_THICKNESS ).rotated( this.tiltAngle ) );
+      return new Vector2( this.bottomCenterLocation.x, this.bottomCenterLocation.y ).plus( new Vector2( 0, PLANK_THICKNESS ).rotated( this.tiltAngle ) );
     },
 
     // Obtain the Y value for the surface of the plank for the specified X
@@ -362,7 +362,8 @@ define( function( require ) {
       // Solve the linear equation for the line that represents the surface
       // of the plank.
       var m = Math.tan( this.tiltAngle );
-      var b = this.getPlankSurfaceCenter().y - m * this.getPlankSurfaceCenter().x;
+      var plankSurfaceCenter = this.getPlankSurfaceCenter();
+      var b = plankSurfaceCenter.y - m * plankSurfaceCenter.x;
       // Does NOT check if the xValue range is valid.
       return m * xValue + b;
     },
@@ -403,7 +404,7 @@ define( function( require ) {
       var thisPlank = this;
       var torque = 0;
       this.massesOnSurface.forEach( function( mass ) {
-        torque += thisPlank.pivotPoint.x - mass.getPosition().x * mass.mass;
+        torque += thisPlank.pivotPoint.x - mass.position.x * mass.mass;
       } );
       return torque;
     },
