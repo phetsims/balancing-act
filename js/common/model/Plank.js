@@ -221,7 +221,7 @@ define( function( require ) {
       // Remove the mass-distance pair for this mass.
       for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
         if ( this.massDistancePairs[i].mass === mass ) {
-          this.massDistancePairs = this.massDistancePairs.splice( i, 1 );
+          this.massDistancePairs.splice( i, 1 );
           break;
         }
       }
@@ -267,7 +267,7 @@ define( function( require ) {
 
     // Find the best open location for a mass that was dropped at the given
     // point.  Returns null if no nearby open location is available.
-    getOpenMassDroppedLocation: function( p ) {
+    getOpenMassDroppedLocation: function( position ) {
       var closestOpenLocation = null;
       var candidateOpenLocations = this.getSnapToLocations();
       if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
@@ -282,7 +282,7 @@ define( function( require ) {
       var copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
       for ( var i = 0; i < copyOfCandidateLocations.length; i++ ) {
         for ( var j = 0; j < this.massesOnSurface.length; j++ ) {
-          if ( this.massesOnSurface[j].getPosition().distance( copyOfCandidateLocations[i] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+          if ( this.massesOnSurface.get( j ).position.distance( copyOfCandidateLocations[i] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
             // This position is already occupied.
             candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[j] );
           }
@@ -293,9 +293,9 @@ define( function( require ) {
       candidateOpenLocations.forEach( function( candidateOpenLocation ) {
         // Must be a reasonable distance away in the horizontal direction
         // so that objects don't appear to fall sideways.
-        if ( Math.abs( candidateOpenLocation.x - p.x ) <= INTER_SNAP_TO_MARKER_DISTANCE ) {
+        if ( Math.abs( candidateOpenLocation.x - position.x ) <= INTER_SNAP_TO_MARKER_DISTANCE ) {
           // This location is a potential candidate.  Is it better than what was already found?
-          if ( closestOpenLocation === null || candidateOpenLocation.distance( p ) < closestOpenLocation.distance( p ) ) {
+          if ( closestOpenLocation === null || candidateOpenLocation.distance( position ) < closestOpenLocation.distance( position ) ) {
             closestOpenLocation = candidateOpenLocation;
           }
         }
