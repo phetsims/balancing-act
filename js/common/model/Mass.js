@@ -26,10 +26,10 @@ define( function( require ) {
         // model object.
         position: initialPosition,
 
-        // Property that contains the rotational angle, in radians, of the model
+        // Property that contains the rotation angle, in radians, of the model
         // element.  By convention for this simulation, the point of rotation is
         // considered to be the center bottom of the model element.
-        rotationalAngle: 0,
+        rotationAngle: 0,
 
         // Boolean property that indicates whether this model element is currently
         // animating.  At the time of this writing, the only animation supported

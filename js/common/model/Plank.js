@@ -56,8 +56,8 @@ define( function( require ) {
         bottomCenterLocation: location,
 
         // Angle of the plank with respect to the ground.  A value of 0
-        // indicates a level plank, positive is tilted right, negative to the
-        // left.  In radians.
+        // indicates a level plank, positive is tilted left, negative to the
+        // right.  In radians.
         tiltAngle: 0,
 
         // Shape of the plank, which conveys everything about where it is in
@@ -203,6 +203,8 @@ define( function( require ) {
 
         // Set the position and rotation of the mass.
         mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
+        if ( thisPlank.tiltAngle !== 0 ) { console.log( "thisPlank.tiltAngle = " + thisPlank.tiltAngle ) }
+        ;
         mass.rotationAngle = thisPlank.tiltAngle;
       } );
 
