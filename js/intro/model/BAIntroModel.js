@@ -20,7 +20,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function IntroModel() {
+  function BAIntroModel() {
     BalanceModel.call( this );
 
     // Add the initial masses and save their initial positions.
@@ -29,7 +29,7 @@ define( function( require ) {
     this.addMass( new SmallTrashCan( new Vector2( 3.7, 0 ), false ) );
   }
 
-  return inherit( BalanceModel, IntroModel, {
+  return inherit( BalanceModel, BAIntroModel, {
     reset: function() {
       this.massList.forEach( function( mass ) {
         mass.positionProperty.reset();

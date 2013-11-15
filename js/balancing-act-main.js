@@ -10,7 +10,7 @@ define( function( require ) {
   var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var IntroModel = require( 'BALANCING_ACT/intro/model/IntroModel' );
+  var BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
   var IntroScreen = require( 'BALANCING_ACT/intro/view/IntroScreen' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
@@ -38,7 +38,7 @@ define( function( require ) {
     //Create and start the sim
     new Sim( simTitleString, [
       new Screen( introString, new Image( firstTabIcon ),
-        function() { return new IntroModel(); },
+        function() { return new BAIntroModel(); },
         function( model ) { return new IntroScreen( model ); },
         { backgroundColor: "#9ddcf8" }
       ),
