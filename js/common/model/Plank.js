@@ -401,6 +401,7 @@ define( function( require ) {
         // Add in torque due to plank.
         this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
       }
+      console.log( this.currentNetTorque );
     },
 
     getTorqueDueToMasses: function() {
@@ -408,6 +409,7 @@ define( function( require ) {
       var torque = 0;
       this.massesOnSurface.forEach( function( mass ) {
         torque += thisPlank.pivotPoint.x - mass.position.x * mass.mass;
+        console.log( "Something on" );
       } );
       return torque;
     },

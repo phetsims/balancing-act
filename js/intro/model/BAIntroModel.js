@@ -33,7 +33,9 @@ define( function( require ) {
     reset: function() {
       this.massList.forEach( function( mass ) {
         mass.positionProperty.reset();
+        mass.rotationAngleProperty.reset();
       } );
+      BalanceModel.prototype.reset.call( this );
     }
   } );
 } );
