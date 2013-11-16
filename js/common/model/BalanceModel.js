@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var AttachmentBar = require( 'BALANCING_ACT/common/model/AttachmentBar' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var ObservableArray = require( 'AXON/ObservableArray' );
@@ -35,7 +36,7 @@ define( function( require ) {
 //    thisModel.columnState = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumn.
     thisModel.columnState = new Property( 'none' ); // Valid values are doubleColumns, singleColumn, noColumn.
     thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnState );
-//    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
+    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
     thisModel.supportColumns = [];
   }
 

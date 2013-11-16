@@ -11,7 +11,6 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
 

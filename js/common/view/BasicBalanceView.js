@@ -11,8 +11,9 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var inherit = require( 'PHET_CORE/inherit' );
+  var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -83,8 +84,8 @@ define( function( require ) {
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
-    nonMassLayer.addChild( new PlankNode( mvt, model.plank, this ) );
-//    nonMassLayer.addChild( new AttachmentBarNode( mvt, model.getAttachmentBar() ) );
+    nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
+    nonMassLayer.addChild( new AttachmentBarNode( mvt, model.attachmentBar ) );
 //    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
 //      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );
 //    }
