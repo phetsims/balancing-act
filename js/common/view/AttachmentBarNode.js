@@ -16,7 +16,7 @@ define( function( require ) {
   var ModelObjectNode = require( 'BALANCING_ACT/common/view/ModelObjectNode' );
 
   function AttachmentBarNode( mvt, attachmentBar ) {
-    ModelObjectNode.call( this, mvt, attachmentBar.shapeProperty, new Color( 230, 230, 230 ) );
+    ModelObjectNode.call( this, mvt, attachmentBar.shapeProperty, new Color( 210, 210, 210 ) );
     // Add the pivot point, which is represented as a circle with a point in the middle.
     this.addChild( new Circle( 5,
       {
