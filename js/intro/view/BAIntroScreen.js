@@ -15,7 +15,7 @@ define( function( require ) {
    * @param model
    * @constructor
    */
-  function IntroScreen( model ) {
+  function BAIntroScreen( model ) {
     BasicBalanceView.call( this, model );
     var thisScreen = this;
 
@@ -35,8 +35,7 @@ define( function( require ) {
               mass.position = new Vector2( mass.position.x, 0 );
             }
             else {
-              // Mass is off stage.  Return it to its
-              // original position.
+              // Mass is off stage.  Return it to its original position.
               mass.position.reset();
             }
           }
@@ -45,6 +44,6 @@ define( function( require ) {
     } );
   }
 
-  return inherit( BasicBalanceView, IntroScreen );
+  return inherit( BasicBalanceView, BAIntroScreen );
 } );
 
