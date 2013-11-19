@@ -76,20 +76,23 @@ define( function( require ) {
     thisPlank.massesOnSurface = new ObservableArray();
     thisPlank.forceVectors = new ObservableArray();
 
-    //------------------------------------------------------------------------
+    // Map of masses to distance from the plank's center.
+    thisPlank.massDistancePairs = [];
+
     // Variables that need to be retained for dynamic behavior, but are not
     // intended to be accessed externally.
-    //------------------------------------------------------------------------
-
     thisPlank.pivotPoint = new Vector2( pivotPoint.x, pivotPoint.y );
     thisPlank.columnState = columnState;
     thisPlank.angularVelocity = 0;
     thisPlank.currentNetTorque = 0;
     thisPlank.massForceVectors = [];
-    thisPlank.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
 
-    // Tracks masses that are on the plank.
-    thisPlank.massDistancePairs = [];
+    // Calculate the max angle at which the plank can tilt before hitting
+    // the ground.  NOTE: This assumes a small distance between the pivot
+    // point and the bottom of the plank.  If this assumption changes, or
+    // if the fulcrum becomes movable, the way this is done will need to
+    // change.
+    thisPlank.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
 
     // The original, unrotated shape, which is needed for a number of operations.
     thisPlank.unrotatedShape = initialPlankShape;
@@ -97,6 +100,18 @@ define( function( require ) {
     // Maintain the tick mark positions here, since they represent the
     // locations where masses can be placed.
     thisPlank.tickMarks = [];
+
+    // Listen to the support column property.  The plank goes to the level
+    // position whenever there are two columns present, and into a tilted
+    // position when only one is present.
+    columnState.link( function( newColumnState ) {
+      if ( newColumnState === 'singleColumn' ) {
+        thisPlank.forceToMaxAndStill();
+      }
+      else if ( newColumnState === 'doubleColumns' ) {
+        thisPlank.forceToLevelAndStill();
+      }
+    } );
   }
 
   // Inherit from base class and define the methods for this object.
@@ -393,7 +408,7 @@ define( function( require ) {
 
     updateNetTorque: function() {
       this.currentNetTorque = 0;
-      if ( this.columnState.value === 'none' ) {
+      if ( this.columnState.value === 'noColumns' ) {
 
         // Add the torque due to the masses on the surface of the plank.
         this.currentNetTorque += this.getTorqueDueToMasses();

@@ -33,8 +33,8 @@ define( function( require ) {
     // Model elements
     thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
     thisModel.massList = new ObservableArray();
-    thisModel.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumn.
-    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnState );
+    thisModel.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
+    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty );
     thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
     thisModel.supportColumns = [];
   }
@@ -61,7 +61,7 @@ define( function( require ) {
 
     reset: function() {
       this.plank.removeAllMasses();
-      this.columnState.reset();
+      this.columnStateProperty.reset();
     }
   };
 

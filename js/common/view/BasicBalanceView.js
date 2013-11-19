@@ -14,6 +14,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -97,6 +98,19 @@ define( function( require ) {
     // TODO: Add the force vectors and the code that updates them.
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
+
+    // Add the buttons that will control whether or not the support columns
+    // are in place.
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', new Rectangle( 0, 0, 20, 20, 0, 0, { fill: 'pink' } ) );
+    insertColumnsButton.centerX = mvt.modelToViewX( -0.2 );
+    insertColumnsButton.centerY = mvt.modelToViewY( -0.5 );
+    nonMassLayer.addChild( insertColumnsButton );
+    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', new Rectangle( 0, 0, 20, 20, 0, 0, { fill: 'green' } ) );
+    removeColumnsButton.centerX = mvt.modelToViewX( 0.2 );
+    removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
+    nonMassLayer.addChild( removeColumnsButton );
+
 
     nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
       {
