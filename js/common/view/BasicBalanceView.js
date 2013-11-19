@@ -18,6 +18,7 @@ define( function( require ) {
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var Property = require( 'AXON/Property' );
@@ -87,9 +88,9 @@ define( function( require ) {
     nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
     nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
     nonMassLayer.addChild( new AttachmentBarNode( mvt, model.attachmentBar ) );
-//    for ( LevelSupportColumn supportColumn : model.getSupportColumns() ) {
-//      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnState, true ) );
-//    }
+    model.supportColumns.forEach( function( supportColumn ) {
+      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
+    } );
 
     // TODO: Add the ruler.
 
