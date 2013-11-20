@@ -165,7 +165,7 @@ define( function( require ) {
       } ) );
 
     // Reset All button.
-    nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
+    nonMassLayer.addChild( new ResetAllButton( function() { thisView.reset(); },
       {
         radius: 20,
         centerX: mvt.modelToViewX( 2 ),
@@ -189,6 +189,12 @@ define( function( require ) {
   }
 
   return inherit( ScreenView, BasicBalanceView, {
-    //TODO prototypes
+    reset: function() {
+      this.model.reset();
+      this.massLabelsVisible.reset();
+      this.distancesVisible.reset();
+      this.forceVectorsFromObjectsVisible.reset();
+      this.levelIndicatorVisible.reset();
+    }
   } );
 } );
