@@ -34,6 +34,10 @@ define( function( require ) {
   // Images and Strings
   var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
   var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
+  var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
+  var levelString = require( 'string!BALANCING_ACT/level' );
+  var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
+  var showString = require( 'string!BALANCING_ACT/show' );
 
   // Constants
   var BUTTON_ICON_WIDTH = 70;
@@ -140,16 +144,21 @@ define( function( require ) {
 
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
-    var controlPanelFontOptions = { font: new PhetFont( 14 ) };
-    var controlPanel = new VerticalCheckBoxGroup( [
-      {content: new Text( 'Mass Label xxx', controlPanelFontOptions ), property: thisView.massLabelsVisible, label: 'Mass Label xxx' },
-      {content: new Text( 'Force Vectors xxx', controlPanelFontOptions ), property: thisView.forceVectorsFromObjectsVisible, label: 'Force Vectors xxx' },
-      {content: new Text( 'Level xxx', controlPanelFontOptions ), property: thisView.levelIndicatorVisible, label: 'Level xxx' }
+    var checkboxFontOptions = { font: new PhetFont( 14 ) };
+    var checkBoxGroup = new VerticalCheckBoxGroup( [
+      { content: new Text( massLabelsString, checkboxFontOptions ), property: thisView.massLabelsVisible, label: massLabelsString },
+      { content: new Text( forcesFromObjectsString, checkboxFontOptions ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
+      { content: new Text( levelString, checkboxFontOptions ), property: thisView.levelIndicatorVisible, label: levelString }
     ] );
-    nonMassLayer.addChild( new Panel( controlPanel,
+    var checkBoxPanelContent = new Node();
+    checkBoxPanelContent.addChild( new Text( showString, { font: new PhetFont( 16 ) } ) );
+    checkBoxGroup.left = 10;
+    checkBoxGroup.top = checkBoxPanelContent.bottom + 5;
+    checkBoxPanelContent.addChild( checkBoxGroup );
+    nonMassLayer.addChild( new Panel( checkBoxPanelContent,
       {
-        xMargin: 10,
-        yMargin: 10,
+        xMargin: 5,
+        yMargin: 5,
         fill: 'rgb( 240, 240, 240 )',
         right: this.layoutBounds.width - 20,
         top: 10
