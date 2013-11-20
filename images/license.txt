@@ -1,3 +1,5 @@
+balance-with-supports-icon.png source=PhET author=jblanco
+balance-without-supports-icon.png source=PhET author=jblanco
 barrel.png source=PhET author=jblanco
 blue-bucket.png source=PhET author=jblanco
 boy-sitting.png source=PhET author=jblanco
