@@ -3,13 +3,13 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="640px" height="480px" viewBox="0 0 640 480" enable-background="new 0 0 640 480" xml:space="preserve">
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="325" y1="79.5" x2="325" y2="399.5005">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="324.5" y1="78.5" x2="324.5" y2="398.5005">
 	<stop  offset="0" style="stop-color:#29ABD6"/>
 	<stop  offset="0.6925" style="stop-color:#98E7F3"/>
 	<stop  offset="1" style="stop-color:#C4FFFF"/>
 </linearGradient>
-<path fill="url(#SVGID_1_)" stroke="#000000" stroke-width="3" stroke-miterlimit="10" d="M592.5,359.5c0,22.092-17.908,40-40,40
-	h-455c-22.091,0-40-17.908-40-40v-240c0-22.091,17.909-40,40-40h455c22.092,0,40,17.909,40,40V359.5z"/>
+<path fill="url(#SVGID_1_)" stroke="#000000" stroke-width="3" stroke-miterlimit="10" d="M594.5,358.5c0,22.092-17.908,40-40,40
+	h-460c-22.091,0-40-17.908-40-40v-240c0-22.091,17.909-40,40-40h460c22.092,0,40,17.909,40,40V358.5z"/>
 <polygon fill="#FFFF00" stroke="#000000" stroke-width="3" stroke-miterlimit="10" points="428.497,397.5 402.965,397.5 
 	324.939,245.305 245.801,397.5 222.5,397.5 316.688,217.5 333.311,217.5 "/>
 <rect x="80.5" y="237.5" fill="#C69C6D" stroke="#000000" stroke-width="3" stroke-miterlimit="10" width="489" height="12"/>
