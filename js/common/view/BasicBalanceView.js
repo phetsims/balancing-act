@@ -108,22 +108,33 @@ define( function( require ) {
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
 
-    // Add the buttons that will control whether or not the support columns
-    // are in place.
+    // Add the buttons that will control whether or not the support columns are in place.
     var balanceWithSupportsIconImage = new Image( balanceWithSupportsIcon );
     balanceWithSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithSupportsIconImage.width );
-    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', balanceWithSupportsIconImage );
+    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', balanceWithSupportsIconImage,
+      {
+        xMargin: 0,
+        yMargin: 0,
+        cornerRadius: 5,
+        stroke: null
+      } );
     insertColumnsButton.centerX = mvt.modelToViewX( -0.4 );
     insertColumnsButton.centerY = mvt.modelToViewY( -0.5 );
     nonMassLayer.addChild( insertColumnsButton );
     var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
     balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
-    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage );
+    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage,
+      {
+        xMargin: 0,
+        yMargin: 0,
+        cornerRadius: 5,
+        stroke: null
+      } );
     removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
     removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
     nonMassLayer.addChild( removeColumnsButton );
 
-
+    // Reset All button.
     nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
       {
         radius: 20,
