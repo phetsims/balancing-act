@@ -21,11 +21,15 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
+  var Panel = require( 'SUN/Panel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
+  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
 
   // Images and Strings
   var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
@@ -134,6 +138,23 @@ define( function( require ) {
     removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
     nonMassLayer.addChild( removeColumnsButton );
 
+    // Add the control panel that will allow users to control the visibility
+    // of the various indicators.
+    var controlPanelFontOptions = { font: new PhetFont( 14 ) };
+    var controlPanel = new VerticalCheckBoxGroup( [
+      {content: new Text( 'Mass Label xxx', controlPanelFontOptions ), property: thisView.massLabelsVisible, label: 'Mass Label xxx' },
+      {content: new Text( 'Force Vectors xxx', controlPanelFontOptions ), property: thisView.forceVectorsFromObjectsVisible, label: 'Force Vectors xxx' },
+      {content: new Text( 'Level xxx', controlPanelFontOptions ), property: thisView.levelIndicatorVisible, label: 'Level xxx' }
+    ] );
+    nonMassLayer.addChild( new Panel( controlPanel,
+      {
+        xMargin: 10,
+        yMargin: 10,
+        fill: 'rgb( 240, 240, 240 )',
+        right: this.layoutBounds.width - 20,
+        top: 10
+      } ) );
+
     // Reset All button.
     nonMassLayer.addChild( new ResetAllButton( function() { model.reset(); },
       {
@@ -145,8 +166,6 @@ define( function( require ) {
     // TODO: Temp for testing button
     var SimpleClockIcon = require( 'SCENERY_PHET/SimpleClockIcon' );
     var PushButtonNew = require( 'SCENERY_PHET/PushButtonNew' );
-    var Text = require( 'SCENERY/nodes/Text' );
-    var PhetFont = require( 'SCENERY_PHET/PhetFont' );
     nonMassLayer.addChild( new PushButtonNew(
       function() { model.reset(); },
       new SimpleClockIcon( 12 ),
