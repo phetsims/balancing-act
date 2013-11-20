@@ -14,6 +14,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -25,6 +26,13 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // Images and Strings
+  var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
+  var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
+
+  // Constants
+  var BUTTON_ICON_WIDTH = 70;
 
   /**
    * @param {BalanceModel} model
@@ -102,13 +110,16 @@ define( function( require ) {
 
     // Add the buttons that will control whether or not the support columns
     // are in place.
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', new Rectangle( 0, 0, 20, 20, 0, 0, { fill: 'pink' } ) );
-    insertColumnsButton.centerX = mvt.modelToViewX( -0.2 );
+    var balanceWithSupportsIconImage = new Image( balanceWithSupportsIcon );
+    balanceWithSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithSupportsIconImage.width );
+    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', balanceWithSupportsIconImage );
+    insertColumnsButton.centerX = mvt.modelToViewX( -0.4 );
     insertColumnsButton.centerY = mvt.modelToViewY( -0.5 );
     nonMassLayer.addChild( insertColumnsButton );
-    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', new Rectangle( 0, 0, 20, 20, 0, 0, { fill: 'green' } ) );
-    removeColumnsButton.centerX = mvt.modelToViewX( 0.2 );
+    var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
+    balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
+    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage );
+    removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
     removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
     nonMassLayer.addChild( removeColumnsButton );
 
