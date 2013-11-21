@@ -438,7 +438,10 @@ define( function( require ) {
       }
 
       return snapToLocations;
-    }
+    },
+
+    // Public constants.
+    LENGTH: PLANK_LENGTH
   } );
 
 } );

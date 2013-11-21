@@ -19,6 +19,7 @@ define( function( require ) {
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
@@ -110,7 +111,12 @@ define( function( require ) {
 
     // TODO: Add the ruler.
 
-    // TODO: Add the level indicator.
+    // Add the level indicator node which will show whether the plank is balanced or not
+    var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );
+    this.levelIndicatorVisible.link( function( visible ) {
+      levelIndicatorNode.visible = visible;
+    } );
+    nonMassLayer.addChild( levelIndicatorNode );
 
     // TODO: Add the force vectors and the code that updates them.
 
