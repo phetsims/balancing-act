@@ -176,6 +176,9 @@ define( function( require ) {
     var SimpleClockIcon = require( 'SCENERY_PHET/SimpleClockIcon' );
     var PushButtonNew = require( 'SCENERY_PHET/PushButtonNew' );
     var PushButtonNew2 = require( 'SCENERY_PHET/PushButtonNew2' );
+    var Shape = require( 'KITE/Shape' );
+    var Color = require( 'SCENERY/util/Color' );
+    var Path = require( 'SCENERY/nodes/Path' );
     nonMassLayer.addChild( new PushButtonNew(
       function() { model.reset(); },
       new SimpleClockIcon( 12 ),
@@ -198,6 +201,25 @@ define( function( require ) {
       function() { model.reset(); },
       new Text( 'Test Button', { font: new PhetFont( { size: 14 } ) } ),
       { centerX: mvt.modelToViewX( 2.2 ), centerY: mvt.modelToViewY( -0.8 ) } ) );
+
+    var rightArrowShape = new Shape().
+      moveTo( 0, 0 ).
+      lineTo( 17, 10 ).
+      lineTo( 0, 20 ).
+      close();
+    var rightArrowNode = new Path( rightArrowShape, { fill: 'black' } );
+    nonMassLayer.addChild( new PushButtonNew2(
+      function() { model.reset(); },
+      rightArrowNode,
+      {
+        widthProportion: 1.6,
+        heightProportion: 1.4,
+        baseColor: new Color( 80, 255, 36 ),
+        centerX: mvt.modelToViewX( 2.2 ),
+        centerY: mvt.modelToViewY( -1.1 )
+      } ) );
+
+
   }
 
   return inherit( ScreenView, BasicBalanceView, {
