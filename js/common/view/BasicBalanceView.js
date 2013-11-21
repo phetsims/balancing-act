@@ -175,14 +175,26 @@ define( function( require ) {
     // TODO: Temp for testing button
     var SimpleClockIcon = require( 'SCENERY_PHET/SimpleClockIcon' );
     var PushButtonNew = require( 'SCENERY_PHET/PushButtonNew' );
+    var PushButtonNew2 = require( 'SCENERY_PHET/PushButtonNew2' );
     nonMassLayer.addChild( new PushButtonNew(
+      function() { model.reset(); },
+      new SimpleClockIcon( 12 ),
+      {
+        centerX: mvt.modelToViewX( -2.1 ),
+        centerY: mvt.modelToViewY( -0.5 )
+      } ) );
+    nonMassLayer.addChild( new PushButtonNew(
+      function() { model.reset(); },
+      new Text( 'Test Button', { font: new PhetFont( { size: 14 } ) } ),
+      { centerX: mvt.modelToViewX( -1.9 ), centerY: mvt.modelToViewY( -0.8 ) } ) );
+    nonMassLayer.addChild( new PushButtonNew2(
       function() { model.reset(); },
       new SimpleClockIcon( 12 ),
       {
         centerX: mvt.modelToViewX( 2.4 ),
         centerY: mvt.modelToViewY( -0.5 )
       } ) );
-    nonMassLayer.addChild( new PushButtonNew(
+    nonMassLayer.addChild( new PushButtonNew2(
       function() { model.reset(); },
       new Text( 'Test Button', { font: new PhetFont( { size: 14 } ) } ),
       { centerX: mvt.modelToViewX( 2.2 ), centerY: mvt.modelToViewY( -0.8 ) } ) );
