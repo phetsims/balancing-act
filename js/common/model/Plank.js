@@ -85,7 +85,6 @@ define( function( require ) {
     thisPlank.columnState = columnState;
     thisPlank.angularVelocity = 0;
     thisPlank.currentNetTorque = 0;
-    thisPlank.massForceVectors = [];
 
     // Calculate the max angle at which the plank can tilt before hitting
     // the ground.  NOTE: This assumes a small distance between the pivot

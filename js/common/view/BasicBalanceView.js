@@ -21,10 +21,12 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
+  var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
+  var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -118,7 +120,30 @@ define( function( require ) {
     } );
     nonMassLayer.addChild( levelIndicatorNode );
 
-    // TODO: Add the force vectors and the code that updates them.
+    // Listen to the list of force vectors and manage their representations.
+    model.plank.forceVectors.addItemAddedListener( function( addedMassForceVector ) {
+      // Add a representation for the new vector.
+      var forceVectorNode;
+      if ( addedMassForceVector.isObfuscated() ) {
+        forceVectorNode = new MysteryVectorNode( addedMassForceVector.forceVectorProperty, this.forceVectorsFromObjectsVisible, mvt );
+      }
+      else {
+        forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
+          0.002,  // Scaling factor, chosen to make size reasonable.
+          thisView.forceVectorsFromObjectsVisible,
+          Color.WHITE,
+          mvt );
+      }
+      nonMassLayer.addChild( forceVectorNode );
+
+      // Listen for removal of this vector and, if and when it is
+      // removed, remove the corresponding representation.
+      model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
+        if ( removedMassForceVector == addedMassForceVector ) {
+          nonMassLayer.removeChild( forceVectorNode );
+        }
+      } );
+    } );
 
     // TODO: Add everything else from BasicBalanceCanvas in Java.
 
