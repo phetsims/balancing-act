@@ -246,7 +246,7 @@ define( function( require ) {
       // Remove the force vector associated with this mass.
       for ( var j = 0; j < this.forceVectors.length; j++ ) {
         if ( this.forceVectors.get( j ).mass === mass ) {
-          this.forceVectors.remove( j, 1 );
+          this.forceVectors.remove( this.forceVectors.get( j ) );
           break;
         }
       }
