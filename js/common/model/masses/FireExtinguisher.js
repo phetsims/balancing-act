@@ -19,6 +19,7 @@ define( function( require ) {
    */
   function FireExtinguisher( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, fireExtinguisherImage, HEIGHT, initialPosition, isMystery );
+    this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 
   return inherit( ImageMass, FireExtinguisher );
