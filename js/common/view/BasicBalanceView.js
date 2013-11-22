@@ -129,10 +129,10 @@ define( function( require ) {
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
-          0.002,  // Scaling factor, chosen to make size reasonable.
+          0.3,  // Scaling factor, chosen to make size reasonable.
           thisView.forceVectorsFromObjectsVisible,
-          Color.WHITE,
-          mvt );
+          mvt
+        );
       }
       nonMassLayer.addChild( forceVectorNode );
 

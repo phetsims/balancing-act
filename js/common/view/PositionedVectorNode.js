@@ -5,35 +5,49 @@
  * and that monitors the vector and updates the representation when changes
  * occur.
  *
+ * NOTE: This only works with downward pointing vectors, which is what was
+ * needed for Balancing Act.  This would need to be generalized to support
+ * vectors pointing in other directions.
+ *
  * @author John Blanco
  */
 define( function( require ) {
   'use strict';
 
   // Imports
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   /**
    * @param positionedVectorProperty
-   * @param scalingFactor
    * @param visibilityProperty
-   * @param fillColor
-   * @param mvt Model-view transform
+   * @param scalingFactor
+   * @param mvt
+   * @param options
    * @constructor
    */
-  function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, fillColor, mvt ) {
+  function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, mvt, options ) {
     Node.call( this );
     var thisNode = this;
-    // Create the vector node and add it as a child.
-    //TODO this is stubbed, port needs to be completed.
 
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    thisNode.addChild( new Rectangle( 0, 0, 20, 20, 0, 0, {fill: 'pink', stroke: 'black'} ) );
+    options = _.extend(
+      {
+        fill: 'white',
+        stroke: 'black',
+        lineWidth: 1,
+        headHeight: 8,
+        headWidth: 12,
+        tailWidth: 5
+      }, options );
+
+    // Create the vector node and add it as a child.
+    var length = positionedVectorProperty.value.vector.magnitude() * scalingFactor;
+    thisNode.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
     positionedVectorProperty.link( function( positionedVector ) {
       thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
-      thisNode.centerY = mvt.modelToViewY( positionedVector.origin.y );
+      thisNode.top = mvt.modelToViewY( positionedVector.origin.y );
     } );
 
     visibilityProperty.link( function( visible ) {
