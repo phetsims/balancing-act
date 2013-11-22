@@ -15,6 +15,7 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Shape = require( 'KITE/Shape' );
+  var Transform3 = require( 'DOT/Transform3' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -67,6 +68,12 @@ define( function( require ) {
         // it *isn't* used, get rid of it from here.
         shape: initialPlankShape,
 
+        // Shape of the tick marks.  These are calculated here in the model, since
+        // their positions correspond to the "snap to" locations, but they are not
+        // added to the overall shape so that the view has more freedom to vary
+        // their appearance.
+        tickMarks: [],
+
         // Property that indicates whether the plank is being manually moved
         // by the user.
         userControlled: false
@@ -85,6 +92,12 @@ define( function( require ) {
     thisPlank.columnState = columnState;
     thisPlank.angularVelocity = 0;
     thisPlank.currentNetTorque = 0;
+
+    // Listen the our own overall shape and update the tick marks whenever
+    // the shape changes.
+    thisPlank.shapeProperty.lazyLink( function() {
+      thisPlank.updateTickMarks( thisPlank );
+    } );
 
     // Calculate the max angle at which the plank can tilt before hitting
     // the ground.  NOTE: This assumes a small distance between the pivot
@@ -360,8 +373,19 @@ define( function( require ) {
     },
 
     updateTickMarks: function() {
-      // TODO: Stubbed until I figure out whether to do tick marks the same way as in the Java sim.
-      console.log( 'updateTickMarks not implemented yet.' );
+      var interTickMarkDistance = PLANK_LENGTH / ( NUM_SNAP_TO_LOCATIONS + 1 );
+      var plankLeftEdgeX = this.unrotatedShape.bounds.minX + interTickMarkDistance;
+      var tickMarkYPos = this.unrotatedShape.bounds.minY;
+      var rotationTransform = new Transform3( Matrix3.rotationAroundPoint( this.tiltAngle, this.pivotPoint ) );
+      var newTickMarks = new Array( NUM_SNAP_TO_LOCATIONS );
+      for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
+        var tickMarkShape = new Shape();
+        var xPos = plankLeftEdgeX + interTickMarkDistance * i;
+        tickMarkShape.moveTo( xPos, tickMarkYPos );
+        tickMarkShape.lineTo( xPos, tickMarkYPos + PLANK_THICKNESS );
+        newTickMarks[i] = rotationTransform.transformShape( tickMarkShape );
+      }
+      this.tickMarks = newTickMarks;
     },
 
     // Obtain the absolute position (in meters) of the center surface (top)
