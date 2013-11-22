@@ -269,7 +269,11 @@ define( function( require ) {
     },
 
     removeAllMasses: function() {
-      this.massesOnSurface.clear();
+      var copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
+      var thisPlank = this;
+      copyOfMassesArray.forEach( function( mass ) {
+        thisPlank.removeMassFromSurface( mass );
+      } );
     },
 
     getMassDistanceFromCenter: function( mass ) {
