@@ -1,8 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * The level indicator shows triangles to the side of the plank to help
- * indicate whether the plank is at exactly 0 degrees.
+ * The level indicator shows triangles to the left and right of the plank to
+ * help indicate whether the plank is at exactly 0 degrees.
  *
  * @author John Blanco
  */
@@ -28,8 +28,8 @@ define( function( require ) {
     var thisNode = this;
 
     // Locations for left and right edge
-    var leftEdgeOfPlank = mvt.modelToViewPosition( plank.pivotPoint.plus( new Vector2( -plank.LENGTH / 2, 0 ) ) );
-    var rightEdgeOfPlank = mvt.modelToViewPosition( plank.pivotPoint.plus( new Vector2( plank.LENGTH / 2, 0 ) ) );
+    var leftEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x - plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
+    var rightEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x + plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
 
     // Draw a sort of arrow head shape.
     var leftIndicatorShape = new Shape().
@@ -44,7 +44,7 @@ define( function( require ) {
       {
         stroke: 'black',
         right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
-        centerY: mvt.modelToViewY( plank.pivotPoint.y )
+        centerY: leftEdgeOfPlank.y
       } );
     this.addChild( leftLevelIndicatorNode );
 
@@ -55,7 +55,7 @@ define( function( require ) {
       {
         stroke: 'black',
         left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,
-        centerY: mvt.modelToViewY( plank.pivotPoint.y )
+        centerY: rightEdgeOfPlank.y
       } );
     this.addChild( rightLevelIndicatorNode );
 
