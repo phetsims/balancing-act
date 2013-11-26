@@ -15,6 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Strings
@@ -22,6 +23,7 @@ define( function( require ) {
 
   // Constants
   var RULER_HEIGHT = 50; // Empirically determined
+  var UNITS_FONT = new PhetFont( 14 ); // Empirically determined
 
   /**
    * @param {Plank} plank
@@ -53,12 +55,17 @@ define( function( require ) {
     var rulerNode = new RulerNode( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
       {
         backgroundFill: 'rgba( 236, 225, 113, 0.5)',
-        majorTickFont: new PhetFont( 11 )
+        majorTickFont: new PhetFont( 11 ),
+        tickMarksOnBottom: false
       } );
-    this.addChild( rulerNode );
+    thisNode.addChild( rulerNode );
 
     // Add a line in the center of the ruler to make it look like two separate rulers.
     thisNode.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
+
+    // Add a units label on each side.
+    thisNode.addChild( new Text( metersString, { font: UNITS_FONT, centerX: rulerNode.width * 0.25, bottom: RULER_HEIGHT } ) );
+    thisNode.addChild( new Text( metersString, { font: UNITS_FONT, centerX: rulerNode.width * 0.75, bottom: RULER_HEIGHT } ) );
 
     // Observe visibility.
     visibleProperty.link( function( visible ) {
@@ -67,8 +74,8 @@ define( function( require ) {
 
     // Set initial position.
     var topCenter = mvt.modelToViewPosition( plank.bottomCenterLocation );
-    this.top = topCenter.y;
-    this.centerX = topCenter.x;
+    thisNode.top = topCenter.y;
+    thisNode.centerX = topCenter.x;
 
     // Rotate with the plank.
     var rulerRotationAngle = 0;
