@@ -27,6 +27,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
+  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
@@ -118,12 +119,19 @@ define( function( require ) {
       nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
     } );
 
-    // TODO: Add the ruler.
+    // Add the ruler.
     var rulersVisible = new Property( false );
     this.positionMarkerState.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
     nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
+
+    // Add the position markers.
+    var positionMarkersVisible = new Property( false );
+    this.positionMarkerState.link( function( positionMarkerState ) {
+      positionMarkersVisible.value = positionMarkerState === 'marks';
+    } );
+    nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );

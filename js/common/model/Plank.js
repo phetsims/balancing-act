@@ -469,7 +469,8 @@ define( function( require ) {
     },
 
     // Public constants.
-    LENGTH: PLANK_LENGTH
+    LENGTH: PLANK_LENGTH,
+    INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE
   } );
 
 } );
