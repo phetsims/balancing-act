@@ -146,17 +146,18 @@ define( function( require ) {
 
         // Update the angle of the plank's tilt based on the angular velocity.
         var previousTiltAngle = this.tiltAngle;
-        this.tiltAngle += this.angularVelocity * dt;
-        if ( Math.abs( this.tiltAngle ) > this.maxTiltAngle ) {
+        var newTiltAngle = this.tiltAngle + this.angularVelocity * dt;
+        if ( Math.abs( newTiltAngle ) > this.maxTiltAngle ) {
           // Limit the angle when one end is touching the ground.
-          this.tiltAngle = this.maxTiltAngle * ( this.tiltAngle < 0 ? -1 : 1 );
+          newTiltAngle = this.maxTiltAngle * ( this.tiltAngle < 0 ? -1 : 1 );
           this.angularVelocity = 0;
         }
-        else if ( Math.abs( this.tiltAngle ) < 0.0001 ) {
+        else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
           // Below a certain threshold just force the tilt angle to be
           // zero so that it appears perfectly level.
-          this.tiltAngle = 0;
+          newTiltAngle = 0;
         }
+        this.tiltAngle = newTiltAngle;
 
         // Update the shape of the plank and the positions of the masses on
         // the surface, but only if the tilt angle has changed.

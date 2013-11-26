@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // Strings
   var metersString = require( 'string!BALANCING_ACT/meters' );
@@ -30,12 +31,29 @@ define( function( require ) {
     var majorTickMarkWidth = rulerWidth / 18;
     this.addChild( new RulerNode( rulerWidth, 30, majorTickMarkWidth, metersString,
       {
-
       } ) );
 
     // Observe visibility.
     visibleProperty.link( function( visible ) {
       thisNode.visible = visible;
+    } );
+
+    // Set initial position.
+    var topCenter = mvt.modelToViewPosition( plank.bottomCenterLocation );
+    this.top = topCenter.y;
+    this.centerX = topCenter.x;
+
+    // Rotate with the plank.
+    var rulerRotationAngle = 0;
+    var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
+    plank.tiltAngleProperty.link( function( angle ) {
+      var deltaAngle = rulerRotationAngle - angle;
+      rulerRotationAngle = angle;
+
+      console.log( '----------------------------------' );
+      console.log( 'rotation event, angle = ' + angle + ', or ' + angle / Math.PI + '*PI' );
+      console.log( 'deltaAngle = ' + deltaAngle );
+      thisNode.rotateAround( rotationPoint, deltaAngle );
     } );
   }
 
