@@ -32,6 +32,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
+  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
 
   // Images and Strings
@@ -39,7 +40,11 @@ define( function( require ) {
   var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var levelString = require( 'string!BALANCING_ACT/level' );
+  var marksString = require( 'string!BALANCING_ACT/marks' );
   var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
+  var noneString = require( 'string!BALANCING_ACT/none' );
+  var positionString = require( 'string!BALANCING_ACT/position' );
+  var rulersString = require( 'string!BALANCING_ACT/rulers' );
   var showString = require( 'string!BALANCING_ACT/show' );
 
   // Constants
@@ -175,24 +180,47 @@ define( function( require ) {
 
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
-    var checkboxFontOptions = { font: new PhetFont( 14 ) };
+    var panelTitleFont = new PhetFont( 16 );
+    var panelOptionFont = { font: new PhetFont( 14 ) };
     var checkBoxGroup = new VerticalCheckBoxGroup( [
-      { content: new Text( massLabelsString, checkboxFontOptions ), property: thisView.massLabelsVisible, label: massLabelsString },
-      { content: new Text( forcesFromObjectsString, checkboxFontOptions ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
-      { content: new Text( levelString, checkboxFontOptions ), property: thisView.levelIndicatorVisible, label: levelString }
+      { content: new Text( massLabelsString, panelOptionFont ), property: thisView.massLabelsVisible, label: massLabelsString },
+      { content: new Text( forcesFromObjectsString, panelOptionFont ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
+      { content: new Text( levelString, panelOptionFont ), property: thisView.levelIndicatorVisible, label: levelString }
     ] );
     var checkBoxPanelContent = new Node();
-    checkBoxPanelContent.addChild( new Text( showString, { font: new PhetFont( 16 ) } ) );
+    checkBoxPanelContent.addChild( new Text( showString, { font: panelTitleFont } ) );
     checkBoxGroup.left = 10;
     checkBoxGroup.top = checkBoxPanelContent.bottom + 5;
     checkBoxPanelContent.addChild( checkBoxGroup );
-    nonMassLayer.addChild( new Panel( checkBoxPanelContent,
+    var indicatorControlPanel = new Panel( checkBoxPanelContent,
       {
         xMargin: 5,
         yMargin: 5,
         fill: 'rgb( 240, 240, 240 )',
         right: this.layoutBounds.width - 20,
         top: 10
+      } );
+    nonMassLayer.addChild( indicatorControlPanel );
+
+    // Add the control panel that will allow users to select between the
+    // various position markers, i.e. ruler, position markers, or nothing.
+    var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
+      { node: new Text( noneString, panelOptionFont ), property: thisView.massLabelsVisible, label: noneString },
+      { node: new Text( rulersString, panelOptionFont ), property: thisView.forceVectorsFromObjectsVisible, label: rulersString },
+      { node: new Text( marksString, panelOptionFont ), property: thisView.levelIndicatorVisible, label: marksString }
+    ] );
+    var positionMarkerPanelContent = new Node();
+    positionMarkerPanelContent.addChild( new Text( positionString, panelTitleFont ) );
+    positionMarkerRadioButtons.left = 10;
+    positionMarkerRadioButtons.top = positionMarkerPanelContent.bottom + 5;
+    positionMarkerPanelContent.addChild( positionMarkerRadioButtons );
+    nonMassLayer.addChild( new Panel( positionMarkerPanelContent,
+      {
+        xMargin: 5,
+        yMargin: 5,
+        fill: 'rgb( 240, 240, 240 )',
+        left: indicatorControlPanel.left,
+        top: indicatorControlPanel.bottom + 5
       } ) );
 
     // Reset All button.
