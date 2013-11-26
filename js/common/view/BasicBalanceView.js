@@ -29,6 +29,7 @@ define( function( require ) {
   var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -118,6 +119,11 @@ define( function( require ) {
     } );
 
     // TODO: Add the ruler.
+    var rulersVisible = new Property( false );
+    this.positionMarkerState.link( function( positionMarkerState ) {
+      rulersVisible.value = positionMarkerState === 'rulers';
+    } );
+    nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );
@@ -142,8 +148,7 @@ define( function( require ) {
       }
       nonMassLayer.addChild( forceVectorNode );
 
-      // Listen for removal of this vector and, if and when it is
-      // removed, remove the corresponding representation.
+      // Remove representation when corresponding vector removed from model.
       model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
         if ( removedMassForceVector == addedMassForceVector ) {
           nonMassLayer.removeChild( forceVectorNode );
