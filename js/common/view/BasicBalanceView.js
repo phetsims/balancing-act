@@ -283,8 +283,6 @@ define( function( require ) {
         centerX: mvt.modelToViewX( 2.2 ),
         centerY: mvt.modelToViewY( -1.1 )
       } ) );
-
-
   }
 
   return inherit( ScreenView, BasicBalanceView, {
@@ -294,6 +292,7 @@ define( function( require ) {
       this.distancesVisible.reset();
       this.forceVectorsFromObjectsVisible.reset();
       this.levelIndicatorVisible.reset();
+      this.positionMarkerState.reset();
     }
   } );
 } );
