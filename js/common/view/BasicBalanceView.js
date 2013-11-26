@@ -64,6 +64,7 @@ define( function( require ) {
     thisView.distancesVisible = new Property( false );
     thisView.forceVectorsFromObjectsVisible = new Property( false );
     thisView.levelIndicatorVisible = new Property( false );
+    thisView.positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
 
     // Create the model-view transform.  The primary units used in the model
     // are meters, so significant zoom is used.  The multipliers for the 2nd
@@ -205,9 +206,9 @@ define( function( require ) {
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
-      { node: new Text( noneString, panelOptionFont ), property: thisView.massLabelsVisible, label: noneString },
-      { node: new Text( rulersString, panelOptionFont ), property: thisView.forceVectorsFromObjectsVisible, label: rulersString },
-      { node: new Text( marksString, panelOptionFont ), property: thisView.levelIndicatorVisible, label: marksString }
+      { node: new Text( noneString, panelOptionFont ), property: thisView.positionMarkerState, value: 'none', label: noneString },
+      { node: new Text( rulersString, panelOptionFont ), property: thisView.positionMarkerState, value: 'rulers', label: rulersString },
+      { node: new Text( marksString, panelOptionFont ), property: thisView.positionMarkerState, value: 'marks', label: marksString }
     ] );
     var positionMarkerPanelContent = new Node();
     positionMarkerPanelContent.addChild( new Text( positionString, panelTitleFont ) );
