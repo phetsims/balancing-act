@@ -1,8 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Node that, when parameterized correctly, can be used to represent the sky in
- * a simulation screen.
+ * Node that can be used to represent the sky.
  *
  * @author John Blanco
  * @author Sam Reid
