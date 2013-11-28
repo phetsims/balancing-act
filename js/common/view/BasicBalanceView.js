@@ -231,10 +231,11 @@ define( function( require ) {
     nonMassLayer.addChild( new Panel( positionMarkerPanelContent,
       {
         xMargin: 5,
-        yMargin: 5,
         fill: 'rgb( 240, 240, 240 )',
         left: indicatorControlPanel.left,
-        top: indicatorControlPanel.bottom + 5
+        top: indicatorControlPanel.bottom + 5,
+        minWidth: indicatorControlPanel.width,
+        align: 'left'
       } ) );
 
     // Reset All button.
