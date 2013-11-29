@@ -12,7 +12,12 @@ define( function( require ) {
 
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
+  var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
+  var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'BALANCING_ACT/common/view/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Image = require( 'SCENERY/nodes/Image' );
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
@@ -20,37 +25,38 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
+  var levelString = require( 'string!BALANCING_ACT/level' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
+  var marksString = require( 'string!BALANCING_ACT/marks' );
+  var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
   var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
+  var noneString = require( 'string!BALANCING_ACT/none' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+  var positionString = require( 'string!BALANCING_ACT/position' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
+  var rulersString = require( 'string!BALANCING_ACT/rulers' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var showString = require( 'string!BALANCING_ACT/show' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VStrut = require( 'BALANCING_ACT/common/view/VStrut' );
 
-  // Images and Strings
-  var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
-  var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
-  var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
-  var levelString = require( 'string!BALANCING_ACT/level' );
-  var marksString = require( 'string!BALANCING_ACT/marks' );
-  var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
-  var noneString = require( 'string!BALANCING_ACT/none' );
-  var positionString = require( 'string!BALANCING_ACT/position' );
-  var rulersString = require( 'string!BALANCING_ACT/rulers' );
-  var showString = require( 'string!BALANCING_ACT/show' );
 
   // Constants
   var BUTTON_ICON_WIDTH = 70;
+  var X_MARGIN_IN_PANELS = 5;
+  var PANEL_TITLE_FONT = new PhetFont( 16 );
+  var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
 
   /**
    * @param {BalanceModel} model
@@ -164,8 +170,6 @@ define( function( require ) {
       } );
     } );
 
-    // TODO: Add everything else from BasicBalanceCanvas in Java.
-
     // Add the buttons that will control whether or not the support columns are in place.
     var balanceWithSupportsIconImage = new Image( balanceWithSupportsIcon );
     balanceWithSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithSupportsIconImage.width );
@@ -194,48 +198,51 @@ define( function( require ) {
 
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
-    var panelTitleFont = new PhetFont( 16 );
-    var panelOptionFont = { font: new PhetFont( 14 ) };
-    var checkBoxGroup = new VerticalCheckBoxGroup( [
-      { content: new Text( massLabelsString, panelOptionFont ), property: thisView.massLabelsVisible, label: massLabelsString },
-      { content: new Text( forcesFromObjectsString, panelOptionFont ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
-      { content: new Text( levelString, panelOptionFont ), property: thisView.levelIndicatorVisible, label: levelString }
+    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
+      { content: new Text( massLabelsString, PANEL_OPTION_FONT ), property: thisView.massLabelsVisible, label: massLabelsString },
+      { content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
+      { content: new Text( levelString, PANEL_OPTION_FONT ), property: thisView.levelIndicatorVisible, label: levelString }
     ] );
-    var checkBoxPanelContent = new Node();
-    checkBoxPanelContent.addChild( new Text( showString, { font: panelTitleFont } ) );
-    checkBoxGroup.left = 10;
-    checkBoxGroup.top = checkBoxPanelContent.bottom + 5;
-    checkBoxPanelContent.addChild( checkBoxGroup );
-    var indicatorControlPanel = new Panel( checkBoxPanelContent,
+    var titleToControlsVerticalSpace = 7;
+    var indicatorVisibilityControlsVBox = new VBox( {
+      children: [
+        new Text( showString, PANEL_TITLE_FONT ),
+        new VStrut( titleToControlsVerticalSpace ),
+        new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckBoxGroup ] } )
+      ],
+      align: 'left'
+    } );
+    var indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox,
       {
-        xMargin: 5,
-        yMargin: 5,
+        xMargin: X_MARGIN_IN_PANELS,
         fill: 'rgb( 240, 240, 240 )',
-        right: this.layoutBounds.width - 20,
-        top: 10
+        top: 5,
+        right: this.layoutBounds.width - 10
       } );
-    nonMassLayer.addChild( indicatorControlPanel );
+    nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
-      { node: new Text( noneString, panelOptionFont ), property: thisView.positionMarkerState, value: 'none', label: noneString },
-      { node: new Text( rulersString, panelOptionFont ), property: thisView.positionMarkerState, value: 'rulers', label: rulersString },
-      { node: new Text( marksString, panelOptionFont ), property: thisView.positionMarkerState, value: 'marks', label: marksString }
+      { node: new Text( noneString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'none', label: noneString },
+      { node: new Text( rulersString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'rulers', label: rulersString },
+      { node: new Text( marksString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'marks', label: marksString }
     ] );
-    var positionMarkerPanelContent = new Node();
-    positionMarkerPanelContent.addChild( new Text( positionString, panelTitleFont ) );
-    positionMarkerRadioButtons.left = 10;
-    positionMarkerRadioButtons.top = positionMarkerPanelContent.bottom + 5;
-    positionMarkerPanelContent.addChild( positionMarkerRadioButtons );
-    nonMassLayer.addChild( new Panel( positionMarkerPanelContent,
+    var positionMarkerVBox = new VBox( {
+      children: [
+        new Text( positionString, PANEL_TITLE_FONT ),
+        new VStrut( titleToControlsVerticalSpace ),
+        new HStrut( indicatorVisibilityControlPanel.width - 2 * X_MARGIN_IN_PANELS ),
+        new HBox( { children: [ new HStrut( 10 ), positionMarkerRadioButtons ] } )
+      ],
+      align: 'left'
+    } );
+    nonMassLayer.addChild( new Panel( positionMarkerVBox,
       {
-        xMargin: 5,
+        xMargin: X_MARGIN_IN_PANELS,
         fill: 'rgb( 240, 240, 240 )',
-        left: indicatorControlPanel.left,
-        top: indicatorControlPanel.bottom + 5,
-        minWidth: indicatorControlPanel.width,
-        align: 'left'
+        left: indicatorVisibilityControlPanel.left,
+        top: indicatorVisibilityControlPanel.bottom + 5
       } ) );
 
     // Reset All button.
