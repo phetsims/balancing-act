@@ -58,15 +58,15 @@ define( function( require ) {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
-      // Debug printouts for indicating whether the image for this
-      // node starts at a reasonable size.
+      // Debug printouts for indicating whether the image for this node is
+      // reasonably scaled.  Generally, scale values between 0.5 and 1 look best.
       if ( scalingFactor > 2 || scalingFactor < 0.5 ) {
         console.log( 'Warning: Scaling factor is too large or small, drawing size should be adjusted.  Scaling factor = ' + scalingFactor );
-        console.log( '   Image type = ' + typeof( image ) );
+        console.log( '   Image src = ' + image.getAttribute( 'src' ) );
       }
       if ( scalingFactor > 1 ) {
-        console.log( 'Scaling image up, factor = ' + scalingFactor );
-        console.log( '   Image type = ' + typeof( image ) );
+        console.log( 'Warning: Scaling image up, could lead to blurriness, factor = ' + scalingFactor );
+        console.log( '   Image src = ' + image.getAttribute( 'src' ) );
       }
       imageNode.scale( scalingFactor );
       updatePositionAndAngle();
