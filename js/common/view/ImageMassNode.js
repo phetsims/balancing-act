@@ -37,14 +37,8 @@ define( function( require ) {
     var thisNode = this;
 
     // Add the mass indicator label.  Note that it is positioned elsewhere.
-    var massLabel = new Text( { font: new PhetFont( 14 ) } );
-    if ( imageMass.isMystery ) {
-      massLabel.text = unknownMassString;
-    }
-    else {
-      var valueText = Number( imageMass.mass ).toFixed( 2 );
-      massLabel.text = StringUtils.format( pattern0Value1UnitsString, valueText, kgString );
-    }
+    var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.mass, kgString );
+    var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
     thisNode.addChild( massLabel );
 
     // Observe changes to mass indicator visibility.
@@ -79,6 +73,7 @@ define( function( require ) {
       // Position the label to be centered above the center of mass, as
       // opposed to the center of the image node.
       massLabel.centerX = imageNode.width / 2 + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+      massLabel.bottom = imageNode.top;
 
       // Set overall position.  Recall that positions in the model are defined
       // as the center bottom of the item.
