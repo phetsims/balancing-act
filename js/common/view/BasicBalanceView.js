@@ -52,7 +52,7 @@ define( function( require ) {
   var VStrut = require( 'BALANCING_ACT/common/view/VStrut' );
 
   // Constants
-  var BUTTON_ICON_WIDTH = 70;
+  var BUTTON_ICON_WIDTH = 60;
   var X_MARGIN_IN_PANELS = 5;
   var PANEL_TITLE_FONT = new PhetFont( 16 );
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
@@ -80,8 +80,8 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisView.layoutBounds.width * 0.4, thisView.layoutBounds.height * 0.75 ),
-      120 );
+      new Vector2( thisView.layoutBounds.width * 0.35, thisView.layoutBounds.height * 0.75 ),
+      100 );
     thisView.mvt = mvt; // Make mvt available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can
@@ -253,9 +253,9 @@ define( function( require ) {
     // Reset All button.
     nonMassLayer.addChild( new ResetAllButton( function() { thisView.reset(); },
       {
-        radius: 20,
-        centerX: mvt.modelToViewX( 2 ),
-        centerY: mvt.modelToViewY( -0.5 )
+        radius: 18,
+        right: thisView.layoutBounds.width - 20,
+        bottom: thisView.layoutBounds.height - 15
       } ) );
   }
 
