@@ -15,7 +15,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   // Constants
-  var LEG_THICKNESS_FACTOR = 0.08; // Thickness of legs proportional to overall width, empirically determined.
+  var LEG_THICKNESS_FACTOR = 0.09; // Thickness of legs proportional to overall width, empirically determined.
 
   /**
    * @param {Dimension2} size - width and height of the fulcrum.
@@ -27,15 +27,16 @@ define( function( require ) {
     var legThickness = LEG_THICKNESS_FACTOR * size.width;
 
     // Define the basic shape of the fulcrum, which is an A-frame sort of
-    // thing that is centered horizontally around x = 0.
+    // thing that is centered horizontally around x = 0.  There are some
+    // 'tweak factors' in here, adjust as needed for desired look.
     var fulcrumShape = new Shape();
-    // Start at leftmost point.
+    // Start at leftmost and lowest point.
     fulcrumShape.moveTo( -size.width / 2, 0 );
-    fulcrumShape.lineTo( -legThickness / 2, size.height );
-    fulcrumShape.lineTo( legThickness / 2, size.height );
+    fulcrumShape.lineTo( -legThickness * 0.67, size.height + legThickness / 2 );
+    fulcrumShape.lineTo( legThickness * 0.67, size.height + legThickness / 2 );
     fulcrumShape.lineTo( size.width / 2, 0 );
     fulcrumShape.lineTo( size.width / 2 - legThickness, 0 );
-    fulcrumShape.lineTo( 0, size.height - ( legThickness * size.height / ( size.width - legThickness ) ) );
+    fulcrumShape.lineTo( 0, size.height - legThickness * 0.2 );
     fulcrumShape.lineTo( -size.width / 2 + legThickness, 0 );
     fulcrumShape.close();
 
