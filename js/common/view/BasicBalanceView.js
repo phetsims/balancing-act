@@ -207,7 +207,7 @@ define( function( require ) {
       { content: new Text( massLabelsString, PANEL_OPTION_FONT ), property: thisView.massLabelsVisible, label: massLabelsString },
       { content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ), property: thisView.forceVectorsFromObjectsVisible, label: forcesFromObjectsString },
       { content: new Text( levelString, PANEL_OPTION_FONT ), property: thisView.levelIndicatorVisible, label: levelString }
-    ] );
+    ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
@@ -232,7 +232,7 @@ define( function( require ) {
       { node: new Text( noneString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'none', label: noneString },
       { node: new Text( rulersString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'rulers', label: rulersString },
       { node: new Text( marksString, PANEL_OPTION_FONT ), property: thisView.positionMarkerState, value: 'marks', label: marksString }
-    ] );
+    ], { radius: 8 } );
     var positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, PANEL_TITLE_FONT ),
