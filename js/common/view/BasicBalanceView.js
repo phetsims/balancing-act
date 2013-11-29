@@ -51,7 +51,6 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'BALANCING_ACT/common/view/VStrut' );
 
-
   // Constants
   var BUTTON_ICON_WIDTH = 70;
   var X_MARGIN_IN_PANELS = 5;
@@ -85,17 +84,23 @@ define( function( require ) {
       120 );
     thisView.mvt = mvt; // Make mvt available to descendant types.
 
+    // Create a root node and send to back so that the layout bounds box can
+    // be made visible if needed.
+    var root = new Node();
+    thisView.addChild( root );
+    root.moveToBack();
+
     // Add the background, which portrays the sky and ground.
-    thisView.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
+    root.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
 
     // Set up a layer for non-mass model elements.
     var nonMassLayer = new Node();
-    thisView.addChild( nonMassLayer );
+    root.addChild( nonMassLayer );
 
     // Set up a separate layer for the masses so that they will be out in
     // front of the other elements of the model.
     var massesLayer = new Node();
-    thisView.addChild( massesLayer );
+    root.addChild( massesLayer );
 
     function handleMassAdded( addedMass ) {
       // Create and add the view representation for this mass.
