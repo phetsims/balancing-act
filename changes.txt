@@ -1,3 +1,5 @@
+11/29/2013 Added basic model & view classes for the 2nd screen.
+11/29/2013 Finished implementing all of the basic functionality of the 1st screen.
 # 0.0.0-dev.2
 11/8/2013 Got basic dragging and dropping of model objects working (drop on ground only).
 11/6/2013 Integrated drawn reset all button.
