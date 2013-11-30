@@ -1,9 +1,9 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Primary model class for the intro screen in the balancing act simulation.
- * This model depicts a plank on a fulcrum with a few masses that the user can
- * put on and remove from the plank.
+ * Primary model class for the 'balance lab' tab in the balancing act
+ * simulation. This model depicts a plank on a fulcrum with a collection of
+ * masses that the user can put on and remove from the plank.
  *
  * @author John Blanco
  */
@@ -20,16 +20,15 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function BAIntroModel() {
+  function BalanceLabModel() {
     BalanceModel.call( this );
 
     // Add the initial masses and save their initial positions.
     this.addMass( new FireExtinguisher( new Vector2( 2.7, 0 ), false ) );
-    this.addMass( new FireExtinguisher( new Vector2( 3.2, 0 ), false ) );
-    this.addMass( new SmallTrashCan( new Vector2( 3.7, 0 ), false ) );
+    this.addMass( new SmallTrashCan( new Vector2( 3.3, 0 ), false ) );
   }
 
-  return inherit( BalanceModel, BAIntroModel, {
+  return inherit( BalanceModel, BalanceLabModel, {
     reset: function() {
       this.massList.forEach( function( mass ) {
         mass.positionProperty.reset();

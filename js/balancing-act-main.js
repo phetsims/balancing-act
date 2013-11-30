@@ -7,11 +7,13 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
-  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
   var BAIntroScreen = require( 'BALANCING_ACT/intro/view/BAIntroScreen' );
+  var BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
+  var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/view/BalanceLabScreen' );
+  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
+  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
@@ -39,18 +41,15 @@ define( function( require ) {
     new Sim( simTitleString, [
       new Screen( introString, new Image( firstTabIcon ),
         function() { return new BAIntroModel(); },
-        function( model ) { return new BAIntroScreen( model ); },
-        { backgroundColor: "#9ddcf8" }
+        function( model ) { return new BAIntroScreen( model ); }
       ),
       new Screen( balanceLabString, new Image( secondTabIcon ),
-        function() {return new BalanceModel();},
-        function( model ) {return new BasicBalanceView( model );},
-        { backgroundColor: "#9ddcf8" }
+        function() {return new BalanceLabModel();},
+        function( model ) {return new BalanceLabScreen( model );}
       ),
       new Screen( gameString, new Image( thirdTabIcon ),
         function() {return new BalanceModel();},
-        function( model ) {return new BasicBalanceView( model );},
-        { backgroundColor: "#9ddcf8" }
+        function( model ) {return new BasicBalanceView( model );}
       )
     ], simOptions ).start();
   } );
