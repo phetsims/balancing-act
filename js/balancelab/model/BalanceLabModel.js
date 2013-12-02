@@ -13,8 +13,7 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
-  var FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );
-  var SmallTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallTrashCan' );
+  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -24,8 +23,8 @@ define( function( require ) {
     BalanceModel.call( this );
 
     // Add the initial masses and save their initial positions.
-    this.addMass( new FireExtinguisher( new Vector2( 2.7, 0 ), false ) );
-    this.addMass( new SmallTrashCan( new Vector2( 3.3, 0 ), false ) );
+    this.addMass( new BrickStack( 1, new Vector2( 2.7, 0 ), false ) );
+    this.addMass( new BrickStack( 2, new Vector2( 3.3, 0 ), false ) );
   }
 
   return inherit( BalanceModel, BalanceLabModel, {

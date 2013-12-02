@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
@@ -26,7 +27,7 @@ define( function( require ) {
       if ( mass instanceof ImageMass ) {
         massNode = new ImageMassNode( mvt, mass, labelVisibleProperty );
       }
-      else if ( mass instanceof ShapeMass ) {
+      else if ( mass instanceof BrickStack ) {
         massNode = new BrickStackNode( mass, mvt, labelVisibleProperty );
       }
       else if ( mass instanceof MysteryMass ) {

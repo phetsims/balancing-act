@@ -15,8 +15,8 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  function ShapeMass( massValue, shape ) {
-    Mass.call( this, massValue );
+  function ShapeMass( massValue, shape, initialPosition ) {
+    Mass.call( this, massValue, initialPosition );
 
     // TODO: Is this really needed, i.e. do any of the sub-types change shape
     // once constructed?  If not, it may make sense to do away with this level
