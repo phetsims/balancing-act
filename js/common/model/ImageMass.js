@@ -93,7 +93,7 @@ define( function( require ) {
     },
 
     createCopy: function() {
-      var copy = new ImageMass( this.mass, this.image, this.height, this.position, this.isMystery );
+      var copy = new ImageMass( this.massValue, this.image, this.height, this.position, this.isMystery );
     }
   } );
 } );

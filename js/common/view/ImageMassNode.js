@@ -37,7 +37,7 @@ define( function( require ) {
     var thisNode = this;
 
     // Add the mass indicator label.  Note that it is positioned elsewhere.
-    var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.mass, kgString );
+    var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
     var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
     thisNode.addChild( massLabel );
 

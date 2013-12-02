@@ -10,7 +10,7 @@ define( function( require ) {
   var ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
 
   /**
-   * @param mass
+   * @param {Object} mass - A mass object as used in this simulation.
    * @constructor
    */
   function MassForceVector( mass ) {
@@ -28,7 +28,7 @@ define( function( require ) {
     generateVector: function( mass ) {
       return {
         origin: new Vector2( mass.position.x, mass.position.y ),
-        vector: new Vector2( 0, mass.mass * ACCELERATION_DUE_TO_GRAVITY )
+        vector: new Vector2( 0, mass.massValue * ACCELERATION_DUE_TO_GRAVITY )
       };
     }
   };

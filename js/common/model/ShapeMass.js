@@ -12,7 +12,7 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var Mass = require( 'BALANCING_ACT/common/model/Mass' );
-  var Property = require( 'Mass' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function ShapeMass( massValue, shape ) {

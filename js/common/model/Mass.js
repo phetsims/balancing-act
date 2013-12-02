@@ -13,7 +13,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  function Mass( mass, initialPosition, isMystery ) {
+  function Mass( massValue, initialPosition, isMystery ) {
     var thisMass = this;
     PropertySet.call( this,
       {
@@ -40,7 +40,7 @@ define( function( require ) {
     //------------------------------------------------------------------------
     // Externally used (i.e. public) attributes that don't need to be properties.
     //------------------------------------------------------------------------
-    thisMass.mass = mass;
+    thisMass.massValue = massValue;
     thisMass.animationDestination = null;
     thisMass.animationMoionVector = null;
     thisMass.animationScale = 1;

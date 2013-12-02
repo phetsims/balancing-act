@@ -427,7 +427,7 @@ define( function( require ) {
     isBalanced: function() {
       var unCompensatedTorque = 0;
       this.massesOnSurface.forEach( function( mass ) {
-        unCompensatedTorque += mass.mass * this.getMassDistanceFromCenter( mass );
+        unCompensatedTorque += mass.massValue * this.getMassDistanceFromCenter( mass );
       } );
 
       // Account for floating point error, just make sure it is close enough.
@@ -450,7 +450,7 @@ define( function( require ) {
       var thisPlank = this;
       var torque = 0;
       this.massesOnSurface.forEach( function( mass ) {
-        torque += thisPlank.pivotPoint.x - mass.position.x * mass.mass;
+        torque += thisPlank.pivotPoint.x - mass.position.x * mass.massValue;
       } );
       return torque;
     },
