@@ -32,7 +32,7 @@ define( function( require ) {
    * @param massLabelVisibleProperty
    * @constructor
    */
-  function ImageMassNode( mvt, imageMass, massLabelVisibleProperty ) {
+  function ImageMassNode( imageMass, mvt, massLabelVisibleProperty ) {
     Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;
 

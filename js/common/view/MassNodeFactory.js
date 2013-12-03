@@ -25,13 +25,13 @@ define( function( require ) {
     createMassNode: function( mass, mvt, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof ImageMass ) {
-        massNode = new ImageMassNode( mvt, mass, labelVisibleProperty );
+        massNode = new ImageMassNode( mass, mvt, labelVisibleProperty );
       }
       else if ( mass instanceof BrickStack ) {
         massNode = new BrickStackNode( mass, mvt, labelVisibleProperty );
       }
       else if ( mass instanceof MysteryMass ) {
-        massNode = new MysteryMassNode( mvt, mass, labelVisibleProperty );
+        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );
       }
       else {
         console.log( "Error: Unrecognized mass type sent to MassNodeFactory." );
