@@ -46,7 +46,8 @@ define( function( require ) {
     // Function for translating click event to model coordinates.
     function eventToModelPosition( position ) {
       //TODO: Work with JO and/or SR for a better translation.
-      return mvt.viewToModelPosition( thisNode.getParents()[0].globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+//      return mvt.viewToModelPosition( thisNode.getParents()[0].globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+      return mvt.viewToModelPosition( thisNode.getParent().globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
     }
 
     // Set up handling of mouse events.
@@ -60,7 +61,6 @@ define( function( require ) {
         drag: function( event ) {
           if ( thisNode.modelElement !== null ) {
             // Move the node.
-            //TODO: Same as above - see if translation can be improved.
             thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
           }
           else {
