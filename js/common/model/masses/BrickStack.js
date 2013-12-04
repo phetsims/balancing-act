@@ -48,7 +48,7 @@ define( function( require ) {
     ShapeMass.call( this, numBricks * BRICK_MASS, brickStackShape, initialPosition );
   }
 
-  return inherit( ShapeMass, BrickStack,
+  inherit( ShapeMass, BrickStack,
     {
       initiateAnimation: function() {
         // Calculate velocity.  A higher velocity is used if the model element
@@ -78,11 +78,14 @@ define( function( require ) {
             this.animationScale = 1;
           }
         }
-      },
-      // Public constants
-      BRICK_MASS: BRICK_MASS,
-      BRICK_HEIGHT: BRICK_HEIGHT
+      }
     } );
+
+  // Public constants
+  BrickStack.BRICK_MASS = BRICK_MASS;
+  BrickStack.BRICK_HEIGHT = BRICK_HEIGHT;
+
+  return BrickStack;
 } );
 
 
