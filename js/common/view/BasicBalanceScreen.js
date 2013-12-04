@@ -62,7 +62,7 @@ define( function( require ) {
    * @param {BalanceModel} model
    * @constructor
    */
-  function BasicBalanceView( model ) {
+  function BasicBalanceScreen( model ) {
     ScreenView.call( this, { renderer: 'svg' } );
     var thisView = this;
     thisView.model = model;
@@ -265,5 +265,5 @@ define( function( require ) {
       } ) );
   }
 
-  return inherit( ScreenView, BasicBalanceView );
+  return inherit( ScreenView, BasicBalanceScreen );
 } );

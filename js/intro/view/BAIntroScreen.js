@@ -8,7 +8,7 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
+  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -16,7 +16,7 @@ define( function( require ) {
    * @constructor
    */
   function BAIntroScreen( model ) {
-    BasicBalanceView.call( this, model );
+    BasicBalanceScreen.call( this, model );
     var thisScreen = this;
 
     model.massList.forEach( function( mass ) {
@@ -24,7 +24,7 @@ define( function( require ) {
       // in this case, rather than in the model, because we need to check
       // whether or not the user dropped it on the "stage" so that it isn't
       // permanently dragged off of the screen.
-      mass.userControlledProperty.lazyLink( function( userControlled, wasUserControlled ) {
+      mass.userControlledProperty.lazyLink( function( userControlled ) {
         if ( !userControlled ) {
           // The user has dropped this mass.
           if ( !model.plank.addMassToSurface( mass ) ) {
@@ -46,6 +46,6 @@ define( function( require ) {
     } );
   }
 
-  return inherit( BasicBalanceView, BAIntroScreen );
+  return inherit( BasicBalanceScreen, BAIntroScreen );
 } );
 

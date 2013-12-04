@@ -12,7 +12,7 @@ define( function( require ) {
   var BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
   var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/view/BalanceLabScreen' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
-  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
+  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
@@ -49,7 +49,7 @@ define( function( require ) {
       ),
       new Screen( gameString, new Image( thirdTabIcon ),
         function() {return new BalanceModel();},
-        function( model ) {return new BasicBalanceView( model );}
+        function( model ) {return new BasicBalanceScreen( model );}
       )
     ], simOptions ).start();
   } );

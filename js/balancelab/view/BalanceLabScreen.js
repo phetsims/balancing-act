@@ -8,7 +8,7 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
+  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var Vector2 = require( 'DOT/Vector2' );
 
   var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' ); // TODO: For testing, remove when not needed.
@@ -18,13 +18,13 @@ define( function( require ) {
    * @constructor
    */
   function BalanceLabScreen( model ) {
-    BasicBalanceView.call( this, model );
+    BasicBalanceScreen.call( this, model );
     var thisScreen = this;
 
     //TODO for testing only, remove.
     this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ) );
   }
 
-  return inherit( BasicBalanceView, BalanceLabScreen );
+  return inherit( BasicBalanceScreen, BalanceLabScreen );
 } );
 
