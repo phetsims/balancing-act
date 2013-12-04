@@ -23,10 +23,11 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param mass
-   * @param mvt
-   * @param fillColor
-   * @param labelVisibleProperty
+   * @param {Mass} mass
+   * @param {ModelViewTransform2} mvt
+   * @param {color} fillColor
+   * @param {Property} labelVisibleProperty
+   * @param {boolean} draggable
    * @constructor
    */
   function ShapeMassNode( mass, mvt, fillColor, labelVisibleProperty, draggable ) {

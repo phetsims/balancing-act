@@ -30,9 +30,10 @@ define( function( require ) {
    * @param mvt
    * @param imageMass
    * @param massLabelVisibleProperty
+   * @param {boolean} draggable
    * @constructor
    */
-  function ImageMassNode( imageMass, mvt, massLabelVisibleProperty ) {
+  function ImageMassNode( imageMass, mvt, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;
 
@@ -106,7 +107,9 @@ define( function( require ) {
     } );
 
     // Add the mouse event handler.
-    thisNode.addInputListener( new MassDragHandler( imageMass, mvt ) );
+    if ( draggable ) {
+      thisNode.addInputListener( new MassDragHandler( imageMass, mvt ) );
+    }
   }
 
   return inherit( Node, ImageMassNode );

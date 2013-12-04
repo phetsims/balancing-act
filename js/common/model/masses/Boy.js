@@ -36,7 +36,9 @@ define( function( require ) {
   return inherit( HumanMass, Boy,
     {
       createCopy: function() {
-        return new Boy( this.position, this.isMystery );
+        var copy = new Boy();
+        copy.position = this.position.copy;
+        return copy;
       }
     } );
 } );

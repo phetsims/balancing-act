@@ -42,8 +42,7 @@ define( function( require ) {
      * node.  Overridden by subclasses to create the appropriate type.
      */
     createImageMassInstance: function() {
-      this.prototypeImageMass.createCopy();
+      return this.prototypeImageMass.createCopy();
     }
-
   } );
 } );
