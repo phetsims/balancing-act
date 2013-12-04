@@ -27,11 +27,32 @@ define( function( require ) {
    */
   function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
     ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
-    this.standingImage = standingImage;
-    this.standingHeight = standingHeight;
-    this.sittingImage = sittingImage;
-    this.sittingHeight = sittingHeight;
-    this.sittingCenterOfMassXOffset = sittingCenterOfMassXOffset;
+    var thisMass = this;
+    thisMass.standingImage = standingImage;
+    thisMass.standingHeight = standingHeight;
+    thisMass.sittingImage = sittingImage;
+    thisMass.sittingHeight = sittingHeight;
+    thisMass.sittingCenterOfMassXOffset = sittingCenterOfMassXOffset;
+
+    thisMass.onPlankProperty.link( function( onPlank ) {
+      if ( onPlank ) {
+        thisMass.height = sittingHeight;
+        if ( thisMass.position.x > 0 ) {
+          thisMass.image = thisMass.sittingImage;
+          thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset;
+        }
+        else {
+          // Reverse image if on other side of balance.
+          thisMass.image = thisMass.sittingImage; // TODO: How do I reverse the image?
+          thisMass.centerOfMassXOffset = -sittingCenterOfMassXOffset;
+        }
+      }
+      else {
+        thisMass.height = thisMass.standingHeight;
+        thisMass.image = thisMass.standingImage;
+        thisMass.centerOfMassXOffset = 0;
+      }
+    } );
   }
 
   return inherit( ImageMass, HumanMass, {

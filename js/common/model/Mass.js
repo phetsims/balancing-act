@@ -31,6 +31,10 @@ define( function( require ) {
         // considered to be the center bottom of the model element.
         rotationAngle: 0,
 
+        // Property that tracks whether this mass is on the plank, changes to
+        // which may initiate changes in the visual depiction of the mass.
+        onPlank: false,
+
         // Boolean property that indicates whether this model element is currently
         // animating.  At the time of this writing, the only animation supported
         // is a simple linear motion to a preset point.
