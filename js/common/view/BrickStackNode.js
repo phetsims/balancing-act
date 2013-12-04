@@ -12,8 +12,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ShapeMassNode = require( 'BALANCING_ACT/common/view/ShapeMassNode' );
 
-  function BrickStackNode( mass, mvt, labelVisibleProperty ) {
-    ShapeMassNode.call( this, mass, mvt, 'rgb( 205, 38, 38 )', labelVisibleProperty );
+  function BrickStackNode( mass, mvt, labelVisibleProperty, draggable ) {
+    ShapeMassNode.call( this, mass, mvt, 'rgb( 205, 38, 38 )', labelVisibleProperty, draggable );
   }
 
   return inherit( ShapeMassNode, BrickStackNode );

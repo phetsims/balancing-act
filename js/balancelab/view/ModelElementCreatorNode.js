@@ -15,18 +15,23 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
   var CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
   var LABEL_FONT = new PhetFont( 16 );
 
   /**
-   * @param model
-   * @param mvt
+   * @param {BalanceModel} model
+   * @param {ModelViewTransform} mvt
+   * @param {Object} options
    * @constructor
    */
-  function ModelElementCreatorNode( model, mvt ) {
-    Node.call( this, { cursor: 'pointer' } );
+  function ModelElementCreatorNode( model, mvt, options ) {
+    options = _.extend( { cursor: 'pointer' }, options );
+    Node.call( this, options );
+    var thisNode = this;
 
     // Element in the model that is being moved by the user.  Only non-null if
     // the user performed some action that caused this to be created, such as
@@ -38,13 +43,13 @@ define( function( require ) {
       {
         start: function( event ) {
           // Create a new node and add it to the model.
-          this.modelElement = this.addElementToModel( mvt.viewToModelPosition( event.pointer.point ) );
+          thisNode.modelElement = thisNode.addElementToModel( mvt.viewToModelPosition( event.pointer.point ) );
         },
 
         drag: function( event ) {
-          if ( modelElement !== null ) {
+          if ( thisNode.modelElement !== null ) {
             // Move the node.
-            this.modelElement.setPosition( mvt.viewToModelPosition( event.pointer.point ) );
+            thisNode.modelElement.position = mvt.viewToModelPosition( event.pointer.point );
           }
           else {
             // TODO: Remove this 'else' clause once this handler is fully debugged.
@@ -53,10 +58,15 @@ define( function( require ) {
         },
         end: function( event ) {
           // The user has released the node.
-          this.modelElement.release();
-          this.modelElement = null;
+          thisNode.modelElement.release();
+          thisNode.modelElement = null;
         }
       } ) );
+
+    // Offset used when adding an element to the model.  This is useful in
+    // making sure that the newly created object isn't positioned in, shall we
+    // say, an awkward location with respect to the mouse.
+    this.positioningOffset = Vector2.ZERO;
   }
 
   return inherit( Node, ModelElementCreatorNode, {
@@ -71,7 +81,8 @@ define( function( require ) {
     },
 
     setSelectionNode: function( selectionNode ) {
-      // TODO: Note to self made during port: Why isn't this handled in the constructor?
+      // TODO: Note to self made during port: Why isn't this handled in the
+      // constructor?  Consider making it so once things are working.
       if ( this.selectionNode ) {
         console.log( 'Can\'t set selectionNode more than once.' );
       }
@@ -80,9 +91,19 @@ define( function( require ) {
       this.updateLayout();
     },
 
-    setCaption: function() {
+    setCaption: function( captionText ) {
+      // TODO: Note to self made during port: Why isn't this handled in the constructor?
+      this.caption = new Text( '', { font: LABEL_FONT } );
+      this.addChild( this.caption );
+      this.updateLayout();
+    },
 
+    updateLayout: function() {
+      // This only does something if both the element node and the caption are set.
+      if ( this.caption && this.selectionNode ) {
+        this.caption.centerX = this.selectionNode.centerX;
+        this.caption.top = this.selectionNode.bottom + CAPTION_OFFSET_FROM_SELECTION_NODE;
+      }
     }
-
   } );
 } );

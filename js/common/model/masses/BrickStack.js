@@ -73,7 +73,10 @@ define( function( require ) {
             this.animationScale = 1;
           }
         }
-      }
+      },
+      // Public constants
+      BRICK_MASS: BRICK_MASS,
+      BRICK_HEIGHT: BRICK_HEIGHT
     } );
 } );
 

@@ -29,7 +29,7 @@ define( function( require ) {
    * @param labelVisibleProperty
    * @constructor
    */
-  function ShapeMassNode( mass, mvt, fillColor, labelVisibleProperty ) {
+  function ShapeMassNode( mass, mvt, fillColor, labelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
     var thisNode = this;
     thisNode.mass = mass;
@@ -46,7 +46,7 @@ define( function( require ) {
 
     // Control label visibility.
     labelVisibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      massLabel.visible = visible;
     } );
 
     // TODO: Monitoring of dynamic shape changes was here in the original Java version, removed in JavaScript
@@ -61,7 +61,9 @@ define( function( require ) {
     } );
 
     // Add event listener for mouse activity.
-    this.addInputListener( new MassDragHandler( mass, mvt ) );
+    if ( draggable ) {
+      this.addInputListener( new MassDragHandler( mass, mvt ) );
+    }
   }
 
   return inherit( Node, ShapeMassNode, {

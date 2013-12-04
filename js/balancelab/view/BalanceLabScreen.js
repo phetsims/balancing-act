@@ -11,6 +11,8 @@ define( function( require ) {
   var BasicBalanceView = require( 'BALANCING_ACT/common/view/BasicBalanceView' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' ); // TODO: For testing, remove when not needed.
+
   /**
    * @param model
    * @constructor
@@ -18,6 +20,9 @@ define( function( require ) {
   function BalanceLabScreen( model ) {
     BasicBalanceView.call( this, model );
     var thisScreen = this;
+
+    //TODO for testing only, remove.
+    this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ).mutate( { centerX: 30, centerY: 30 } ) );
 
     model.massList.forEach( function( mass ) {
       // Add a listener that decides what the mass does once it is released

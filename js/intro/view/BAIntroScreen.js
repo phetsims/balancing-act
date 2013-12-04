@@ -20,8 +20,10 @@ define( function( require ) {
     var thisScreen = this;
 
     model.massList.forEach( function( mass ) {
-      // Add a listener that decides what the mass does once it is released
-      // by the user.
+      // Add a listener for when the user drops the mass.  This is done here
+      // in this case, rather than in the model, because we need to check
+      // whether or not the user dropped it on the "stage" so that it isn't
+      // permanently dragged off of the screen.
       mass.userControlledProperty.lazyLink( function( userControlled, wasUserControlled ) {
         if ( !userControlled ) {
           // The user has dropped this mass.

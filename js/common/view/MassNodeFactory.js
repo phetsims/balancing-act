@@ -28,7 +28,7 @@ define( function( require ) {
         massNode = new ImageMassNode( mass, mvt, labelVisibleProperty );
       }
       else if ( mass instanceof BrickStack ) {
-        massNode = new BrickStackNode( mass, mvt, labelVisibleProperty );
+        massNode = new BrickStackNode( mass, mvt, labelVisibleProperty, true );
       }
       else if ( mass instanceof MysteryMass ) {
         massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );
