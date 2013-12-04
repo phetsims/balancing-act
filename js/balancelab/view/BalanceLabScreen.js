@@ -12,6 +12,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' ); // TODO: For testing, remove when not needed.
+  var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' ); // TODO: For testing, remove when not needed.
 
   /**
    * @param model
@@ -22,7 +23,8 @@ define( function( require ) {
     var thisScreen = this;
 
     //TODO for testing only, remove.
-    this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ) );
+    this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ).mutate( { centerX: 650, bottom: 400 } ) );
+    this.addChild( new BoyCreatorNode( model, thisScreen.mvt ).mutate( { centerX: 700, bottom: 400 } ) );
   }
 
   return inherit( BasicBalanceScreen, BalanceLabScreen );

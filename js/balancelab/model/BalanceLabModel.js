@@ -21,10 +21,6 @@ define( function( require ) {
    */
   function BalanceLabModel() {
     BalanceModel.call( this );
-
-    // Add the initial masses and save their initial positions.
-    this.addMass( new BrickStack( 1, new Vector2( 2.7, 0 ), false ) );
-    this.addMass( new BrickStack( 2, new Vector2( 3.3, 0 ), false ) );
   }
 
   return inherit( BalanceModel, BalanceLabModel, {
