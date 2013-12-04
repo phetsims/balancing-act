@@ -39,7 +39,7 @@ define( function( require ) {
 
     addMass: function( mass ) {
       var thisModel = this;
-      BalanceModel.prototype.addMass.call( this, mass );
+      BalanceModel.prototype.addMass.call( thisModel, mass );
       mass.userControlledProperty.lazyLink( function( isUserControlled ) {
         if ( !isUserControlled ) {
           // The user has dropped this mass.
@@ -56,13 +56,12 @@ define( function( require ) {
     removeMassAnimated: function( mass ) {
 
       // Register a listener for the completion of the removal animation sequence.
-      mass.animating.link( function( isAnimating, wasAnimating ) {
+      mass.animatingProperty.link( function( isAnimating, wasAnimating ) {
         if ( wasAnimating && !isAnimating ) {
           // Animation sequence has completed.
           debugger; // TODO: Does the 'this' below refer to the function, so that this will work?
           mass.unlink( this );
           this.massList.remove( mass );
-
         }
       } );
 

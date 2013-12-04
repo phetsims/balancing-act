@@ -22,7 +22,7 @@ define( function( require ) {
     var thisScreen = this;
 
     //TODO for testing only, remove.
-    this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ).mutate( { centerX: 30, centerY: 30 } ) );
+    this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ) );
   }
 
   return inherit( BasicBalanceView, BalanceLabScreen );

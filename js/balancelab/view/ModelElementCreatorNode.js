@@ -36,20 +36,32 @@ define( function( require ) {
     // Element in the model that is being moved by the user.  Only non-null if
     // the user performed some action that caused this to be created, such as
     // clicking on this node.
-    this.modelElement = null;
+    thisNode.modelElement = null;
+
+    // Offset used when adding an element to the model.  This is useful in
+    // making sure that the newly created object isn't positioned in, shall we
+    // say, an awkward location with respect to the mouse.
+    thisNode.positioningOffset = Vector2.ZERO;
+
+    // Function for translating click event to model coordinates.
+    function eventToModelPosition( position ) {
+      //TODO: Work with JO and/or SR for a better translation.
+      return mvt.viewToModelPosition( thisNode.getParents()[0].globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+    }
 
     // Set up handling of mouse events.
     this.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
           // Create a new node and add it to the model.
-          thisNode.modelElement = thisNode.addElementToModel( mvt.viewToModelPosition( event.pointer.point ) );
+          thisNode.modelElement = thisNode.addElementToModel( eventToModelPosition( event.pointer.point ) );
         },
 
         drag: function( event ) {
           if ( thisNode.modelElement !== null ) {
             // Move the node.
-            thisNode.modelElement.position = mvt.viewToModelPosition( event.pointer.point );
+            //TODO: Same as above - see if translation can be improved.
+            thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
           }
           else {
             // TODO: Remove this 'else' clause once this handler is fully debugged.
@@ -62,11 +74,6 @@ define( function( require ) {
           thisNode.modelElement = null;
         }
       } ) );
-
-    // Offset used when adding an element to the model.  This is useful in
-    // making sure that the newly created object isn't positioned in, shall we
-    // say, an awkward location with respect to the mouse.
-    this.positioningOffset = Vector2.ZERO;
   }
 
   return inherit( Node, ModelElementCreatorNode, {

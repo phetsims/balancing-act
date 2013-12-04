@@ -22,6 +22,11 @@ define( function( require ) {
   var BRICK_HEIGHT = BRICK_WIDTH / 3;
   var BRICK_MASS = 5; // In kg.
 
+  /**
+   * @param {number} numBricks
+   * @param {Vector2} initialPosition
+   * @constructor
+   */
   function BrickStack( numBricks, initialPosition ) {
 
     // Generate the shape of the brick stack.
