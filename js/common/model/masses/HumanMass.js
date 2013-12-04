@@ -28,57 +28,28 @@ define( function( require ) {
   function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
     ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
     var thisMass = this;
-    thisMass.standingImage = standingImage;
-    thisMass.standingHeight = standingHeight;
-    thisMass.sittingImage = sittingImage;
-    thisMass.sittingHeight = sittingHeight;
-    thisMass.sittingCenterOfMassXOffset = sittingCenterOfMassXOffset;
 
+    // Monitor the 'onPlank' property and update the image as changes occur.
     thisMass.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
         thisMass.height = sittingHeight;
         if ( thisMass.position.x > 0 ) {
-          thisMass.image = thisMass.sittingImage;
+          thisMass.image = sittingImage;
           thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset;
         }
         else {
           // Reverse image if on other side of balance.
-          thisMass.image = thisMass.sittingImage; // TODO: How do I reverse the image?
+          thisMass.image = sittingImage; // TODO: How do I reverse the image?
           thisMass.centerOfMassXOffset = -sittingCenterOfMassXOffset;
         }
       }
       else {
-        thisMass.height = thisMass.standingHeight;
-        thisMass.image = thisMass.standingImage;
+        thisMass.height = standingHeight;
+        thisMass.image = standingImage;
         thisMass.centerOfMassXOffset = 0;
       }
     } );
   }
 
-  return inherit( ImageMass, HumanMass, {
-
-    /**
-     * Invoked when this is placed on or removed from the plank, switches
-     * between seated and standing images.
-     */
-    setOnPlank: function( onPlank ) {
-      if ( onPlank ) {
-        this.height = sittingHeight;
-        if ( this.position.x > 0 ) {
-          this.image = this.sittingImage;
-          this.centerOfMassXOffset = sittingCenterOfMassXOffset;
-        }
-        else {
-          // Reverse image if on other side of balance.
-          this.image = this.sittingImage; // TODO: How do I reverse the image?
-          this.centerOfMassXOffset = -sittingCenterOfMassXOffset;
-        }
-      }
-      else {
-        this.height = this.standingHeight;
-        this.image = this.standingImage;
-        this.centerOfMassXOffset = 0;
-      }
-    }
-  } );
+  return inherit( ImageMass, HumanMass );
 } );

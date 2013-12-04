@@ -77,11 +77,6 @@ define( function( require ) {
       this.animating = false;
     },
 
-    setOnPlank: function() {
-      // Handle any changes that need to happen when added to the plank,
-      // such as changes to shape or image.  By default, this does nothing.
-    },
-
     release: function() { this.userControlled = false; },
 
     step: function() { console.log( 'step should be implemented in descendant types.' ); },
