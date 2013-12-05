@@ -46,7 +46,7 @@ define( function( require ) {
     //------------------------------------------------------------------------
     thisMass.massValue = massValue;
     thisMass.animationDestination = null;
-    thisMass.animationMoionVector = null;
+    thisMass.animationMotionVector = null;
     thisMass.animationScale = 1;
     thisMass.expectedAnimationTime = 0;
     thisMass.isMystery = isMystery;

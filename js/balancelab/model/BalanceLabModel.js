@@ -51,13 +51,14 @@ define( function( require ) {
 
     removeMassAnimated: function( mass ) {
 
+      var thisModel = this;
+
       // Register a listener for the completion of the removal animation sequence.
       mass.animatingProperty.link( function( isAnimating, wasAnimating ) {
         if ( wasAnimating && !isAnimating ) {
           // Animation sequence has completed.
-          debugger; // TODO: Does the 'this' below refer to the function, so that this will work?
-          mass.unlink( this );
-          this.massList.remove( mass );
+          mass.animatingProperty.unlink( this );
+          BalanceModel.prototype.removeMass.call( thisModel, mass );
         }
       } );
 

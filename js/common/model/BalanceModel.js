@@ -60,7 +60,7 @@ define( function( require ) {
 
     // Remove a mass from the model.  Subclasses generally do additional things.
     removeMass: function( mass ) {
-      this.massList = _.without( this.massList, mass );
+      this.massList.remove( mass );
     },
 
     reset: function() {

@@ -70,9 +70,9 @@ define( function( require ) {
       var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
       this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
       // Calculate the animation motion vector.
-      this.animationMotionVector.set( velocity, 0 );
+      this.animationMotionVector = new Vector2( velocity, 0 );
       var animationAngle = Math.atan2( this.animationDestination.y - this.position.y, this.animationDestination.x - this.position.x );
-      this.animationMotionVector = this.animationMOtionVector.rotated( animationAngle );
+      this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
       // Update the property that tracks the animation state.
       this.animating = true;
       // Save starting height - needed as a reference.

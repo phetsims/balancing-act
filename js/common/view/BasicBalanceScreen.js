@@ -111,9 +111,10 @@ define( function( require ) {
 
       // Add the removal listener for if and when this mass is removed from the model.
       var removalListener = function( removedMass ) {
-        assert( removedMass === addedMass );
-        massesLayer.removeChild( massNode );
-        model.massList.removeItemRemovedListener( removalListener );
+        if ( removedMass === addedMass ) {
+          massesLayer.removeChild( massNode );
+          model.massList.removeItemRemovedListener( removalListener );
+        }
       };
       model.massList.addItemRemovedListener( removalListener );
     }
