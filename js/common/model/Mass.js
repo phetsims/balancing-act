@@ -83,7 +83,7 @@ define( function( require ) {
 
     createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
 
-    // Public constants - TODO - Probably need to be made public.
+    // Public constants - TODO - Probably need to be made public, instead of on the prototype.
     MIN_ANIMATION_VELOCITY: 3, // In meters/sec.
     MAX_REMOVAL_ANIMATION_DURATION: 0.75, // In seconds.
     DEFAULT_INITIAL_LOCATION: new Vector2( 0, 0 )

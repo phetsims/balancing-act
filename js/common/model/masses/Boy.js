@@ -29,7 +29,7 @@ define( function( require ) {
    */
   function Boy() {
     HumanMass.call( this, MASS, boyStandingImage, STANDING_HEIGHT, boySittingImage, SITTING_HEIGHT,
-      SITTING_CENTER_OF_MASS_X_OFFSET, Vector2.ZERO, false );
+      Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 

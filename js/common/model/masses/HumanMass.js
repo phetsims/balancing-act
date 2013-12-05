@@ -33,18 +33,13 @@ define( function( require ) {
     thisMass.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
         thisMass.height = sittingHeight;
-        if ( thisMass.position.x > 0 ) {
-          thisMass.image = sittingImage;
-          thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset;
-        }
-        else {
-          // Reverse image if on other side of balance.
-          thisMass.image = sittingImage; // TODO: How do I reverse the image?
-          thisMass.centerOfMassXOffset = -sittingCenterOfMassXOffset;
-        }
+        thisMass.reverseImage = thisMass.position.x < 0;
+        thisMass.image = sittingImage;
+        thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset * ( thisMass.position.x < 0 ? -1 : 1 );
       }
       else {
         thisMass.height = standingHeight;
+        thisMass.reverseImage = false;
         thisMass.image = standingImage;
         thisMass.centerOfMassXOffset = 0;
       }
