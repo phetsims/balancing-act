@@ -26,10 +26,7 @@ define( function( require ) {
   return inherit( BalanceModel, BalanceLabModel, {
 
     reset: function() {
-      this.massList.forEach( function( mass ) {
-        mass.positionProperty.reset();
-        mass.rotationAngleProperty.reset();
-      } );
+      this.massList.clear();
       BalanceModel.prototype.reset.call( this );
     },
 

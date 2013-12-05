@@ -254,8 +254,12 @@ define( function( require ) {
       } ) );
 
     // Reset All button.
+    function resetClosure() {
+      thisScreen.reset.call( thisScreen );
+    }
+
     nonMassLayer.addChild( new ResetAllButton(
-      this.reset,
+      resetClosure,
       {
         radius: 18,
         right: thisScreen.layoutBounds.width - 20,
@@ -267,7 +271,7 @@ define( function( require ) {
     {
       reset: function() {
         this.model.reset();
-        thisView.viewProperties.reset();
+        this.viewProperties.reset();
       }
     } );
 } );
