@@ -64,11 +64,11 @@ define( function( require ) {
    */
   function BasicBalanceScreen( model ) {
     ScreenView.call( this, { renderer: 'svg' } );
-    var thisView = this;
-    thisView.model = model;
+    var thisScreen = this;
+    thisScreen.model = model;
 
     // Define the properties that control visibility of various display elements.
-    var viewProperties = new PropertySet( {
+    thisScreen.viewProperties = new PropertySet( {
       massLabelsVisible: true,
       forceVectorsFromObjectsVisible: false,
       levelIndicatorVisible: false,
@@ -82,14 +82,14 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisView.layoutBounds.width * 0.4, thisView.layoutBounds.height * 0.75 ),
+      new Vector2( thisScreen.layoutBounds.width * 0.4, thisScreen.layoutBounds.height * 0.75 ),
       115 );
-    thisView.mvt = mvt; // Make mvt available to descendant types.
+    thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can
     // be made visible if needed.
     var root = new Node();
-    thisView.addChild( root );
+    thisScreen.addChild( root );
     root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
@@ -106,7 +106,7 @@ define( function( require ) {
 
     function handleMassAdded( addedMass ) {
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, viewProperties.massLabelsVisibleProperty );
+      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, thisScreen.viewProperties.massLabelsVisibleProperty );
       massesLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
@@ -135,21 +135,21 @@ define( function( require ) {
 
     // Add the ruler.
     var rulersVisible = new Property( false );
-    viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
     nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
-    viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
     nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );
-    viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
+    thisScreen.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
       levelIndicatorNode.visible = visible;
     } );
     nonMassLayer.addChild( levelIndicatorNode );
@@ -164,7 +164,7 @@ define( function( require ) {
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
           0.3,  // Scaling factor, chosen to make size reasonable.
-          viewProperties.forceVectorsFromObjectsVisibleProperty,
+          thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
           mvt
         );
       }
@@ -207,9 +207,9 @@ define( function( require ) {
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      { content: new Text( massLabelsString, PANEL_OPTION_FONT ), property: viewProperties.massLabelsVisibleProperty, label: massLabelsString },
-      { content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ), property: viewProperties.forceVectorsFromObjectsVisibleProperty, label: forcesFromObjectsString },
-      { content: new Text( levelString, PANEL_OPTION_FONT ), property: viewProperties.levelIndicatorVisibleProperty, label: levelString }
+      { content: new Text( massLabelsString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.massLabelsVisibleProperty, label: massLabelsString },
+      { content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty, label: forcesFromObjectsString },
+      { content: new Text( levelString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.levelIndicatorVisibleProperty, label: levelString }
     ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
@@ -232,9 +232,9 @@ define( function( require ) {
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
-      { node: new Text( noneString, PANEL_OPTION_FONT ), property: viewProperties.positionMarkerStateProperty, value: 'none', label: noneString },
-      { node: new Text( rulersString, PANEL_OPTION_FONT ), property: viewProperties.positionMarkerStateProperty, value: 'rulers', label: rulersString },
-      { node: new Text( marksString, PANEL_OPTION_FONT ), property: viewProperties.positionMarkerStateProperty, value: 'marks', label: marksString }
+      { node: new Text( noneString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'none', label: noneString },
+      { node: new Text( rulersString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'rulers', label: rulersString },
+      { node: new Text( marksString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'marks', label: marksString }
     ], { radius: 8 } );
     var positionMarkerVBox = new VBox( {
       children: [
@@ -255,16 +255,19 @@ define( function( require ) {
 
     // Reset All button.
     nonMassLayer.addChild( new ResetAllButton(
-      function() {
-        thisView.model.reset();
-        viewProperties.reset();
-      },
+      this.reset,
       {
         radius: 18,
-        right: thisView.layoutBounds.width - 20,
-        bottom: thisView.layoutBounds.height - 15
+        right: thisScreen.layoutBounds.width - 20,
+        bottom: thisScreen.layoutBounds.height - 15
       } ) );
   }
 
-  return inherit( ScreenView, BasicBalanceScreen );
+  return inherit( ScreenView, BasicBalanceScreen,
+    {
+      reset: function() {
+        this.model.reset();
+        thisView.viewProperties.reset();
+      }
+    } );
 } );

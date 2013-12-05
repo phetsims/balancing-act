@@ -92,7 +92,7 @@ define( function( require ) {
       thisNode.bottom = mvt.modelToViewY( imageMass.position.y );
 
       // Set the rotation.  Rotation point is the center bottom.
-      thisNode.rotateAround( new Vector2( thisNode.centerX, thisNode.bottom ), -imageMass.rotationAngle );
+      thisNode.rotateAround( new Vector2( mvt.modelToViewX( imageMass.position.x ), mvt.modelToViewY( imageMass.position.y ) ), -imageMass.rotationAngle );
     }
 
     // Add the image node.
