@@ -66,7 +66,6 @@ define( function( require ) {
     initiateAnimation: function() {
       // Calculate velocity.  A higher velocity is used if the model element
       // has a long way to travel, otherwise it takes too long.
-      // TODO: Make sure the constants in the next line are really accessible in this way.
       var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
       this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
       // Calculate the animation motion vector.
