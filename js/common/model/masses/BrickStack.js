@@ -48,40 +48,7 @@ define( function( require ) {
     ShapeMass.call( this, numBricks * BRICK_MASS, brickStackShape, initialPosition );
   }
 
-  inherit( ShapeMass, BrickStack,
-    {
-      initiateAnimation: function() {
-        // Calculate velocity.  A higher velocity is used if the model element
-        // has a long way to travel, otherwise it takes too long.
-        var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
-        this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
-        // Calculate the animation motion vector.
-        this.animationMotionVector = new Vector2( velocity, 0 );
-        var animationAngle = Math.atan2( this.animationDestination.y - this.position.y, this.animationDestination.x - this.position.x );
-        this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
-        // Update the property that tracks the animation state.
-        this.animating = true;
-        // Save starting height - needed as a reference.
-        this.animationStartHeight = this.height;
-      },
-
-      step: function( dt ) {
-        if ( this.animating ) {
-          // Do a step of the linear animation towards the destination.
-          if ( this.position.distance( this.animationDestination ) >= this.animationMotionVector.magnitude() * dt ) {
-            // Perform next step of animation.
-            this.translate( this.animationMotionVector.times( dt ) );
-            this.animationScale = Math.max( this.animationScale - ( dt / this.expectedAnimationTime ) * 0.9, 0.1 );
-          }
-          else {
-            // Close enough - animation is complete.
-            this.position = this.animationDestination;
-            this.animating = false;
-            this.animationScale = 1;
-          }
-        }
-      }
-    } );
+  inherit( ShapeMass, BrickStack );
 
   // Public constants
   BrickStack.BRICK_MASS = BRICK_MASS;

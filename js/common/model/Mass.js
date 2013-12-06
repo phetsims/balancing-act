@@ -64,22 +64,39 @@ define( function( require ) {
 
     getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ); },
 
-    initiateAnimation: function() {
-
-      // In this default implementation the signal is sent that says that
-      // the animation is complete, but no actual animation is done.
-      // Override to implement the subclass-specific animation.  This is
-      // done because the animated removal relies on the transition of the
-      // animation property from true to false in order to remove the mass
-      // from the model, so if a removal animation is initiated and the
-      // transition doesn't happen the mass will never go away.
-      this.animating = true;
-      this.animating = false;
-    },
-
     release: function() { this.userControlled = false; },
 
-    step: function() { console.log( 'step should be implemented in descendant types.' ); },
+    initiateAnimation: function() {
+      // Calculate velocity.  A higher velocity is used if the model element
+      // has a long way to travel, otherwise it takes too long.
+      var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
+      this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
+      // Calculate the animation motion vector.
+      this.animationMotionVector = new Vector2( velocity, 0 );
+      var animationAngle = Math.atan2( this.animationDestination.y - this.position.y, this.animationDestination.x - this.position.x );
+      this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
+      // Update the property that tracks the animation state.
+      this.animating = true;
+      // Save starting height - needed as a reference.
+      this.animationStartHeight = this.height;
+    },
+
+    step: function( dt ) {
+      if ( this.animating ) {
+        // Do a step of the linear animation towards the destination.
+        if ( this.position.distance( this.animationDestination ) >= this.animationMotionVector.magnitude() * dt ) {
+          // Perform next step of animation.
+          this.translate( this.animationMotionVector.times( dt ) );
+          this.animationScale = Math.max( this.animationScale - ( dt / this.expectedAnimationTime ) * 0.9, 0.1 );
+        }
+        else {
+          // Close enough - animation is complete.
+          this.position = this.animationDestination;
+          this.animating = false;
+          this.animationScale = 1;
+        }
+      }
+    },
 
     createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
 
