@@ -35,7 +35,7 @@ define( function( require ) {
 
     var nextKitButton = new ArrowButton( 'right', function() {
       selectedKit.value = selectedKit.value + 1;
-    } );
+    }, { fill: options.buttonColor  } );
     this.addChild( nextKitButton );
 
     var previousKitButton = new ArrowButton( 'left', function() {
@@ -47,22 +47,23 @@ define( function( require ) {
     selectedKit.link( function( kitNum ) {
       nextKitButton.enabled = kitNum < numKits - 1;
       previousKitButton.enabled = kitNum != 0;
-    }, { fill: options.buttonColor } );
+    } );
 
     // Layout
-    if ( options.title !== null ) {
-      this.addChild( title );
-      title.left = previousKitButton.right + options.inset;
-      nextKitButton.left = title.right + options.inset;
+    if ( options.titleNode !== null ) {
+      this.addChild( options.titleNode );
+      options.titleNode.centerY = previousKitButton.centerY;
+      options.titleNode.left = previousKitButton.right + options.inset;
+      nextKitButton.left = options.titleNode.right + options.inset;
     }
     else {
-      nextKitButton.left = title.right + options.inset * 2;
+      nextKitButton.left = previousKitButton.right + options.inset * 2;
     }
 
     // If there is only one kit, show the title but not the control buttons.
     // Leave the buttons in the scene graph for keeping layout consistent.
-    previousKitButton.visible = numKits > 0;
-    nextKitButton.visible = numKits > 0;
+    previousKitButton.visible = numKits > 1;
+    nextKitButton.visible = numKits > 1;
 
     this.mutate( options );
   }
