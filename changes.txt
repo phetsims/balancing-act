@@ -1,3 +1,6 @@
+12/5/2013 Implemented the 'sitting person' behavior when added to the plank.
+12/4/2013 Implemented creator node for person.
+12/3/2013 Implemented creator node for bricks.
 12/2/2013 Added brick stacks to both the model and view.
 11/29/2013 Added basic model & view classes for the 2nd screen.
 11/29/2013 Finished implementing all of the basic functionality of the 1st screen.

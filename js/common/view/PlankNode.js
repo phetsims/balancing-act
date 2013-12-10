@@ -43,7 +43,7 @@ define( function( require ) {
       tickMarkLayer.removeAllChildren();
       for ( var i = 0; i < plank.tickMarks.length; i++ ) {
         var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
-        if ( i % 2 == 0 ) {
+        if ( i % 2 === 0 ) {
           // Make some marks bold for easier placement of masses.
           // The 'if' clause can be tweaked to put marks in
           // different places.

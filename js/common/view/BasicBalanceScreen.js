@@ -172,7 +172,7 @@ define( function( require ) {
 
       // Remove representation when corresponding vector removed from model.
       model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
-        if ( removedMassForceVector == addedMassForceVector ) {
+        if ( removedMassForceVector === addedMassForceVector ) {
           nonMassLayer.removeChild( forceVectorNode );
         }
       } );
