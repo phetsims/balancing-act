@@ -25,19 +25,33 @@ define( function( require ) {
    */
   function KitControlNode( numKits, selectedKit, options ) {
     Node.call( this );
-    options = _.extend( { titleNode: null, inset: 5, buttonColor: 'orange' } );
+    options = _.extend(
+      {
+        // Default values
+        titleNode: null,
+        inset: 5,
+        buttonColor: 'orange'
+      } );
+
+    // Set up the 'next kit' button
     var nextButton = new ArrowButton( 'right', function() {
       selectedKit.value = selectedKit.value + 1;
     } );
     this.addChild( nextButton );
+
+    // Set up the 'previous kit' button
     var previousButton = new ArrowButton( 'left', function() {
       selectedKit.value = selectedKit.value - 1;
     }, { fill: options.buttonColor } );
     this.addChild( previousButton );
+
+    // Control button enabled state
     selectedKit.link( function( kitNum ) {
       nextButton.enabled = kitNum < numKits - 1;
       previousButton.enabled = kitNum != 0;
     }, { fill: options.buttonColor } );
+
+    // Layout
     if ( options.title !== null ) {
       this.addChild( title );
       title.left = previousButton.right + options.inset;
@@ -48,7 +62,7 @@ define( function( require ) {
     }
 
     // If there is only one kit, show the title but not the control buttons.
-    // Leave them in the scene graph for keeping layout consistent.
+    // Leave the buttons in the scene graph for keeping layout consistent.
     previousButton.visible = numKits > 0;
     nextButton.visible = numKits > 0;
 
