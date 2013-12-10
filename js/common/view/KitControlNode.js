@@ -33,38 +33,36 @@ define( function( require ) {
         buttonColor: 'orange'
       } );
 
-    // Set up the 'next kit' button
-    var nextButton = new ArrowButton( 'right', function() {
+    var nextKitButton = new ArrowButton( 'right', function() {
       selectedKit.value = selectedKit.value + 1;
     } );
-    this.addChild( nextButton );
+    this.addChild( nextKitButton );
 
-    // Set up the 'previous kit' button
-    var previousButton = new ArrowButton( 'left', function() {
+    var previousKitButton = new ArrowButton( 'left', function() {
       selectedKit.value = selectedKit.value - 1;
     }, { fill: options.buttonColor } );
-    this.addChild( previousButton );
+    this.addChild( previousKitButton );
 
     // Control button enabled state
     selectedKit.link( function( kitNum ) {
-      nextButton.enabled = kitNum < numKits - 1;
-      previousButton.enabled = kitNum != 0;
+      nextKitButton.enabled = kitNum < numKits - 1;
+      previousKitButton.enabled = kitNum != 0;
     }, { fill: options.buttonColor } );
 
     // Layout
     if ( options.title !== null ) {
       this.addChild( title );
-      title.left = previousButton.right + options.inset;
-      nextButton.left = title.right + options.inset;
+      title.left = previousKitButton.right + options.inset;
+      nextKitButton.left = title.right + options.inset;
     }
     else {
-      nextButton.left = title.right + options.inset * 2;
+      nextKitButton.left = title.right + options.inset * 2;
     }
 
     // If there is only one kit, show the title but not the control buttons.
     // Leave the buttons in the scene graph for keeping layout consistent.
-    previousButton.visible = numKits > 0;
-    nextButton.visible = numKits > 0;
+    previousKitButton.visible = numKits > 0;
+    nextKitButton.visible = numKits > 0;
 
     this.mutate( options );
   }
