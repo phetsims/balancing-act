@@ -26,10 +26,10 @@ define( function( require ) {
     this.addChild( new BrickStackCreatorNode( 2, model, thisScreen.mvt ).mutate( { centerX: 650, bottom: 400 } ) );
     this.addChild( new BoyCreatorNode( model, thisScreen.mvt ).mutate( { centerX: 700, bottom: 400 } ) );
 
-
     var KitControlNode = require( 'BALANCING_ACT/common/view/KitControlNode' );
     var Property = require( 'AXON/Property' );
-    this.addChild( new KitControlNode( 5, new Property( 0 ), { centerX: 50, centerY: 50 } ) );
+    var Text = require( 'SCENERY/nodes/Text' );
+    this.addChild( new KitControlNode( 5, new Property( 0 ), { centerX: 50, centerY: 50, titleNode: new Text( 'blah blah blah' ) } ) );
   }
 
   return inherit( BasicBalanceScreen, BalanceLabScreen );

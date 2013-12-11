@@ -31,7 +31,7 @@ define( function( require ) {
         titleNode: null,
         inset: 5,
         buttonColor: 'orange'
-      } );
+      }, options );
 
     var nextKitButton = new ArrowButton( 'right', function() {
       selectedKit.value = selectedKit.value + 1;
@@ -45,8 +45,9 @@ define( function( require ) {
 
     // Control button enabled state
     selectedKit.link( function( kitNum ) {
-      nextKitButton.enabled = kitNum < numKits - 1;
-      previousKitButton.enabled = kitNum != 0;
+      nextKitButton.setEnabled( kitNum < numKits - 1 );
+      previousKitButton.setEnabled( kitNum != 0 );
+      console.log( kitNum );
     } );
 
     // Layout

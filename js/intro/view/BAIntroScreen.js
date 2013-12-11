@@ -31,14 +31,14 @@ define( function( require ) {
             // The attempt to add mass to surface of plank failed,
             // probably because mass was dropped somewhere other
             // than over the plank.
-            if ( thisScreen.mvt.modelToViewX( mass.position.x > 0 ) && thisScreen.mvt.modelToViewX( mass.position.x < thisScreen.layoutBounds.width ) ) {
+            if ( thisScreen.mvt.modelToViewX( mass.position.x ) > thisScreen.layoutBounds.minX && thisScreen.mvt.modelToViewX( mass.position.x ) < thisScreen.layoutBounds.maxX ) {
               // Mass is in the visible area, so just
               // drop it on the ground.
               mass.position = new Vector2( mass.position.x, 0 );
             }
             else {
               // Mass is off stage.  Return it to its original position.
-              mass.position.reset();
+              mass.positionProperty.reset();
             }
           }
         }
