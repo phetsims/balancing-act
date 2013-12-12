@@ -97,8 +97,8 @@ define( function( require ) {
     root.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
 
     // Set up a layer for non-mass model elements.
-    var nonMassLayer = new Node();
-    root.addChild( nonMassLayer );
+    thisScreen.nonMassLayer = new Node();
+    root.addChild( thisScreen.nonMassLayer );
 
     // Set up a separate layer for the masses so that they will be out in
     // front of the other elements of the model.
@@ -127,11 +127,11 @@ define( function( require ) {
     model.massList.addItemAddedListener( handleMassAdded );
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
-    nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
-    nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
-    nonMassLayer.addChild( new AttachmentBarNode( mvt, model.attachmentBar ) );
+    thisScreen.nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
+    thisScreen.nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
+    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( mvt, model.attachmentBar ) );
     model.supportColumns.forEach( function( supportColumn ) {
-      nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
+      thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
     } );
 
     // Add the ruler.
@@ -139,21 +139,21 @@ define( function( require ) {
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
-    nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
+    thisScreen.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
-    nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
+    thisScreen.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );
     thisScreen.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
       levelIndicatorNode.visible = visible;
     } );
-    nonMassLayer.addChild( levelIndicatorNode );
+    thisScreen.nonMassLayer.addChild( levelIndicatorNode );
 
     // Listen to the list of force vectors and manage their representations.
     model.plank.forceVectors.addItemAddedListener( function( addedMassForceVector ) {
@@ -169,12 +169,12 @@ define( function( require ) {
           mvt
         );
       }
-      nonMassLayer.addChild( forceVectorNode );
+      thisScreen.nonMassLayer.addChild( forceVectorNode );
 
       // Remove representation when corresponding vector removed from model.
       model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
         if ( removedMassForceVector === addedMassForceVector ) {
-          nonMassLayer.removeChild( forceVectorNode );
+          thisScreen.nonMassLayer.removeChild( forceVectorNode );
         }
       } );
     } );
@@ -191,7 +191,7 @@ define( function( require ) {
       } );
     insertColumnsButton.centerX = mvt.modelToViewX( -0.4 );
     insertColumnsButton.centerY = mvt.modelToViewY( -0.5 );
-    nonMassLayer.addChild( insertColumnsButton );
+    thisScreen.nonMassLayer.addChild( insertColumnsButton );
     var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
     balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
     var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage,
@@ -203,7 +203,7 @@ define( function( require ) {
       } );
     removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
     removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
-    nonMassLayer.addChild( removeColumnsButton );
+    thisScreen.nonMassLayer.addChild( removeColumnsButton );
 
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
@@ -228,7 +228,7 @@ define( function( require ) {
         top: 5,
         right: this.layoutBounds.width - 10
       } );
-    nonMassLayer.addChild( indicatorVisibilityControlPanel );
+    thisScreen.nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
@@ -253,7 +253,7 @@ define( function( require ) {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 5
       } );
-    nonMassLayer.addChild( positionIndicatorControlPanel );
+    thisScreen.nonMassLayer.addChild( positionIndicatorControlPanel );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
     this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionIndicatorControlPanel.bounds.minY,
@@ -264,7 +264,7 @@ define( function( require ) {
       thisScreen.reset.call( thisScreen );
     }
 
-    nonMassLayer.addChild( new ResetAllButton(
+    thisScreen.nonMassLayer.addChild( new ResetAllButton(
       resetClosure,
       {
         radius: 18,

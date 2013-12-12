@@ -28,7 +28,7 @@ define( function( require ) {
     var Text = require( 'SCENERY/nodes/Text' );
 
     // Add the mass selection carousel.
-    this.addChild( new Panel( new MassKitSelectionNode( model, thisScreen.mvt ),
+    thisScreen.nonMassLayer.addChild( new Panel( new MassKitSelectionNode( model, thisScreen.mvt ),
       {
         centerX: thisScreen.controlPanelBounds.centerX,
         top: thisScreen.controlPanelBounds.bottom + 5,
