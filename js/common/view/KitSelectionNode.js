@@ -15,7 +15,7 @@ define( function( require ) {
   var KitControlNode = require( 'BALANCING_ACT/common/view/KitControlNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RectangleShape = require( 'DOT/Rectangle' );
+  var Shape = require( 'KITE/Shape' );
 
   /**
    * @param {Property} selectedKit
@@ -80,7 +80,7 @@ define( function( require ) {
     } );
 
     // Clip the kits so that the unselected ones are invisible.
-//    thisNode.clipArea = new RectangleShape( 0, 0, this.background.width, this.background.height );
+    thisNode.clipArea = new Shape.rect( 0, 0, this.background.width, this.background.height );
 
     // Add the remaining nodes.
     thisNode.kitLayer.top = controlNode.height;

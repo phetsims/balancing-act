@@ -30,7 +30,7 @@ define( function( require ) {
         // Default values
         titleNode: null,
         inset: 5,
-        buttonColor: 'orange',
+        buttonColor: 'rgb( 255, 184, 77 )',
         minButtonXSpace: 30
       }, options );
 

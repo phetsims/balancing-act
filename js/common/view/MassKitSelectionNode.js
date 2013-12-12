@@ -19,6 +19,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
 
   // TODO: Temp for testing --------------
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -40,8 +41,8 @@ define( function( require ) {
           content: new BoyCreatorNode( model, mvt )
         },
         {
-          title: new Text( 'Square', { font: TITLE_FONT } ),
-          content: new Rectangle( 0, 0, 50, 50, 5, 5, { fill: 'blue'} )
+          title: new Text( peopleString, { font: TITLE_FONT } ),
+          content: new WomanCreatorNode( model, mvt )
         }
       ], options );
   }
