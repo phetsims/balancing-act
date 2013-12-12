@@ -34,7 +34,7 @@ define( function( require ) {
     var Text = require( 'SCENERY/nodes/Text' );
 
     // TODO: May want different MVT so that nodes are scaled a bit differently.
-    this.addChild( new MassKitSelectionNode( thisScreen, thisScreen.mvt, { left: 50 } ) );
+    this.addChild( new MassKitSelectionNode( model, thisScreen.mvt, { left: 50 } ) );
   }
 
   return inherit( BasicBalanceScreen, BalanceLabScreen );
