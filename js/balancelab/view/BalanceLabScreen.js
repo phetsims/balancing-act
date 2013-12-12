@@ -10,6 +10,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -27,10 +28,13 @@ define( function( require ) {
     var Text = require( 'SCENERY/nodes/Text' );
 
     // TODO: May want different MVT so that nodes are scaled a bit differently.
-    var massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.mvt );
-    massKitSelectionNode.centerX = 740;
-    massKitSelectionNode.bottom = 450;
-    this.addChild( massKitSelectionNode );
+    var kitSelectorMvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, Vector2.ZERO, 80 );
+    this.addChild( new Panel( new MassKitSelectionNode( model, kitSelectorMvt ),
+      {
+        centerX: thisScreen.controlPanelBounds.centerX,
+        top: thisScreen.controlPanelBounds.bottom + 5,
+        fill: 'rgb( 240, 240, 240 )'
+      } ) );
   }
 
   return inherit( BasicBalanceScreen, BalanceLabScreen );

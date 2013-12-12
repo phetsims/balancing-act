@@ -14,6 +14,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
   var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -245,13 +246,18 @@ define( function( require ) {
       ],
       align: 'left'
     } );
-    nonMassLayer.addChild( new Panel( positionMarkerVBox,
+    var positionIndicatorControlPanel = new Panel( positionMarkerVBox,
       {
         xMargin: X_MARGIN_IN_PANELS,
         fill: 'rgb( 240, 240, 240 )',
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 5
-      } ) );
+      } );
+    nonMassLayer.addChild( positionIndicatorControlPanel );
+
+    // Add bounds for the control panels so that descendant types can see them for layout.
+    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionIndicatorControlPanel.bounds.minY,
+      indicatorVisibilityControlPanel.bounds.maxX, positionIndicatorControlPanel.bounds.maxY );
 
     // Reset All button.
     function resetClosure() {
