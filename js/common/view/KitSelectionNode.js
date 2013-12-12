@@ -30,9 +30,8 @@ define( function( require ) {
       {
         // Defaults
         backgroundFill: 'white',
-        titleNode: null,
-        padding: 5 // Used for layout
-      }
+        titleNode: null
+      }, options
     );
 
     // Make the selected kit property visible externally.
@@ -75,7 +74,7 @@ define( function( require ) {
         thisNode.kitLayer.addChild( kit.title );
       }
       kit.content.centerX = x + thisNode.background.width / 2;
-      kit.top = kit.title.bottom;
+      kit.content.top = kit.title.bottom;
       thisNode.kitLayer.addChild( kit.content );
 
       //Move over to the next kit
@@ -92,11 +91,14 @@ define( function( require ) {
     selectedKit.link( function( kit ) {
       thisNode.scrollTo( kit );
     } );
+
+    // Pass through any options intended for Node.
+    thisNode.mutate( options );
   }
 
   return inherit( Node, KitSelectionNode, {
     scrollTo: function( kitNumber ) {
-      this.kitLayer.centerX = this.background.width * ( 0.5 + kitNumber );
+      this.kitLayer.x = -kitNumber * this.background.width;
     }
   } );
 } );
