@@ -15,6 +15,7 @@ define( function( require ) {
   var KitControlNode = require( 'BALANCING_ACT/common/view/KitControlNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var RectangleShape = require( 'DOT/Rectangle' );
 
   /**
    * @param {Property} selectedKit
@@ -49,8 +50,7 @@ define( function( require ) {
 
     var controlNode = new KitControlNode( kits.length, selectedKit, { titleNode: options.titleNode } );
 
-    // Construct and add the background.  Make it big enough to hold the
-    // largest kit.
+    // Construct and add the background.  Make it big enough to hold the largest kit.
     thisNode.background = new Rectangle( 0, 0, Math.max( Math.max( maxKitContentSize.width, maxKitTitleSize.width ), controlNode.width ),
       controlNode.height + maxKitContentSize.height + maxKitTitleSize.height, 5, 5, { fill: null } );
     thisNode.addChild( thisNode.background );
@@ -60,10 +60,8 @@ define( function( require ) {
     // visible at a time.
     thisNode.kitLayer = new Node();
 
-    // X location of each kit content nodes within the new parent (kitLayer)
-    // that will be scrolled across
+    // Add the kits to the kit layer, spacing them out so they don't overlap.
     var x = 0;
-
     var availableSpaceForContentNode = thisNode.background.height - maxKitTitleSize.height;
     kits.forEach( function( kit ) {
       // Put the title centered at the top and the content node centered in the
@@ -77,12 +75,14 @@ define( function( require ) {
       kit.content.top = kit.title.bottom;
       thisNode.kitLayer.addChild( kit.content );
 
-      //Move over to the next kit
+      // Move over to the next kit
       x += thisNode.background.width;
     } );
 
     // Clip the kits so that the unselected ones are invisible.
-    // TODO: Add clipping.  For now, the kit node is just directly added
+//    thisNode.clipArea = new RectangleShape( 0, 0, this.background.width, this.background.height );
+
+    // Add the remaining nodes.
     thisNode.kitLayer.top = controlNode.height;
     thisNode.addChild( thisNode.kitLayer );
     thisNode.addChild( controlNode );

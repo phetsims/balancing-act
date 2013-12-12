@@ -30,35 +30,39 @@ define( function( require ) {
         // Default values
         titleNode: null,
         inset: 5,
-        buttonColor: 'orange'
+        buttonColor: 'orange',
+        minButtonXSpace: 30
       }, options );
+
+    var arrowButtonOptions = {
+      arrowWidth: 10,
+      arrowHeight: 10,
+      fill: options.buttonColor,
+      xMargin: 5,
+      yMargin: 3
+    };
 
     var nextKitButton = new ArrowButton( 'right', function() {
       selectedKit.value = selectedKit.value + 1;
-    }, { fill: options.buttonColor  } );
+    }, arrowButtonOptions );
     this.addChild( nextKitButton );
 
     var previousKitButton = new ArrowButton( 'left', function() {
       selectedKit.value = selectedKit.value - 1;
-    }, { fill: options.buttonColor } );
+    }, arrowButtonOptions );
     this.addChild( previousKitButton );
 
     // Control button enabled state
     selectedKit.link( function( kitNum ) {
       nextKitButton.setEnabled( kitNum < numKits - 1 );
       previousKitButton.setEnabled( kitNum != 0 );
-      console.log( kitNum );
     } );
 
     // Layout
+    var interButtonXSpace = Math.max( options.minButtonXSpace, 2 * options.inset + ( options.titleNode === null ? 0 : options.titleNode.width ) );
+    nextKitButton.left = previousKitButton.right + interButtonXSpace;
     if ( options.titleNode !== null ) {
-      this.addChild( options.titleNode );
-      options.titleNode.centerY = previousKitButton.centerY;
-      options.titleNode.left = previousKitButton.right + options.inset;
-      nextKitButton.left = options.titleNode.right + options.inset;
-    }
-    else {
-      nextKitButton.left = previousKitButton.right + options.inset * 2;
+      this.addChild( options.titleNode, { centerX: ( previousKitButton.centerX + nextKitButton.centerX ) / 2 } );
     }
 
     // If there is only one kit, show the title but not the control buttons.
