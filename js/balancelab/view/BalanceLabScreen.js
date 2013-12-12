@@ -27,9 +27,8 @@ define( function( require ) {
     var Property = require( 'AXON/Property' );
     var Text = require( 'SCENERY/nodes/Text' );
 
-    // TODO: May want different MVT so that nodes are scaled a bit differently.
-    var kitSelectorMvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, Vector2.ZERO, 80 );
-    this.addChild( new Panel( new MassKitSelectionNode( model, kitSelectorMvt ),
+    // Add the mass selection carousel.
+    this.addChild( new Panel( new MassKitSelectionNode( model, thisScreen.mvt ),
       {
         centerX: thisScreen.controlPanelBounds.centerX,
         top: thisScreen.controlPanelBounds.bottom + 5,

@@ -45,7 +45,10 @@ define( function( require ) {
 
     // Function for translating click event to model coordinates.
     function eventToModelPosition( position ) {
-      return mvt.viewToModelPosition( thisNode.globalToParentPoint( position ).plus( thisNode.positioningOffset ) );
+      // TODO: This is very brittle, and should be replaced by some better means of determining the screen.  One idea
+      // would be to have some sort of flag in the screen and then iterate until we find it on the 'start' of the
+      // mouse event and use it for all transforms.
+      return mvt.viewToModelPosition( thisNode.parents[0].parents[0].parents[0].parents[0].globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
     }
 
     // Set up handling of mouse events.
