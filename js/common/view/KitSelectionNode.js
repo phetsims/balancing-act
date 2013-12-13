@@ -85,7 +85,7 @@ define( function( require ) {
     // Add the remaining nodes.
     thisNode.kitLayer.top = controlNode.height;
     thisNode.addChild( thisNode.kitLayer );
-    thisNode.addChild( controlNode );
+    thisNode.addChild( controlNode.mutate( { centerX: this.background.width / 2 } ) );
 
     // Set up an observer to set visibility of the selected kit.
     selectedKit.link( function( kit ) {
