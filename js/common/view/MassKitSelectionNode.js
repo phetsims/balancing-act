@@ -24,16 +24,12 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
 
-  // TODO: Temp for testing --------------
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  // End of temp for testing --------------
-
   // Constants
   var TITLE_FONT = new PhetFont( 16 );
 
   function MassKitSelectionNode( model, mvt, options ) {
 
-    // Lay out the kit node for creating bricks of various sizes.
+    // Create and lay out the kit node for creating bricks of various sizes.
     var brickCreatorKit = new Node();
     brickCreatorKit.addChild( new VBox(
       {
@@ -58,7 +54,7 @@ define( function( require ) {
       [
         {
           title: new Text( bricksString, { font: TITLE_FONT } ),
-          content: new BrickStackCreatorNode( 2, model, mvt )
+          content: brickCreatorKit
         },
         {
           title: new Text( peopleString, { font: TITLE_FONT } ),
