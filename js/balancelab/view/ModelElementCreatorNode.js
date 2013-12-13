@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var ScreenView = require( 'JOIST/ScreenView' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -43,18 +44,32 @@ define( function( require ) {
     // say, an awkward location with respect to the mouse.
     thisNode.positioningOffset = Vector2.ZERO;
 
-    // Function for translating click event to model coordinates.
+    // Function for translating click events to model coordinates.
     function eventToModelPosition( position ) {
-      // TODO: This is very brittle, and should be replaced by some better means of determining the screen.  One idea
-      // would be to have some sort of flag in the screen and then iterate until we find it on the 'start' of the
-      // mouse event and use it for all transforms.
-      return mvt.viewToModelPosition( thisNode.parents[0].parents[0].parents[0].parents[0].globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+      if ( parentScreen !== null ) {
+        return mvt.viewToModelPosition( parentScreen.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+      }
+      console.log( 'Warning: Unable to transform position - no parent screen set.' );
+      return position;
     }
+
+    // Variable for the parent screen, which is needed for coordinate transforms.
+    var parentScreen = null;
 
     // Set up handling of mouse events.
     this.addInputListener( new SimpleDragHandler(
       {
         start: function( event ) {
+          // Move up the scene graph until the parent screen is found.
+          var testNode = thisNode;
+          while ( testNode !== null ) {
+            if ( testNode instanceof ScreenView ) {
+              parentScreen = testNode;
+              break;
+            }
+            testNode = testNode.parents[0]; // Move up the scene graph by one level
+          }
+
           // Create a new node and add it to the model.
           thisNode.modelElement = thisNode.addElementToModel( eventToModelPosition( event.pointer.point ) );
         },
@@ -73,6 +88,7 @@ define( function( require ) {
           // The user has released the node.
           thisNode.modelElement.release();
           thisNode.modelElement = null;
+          parentScreen = null;
         }
       } ) );
   }
