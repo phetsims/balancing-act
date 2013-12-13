@@ -13,9 +13,11 @@ define( function( require ) {
   var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
   var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   var bricksString = require( 'string!BALANCING_ACT/bricks' );
+  var GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var KitSelectionNode = require( 'BALANCING_ACT/common/view/KitSelectionNode' );
+  var ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var peopleString = require( 'string!BALANCING_ACT/people' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -29,7 +31,7 @@ define( function( require ) {
 
   function MassKitSelectionNode( model, mvt, options ) {
 
-    // Create and lay out the kit node for creating bricks of various sizes.
+    // Create the kit node for creating brick stacks of various sizes.
     var brickCreatorKit = new Node();
     brickCreatorKit.addChild( new VBox(
       {
@@ -49,6 +51,29 @@ define( function( require ) {
         spacing: 5
       } ) );
 
+    // Create the 1st kit node for creating people.
+    var peopleKit1 = new Node();
+    peopleKit1.addChild( new HBox(
+      {
+        children: [
+          new BoyCreatorNode( model, mvt ),
+          new ManCreatorNode( model, mvt )
+        ],
+        spacing: 5
+      } ) );
+
+    // Create the 2nd kit node for creating people.
+    var peopleKit2 = new Node();
+    peopleKit2.addChild( new HBox(
+      {
+        children: [
+          new GirlCreatorNode( model, mvt ),
+          new WomanCreatorNode( model, mvt )
+        ],
+        spacing: 5
+      } ) );
+
+    // Create the actual kit selection node.
     this.selectedKit = new Property( 0 );
     KitSelectionNode.call( this, this.selectedKit,
       [
@@ -58,11 +83,11 @@ define( function( require ) {
         },
         {
           title: new Text( peopleString, { font: TITLE_FONT } ),
-          content: new BoyCreatorNode( model, mvt )
+          content: peopleKit1
         },
         {
           title: new Text( peopleString, { font: TITLE_FONT } ),
-          content: new WomanCreatorNode( model, mvt )
+          content: peopleKit2
         }
       ], options );
   }
