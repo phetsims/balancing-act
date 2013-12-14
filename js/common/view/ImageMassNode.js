@@ -49,7 +49,8 @@ define( function( require ) {
       massLabel.visible = visible;
     } );
 
-    // Add a rectangle that will be used as a reference when layout out this node.
+    // Add a rectangle that will be used as a reference when performing layout out this node.
+    // TODO: This approach is a bit crude.  When rest of sim working, look into alternatives, or at least making it smaller.
     var referenceRect = new Rectangle( -20, 0, 40, 20, 0, 0, { fill: 'rgba( 0, 0, 0, 0 )' } );
     thisNode.addChild( referenceRect );
 
