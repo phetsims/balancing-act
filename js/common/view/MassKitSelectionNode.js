@@ -18,6 +18,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var KitSelectionNode = require( 'BALANCING_ACT/common/view/KitSelectionNode' );
   var ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
+  var MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var peopleString = require( 'string!BALANCING_ACT/people' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -88,6 +89,10 @@ define( function( require ) {
         {
           title: new Text( peopleString, { font: TITLE_FONT } ),
           content: peopleKit2
+        },
+        {
+          title: new Text( peopleString, { font: TITLE_FONT } ),
+          content: new MysteryMassCreatorNode( 0, model, mvt )
         }
       ], options );
   }

@@ -25,15 +25,16 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Transform3 = require( 'DOT/Transform3' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param mvt
    * @param imageMass
+   * @param mvt
    * @param massLabelVisibleProperty
    * @param {boolean} draggable
    * @constructor
    */
+  var Vector2 = require( 'DOT/Vector2' );
+
   function ImageMassNode( imageMass, mvt, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;

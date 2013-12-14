@@ -2,7 +2,7 @@
 
 /**
  * Class that depicts a "mystery vector", which is a vector that is presented to
- * the user in the appropriate location but that has a fixed size and it labeled
+ * the user in the appropriate location but that has a fixed size and is labeled
  * with a question mark (or some other symbol).
  *
  * @author John Blanco
@@ -31,14 +31,14 @@ define( function( require ) {
     var Rectangle = require( 'SCENERY/nodes/Rectangle' );
     thisNode.addChild( new Rectangle( 0, 0, 20, 20, 0, 0, {fill: 'pink', stroke: 'black'} ) );
 
-    positionedVectorProperty.link( function( positionedVector ) {
-      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
-      thisNode.centerY = mvt.modelToViewY( positionedVector.origin.y );
-    } );
+//    positionedVectorProperty.link( function( positionedVector ) {
+//      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
+//      thisNode.centerY = mvt.modelToViewY( positionedVector.origin.y );
+//    } );
 
-    visibilityProperty.link( function( visible ) {
-      thisNode.visible = visible;
-    } );
+//    visibilityProperty.link( function( visible ) {
+//      thisNode.visible = visible;
+//    } );
   }
 
   return inherit( Node, MysteryVectorNode, {
