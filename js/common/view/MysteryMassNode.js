@@ -43,8 +43,8 @@ define( function( require ) {
     // positioned a little below the center because it looked better on the
     // initial set of mystery masses.  May require adjustment if the artwork
     // for the mystery masses changes.
-    label.centerX = thisNode.width / 2;
-    label.centerY = thisNode.height / 2;
+    label.centerX = thisNode.imageNode.centerX;
+    label.centerY = thisNode.imageNode.centerY + thisNode.imageNode.height * 0.2;
 
     // Add the label as a child.
     thisNode.addChild( label );

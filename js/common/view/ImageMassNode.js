@@ -100,6 +100,9 @@ define( function( require ) {
     // Add the image node.
     thisNode.addChild( imageNode );
 
+    // Make the image node visible to descendent classes for layout purposes.
+    this.imageNode = imageNode;
+
     // Observe height changes.
     imageMass.heightProperty.link( function( newHeight ) {
       imageNode.setScaleMagnitude( 1 );
