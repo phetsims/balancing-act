@@ -74,6 +74,27 @@ define( function( require ) {
         spacing: 5
       } ) );
 
+    // Create the 1st kit node for mystery masses.
+    var mysteryMassesKit1 = new Node();
+    mysteryMassesKit1.addChild( new VBox(
+      {
+        children: [
+          new HBox(
+            {
+              children: [ new MysteryMassCreatorNode( 0, model, mvt ), new MysteryMassCreatorNode( 1, model, mvt ) ],
+              spacing: 20
+
+            } ),
+          new HBox(
+            {
+              children: [ new MysteryMassCreatorNode( 2, model, mvt ), new MysteryMassCreatorNode( 3, model, mvt ) ],
+              spacing: 20
+            } )
+        ],
+        spacing: 5
+      } ) );
+
+
     // Create the actual kit selection node.
     this.selectedKit = new Property( 0 );
     KitSelectionNode.call( this, this.selectedKit,
@@ -92,7 +113,7 @@ define( function( require ) {
         },
         {
           title: new Text( peopleString, { font: TITLE_FONT } ),
-          content: new MysteryMassCreatorNode( 0, model, mvt )
+          content: mysteryMassesKit1
         }
       ], options );
   }

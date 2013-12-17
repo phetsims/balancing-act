@@ -30,8 +30,8 @@ define( function( require ) {
     var inset = thisNode.width * INSET_PROPORTION;
 
     // Create the label.
-    var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, style: 'bold' } ) } );
-    var label = new Rectangle( 0, 0, labelText.width + inset * 2, labelText.height + inset * 2, 5, 5,
+    var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
+    var label = new Rectangle( 0, 0, labelText.width + inset * 2, labelText.height + inset, 3, 3,
       {
         fill: 'white',
         stroke: 'black',

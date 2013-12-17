@@ -15,7 +15,7 @@ define( function( require ) {
   var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
-  var MysteryMass = require( 'BALANCING_ACT/common/model/MysteryMass' );
+  var MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
   var MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ShapeMass = require( 'BALANCING_ACT/common/model/ShapeMass' );
@@ -23,15 +23,16 @@ define( function( require ) {
 
   return{
     createMassNode: function( mass, mvt, labelVisibleProperty ) {
+      debugger;
       var massNode;
-      if ( mass instanceof ImageMass ) {
+      if ( mass instanceof MysteryMass ) {
+        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );
+      }
+      else if ( mass instanceof ImageMass ) {
         massNode = new ImageMassNode( mass, mvt, labelVisibleProperty, true );
       }
       else if ( mass instanceof BrickStack ) {
         massNode = new BrickStackNode( mass, mvt, labelVisibleProperty, true );
-      }
-      else if ( mass instanceof MysteryMass ) {
-        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );
       }
       else {
         console.log( "Error: Unrecognized mass type sent to MassNodeFactory." );
