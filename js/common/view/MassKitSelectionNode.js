@@ -19,6 +19,7 @@ define( function( require ) {
   var KitSelectionNode = require( 'BALANCING_ACT/common/view/KitSelectionNode' );
   var ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
   var MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
+  var mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
   var Node = require( 'SCENERY/nodes/Node' );
   var peopleString = require( 'string!BALANCING_ACT/people' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -94,6 +95,25 @@ define( function( require ) {
         spacing: 5
       } ) );
 
+    // Create the 2nd kit node for mystery masses.
+    var mysteryMassesKit2 = new Node();
+    mysteryMassesKit2.addChild( new VBox(
+      {
+        children: [
+          new HBox(
+            {
+              children: [ new MysteryMassCreatorNode( 4, model, mvt ), new MysteryMassCreatorNode( 5, model, mvt ) ],
+              spacing: 20
+
+            } ),
+          new HBox(
+            {
+              children: [ new MysteryMassCreatorNode( 6, model, mvt ), new MysteryMassCreatorNode( 7, model, mvt ) ],
+              spacing: 20
+            } )
+        ],
+        spacing: 5
+      } ) );
 
     // Create the actual kit selection node.
     this.selectedKit = new Property( 0 );
@@ -112,8 +132,12 @@ define( function( require ) {
           content: peopleKit2
         },
         {
-          title: new Text( peopleString, { font: TITLE_FONT } ),
+          title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
           content: mysteryMassesKit1
+        },
+        {
+          title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+          content: mysteryMassesKit2
         }
       ], options );
   }
