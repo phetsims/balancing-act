@@ -23,7 +23,6 @@ define( function( require ) {
 
   return{
     createMassNode: function( mass, mvt, labelVisibleProperty ) {
-      debugger;
       var massNode;
       if ( mass instanceof MysteryMass ) {
         massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );

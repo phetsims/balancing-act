@@ -16,7 +16,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // Constants
-  var INSET_PROPORTION = 0.1;
+  var INSET_PROPORTION = 0.25;
 
   /**
    * @param {ModelViewTransform} mvt
@@ -27,17 +27,24 @@ define( function( require ) {
   function MysteryMassNode( mass, mvt, massLabelVisibleProperty ) {
     ImageMassNode.call( this, mass, mvt, massLabelVisibleProperty );
     var thisNode = this;
-    var inset = thisNode.width * INSET_PROPORTION;
+    var inset = thisNode.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
     var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
-    var label = new Rectangle( 0, 0, labelText.width + inset * 2, labelText.height + inset, 3, 3,
+    var dimension = Math.max( labelText.width, labelText.height );
+    var label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
       {
         fill: 'white',
         stroke: 'black',
         lineWidth: 1
       } );
     label.addChild( labelText.mutate( { centerX: label.centerX, centerY: label.centerY } ) );
+
+    // Scale the label to fit.
+    var widthScale = ( thisNode.imageNode.width - ( 2 * inset ) ) / label.width;
+    var heightScale = ( thisNode.imageNode.height - ( 2 * inset ) ) / label.height;
+    console.log( 'scale = ' + Math.min( widthScale, heightScale ) );
+    label.scale( Math.min( widthScale, heightScale ) );
 
     // Position the label on the image.  TWEAK WARNING - These labels are
     // positioned a little below the center because it looked better on the
