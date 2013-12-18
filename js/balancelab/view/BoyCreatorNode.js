@@ -22,7 +22,7 @@ define( function( require ) {
   // Model-view transform for scaling the node used in the tool box.  This
   // may scale the node differently than what is used in the model so that
   // items in the tool box can be sized differently (generally smaller).
-  var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 100 );
+  var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 80 );
 
   /**
    * @param {BalanceLabModel} model
