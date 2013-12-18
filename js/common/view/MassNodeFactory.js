@@ -25,7 +25,7 @@ define( function( require ) {
     createMassNode: function( mass, mvt, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof MysteryMass ) {
-        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty );
+        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty, true );
       }
       else if ( mass instanceof ImageMass ) {
         massNode = new ImageMassNode( mass, mvt, labelVisibleProperty, true );
