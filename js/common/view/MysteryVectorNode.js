@@ -13,35 +13,38 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
+
+  // Constants
+  var FONT = new PhetFont( { size: 36 } );
+  var Y_DIST_FROM_POSITION = 3; // In screen units.
 
   /**
    * @param positionedVectorProperty
-   * @param scalingFactor
    * @param visibilityProperty
-   * @param fillColor
    * @param mvt Model-view transform
    * @constructor
    */
-  function MysteryVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, fillColor, mvt ) {
+  function MysteryVectorNode( positionedVectorProperty, visibilityProperty, mvt ) {
     Node.call( this );
     var thisNode = this;
-    // Create the vector node and add it as a child.
-    //TODO this is stubbed, port needs to be completed.
 
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    thisNode.addChild( new Rectangle( 0, 0, 20, 20, 0, 0, {fill: 'pink', stroke: 'black'} ) );
+    // Create the 'mystery vector' node and add it as a child.
+    thisNode.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1} ) );
 
-//    positionedVectorProperty.link( function( positionedVector ) {
-//      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
-//      thisNode.centerY = mvt.modelToViewY( positionedVector.origin.y );
-//    } );
+    // Follow the position as it changes
+    positionedVectorProperty.link( function( positionedVector ) {
+      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
+      thisNode.top = mvt.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
+    } );
 
-//    visibilityProperty.link( function( visible ) {
-//      thisNode.visible = visible;
-//    } );
+    // Control visibility
+    visibilityProperty.link( function( visible ) {
+      thisNode.visible = visible;
+    } );
   }
 
-  return inherit( Node, MysteryVectorNode, {
-    //TODO prototypes
-  } );
+  return inherit( Node, MysteryVectorNode );
 } );

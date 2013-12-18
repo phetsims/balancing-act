@@ -160,7 +160,7 @@ define( function( require ) {
       // Add a representation for the new vector.
       var forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
-        forceVectorNode = new MysteryVectorNode( addedMassForceVector.forceVectorProperty, this.forceVectorsFromObjectsVisibleProperty, mvt );
+        forceVectorNode = new MysteryVectorNode( addedMassForceVector.forceVectorProperty, thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty, mvt );
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
