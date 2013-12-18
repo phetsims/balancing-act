@@ -34,86 +34,105 @@ define( function( require ) {
   function MassKitSelectionNode( model, mvt, options ) {
 
     // Create the kit node for creating brick stacks of various sizes.
-    var brickCreatorKit = new Node();
-    brickCreatorKit.addChild( new VBox(
+    var brickCreatorKit = new Node(
       {
         children: [
-          new HBox(
+          new VBox(
             {
-              children: [ new BrickStackCreatorNode( 1, model, mvt ), new BrickStackCreatorNode( 2, model, mvt ) ],
-              spacing: 20
+              children: [
+                new HBox(
+                  {
+                    children: [ new BrickStackCreatorNode( 1, model, mvt ), new BrickStackCreatorNode( 2, model, mvt ) ],
+                    spacing: 20
 
-            } ),
-          new HBox(
-            {
-              children: [ new BrickStackCreatorNode( 3, model, mvt ), new BrickStackCreatorNode( 4, model, mvt ) ],
-              spacing: 20
+                  } ),
+                new HBox(
+                  {
+                    children: [ new BrickStackCreatorNode( 3, model, mvt ), new BrickStackCreatorNode( 4, model, mvt ) ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 5
             } )
-        ],
-        spacing: 5
-      } ) );
+        ]
+      }
+    );
 
     // Create the 1st kit node for creating people.
-    var peopleKit1 = new Node();
-    peopleKit1.addChild( new HBox(
+    var peopleKit1 = new Node(
       {
         children: [
-          new BoyCreatorNode( model, mvt ),
-          new ManCreatorNode( model, mvt )
-        ],
-        spacing: 5
-      } ) );
+          new HBox(
+            {
+              children: [
+                new BoyCreatorNode( model, mvt ),
+                new ManCreatorNode( model, mvt )
+              ],
+              spacing: 5
+            } )
+        ]
+      } );
 
     // Create the 2nd kit node for creating people.
-    var peopleKit2 = new Node();
-    peopleKit2.addChild( new HBox(
+    var peopleKit2 = new Node(
       {
         children: [
-          new GirlCreatorNode( model, mvt ),
-          new WomanCreatorNode( model, mvt )
-        ],
-        spacing: 5
-      } ) );
+          new HBox(
+            {
+              children: [
+                new GirlCreatorNode( model, mvt ),
+                new WomanCreatorNode( model, mvt )
+              ],
+              spacing: 5
+            } )
+        ]
+      } );
 
     // Create the 1st kit node for mystery masses.
-    var mysteryMassesKit1 = new Node();
-    mysteryMassesKit1.addChild( new VBox(
+    var mysteryMassesKit1 = new Node(
       {
         children: [
-          new HBox(
+          new VBox(
             {
-              children: [ new MysteryMassCreatorNode( 0, model, mvt ), new MysteryMassCreatorNode( 1, model, mvt ) ],
-              spacing: 20
+              children: [
+                new HBox(
+                  {
+                    children: [ new MysteryMassCreatorNode( 0, model, mvt ), new MysteryMassCreatorNode( 1, model, mvt ) ],
+                    spacing: 20
 
-            } ),
-          new HBox(
-            {
-              children: [ new MysteryMassCreatorNode( 2, model, mvt ), new MysteryMassCreatorNode( 3, model, mvt ) ],
-              spacing: 20
-            } )
-        ],
-        spacing: 5
-      } ) );
+                  } ),
+                new HBox(
+                  {
+                    children: [ new MysteryMassCreatorNode( 2, model, mvt ), new MysteryMassCreatorNode( 3, model, mvt ) ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 5
+            } ) ]
+      } );
 
     // Create the 2nd kit node for mystery masses.
-    var mysteryMassesKit2 = new Node();
-    mysteryMassesKit2.addChild( new VBox(
+    var mysteryMassesKit2 = new Node(
       {
         children: [
-          new HBox(
+          new VBox(
             {
-              children: [ new MysteryMassCreatorNode( 4, model, mvt ), new MysteryMassCreatorNode( 5, model, mvt ) ],
-              spacing: 20
+              children: [
+                new HBox(
+                  {
+                    children: [ new MysteryMassCreatorNode( 4, model, mvt ), new MysteryMassCreatorNode( 5, model, mvt ) ],
+                    spacing: 20
 
-            } ),
-          new HBox(
-            {
-              children: [ new MysteryMassCreatorNode( 6, model, mvt ), new MysteryMassCreatorNode( 7, model, mvt ) ],
-              spacing: 20
-            } )
-        ],
-        spacing: 5
-      } ) );
+                  } ),
+                new HBox(
+                  {
+                    children: [ new MysteryMassCreatorNode( 6, model, mvt ), new MysteryMassCreatorNode( 7, model, mvt ) ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 5
+            } ) ]
+      } );
 
     // Create the actual kit selection node.
     this.selectedKit = new Property( 0 );
