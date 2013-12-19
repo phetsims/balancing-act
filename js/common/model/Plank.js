@@ -177,7 +177,7 @@ define( function( require ) {
       // Update the active drop locations.
       var tempDropLocations = [];
       thisPlank.userControlledMasses.forEach( function( userControlledMass ) {
-        if ( thisPlank.isPointAbovePlank( userControlledMass.position ) ) {
+        if ( thisPlank.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
           var closestOpenLocation = thisPlank.getOpenMassDroppedLocation( userControlledMass.position );
           if ( closestOpenLocation ) {
             var plankSurfaceCenter = thisPlank.getPlankSurfaceCenter();
