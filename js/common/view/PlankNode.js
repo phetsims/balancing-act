@@ -41,27 +41,20 @@ define( function( require ) {
     thisNode.tickMarkLayer = new Node();
     thisNode.addChild( thisNode.tickMarkLayer );
     plank.shapeProperty.link( function() {
-      thisNode.updateTickMarks( thisNode.tickMarkLayer, plank, mvt );
+      thisNode.updateTickMarks();
+      thisNode.updateHighlights();
+    } );
+    plank.activeDropLocations.addItemAddedListener( function() {
+      thisNode.updateHighlights();
+    } );
+    plank.activeDropLocations.addItemRemovedListener( function() {
+      thisNode.updateHighlights();
     } );
   }
 
   return inherit( ModelObjectNode, PlankNode, {
+
     updateTickMarks: function() {
-
-      // Update the tick mark highlights by removing and redrawing them.
-      this.tickMarkLayer.removeAllChildren();
-      this.tickMarkHighlightLayer.removeAllChildren();
-      if ( this.plank.dropHighlightPos !== null ) {
-        var highlightShape = Shape.rect(
-          this.mvt.modelToViewX( this.plank.pivotPoint.x + this.plank.dropHighlightPos ) - HIGHLIGHT_WIDTH / 2,
-          this.mvt.modelToViewY( this.plank.unrotatedShape.bounds.minY ),
-          HIGHLIGHT_WIDTH,
-          this.mvt.modelToViewDeltaY( this.plank.THICKNESS ) );
-        var tickMarkHighlight = new Path( highlightShape, { fill: HIGHLIGHT_COLOR } );
-        tickMarkHighlight.rotateAround( this.mvt.modelToViewPosition( this.plank.pivotPoint ), -this.plank.tiltAngle );
-        this.tickMarkHighlightLayer.addChild( tickMarkHighlight );
-      }
-
       // Update the tick marks by removing them and redrawing them.
       this.tickMarkLayer.removeAllChildren();
       for ( var i = 0; i < this.plank.tickMarks.length; i++ ) {
@@ -74,6 +67,22 @@ define( function( require ) {
         }
         this.tickMarkLayer.addChild( new Path( this.mvt.modelToViewShape( this.plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
       }
+    },
+
+    updateHighlights: function() {
+      // Update the tick mark highlights by removing and redrawing them.
+      var thisNode = this;
+      thisNode.tickMarkHighlightLayer.removeAllChildren();
+      thisNode.plank.activeDropLocations.forEach( function( location ) {
+        var highlightShape = Shape.rect(
+          thisNode.mvt.modelToViewX( thisNode.plank.pivotPoint.x + location ) - HIGHLIGHT_WIDTH / 2,
+          thisNode.mvt.modelToViewY( thisNode.plank.unrotatedShape.bounds.minY ),
+          HIGHLIGHT_WIDTH,
+          thisNode.mvt.modelToViewDeltaY( thisNode.plank.THICKNESS ) );
+        var tickMarkHighlight = new Path( highlightShape, { fill: HIGHLIGHT_COLOR } );
+        tickMarkHighlight.rotateAround( thisNode.mvt.modelToViewPosition( thisNode.plank.pivotPoint ), -thisNode.plank.tiltAngle );
+        thisNode.tickMarkHighlightLayer.addChild( tickMarkHighlight );
+      } );
     }
   } );
 } );

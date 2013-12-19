@@ -37,6 +37,7 @@ define( function( require ) {
     thisModel.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
     thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty );
     thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
+    thisModel.userControlledMasses = new ObservableArray(); // Masses being controlled by users, potentially more than one in touch environment.
     thisModel.supportColumns = [
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )

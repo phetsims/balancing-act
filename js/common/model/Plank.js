@@ -74,13 +74,6 @@ define( function( require ) {
         // their appearance.
         tickMarks: [],
 
-        // A position, measured in meters from the center of the plank, where
-        // the current user-controlled mass would be placed if dropped by the
-        // user.  Value is null if there is no user-controlled mass, if the
-        // user-controlled mass is not above the plank, or if there are no
-        // open spots.
-        dropHighlightPos: null,
-
         // Property that indicates whether the plank is being manually moved
         // by the user.
         userControlled: false
@@ -89,6 +82,7 @@ define( function( require ) {
     // Externally visible observable lists.
     thisPlank.massesOnSurface = new ObservableArray();
     thisPlank.forceVectors = new ObservableArray();
+    thisPlank.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
 
     // Map of masses to distance from the plank's center.
     thisPlank.massDistancePairs = [];
