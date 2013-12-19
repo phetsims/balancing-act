@@ -43,7 +43,6 @@ define( function( require ) {
     // Scale the label to fit.
     var widthScale = ( thisNode.imageNode.width - ( 2 * inset ) ) / label.width;
     var heightScale = ( thisNode.imageNode.height - ( 2 * inset ) ) / label.height;
-    console.log( 'scale = ' + Math.min( widthScale, heightScale ) );
     label.scale( Math.min( widthScale, heightScale ) );
 
     // Position the label on the image.  TWEAK WARNING - These labels are

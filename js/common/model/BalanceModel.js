@@ -34,10 +34,10 @@ define( function( require ) {
     // Model elements
     thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
     thisModel.massList = new ObservableArray();
+    thisModel.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
     thisModel.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
-    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty );
+    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty, this.userControlledMasses );
     thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
-    thisModel.userControlledMasses = new ObservableArray(); // Masses being controlled by users, potentially more than one in touch environment.
     thisModel.supportColumns = [
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )
@@ -57,11 +57,29 @@ define( function( require ) {
     // Add a mass to the model.  Subclasses generally do additional things.
     addMass: function( mass ) {
       this.massList.push( mass );
+      var thisNode = this;
+
+      // Add a listener that will update the list of user controlled masses
+      // that are used by the plank so set the active drop locations.
+      var userControlledMassesUpdater = function( userControlled ) {
+        if ( mass.userControlled ) {
+          thisNode.userControlledMasses.push( mass );
+        }
+        else {
+          thisNode.userControlledMasses.splice( thisNode.userControlledMasses.indexOf( mass ), 1 );
+        }
+      };
+      mass.userControlledProperty.link( userControlledMassesUpdater );
+
+      // Attach a reference for this listener to the mass so that it can be removed later.
+      mass.userControlledMassesUpdater = userControlledMassesUpdater;
     },
 
-    // Remove a mass from the model.  Subclasses generally do additional things.
+    // Remove a mass from the model.  Sub-types often do additional things.
     removeMass: function( mass ) {
       this.massList.remove( mass );
+      mass.userControlledProperty.unlink( mass.userControlledMassesUpdater );
+      delete mass.userControlledMassesUpdater;
     },
 
     reset: function() {
