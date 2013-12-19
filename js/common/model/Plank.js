@@ -329,14 +329,32 @@ define( function( require ) {
     // Find the best open location for a mass that was dropped at the given
     // point.  Returns null if no nearby open location is available.
     getOpenMassDroppedLocation: function( position ) {
+      var thisPlank = this;
       var closestOpenLocation = null;
-      var candidateOpenLocations = this.getSnapToLocations();
+      var validMassLocations = this.getSnapToLocations();
       if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
         // Remove the location at the center of the plank from the set of
         // candidates, since we don't want to allow users to place things
         // there.
-        candidateOpenLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 );
+        validMassLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 );
       }
+
+      var candidateOpenLocations = [];
+
+      validMassLocations.forEach( function( validLocation ) {
+        var occupiedOrTooFar = false;
+        if ( Math.abs( validLocation.x - position.x ) > INTER_SNAP_TO_MARKER_DISTANCE * 2 ) {
+          occupiedOrTooFar = true;
+        }
+        for ( var i = 0; i < thisPlank.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
+          if ( thisPlank.massesOnSurface.get( i ).position.distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+            occupiedOrTooFar = true;
+          }
+        }
+        if ( !occupiedOrTooFar ) {
+          candidateOpenLocations.push( validLocation );
+        }
+      } );
 
       // Sort through the locations and eliminate those that are already
       // occupied or too far away.
