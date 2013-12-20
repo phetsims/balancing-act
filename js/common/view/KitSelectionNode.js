@@ -97,6 +97,7 @@ define( function( require ) {
     } );
 
     // Set up the timer and function that will animate the carousel position.
+    // TODO: Consider an animation using the tweening lib if we've decided on one by the time we publish.
     var motionVelocity = thisNode.background.width / SLOT_CHANGE_TIME;
     thisNode.kitLayerTargetX = thisNode.kitLayer.x;
     Timer.addStepListener( function( dt ) {
