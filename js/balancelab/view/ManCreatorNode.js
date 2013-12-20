@@ -31,7 +31,7 @@ define( function( require ) {
    */
   function ManCreatorNode( model, mvt ) {
     ImageMassCreatorNode.call( this, model, mvt, new Man(), true );
-    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, new Property( false ), false ) );
+    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
   }
 

@@ -24,8 +24,8 @@ define( function( require ) {
    * @param {Property} massLabelVisibleProperty
    * @constructor
    */
-  function MysteryMassNode( mass, mvt, massLabelVisibleProperty, draggable ) {
-    ImageMassNode.call( this, mass, mvt, massLabelVisibleProperty, draggable );
+  function MysteryMassNode( mass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
+    ImageMassNode.call( this, mass, mvt, isLabeled, massLabelVisibleProperty, draggable );
     var thisNode = this;
     var inset = thisNode.imageNode.width * INSET_PROPORTION;
 

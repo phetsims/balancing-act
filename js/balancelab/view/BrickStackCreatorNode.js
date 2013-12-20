@@ -35,7 +35,7 @@ define( function( require ) {
     MassCreatorNode.call( this, model, mvt, numBricks * BrickStack.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
-    this.setSelectionNode( new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, new Property( false ) ) );
+    this.setSelectionNode( new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false ) );
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
   }
 

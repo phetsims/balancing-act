@@ -26,7 +26,7 @@ define( function( require ) {
 
   function MysteryMassCreatorNode( mysteryMassID, model, mvt ) {
     ImageMassCreatorNode.call( this, model, mvt, new MysteryMass( Vector2.ZERO, mysteryMassID ), false );
-    this.setSelectionNode( new MysteryMassNode( this.prototypeImageMass, SCALING_MVT, new Property( false ), false ) );
+    this.setSelectionNode( new MysteryMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
   }
 

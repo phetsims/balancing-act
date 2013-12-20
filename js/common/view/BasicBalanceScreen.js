@@ -107,7 +107,7 @@ define( function( require ) {
 
     function handleMassAdded( addedMass ) {
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, thisScreen.viewProperties.massLabelsVisibleProperty );
+      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, thisScreen.viewProperties.massLabelsVisibleProperty );
       massesLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.

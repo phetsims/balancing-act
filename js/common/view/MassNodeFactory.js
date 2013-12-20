@@ -22,16 +22,16 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   return{
-    createMassNode: function( mass, mvt, labelVisibleProperty ) {
+    createMassNode: function( mass, mvt, isLabeled, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof MysteryMass ) {
-        massNode = new MysteryMassNode( mass, mvt, labelVisibleProperty, true );
+        massNode = new MysteryMassNode( mass, mvt, isLabeled, labelVisibleProperty, true );
       }
       else if ( mass instanceof ImageMass ) {
-        massNode = new ImageMassNode( mass, mvt, labelVisibleProperty, true );
+        massNode = new ImageMassNode( mass, mvt, isLabeled, labelVisibleProperty, true );
       }
       else if ( mass instanceof BrickStack ) {
-        massNode = new BrickStackNode( mass, mvt, labelVisibleProperty, true );
+        massNode = new BrickStackNode( mass, mvt, isLabeled, labelVisibleProperty, true );
       }
       else {
         console.log( "Error: Unrecognized mass type sent to MassNodeFactory." );

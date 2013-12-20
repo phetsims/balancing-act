@@ -35,19 +35,21 @@ define( function( require ) {
    */
   var Vector2 = require( 'DOT/Vector2' );
 
-  function ImageMassNode( imageMass, mvt, massLabelVisibleProperty, draggable ) {
+  function ImageMassNode( imageMass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;
 
-    // Add the mass indicator label.  Note that it is positioned elsewhere.
-    var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
-    var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
-    thisNode.addChild( massLabel );
+    if ( isLabeled ) {
+      // Add the mass indicator label.  Note that it is positioned elsewhere.
+      var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
+      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
+      thisNode.addChild( massLabel );
 
-    // Observe changes to mass indicator label visibility.
-    massLabelVisibleProperty.link( function( visible ) {
-      massLabel.visible = visible;
-    } );
+      // Observe changes to mass indicator label visibility.
+      massLabelVisibleProperty.link( function( visible ) {
+        massLabel.visible = visible;
+      } );
+    }
 
     // Add a rectangle that will be used as a reference when performing layout out this node.
     // TODO: This approach is a bit crude.  When rest of sim working, look into alternatives, or at least making it smaller.
@@ -79,8 +81,10 @@ define( function( require ) {
       imageNode.scale( scalingFactor );
       imageNode.centerX = referenceRect.centerX;
       imageNode.bottom = referenceRect.bottom;
-      massLabel.centerX = referenceRect.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
-      massLabel.bottom = imageNode.top;
+      if ( isLabeled ) {
+        massLabel.centerX = referenceRect.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+        massLabel.bottom = imageNode.top;
+      }
       updatePositionAndAngle();
     } );
 

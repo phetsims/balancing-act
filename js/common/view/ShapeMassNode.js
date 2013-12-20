@@ -26,11 +26,12 @@ define( function( require ) {
    * @param {Mass} mass
    * @param {ModelViewTransform2} mvt
    * @param {color} fillColor
+   * @param {boolean} isLabeled
    * @param {Property} labelVisibleProperty
    * @param {boolean} draggable
    * @constructor
    */
-  function ShapeMassNode( mass, mvt, fillColor, labelVisibleProperty, draggable ) {
+  function ShapeMassNode( mass, mvt, fillColor, isLabeled, labelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
     var thisNode = this;
     thisNode.mass = mass;
@@ -41,14 +42,16 @@ define( function( require ) {
     thisNode.addChild( shapeNode );
 
     // Create and add the mass label.
-    var massLabelText = mass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, mass.massValue, kgString );
-    var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), centerX: shapeNode.centerX, bottom: shapeNode.top } );
-    thisNode.addChild( massLabel );
+    if ( isLabeled ) {
+      var massLabelText = mass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, mass.massValue, kgString );
+      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), centerX: shapeNode.centerX, bottom: shapeNode.top } );
+      thisNode.addChild( massLabel );
 
-    // Control label visibility.
-    labelVisibleProperty.link( function( visible ) {
-      massLabel.visible = visible;
-    } );
+      // Control label visibility.
+      labelVisibleProperty.link( function( visible ) {
+        massLabel.visible = visible;
+      } );
+    }
 
     // TODO: Monitoring of dynamic shape changes was here in the original Java version, removed in JavaScript
     // because I (jblanco) don't think it's needed.  Remove this comment once this is certain.
