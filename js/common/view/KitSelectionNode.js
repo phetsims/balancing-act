@@ -16,6 +16,10 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
+  var Timer = require( 'JOIST/Timer' );
+
+  // Constants
+  var SLOT_CHANGE_TIME = 0.35; // In seconds
 
   /**
    * @param {Property} selectedKit
@@ -92,13 +96,28 @@ define( function( require ) {
       thisNode.scrollTo( kit );
     } );
 
+    // Set up the timer and function that will animate the carousel position.
+    var motionVelocity = thisNode.background.width / SLOT_CHANGE_TIME;
+    thisNode.kitLayerTargetX = thisNode.kitLayer.x;
+    Timer.addStepListener( function( dt ) {
+      if ( thisNode.kitLayer.x !== thisNode.kitLayerTargetX ) {
+        var dx = dt * motionVelocity * ( thisNode.kitLayerTargetX < thisNode.kitLayer.x ? -1 : 1 );
+        if ( Math.abs( thisNode.kitLayer.x - thisNode.kitLayerTargetX ) <= Math.abs( dx ) ) {
+          thisNode.kitLayer.x = thisNode.kitLayerTargetX;
+        }
+        else {
+          thisNode.kitLayer.x += dx;
+        }
+      }
+    } );
+
     // Pass through any options intended for Node.
     thisNode.mutate( options );
   }
 
   return inherit( Node, KitSelectionNode, {
     scrollTo: function( kitNumber ) {
-      this.kitLayer.x = -kitNumber * this.background.width;
+      this.kitLayerTargetX = -kitNumber * this.background.width;
     }
   } );
 } );
