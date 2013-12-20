@@ -21,7 +21,7 @@ define( function( require ) {
 
   // Constants
   var CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
-  var LABEL_FONT = new PhetFont( 16 );
+  var LABEL_FONT = new PhetFont( 14 );
 
   /**
    * @param {BalanceModel} model
@@ -117,7 +117,7 @@ define( function( require ) {
 
     setCaption: function( captionText ) {
       // TODO: Note to self made during port: Why isn't this handled in the constructor?
-      this.caption = new Text( '', { font: LABEL_FONT } );
+      this.caption = new Text( captionText, { font: LABEL_FONT } );
       this.addChild( this.caption );
       this.updateLayout();
     },
