@@ -75,8 +75,9 @@ define( function( require ) {
         kit.title.top = 0;
         thisNode.kitLayer.addChild( kit.title );
       }
+
       kit.content.centerX = x + thisNode.background.width / 2;
-      kit.content.top = kit.title.bottom;
+      kit.content.centerY = kit.title.bottom + maxKitContentSize.height / 2;
       thisNode.kitLayer.addChild( kit.content );
 
       // Move over to the next kit
