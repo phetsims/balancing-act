@@ -52,7 +52,7 @@ define( function( require ) {
                     spacing: 20
                   } )
               ],
-              spacing: 5
+              spacing: 20
             } )
         ]
       }
