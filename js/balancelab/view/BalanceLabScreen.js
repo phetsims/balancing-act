@@ -33,11 +33,12 @@ define( function( require ) {
     var Text = require( 'SCENERY/nodes/Text' );
 
     // Add the mass selection carousel.
+    this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.mvt );
     thisScreen.nonMassLayer.addChild( new Panel( new VBox(
       {
         children: [
           new HStrut( thisScreen.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
-          new MassKitSelectionNode( model, thisScreen.mvt ) ]
+          this.massKitSelectionNode ]
       } ),
       {
         centerX: thisScreen.controlPanelBounds.centerX,
@@ -47,6 +48,11 @@ define( function( require ) {
       } ) );
   }
 
-  return inherit( BasicBalanceScreen, BalanceLabScreen );
+  return inherit( BasicBalanceScreen, BalanceLabScreen, {
+    reset: function() {
+      this.massKitSelectionNode.reset();
+      BasicBalanceScreen.prototype.reset.call( this );
+    }
+  } );
 } );
 
