@@ -13,9 +13,12 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var RoundShinyButton = require( 'SCENERY_PHET/RoundShinyButton' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
 
   /**
    * @param {number} numKits
@@ -34,28 +37,35 @@ define( function( require ) {
         minButtonXSpace: 30
       }, options );
 
-    var arrowButtonOptions = {
-      arrowWidth: 10,
-      arrowHeight: 10,
-      fill: options.buttonColor,
+    var baseColor = new Color( 255, 204, 0 );
+    var buttonOptions = {
+      radius: 12,
+      upFill: baseColor,
+      overFill: baseColor.colorUtilsBrighter( 0.2 ),
+      disabledFill: new Color( 180, 180, 180 ),
+      downFill: baseColor.colorUtilsDarker( 0.2 ),
       xMargin: 5,
       yMargin: 3
     };
 
-    var nextKitButton = new ArrowButton( 'right', function() {
+    var iconOptions = { stroke: 'black', lineWidth: 3, lineCap: 'round' };
+    var nextIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( 5, 5 ).lineTo( 0, 10 ), iconOptions );
+    var previousIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( -5, 5 ).lineTo( 0, 10 ), iconOptions );
+
+    var nextKitButton = new RoundShinyButton( function() {
       selectedKit.value = selectedKit.value + 1;
-    }, arrowButtonOptions );
+    }, nextIcon, _.extend( { iconOffsetX: 1 }, buttonOptions ) );
     this.addChild( nextKitButton );
 
-    var previousKitButton = new ArrowButton( 'left', function() {
+    var previousKitButton = new RoundShinyButton( function() {
       selectedKit.value = selectedKit.value - 1;
-    }, arrowButtonOptions );
+    }, previousIcon, _.extend( { iconOffsetX: -1 }, buttonOptions ) );
     this.addChild( previousKitButton );
 
     // Control button enabled state
     selectedKit.link( function( kitNum ) {
-      nextKitButton.setEnabled( kitNum < numKits - 1 );
-      previousKitButton.setEnabled( kitNum != 0 );
+      nextKitButton.enabled = ( kitNum < numKits - 1 );
+      previousKitButton.enabled = ( kitNum != 0 );
     } );
 
     // Layout

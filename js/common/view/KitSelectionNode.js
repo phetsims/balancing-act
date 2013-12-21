@@ -52,7 +52,7 @@ define( function( require ) {
       maxKitTitleSize.height = Math.max( maxKitTitleSize.height, kit.title.height );
     } );
 
-    var controlNode = new KitControlNode( kits.length, selectedKit, { titleNode: options.titleNode } );
+    var controlNode = new KitControlNode( kits.length, selectedKit, { titleNode: options.titleNode, minButtonXSpace: 70 } );
 
     // Construct and add the background.  Make it big enough to hold the largest kit.
     thisNode.background = new Rectangle( 0, 0, Math.max( Math.max( maxKitContentSize.width, maxKitTitleSize.width ), controlNode.width ),
@@ -90,7 +90,7 @@ define( function( require ) {
     // Add the remaining nodes.
     thisNode.kitLayer.top = controlNode.height;
     thisNode.addChild( thisNode.kitLayer );
-    thisNode.addChild( controlNode.mutate( { centerX: this.background.width / 2 } ) );
+    thisNode.addChild( controlNode.mutate( { top: 0, centerX: this.background.width / 2 } ) );
 
     // Set up an observer to set visibility of the selected kit.
     selectedKit.link( function( kit ) {
