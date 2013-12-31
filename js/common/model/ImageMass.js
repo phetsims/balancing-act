@@ -65,7 +65,7 @@ define( function( require ) {
     },
 
     createCopy: function() {
-      var copy = new ImageMass( this.massValue, this.image, this.height, this.position, this.isMystery );
+      return new ImageMass( this.massValue, this.image, this.height, this.position, this.isMystery );
     }
   } );
 } );

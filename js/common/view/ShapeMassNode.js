@@ -57,10 +57,10 @@ define( function( require ) {
     // because I (jblanco) don't think it's needed.  Remove this comment once this is certain.
 
     // Monitor the mass for position and angle changes.
-    mass.rotationAngleProperty.link( function( angle ) {
+    mass.rotationAngleProperty.link( function() {
       thisNode.updatePositionAndAngle();
     } );
-    mass.positionProperty.link( function( position ) {
+    mass.positionProperty.link( function() {
       thisNode.updatePositionAndAngle();
     } );
 

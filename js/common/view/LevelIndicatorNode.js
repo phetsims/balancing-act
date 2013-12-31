@@ -46,18 +46,17 @@ define( function( require ) {
         right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
         centerY: leftEdgeOfPlank.y
       } );
-    this.addChild( leftLevelIndicatorNode );
+    thisNode.addChild( leftLevelIndicatorNode );
 
     var reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
     var rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
-//    var rightIndicatorShape = leftIndicatorShape;
     var rightLevelIndicatorNode = new Path( rightIndicatorShape,
       {
         stroke: 'black',
         left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,
         centerY: rightEdgeOfPlank.y
       } );
-    this.addChild( rightLevelIndicatorNode );
+    thisNode.addChild( rightLevelIndicatorNode );
 
     //Highlight if the plank is level
     plank.tiltAngleProperty.link( function( tiltAngle ) {

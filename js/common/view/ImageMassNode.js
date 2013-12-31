@@ -23,7 +23,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Transform3 = require( 'DOT/Transform3' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   /**
@@ -58,7 +57,6 @@ define( function( require ) {
 
     var imageNode = new Image( defaultImage );
     // Observe image changes.
-    var horizontalFlipTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
     imageMass.imageProperty.link( function( image ) {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );

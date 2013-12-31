@@ -100,7 +100,7 @@ define( function( require ) {
      *
      * @param position
      */
-    addElementToModel: function( position ) {
+    addElementToModel: function() {
       console.log( 'addElementToModel should be implemented in descendant classes.' );
     },
 

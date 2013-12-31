@@ -3,7 +3,7 @@
 /**
  * Shared constants for the Balancing Act simulation.
  */
-define( function( require ) {
+define( function() {
   'use strict';
 
   return {

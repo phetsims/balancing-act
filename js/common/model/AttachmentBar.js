@@ -52,7 +52,7 @@ define( function( require ) {
       } );
 
     // Update the shape whenever the plank's tilt angle changes.
-    plank.bottomCenterLocationProperty.link( function( location ) {
+    plank.bottomCenterLocationProperty.link( function() {
       thisAttachmentBar.shape = generateBarShape( thisAttachmentBar.plank );
     } );
   }

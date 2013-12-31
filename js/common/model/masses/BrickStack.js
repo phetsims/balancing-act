@@ -14,7 +14,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Shape = require( 'KITE/Shape' );
   var ShapeMass = require( 'BALANCING_ACT/common/model/ShapeMass' );
-  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants

@@ -62,7 +62,7 @@ define( function( require ) {
       // Add a listener that will update the list of user controlled masses
       // that are used by the plank so set the active drop locations.
       var userControlledMassesUpdater = function( userControlled ) {
-        if ( mass.userControlled ) {
+        if ( userControlled ) {
           thisNode.userControlledMasses.push( mass );
         }
         else {

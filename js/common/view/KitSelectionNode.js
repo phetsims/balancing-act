@@ -66,7 +66,6 @@ define( function( require ) {
 
     // Add the kits to the kit layer, spacing them out so they don't overlap.
     var x = 0;
-    var availableSpaceForContentNode = thisNode.background.height - maxKitTitleSize.height;
     kits.forEach( function( kit ) {
       // Put the title centered at the top and the content node centered in the
       // available space beneath.

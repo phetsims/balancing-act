@@ -18,7 +18,6 @@ define( function( require ) {
   var MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
   var MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var ShapeMass = require( 'BALANCING_ACT/common/model/ShapeMass' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   return{

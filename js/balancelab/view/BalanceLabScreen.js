@@ -11,11 +11,8 @@ define( function( require ) {
   var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
   var HStrut = require( 'BALANCING_ACT/common/view/HStrut' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
   var PANEL_X_MARGIN = 5;
@@ -27,10 +24,6 @@ define( function( require ) {
   function BalanceLabScreen( model ) {
     BasicBalanceScreen.call( this, model );
     var thisScreen = this;
-
-    var KitControlNode = require( 'BALANCING_ACT/common/view/KitControlNode' );
-    var Property = require( 'AXON/Property' );
-    var Text = require( 'SCENERY/nodes/Text' );
 
     // Add the mass selection carousel.
     this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.mvt );

@@ -14,11 +14,9 @@ define( function( require ) {
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // Strings & Images
   var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );

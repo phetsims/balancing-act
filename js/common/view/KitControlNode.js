@@ -65,7 +65,7 @@ define( function( require ) {
     // Control button enabled state
     selectedKit.link( function( kitNum ) {
       nextKitButton.enabled = ( kitNum < numKits - 1 );
-      previousKitButton.enabled = ( kitNum != 0 );
+      previousKitButton.enabled = ( kitNum !== 0 );
     } );
 
     // Layout
