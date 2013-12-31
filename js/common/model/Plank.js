@@ -188,12 +188,13 @@ define( function( require ) {
         }
       } );
       var copyOfActiveDropLocations = thisPlank.activeDropLocations.getArray().slice( 0 );
+      // Remove newly inactive drop locations.
       copyOfActiveDropLocations.forEach( function( activeDropLocation ) {
         if ( tempDropLocations.indexOf( activeDropLocation ) < 0 ) {
           thisPlank.activeDropLocations.remove( activeDropLocation );
         }
       } );
-      // Add any new drop locations.
+      // Add any new active drop locations.
       tempDropLocations.forEach( function( dropLocation ) {
         if ( !thisPlank.activeDropLocations.contains( dropLocation ) ) {
           thisPlank.activeDropLocations.add( dropLocation );
@@ -380,13 +381,6 @@ define( function( require ) {
         }
       } );
       return closestOpenLocation;
-    },
-
-    // Update the active drop locations, which are the location where masses
-    // that are currently in the model but not on the plank will end up if
-    // dropped.
-    updateActiveDropLocations: function( userControlledMassList ) {
-      console.log( 'updating active drop locations' );
     },
 
     /**
