@@ -37,6 +37,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
+  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var positionString = require( 'string!BALANCING_ACT/position' );
   var Property = require( 'AXON/Property' );
@@ -232,26 +233,11 @@ define( function( require ) {
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
-      { node: new Text( noneString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'none', label: noneString },
-      { node: new Text( rulersString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'rulers', label: rulersString },
-      { node: new Text( marksString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.positionMarkerStateProperty, value: 'marks', label: marksString }
-    ], { radius: 8 } );
-    var positionMarkerVBox = new VBox( {
-      children: [
-        new Text( positionString, PANEL_TITLE_FONT ),
-        new VStrut( titleToControlsVerticalSpace ),
-        new HStrut( indicatorVisibilityControlPanel.width - 2 * X_MARGIN_IN_PANELS ),
-        new HBox( { children: [ new HStrut( 10 ), positionMarkerRadioButtons ] } )
-      ],
-      align: 'left'
-    } );
-    var positionIndicatorControlPanel = new Panel( positionMarkerVBox,
+    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( thisScreen.viewProperties.positionMarkerStateProperty,
       {
-        xMargin: X_MARGIN_IN_PANELS,
-        fill: 'rgb( 240, 240, 240 )',
         left: indicatorVisibilityControlPanel.left,
-        top: indicatorVisibilityControlPanel.bottom + 5
+        top: indicatorVisibilityControlPanel.bottom + 5,
+        minWidth: indicatorVisibilityControlPanel.width
       } );
     thisScreen.nonMassLayer.addChild( positionIndicatorControlPanel );
 

@@ -27,7 +27,7 @@ define( function( require ) {
   /**
    * @param {Plank} plank
    * @param {ModelViewTransform2} mvt model-view transform
-   * @param {Property} visibleProperty
+   * @param {Property} visibleProperty TODO: It's a bit odd to control visibility this way, but that's how it was done in Java version. Consider refactoring when port is complete.  Would simplify some things.
    * @constructor
    */
   function RotatingRulerNode( plank, mvt, visibleProperty ) {
