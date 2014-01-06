@@ -10,6 +10,7 @@ define( function( require ) {
 
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  var Color = require( 'SCENERY/util/Color' );
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
@@ -29,9 +30,10 @@ define( function( require ) {
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
-  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/common/view/TiltPredictionSelectorNode' );
+  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Strings
@@ -114,7 +116,25 @@ define( function( require ) {
     } );
 
     // Create and add the game settings node.
-    var startGameLevelNode = new StartGameLevelNode( gameModel, thisScreen.layoutBounds );
+    // TODO: Temp for testing --------------
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    this.addChild( new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'pink' } ) );
+    // End of temp for testing --------------
+
+    var startGameLevelNode = new StartGameLevelNode(
+      function( level ) { gameModel.startLevel( level ) },
+      function() { gameModel.reset() },
+      gameModel.timerEnabledProperty,
+      gameModel.soundEnabledProperty,
+      [
+        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'pink' } ),
+        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'red' } ),
+        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'orange' } ),
+        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'blue' } )
+      ],
+      gameModel.bestScores,
+      {}
+    );
     root.addChild( startGameLevelNode );
 
     // Hook up the audio player to the sound settings.

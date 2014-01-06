@@ -10,6 +10,8 @@ define( function( require ) {
   var BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
   var BAIntroScreen = require( 'BALANCING_ACT/intro/view/BAIntroScreen' );
   var BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
+  var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
+  var BalanceGameScreen = require( 'BALANCING_ACT/game/view/BalanceGameScreen' );
   var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/view/BalanceLabScreen' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
@@ -46,8 +48,8 @@ define( function( require ) {
         function( model ) {return new BalanceLabScreen( model );}
       ),
       new Screen( gameString, new Image( thirdTabIcon ),
-        function() {return new BalanceModel();},
-        function( model ) {return new BasicBalanceScreen( model );}
+        function() {return new BalanceGameModel();},
+        function( model ) {return new BalanceGameScreen( model );}
       )
     ], simOptions ).start();
   } );
