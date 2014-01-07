@@ -27,12 +27,14 @@ define( function( require ) {
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+  var Property = require( 'AXON/Property' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
+  var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
   var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -45,6 +47,7 @@ define( function( require ) {
   // Constants
   var BUTTON_FONT = new PhetFont( 24 );
   var BUTTON_FILL = new Color( 0, 255, 153 );
+  var POINT_TEXT_OPTIONS = { font: new PhetFont( { size: 20, weight: 'bold' } ) };
 
   /**
    * @param {BalanceGameModel} model
@@ -84,9 +87,9 @@ define( function( require ) {
 
     // Add the fulcrum, the columns, etc.
     thisScreen.challengeLayer.addChild( new FulcrumNode( mvt, gameModel.fulcrum ) );
-    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode( mvt, gameModel.getTiltSupportColumn(), gameModel.supportColumnState ) );
-    gameModel.levelSupportColumns.foreach( function( levelSupportColumn ) {
-      thisScreen.challengeLayer.addChild( new LevelSupportColumnNode( mvt, levelSupportColumn, gameModel.supportColumnState, false ) );
+    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode( mvt, gameModel.tiltedSupportColumn, gameModel.columnState ) );
+    gameModel.levelSupportColumns.forEach( function( levelSupportColumn ) {
+      thisScreen.challengeLayer.addChild( new LevelSupportColumnNode( mvt, levelSupportColumn, gameModel.columnStateProperty, false ) );
     } );
     thisScreen.challengeLayer.addChild( new PlankNode( mvt, gameModel.plank ) );
     thisScreen.challengeLayer.addChild( new AttachmentBarNode( mvt, gameModel.attachmentBar ) );
@@ -142,7 +145,7 @@ define( function( require ) {
 
     // Create and add the game scoreboard.
     var scoreboard = new Scoreboard(
-      gameModel.problemIndexProperty,
+      gameModel.challengeIndexProperty,
       new Property( gameModel.PROBLEMS_PER_LEVEL ),
       gameModel.levelProperty,
       gameModel.scoreProperty,
@@ -162,7 +165,7 @@ define( function( require ) {
         stroke: 'black',
         lineWidth: 1
       } );
-    updateTitle();
+    thisScreen.updateTitle();
     root.addChild( thisScreen.challengeTitleNode );
 
     // Add the dialog node that is used in the mass deduction challenges
@@ -176,7 +179,7 @@ define( function( require ) {
     root.addChild( thisScreen.massValueAnswerNode );
 
     // Position the mass entry and mass answer nodes in the same place.
-    var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds().maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
+    var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
     thisScreen.massValueEntryNode.center = massEntryDialogCenter;
     thisScreen.massValueAnswerNode.center = massEntryDialogCenter;
 
@@ -260,8 +263,8 @@ define( function( require ) {
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
     var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
-    gameModel.supportColumnState.link( function( supportColumnState ) {
-      levelIndicator.visible = supportColumnState === 'none';
+    gameModel.columnState.link( function( columnState ) {
+      levelIndicator.visible = columnState === 'none';
     } );
     thisScreen.challengeLayer.addChild( levelIndicator );
 
@@ -273,14 +276,14 @@ define( function( require ) {
     positionMarkerState.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.challengeLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
+    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
     positionMarkerState.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
-    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
+    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
