@@ -9,10 +9,12 @@ define( function( require ) {
   // Imports
   var levelString = require( 'string!BALANCING_ACT/level' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // TODO - Temp, remove eventually.
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -25,8 +27,11 @@ define( function( require ) {
     Node.call( this );
     var title = new Text( levelString + ' ' + levelNumber, { font: FONT } );
     this.addChild( title );
-    var imageNode = new Rectangle( 0, 0, IMAGE_SIZE.width, IMAGE_SIZE.height, 0, 0, { top: title.bottom + 5, fill: 'red' } );
+    var imageNode = new Image( image );
+    imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
+    imageNode.top = title.bottom + 4;
     this.addChild( imageNode );
+
     if ( title.width > imageNode.width ) {
       imageNode.centerX = title.width / 2;
     }

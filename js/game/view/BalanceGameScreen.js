@@ -39,11 +39,15 @@ define( function( require ) {
   var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Strings
+  // Images and Strings
   var checkString = require( 'string!VEGAS/check' );
-  var tryAgainString = require( 'string!VEGAS/tryAgain' );
-  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var gameLevel1Icon = require( 'image!BALANCING_ACT/game-level-1-icon.png' );
+  var gameLevel2Icon = require( 'image!BALANCING_ACT/game-level-2-icon.png' );
+  var gameLevel3Icon = require( 'image!BALANCING_ACT/game-level-3-icon.png' );
+  var gameLevel4Icon = require( 'image!BALANCING_ACT/game-level-4-icon.png' );
   var nextString = require( 'string!VEGAS/next' );
+  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // Constants
   var BUTTON_FONT = new PhetFont( 24 );
@@ -127,10 +131,10 @@ define( function( require ) {
       gameModel.timerEnabledProperty,
       gameModel.soundEnabledProperty,
       [
-        new GameIconNode( null, 1 ),
-        new GameIconNode( null, 2 ),
-        new GameIconNode( null, 3 ),
-        new GameIconNode( null, 4 )
+        new GameIconNode( gameLevel1Icon, 1 ),
+        new GameIconNode( gameLevel2Icon, 2 ),
+        new GameIconNode( gameLevel3Icon, 3 ),
+        new GameIconNode( gameLevel4Icon, 4 )
       ],
       gameModel.bestScores,
       {}
