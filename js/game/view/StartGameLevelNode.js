@@ -76,7 +76,7 @@ define( function( require ) {
     for ( var i = 0; i < options.numLevels; i++ ) {
       buttons[ i ] = new LevelStartButton(
         iconNodes[ i ],
-        options.numStarsOnButton,
+        options.numStarsOnButtons,
         createLevelStartFunction( i ),
         scores[ i ],
         options.perfectScore,
