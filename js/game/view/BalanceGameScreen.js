@@ -121,7 +121,6 @@ define( function( require ) {
     // Create and add the game settings node.
     // TODO: Temp for testing --------------
     var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    this.addChild( new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'pink' } ) );
     // End of temp for testing --------------
 
     var startGameLevelNode = new StartGameLevelNode(

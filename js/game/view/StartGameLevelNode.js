@@ -56,7 +56,7 @@ define( function( require ) {
       numButtonRows: 1, // For layout
       controlsInset: 20,
       size: new Dimension2( 768, 504 )
-    } );
+    }, options );
 
     // Verify parameters
     if ( iconNodes.length !== options.numLevels || scores.length !== options.numLevels ) {
@@ -102,12 +102,13 @@ define( function( require ) {
     this.addChild( resetButton );
 
     // Layout
-    var numColumns = options.numLevels / options.numRows;
+    var numColumns = options.numLevels / options.numButtonRows;
     var buttonSpacingX = buttons[0].width * 1.2; // Note: Assumes all buttons are the same size.
     var buttonSpacingY = buttons[0].height * 1.2;  // Note: Assumes all buttons are the same size.
-    var firstButtonOrigin = new Vector2( ( options.size.width / 2 - ( numColumns - 1 ) * buttonSpacingX ) / 2,
-      options.size.height * 0.45 - ( ( options.numRows - 1 ) * buttonSpacingY ) / 2 );
-    for ( var row = 0; row < options.numRows; row++ ) {
+    var firstButtonOrigin = new Vector2( options.size.width / 2 - ( numColumns - 1 ) * buttonSpacingX / 2,
+      options.size.height * 0.45 - ( ( options.numButtonRows - 1 ) * buttonSpacingY ) / 2 );
+    debugger;
+    for ( var row = 0; row < options.numButtonRows; row++ ) {
       for ( var col = 0; col < numColumns; col++ ) {
         var buttonIndex = row * numColumns + col;
         buttons[ buttonIndex ].centerX = firstButtonOrigin.x + col * buttonSpacingX;
