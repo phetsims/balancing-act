@@ -14,6 +14,7 @@ define( function( require ) {
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+  var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
@@ -119,11 +120,6 @@ define( function( require ) {
       } );
     } );
 
-    // Create and add the game settings node.
-    // TODO: Temp for testing --------------
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    // End of temp for testing --------------
-
     // Add the node that allows the user to choose a game level to play.
     thisScreen.startGameLevelNode = new StartGameLevelNode(
       function( level ) { gameModel.startLevel( level ) },
@@ -131,10 +127,10 @@ define( function( require ) {
       gameModel.timerEnabledProperty,
       gameModel.soundEnabledProperty,
       [
-        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'pink' } ),
-        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'red' } ),
-        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'orange' } ),
-        new Rectangle( 0, 0, 100, 100, 0, 0, { fill: 'blue' } )
+        new GameIconNode( null, 1 ),
+        new GameIconNode( null, 2 ),
+        new GameIconNode( null, 3 ),
+        new GameIconNode( null, 4 )
       ],
       gameModel.bestScores,
       {}
