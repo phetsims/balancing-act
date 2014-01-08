@@ -71,19 +71,20 @@ define( function( require ) {
 
     // Create a root node and send to back so that the layout bounds box can
     // be made visible if needed.
-    var root = new Node();
-    thisScreen.addChild( root );
-    root.moveToBack();
+    thisScreen.root = new Node();
+    thisScreen.addChild( thisScreen.root );
+    thisScreen.root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    root.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
+    thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( mvt, 3, -1 );
+    thisScreen.root.addChild( thisScreen.outsideBackgroundNode );
 
     // Add layers used to control game appearance.
     // TODO: controlLayer and challengeLayer may not need to be on the object, i.e. can possibly be made local.
     thisScreen.controlLayer = new Node();
-    thisScreen.addChild( thisScreen.controlLayer );
+    thisScreen.root.addChild( thisScreen.controlLayer );
     thisScreen.challengeLayer = new Node();
-    thisScreen.addChild( thisScreen.challengeLayer );
+    thisScreen.root.addChild( thisScreen.challengeLayer );
 
     // Add the fulcrum, the columns, etc.
     thisScreen.challengeLayer.addChild( new FulcrumNode( mvt, gameModel.fulcrum ) );
@@ -123,7 +124,8 @@ define( function( require ) {
     var Rectangle = require( 'SCENERY/nodes/Rectangle' );
     // End of temp for testing --------------
 
-    var startGameLevelNode = new StartGameLevelNode(
+    // Add the node that allows the user to choose a game level to play.
+    thisScreen.startGameLevelNode = new StartGameLevelNode(
       function( level ) { gameModel.startLevel( level ) },
       function() { gameModel.reset() },
       gameModel.timerEnabledProperty,
@@ -137,7 +139,10 @@ define( function( require ) {
       gameModel.bestScores,
       {}
     );
-    root.addChild( startGameLevelNode );
+    thisScreen.root.addChild( thisScreen.startGameLevelNode );
+
+    // Initialize a reference to the 'level completed' node.
+    thisScreen.levelCompletedNode = null;
 
     // Hook up the audio player to the sound settings.
     var gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
@@ -165,17 +170,17 @@ define( function( require ) {
         lineWidth: 1
       } );
     thisScreen.updateTitle();
-    root.addChild( thisScreen.challengeTitleNode );
+    thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
     thisScreen.massValueEntryNode = new MassValueEntryNode( gameModel, this );
-    root.addChild( thisScreen.massValueEntryNode );
+    thisScreen.root.addChild( thisScreen.massValueEntryNode );
 
     // Add the node that is used to depict the correct answer for the
     // mass deduction challenges.
     thisScreen.massValueAnswerNode = new MassValueAnswerNode( gameModel, this );
-    root.addChild( thisScreen.massValueAnswerNode );
+    thisScreen.root.addChild( thisScreen.massValueAnswerNode );
 
     // Position the mass entry and mass answer nodes in the same place.
     var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
@@ -185,7 +190,7 @@ define( function( require ) {
     // Add the node that allows the user to submit their prediction of which
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
-    root.addChild( thisScreen.tiltPredictionSelectorNode );
+    thisScreen.root.addChild( thisScreen.tiltPredictionSelectorNode );
     thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
     // Add smile/frown face node used to signal correct/incorrect answers.
@@ -199,31 +204,31 @@ define( function( require ) {
     // Add and lay out the buttons.
     thisScreen.buttons = [];
     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-      listener: function() { model.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
+      listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.addChild( thisScreen.checkAnswerButton );
+    thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
     thisScreen.buttons.push( thisScreen.checkAnswerButton );
 
     thisScreen.nextButton = new TextPushButton( nextString, {
       listener: function() { gameModel.nextChallenge(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.addChild( thisScreen.nextButton );
+    thisScreen.challengeLayer.addChild( thisScreen.nextButton );
     thisScreen.buttons.push( thisScreen.nextButton );
 
     thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
       listener: function() { gameModel.tryAgain(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.addChild( thisScreen.tryAgainButton );
+    thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
     thisScreen.buttons.push( thisScreen.tryAgainButton );
 
     thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
       listener: function() { gameModel.displayCorrectAnswer(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.addChild( thisScreen.displayCorrectAnswerButton );
+    thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
     thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
 
     // Add listeners that control the enabled state of the check answer button.
@@ -257,7 +262,7 @@ define( function( require ) {
     };
 
     // Register for changes to the game state and update accordingly.
-    gameModel.gameStateProperty.link( thisScreen.handleGameStateChange );
+    gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
 
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
@@ -306,12 +311,53 @@ define( function( require ) {
 
     // When the game state changes, update the view with the appropriate
     // buttons and readouts.
-    handleGameStateChange: function() {
-      // TODO
+    handleGameStateChange: function( gameState ) {
+
+      // Hide all nodes - the appropriate ones will be shown later based on
+      // the current state.
+      this.hideAllGameNodes();
+
+      // Show the nodes appropriate to the state
+      switch( gameState ) {
+        case 'choosingLevel':
+          this.startGameLevelNode.visible = true;
+          this.hideChallenge();
+          if ( this.levelCompletedNode !== null ) {
+            this.root.removeChild( this.levelCompletedNode );
+            this.levelCompletedNode = null;
+          }
+          break;
+
+        case 'presentingInteractiveChallenge':
+          break;
+
+        case 'showingCorrectAnswerFeedback':
+          break;
+
+        case 'showingIncorrectAnswerFeedbackTryAgain':
+          break;
+
+        case 'showingIncorrectAnswerFeedbackMoveOn':
+          break;
+
+        case 'displayingCorrectAnswer':
+          break;
+
+        case 'showingGameResults':
+          break;
+
+        default:
+          throw new Error( 'Unhandled game state' );
+      }
+
+
     },
 
+    // Utility method for hiding all of the game nodes whose visibility changes
+    // during the course of a challenge.
     hideAllGameNodes: function() {
-      // TODO
+      this.outsideBackgroundNode.visible = false;
+      this.challengeLayer.visible = false; // TODO: Java version had finer resolution (i.e. hide fulcrum, plank, etc).  May eventually need that here.
     },
 
     show: function() {
@@ -324,6 +370,8 @@ define( function( require ) {
 
     hideChallenge: function( visible ) {
       // TODO
+      this.challengeLayer.visible = false;
+      this.controlLayer.visible = false;
     },
 
     // Show the graphic model elements for this challenge, i.e. the plank,

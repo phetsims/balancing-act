@@ -42,7 +42,7 @@ define( function( require ) {
         level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
         challengeIndex: 0,
         score: 0,
-        gameState: 'obtainingGameSetup',
+        gameState: 'choosingLevel',
         columnState: 'singleColumns', // Valid values are none, singleColumn, doubleColumns
         elapsedTime: 0
       } );

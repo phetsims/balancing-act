@@ -107,7 +107,6 @@ define( function( require ) {
     var buttonSpacingY = buttons[0].height * 1.2;  // Note: Assumes all buttons are the same size.
     var firstButtonOrigin = new Vector2( options.size.width / 2 - ( numColumns - 1 ) * buttonSpacingX / 2,
       options.size.height * 0.45 - ( ( options.numButtonRows - 1 ) * buttonSpacingY ) / 2 );
-    debugger;
     for ( var row = 0; row < options.numButtonRows; row++ ) {
       for ( var col = 0; col < numColumns; col++ ) {
         var buttonIndex = row * numColumns + col;
