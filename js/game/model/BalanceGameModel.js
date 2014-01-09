@@ -59,8 +59,8 @@ define( function( require ) {
     } );
 
     // Counters used to track progress on the game.
-    var challengeCount = 0;
-    var incorrectGuessesOnCurrentChallenge = 0;
+    this.challengeCount = 0;
+    this.incorrectGuessesOnCurrentChallenge = 0;
 
     // Current set of challenges, which collectively comprise a single level, on
     // which the user is currently working.
@@ -107,9 +107,76 @@ define( function( require ) {
           mass.step( dt );
         } );
       },
+
       reset: function() {
         // TODO
       },
+
+      startLevel: function( level ) {
+        this.level = level;
+        this.score = 0;
+        this.challengeIndex = 0;
+        this.elapsedTime = 0;
+
+        // Set up the challenges.
+        // TODO: uncomment and make work
+//        this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
+
+        // Set up the model for the next challenge
+        // TODO: Uncomment and make work
+        // this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
+
+        // Change to new game state.
+        this.gameState = 'presentingInteractiveChallenge';
+      },
+
+      setChallenge: function( balanceChallenge, columnState ) {
+
+        var thisModel = this;
+
+        // Clear out the previous challenge (if there was one).  Start by
+        // resetting the plank.
+        thisModel.plank.removeAllMasses();
+
+        // Force the plank to be level and still.  This prevents any floating
+        // point inaccuracies when adding masses.
+        thisModel.columnState = 'doubleColumns';
+
+        // Clear out the masses from the previous challenge.
+        thisModel.fixedMasses.clear();
+        thisModel.movableMasses.clear();
+
+        // Set up the new challenge.
+        balanceChallenge.fixedMassDistancePairs.forEach( function( fixedMassDistancePair ) {
+          thisModel.fixedMasses.push( fixedMassDistancePair );
+          thisModel.plank.addMassToSurface( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
+        } );
+
+        balanceChallenge.movableMassDistancePairs.forEach( function( mass ) {
+          var initialPosition = new Vector2( 3, 0 );
+          mass.position = initialPosition;
+          mass.userControlled.link( function( userControlled ) {
+            if ( !userControlled ) {
+              // The user has dropped this mass.
+              if ( !thisModel.plank.addMassToSurface( mass ) ) {
+                // The attempt to add this mass to surface of plank failed,
+                // probably because the mass wasn't over the plank or there
+                // wasn't on open spot near where it was released.
+                mass.setPosition( initialPosition );
+              }
+            }
+          } );
+          thisModel.movableMasses.add( mass );
+        } );
+
+        // Set the column state.
+        thisModel.columnState = columnState;
+      },
+
+      setChoosingLevelState: function() {
+        this.gameState = 'choosingLevel';
+      },
+
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET
     } )
 } );

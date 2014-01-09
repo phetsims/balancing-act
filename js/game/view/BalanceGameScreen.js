@@ -162,7 +162,7 @@ define( function( require ) {
 
     // Add the title.  It is blank to start with, and is updated later at
     // the appropriate state change.
-    thisScreen.challengeTitleNode = new Text( "Blank",
+    thisScreen.challengeTitleNode = new Text( "Balance Me", // TODO: Set back to nothing when title updates working.
       {
         font: new PhetFont( 64, true ),
         fill: 'white',
@@ -172,131 +172,148 @@ define( function( require ) {
     thisScreen.updateTitle();
     thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
-    // Add the dialog node that is used in the mass deduction challenges
-    // to enable the user to submit specific mass values.
-    thisScreen.massValueEntryNode = new MassValueEntryNode( gameModel, this );
-    thisScreen.root.addChild( thisScreen.massValueEntryNode );
+    /*
 
-    // Add the node that is used to depict the correct answer for the
-    // mass deduction challenges.
-    thisScreen.massValueAnswerNode = new MassValueAnswerNode( gameModel, this );
-    thisScreen.root.addChild( thisScreen.massValueAnswerNode );
+     // TODO: Uncomment the various pieces below as the corresponding functionality is implemented.
 
-    // Position the mass entry and mass answer nodes in the same place.
-    var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
-    thisScreen.massValueEntryNode.center = massEntryDialogCenter;
-    thisScreen.massValueAnswerNode.center = massEntryDialogCenter;
+     // Add the dialog node that is used in the mass deduction challenges
+     // to enable the user to submit specific mass values.
+     thisScreen.massValueEntryNode = new MassValueEntryNode( gameModel, this );
+     thisScreen.root.addChild( thisScreen.massValueEntryNode );
 
-    // Add the node that allows the user to submit their prediction of which
-    // way the plank will tilt.  This is used in the tilt prediction challenges.
-    thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
-    thisScreen.root.addChild( thisScreen.tiltPredictionSelectorNode );
-    thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
+     // Add the node that is used to depict the correct answer for the
+     // mass deduction challenges.
+     thisScreen.massValueAnswerNode = new MassValueAnswerNode( gameModel, this );
+     thisScreen.root.addChild( thisScreen.massValueAnswerNode );
 
-    // Add smile/frown face node used to signal correct/incorrect answers.
-    thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4, { visible: false, opacity: 0.75 } );
-    thisScreen.pointDisplay = new Text( "+0", POINT_TEXT_OPTIONS );
-    thisScreen.pointDisplay.centerX = 0;
-    thisScreen.pointDisplay.top = thisScreen.faceNode.height / 2;
-    thisScreen.faceNode.addChild( thisScreen.pointDisplay );
-    thisScreen.addChild( thisScreen.faceNode );
+     // Position the mass entry and mass answer nodes in the same place.
+     var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
+     thisScreen.massValueEntryNode.center = massEntryDialogCenter;
+     thisScreen.massValueAnswerNode.center = massEntryDialogCenter;
 
-    // Add and lay out the buttons.
-    thisScreen.buttons = [];
-    thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-      listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
-      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-    } );
-    thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
-    thisScreen.buttons.push( thisScreen.checkAnswerButton );
+     // Add the node that allows the user to submit their prediction of which
+     // way the plank will tilt.  This is used in the tilt prediction challenges.
+     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
+     thisScreen.root.addChild( thisScreen.tiltPredictionSelectorNode );
+     thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
-    thisScreen.nextButton = new TextPushButton( nextString, {
-      listener: function() { gameModel.nextChallenge(); },
-      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-    } );
-    thisScreen.challengeLayer.addChild( thisScreen.nextButton );
-    thisScreen.buttons.push( thisScreen.nextButton );
+     // Add smile/frown face node used to signal correct/incorrect answers.
+     thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4, { visible: false, opacity: 0.75 } );
+     thisScreen.pointDisplay = new Text( "+0", POINT_TEXT_OPTIONS );
+     thisScreen.pointDisplay.centerX = 0;
+     thisScreen.pointDisplay.top = thisScreen.faceNode.height / 2;
+     thisScreen.faceNode.addChild( thisScreen.pointDisplay );
+     thisScreen.addChild( thisScreen.faceNode );
 
-    thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
-      listener: function() { gameModel.tryAgain(); },
-      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-    } );
-    thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
-    thisScreen.buttons.push( thisScreen.tryAgainButton );
+     // Add and lay out the buttons.
+     thisScreen.buttons = [];
+     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
+     listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
+     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+     } );
+     thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
+     thisScreen.buttons.push( thisScreen.checkAnswerButton );
 
-    thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
-      listener: function() { gameModel.displayCorrectAnswer(); },
-      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-    } );
-    thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
-    thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
+     thisScreen.nextButton = new TextPushButton( nextString, {
+     listener: function() { gameModel.nextChallenge(); },
+     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+     } );
+     thisScreen.challengeLayer.addChild( thisScreen.nextButton );
+     thisScreen.buttons.push( thisScreen.nextButton );
 
-    // Add listeners that control the enabled state of the check answer button.
-    gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled );
-    gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled );
-    thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled );
+     thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
+     listener: function() { gameModel.tryAgain(); },
+     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+     } );
+     thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
+     thisScreen.buttons.push( thisScreen.tryAgainButton );
 
-    // Add a key listener that will allow the user to essentially press the
-    // active button by pressing the Enter key.
-    // TODO: Brand new code, needs to be tested, debugged.
-    window.onkeyup = function( e ) {
-      var key = e.keyCode ? e.keyCode : e.which;
+     thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
+     listener: function() { gameModel.displayCorrectAnswer(); },
+     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+     } );
+     thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
+     thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
 
-      if ( key === 13 ) {
-        // The user pressed the Enter key.  If one of the game
-        // control buttons is currently active, treat it as though
-        // this button has been pressed.
-        if ( thisScreen.nextButton.visible && thisScreen.nextButton.enabled ) {
-          gameModel.nextChallenge();
-        }
-        else if ( thisScreen.tryAgainButton.visible && thisScreen.tryAgainButton.enabled ) {
-          gameModel.tryAgain();
-        }
-        else if ( thisScreen.checkAnswerButton.visible && thisScreen.checkAnswerButton.enabled ) {
-          gameModel.checkAnswer();
-        }
-        else if ( thisScreen.displayCorrectAnswerButton.visible && thisScreen.displayCorrectAnswerButton.enabled ) {
-          gameModel.displayCorrectAnswer();
-        }
-      }
-    };
+     // Add listeners that control the enabled state of the check answer button.
+     gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled );
+     gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled );
+     thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled );
+
+     // Add a key listener that will allow the user to essentially press the
+     // active button by pressing the Enter key.
+     // TODO: Brand new code, needs to be tested, debugged.
+     window.onkeyup = function( e ) {
+     var key = e.keyCode ? e.keyCode : e.which;
+
+     if ( key === 13 ) {
+     // The user pressed the Enter key.  If one of the game
+     // control buttons is currently active, treat it as though
+     // this button has been pressed.
+     if ( thisScreen.nextButton.visible && thisScreen.nextButton.enabled ) {
+     gameModel.nextChallenge();
+     }
+     else if ( thisScreen.tryAgainButton.visible && thisScreen.tryAgainButton.enabled ) {
+     gameModel.tryAgain();
+     }
+     else if ( thisScreen.checkAnswerButton.visible && thisScreen.checkAnswerButton.enabled ) {
+     gameModel.checkAnswer();
+     }
+     else if ( thisScreen.displayCorrectAnswerButton.visible && thisScreen.displayCorrectAnswerButton.enabled ) {
+     gameModel.displayCorrectAnswer();
+     }
+     }
+     };
+
+     */
 
     // Register for changes to the game state and update accordingly.
     gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
 
-    // Show the level indicator to help the user see if the plank is perfectly
-    // balanced, but only show it when the support column has been removed.
-    var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
-    gameModel.columnState.link( function( columnState ) {
-      levelIndicator.visible = columnState === 'none';
-    } );
-    thisScreen.challengeLayer.addChild( levelIndicator );
+    // TODO: Temp - add a button for returning to the main screen when a level is unimplemented.
+    thisScreen.challengeLayer.addChild( new TextPushButton( 'Unimplemented', {
+      listener: function() { gameModel.setChoosingLevelState() },
+      font: new PhetFont( 40 ),
+      rectangleFillUp: new Color( 255, 0, 0 ),
+      centerX: thisScreen.layoutBounds.width / 2,
+      centerY: thisScreen.layoutBounds.height / 2
+    } ) );
 
-    // Add a panel for controlling whether the ruler or marker set are visible.
-    var positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
+    /*
+     // Show the level indicator to help the user see if the plank is perfectly
+     // balanced, but only show it when the support column has been removed.
+     var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
+     gameModel.columnState.link( function( columnState ) {
+     levelIndicator.visible = columnState === 'none';
+     } );
+     thisScreen.challengeLayer.addChild( levelIndicator );
 
-    // Add the ruler.
-    var rulersVisible = new Property( false );
-    positionMarkerState.link( function( positionMarkerState ) {
-      rulersVisible.value = positionMarkerState === 'rulers';
-    } );
-    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
+     // Add a panel for controlling whether the ruler or marker set are visible.
+     var positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
 
-    // Add the position markers.
-    var positionMarkersVisible = new Property( false );
-    positionMarkerState.link( function( positionMarkerState ) {
-      positionMarkersVisible.value = positionMarkerState === 'marks';
-    } );
-    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
+     // Add the ruler.
+     var rulersVisible = new Property( false );
+     positionMarkerState.link( function( positionMarkerState ) {
+     rulersVisible.value = positionMarkerState === 'rulers';
+     } );
+     thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
 
-    // Add the control panel that will allow users to select between the
-    // various position markers, i.e. ruler, position markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState,
-      {
-        right: thisScreen.layoutBounds.width - 5,
-        top: 5
-      } );
-    thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
+     // Add the position markers.
+     var positionMarkersVisible = new Property( false );
+     positionMarkerState.link( function( positionMarkerState ) {
+     positionMarkersVisible.value = positionMarkerState === 'marks';
+     } );
+     thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
+
+     // Add the control panel that will allow users to select between the
+     // various position markers, i.e. ruler, position markers, or nothing.
+     var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState,
+     {
+     right: thisScreen.layoutBounds.width - 5,
+     top: 5
+     } );
+     thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
+     */
   }
 
   return inherit( ScreenView, BalanceGameScreen, {
@@ -329,6 +346,9 @@ define( function( require ) {
           break;
 
         case 'presentingInteractiveChallenge':
+          this.startGameLevelNode.visible = false;
+          this.outsideBackgroundNode.visible = true;
+          this.challengeLayer.visible = true;
           break;
 
         case 'showingCorrectAnswerFeedback':
@@ -349,8 +369,6 @@ define( function( require ) {
         default:
           throw new Error( 'Unhandled game state' );
       }
-
-
     },
 
     // Utility method for hiding all of the game nodes whose visibility changes
