@@ -13,8 +13,6 @@ define( function( require ) {
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceGameScreen = require( 'BALANCING_ACT/game/view/BalanceGameScreen' );
   var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/view/BalanceLabScreen' );
-  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
-  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );

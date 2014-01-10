@@ -26,9 +26,8 @@ define( function( require ) {
 
   // Constants
   var MAX_LEVELS = 4;
-  var MAX_POINTS_PER_PROBLEM = 2;
+//  var MAX_POINTS_PER_PROBLEM = 2;
   var CHALLENGES_PER_PROBLEM_SET = 6;
-  var MAX_SCORE_PER_GAME = CHALLENGES_PER_PROBLEM_SET * MAX_POINTS_PER_PROBLEM;
   var FULCRUM_HEIGHT = 0.85; // In meters.
   var PLANK_HEIGHT = 0.75; // In meters.
 
@@ -58,13 +57,14 @@ define( function( require ) {
       thisModel.bestScores.push( new Property( 0 ) );
     } );
 
+    // TODO: Put vars below back in (commented out to enable grunt to run).
     // Counters used to track progress on the game.
-    this.challengeCount = 0;
-    this.incorrectGuessesOnCurrentChallenge = 0;
+//    this.challengeCount = 0;
+//    this.incorrectGuessesOnCurrentChallenge = 0;
 
     // Current set of challenges, which collectively comprise a single level, on
     // which the user is currently working.
-    var challengeList = null;
+//    var challengeList = null;
 
     // Fixed masses that sit on the plank and that the user must attempt to balance.
     thisModel.fixedMasses = new ObservableArray();
@@ -178,5 +178,5 @@ define( function( require ) {
       },
 
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET
-    } )
+    } );
 } );

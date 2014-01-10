@@ -28,10 +28,8 @@ define( function( require ) {
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var levelString = require( 'string!BALANCING_ACT/level' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
-  var marksString = require( 'string!BALANCING_ACT/marks' );
   var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
   var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
-  var noneString = require( 'string!BALANCING_ACT/none' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -39,18 +37,15 @@ define( function( require ) {
   var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
   var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
-  var positionString = require( 'string!BALANCING_ACT/position' );
   var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var rulersString = require( 'string!BALANCING_ACT/rulers' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var showString = require( 'string!BALANCING_ACT/show' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
-  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'BALANCING_ACT/common/view/VStrut' );
 

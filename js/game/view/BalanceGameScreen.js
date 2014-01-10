@@ -11,48 +11,48 @@ define( function( require ) {
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var Color = require( 'SCENERY/util/Color' );
-  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+//  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
-  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+//  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
+//  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
-  var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
+//  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
+//  var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
-  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
-  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+//  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
+//  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
-  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
+//  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
   var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
-  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
+//  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Images and Strings
-  var checkString = require( 'string!VEGAS/check' );
+//  var checkString = require( 'string!VEGAS/check' );
   var gameLevel1Icon = require( 'image!BALANCING_ACT/game-level-1-icon.png' );
   var gameLevel2Icon = require( 'image!BALANCING_ACT/game-level-2-icon.png' );
   var gameLevel3Icon = require( 'image!BALANCING_ACT/game-level-3-icon.png' );
   var gameLevel4Icon = require( 'image!BALANCING_ACT/game-level-4-icon.png' );
-  var nextString = require( 'string!VEGAS/next' );
-  var showAnswerString = require( 'string!VEGAS/showAnswer' );
-  var tryAgainString = require( 'string!VEGAS/tryAgain' );
+//  var nextString = require( 'string!VEGAS/next' );
+//  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+//  var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // Constants
-  var BUTTON_FONT = new PhetFont( 24 );
-  var BUTTON_FILL = new Color( 0, 255, 153 );
-  var POINT_TEXT_OPTIONS = { font: new PhetFont( { size: 20, weight: 'bold' } ) };
+//  var BUTTON_FONT = new PhetFont( 24 );
+//  var BUTTON_FILL = new Color( 0, 255, 153 );
+//  var POINT_TEXT_OPTIONS = { font: new PhetFont( { size: 20, weight: 'bold' } ) };
 
   /**
    * @param {BalanceGameModel} model
@@ -126,8 +126,8 @@ define( function( require ) {
 
     // Add the node that allows the user to choose a game level to play.
     thisScreen.startGameLevelNode = new StartGameLevelNode(
-      function( level ) { gameModel.startLevel( level ) },
-      function() { gameModel.reset() },
+      function( level ) { gameModel.startLevel( level ); },
+      function() { gameModel.reset(); },
       gameModel.timerEnabledProperty,
       gameModel.soundEnabledProperty,
       [
@@ -145,7 +145,7 @@ define( function( require ) {
     thisScreen.levelCompletedNode = null;
 
     // Hook up the audio player to the sound settings.
-    var gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
+//    var gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
     var scoreboard = new Scoreboard(
@@ -272,7 +272,7 @@ define( function( require ) {
 
     // TODO: Temp - add a button for returning to the main screen when a level is unimplemented.
     thisScreen.challengeLayer.addChild( new TextPushButton( 'Unimplemented', {
-      listener: function() { gameModel.setChoosingLevelState() },
+      listener: function() { gameModel.setChoosingLevelState(); },
       font: new PhetFont( 40 ),
       rectangleFillUp: new Color( 255, 0, 0 ),
       centerX: thisScreen.layoutBounds.width / 2,

@@ -16,9 +16,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // TODO - Temp, remove eventually.
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-
   // Constants
   var FONT = new PhetFont( 16 );
   var IMAGE_SIZE = new Dimension2( 100, 65 );
