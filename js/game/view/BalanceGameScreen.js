@@ -10,12 +10,14 @@ define( function( require ) {
 
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var Color = require( 'SCENERY/util/Color' );
 //  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
-//  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
 //  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
@@ -76,20 +78,20 @@ define( function( require ) {
 
     // Create a root node and send to back so that the layout bounds box can
     // be made visible if needed.
-    thisScreen.root = new Node();
-    thisScreen.addChild( thisScreen.root );
-    thisScreen.root.moveToBack();
+    thisScreen.rootNode = new Node();
+    thisScreen.addChild( thisScreen.rootNode );
+    thisScreen.rootNode.moveToBack();
 
     // Add the background, which portrays the sky and ground.
     thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( mvt, 3, -1 );
-    thisScreen.root.addChild( thisScreen.outsideBackgroundNode );
+    thisScreen.rootNode.addChild( thisScreen.outsideBackgroundNode );
 
     // Add layers used to control game appearance.
     // TODO: controlLayer and challengeLayer may not need to be on the object, i.e. can possibly be made local.
     thisScreen.controlLayer = new Node();
-    thisScreen.root.addChild( thisScreen.controlLayer );
+    thisScreen.rootNode.addChild( thisScreen.controlLayer );
     thisScreen.challengeLayer = new Node();
-    thisScreen.root.addChild( thisScreen.challengeLayer );
+    thisScreen.rootNode.addChild( thisScreen.challengeLayer );
 
     // Add the fulcrum, the columns, etc.
     thisScreen.challengeLayer.addChild( new FulcrumNode( mvt, gameModel.fulcrum ) );
@@ -139,13 +141,13 @@ define( function( require ) {
       gameModel.bestScores,
       {}
     );
-    thisScreen.root.addChild( thisScreen.startGameLevelNode );
+    thisScreen.rootNode.addChild( thisScreen.startGameLevelNode );
 
     // Initialize a reference to the 'level completed' node.
     thisScreen.levelCompletedNode = null;
 
     // Hook up the audio player to the sound settings.
-//    var gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
+    thisScreen.gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
     var scoreboard = new Scoreboard(
@@ -179,12 +181,12 @@ define( function( require ) {
      // Add the dialog node that is used in the mass deduction challenges
      // to enable the user to submit specific mass values.
      thisScreen.massValueEntryNode = new MassValueEntryNode( gameModel, this );
-     thisScreen.root.addChild( thisScreen.massValueEntryNode );
+     thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
 
      // Add the node that is used to depict the correct answer for the
      // mass deduction challenges.
      thisScreen.massValueAnswerNode = new MassValueAnswerNode( gameModel, this );
-     thisScreen.root.addChild( thisScreen.massValueAnswerNode );
+     thisScreen.rootNode.addChild( thisScreen.massValueAnswerNode );
 
      // Position the mass entry and mass answer nodes in the same place.
      var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
@@ -194,7 +196,7 @@ define( function( require ) {
      // Add the node that allows the user to submit their prediction of which
      // way the plank will tilt.  This is used in the tilt prediction challenges.
      thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
-     thisScreen.root.addChild( thisScreen.tiltPredictionSelectorNode );
+     thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
      thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
      // Add smile/frown face node used to signal correct/incorrect answers.
@@ -270,15 +272,6 @@ define( function( require ) {
     // Register for changes to the game state and update accordingly.
     gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
 
-    // TODO: Temp - add a button for returning to the main screen when a level is unimplemented.
-    thisScreen.challengeLayer.addChild( new TextPushButton( 'Unimplemented', {
-      listener: function() { gameModel.setChoosingLevelState(); },
-      font: new PhetFont( 40 ),
-      rectangleFillUp: new Color( 255, 0, 0 ),
-      centerX: thisScreen.layoutBounds.width / 2,
-      centerY: thisScreen.layoutBounds.height / 2
-    } ) );
-
     /*
      // Show the level indicator to help the user see if the plank is perfectly
      // balanced, but only show it when the support column has been removed.
@@ -339,10 +332,6 @@ define( function( require ) {
         case 'choosingLevel':
           this.startGameLevelNode.visible = true;
           this.hideChallenge();
-          if ( this.levelCompletedNode !== null ) {
-            this.root.removeChild( this.levelCompletedNode );
-            this.levelCompletedNode = null;
-          }
           break;
 
         case 'presentingInteractiveChallenge':
@@ -363,7 +352,22 @@ define( function( require ) {
         case 'displayingCorrectAnswer':
           break;
 
-        case 'showingGameResults':
+        case 'showingLevelResults':
+          if ( this.model.score === BalanceGameModel.prototype.MAX_POSSIBLE_SCORE ) {
+            this.gameAudioPlayer.gameOverPerfectScore();
+          }
+          else if ( this.model.score == 0 ) {
+            this.gameAudioPlayer.gameOverZeroScore();
+          }
+          else {
+            this.gameAudioPlayer.gameOverImperfectScore();
+          }
+
+          // TODO: Following line can be removed once other states have been implemented.
+          this.startGameLevelNode.visible = false;
+
+          this.showLevelResultsNode();
+          this.hideChallenge();
           break;
 
         default:
@@ -400,6 +404,27 @@ define( function( require ) {
 
     showGameOverNode: function( visible ) {
       // TODO
+    },
+
+    showLevelResultsNode: function() {
+      var thisScreen = this;
+
+      // Set a new "level completed" node based on the results.
+      thisScreen.levelCompletedNode = new LevelCompletedNode( this.model.level, this.model.score, BalanceGameModel.prototype.MAX_POSSIBLE_SCORE,
+        BalanceGameModel.prototype.PROBLEMS_PER_LEVEL, this.model.timerEnabled, this.model.elapsedTime, this.model.bestTimes[ this.model.level ],
+        thisScreen.model.newBestTime,
+        function() {
+          thisScreen.model.gameState = 'choosingLevel';
+          thisScreen.rootNode.removeChild( thisScreen.levelCompletedNode );
+          thisScreen.levelCompletedNode = null;
+        },
+        {
+          centerX: thisScreen.layoutBounds.width / 2,
+          centerY: thisScreen.layoutBounds.height / 2
+        } );
+
+      // Add the node.
+      this.rootNode.addChild( thisScreen.levelCompletedNode );
     },
 
     createMassNode: function( visible ) {

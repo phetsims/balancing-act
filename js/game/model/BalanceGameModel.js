@@ -26,7 +26,7 @@ define( function( require ) {
 
   // Constants
   var MAX_LEVELS = 4;
-//  var MAX_POINTS_PER_PROBLEM = 2;
+  var MAX_POINTS_PER_PROBLEM = 2;
   var CHALLENGES_PER_PROBLEM_SET = 6;
   var FULCRUM_HEIGHT = 0.85; // In meters.
   var PLANK_HEIGHT = 0.75; // In meters.
@@ -127,7 +127,10 @@ define( function( require ) {
         // this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
 
         // Change to new game state.
-        this.gameState = 'presentingInteractiveChallenge';
+//        this.gameState = 'presentingInteractiveChallenge';
+
+        // TODO: Temporary sets state to the last state.
+        this.gameState = 'showingLevelResults';
       },
 
       setChallenge: function( balanceChallenge, columnState ) {
@@ -177,6 +180,7 @@ define( function( require ) {
         this.gameState = 'choosingLevel';
       },
 
-      PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET
+      PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,
+      MAX_POSSIBLE_SCORE: MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET
     } );
 } );
