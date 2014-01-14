@@ -522,5 +522,4 @@ define( function( require ) {
     THICKNESS: PLANK_THICKNESS,
     INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE
   } );
-
 } );

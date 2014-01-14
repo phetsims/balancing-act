@@ -127,10 +127,7 @@ define( function( require ) {
         // this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
 
         // Change to new game state.
-//        this.gameState = 'presentingInteractiveChallenge';
-
-        // TODO: Temporary sets state to the last state.
-        this.gameState = 'showingLevelResults';
+        this.gameState = 'presentingInteractiveChallenge';
       },
 
       setChallenge: function( balanceChallenge, columnState ) {
