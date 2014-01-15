@@ -13,6 +13,7 @@ define( function( require ) {
 
   // Imports
   var AttachmentBar = require( 'BALANCING_ACT/common/model/AttachmentBar' );
+  var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -119,12 +120,10 @@ define( function( require ) {
         this.elapsedTime = 0;
 
         // Set up the challenges.
-        // TODO: uncomment and make work
-//        this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
+        this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
 
         // Set up the model for the next challenge
-        // TODO: Uncomment and make work
-        // this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
+        this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
 
         // Change to new game state.
         this.gameState = 'presentingInteractiveChallenge';

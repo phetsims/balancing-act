@@ -19,7 +19,6 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
@@ -34,7 +33,7 @@ define( function( require ) {
 
   // Determine the min and max distances from the center of the plank where
   // masses may be positioned.
-  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.getLength() / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
+  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
   // balance challenge.
@@ -163,29 +162,34 @@ define( function( require ) {
     },
 
     generateChallengeSet: function( level ) {
+      debugger;
       var balanceChallengeList = [];
       switch( level ) {
+
         case 0:
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
+
         case 1:
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
+
         case 2:
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
+
         case 3:
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
+
         default:
           throw new Error( 'Can\'t generate challenge set for requested level: ' + level );
       }
       return balanceChallengeList;
-    },
-
+    }
   };
 } );
