@@ -12,7 +12,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var Color = require( 'SCENERY/util/Color' );
-//  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
@@ -54,7 +54,6 @@ define( function( require ) {
   // Constants
   var BUTTON_FONT = new PhetFont( 24 );
   var BUTTON_FILL = new Color( 0, 255, 153 );
-//  var POINT_TEXT_OPTIONS = { font: new PhetFont( { size: 20, weight: 'bold' } ) };
 
   /**
    * @param {BalanceGameModel} model
@@ -200,15 +199,20 @@ define( function( require ) {
      thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
      thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
-     // Add smile/frown face node used to signal correct/incorrect answers.
-     thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4, { visible: false, opacity: 0.75 } );
-     thisScreen.pointDisplay = new Text( "+0", POINT_TEXT_OPTIONS );
-     thisScreen.pointDisplay.centerX = 0;
-     thisScreen.pointDisplay.top = thisScreen.faceNode.height / 2;
-     thisScreen.faceNode.addChild( thisScreen.pointDisplay );
-     thisScreen.addChild( thisScreen.faceNode );
-
      */
+
+    // Add smile/frown face node used to signal correct/incorrect answers.
+    //TODO: opacity seems to be causing issues, need to work them out, just leaving off for now.
+    thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4,
+      {
+        centerX: thisScreen.mvt.modelToViewX( 0 ),
+        centerY: thisScreen.mvt.modelToViewY( 1 )
+      } );
+    thisScreen.pointDisplay = new Text( "+0", { font: new PhetFont( { size: 20, weight: 'bold' } ) } );
+    thisScreen.pointDisplay.centerX = 0;
+    thisScreen.pointDisplay.top = thisScreen.faceNode.height / 2;
+    thisScreen.faceNode.addChild( thisScreen.pointDisplay );
+    thisScreen.addChild( thisScreen.faceNode );
 
     // Add and lay out the buttons.
     thisScreen.buttons = [];
@@ -382,6 +386,8 @@ define( function( require ) {
           break;
 
         case 'showingCorrectAnswerFeedback':
+          this.faceNode.visible = true;
+          this.nextButton.visible = true;
           break;
 
         case 'showingIncorrectAnswerFeedbackTryAgain':
@@ -421,7 +427,7 @@ define( function( require ) {
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false } );
       //TODO: More nodes to add as they come on line.
-      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode ] );
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceNode ] );
     },
 
     show: function( nodesToShow ) {
