@@ -65,7 +65,7 @@ define( function( require ) {
 
     // Current set of challenges, which collectively comprise a single level, on
     // which the user is currently working.
-//    var challengeList = null;
+    thisModel.challengeList = null;
 
     // Fixed masses that sit on the plank and that the user must attempt to balance.
     thisModel.fixedMasses = new ObservableArray();
@@ -174,6 +174,13 @@ define( function( require ) {
 
       setChoosingLevelState: function() {
         this.gameState = 'choosingLevel';
+      },
+
+      getCurrentChallenge: function() {
+        if ( this.challengeList === null || this.challengeList.size <= this.challengeIndex ) {
+          return null;
+        }
+        return this.challengeList[ this.challengeIndex ];
       },
 
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,

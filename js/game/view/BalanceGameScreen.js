@@ -164,14 +164,14 @@ define( function( require ) {
 
     // Add the title.  It is blank to start with, and is updated later at
     // the appropriate state change.
-    thisScreen.challengeTitleNode = new Text( "Balance Me", // TODO: Set back to nothing when title updates working.
+    thisScreen.challengeTitleNode = new Text( '',
       {
         font: new PhetFont( 64, true ),
         fill: 'white',
         stroke: 'black',
-        lineWidth: 1
+        lineWidth: 1.5,
+        top: 5 // Empirically determined based on appearance
       } );
-    thisScreen.updateTitle();
     thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
     /*
@@ -312,7 +312,18 @@ define( function( require ) {
   return inherit( ScreenView, BalanceGameScreen, {
 
     updateTitle: function() {
-      // TODO
+      var balanceGameChallenge = this.model.getCurrentChallenge();
+      if ( balanceGameChallenge !== null ) {
+        this.challengeTitleNode.text = this.model.getCurrentChallenge().viewConfig.title;
+      }
+      else {
+        // Set the value to something so that layout can be done.  This
+        // string doesn't need to be translated - users should never see it.
+        this.challengeTitleNode.setText( "No challenge available." );
+      }
+
+      // Center the title above the pivot point.
+      this.challengeTitleNode.centerX = this.mvt.modelToViewX( this.model.plank.pivotPoint.x );
     },
 
     updateCheckAnswerButtonEnabled: function() {
@@ -335,6 +346,7 @@ define( function( require ) {
           break;
 
         case 'presentingInteractiveChallenge':
+          this.updateTitle();
           this.startGameLevelNode.visible = false;
           this.outsideBackgroundNode.visible = true;
           this.challengeLayer.visible = true;

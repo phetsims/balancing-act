@@ -32,7 +32,7 @@ define( function( require ) {
 
     // Set up the challenge view configuration, which provides information to
     // the view about how this challenge should be displayed.
-    this.challengeViewConfig = {
+    this.viewConfig = {
       title: balanceMeString,
       showMassEntryDialog: false,
       showTiltPredictionSelector: false
