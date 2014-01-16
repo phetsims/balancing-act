@@ -89,7 +89,7 @@ define( function( require ) {
     },
 
     createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
-      return BalanceMassesChallenge.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
+      return BalanceMassesChallenge.prototype.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
     },
 
     // Generate a simple challenge where brick stacks of equal mass appear on each side.
@@ -139,6 +139,9 @@ define( function( require ) {
           this.removeOldestHalfOfList( previousChallenges );
         }
       }
+      assert && assert( challenged !== null ); // The algorithm above should always produce something, log it if not.
+      previousChallenges.push( challenge );
+      return challenge;
     },
 
     /**
@@ -162,28 +165,27 @@ define( function( require ) {
     },
 
     generateChallengeSet: function( level ) {
-      debugger;
       var balanceChallengeList = [];
       switch( level ) {
 
         case 0:
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
 
         case 1:
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
 
         case 2:
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
 
         case 3:
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge, this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
 
         default:

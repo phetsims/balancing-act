@@ -241,14 +241,14 @@ define( function( require ) {
 
     // Add a mass to the specified location on the plank.
     addMassToSurfaceAt: function( mass, distanceFromCenter ) {
-      if ( distanceFromCenter <= PLANK_LENGTH / 2 ) {
+      if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
         throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
       }
       var vectorToLocation = this.getPlankSurfaceCenter().plus( new Vector2( distanceFromCenter, 0 ).rotated( this.tiltAngle ) );
       // Set the position of the mass to be just above the plank at the
       // appropriate distance so that it will drop to the correct place.
-      mass.setPosition( vectorToLocation.x, vectorToLocation.y + 0.01 );
-      assert( this.isPointAbovePlank( mass.position ) );  // Need to fix this if mass isn't above the surface.
+      mass.position = new Vector2( vectorToLocation.x, vectorToLocation.y + 0.01 );
+      assert && assert( this.isPointAbovePlank( mass.position ) );  // Need to fix this if mass isn't above the surface.
       this.addMassToSurface( mass );
     },
 

@@ -28,6 +28,8 @@ define( function( require ) {
    */
   function BrickStack( numBricks, initialPosition ) {
 
+    initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
+
     // Generate the shape of the brick stack.
     var brickStackShape = new Shape();
     var brickOrigin = Vector2.ZERO;

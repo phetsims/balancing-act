@@ -53,7 +53,7 @@ define( function( require ) {
 
       // Create a valid solution for the challenge.
       var solution = [
-        { mass: movableMass, distance: -fixedMass * fixedMassDistanceFromCenter / movableMass.massValue }
+        { mass: movableMass, distance: -( fixedMass.massValue * fixedMassDistanceFromCenter / movableMass.massValue ) }
       ];
 
       // And we're done.

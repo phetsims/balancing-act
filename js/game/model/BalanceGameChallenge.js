@@ -56,7 +56,7 @@ define( function( require ) {
 
     // Test two mass lists to see if they contain equivalent masses.
     containsEquivalentMasses: function( massList1, massList2 ) {
-      if ( massList1.length != massList2.length ) {
+      if ( massList1.length !== massList2.length ) {
         return false;
       }
       for ( var i = 0; i < massList1.length; i++ ) {
@@ -73,6 +73,7 @@ define( function( require ) {
       this.fixedMassDistancePairs.forEach( function( massDistancePair ) {
         fixedMassesList.push( massDistancePair.mass );
       } );
+      return fixedMassesList;
     },
 
     /**
@@ -84,7 +85,7 @@ define( function( require ) {
         return true;
       }
 
-      var thisFixedMasses = this.fixedMasses;
+      var thisFixedMasses = this.getFixedMassesList();
       var thatFixedMasses = that.getFixedMassesList();
 
       if ( !this.containsEquivalentMasses( thisFixedMasses, thatFixedMasses ) ) {

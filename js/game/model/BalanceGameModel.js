@@ -147,21 +147,21 @@ define( function( require ) {
 
         // Set up the new challenge.
         balanceChallenge.fixedMassDistancePairs.forEach( function( fixedMassDistancePair ) {
-          thisModel.fixedMasses.push( fixedMassDistancePair );
-          thisModel.plank.addMassToSurface( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
+          thisModel.fixedMasses.push( fixedMassDistancePair.mass );
+          thisModel.plank.addMassToSurfaceAt( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
         } );
 
-        balanceChallenge.movableMassDistancePairs.forEach( function( mass ) {
+        balanceChallenge.movableMasses.forEach( function( mass ) {
           var initialPosition = new Vector2( 3, 0 );
           mass.position = initialPosition;
-          mass.userControlled.link( function( userControlled ) {
+          mass.userControlledProperty.link( function( userControlled ) {
             if ( !userControlled ) {
               // The user has dropped this mass.
               if ( !thisModel.plank.addMassToSurface( mass ) ) {
                 // The attempt to add this mass to surface of plank failed,
                 // probably because the mass wasn't over the plank or there
                 // wasn't on open spot near where it was released.
-                mass.setPosition( initialPosition );
+                mass.position = initialPosition;
               }
             }
           } );
