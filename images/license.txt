@@ -9,6 +9,10 @@ default-image.png source=PhET author=jblanco
 fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco
 fire-hydrant.png source=PhET author=jblanco
 flower-pot.png source=PhET author=jblanco
+game-level-1-icon.png source=PhET author=ssiman-tov
+game-level-2-icon.png source=PhET author=ssiman-tov
+game-level-3-icon.png source=PhET author=ssiman-tov
+game-level-4-icon.png source=PhET author=ssiman-tov
 girl-sitting.png source=PhET author=jblanco
 girl-standing.png source=PhET author=jblanco
 man-sitting.png source=PhET author=jblanco
