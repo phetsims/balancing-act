@@ -14,6 +14,7 @@ define( function( require ) {
   // Imports
   var AttachmentBar = require( 'BALANCING_ACT/common/model/AttachmentBar' );
   var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
+  var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -61,7 +62,7 @@ define( function( require ) {
     // TODO: Put vars below back in (commented out to enable grunt to run).
     // Counters used to track progress on the game.
 //    this.challengeCount = 0;
-//    this.incorrectGuessesOnCurrentChallenge = 0;
+    this.incorrectGuessesOnCurrentChallenge = 0;
 
     // Current set of challenges, which collectively comprise a single level, on
     // which the user is currently working.
@@ -181,6 +182,36 @@ define( function( require ) {
           return null;
         }
         return this.challengeList[ this.challengeIndex ];
+      },
+
+      // Check the user's proposed answer.  Used overloaded functions in
+      // the original Java sim, a little ugly when ported.
+      checkAnswer: function( mass, tiltPrediction ) {
+        if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
+          // Turn off the column(s) so that the plank can move.
+          this.columnState = 'noColumns';
+
+          this.handleProposedAnswer( this.plank.isBalanced() );
+        }
+        // TODO: Add handling for other challenge types.
+
+      },
+
+      handleProposedAnswer: function( answerIsCorrect ) {
+        var pointsEarned = 0;
+        if ( answerIsCorrect ) {
+          // The user answered the challenge correctly.
+          this.gameState = 'showingCorrectAnswerFeedback';
+          if ( this.incorrectGuessesOnCurrentChallenge === 0 ) {
+            // User got it right the first time.
+            pointsEarned = MAX_POINTS_PER_PROBLEM;
+          }
+          else {
+            // User got it wrong at first, but got it right now.
+            pointsEarned = MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
+          }
+          this.score = this.score + pointsEarned;
+        }
       },
 
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,

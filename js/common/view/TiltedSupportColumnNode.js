@@ -64,7 +64,6 @@ define( function( require ) {
       } );
     thisNode.addChild( columnSupportNode );
 
-
     columnState.link( function( state ) {
       thisNode.visible = state === 'singleColumn';
     } );

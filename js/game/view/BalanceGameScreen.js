@@ -95,7 +95,7 @@ define( function( require ) {
 
     // Add the fulcrum, the columns, etc.
     thisScreen.challengeLayer.addChild( new FulcrumNode( mvt, gameModel.fulcrum ) );
-    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode( mvt, gameModel.tiltedSupportColumn, gameModel.columnState ) );
+    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode( mvt, gameModel.tiltedSupportColumn, gameModel.columnStateProperty ) );
     gameModel.levelSupportColumns.forEach( function( levelSupportColumn ) {
       thisScreen.challengeLayer.addChild( new LevelSupportColumnNode( mvt, levelSupportColumn, gameModel.columnStateProperty, false ) );
     } );
@@ -357,9 +357,28 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          this.startGameLevelNode.visible = false;
-          this.outsideBackgroundNode.visible = true;
-          this.challengeLayer.visible = true;
+          // TODO: Add scoreboard in asap.
+//          this.show( [ this.challengeTitleNode, this.scoreboard ] );
+          this.show( [ this.challengeTitleNode ] );
+          if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
+            this.massValueEntryNode.clear();
+            this.massValueEntryNode.visible = true;
+          }
+          else {
+            this.checkAnswerButton.visible = true;
+            if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
+              this.tiltPredictionSelectorNode.tiltPredictionProperty.reset();
+              this.tiltPredictionSelectorNode.visible = true;
+            }
+          }
+
+          this.showChallengeGraphics();
+
+          // Set the challenge layer to be interactive so that the user can
+          // manipulate the masses.
+          this.challengeLayer.setPickable = false;
+          this.challengeLayer.setChildrenPickable = false;
+
           break;
 
         case 'showingCorrectAnswerFeedback':
@@ -400,28 +419,35 @@ define( function( require ) {
     // Utility method for hiding all of the game nodes whose visibility changes
     // during the course of a challenge.
     hideAllGameNodes: function() {
-      this.outsideBackgroundNode.visible = false;
-      this.challengeLayer.visible = false; // TODO: Java version had finer resolution (i.e. hide fulcrum, plank, etc).  May eventually need that here.
+      this.buttons.forEach( function( button ) { button.visible = false } );
+      //TODO: More nodes to add as they come on line.
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode ] );
     },
 
-    show: function() {
-      // TODO
+    show: function( nodesToShow ) {
+      nodesToShow.forEach( function( nodeToShow ) { nodeToShow.visible = true } );
     },
 
-    setNodeVisibility: function( visible ) {
-      // TODO
+    setNodeVisibility: function( isVisible, nodes ) {
+      nodes.forEach( function( node ) { node.visible = isVisible } );
     },
 
-    hideChallenge: function( visible ) {
-      // TODO
+    hideChallenge: function() {
       this.challengeLayer.visible = false;
       this.controlLayer.visible = false;
+
+      // TODO - Java version sets these layers to be unpickable, not sure why, have omitted for now.
     },
 
     // Show the graphic model elements for this challenge, i.e. the plank,
     // fulcrum, etc.
-    showChallengeGraphics: function( visible ) {
-      // TODO
+    showChallengeGraphics: function() {
+      this.challengeLayer.visible = true;
+      this.controlLayer.visible = true;
+
+      // By default this is initially set up to be non-interactive.
+      this.challengeLayer.setPickable = false;
+      this.challengeLayer.setChildrenPickable = false;
     },
 
     showGameOverNode: function( visible ) {
