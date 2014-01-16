@@ -42,18 +42,18 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Images and Strings
-//  var checkString = require( 'string!VEGAS/check' );
+  var checkString = require( 'string!VEGAS/check' );
   var gameLevel1Icon = require( 'image!BALANCING_ACT/game-level-1-icon.png' );
   var gameLevel2Icon = require( 'image!BALANCING_ACT/game-level-2-icon.png' );
   var gameLevel3Icon = require( 'image!BALANCING_ACT/game-level-3-icon.png' );
   var gameLevel4Icon = require( 'image!BALANCING_ACT/game-level-4-icon.png' );
-//  var nextString = require( 'string!VEGAS/next' );
-//  var showAnswerString = require( 'string!VEGAS/showAnswer' );
-//  var tryAgainString = require( 'string!VEGAS/tryAgain' );
+  var nextString = require( 'string!VEGAS/next' );
+  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // Constants
-//  var BUTTON_FONT = new PhetFont( 24 );
-//  var BUTTON_FILL = new Color( 0, 255, 153 );
+  var BUTTON_FONT = new PhetFont( 24 );
+  var BUTTON_FILL = new Color( 0, 255, 153 );
 //  var POINT_TEXT_OPTIONS = { font: new PhetFont( { size: 20, weight: 'bold' } ) };
 
   /**
@@ -208,35 +208,44 @@ define( function( require ) {
      thisScreen.faceNode.addChild( thisScreen.pointDisplay );
      thisScreen.addChild( thisScreen.faceNode );
 
-     // Add and lay out the buttons.
-     thisScreen.buttons = [];
-     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-     listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
-     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-     } );
-     thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
-     thisScreen.buttons.push( thisScreen.checkAnswerButton );
+     */
 
-     thisScreen.nextButton = new TextPushButton( nextString, {
-     listener: function() { gameModel.nextChallenge(); },
-     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-     } );
-     thisScreen.challengeLayer.addChild( thisScreen.nextButton );
-     thisScreen.buttons.push( thisScreen.nextButton );
+    // Add and lay out the buttons.
+    thisScreen.buttons = [];
+    thisScreen.checkAnswerButton = new TextPushButton( checkString, {
+      listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
+      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+    } );
+    thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
+    thisScreen.buttons.push( thisScreen.checkAnswerButton );
 
-     thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
-     listener: function() { gameModel.tryAgain(); },
-     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-     } );
-     thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
-     thisScreen.buttons.push( thisScreen.tryAgainButton );
+    thisScreen.nextButton = new TextPushButton( nextString, {
+      listener: function() { gameModel.nextChallenge(); },
+      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+    } );
+    thisScreen.challengeLayer.addChild( thisScreen.nextButton );
+    thisScreen.buttons.push( thisScreen.nextButton );
 
-     thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
-     listener: function() { gameModel.displayCorrectAnswer(); },
-     font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
-     } );
-     thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
-     thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
+    thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
+      listener: function() { gameModel.tryAgain(); },
+      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+    } );
+    thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
+    thisScreen.buttons.push( thisScreen.tryAgainButton );
+
+    thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
+      listener: function() { gameModel.displayCorrectAnswer(); },
+      font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
+    } );
+    thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
+    thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
+
+    var buttonCenter = this.mvt.modelToViewPosition( new Vector2( 0, -0.3 ) );
+    thisScreen.buttons.forEach( function( button ) {
+      button.center = buttonCenter;
+    } );
+
+    /*
 
      // Add listeners that control the enabled state of the check answer button.
      gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled );
