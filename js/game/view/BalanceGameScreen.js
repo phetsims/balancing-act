@@ -117,6 +117,7 @@ define( function( require ) {
     gameModel.fixedMasses.addItemAddedListener( function( addedMass ) {
       // Create and add the view representation for this mass.
       var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, new Property( true ) );
+      massNode.pickable = false; // Fixed masses can't be moved by users.
       thisScreen.challengeLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
@@ -166,7 +167,7 @@ define( function( require ) {
     // the appropriate state change.
     thisScreen.challengeTitleNode = new Text( '',
       {
-        font: new PhetFont( 64, true ),
+        font: new PhetFont( { size: 60, style: 'bold' } ),
         fill: 'white',
         stroke: 'black',
         lineWidth: 1.5,
