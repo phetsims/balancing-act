@@ -202,9 +202,10 @@ define( function( require ) {
      */
 
     // Add smile/frown face node used to signal correct/incorrect answers.
-    //TODO: opacity seems to be causing issues, need to work them out, just leaving off for now.
     thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4,
       {
+        //TODO: opacity seems to be causing issues, need to work them out, just leaving off for now.
+//        opacity: 0.75,
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 1 )
       } );
