@@ -18,7 +18,7 @@ define( function( require ) {
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
-//  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
+  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
 //  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
@@ -28,10 +28,10 @@ define( function( require ) {
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
-//  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
-//  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
+  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
-//  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
+  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
@@ -287,41 +287,39 @@ define( function( require ) {
     // Register for changes to the game state and update accordingly.
     gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
 
-    /*
-     // Show the level indicator to help the user see if the plank is perfectly
-     // balanced, but only show it when the support column has been removed.
-     var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
-     gameModel.columnState.link( function( columnState ) {
-     levelIndicator.visible = columnState === 'none';
-     } );
-     thisScreen.challengeLayer.addChild( levelIndicator );
+    // Show the level indicator to help the user see if the plank is perfectly
+    // balanced, but only show it when the support column has been removed.
+    var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
+    gameModel.columnState.link( function( columnState ) {
+      levelIndicator.visible = ( columnState === 'noColumns' );
+    } );
+    thisScreen.challengeLayer.addChild( levelIndicator );
 
-     // Add a panel for controlling whether the ruler or marker set are visible.
-     var positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
+    // Add a panel for controlling whether the ruler or marker set are visible.
+    var positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
 
-     // Add the ruler.
-     var rulersVisible = new Property( false );
-     positionMarkerState.link( function( positionMarkerState ) {
-     rulersVisible.value = positionMarkerState === 'rulers';
-     } );
-     thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
+    // Add the ruler.
+    var rulersVisible = new Property( false );
+    positionMarkerState.link( function( positionMarkerState ) {
+      rulersVisible.value = positionMarkerState === 'rulers';
+    } );
+    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
 
-     // Add the position markers.
-     var positionMarkersVisible = new Property( false );
-     positionMarkerState.link( function( positionMarkerState ) {
-     positionMarkersVisible.value = positionMarkerState === 'marks';
-     } );
-     thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
+    // Add the position markers.
+    var positionMarkersVisible = new Property( false );
+    positionMarkerState.link( function( positionMarkerState ) {
+      positionMarkersVisible.value = positionMarkerState === 'marks';
+    } );
+    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
 
-     // Add the control panel that will allow users to select between the
-     // various position markers, i.e. ruler, position markers, or nothing.
-     var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState,
-     {
-     right: thisScreen.layoutBounds.width - 5,
-     top: 5
-     } );
-     thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
-     */
+    // Add the control panel that will allow users to select between the
+    // various position markers, i.e. ruler, position markers, or nothing.
+    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState,
+      {
+        right: thisScreen.layoutBounds.width - 5,
+        top: 5
+      } );
+    thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
   }
 
   return inherit( ScreenView, BalanceGameScreen, {
