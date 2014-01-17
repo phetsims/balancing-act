@@ -290,7 +290,7 @@ define( function( require ) {
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
     var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
-    gameModel.columnState.link( function( columnState ) {
+    gameModel.columnStateProperty.link( function( columnState ) {
       levelIndicator.visible = ( columnState === 'noColumns' );
     } );
     thisScreen.challengeLayer.addChild( levelIndicator );
