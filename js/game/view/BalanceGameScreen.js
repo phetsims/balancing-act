@@ -60,7 +60,7 @@ define( function( require ) {
    * @constructor
    */
   function BalanceGameScreen( gameModel ) {
-    ScreenView.call( this );
+    ScreenView.call( this, { renderer: 'svg' } );
     var thisScreen = this;
     thisScreen.model = gameModel;
 
@@ -205,7 +205,7 @@ define( function( require ) {
     thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4,
       {
         //TODO: opacity seems to be causing issues, need to work them out, just leaving off for now.
-//        opacity: 0.75,
+        opacity: 0.75,
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 1 )
       } );
