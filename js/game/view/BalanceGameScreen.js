@@ -204,14 +204,23 @@ define( function( require ) {
     // Add smile/frown face node used to signal correct/incorrect answers.
     thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4,
       {
-        //TODO: opacity seems to be causing issues, need to work them out, just leaving off for now.
+        scale: 0.75,
         opacity: 0.75,
         centerX: thisScreen.mvt.modelToViewX( 0 ),
-        centerY: thisScreen.mvt.modelToViewY( 1 )
+        centerY: thisScreen.mvt.modelToViewY( 2 )
       } );
-    thisScreen.pointDisplay = new Text( "+0", { font: new PhetFont( { size: 20, weight: 'bold' } ) } );
+    thisScreen.pointDisplay = new Text( "+0",
+      {
+        font: new PhetFont(
+          {
+            size: 50,
+            weight: 'bold',
+            lineWidth: 1.5,
+            fill: 'yellow'
+          } )
+      } );
     thisScreen.pointDisplay.centerX = 0;
-    thisScreen.pointDisplay.top = thisScreen.faceNode.height / 2;
+    thisScreen.pointDisplay.top = thisScreen.faceNode.bottom;
     thisScreen.faceNode.addChild( thisScreen.pointDisplay );
     thisScreen.addChild( thisScreen.faceNode );
 
