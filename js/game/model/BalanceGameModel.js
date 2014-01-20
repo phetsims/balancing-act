@@ -30,6 +30,7 @@ define( function( require ) {
   var MAX_LEVELS = 4;
   var MAX_POINTS_PER_PROBLEM = 2;
   var CHALLENGES_PER_PROBLEM_SET = 6;
+  var MAX_SCORE_PER_GAME = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
   var FULCRUM_HEIGHT = 0.85; // In meters.
   var PLANK_HEIGHT = 0.75; // In meters.
 
@@ -59,9 +60,7 @@ define( function( require ) {
       thisModel.bestScores.push( new Property( 0 ) );
     } );
 
-    // TODO: Put vars below back in (commented out to enable grunt to run).
-    // Counters used to track progress on the game.
-//    this.challengeCount = 0;
+    // Counter used to track number of incorrect answers.
     this.incorrectGuessesOnCurrentChallenge = 0;
 
     // Current set of challenges, which collectively comprise a single level, on
@@ -229,6 +228,27 @@ define( function( require ) {
         this.gameState = 'choosingLevel';
       },
 
+      nextChallenge: function() {
+        this.challengeIndex++;
+        this.incorrectGuessesOnCurrentChallenge = 0;
+        if ( this.challengeIndex < this.challengeList.length ) {
+          this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
+          this.gameState = 'presentingInteractiveChallenge';
+        }
+        else {
+          // See if this is a new best time and, if so, record it.
+          if ( this.score === MAX_SCORE_PER_GAME ) {
+            // Perfect game.  See if new best time.
+            if ( this.elapsedTime < this.bestTimes( this.level ) ) {
+              // New best.
+              this.bestTimes[ this.level ] = this.elapsedTime;
+            }
+          }
+          // Done with this game, show the results.
+          this.gameState = 'showingLevelResults';
+        }
+      },
+
       tryAgain: function() {
         // Restore the column(s) to the original state but don't move the
         // masses anywhere.  This makes it easier for the users to see why
@@ -238,7 +258,6 @@ define( function( require ) {
       },
 
       displayCorrectAnswer: function() {
-
         var currentChallenge = this.getCurrentChallenge();
 
         // Put the challenge in its initial state, but with the columns turned off.
