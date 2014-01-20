@@ -237,6 +237,23 @@ define( function( require ) {
         this.gameState = 'presentingInteractiveChallenge';
       },
 
+      displayCorrectAnswer: function() {
+
+        var currentChallenge = this.getCurrentChallenge();
+
+        // Put the challenge in its initial state, but with the columns turned off.
+        this.setChallenge( currentChallenge, 'noColumns' );
+
+        // Add the movable mass or masses to the plank according to the solution.
+        var thisModel = this;
+        currentChallenge.balancedConfiguration.forEach( function( massDistancePair ) {
+          thisModel.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
+        } );
+
+        // Update the game state.
+        this.gameState = 'displayingCorrectAnswer';
+      },
+
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
           window.clearInterval( this.gameTimerId );
