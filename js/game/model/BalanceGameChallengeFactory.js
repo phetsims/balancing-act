@@ -103,7 +103,7 @@ define( function( require ) {
      * Convenience function for removing the oldest half of a list.
      */
     removeOldestHalfOfList: function( list ) {
-      var halfLength = Math.floor( list.size() / 2 );
+      var halfLength = Math.floor( list.length / 2 );
       for ( var i = 0; i < halfLength; i++ ) {
         list.splice( halfLength, halfLength );
       }
@@ -112,7 +112,7 @@ define( function( require ) {
     /**
      * Method to generate a "unique" challenge, meaning one that the user
      * either hasn't seen before or at least hasn't seen recently.  The caller
-     * provides function objects for generating the challenges and testing its
+     * provides functions for generating the challenges and testing its
      * uniqueness, as well as a list of previous challenges to test against.
      */
     generateUniqueChallenge: function( challengeGenerator, uniquenessTest, previousChallenges ) {

@@ -214,6 +214,11 @@ define( function( require ) {
         }
       },
 
+      newGame: function() {
+        this.stopGameTimer();
+        this.gameState = 'choosingLevel';
+      },
+
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
           window.clearInterval( this.gameTimerId );
@@ -221,6 +226,11 @@ define( function( require ) {
         this.elapsedTime = 0;
         var thisModel = this;
         this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
+      },
+
+      stopGameTimer: function() {
+        window.clearInterval( this.gameTimerId );
+        this.gameTimerId = null;
       },
 
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,
