@@ -161,7 +161,8 @@ define( function( require ) {
       {
         levelVisible: false,
         centerX: this.layoutBounds.centerX,
-        bottom: this.layoutBounds.maxY - 10
+        bottom: this.layoutBounds.maxY - 5,
+        yMargin: 5
       }
     );
     thisScreen.addChild( this.scoreboard );
