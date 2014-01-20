@@ -383,19 +383,64 @@ define( function( require ) {
           break;
 
         case 'showingCorrectAnswerFeedback':
+
+          // Show the appropriate nodes for this state.
+          this.scoreboard.visible = true;
+          this.nextButton.visible = true;
+
+          // Give the user the appropriate feedback
+          this.gameAudioPlayer.correctAnswer();
           this.faceWithScoreNode.smile();
           this.faceWithScoreNode.setScore( this.model.score );
           this.faceWithScoreNode.visible = true;
-          this.nextButton.visible = true;
+
           break;
 
         case 'showingIncorrectAnswerFeedbackTryAgain':
+
+          // Show the appropriate nodes for this state.
+          this.scoreboard.visible = true;
+          this.tryAgainButton.visible = true;
+
+          // Give the user the appropriate feedback
+          this.gameAudioPlayer.wrongAnswer();
+          this.faceWithScoreNode.frown();
+          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.visible = true;
+
           break;
 
         case 'showingIncorrectAnswerFeedbackMoveOn':
+
+          // Show the appropriate nodes for this state.
+          this.scoreboard.visible = true;
+          this.displayCorrectAnswerButton.visible = true;
+
+          // Give the user the appropriate feedback
+          this.gameAudioPlayer.wrongAnswer();
+          this.faceWithScoreNode.frown();
+          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.visible = true;
+
           break;
 
         case 'displayingCorrectAnswer':
+
+          // Show the appropriate nodes for this state.
+          this.scoreboard.visible = true;
+          this.nextButton.visible = true;
+
+          // Display the correct answer
+          if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
+            this.massValueAnswerNode.update();
+            this.massValueAnswerNode.visible = true;
+          }
+          else if ( this.model.getCurrentChallenge().viewConfig.showTilePredictionSelector ) {
+            this.tiltPredictionNode.tiltPrediction = this.model.getTipDirection();
+            this.tiltPredictionNode.visible = true;
+          }
+          this.showChallengeGraphics();
+
           break;
 
         case 'showingLevelResults':
@@ -453,10 +498,6 @@ define( function( require ) {
       // By default this is initially set up to be non-interactive.
       this.challengeLayer.setPickable = false;
       this.challengeLayer.setChildrenPickable = false;
-    },
-
-    showGameOverNode: function( visible ) {
-      // TODO
     },
 
     showLevelResultsNode: function() {

@@ -212,11 +212,29 @@ define( function( require ) {
           }
           this.score = this.score + pointsEarned;
         }
+        else {
+          // The user got it wrong.
+          this.incorrectGuessesOnCurrentChallenge++;
+          if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
+            this.gameState = 'showingIncorrectAnswerFeedbackTryAgain';
+          }
+          else {
+            this.gameState = 'showingIncorrectAnswerFeedbackMoveOn';
+          }
+        }
       },
 
       newGame: function() {
         this.stopGameTimer();
         this.gameState = 'choosingLevel';
+      },
+
+      tryAgain: function() {
+        // Restore the column(s) to the original state but don't move the
+        // masses anywhere.  This makes it easier for the users to see why
+        // their answer was incorrect.
+        this.columnState = this.getCurrentChallenge().initialColumnState;
+        this.gameState = 'presentingInteractiveChallenge';
       },
 
       restartGameTimer: function() {
