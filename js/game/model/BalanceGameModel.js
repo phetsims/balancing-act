@@ -118,7 +118,7 @@ define( function( require ) {
         this.level = level;
         this.score = 0;
         this.challengeIndex = 0;
-        this.elapsedTime = 0;
+        this.restartGameTimer();
 
         // Set up the challenges.
         this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
@@ -212,6 +212,15 @@ define( function( require ) {
           }
           this.score = this.score + pointsEarned;
         }
+      },
+
+      restartGameTimer: function() {
+        if ( this.gameTimerId !== null ) {
+          window.clearInterval( this.gameTimerId );
+        }
+        this.elapsedTime = 0;
+        var thisModel = this;
+        this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
       },
 
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,

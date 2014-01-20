@@ -150,7 +150,7 @@ define( function( require ) {
     thisScreen.gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
-    var scoreboard = new Scoreboard(
+    this.scoreboard = new Scoreboard(
       gameModel.challengeIndexProperty,
       new Property( gameModel.PROBLEMS_PER_LEVEL ),
       gameModel.levelProperty,
@@ -158,9 +158,13 @@ define( function( require ) {
       gameModel.elapsedTimeProperty,
       gameModel.timerEnabledProperty,
       function() { gameModel.newGame(); },
-      { levelVisible: false }
+      {
+        levelVisible: false,
+        centerX: this.layoutBounds.centerX,
+        bottom: this.layoutBounds.maxY - 10
+      }
     );
-    scoreboard.mutate( { centerX: this.layoutBounds.centerX, bottom: this.layoutBounds.maxY - 10 } );
+    thisScreen.addChild( this.scoreboard );
 
     // Add the title.  It is blank to start with, and is updated later at
     // the appropriate state change.
@@ -355,9 +359,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          // TODO: Add scoreboard in asap.
-//          this.show( [ this.challengeTitleNode, this.scoreboard ] );
-          this.show( [ this.challengeTitleNode ] );
+          this.show( [ this.challengeTitleNode, this.scoreboard ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
             this.massValueEntryNode.clear();
             this.massValueEntryNode.visible = true;
@@ -423,7 +425,7 @@ define( function( require ) {
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false } );
       //TODO: More nodes to add as they come on line.
-      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode ] );
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard ] );
     },
 
     show: function( nodesToShow ) {
