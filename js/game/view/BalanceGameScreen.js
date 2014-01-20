@@ -12,7 +12,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var Color = require( 'SCENERY/util/Color' );
-  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  var FaceWithScoreNode = require( 'BALANCING_ACT/game/view/FaceWithScoreNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
@@ -201,28 +201,14 @@ define( function( require ) {
 
      */
 
-    // Add smile/frown face node used to signal correct/incorrect answers.
-    thisScreen.faceNode = new FaceNode( thisScreen.layoutBounds.width * 0.4,
+    // Create the 'feedback node' that is used to visually indicate correct
+    // and incorrect answers.
+    thisScreen.faceWithScoreNode = new FaceWithScoreNode( thisScreen.layoutBounds.width * 0.31,
       {
-        scale: 0.75,
-        opacity: 0.75,
         centerX: thisScreen.mvt.modelToViewX( 0 ),
-        centerY: thisScreen.mvt.modelToViewY( 2 )
+        centerY: thisScreen.mvt.modelToViewY( 2.2 )
       } );
-    thisScreen.pointDisplay = new Text( "+0",
-      {
-        font: new PhetFont(
-          {
-            size: 50,
-            weight: 'bold',
-            lineWidth: 1.5,
-            fill: 'yellow'
-          } )
-      } );
-    thisScreen.pointDisplay.centerX = 0;
-    thisScreen.pointDisplay.top = thisScreen.faceNode.bottom;
-    thisScreen.faceNode.addChild( thisScreen.pointDisplay );
-    thisScreen.addChild( thisScreen.faceNode );
+    thisScreen.addChild( thisScreen.faceWithScoreNode );
 
     // Add and lay out the buttons.
     thisScreen.buttons = [];
@@ -394,7 +380,9 @@ define( function( require ) {
           break;
 
         case 'showingCorrectAnswerFeedback':
-          this.faceNode.visible = true;
+          this.faceWithScoreNode.smile();
+          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.visible = true;
           this.nextButton.visible = true;
           break;
 
@@ -435,7 +423,7 @@ define( function( require ) {
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false } );
       //TODO: More nodes to add as they come on line.
-      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceNode ] );
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode ] );
     },
 
     show: function( nodesToShow ) {
