@@ -24,6 +24,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
+  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -192,6 +193,14 @@ define( function( require ) {
 
           this.handleProposedAnswer( this.plank.isBalanced() );
         }
+        else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
+          // Turn off the column(s) so that the plank can move.
+          this.columnState = 'noColumns';
+
+          this.handleProposedAnswer( ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
+                                     ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
+                                     ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() == 0 ) );
+        }
         // TODO: Add handling for other challenge types.
 
       },
@@ -271,6 +280,18 @@ define( function( require ) {
 
         // Update the game state.
         this.gameState = 'displayingCorrectAnswer';
+      },
+
+      getTipDirection: function() {
+        if ( this.plank.getTorqueDueToMasses() < 0 ) {
+          return 'tiltDownOnRightSide';
+        }
+        else if ( this.plank.getTorqueDueToMasses() > 0 ) {
+          return 'tiltDownOnLeftSide';
+        }
+        else {
+          return 'stayBalanced';
+        }
       },
 
       restartGameTimer: function() {

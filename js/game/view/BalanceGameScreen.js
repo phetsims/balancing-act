@@ -218,7 +218,7 @@ define( function( require ) {
     // Add and lay out the buttons.
     thisScreen.buttons = [];
     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-      listener: function() { gameModel.checkAnswer( thisScreen.tiltPredictionSelectorNode ) },
+      listener: function() { gameModel.checkAnswer( null, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value ) },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
     thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
@@ -435,9 +435,9 @@ define( function( require ) {
             this.massValueAnswerNode.update();
             this.massValueAnswerNode.visible = true;
           }
-          else if ( this.model.getCurrentChallenge().viewConfig.showTilePredictionSelector ) {
-            this.tiltPredictionNode.tiltPrediction = this.model.getTipDirection();
-            this.tiltPredictionNode.visible = true;
+          else if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
+            this.tiltPredictionSelectorNode.tiltPredictionProperty.value = this.model.getTipDirection();
+            this.tiltPredictionSelectorNode.visible = true;
           }
           this.showChallengeGraphics();
 
