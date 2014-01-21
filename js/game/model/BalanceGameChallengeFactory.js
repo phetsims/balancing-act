@@ -26,6 +26,7 @@ define( function( require ) {
   var Man = require( 'BALANCING_ACT/common/model/masses/Man' );
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Tolerance value used when comparing floating-point calculations.
@@ -100,6 +101,33 @@ define( function( require ) {
     },
 
     /**
+     * Generate a simple tilt-prediction style of challenge.  This one only
+     * uses bricks, and never produces perfectly balanced challenges.
+     */
+    generateSimpleTiltPredictionChallenge: function() {
+      // Choose two different numbers between 1 and 4 (inclusive) for the
+      // number of bricks in the two stacks.
+      var numBricksInLeftStack = 1 + Math.floor( Math.random() * 4 );
+      var numBricksInRightStack = numBricksInLeftStack;
+      while ( numBricksInRightStack == numBricksInLeftStack ) {
+        numBricksInRightStack = 1 + Math.floor( Math.random() * 4 );
+      }
+
+      // Choose a distance from the center, which will be used for
+      // positioning both stacks.  The max and min values can be tweaked if
+      // desired to limit the range of distances generated.
+      var distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.prototype.LENGTH / 2 - Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
+
+      // Create the actual challenge from the pieces.
+      return TiltPredictionChallenge.prototype.create(
+        new BrickStack( numBricksInLeftStack ),
+        distanceFromPlankCenter,
+        new BrickStack( numBricksInRightStack ),
+        -distanceFromPlankCenter );
+    },
+
+    /**
      * Convenience function for removing the oldest half of a list.
      */
     removeOldestHalfOfList: function( list ) {
@@ -164,11 +192,34 @@ define( function( require ) {
       return true;
     },
 
+    /**
+     * Tests a challenge against a set of challenges to see whether the test
+     * challenge has unique fixed masses and distances compared to all of the
+     * challenges on the comparison list.  If any of the challenge on the
+     * comparison list have the same fixed masses at the same distances from
+     * the center, this will return false, indicating that the test challenge
+     * is not unique.
+     *
+     * @param testChallenge
+     * @param usedChallengeList
+     * @return
+     */
+    usesUniqueFixedMassesAndDistances: function( testChallenge, usedChallengeList ) {
+      for ( var i = 0; i < usedChallengeList.length; i++ ) {
+        if ( usedChallengeList[i].usesSameFixedMassesAndDistances( testChallenge ) ) {
+          return false;
+        }
+      }
+      return true;
+    },
+
+
     generateChallengeSet: function( level ) {
       var balanceChallengeList = [];
       switch( level ) {
 
         case 0:
+          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
           break;
@@ -194,4 +245,5 @@ define( function( require ) {
       return balanceChallengeList;
     }
   };
-} );
+} )
+;

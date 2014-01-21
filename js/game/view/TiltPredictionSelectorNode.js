@@ -17,7 +17,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var plankBalancedImage = require( 'image!BALANCING_ACT/plank-balanced.png' );
   var plankTippedLeftImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
-  var plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
+  var plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
   var Property = require( 'AXON/Property' );
   var TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -34,9 +34,9 @@ define( function( require ) {
         new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
         new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
         new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
-      ] } );
+      ], spacing: 5 } );
 
-    this.addChild( new Panel( panelContents ) );
+    this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
   }
 
   return inherit( Node, TiltPredictionSelectorNode );

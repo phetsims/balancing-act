@@ -38,7 +38,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
   var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
-//  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
+  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Images and Strings
@@ -198,13 +198,13 @@ define( function( require ) {
      thisScreen.massValueEntryNode.center = massEntryDialogCenter;
      thisScreen.massValueAnswerNode.center = massEntryDialogCenter;
 
-     // Add the node that allows the user to submit their prediction of which
-     // way the plank will tilt.  This is used in the tilt prediction challenges.
-     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
-     thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
-     thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
-
      */
+
+    // Add the node that allows the user to submit their prediction of which
+    // way the plank will tilt.  This is used in the tilt prediction challenges.
+    thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
+    thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
+    thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.
@@ -471,7 +471,8 @@ define( function( require ) {
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false } );
       //TODO: More nodes to add as they come on line.
-      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard ] );
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard,
+        this.tiltPredictionSelectorNode ] );
     },
 
     show: function( nodesToShow ) {
