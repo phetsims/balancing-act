@@ -11,6 +11,7 @@ define( function( require ) {
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
+  var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Color = require( 'SCENERY/util/Color' );
   var FaceWithScoreNode = require( 'BALANCING_ACT/game/view/FaceWithScoreNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
@@ -38,6 +39,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
   var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
+  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -250,12 +252,12 @@ define( function( require ) {
       button.center = buttonCenter;
     } );
 
-    /*
+    // Add listeners that control the enabled state of the check answer button.
+    gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
+    gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
+    thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
 
-     // Add listeners that control the enabled state of the check answer button.
-     gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled );
-     gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled );
-     thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled );
+    /*
 
      // Add a key listener that will allow the user to essentially press the
      // active button by pressing the Enter key.
@@ -340,7 +342,22 @@ define( function( require ) {
     },
 
     updateCheckAnswerButtonEnabled: function() {
-      // TODO
+      if ( this.model.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
+        // The button should be enabled whenever there are masses on the
+        // right side of the plank.
+        var thisScreen = this;
+        var massesOnRightSide = false;
+        this.model.plank.massesOnSurface.forEach( function( mass ) {
+          if ( mass.position.x > thisScreen.model.plank.getPlankSurfaceCenter().x ) {
+            massesOnRightSide = true;
+          }
+        } );
+        this.checkAnswerButton.enabled = massesOnRightSide;
+      }
+      else if ( this.model.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
+        // The button should be enabled once the user has made a prediction.
+        this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value != 'none';
+      }
     },
 
     // When the game state changes, update the view with the appropriate
