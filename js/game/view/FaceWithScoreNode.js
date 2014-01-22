@@ -38,9 +38,11 @@ define( function( require ) {
   return inherit( Node, FaceWithScoreNode, {
     smile: function() {
       this.faceNode.smile();
+      this.pointDisplay.visible = true;
     },
     frown: function() {
       this.faceNode.frown();
+      this.pointDisplay.visible = false;
     },
     setScore: function( score ) {
       assert && assert( score >= 0 );

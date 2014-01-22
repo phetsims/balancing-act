@@ -408,7 +408,7 @@ define( function( require ) {
           // Give the user the appropriate feedback
           this.gameAudioPlayer.correctAnswer();
           this.faceWithScoreNode.smile();
-          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.setScore( this.model.getChallengeCurrentPointValue() );
           this.faceWithScoreNode.visible = true;
 
           break;

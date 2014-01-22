@@ -184,6 +184,10 @@ define( function( require ) {
         return this.challengeList[ this.challengeIndex ];
       },
 
+      getChallengeCurrentPointValue: function() {
+        return MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
+      },
+
       // Check the user's proposed answer.  Used overloaded functions in
       // the original Java sim, a little ugly when ported.
       checkAnswer: function( mass, tiltPrediction ) {
