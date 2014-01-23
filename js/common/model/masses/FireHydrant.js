@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, fireHydrantImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, FireHydrant );
+  return inherit( ImageMass, FireHydrant,
+    {
+      createCopy: function() {
+        var copy = new FireHydrant();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

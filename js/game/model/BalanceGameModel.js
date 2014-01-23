@@ -19,6 +19,7 @@ define( function( require ) {
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
+  var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -205,8 +206,9 @@ define( function( require ) {
                                      ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
                                      ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() == 0 ) );
         }
-        // TODO: Add handling for other challenge types.
-
+        else if ( this.getCurrentChallenge() instanceof MassDeductionChallenge ) {
+          this.handleProposedAnswer( mass === this.getTotalFixedMassValue() );
+        }
       },
 
       handleProposedAnswer: function( answerIsCorrect ) {
@@ -296,6 +298,14 @@ define( function( require ) {
         else {
           return 'stayBalanced';
         }
+      },
+
+      getTotalFixedMassValue: function() {
+        var totalMass = 0;
+        this.getCurrentChallenge().fixedMassDistancePairs.forEach( function( massDistancePair ) {
+          totalMass += massDistancePair.mass.massValue;
+        } );
+        return totalMass;
       },
 
       restartGameTimer: function() {

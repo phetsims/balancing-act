@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, cinderBlockImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, CinderBlock );
+  return inherit( ImageMass, CinderBlock,
+    {
+      createCopy: function() {
+        var copy = new CinderBlock();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

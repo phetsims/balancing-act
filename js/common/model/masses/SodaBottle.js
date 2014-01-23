@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, sodaBottleImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, SodaBottle );
+  return inherit( ImageMass, SodaBottle,
+    {
+      createCopy: function() {
+        var copy = new SodaBottle();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

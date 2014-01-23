@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, televisionImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, Television );
+  return inherit( ImageMass, Television,
+    {
+      createCopy: function() {
+        var copy = new Television();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

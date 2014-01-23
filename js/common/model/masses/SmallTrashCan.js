@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, SmallTrashCan );
+  return inherit( ImageMass, SmallTrashCan,
+    {
+      createCopy: function() {
+        var copy = new SmallTrashCan();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

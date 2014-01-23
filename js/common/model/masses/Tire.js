@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, tireImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, Tire );
+  return inherit( ImageMass, Tire,
+    {
+      createCopy: function() {
+        var copy = new Tire();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

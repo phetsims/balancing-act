@@ -21,5 +21,12 @@ define( function( require ) {
     ImageMass.call( this, MASS, metalBucketImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, LargeBucket );
+  return inherit( ImageMass, LargeBucket,
+    {
+      createCopy: function() {
+        var copy = new LargeBucket();
+        copy.position = this.position.copy;
+        return copy;
+      }
+    } );
 } );

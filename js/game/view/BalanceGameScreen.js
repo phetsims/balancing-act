@@ -22,8 +22,8 @@ define( function( require ) {
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-//  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
-//  var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
+  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
+  var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
@@ -181,14 +181,18 @@ define( function( require ) {
       } );
     thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
+    // TODO: Uncomment the various pieces below as the corresponding functionality is implemented.
+
+    // Add the dialog node that is used in the mass deduction challenges
+    // to enable the user to submit specific mass values.
+    thisScreen.massValueEntryNode = new MassValueEntryNode(
+      {
+        centerX: mvt.modelToViewX( 0 ),
+        centerY: thisScreen.challengeTitleNode.bounds.maxY + 30
+      } );
+    thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
+
     /*
-
-     // TODO: Uncomment the various pieces below as the corresponding functionality is implemented.
-
-     // Add the dialog node that is used in the mass deduction challenges
-     // to enable the user to submit specific mass values.
-     thisScreen.massValueEntryNode = new MassValueEntryNode( gameModel, this );
-     thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
 
      // Add the node that is used to depict the correct answer for the
      // mass deduction challenges.
@@ -489,7 +493,7 @@ define( function( require ) {
       this.buttons.forEach( function( button ) { button.visible = false } );
       //TODO: More nodes to add as they come on line.
       this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard,
-        this.tiltPredictionSelectorNode ] );
+        this.tiltPredictionSelectorNode, this.massValueEntryNode ] );
     },
 
     show: function( nodesToShow ) {

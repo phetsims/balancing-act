@@ -28,6 +28,7 @@ define( function( require ) {
    */
   function BrickStack( numBricks, initialPosition ) {
 
+    this.numBricks = numBricks;
     initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
 
     // Generate the shape of the brick stack.
@@ -49,13 +50,17 @@ define( function( require ) {
     ShapeMass.call( this, numBricks * BRICK_MASS, brickStackShape, initialPosition );
   }
 
-  inherit( ShapeMass, BrickStack );
+  return inherit( ShapeMass, BrickStack,
+    {
+      createCopy: function() {
+        return new BrickStack( this.numBricks, this.position );
+      },
 
-  // Public constants
-  BrickStack.BRICK_MASS = BRICK_MASS;
-  BrickStack.BRICK_HEIGHT = BRICK_HEIGHT;
-
-  return BrickStack;
+      // Public constants
+      BRICK_MASS: BRICK_MASS,
+      BRICK_HEIGHT: BRICK_HEIGHT
+    }
+  );
 } );
 
 
