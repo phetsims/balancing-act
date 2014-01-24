@@ -22,7 +22,7 @@ define( function( require ) {
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
-  var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
+//  var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
   var FireHydrant = require( 'BALANCING_ACT/common/model/masses/FireHydrant' );
   var FlowerPot = require( 'BALANCING_ACT/common/model/masses/FlowerPot' );
   var Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
@@ -31,26 +31,26 @@ define( function( require ) {
   var Man = require( 'BALANCING_ACT/common/model/masses/Man' );
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
-  var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
+//  var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
   var MediumTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
   var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
-  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
+//  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
+//  var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
   var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Tolerance value used when comparing floating-point calculations.
-  var COMPARISON_TOLERANCE = 1E-6;
+//  var COMPARISON_TOLERANCE = 1E-6;
 
   // Determine the min and max distances from the center of the plank where
   // masses may be positioned.
-  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
+//  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
   // balance challenge.
@@ -91,12 +91,14 @@ define( function( require ) {
   // List of masses that are "low profile", meaning that they are short.
   // This is needed for the tilt-prediction style of problem, since taller
   // masses end up going behind the tilt prediction selector.
-  var LOW_PROFILE_MASSES = [
+  /*
+   var LOW_PROFILE_MASSES = [
     new TinyRock( Vector2.ZERO, true ),
     new SmallRock( Vector2.ZERO, true ),
     new MediumRock( Vector2.ZERO, true ),
     new CinderBlock( Vector2.ZERO, true )
   ];
+   */
 
   // Lists used to keep track of the challenges generated so far so that we
   // can avoid creating the same challenges multiple times.
@@ -163,7 +165,7 @@ define( function( require ) {
       // number of bricks in the two stacks.
       var numBricksInLeftStack = 1 + Math.floor( Math.random() * 4 );
       var numBricksInRightStack = numBricksInLeftStack;
-      while ( numBricksInRightStack == numBricksInLeftStack ) {
+      while ( numBricksInRightStack === numBricksInLeftStack ) {
         numBricksInRightStack = 1 + Math.floor( Math.random() * 4 );
       }
 
@@ -248,7 +250,7 @@ define( function( require ) {
           this.removeOldestHalfOfList( previousChallenges );
         }
       }
-      assert && assert( challenged !== null ); // The algorithm above should always produce something, log it if not.
+      assert && assert( challenge !== null ); // The algorithm above should always produce something, log it if not.
       previousChallenges.push( challenge );
       return challenge;
     },

@@ -27,7 +27,7 @@ define( function( require ) {
       title: whatIsTheMassString,
       showMassEntryDialog: true,
       showTiltPredictionSelector: false
-    }
+    };
   }
 
   return inherit( BalanceGameChallenge, MassDeductionChallenge, {

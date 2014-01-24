@@ -12,7 +12,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Shape = require( 'KITE/Shape' );
 
   // Constants, collected here for easy appearance tweaking.
   var PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.
@@ -20,7 +19,6 @@ define( function( require ) {
   var NON_HIGHLIGHT_LINE_WIDTH = 1;
   var HOVER_LINE_WIDTH = 2;
   var SELECTED_HIGHLIGHT_COLOR = 'rgb( 255, 215, 0 )';
-  var MOUSE_OVER_HIGHLIGHT_COLOR = 'rgb( 255, 215, 0 )';
   var SELECTED_HIGHLIGHT_LINE_WIDTH = 6;
   var CORRECT_ANSWER_HIGHLIGHT_COLOR = 'rgb( 0, 255, 0 )';
   var INVISIBLE_COLOR = 'rgba( 0, 0, 0, 0 )';
@@ -79,7 +77,6 @@ define( function( require ) {
 
     // Add the outline around the panel, which will be changed to depict the
     // user's selection and the correct answer.
-    var outlineShape = Shape.rect( imagePanel.bounds.minX, imagePanel.bounds.minY, imagePanel.bounds.width, imagePanel.bounds.minX );
     thisNode.thinOutline = new Rectangle.bounds( imagePanel.bounds,
       {
         stroke: NON_HIGHLIGHT_COLOR,

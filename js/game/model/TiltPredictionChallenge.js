@@ -27,7 +27,7 @@ define( function( require ) {
       title: whatWillHappenString,
       showMassEntryDialog: false,
       showTiltPredictionSelector: true
-    }
+    };
   }
 
   return inherit( BalanceGameChallenge, TiltPredictionChallenge, {

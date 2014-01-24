@@ -204,7 +204,7 @@ define( function( require ) {
 
           this.handleProposedAnswer( ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
                                      ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
-                                     ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() == 0 ) );
+                                     ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 ) );
         }
         else if ( this.getCurrentChallenge() instanceof MassDeductionChallenge ) {
           this.handleProposedAnswer( mass === this.getTotalFixedMassValue() );

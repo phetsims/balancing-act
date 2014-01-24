@@ -20,7 +20,6 @@ define( function( require ) {
   var plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
   var Property = require( 'AXON/Property' );
   var TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   function TiltPredictionSelectorNode( gameStateProperty ) {
     Node.call( this );

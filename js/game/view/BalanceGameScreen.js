@@ -23,7 +23,6 @@ define( function( require ) {
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-  var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
   var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -193,20 +192,6 @@ define( function( require ) {
       } );
     thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
 
-    /*
-
-     // Add the node that is used to depict the correct answer for the
-     // mass deduction challenges.
-     thisScreen.massValueAnswerNode = new MassValueAnswerNode( gameModel, this );
-     thisScreen.rootNode.addChild( thisScreen.massValueAnswerNode );
-
-     // Position the mass entry and mass answer nodes in the same place.
-     var massEntryDialogCenter = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + thisScreen.massValueEntryNode.height / 2 + 10 );
-     thisScreen.massValueEntryNode.center = massEntryDialogCenter;
-     thisScreen.massValueAnswerNode.center = massEntryDialogCenter;
-
-     */
-
     // Add the node that allows the user to submit their prediction of which
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
@@ -225,7 +210,9 @@ define( function( require ) {
     // Add and lay out the buttons.
     thisScreen.buttons = [];
     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-      listener: function() { gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value ) },
+      listener: function() {
+        gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value );
+      },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
     thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
@@ -469,7 +456,7 @@ define( function( require ) {
           if ( this.model.score === BalanceGameModel.prototype.MAX_POSSIBLE_SCORE ) {
             this.gameAudioPlayer.gameOverPerfectScore();
           }
-          else if ( this.model.score == 0 ) {
+          else if ( this.model.score === 0 ) {
             this.gameAudioPlayer.gameOverZeroScore();
           }
           else {
@@ -491,18 +478,18 @@ define( function( require ) {
     // Utility method for hiding all of the game nodes whose visibility changes
     // during the course of a challenge.
     hideAllGameNodes: function() {
-      this.buttons.forEach( function( button ) { button.visible = false } );
+      this.buttons.forEach( function( button ) { button.visible = false; } );
       //TODO: More nodes to add as they come on line.
       this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard,
         this.tiltPredictionSelectorNode, this.massValueEntryNode ] );
     },
 
     show: function( nodesToShow ) {
-      nodesToShow.forEach( function( nodeToShow ) { nodeToShow.visible = true } );
+      nodesToShow.forEach( function( nodeToShow ) { nodeToShow.visible = true; } );
     },
 
     setNodeVisibility: function( isVisible, nodes ) {
-      nodes.forEach( function( node ) { node.visible = isVisible } );
+      nodes.forEach( function( node ) { node.visible = isVisible; } );
     },
 
     hideChallenge: function() {

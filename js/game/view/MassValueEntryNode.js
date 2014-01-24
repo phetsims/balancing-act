@@ -68,9 +68,9 @@ define( function( require ) {
 
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValue.value-- }, arrowButtonOptions );
+    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValue.value--; }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.massValue.value++ }, arrowButtonOptions );
+    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.massValue.value++; }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout

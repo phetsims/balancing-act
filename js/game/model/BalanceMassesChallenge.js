@@ -36,7 +36,7 @@ define( function( require ) {
       title: balanceMeString,
       showMassEntryDialog: false,
       showTiltPredictionSelector: false
-    }
+    };
   }
 
   return inherit( BalanceGameChallenge, BalanceMassesChallenge, {

@@ -121,7 +121,7 @@ define( function( require ) {
         return true;
       }
 
-      if ( this.fixedMassDistancePairs.length != that.fixedMassDistancePairs.length ) {
+      if ( this.fixedMassDistancePairs.length !== that.fixedMassDistancePairs.length ) {
         // If the lists are unequal in size, then the set of fixed masses
         // and distances can't be equal.
         return false;
