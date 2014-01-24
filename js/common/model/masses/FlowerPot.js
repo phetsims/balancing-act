@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, FlowerPot,
     {
       createCopy: function() {
-        var copy = new FlowerPot();
-        copy.position = this.position.copy;
-        return copy;
+        return new FlowerPot( this.position.copy(), this.isMystery );
       }
     } );
 } );

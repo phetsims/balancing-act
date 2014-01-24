@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, SmallTrashCan,
     {
       createCopy: function() {
-        var copy = new SmallTrashCan();
-        copy.position = this.position.copy;
-        return copy;
+        return new SmallTrashCan( this.position.copy(), this.isMystery );
       }
     } );
 } );

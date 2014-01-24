@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, LargeBucket,
     {
       createCopy: function() {
-        var copy = new LargeBucket();
-        copy.position = this.position.copy;
-        return copy;
+        return new LargeBucket( this.position.copy(), this.isMystery );
       }
     } );
 } );

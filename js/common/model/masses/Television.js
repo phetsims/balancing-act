@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, Television,
     {
       createCopy: function() {
-        var copy = new Television();
-        copy.position = this.position.copy;
-        return copy;
+        return new Television( this.position.copy(), this.isMystery );
       }
     } );
 } );

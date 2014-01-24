@@ -33,7 +33,7 @@ define( function( require ) {
     {
       createCopy: function() {
         var copy = new Man();
-        copy.position = this.position.copy;
+        copy.position = this.position.copy();
         return copy;
       }
     } );

@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, MediumBucket,
     {
       createCopy: function() {
-        var copy = new MediumBucket();
-        copy.position = this.position.copy;
-        return copy;
+        return new MediumBucket( this.position.copy(), this.isMystery );
       }
     } );
 } );

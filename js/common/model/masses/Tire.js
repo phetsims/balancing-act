@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, Tire,
     {
       createCopy: function() {
-        var copy = new Tire();
-        copy.position = this.position.copy;
-        return copy;
+        var copy = new Tire( this.position.copy(), this.isMystery );
       }
     } );
 } );

@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, FireHydrant,
     {
       createCopy: function() {
-        var copy = new FireHydrant();
-        copy.position = this.position.copy;
-        return copy;
+        return new FireHydrant( this.position.copy(), this.isMystery );
       }
     } );
 } );

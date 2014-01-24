@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, SodaBottle,
     {
       createCopy: function() {
-        var copy = new SodaBottle();
-        copy.position = this.position.copy;
-        return copy;
+        return new SodaBottle( this.position.copy(), this.isMystery );
       }
     } );
 } );

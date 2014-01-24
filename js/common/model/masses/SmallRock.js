@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, SmallRock,
     {
       createCopy: function() {
-        var copy = new SmallRock();
-        copy.position = this.position.copy;
-        return copy;
+        return SmallRock( this.position.copy(), this.isMystery );
       }
     } );
 } );

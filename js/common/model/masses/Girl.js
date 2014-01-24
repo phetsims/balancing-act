@@ -35,7 +35,7 @@ define( function( require ) {
     {
       createCopy: function() {
         var copy = new Girl();
-        copy.position = this.position.copy;
+        copy.position = this.position.copy();
         return copy;
       }
     } );

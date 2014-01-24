@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, CinderBlock,
     {
       createCopy: function() {
-        var copy = new CinderBlock();
-        copy.position = this.position.copy;
-        return copy;
+        return new CinderBlock( this.position.copy(), this.isMystery );
       }
     } );
 } );

@@ -24,9 +24,7 @@ define( function( require ) {
   return inherit( ImageMass, SmallBucket,
     {
       createCopy: function() {
-        var copy = new SmallBucket();
-        copy.position = this.position.copy;
-        return copy;
+        return new SmallBucket( this.position.copy(), this.isMystery );
       }
     } );
 } );
