@@ -21,6 +21,7 @@ define( function( require ) {
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
+  var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var MassValueAnswerNode = require( 'BALANCING_ACT/game/view/MassValueAnswerNode' );
   var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
@@ -224,7 +225,7 @@ define( function( require ) {
     // Add and lay out the buttons.
     thisScreen.buttons = [];
     thisScreen.checkAnswerButton = new TextPushButton( checkString, {
-      listener: function() { gameModel.checkAnswer( null, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value ) },
+      listener: function() { gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value ) },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
     thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
@@ -260,6 +261,7 @@ define( function( require ) {
     gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
+    thisScreen.massValueEntryNode.massValue.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
 
     /*
 
@@ -360,7 +362,11 @@ define( function( require ) {
       }
       else if ( this.model.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
         // The button should be enabled once the user has made a prediction.
-        this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value != 'none';
+        this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value !== 'none';
+      }
+      else if ( this.model.getCurrentChallenge() instanceof MassDeductionChallenge ) {
+        // The button should be enabled for any non-zero value.
+        this.checkAnswerButton.enabled = this.massValueEntryNode.massValue.value !== 0;
       }
     },
 
@@ -375,19 +381,18 @@ define( function( require ) {
       // Show the nodes appropriate to the state
       switch( gameState ) {
         case 'choosingLevel':
-          this.startGameLevelNode.visible = true;
+          this.show( [ this.startGameLevelNode ] );
           this.hideChallenge();
+          this.massValueEntryNode.clear();
           break;
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          this.show( [ this.challengeTitleNode, this.scoreboard ] );
+          this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
-            this.massValueEntryNode.clear();
             this.massValueEntryNode.visible = true;
           }
           else {
-            this.checkAnswerButton.visible = true;
             if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
               this.tiltPredictionSelectorNode.tiltPredictionProperty.reset();
               this.tiltPredictionSelectorNode.visible = true;
@@ -406,8 +411,7 @@ define( function( require ) {
         case 'showingCorrectAnswerFeedback':
 
           // Show the appropriate nodes for this state.
-          this.scoreboard.visible = true;
-          this.nextButton.visible = true;
+          this.show( [ this.scoreboard, this.nextButton ] );
 
           // Give the user the appropriate feedback
           this.gameAudioPlayer.correctAnswer();
@@ -420,8 +424,7 @@ define( function( require ) {
         case 'showingIncorrectAnswerFeedbackTryAgain':
 
           // Show the appropriate nodes for this state.
-          this.scoreboard.visible = true;
-          this.tryAgainButton.visible = true;
+          this.show( [ this.scoreboard, this.tryAgainButton ] );
 
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
@@ -434,8 +437,7 @@ define( function( require ) {
         case 'showingIncorrectAnswerFeedbackMoveOn':
 
           // Show the appropriate nodes for this state.
-          this.scoreboard.visible = true;
-          this.displayCorrectAnswerButton.visible = true;
+          this.show( [ this.scoreboard, this.displayCorrectAnswerButton ] );
 
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
@@ -448,13 +450,12 @@ define( function( require ) {
         case 'displayingCorrectAnswer':
 
           // Show the appropriate nodes for this state.
-          this.scoreboard.visible = true;
-          this.nextButton.visible = true;
+          this.show( [ this.scoreboard, this.nextButton ] );
 
           // Display the correct answer
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
-            this.massValueAnswerNode.update();
-            this.massValueAnswerNode.visible = true;
+            this.massValueEntryNode.showAnswer( this.model.getTotalFixedMassValue() );
+            this.massValueEntryNode.visible = true;
           }
           else if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
             this.tiltPredictionSelectorNode.tiltPredictionProperty.value = this.model.getTipDirection();

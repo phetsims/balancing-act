@@ -28,7 +28,7 @@ define( function( require ) {
   function MassValueEntryNode( options ) {
     Node.call( this );
     var thisNode = this;
-    thisNode.readoutValue = new Property( 0 );
+    thisNode.massValue = new Property( 0 );
 
     // Create and add the readout, including the background.
     var readoutText = new Text( '0' + ' ' + kgString, { font: READOUT_FONT } );
@@ -44,7 +44,8 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    var slider = new HSlider( thisNode.readoutValue, { min: 0, max: MAX_MASS },
+    this.sliderValue = new Property( 0 );
+    var slider = new HSlider( thisNode.sliderValue, { min: 0, max: MAX_MASS },
       {
         thumbSize: new Dimension2( 15, 30 ),
         majorTickLength: 15,
@@ -60,15 +61,20 @@ define( function( require ) {
       }
     }
 
+    // Hook up the slider property to the mass value so that mass only contains integer values.
+    thisNode.sliderValue.link( function( value ) {
+      thisNode.massValue.value = Math.round( value );
+    } );
+
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.readoutValue.value-- }, arrowButtonOptions );
+    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValue.value-- }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.readoutValue.value++ }, arrowButtonOptions );
+    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.massValue.value++ }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
-    thisNode.readoutValue.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
+    thisNode.massValue.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
     readoutBackground.centerX = slider.bounds.width / 2;
     readoutBackground.top = 0;
     slider.left = 0;
@@ -77,15 +83,15 @@ define( function( require ) {
     leftArrowButton.centerY = slider.centerY;
     rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
-    thisNode.readoutValue.reset(); // Put slider back to original position.
+    thisNode.massValue.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
     var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 10, yMargin: 10 } );
     thisNode.addChild( panel );
 
     // Update the readout text whenever the value changes.
-    thisNode.readoutValue.link( function( value ) {
-      readoutText.text = Math.round( value ) + ' ' + kgString;
+    thisNode.massValue.link( function( value ) {
+      readoutText.text = value + ' ' + kgString;
       readoutText.centerX = readoutBackground.centerX;
     } );
 
@@ -94,7 +100,10 @@ define( function( require ) {
 
   return inherit( Node, MassValueEntryNode, {
     clear: function() {
-      this.readoutValue.reset();
+      this.sliderValue.reset();
+    },
+    showAnswer: function( massValue ) {
+      this.sliderValue.value = massValue;
     }
   } );
 } );
