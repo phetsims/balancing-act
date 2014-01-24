@@ -247,14 +247,16 @@ define( function( require ) {
         this.challengeIndex++;
         this.incorrectGuessesOnCurrentChallenge = 0;
         if ( this.challengeIndex < this.challengeList.length ) {
+          // Move to the next challenge.
           this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
           this.gameState = 'presentingInteractiveChallenge';
         }
         else {
-          // See if this is a new best time and, if so, record it.
+          // All challenges completed for this level.  See if this is a new
+          // best time and, if so, record it.
           if ( this.score === MAX_SCORE_PER_GAME ) {
             // Perfect game.  See if new best time.
-            if ( this.elapsedTime < this.bestTimes( this.level ) ) {
+            if ( this.elapsedTime < this.bestTimes[ this.level ] ) {
               // New best.
               this.bestTimes[ this.level ] = this.elapsedTime;
             }
