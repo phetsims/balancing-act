@@ -370,13 +370,15 @@ define( function( require ) {
         case 'choosingLevel':
           this.show( [ this.startGameLevelNode ] );
           this.hideChallenge();
-          this.massValueEntryNode.clear();
           break;
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
+            if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
+              this.massValueEntryNode.clear();
+            }
             this.massValueEntryNode.visible = true;
           }
           else {
@@ -400,7 +402,7 @@ define( function( require ) {
           // Show the appropriate nodes for this state.
           this.show( [ this.scoreboard, this.nextButton ] );
 
-          // Give the user the appropriate feedback
+          // Give the user the appropriate audio and visual feedback
           this.gameAudioPlayer.correctAnswer();
           this.faceWithScoreNode.smile();
           this.faceWithScoreNode.setScore( this.model.getChallengeCurrentPointValue() );
