@@ -188,7 +188,7 @@ define( function( require ) {
     thisScreen.massValueEntryNode = new MassValueEntryNode(
       {
         centerX: mvt.modelToViewX( 0 ),
-        centerY: thisScreen.challengeTitleNode.bounds.maxY + 30
+        top: thisScreen.challengeTitleNode.bounds.maxY + 12
       } );
     thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
 

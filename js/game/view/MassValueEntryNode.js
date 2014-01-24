@@ -5,6 +5,7 @@ define( function( require ) {
 
   // Imports
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -17,6 +18,9 @@ define( function( require ) {
 
   // Constants
   var READOUT_FONT = new PhetFont( 16 );
+  var ARROW_HEIGHT = 15;
+  var MAX_MASS = 100;
+  var TICK_MARK_FONT = new PhetFont( 10 );
 
   /**
    * @constructor
@@ -40,29 +44,43 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    var slider = new HSlider( thisNode.readoutValue, { min: 0, max: 100 } );
+    var slider = new HSlider( thisNode.readoutValue, { min: 0, max: MAX_MASS },
+      {
+        thumbSize: new Dimension2( 15, 30 ),
+        majorTickLength: 15,
+        tickLabelSpacing: 2
+      } );
     panelContent.addChild( slider );
+    for ( var i = 0; i <= MAX_MASS; i += 10 ) {
+      if ( i % 50 === 0 ) {
+        slider.addMajorTick( i, new Text( i, { font: TICK_MARK_FONT } ) );
+      }
+      else {
+        slider.addMinorTick( i, null );
+      }
+    }
 
     // Create and add the arrow buttons.
-    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.readoutValue.value-- } );
+    var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.readoutValue.value-- }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.readoutValue.value++ } );
+    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.readoutValue.value++ }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
-    thisNode.readoutValue.value = 50; // Make sure slider is in the middle during layout.
+    thisNode.readoutValue.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
     readoutBackground.centerX = slider.bounds.width / 2;
     readoutBackground.top = 0;
     slider.left = 0;
     slider.top = readoutBackground.bottom + 5;
-    leftArrowButton.right = slider.left - 5;
+    leftArrowButton.right = slider.left - 12;
     leftArrowButton.centerY = slider.centerY;
-    rightArrowButton.left = slider.right + 5;
+    rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
     thisNode.readoutValue.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
-    var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )' } );
+    var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 10, yMargin: 10 } );
     thisNode.addChild( panel );
 
     // Update the readout text whenever the value changes.
