@@ -1,5 +1,10 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
+/**
+ * This class presents a dialog to the user that allows them to enter a mass value.
+ *
+ * @author John Blanco
+ */
 define( function( require ) {
   'use strict';
 
