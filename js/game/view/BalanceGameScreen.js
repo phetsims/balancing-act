@@ -190,12 +190,13 @@ define( function( require ) {
         centerX: mvt.modelToViewX( 0 ),
         top: thisScreen.challengeTitleNode.bounds.maxY + 12
       } );
-    thisScreen.rootNode.addChild( thisScreen.massValueEntryNode );
+    thisScreen.challengeLayer.addChild( thisScreen.massValueEntryNode );
 
     // Add the node that allows the user to submit their prediction of which
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
-    thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
+    thisScreen.challengeLayer.addChild( thisScreen.tiltPredictionSelectorNode );
+//    thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
     thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
     // Create the 'feedback node' that is used to visually indicate correct
@@ -215,28 +216,28 @@ define( function( require ) {
       },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.challengeLayer.addChild( thisScreen.checkAnswerButton );
+    thisScreen.rootNode.addChild( thisScreen.checkAnswerButton );
     thisScreen.buttons.push( thisScreen.checkAnswerButton );
 
     thisScreen.nextButton = new TextPushButton( nextString, {
       listener: function() { gameModel.nextChallenge(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.challengeLayer.addChild( thisScreen.nextButton );
+    thisScreen.rootNode.addChild( thisScreen.nextButton );
     thisScreen.buttons.push( thisScreen.nextButton );
 
     thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
       listener: function() { gameModel.tryAgain(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.challengeLayer.addChild( thisScreen.tryAgainButton );
+    thisScreen.rootNode.addChild( thisScreen.tryAgainButton );
     thisScreen.buttons.push( thisScreen.tryAgainButton );
 
     thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
       listener: function() { gameModel.displayCorrectAnswer(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
-    thisScreen.challengeLayer.addChild( thisScreen.displayCorrectAnswerButton );
+    thisScreen.rootNode.addChild( thisScreen.displayCorrectAnswerButton );
     thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
 
     var buttonCenter = this.mvt.modelToViewPosition( new Vector2( 0, -0.3 ) );
@@ -374,6 +375,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
+          this.challengeLayer.pickable = true;
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
             if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
@@ -390,11 +392,6 @@ define( function( require ) {
 
           this.showChallengeGraphics();
 
-          // Set the challenge layer to be interactive so that the user can
-          // manipulate the masses.
-          this.challengeLayer.setPickable = false;
-          this.challengeLayer.setChildrenPickable = false;
-
           break;
 
         case 'showingCorrectAnswerFeedback':
@@ -407,6 +404,9 @@ define( function( require ) {
           this.faceWithScoreNode.smile();
           this.faceWithScoreNode.setScore( this.model.getChallengeCurrentPointValue() );
           this.faceWithScoreNode.visible = true;
+
+          // Disable interaction with the challenge elements.
+          this.challengeLayer.pickable = false;
 
           break;
 
@@ -421,6 +421,9 @@ define( function( require ) {
           this.faceWithScoreNode.setScore( this.model.score );
           this.faceWithScoreNode.visible = true;
 
+          // Disable interaction with the challenge elements.
+          this.challengeLayer.pickable = false;
+
           break;
 
         case 'showingIncorrectAnswerFeedbackMoveOn':
@@ -433,6 +436,9 @@ define( function( require ) {
           this.faceWithScoreNode.frown();
           this.faceWithScoreNode.setScore( this.model.score );
           this.faceWithScoreNode.visible = true;
+
+          // Disable interaction with the challenge elements.
+          this.challengeLayer.pickable = false;
 
           break;
 
@@ -452,6 +458,9 @@ define( function( require ) {
           }
           this.showChallengeGraphics();
 
+          // Disable interaction with the challenge elements.
+          this.challengeLayer.pickable = false;
+
           break;
 
         case 'showingLevelResults':
@@ -464,9 +473,6 @@ define( function( require ) {
           else {
             this.gameAudioPlayer.gameOverImperfectScore();
           }
-
-          // TODO: Following line can be removed once other states have been implemented.
-          this.startGameLevelNode.visible = false;
 
           this.showLevelResultsNode();
           this.hideChallenge();
@@ -497,8 +503,6 @@ define( function( require ) {
     hideChallenge: function() {
       this.challengeLayer.visible = false;
       this.controlLayer.visible = false;
-
-      // TODO - Java version sets these layers to be unpickable, not sure why, have omitted for now.
     },
 
     // Show the graphic model elements for this challenge, i.e. the plank,
@@ -506,10 +510,6 @@ define( function( require ) {
     showChallengeGraphics: function() {
       this.challengeLayer.visible = true;
       this.controlLayer.visible = true;
-
-      // By default this is initially set up to be non-interactive.
-      this.challengeLayer.setPickable = false;
-      this.challengeLayer.setChildrenPickable = false;
     },
 
     showLevelResultsNode: function() {
