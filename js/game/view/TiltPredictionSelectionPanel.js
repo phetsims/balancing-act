@@ -59,11 +59,11 @@ define( function( require ) {
     }
 
     // Set up mouse listener that watches to see if the user has selected this option.
-    imagePanel.addInputListener( new DownUpListener( { up: function( event ) { tiltPredictionProperty.value = correspondingPrediction; } } ) );
+    thisNode.addInputListener( new DownUpListener( { up: function( event ) { tiltPredictionProperty.value = correspondingPrediction; } } ) );
 
     // Set up a hover listener to update hover highlight.
     thisNode.mouseOver = false;
-    imagePanel.addInputListener(
+    thisNode.addInputListener(
       {
         over: function() {
           thisNode.mouseOver = true;
