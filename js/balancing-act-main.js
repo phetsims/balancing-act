@@ -20,12 +20,12 @@ define( function( require ) {
 
   // Strings & Images
   var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
-  var firstTabIcon = require( 'image!BALANCING_ACT/first-tab-icon.png' );
+  var introIcon = require( 'image!BALANCING_ACT/intro-icon.png' );
   var gameString = require( 'string!BALANCING_ACT/game' );
   var introString = require( 'string!BALANCING_ACT/intro' );
-  var secondTabIcon = require( 'image!BALANCING_ACT/second-tab-icon.png' );
+  var labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
   var simTitleString = require( 'string!BALANCING_ACT/balancing-act.name' );
-  var thirdTabIcon = require( 'image!BALANCING_ACT/third-tab-icon.png' );
+  var gameIcon = require( 'image!BALANCING_ACT/game-icon.png' );
 
   SimLauncher.launch( function() {
 
@@ -37,15 +37,15 @@ define( function( require ) {
 
     //Create and start the sim
     new Sim( simTitleString, [
-      new Screen( introString, new Image( firstTabIcon ),
+      new Screen( introString, new Image( introIcon ),
         function() { return new BAIntroModel(); },
         function( model ) { return new BAIntroScreen( model ); }
       ),
-      new Screen( balanceLabString, new Image( secondTabIcon ),
+      new Screen( balanceLabString, new Image( labIcon ),
         function() {return new BalanceLabModel();},
         function( model ) {return new BalanceLabScreen( model );}
       ),
-      new Screen( gameString, new Image( thirdTabIcon ),
+      new Screen( gameString, new Image( gameIcon ),
         function() {return new BalanceGameModel();},
         function( model ) {return new BalanceGameScreen( model );}
       )
