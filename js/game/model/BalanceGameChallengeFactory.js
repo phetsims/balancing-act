@@ -20,9 +20,11 @@ define( function( require ) {
 
   // Imports
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
-  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
+  var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
+  var BigRock = require( 'BALANCING_ACT/common/model/masses/BigRock' );
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
-//  var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
+  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
+  var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
   var FireHydrant = require( 'BALANCING_ACT/common/model/masses/FireHydrant' );
   var FlowerPot = require( 'BALANCING_ACT/common/model/masses/FlowerPot' );
   var Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
@@ -31,16 +33,16 @@ define( function( require ) {
   var Man = require( 'BALANCING_ACT/common/model/masses/Man' );
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
-//  var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
+  var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
   var MediumTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
   var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
-//  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
+  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-//  var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
+  var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
   var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -64,11 +66,16 @@ define( function( require ) {
     new BrickStack( 2, Vector2.ZERO ),
     new BrickStack( 3, Vector2.ZERO ),
     new BrickStack( 4, Vector2.ZERO ),
-    new Boy( Vector2.ZERO ),
-    new Girl( Vector2.ZERO ),
-    new Man( Vector2.ZERO ),
-    new Woman( Vector2.ZERO )
-    // TODO: Add other masses once all are ported, see orig Java sim for full list.
+    new TinyRock( Vector2.ZERO, false ),
+    new SmallRock( Vector2.ZERO, false ),
+    new MediumRock( Vector2.ZERO, false ),
+    new BigRock( Vector2.ZERO, false ),
+    new Boy( Vector2.ZERO, false ),
+    new Girl( Vector2.ZERO, false ),
+    new Man( Vector2.ZERO, false ),
+    new Woman( Vector2.ZERO, false ),
+    new Barrel( Vector2.ZERO, false ),
+    new CinderBlock( Vector2.ZERO, false )
   ];
 
   // List of masses that can be used as "mystery masses" in the mass
@@ -93,11 +100,11 @@ define( function( require ) {
   // masses end up going behind the tilt prediction selector.
   /*
    var LOW_PROFILE_MASSES = [
-    new TinyRock( Vector2.ZERO, true ),
-    new SmallRock( Vector2.ZERO, true ),
-    new MediumRock( Vector2.ZERO, true ),
-    new CinderBlock( Vector2.ZERO, true )
-  ];
+   new TinyRock( Vector2.ZERO, true ),
+   new SmallRock( Vector2.ZERO, true ),
+   new MediumRock( Vector2.ZERO, true ),
+   new CinderBlock( Vector2.ZERO, true )
+   ];
    */
 
   // Lists used to keep track of the challenges generated so far so that we
@@ -118,6 +125,25 @@ define( function( require ) {
       var increment = Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
       var maxIncrements = Math.round( maxDistance / increment ) - 1;
       return ( Math.floor( Math.random() * maxIncrements ) + 1 ) * increment;
+    },
+
+    /**
+     * Get a list of the distances at which the fixed mass could be positioned
+     * that would allow the movable mass to be positioned somewhere on the
+     * other side of the fulcrum and balance the fixed mass.
+     */
+    getPossibleDistanceList: function( massOfFixedItem, massOfMovableItem ) {
+      var validFixedMassDistances = [];
+      for ( var testDistance = Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE ) {
+        var possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
+        if ( possibleFixedMassDistance < Plank.length / 2 &&
+             possibleFixedMassDistance >= Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE - 1E-6 &&
+             possibleFixedMassDistance % Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE < 1E-6 ) {
+          // This is a valid distance.
+          validFixedMassDistances.push( possibleFixedMassDistance );
+        }
+      }
+      return validFixedMassDistances;
     },
 
     createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
@@ -154,6 +180,44 @@ define( function( require ) {
       var numBricks = 1 + Math.floor( Math.random() * 4 );
       var distance = -this.generateRandomValidPlankDistance();
       return this.createTwoBrickStackChallenge( numBricks, distance, numBricks );
+    },
+
+    /**
+     * Generate a challenge that consists of brick stacks in simple ratios to
+     * one another.  For instance, the fixed brick stack might be 2 bricks,
+     * and the movable state be one brick.
+     * <p/>
+     * Ratios used are 2:1 or 1:2.
+     */
+    generateEasyBalanceChallenge: function() {
+      var numBricksInFixedStack = 1;
+      var numBricksInMovableStack = 1;
+      var validFixedStackDistances = [];
+
+      while ( validFixedStackDistances.length === 0 ) {
+        // Choose the number of bricks in the fixed stack.  Must be 1, 2,
+        // or 4 in order to support the ratios used.
+        numBricksInFixedStack = Math.pow( 2, Math.floor( Math.random() * 3 ) );
+
+        // Choose the number of bricks in movable stack.
+        if ( numBricksInFixedStack === 1 || Math.random() > 0.5 ) {
+          numBricksInMovableStack = 2 * numBricksInFixedStack;
+        }
+        else {
+          numBricksInMovableStack = numBricksInFixedStack / 2;
+        }
+
+        // Create a list of the distances at which the fixed stack may be
+        // positioned to balance the movable stack.
+        validFixedStackDistances = this.getPossibleDistanceList( numBricksInFixedStack * BrickStack.prototype.BRICK_MASS,
+          numBricksInMovableStack * BrickStack.prototype.BRICK_MASS );
+      }
+
+      // Randomly choose a distance to use from the identified set.
+      var fixedStackDistanceFromCenter = -validFixedStackDistances[ Math.floor( Math.random() * validFixedStackDistances.length ) ];
+
+      // Create the challenge.
+      return this.createTwoBrickStackChallenge( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack );
     },
 
     /**
@@ -205,6 +269,32 @@ define( function( require ) {
       // Since the masses are equal, any position for the mystery mass should
       // create a solvable challenge.
       var mysteryMassDistanceFromCenter = -this.generateRandomValidPlankDistance();
+
+      // Create the challenge.
+      return MassDeductionChallenge.prototype.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
+    },
+
+    /**
+     * Generate a mass deduction style challenge where the fixed mystery mass
+     * is either twice as heavy or half as heavy as the known mass.
+     */
+    generateEasyMassDeductionChallenge: function() {
+      var indexOffset = Math.floor( Math.random() * BALANCE_CHALLENGE_MASSES.length );
+      var knownMass = null;
+      var mysteryMassPrototype = null;
+
+      for ( var i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
+        mysteryMassPrototype = MYSTERY_MASSES[ ( i + indexOffset ) % MYSTERY_MASSES.length ];
+        knownMass = this.createMassByRatio( mysteryMassPrototype.massValue, [ 2, 0.5 ] );
+      }
+
+      // There must be at least one combination that works.  If not, it's a
+      // major problem in the code that must be fixed.
+      assert && assert( knownMass !== null, 'Failed to generate an easy mass deduction challenge' );
+
+      // Choose a distance for the mystery mass.
+      var possibleDistances = this.getPossibleDistanceList( mysteryMassPrototype.massValue, knownMass.massValue );
+      var mysteryMassDistanceFromCenter = -possibleDistances[ Math.floor( Math.random() * possibleDistances.length ) ];
 
       // Create the challenge.
       return MassDeductionChallenge.prototype.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
@@ -316,17 +406,37 @@ define( function( require ) {
       return true;
     },
 
+    simpleBalanceChallengeGenerator: function() {
+      return this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
+    },
+
+    easyBalanceChallengeGenerator: function() {
+      return this.generateUniqueChallenge( this.generateEasyBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
+    },
+
+    simpleMassDeductionChallengeGenerator: function() {
+      return this.generateUniqueChallenge( this.generateSimpleMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges );
+    },
+
+    easyMassDeductionChallengeGenerator: function() {
+      return this.generateUniqueChallenge( this.generateEasyMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges );
+    },
+
+    simpleTiltPredictionChallengeGenerator: function() {
+      return this.generateUniqueChallenge( this.generateSimpleTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges );
+    },
+
     generateChallengeSet: function( level ) {
       var balanceChallengeList = [];
       switch( level ) {
 
         case 0:
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges ) );
-          balanceChallengeList.push( this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges ) );
+          balanceChallengeList.push( this.simpleBalanceChallengeGenerator() );
+          balanceChallengeList.push( this.simpleTiltPredictionChallengeGenerator() );
+          balanceChallengeList.push( this.easyBalanceChallengeGenerator() );
+          balanceChallengeList.push( this.simpleMassDeductionChallengeGenerator() );
+          balanceChallengeList.push( this.simpleTiltPredictionChallengeGenerator() );
+          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
           break;
 
         case 1:
