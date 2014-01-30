@@ -76,7 +76,7 @@ define( function( require ) {
     thisModel.movableMasses = new ObservableArray();
 
     // Masses that the user is (or users are) moving.
-    thisModel.userControlledMasses = new ObservableArray();
+    thisModel.userControlledMasses = [];
 
     // Add the plank.
     thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), thisModel.columnStateProperty, thisModel.userControlledMasses );
@@ -138,6 +138,7 @@ define( function( require ) {
         // Clear out the previous challenge (if there was one).  Start by
         // resetting the plank.
         thisModel.plank.removeAllMasses();
+        thisModel.userControlledMasses.length = 0;
 
         // Force the plank to be level and still.  This prevents any floating
         // point inaccuracies when adding masses.
@@ -157,8 +158,12 @@ define( function( require ) {
           var initialPosition = new Vector2( 3, 0 );
           mass.position = initialPosition;
           mass.userControlledProperty.link( function( userControlled ) {
-            if ( !userControlled ) {
+            if ( userControlled ) {
+              thisModel.userControlledMasses.push( mass );
+            }
+            else {
               // The user has dropped this mass.
+              thisModel.userControlledMasses.splice( thisModel.userControlledMasses.indexOf( mass ), 1 );
               if ( !thisModel.plank.addMassToSurface( mass ) ) {
                 // The attempt to add this mass to surface of plank failed,
                 // probably because the mass wasn't over the plank or there
@@ -168,6 +173,7 @@ define( function( require ) {
             }
           } );
           thisModel.movableMasses.add( mass );
+
         } );
 
         // Set the column state.

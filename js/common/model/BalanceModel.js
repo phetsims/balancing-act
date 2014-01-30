@@ -57,16 +57,16 @@ define( function( require ) {
     // Add a mass to the model.  Subclasses generally do additional things.
     addMass: function( mass ) {
       this.massList.push( mass );
-      var thisNode = this;
+      var thisModel = this;
 
       // Add a listener that will update the list of user controlled masses
-      // that are used by the plank so set the active drop locations.
+      // that is used by the plank to update the active drop locations.
       var userControlledMassesUpdater = function( userControlled ) {
         if ( userControlled ) {
-          thisNode.userControlledMasses.push( mass );
+          thisModel.userControlledMasses.push( mass );
         }
         else {
-          thisNode.userControlledMasses.splice( thisNode.userControlledMasses.indexOf( mass ), 1 );
+          thisModel.userControlledMasses.splice( thisModel.userControlledMasses.indexOf( mass ), 1 );
         }
       };
       mass.userControlledProperty.link( userControlledMassesUpdater );
