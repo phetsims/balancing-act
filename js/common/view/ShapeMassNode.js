@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
+  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
@@ -43,8 +44,19 @@ define( function( require ) {
 
     // Create and add the mass label.
     if ( isLabeled ) {
-      var massLabelText = mass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, mass.massValue, kgString );
-      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), centerX: shapeNode.centerX, bottom: shapeNode.top } );
+      var massLabel;
+      if ( mass.isMystery ) {
+        massLabel = new Text( unknownMassString, { font: new PhetFont( 12 ) } );
+      }
+      else {
+        // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
+        massLabel = new Node();
+        var massValueText = new Text( mass.massValue, { font: new PhetFont( 12 ), centerX: 0 } );
+        massLabel.addChild( massValueText );
+        massLabel.addChild( new Text( kgString, { font: new PhetFont( 12 ), centerX: 0, top: massValueText.bottom - 4 } ) );
+      }
+      massLabel.centerX = shapeNode.centerX;
+      massLabel.bottom = shapeNode.top - 1;
       thisNode.addChild( massLabel );
 
       // Control label visibility.
