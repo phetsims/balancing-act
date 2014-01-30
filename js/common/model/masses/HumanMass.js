@@ -32,16 +32,16 @@ define( function( require ) {
     // Monitor the 'onPlank' property and update the image as changes occur.
     thisMass.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
+        thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset * ( thisMass.position.x < 0 ? -1 : 1 );
         thisMass.height = sittingHeight;
         thisMass.reverseImage = thisMass.position.x < 0;
         thisMass.image = sittingImage;
-        thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset * ( thisMass.position.x < 0 ? -1 : 1 );
       }
       else {
+        thisMass.centerOfMassXOffset = 0;
         thisMass.height = standingHeight;
         thisMass.reverseImage = false;
         thisMass.image = standingImage;
-        thisMass.centerOfMassXOffset = 0;
       }
     } );
   }
