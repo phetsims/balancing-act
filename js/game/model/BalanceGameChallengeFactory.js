@@ -48,7 +48,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Tolerance value used when comparing floating-point calculations.
-//  var COMPARISON_TOLERANCE = 1E-6;
+  var COMPARISON_TOLERANCE = 1E-6;
 
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
 
@@ -116,6 +116,26 @@ define( function( require ) {
     // Generate a random integer from 0 (inclusive) to max (exclusive)
     randInt: function( max ) {
       return Math.floor( Math.random() * max );
+    },
+
+    /**
+     * Determine whether a challenge with the given values for the fixed and
+     * movable masses and the given constraints on the plank can be solved.
+     */
+    isChallengeSolvable: function( fixedMassValue, movableMassValue, distanceIncrement, maxDistance ) {
+      if ( fixedMassValue * distanceIncrement > movableMassValue * maxDistance || fixedMassValue * maxDistance < movableMassValue * distanceIncrement ) {
+        // The balance is not long enough to allow these masses to be balanced.
+        return false;
+      }
+
+      return ( fixedMassValue / movableMassValue ) % distanceIncrement <= COMPARISON_TOLERANCE;
+    },
+
+    chooseRandomValidFixedMassDistance: function( fixedMassValue, movableMassValue ) {
+      var validFixedMassDistances = this.getPossibleDistanceList( fixedMassValue, movableMassValue );
+
+      // Randomly choose a distance to use from the identified set.
+      return -validFixedMassDistances[ this.randInt( validFixedMassDistances.size() ) ];
     },
 
     /**
