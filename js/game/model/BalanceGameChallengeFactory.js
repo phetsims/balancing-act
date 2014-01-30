@@ -133,7 +133,7 @@ define( function( require ) {
       var validFixedMassDistances = this.getPossibleDistanceList( fixedMassValue, movableMassValue );
 
       // Randomly choose a distance to use from the identified set.
-      return -validFixedMassDistances[ this.randInt( validFixedMassDistances.size() ) ];
+      return -validFixedMassDistances[ this.randInt( validFixedMassDistances.length ) ];
     },
 
     /**
@@ -358,14 +358,14 @@ define( function( require ) {
       }
       while ( !this.isChallengeSolvable( fixedMassPrototype.massValue,
         movableMass.massValue,
-        Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
         MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS ) );
 
       // Randomly choose a distance to use for the fixed mass position.
       var fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass.massValue );
 
       // Create the challenge.
-      return BalanceMassesChallenge.prototype.create( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass );
+      return BalanceMassesChallenge.prototype.create1Fixed1Movable( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass );
     },
 
     /**
@@ -743,8 +743,8 @@ define( function( require ) {
           break;
 
         case 3:
-          balanceChallengeList.push( this.advancedBalanceChallengeGenerator() );
           balanceChallengeList.push( this.advancedTiltPredictionChallengeGenerator() );
+          balanceChallengeList.push( this.advancedBalanceChallengeGenerator() );
           balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
           balanceChallengeList.push( this.advancedTiltPredictionChallengeGenerator() );
           balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );

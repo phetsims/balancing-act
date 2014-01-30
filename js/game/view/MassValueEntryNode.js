@@ -37,9 +37,9 @@ define( function( require ) {
 
     // Create and add the readout, including the background.
     var readoutText = new Text( '0' + ' ' + kgString, { font: READOUT_FONT } );
-    var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.5, 4, 4,
+    var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
-        fill: 'white',
+        fill: 'rgb( 220, 220, 220 )',
         stroke: 'black'
       }
     );
@@ -91,7 +91,7 @@ define( function( require ) {
     thisNode.massValue.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
-    var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 10, yMargin: 10 } );
+    var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 7, yMargin: 7 } );
     thisNode.addChild( panel );
 
     // Update the readout text whenever the value changes.
