@@ -71,6 +71,12 @@ define( function( require ) {
       thisNode.massValue.value = Math.round( value );
     } );
 
+    // Hook them up in the other direction so that changes to the mass value
+    // that occur outside of the slider (e.g. the arrow buttons).
+    thisNode.massValue.link( function( massValue ) {
+      thisNode.sliderValue.value = massValue;
+    } );
+
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
     var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValue.value--; }, arrowButtonOptions );
