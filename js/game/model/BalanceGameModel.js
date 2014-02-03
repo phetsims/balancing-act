@@ -270,6 +270,8 @@ define( function( require ) {
               this.bestTimes[ this.level ] = this.elapsedTime;
             }
           }
+          this.bestScores[ this.level ].value = this.score;
+
           // Done with this game, show the results.
           this.gameState = 'showingLevelResults';
         }
