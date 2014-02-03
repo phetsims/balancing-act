@@ -734,19 +734,12 @@ define( function( require ) {
           break;
 
         case 2:
+          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
           balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
-          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
-          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
+          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
+          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
+          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
           balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
-          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
-          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
-
-//          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
-//          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
-//          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
-//          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
-//          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
-//          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
           break;
 
         case 3:
