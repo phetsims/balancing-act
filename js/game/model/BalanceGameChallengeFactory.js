@@ -84,12 +84,11 @@ define( function( require ) {
     new Television( Vector2.ZERO, true ),
     new LargeTrashCan( Vector2.ZERO, true ),
     new MediumTrashCan( Vector2.ZERO, true ),
+    new SmallRock( Vector2.ZERO, true ),
     new FlowerPot( Vector2.ZERO, true ),
-    new SmallBucket( Vector2.ZERO, true ),
     new MediumBucket( Vector2.ZERO, true ),
     new LargeBucket( Vector2.ZERO, true ),
     new PottedPlant( Vector2.ZERO, true ),
-    new SodaBottle( Vector2.ZERO, true ),
     new Tire( Vector2.ZERO, true )
   ];
 
