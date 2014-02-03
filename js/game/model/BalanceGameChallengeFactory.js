@@ -25,6 +25,7 @@ define( function( require ) {
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
+  var Crate = require( 'BALANCING_ACT/common/model/masses/Crate' );
   var FireHydrant = require( 'BALANCING_ACT/common/model/masses/FireHydrant' );
   var FlowerPot = require( 'BALANCING_ACT/common/model/masses/FlowerPot' );
   var Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
@@ -84,7 +85,7 @@ define( function( require ) {
     new Television( Vector2.ZERO, true ),
     new LargeTrashCan( Vector2.ZERO, true ),
     new MediumTrashCan( Vector2.ZERO, true ),
-    new SmallRock( Vector2.ZERO, true ),
+    new Crate( Vector2.ZERO, true ),
     new FlowerPot( Vector2.ZERO, true ),
     new MediumBucket( Vector2.ZERO, true ),
     new LargeBucket( Vector2.ZERO, true ),
@@ -733,12 +734,19 @@ define( function( require ) {
           break;
 
         case 2:
-          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
           balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
-          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
-          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
-          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
+          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
+          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
           balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
+          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
+          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
+
+//          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
+//          balanceChallengeList.push( this.easyMassDeductionChallengeGenerator() );
+//          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
+//          balanceChallengeList.push( this.moderateBalanceChallengeGenerator() );
+//          balanceChallengeList.push( this.moderateTiltPredictionChallengeGenerator() );
+//          balanceChallengeList.push( this.moderateMassDeductionChallengeGenerator() );
           break;
 
         case 3:
