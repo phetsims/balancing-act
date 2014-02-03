@@ -100,10 +100,12 @@ define( function( require ) {
     var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 7, yMargin: 7 } );
     thisNode.addChild( panel );
 
-    // Update the readout text whenever the value changes.
+    // Update the readout text and arrow button states whenever the value changes.
     thisNode.massValue.link( function( value ) {
       readoutText.text = value + ' ' + kgString;
       readoutText.centerX = readoutBackground.centerX;
+      leftArrowButton.setEnabled( value > 0 );
+      rightArrowButton.setEnabled( value < MAX_MASS );
     } );
 
     thisNode.mutate( options );
