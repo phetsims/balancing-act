@@ -58,7 +58,7 @@ define( function( require ) {
     thisModel.bestTimes = [];
     thisModel.bestScores = [];
     _.times( MAX_LEVELS, function() {
-      thisModel.bestTimes.push( Number.POSITIVE_INFINITY );
+      thisModel.bestTimes.push( null );
       thisModel.bestScores.push( new Property( 0 ) );
     } );
 
@@ -129,6 +129,9 @@ define( function( require ) {
 
         // Change to new game state.
         this.gameState = 'presentingInteractiveChallenge';
+
+        // Flag set to indicate new best time, cleared each time a level is started.
+        this.newBestTime = false;
       },
 
       setChallenge: function( balanceChallenge, columnState ) {
@@ -262,8 +265,8 @@ define( function( require ) {
           // best time and, if so, record it.
           if ( this.score === MAX_SCORE_PER_GAME ) {
             // Perfect game.  See if new best time.
-            if ( this.elapsedTime < this.bestTimes[ this.level ] ) {
-              // New best.
+            if ( this.bestTimes[ this.level ] === null || this.elapsedTime < this.bestTimes[ this.level ] ) {
+              this.newBestTime = this.bestTimes[ this.level ] !== null; // Don't set this flag for the first 'best time', only when the time improves.
               this.bestTimes[ this.level ] = this.elapsedTime;
             }
           }
