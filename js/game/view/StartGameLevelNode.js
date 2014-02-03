@@ -21,9 +21,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Strings
-  // TODO: Need a common code string here.  Implement string, uncomment the line, delete the other line.
-//  var defaultTitleString = require( 'string!VEGAS/chooseYourGame' );
-  var defaultTitleString = 'Select Level';
+  var defaultTitleString = require( 'string!VEGAS/selectLevel' );
 
   // Constants
   var CONTROL_INSET = 20;
