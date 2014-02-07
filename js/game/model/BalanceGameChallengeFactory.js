@@ -294,7 +294,7 @@ define( function( require ) {
 
     // Generate a simple challenge where brick stacks of equal mass appear on each side.
     generateSimpleBalanceChallenge: function() {
-      var numBricks = this.randInt( 5 );
+      var numBricks = this.randInt( 4 ) + 1;
       var distance = -this.generateRandomValidPlankDistance();
       return this.createTwoBrickStackChallenge( numBricks, distance, numBricks );
     },

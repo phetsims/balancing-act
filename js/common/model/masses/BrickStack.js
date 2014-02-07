@@ -28,6 +28,9 @@ define( function( require ) {
    */
   function BrickStack( numBricks, initialPosition ) {
 
+    if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ) }
+    ;
+
     this.numBricks = numBricks;
     initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
 
