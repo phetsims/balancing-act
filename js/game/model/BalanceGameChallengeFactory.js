@@ -38,9 +38,7 @@ define( function( require ) {
   var MediumTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
-  var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
   var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
-  var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
@@ -169,7 +167,7 @@ define( function( require ) {
         }
         // Handle the unlikely case where enough unique distances couldn't
         // be found.
-        if ( distanceList.length != masses.length ) {
+        if ( distanceList.length !== masses.length ) {
           distanceList = [];
           for ( var k = 0; k < masses.length; k++ ) {
             // Just add a linear set of distances.
@@ -664,7 +662,7 @@ define( function( require ) {
     },
 
     generateBalanceChallenge: function( level ) {
-      return this.generateUniqueChallenge( this.balanceChallengeGenerators[ level ].bind( this ), this.usesUniqueMasses, usedBalanceChallenges )
+      return this.generateUniqueChallenge( this.balanceChallengeGenerators[ level ].bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
     },
 
     simpleBalanceChallengeGenerator: function() {

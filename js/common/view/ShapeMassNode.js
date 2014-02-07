@@ -13,12 +13,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
-  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
   var Vector2 = require( 'DOT/Vector2' );
