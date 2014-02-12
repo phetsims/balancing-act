@@ -11,7 +11,6 @@ define( function( require ) {
   // Imports
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ModelObjectNode = require( 'BALANCING_ACT/common/view/ModelObjectNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
@@ -28,10 +27,14 @@ define( function( require ) {
    * @constructor
    */
   function PlankNode( mvt, plank ) {
-    ModelObjectNode.call( this, mvt, plank.shapeProperty, new Color( 243, 203, 127 ) );
+    Node.call( this );
     var thisNode = this;
     thisNode.plank = plank;
     thisNode.mvt = mvt;
+
+    // Create and position the plank.
+    thisNode.plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
+    thisNode.addChild( thisNode.plankNode );
 
     // Create a layer for the tick mark highlight(s).
     thisNode.tickMarkHighlightLayer = new Node();
@@ -50,9 +53,17 @@ define( function( require ) {
     plank.activeDropLocations.addItemRemovedListener( function() {
       thisNode.updateHighlights();
     } );
+
+    // Track the rotational angle of the plank and update the node accordingly.
+    var nodeRotation = 0;
+    var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
+    plank.tiltAngleProperty.link( function( tiltAngle ) {
+      thisNode.plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
+      nodeRotation = tiltAngle;
+    } );
   }
 
-  return inherit( ModelObjectNode, PlankNode, {
+  return inherit( Node, PlankNode, {
 
     updateTickMarks: function() {
       // Update the tick marks by removing them and redrawing them.
