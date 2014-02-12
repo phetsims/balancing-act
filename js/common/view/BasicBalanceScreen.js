@@ -79,8 +79,8 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.4, thisScreen.layoutBounds.height * 0.75 ),
-      115 );
+      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.75 ),
+      105 );
     thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can
