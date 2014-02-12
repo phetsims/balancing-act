@@ -41,7 +41,7 @@ define( function( require ) {
     fulcrumShape.close();
 
     // The shape property is what will define the shape in the view.
-    thisFulcrum.shape = new Property( fulcrumShape );
+    thisFulcrum.shape = fulcrumShape;
   }
 
   return Fulcrum;

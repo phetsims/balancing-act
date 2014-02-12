@@ -11,13 +11,19 @@ define( function( require ) {
   // imports
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ModelObjectNode = require( 'BALANCING_ACT/common/view/ModelObjectNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
 
   function FulcrumNode( mvt, fulcrum ) {
-    ModelObjectNode.call( this, mvt, fulcrum.shape, new Color( 240, 240, 0 ) );
+    Node.call( this );
+//    Node.call( this, mvt, fulcrum.shape, new Color( 240, 240, 0 ) );
+    this.addChild( new Path( mvt.modelToViewShape( fulcrum.shape ),
+      {
+        fill: 'rgb( 240, 240, 0 )',
+        stroke: 'black',
+        lineThickness: 1
+      } ) );
   }
 
-  return inherit( ModelObjectNode, FulcrumNode, {
-    //TODO prototypes
-  } );
+  return inherit( Node, FulcrumNode );
 } );
