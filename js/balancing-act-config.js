@@ -42,7 +42,7 @@ require.config( {
     VIBE: '../../vibe/js',
 
     // this sim
-    BALANCING_ACT: '../../balancing-act/js',
+    BALANCING_ACT: '../../balancing-act/js'
   },
 
   urlArgs: new Date().getTime()  // cache buster to make browser reload all included scripts
