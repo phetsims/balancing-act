@@ -127,6 +127,8 @@ define( function( require ) {
         thisPlank.forceToLevelAndStill();
       }
     } );
+
+    this.updateTickMarks();
   }
 
   // Inherit from base class and define the methods for this object.
