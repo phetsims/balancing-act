@@ -141,7 +141,7 @@ define( function( require ) {
         new GameIconNode( gameLevel4Icon, 4 )
       ],
       gameModel.bestScores,
-      {}
+      { numStarsOnButtons: BalanceGameModel.prototype.PROBLEMS_PER_LEVEL, perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE }
     );
     thisScreen.rootNode.addChild( thisScreen.startGameLevelNode );
 
