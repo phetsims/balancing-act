@@ -29,20 +29,37 @@ define( function( require ) {
   function PlankNode( mvt, plank ) {
     Node.call( this );
     var thisNode = this;
-    thisNode.plank = plank;
-    thisNode.mvt = mvt;
 
     // Create and position the plank.
-    thisNode.plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
-    thisNode.addChild( thisNode.plankNode );
+    var plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
+    thisNode.addChild( plankNode );
 
     // Create a layer for the tick mark highlight(s).
-    thisNode.tickMarkHighlightLayer = new Node();
-    thisNode.addChild( thisNode.tickMarkHighlightLayer );
+    var tickMarkHighlightLayer = new Node();
+    plankNode.addChild( tickMarkHighlightLayer );
+
+    // Function for updating the highlights
+    function updateHighlights() {
+      // Update the tick mark highlights by removing and redrawing them.
+      tickMarkHighlightLayer.removeAllChildren();
+      plank.activeDropLocations.forEach( function( location ) {
+        var highlightShape = Shape.rect(
+          mvt.modelToViewX( location ) - HIGHLIGHT_WIDTH / 2,
+          mvt.modelToViewY( plank.unrotatedShape.bounds.minY ),
+          HIGHLIGHT_WIDTH,
+          mvt.modelToViewDeltaY( plank.THICKNESS ) );
+        var tickMarkHighlight = new Path( highlightShape, { fill: HIGHLIGHT_COLOR } );
+        tickMarkHighlightLayer.addChild( tickMarkHighlight );
+      } );
+    }
+
+    // Update the tick mark highlights as the active drop locations change.
+    plank.activeDropLocations.addItemAddedListener( updateHighlights );
+    plank.activeDropLocations.addItemRemovedListener( updateHighlights );
 
     // Create and add the tick mark layer.
     var tickMarkLayer = new Node();
-    for ( var i = 0; i < this.plank.tickMarks.length; i++ ) {
+    for ( var i = 0; i < plank.tickMarks.length; i++ ) {
       var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
       if ( i % 2 === 0 ) {
         // Make some marks bold for easier placement of masses.
@@ -50,36 +67,18 @@ define( function( require ) {
         // different places.
         tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
       }
-      tickMarkLayer.addChild( new Path( this.mvt.modelToViewShape( this.plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
+      tickMarkLayer.addChild( new Path( mvt.modelToViewShape( plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
     }
-    thisNode.plankNode.addChild( tickMarkLayer );
+    plankNode.addChild( tickMarkLayer );
 
-    // Track the rotational angle of the plank and update the node accordingly.
+    // Track the rotational angle of the plank and update this node accordingly.
     var nodeRotation = 0;
     var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( tiltAngle ) {
-      thisNode.plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
+      plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
       nodeRotation = tiltAngle;
-      thisNode.updateHighlights();
     } );
   }
 
-  return inherit( Node, PlankNode, {
-
-    updateHighlights: function() {
-      // Update the tick mark highlights by removing and redrawing them.
-      var thisNode = this;
-      thisNode.tickMarkHighlightLayer.removeAllChildren();
-      thisNode.plank.activeDropLocations.forEach( function( location ) {
-        var highlightShape = Shape.rect(
-          thisNode.mvt.modelToViewX( thisNode.plank.pivotPoint.x + location ) - HIGHLIGHT_WIDTH / 2,
-          thisNode.mvt.modelToViewY( thisNode.plank.unrotatedShape.bounds.minY ),
-          HIGHLIGHT_WIDTH,
-          thisNode.mvt.modelToViewDeltaY( thisNode.plank.THICKNESS ) );
-        var tickMarkHighlight = new Path( highlightShape, { fill: HIGHLIGHT_COLOR } );
-        tickMarkHighlight.rotateAround( thisNode.mvt.modelToViewPosition( thisNode.plank.pivotPoint ), -thisNode.plank.tiltAngle );
-        thisNode.tickMarkHighlightLayer.addChild( tickMarkHighlight );
-      } );
-    }
-  } );
+  return inherit( Node, PlankNode );
 } );
