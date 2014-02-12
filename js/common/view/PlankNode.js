@@ -40,19 +40,19 @@ define( function( require ) {
     thisNode.tickMarkHighlightLayer = new Node();
     thisNode.addChild( thisNode.tickMarkHighlightLayer );
 
-    // Create a layer for the tick marks and add the code to create and update them.
-    thisNode.tickMarkLayer = new Node();
-    thisNode.addChild( thisNode.tickMarkLayer );
-    plank.shapeProperty.link( function() {
-      thisNode.updateTickMarks();
-      thisNode.updateHighlights();
-    } );
-    plank.activeDropLocations.addItemAddedListener( function() {
-      thisNode.updateHighlights();
-    } );
-    plank.activeDropLocations.addItemRemovedListener( function() {
-      thisNode.updateHighlights();
-    } );
+    // Create and add the tick mark layer.
+    var tickMarkLayer = new Node();
+    for ( var i = 0; i < this.plank.tickMarks.length; i++ ) {
+      var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
+      if ( i % 2 === 0 ) {
+        // Make some marks bold for easier placement of masses.
+        // The 'if' clause can be tweaked to put marks in
+        // different places.
+        tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
+      }
+      tickMarkLayer.addChild( new Path( this.mvt.modelToViewShape( this.plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
+    }
+    thisNode.plankNode.addChild( tickMarkLayer );
 
     // Track the rotational angle of the plank and update the node accordingly.
     var nodeRotation = 0;
@@ -60,25 +60,11 @@ define( function( require ) {
     plank.tiltAngleProperty.link( function( tiltAngle ) {
       thisNode.plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
       nodeRotation = tiltAngle;
+      thisNode.updateHighlights();
     } );
   }
 
   return inherit( Node, PlankNode, {
-
-    updateTickMarks: function() {
-      // Update the tick marks by removing them and redrawing them.
-      this.tickMarkLayer.removeAllChildren();
-      for ( var i = 0; i < this.plank.tickMarks.length; i++ ) {
-        var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
-        if ( i % 2 === 0 ) {
-          // Make some marks bold for easier placement of masses.
-          // The 'if' clause can be tweaked to put marks in
-          // different places.
-          tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
-        }
-        this.tickMarkLayer.addChild( new Path( this.mvt.modelToViewShape( this.plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
-      }
-    },
 
     updateHighlights: function() {
       // Update the tick mark highlights by removing and redrawing them.
