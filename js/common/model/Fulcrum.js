@@ -11,7 +11,6 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
 
   // Constants
