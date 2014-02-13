@@ -50,7 +50,7 @@ define( function( require ) {
         // plank, as is generally done in this simulation in order to make the
         // plank rebalance if nothing is on it, this location will be
         // different.
-        bottomCenterLocation: location,
+        bottomCenterLocation: location
       } );
 
     // Externally visible observable lists.
@@ -86,9 +86,6 @@ define( function( require ) {
     tempShape.lineTo( 0, 0 );
     thisPlank.unrotatedShape = tempShape.transformed( Matrix3.translation( location.x, location.y ) );
 
-    // Tick marks, which represent to location where masses may be placed by the user.
-    thisPlank.tickMarks = [];
-
     // Listen to the support column property.  The plank goes to the level
     // position whenever there are two columns present, and into a tilted
     // position when only one is present.
@@ -99,11 +96,6 @@ define( function( require ) {
       else if ( newColumnState === 'doubleColumns' ) {
         thisPlank.forceToLevelAndStill();
       }
-    } );
-
-    // Update the tick marks when the plank rotates.
-    thisPlank.tiltAngleProperty.link( function() {
-      thisPlank.updateTickMarks( thisPlank );
     } );
   }
 
@@ -403,22 +395,6 @@ define( function( require ) {
       return massAtThisTickMark;
     },
 
-    updateTickMarks: function() {
-      var interTickMarkDistance = PLANK_LENGTH / ( NUM_SNAP_TO_LOCATIONS + 1 );
-      var plankLeftEdgeX = this.unrotatedShape.bounds.minX + interTickMarkDistance;
-      var tickMarkYPos = this.unrotatedShape.bounds.minY;
-      var rotationTransform = new Transform3( Matrix3.rotationAroundPoint( this.tiltAngle, this.pivotPoint ) );
-      var newTickMarks = new Array( NUM_SNAP_TO_LOCATIONS );
-      for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
-        var tickMarkShape = new Shape();
-        var xPos = plankLeftEdgeX + interTickMarkDistance * i;
-        tickMarkShape.moveTo( xPos, tickMarkYPos );
-        tickMarkShape.lineTo( xPos, tickMarkYPos + PLANK_THICKNESS );
-        newTickMarks[i] = rotationTransform.transformShape( tickMarkShape );
-      }
-      this.tickMarks = newTickMarks;
-    },
-
     // Obtain the absolute position (in meters) of the center surface (top)
     // of the plank
     getPlankSurfaceCenter: function() {
@@ -499,6 +475,7 @@ define( function( require ) {
     // Public constants.
     LENGTH: PLANK_LENGTH,
     THICKNESS: PLANK_THICKNESS,
-    INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE
+    INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE,
+    NUM_SNAP_TO_LOCATIONS: NUM_SNAP_TO_LOCATIONS
   } );
 } );

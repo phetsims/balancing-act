@@ -13,7 +13,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Shape = require( 'KITE/Shape' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
   var NORMAL_TICK_MARK_LINE_WIDTH = 1;
@@ -59,7 +61,13 @@ define( function( require ) {
 
     // Create and add the tick mark layer.
     var tickMarkLayer = new Node();
-    for ( var i = 0; i < plank.tickMarks.length; i++ ) {
+    var tickMarkShape = new Shape();
+    tickMarkShape.moveTo( 0, 0 );
+    tickMarkShape.lineTo( 0, mvt.modelToViewDeltaY( Plank.prototype.THICKNESS ) );
+    var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.prototype.LENGTH / 2 ),
+      mvt.modelToViewY( plank.getPlankSurfaceCenter().y ) );
+    var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE );
+    for ( var i = 0; i < Plank.prototype.NUM_SNAP_TO_LOCATIONS; i++ ) {
       var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
       if ( i % 2 === 0 ) {
         // Make some marks bold for easier placement of masses.
@@ -67,7 +75,13 @@ define( function( require ) {
         // different places.
         tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
       }
-      tickMarkLayer.addChild( new Path( mvt.modelToViewShape( plank.tickMarks[ i ] ), { lineWidth: tickMarkStroke, stroke: 'black' } ) );
+      tickMarkLayer.addChild( new Path( tickMarkShape,
+        {
+          centerX: plankLeftEdge.x + ( i + 1 ) * tickMarkDeltaX,
+          top: plankLeftEdge.y,
+          lineWidth: tickMarkStroke,
+          stroke: 'black'
+        } ) );
     }
     plankNode.addChild( tickMarkLayer );
 
