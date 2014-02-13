@@ -18,7 +18,7 @@ define( function( require ) {
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'BALANCING_ACT/common/view/HStrut' );
+  var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Image = require( 'SCENERY/nodes/Image' );
   var InOutRadioButton = require( 'SUN/InOutRadioButton' );
@@ -47,7 +47,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var VStrut = require( 'BALANCING_ACT/common/view/VStrut' );
+  var VStrut = require( 'SUN/VStrut' );
 
   // Constants
   var BUTTON_ICON_WIDTH = 60;
