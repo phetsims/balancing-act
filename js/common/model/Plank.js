@@ -37,19 +37,13 @@ define( function( require ) {
     var thisPlank = this;
     thisPlank.userControlledMasses = userControlledMasses;
 
-    // Create the outline shape of the plank.
-    var tempShape = new Shape();
-    tempShape.moveTo( 0, 0 );
-    tempShape.lineTo( PLANK_LENGTH / 2, 0 );
-    tempShape.lineTo( PLANK_LENGTH / 2, PLANK_THICKNESS );
-    tempShape.lineTo( 0, PLANK_THICKNESS );
-    tempShape.lineTo( -PLANK_LENGTH / 2, PLANK_THICKNESS );
-    tempShape.lineTo( -PLANK_LENGTH / 2, 0 );
-    tempShape.lineTo( 0, 0 );
-    var initialPlankShape = tempShape.transformed( Matrix3.translation( location.x, location.y ) );
-
     PropertySet.call( this,
       {
+        // Angle of the plank with respect to the ground.  A value of 0
+        // indicates a level plank, positive is tilted left, negative to the
+        // right.  In radians.
+        tiltAngle: 0,
+
         // Point where the bottom center of the plank is currently located.
         // If the plank is sitting on top of the fulcrum, this point will be
         // the same as the pivot point.  When the pivot point is above the
@@ -57,28 +51,6 @@ define( function( require ) {
         // plank rebalance if nothing is on it, this location will be
         // different.
         bottomCenterLocation: location,
-
-        // Angle of the plank with respect to the ground.  A value of 0
-        // indicates a level plank, positive is tilted left, negative to the
-        // right.  In radians.
-        tiltAngle: 0,
-
-        // Shape of the plank, which conveys everything about where it is in
-        // model space.  TODO: This may or may not be used, based on what the
-        // performance is like in scenery.  If it is, some of the other
-        // properties aren't needed, or at least don't need to be public.  If
-        // it *isn't* used, get rid of it from here.
-        shape: initialPlankShape,
-
-        // Shape of the tick marks.  These are calculated here in the model, since
-        // their positions correspond to the "snap to" locations, but they are not
-        // added to the overall shape so that the view has more freedom to vary
-        // their appearance.
-        tickMarks: [],
-
-        // Property that indicates whether the plank is being manually moved
-        // by the user.
-        userControlled: false
       } );
 
     // Externally visible observable lists.
@@ -96,12 +68,6 @@ define( function( require ) {
     thisPlank.angularVelocity = 0;
     thisPlank.currentNetTorque = 0;
 
-    // Listen the our own overall shape and update the tick marks whenever
-    // the shape changes.
-    thisPlank.shapeProperty.lazyLink( function() {
-      thisPlank.updateTickMarks( thisPlank );
-    } );
-
     // Calculate the max angle at which the plank can tilt before hitting
     // the ground.  NOTE: This assumes a small distance between the pivot
     // point and the bottom of the plank.  If this assumption changes, or
@@ -109,11 +75,18 @@ define( function( require ) {
     // change.
     thisPlank.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
 
-    // The original, unrotated shape, which is needed for a number of operations.
-    thisPlank.unrotatedShape = initialPlankShape;
+    // Unrotated shape of the plank
+    var tempShape = new Shape();
+    tempShape.moveTo( 0, 0 );
+    tempShape.lineTo( PLANK_LENGTH / 2, 0 );
+    tempShape.lineTo( PLANK_LENGTH / 2, PLANK_THICKNESS );
+    tempShape.lineTo( 0, PLANK_THICKNESS );
+    tempShape.lineTo( -PLANK_LENGTH / 2, PLANK_THICKNESS );
+    tempShape.lineTo( -PLANK_LENGTH / 2, 0 );
+    tempShape.lineTo( 0, 0 );
+    thisPlank.unrotatedShape = tempShape.transformed( Matrix3.translation( location.x, location.y ) );
 
-    // Maintain the tick mark positions here, since they represent the
-    // locations where masses can be placed.
+    // Tick marks, which represent to location where masses may be placed by the user.
     thisPlank.tickMarks = [];
 
     // Listen to the support column property.  The plank goes to the level
@@ -128,7 +101,10 @@ define( function( require ) {
       }
     } );
 
-    this.updateTickMarks();
+    // Update the tick marks when the plank rotates.
+    thisPlank.tiltAngleProperty.link( function() {
+      thisPlank.updateTickMarks( thisPlank );
+    } );
   }
 
   // Inherit from base class and define the methods for this object.
@@ -323,7 +299,6 @@ define( function( require ) {
       if ( this.pivotPoint.y >= this.unrotatedShape.minY ) {
         throw new Error( 'Pivot point cannot be below the plank.' );
       }
-      this.shape = this.unrotatedShape.transformed( Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y ) );
       var attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
       attachmentBarVector = attachmentBarVector.rotated( this.tiltAngle );
       this.bottomCenterLocation = this.pivotPoint.plus( attachmentBarVector );
@@ -466,8 +441,9 @@ define( function( require ) {
     },
 
     isPointAbovePlank: function( p ) {
-      var plankBounds = this.shape.bounds;
-      return p.x >= plankBounds.minX && p.x <= plankBounds.maxX && p.y > this.getSurfaceYValue( p.x );
+      var plankSpan = PLANK_LENGTH * Math.cos( this.tiltAngle );
+      var surfaceCenter = this.getPlankSurfaceCenter();
+      return p.x >= surfaceCenter.x - ( plankSpan / 2 ) && p.x <= surfaceCenter.x + ( plankSpan / 2 ) && p.y > this.getSurfaceYValue( p.x );
     },
 
     /*
