@@ -9,30 +9,47 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // Imports
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ModelObjectNode = require( 'BALANCING_ACT/common/view/ModelObjectNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  function AttachmentBarNode( mvt, attachmentBar ) {
-    ModelObjectNode.call( this, mvt, attachmentBar.shapeProperty, new Color( 210, 210, 210 ) );
+  // Constants
+  var PIVOT_RADIUS = 5;
+  var ATTACHMENT_BAR_WIDTH = PIVOT_RADIUS * 1.5;
+
+  function AttachmentBarNode( mvt, plank ) {
+    Node.call( this );
+    var pivotPointPosInView = mvt.modelToViewPosition( plank.pivotPoint );
+
+    // Add the bar, which goes from the pivot point to the bottom of the plank.
+    var attachmentBarLength = mvt.modelToViewDeltaY( plank.bottomCenterLocation.y - plank.pivotPoint.y );
+    var attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
+      attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', lineWidth: 1, stroke: 'rgb( 50, 50, 50 )' } );
+    this.addChild( attachmentBar );
+
+    // Rotate the bar as the plank tilts.
+    var nodeRotation = 0;
+    plank.tiltAngleProperty.link( function( angle ) {
+      attachmentBar.rotateAround( pivotPointPosInView, nodeRotation - angle );
+      nodeRotation = angle;
+    } );
+
     // Add the pivot point, which is represented as a circle with a point in the middle.
-    this.addChild( new Circle( 5,
+    this.addChild( new Circle( PIVOT_RADIUS,
       {
         fill: 'rgb( 220, 220, 220 )',
         stroke: 'black',
         lineWidth: 1,
-        center: mvt.modelToViewPosition( attachmentBar.getPivotPoint() )
+        center: pivotPointPosInView
       } ) );
     this.addChild( new Circle( 1,
       {
         fill: 'black',
-        center: mvt.modelToViewPosition( attachmentBar.getPivotPoint() )
+        center: pivotPointPosInView
       } ) );
   }
 
-  return inherit( ModelObjectNode, AttachmentBarNode, {
-    //TODO prototypes
-  } );
+  return inherit( Node, AttachmentBarNode );
 } );

@@ -12,7 +12,6 @@ define( function( require ) {
   'use strict';
 
   // Imports
-  var AttachmentBar = require( 'BALANCING_ACT/common/model/AttachmentBar' );
   var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -91,9 +90,6 @@ define( function( require ) {
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )
     ];
-
-    // Bar that attaches the fulcrum to the pivot point.
-    thisModel.attachmentBar = new AttachmentBar( thisModel.plank );
 
     // Fulcrum on which the plank pivots
     thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );

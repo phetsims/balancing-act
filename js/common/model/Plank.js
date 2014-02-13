@@ -57,12 +57,14 @@ define( function( require ) {
     thisPlank.forceVectors = new ObservableArray();
     thisPlank.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
 
+    // Other external visible attributes.
+    thisPlank.pivotPoint = new Vector2( pivotPoint.x, pivotPoint.y );
+
     // Map of masses to distance from the plank's center.
     thisPlank.massDistancePairs = [];
 
     // Variables that need to be retained for dynamic behavior, but are not
     // intended to be accessed externally.
-    thisPlank.pivotPoint = new Vector2( pivotPoint.x, pivotPoint.y );
     thisPlank.columnState = columnState;
     thisPlank.angularVelocity = 0;
     thisPlank.currentNetTorque = 0;

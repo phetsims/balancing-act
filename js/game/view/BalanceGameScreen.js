@@ -101,7 +101,7 @@ define( function( require ) {
       thisScreen.challengeLayer.addChild( new LevelSupportColumnNode( mvt, levelSupportColumn, gameModel.columnStateProperty, false ) );
     } );
     thisScreen.challengeLayer.addChild( new PlankNode( mvt, gameModel.plank ) );
-    thisScreen.challengeLayer.addChild( new AttachmentBarNode( mvt, gameModel.attachmentBar ) );
+    thisScreen.challengeLayer.addChild( new AttachmentBarNode( mvt, gameModel.plank ) );
 
     // Watch the model and add/remove visual representations of masses.
     gameModel.movableMasses.addItemAddedListener( function( addedMass ) {

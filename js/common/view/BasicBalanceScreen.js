@@ -125,7 +125,7 @@ define( function( require ) {
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     thisScreen.nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
     thisScreen.nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
-    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( mvt, model.attachmentBar ) );
+    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( mvt, model.plank ) );
     model.supportColumns.forEach( function( supportColumn ) {
       thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
     } );
