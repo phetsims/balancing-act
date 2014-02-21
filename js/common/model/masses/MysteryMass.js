@@ -45,14 +45,14 @@ define( function( require ) {
       isMystery: true
     },
     {
-      massValue: 2.5, // in kg
+      massValue: 3, // in kg
       image: require( 'image!BALANCING_ACT/mystery-object-05.png' ),
       height: 0.25, // in meters
       labelText: require( 'string!BALANCING_ACT/massLabelE' ),
       isMystery: true
     },
     {
-      massValue: 52.5, // in kg
+      massValue: 50, // in kg
       image: require( 'image!BALANCING_ACT/mystery-object-06.png' ),
       height: 0.35, // in meters
       labelText: require( 'string!BALANCING_ACT/massLabelF' ),

@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * This is a factory pattern type that generates sets of challenges for use in
+ * This is a factory pattern object that generates sets of challenges for use in
  * the balance game.  In this type, the terminology used to distinguish
  * between the various levels of difficulty for the challenges are (in order of
  * increasing difficulty):
@@ -38,6 +38,8 @@ define( function( require ) {
   var MediumTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
+  var Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
+  var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
@@ -72,7 +74,9 @@ define( function( require ) {
     new Man( Vector2.ZERO, false ),
     new Woman( Vector2.ZERO, false ),
     new Barrel( Vector2.ZERO, false ),
-    new CinderBlock( Vector2.ZERO, false )
+    new CinderBlock( Vector2.ZERO, false ),
+    new Puppy( Vector2.ZERO, false ),
+    new SodaBottle( Vector2.ZERO, false )
   ];
 
   // List of masses that can be used as "mystery masses" in the mass

@@ -6,25 +6,25 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  var blueBucketImage = require( 'image!BALANCING_ACT/blue-bucket.png' );
+  var puppyImage = require( 'image!BALANCING_ACT/puppy.png' );
 
   // Constants
-  var MASS = 3; // In kg
-  var HEIGHT = 0.3; // In meters
+  var MASS = 6; // In kg
+  var HEIGHT = 0.67; // In meters
 
   /**
    * @param initialPosition
    * @param isMystery
    * @constructor
    */
-  function SmallBucket( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, blueBucketImage, HEIGHT, initialPosition, isMystery );
+  function Puppy( initialPosition, isMystery ) {
+    ImageMass.call( this, MASS, puppyImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, SmallBucket,
+  return inherit( ImageMass, Puppy,
     {
       createCopy: function() {
-        return new SmallBucket( this.position.copy(), this.isMystery );
+        return new Puppy( this.position.copy(), this.isMystery );
       }
     } );
 } );
