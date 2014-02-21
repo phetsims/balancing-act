@@ -1,3 +1,9 @@
+# 1.0.0-dev.8
+Removed all non-integer masses from the games.
+Implemented major performance improvements.
+Fixed and issue with progress indicators on main game screen.
+# 1.0.0-dev.7 - Game mostly working
+# 1.0.0-dev.6
 # 1.0.0-dev.5
 1/7/2013 Implemented much of game infrastructure, got start screen working.
 # 1.0.0-dev.4
