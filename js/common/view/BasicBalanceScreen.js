@@ -160,7 +160,7 @@ define( function( require ) {
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
-          0.3,  // Scaling factor, chosen to make size reasonable.
+          0.23,  // Scaling factor, chosen to make size reasonable.
           thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
           mvt
         );
