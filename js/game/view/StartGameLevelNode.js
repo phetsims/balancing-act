@@ -23,9 +23,6 @@ define( function( require ) {
   // Strings
   var defaultTitleString = require( 'string!VEGAS/selectLevel' );
 
-  // Constants
-  var CONTROL_INSET = 20;
-
   /**
    * @param {Function} startLevelFunction - Function used to initiate a game
    * level, will be called with a zero-based index value.
@@ -52,7 +49,7 @@ define( function( require ) {
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',
       highlightedButtonBackgroundColor: 'rgb( 224, 255, 122 )',
       numButtonRows: 1, // For layout
-      controlsInset: 20,
+      controlsInset: 10,
       size: new Dimension2( 768, 504 )
     }, options );
 
@@ -112,13 +109,13 @@ define( function( require ) {
         buttons[ buttonIndex ].centerY = firstButtonOrigin.y + row * buttonSpacingY;
       }
     }
-    resetButton.right = options.size.width - CONTROL_INSET;
-    resetButton.bottom = options.size.height - CONTROL_INSET;
+    resetButton.right = options.size.width - options.controlsInset;
+    resetButton.bottom = options.size.height - options.controlsInset;
     title.centerX = options.size.width / 2;
     title.centerY = buttons[ 0 ].top / 2;
-    soundToggleButton.left = CONTROL_INSET;
-    soundToggleButton.bottom = options.size.height - CONTROL_INSET;
-    timerToggleButton.left = CONTROL_INSET;
+    soundToggleButton.left = options.controlsInset;
+    soundToggleButton.bottom = options.size.height - options.controlsInset;
+    timerToggleButton.left = options.controlsInset;
     timerToggleButton.bottom = soundToggleButton.top - 10;
   }
 
