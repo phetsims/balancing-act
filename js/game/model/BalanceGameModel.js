@@ -246,6 +246,7 @@ define( function( require ) {
       newGame: function() {
         this.stopGameTimer();
         this.gameState = 'choosingLevel';
+        this.incorrectGuessesOnCurrentChallenge = 0;
       },
 
       nextChallenge: function() {
