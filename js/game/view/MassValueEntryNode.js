@@ -39,7 +39,7 @@ define( function( require ) {
     var readoutText = new Text( '0' + ' ' + kgString, { font: READOUT_FONT } );
     var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
-        fill: 'rgb( 220, 220, 220 )',
+        fill: 'white',
         stroke: 'black'
       }
     );
