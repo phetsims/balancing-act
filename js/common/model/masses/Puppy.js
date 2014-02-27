@@ -19,6 +19,7 @@ define( function( require ) {
    */
   function Puppy( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, puppyImage, HEIGHT, initialPosition, isMystery );
+    this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 
   return inherit( ImageMass, Puppy,
