@@ -31,7 +31,9 @@ define( function( require ) {
 
     var simOptions = {
       credits: {
-        //TODO
+        leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
+        softwareDevelopment: 'John Blanco',
+        designTeam: 'Micheal Dubson, Trish Loeblein'
       }
     };
 
