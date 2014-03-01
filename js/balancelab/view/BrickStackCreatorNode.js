@@ -32,7 +32,7 @@ define( function( require ) {
    * @constructor
    */
   function BrickStackCreatorNode( numBricks, model, mvt, options ) {
-    MassCreatorNode.call( this, model, mvt, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
+    MassCreatorNode.call( this, mvt, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
     this.setSelectionNode( new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false ) );

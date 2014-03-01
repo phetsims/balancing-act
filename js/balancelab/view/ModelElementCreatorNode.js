@@ -24,12 +24,11 @@ define( function( require ) {
   var LABEL_FONT = new PhetFont( 14 );
 
   /**
-   * @param {BalanceModel} model
    * @param {ModelViewTransform} mvt
    * @param {Object} options
    * @constructor
    */
-  function ModelElementCreatorNode( model, mvt, options ) {
+  function ModelElementCreatorNode( mvt, options ) {
     options = _.extend( { cursor: 'pointer' }, options );
     Node.call( this, options );
     var thisNode = this;
@@ -78,10 +77,6 @@ define( function( require ) {
           if ( thisNode.modelElement !== null ) {
             // Move the node.
             thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
-          }
-          else {
-            // TODO: Remove this 'else' clause once this handler is fully debugged.
-            console.log( "Drag event received with no model element to move." );
           }
         },
         end: function( event ) {
