@@ -141,15 +141,6 @@ define( function( require ) {
       // lists are equivalent.
       return matchCount === this.fixedMassDistancePairs.length;
     },
-
-    equals: function( that ) {
-      if ( this === that ) {
-        return true;
-      }
-
-      // TODO: Implement or remove this function.  Came up during port from Java, not sure if really needed.
-      throw new Error( 'unimplemented function' );
-    }
   };
 
   return BalanceGameChallenge;

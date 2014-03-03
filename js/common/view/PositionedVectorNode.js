@@ -55,7 +55,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( Node, PositionedVectorNode, {
-    //TODO prototypes
-  } );
+  return inherit( Node, PositionedVectorNode );
 } );
