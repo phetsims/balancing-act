@@ -24,7 +24,5 @@ define( function( require ) {
     this.labelText = config.labelText;
   }
 
-  return inherit( ImageMass, LabeledImageMass, {
-    //TODO prototypes
-  } );
+  return inherit( ImageMass, LabeledImageMass );
 } );

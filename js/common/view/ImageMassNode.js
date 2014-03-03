@@ -50,11 +50,6 @@ define( function( require ) {
       } );
     }
 
-    // Add a rectangle that will be used as a reference when performing layout out this node.
-    // TODO: This approach is a bit crude.  When rest of sim working, look into alternatives, or at least making it smaller.
-    var referenceRect = new Rectangle( -20, 0, 40, 20, 0, 0, { fill: 'rgba( 0, 0, 0, 0 )' } );
-    thisNode.addChild( referenceRect );
-
     var imageNode = new Image( defaultImage );
     // Observe image changes.
     imageMass.imageProperty.link( function( image ) {
@@ -77,10 +72,9 @@ define( function( require ) {
         console.log( '   Image src = ' + image.getAttribute( 'src' ) );
       }
       imageNode.scale( scalingFactor );
-      imageNode.centerX = referenceRect.centerX;
-      imageNode.bottom = referenceRect.bottom;
+      imageNode.centerX = 0;
       if ( isLabeled ) {
-        massLabel.centerX = referenceRect.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+        massLabel.centerX = imageNode.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
         massLabel.bottom = imageNode.top;
       }
       updatePositionAndAngle();
