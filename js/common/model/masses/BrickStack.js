@@ -12,8 +12,8 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
+  var Mass = require( 'BALANCING_ACT/common/model/Mass' );
   var Shape = require( 'KITE/Shape' );
-  var ShapeMass = require( 'BALANCING_ACT/common/model/ShapeMass' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -48,14 +48,20 @@ define( function( require ) {
       brickOrigin = new Vector2( brickOrigin.x, brickOrigin.y + BRICK_HEIGHT );
     }
 
+    this.shape = brickStackShape;
+
     // Invoke superconstructor.
-    ShapeMass.call( this, numBricks * BRICK_MASS, brickStackShape, initialPosition );
+    Mass.call( this, numBricks * BRICK_MASS, initialPosition );
   }
 
-  return inherit( ShapeMass, BrickStack,
+  return inherit( Mass, BrickStack,
     {
       createCopy: function() {
         return new BrickStack( this.numBricks, this.position );
+      },
+
+      getMiddlePoint: function() {
+        return this.shape.bounds.center.rotated( this.rotationAngle ).plus( this.position );
       },
 
       // Public constants
