@@ -88,7 +88,6 @@ define( function( require ) {
     thisScreen.rootNode.addChild( thisScreen.outsideBackgroundNode );
 
     // Add layers used to control game appearance.
-    // TODO: controlLayer and challengeLayer may not need to be on the object, i.e. can possibly be made local.
     thisScreen.controlLayer = new Node();
     thisScreen.rootNode.addChild( thisScreen.controlLayer );
     thisScreen.challengeLayer = new Node();
@@ -181,8 +180,6 @@ define( function( require ) {
       } );
     thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
-    // TODO: Uncomment the various pieces below as the corresponding functionality is implemented.
-
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
     thisScreen.massValueEntryNode = new MassValueEntryNode(
@@ -196,7 +193,6 @@ define( function( require ) {
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
     thisScreen.challengeLayer.addChild( thisScreen.tiltPredictionSelectorNode );
-//    thisScreen.rootNode.addChild( thisScreen.tiltPredictionSelectorNode );
     thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
 
     // Create the 'feedback node' that is used to visually indicate correct
@@ -250,35 +246,6 @@ define( function( require ) {
     gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     thisScreen.massValueEntryNode.massValue.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
-
-    /*
-
-     // Add a key listener that will allow the user to essentially press the
-     // active button by pressing the Enter key.
-     // TODO: Brand new code, needs to be tested, debugged.
-     window.onkeyup = function( e ) {
-     var key = e.keyCode ? e.keyCode : e.which;
-
-     if ( key === 13 ) {
-     // The user pressed the Enter key.  If one of the game
-     // control buttons is currently active, treat it as though
-     // this button has been pressed.
-     if ( thisScreen.nextButton.visible && thisScreen.nextButton.enabled ) {
-     gameModel.nextChallenge();
-     }
-     else if ( thisScreen.tryAgainButton.visible && thisScreen.tryAgainButton.enabled ) {
-     gameModel.tryAgain();
-     }
-     else if ( thisScreen.checkAnswerButton.visible && thisScreen.checkAnswerButton.enabled ) {
-     gameModel.checkAnswer();
-     }
-     else if ( thisScreen.displayCorrectAnswerButton.visible && thisScreen.displayCorrectAnswerButton.enabled ) {
-     gameModel.displayCorrectAnswer();
-     }
-     }
-     };
-
-     */
 
     // Register for changes to the game state and update accordingly.
     gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
@@ -487,7 +454,6 @@ define( function( require ) {
     // during the course of a challenge.
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false; } );
-      //TODO: More nodes to add as they come on line.
       this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard,
         this.tiltPredictionSelectorNode, this.massValueEntryNode ] );
     },
@@ -531,11 +497,6 @@ define( function( require ) {
 
       // Add the node.
       this.rootNode.addChild( thisScreen.levelCompletedNode );
-    },
-
-    createMassNode: function( visible ) {
-      // TODO
     }
-
   } );
 } );
