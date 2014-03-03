@@ -100,8 +100,6 @@ define( function( require ) {
     },
 
     setSelectionNode: function( selectionNode ) {
-      // TODO: Note to self made during port: Why isn't this handled in the
-      // constructor?  Consider making it so once things are working.
       if ( this.selectionNode ) {
         console.log( 'Can\'t set selectionNode more than once.' );
       }
@@ -111,7 +109,6 @@ define( function( require ) {
     },
 
     setCaption: function( captionText ) {
-      // TODO: Note to self made during port: Why isn't this handled in the constructor?
       this.caption = new Text( captionText, { font: LABEL_FONT } );
       this.addChild( this.caption );
       this.updateLayout();
