@@ -30,7 +30,7 @@ define( function( require ) {
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
   var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
-  var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
+  var OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );

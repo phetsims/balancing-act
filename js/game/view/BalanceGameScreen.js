@@ -26,7 +26,7 @@ define( function( require ) {
   var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var OutsideBackgroundNode = require( 'BALANCING_ACT/common/view/OutsideBackgroundNode' );
+  var OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
