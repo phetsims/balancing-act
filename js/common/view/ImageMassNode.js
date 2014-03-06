@@ -19,7 +19,6 @@ define( function( require ) {
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
-  var Rectangle = require( 'SCENERY/nodes/rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );

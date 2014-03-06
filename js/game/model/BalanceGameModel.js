@@ -110,8 +110,9 @@ define( function( require ) {
       reset: function() {
         // This can only be done from the level selection screen, so it only
         // clears best times and scores.
-        this.bestScores.forEach( function( bestScoreProperty ) { bestScoreProperty.reset() } );
+        this.bestScores.forEach( function( bestScoreProperty ) { bestScoreProperty.reset(); } );
         this.bestTimes = [];
+        var thisModel = this;
         _.times( MAX_LEVELS, function() {
           thisModel.bestTimes.push( null );
         } );
