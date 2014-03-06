@@ -58,7 +58,7 @@ define( function( require ) {
   var BUTTON_FILL = new Color( 0, 255, 153 );
 
   /**
-   * @param {BalanceGameModel} model
+   * @param {BalanceGameModel} gameModel
    * @constructor
    */
   function BalanceGameScreen( gameModel ) {
@@ -109,9 +109,9 @@ define( function( require ) {
       thisScreen.challengeLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.movableMasses.addItemRemovedListener( function() {
+      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass() {
         thisScreen.challengeLayer.removeChild( massNode );
-        gameModel.movableMasses.removeItemRemovedListener( this );
+        gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
       } );
     } );
     gameModel.fixedMasses.addItemAddedListener( function( addedMass ) {
@@ -121,9 +121,9 @@ define( function( require ) {
       thisScreen.challengeLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.fixedMasses.addItemRemovedListener( function() {
+      gameModel.fixedMasses.addItemRemovedListener( function removeFixedMass() {
         thisScreen.challengeLayer.removeChild( massNode );
-        gameModel.fixedMasses.removeItemRemovedListener( this );
+        gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
       } );
     } );
 
