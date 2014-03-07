@@ -37,6 +37,7 @@ define( function( require ) {
     var brickStackShape = new Shape();
     var brickOrigin = Vector2.ZERO;
     for ( var i = 0; i < numBricks; i++ ) {
+      //REVIEW: Easier to read as brickStackShape.rect( brickOrigin.x - BRICK_WIDTH / 2, brickOrigin.y, BRICK_WIDTH, BRICK_HEIGHT ), and these can be chained to result in the same operation
       brickStackShape.moveTo( brickOrigin.x, brickOrigin.y );
       brickStackShape.lineTo( brickOrigin.x + BRICK_WIDTH / 2, brickOrigin.y );
       brickStackShape.lineTo( brickOrigin.x + BRICK_WIDTH / 2, brickOrigin.y + BRICK_HEIGHT );

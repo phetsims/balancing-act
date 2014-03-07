@@ -33,6 +33,7 @@ define( function( require ) {
   return inherit( HumanMass, Woman,
     {
       createCopy: function() {
+        //REVIEW: these parameters seem to be ignored, unless I'm misreading something
         return new Woman( this.position.copy(), this.isMystery );
       }
     } );

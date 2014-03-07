@@ -32,6 +32,7 @@ define( function( require ) {
   return inherit( HumanMass, Man,
     {
       createCopy: function() {
+        //REVIEW: consider Man( initialPosition ) like other masses?
         var copy = new Man();
         copy.position = this.position.copy();
         return copy;
