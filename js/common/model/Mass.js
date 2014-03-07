@@ -101,8 +101,13 @@ define( function( require ) {
     createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
 
     // Public constants
+    //REVIEW: The first two are duplicated in BASharedConstants.js (where they aren't used), and these are properties on every instance.
+    //REVIEW: Presumably the BASharedConstants versions should be used, or they should be on the type itself, e.g.:
+    //REIVEW: inherit( PropertySet, Mass, { ... }, { MIN_ANIMATION_VELOCITY: 3 } );
+    //REIVEW: Thus they would be accessed either with BASharedConstants.MIN_ANIMATION_VELOCITY or Mass.MIN_ANIMATION_VELOCITY (not someMass.MIN_ANIMATION_VELOCITY)
     MIN_ANIMATION_VELOCITY: 3, // In meters/sec.
     MAX_REMOVAL_ANIMATION_DURATION: 0.75, // In seconds.
+    //REVIEW: DEFAULT_INITIAL_LOCATION doesn't appear to be used? Also I prefer Vector2.ZERO if you need an immutable (0,0).
     DEFAULT_INITIAL_LOCATION: new Vector2( 0, 0 )
   } );
 } );
