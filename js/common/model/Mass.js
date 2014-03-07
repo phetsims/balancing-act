@@ -62,6 +62,7 @@ define( function( require ) {
       this.position = this.position.plus( translationVector );
     },
 
+    //REVIEW: prefer throw( '...' ), since it doesn't return a Vector2, and it's easier to trace down in debugging tools?
     getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ); },
 
     release: function() { this.userControlled = false; },
@@ -98,6 +99,7 @@ define( function( require ) {
       }
     },
 
+    //REVIEW: prefer throw( '...' ), since it doesn't return a Mass, and it's easier to trace down in debugging tools?
     createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
 
     // Public constants

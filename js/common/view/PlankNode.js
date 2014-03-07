@@ -32,6 +32,7 @@ define( function( require ) {
     var thisNode = this;
 
     // Create and position the plank.
+    //REVIEW: Consider using a Scenery Rectangle here, constructed from the plank's bounds?
     var plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
     thisNode.addChild( plankNode );
 

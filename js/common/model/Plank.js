@@ -58,9 +58,12 @@ define( function( require ) {
     thisPlank.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
 
     // Other external visible attributes.
+    //REVIEW: is the passed-in pivotPoint or thisPlank.pivotPoint mutable? Curious about the reason why this isn't "thisPlank.pivotPoint = pivotPoint"
     thisPlank.pivotPoint = new Vector2( pivotPoint.x, pivotPoint.y );
 
     // Map of masses to distance from the plank's center.
+    //REVIEW: consider an object mapping from a mass ID => distance? No need to delete entries (but could simply with delete massDistancePairs[i]),
+    //REVIEW: and lookup is simpler and faster.
     thisPlank.massDistancePairs = [];
 
     // Variables that need to be retained for dynamic behavior, but are not
@@ -78,6 +81,9 @@ define( function( require ) {
 
     // Unrotated shape of the plank
     var tempShape = new Shape();
+    //REVIEW: unrotatedShape is the same as Shape.rect( x - PLANK_LENGTH / 2, y, PLANK_LENGTH, PLANK_THICKNESS )?
+    //REVIEW: Since its use only needs to be bounds (checking minY and creating a Scenery Rectangle), consider storing as
+    //REVIEW: a Bounds2.rect( x - PLANK_LENGTH / 2, y, PLANK_LENGTH, PLANK_THICKNESS )?
     tempShape.moveTo( 0, 0 );
     tempShape.lineTo( PLANK_LENGTH / 2, 0 );
     tempShape.lineTo( PLANK_LENGTH / 2, PLANK_THICKNESS );
@@ -124,6 +130,7 @@ define( function( require ) {
         var newTiltAngle = thisPlank.tiltAngle + thisPlank.angularVelocity * dt;
         if ( Math.abs( newTiltAngle ) > thisPlank.maxTiltAngle ) {
           // Limit the angle when one end is touching the ground.
+          //REVIEW: Consider Math.sign( thisPlank.tiltAngle ). No preference on what is used, just whatever you find most readable
           newTiltAngle = thisPlank.maxTiltAngle * ( thisPlank.tiltAngle < 0 ? -1 : 1 );
           thisPlank.angularVelocity = 0;
         }
@@ -215,6 +222,7 @@ define( function( require ) {
       if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
         throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
       }
+      //REVIEW: Consider Vector2.createPolar( distanceFromCenter, this.tiltAngle ) for the future (no extra Vector2 allocation)
       var vectorToLocation = this.getPlankSurfaceCenter().plus( new Vector2( distanceFromCenter, 0 ).rotated( this.tiltAngle ) );
       // Set the position of the mass to be just above the plank at the
       // appropriate distance so that it will drop to the correct place.
@@ -272,6 +280,7 @@ define( function( require ) {
     },
 
     removeAllMasses: function() {
+      //REVIEW: Would an ObservableArray.getDefensiveCopy() be useful/more readable?
       var copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
       var thisPlank = this;
       copyOfMassesArray.forEach( function( mass ) {
@@ -377,6 +386,7 @@ define( function( require ) {
     },
 
     isTickMarkOccupied: function( tickMark ) {
+      //REVIEW: Simplified with "var tickMarkCenter = tickMark.bounds.center;"
       var tickMarkCenter = new Vector2( tickMark.bounds.centerX(), tickMark.bounds.centerY() );
       var tickMarkDistanceFromCenter = this.getPlankSurfaceCenter().distance( tickMarkCenter );
       if ( tickMarkCenter.x < this.getPlankSurfaceCenter().x ) {
@@ -402,6 +412,7 @@ define( function( require ) {
       // Start at the absolute location of the attachment point, and add the
       // relative location of the top of the plank, accounting for its
       // rotation angle
+      //REVIEW: reason for not using this.bottomCenterLocation.plus( ... )? Overall this function makes 3 more Vector2 allocations than necessary (if GCs are an issue)
       return new Vector2( this.bottomCenterLocation.x, this.bottomCenterLocation.y ).plus( new Vector2( 0, PLANK_THICKNESS ).rotated( this.tiltAngle ) );
     },
 
@@ -436,6 +447,7 @@ define( function( require ) {
       } );
 
       // Account for floating point error, just make sure it is close enough.
+      //REVIEW: I've seen various small float constants. I generally consolidate them as a specific 'epsilon' constant unless I need to adjust them independently
       return Math.abs( unCompensatedTorque ) < 1E-6;
     },
 
@@ -474,6 +486,7 @@ define( function( require ) {
     },
 
     // Public constants.
+    //REVIEW: constants set to instance instead of type (see comments in Mass.js)
     LENGTH: PLANK_LENGTH,
     THICKNESS: PLANK_THICKNESS,
     INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE,
