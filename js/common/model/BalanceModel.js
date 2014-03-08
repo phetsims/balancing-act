@@ -70,6 +70,7 @@ define( function( require ) {
       mass.userControlledProperty.link( userControlledMassesUpdater );
 
       // Attach a reference for this listener to the mass so that it can be removed later.
+      //REVIEW: I usually like to document properties that are set on other types in those types' files (e.g. noting userControlledMassesUpdater in Mass.js)
       mass.userControlledMassesUpdater = userControlledMassesUpdater;
     },
 

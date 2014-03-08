@@ -51,6 +51,7 @@ define( function( require ) {
   // Tolerance value used when comparing floating-point calculations.
   var COMPARISON_TOLERANCE = 1E-6;
 
+  //REVIEW: see earlier comment about refactoring to access Plank.INTER_SNAP_TO_MARKER_DISTANCE, etc.
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
@@ -266,6 +267,7 @@ define( function( require ) {
     },
 
     createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
+      //REVIEW: refactor so it can be BalanceMassChallenge.create1Fixed1Movable, unless this is a workaround (and you usually call create1Fixed1Movable on an instance)
       return BalanceMassesChallenge.prototype.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
     },
 
@@ -564,6 +566,7 @@ define( function( require ) {
      */
     removeOldestHalfOfList: function( list ) {
       var halfLength = Math.floor( list.length / 2 );
+      //REVIEW: A single list.splice( halfLength, halfLength + 1 ) should suffice here? Executing the splice halflength-times is not needed.
       for ( var i = 0; i < halfLength; i++ ) {
         list.splice( halfLength, halfLength );
       }
@@ -616,6 +619,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueMasses: function( testChallenge, usedChallengeList ) {
+      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
       for ( var i = 0; i < usedChallengeList.length; i++ ) {
         if ( usedChallengeList[i].usesSameMasses( testChallenge ) ) {
           return false;
@@ -637,6 +641,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMassesAndDistances: function( testChallenge, usedChallengeList ) {
+      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
       for ( var i = 0; i < usedChallengeList.length; i++ ) {
         if ( usedChallengeList[i].usesSameFixedMassesAndDistances( testChallenge ) ) {
           return false;
@@ -657,6 +662,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMasses: function( testChallenge, usedChallengeList ) {
+      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
       for ( var i = 0; i < usedChallengeList.length; i++ ) {
         if ( usedChallengeList[i].usesSameFixedMasses( testChallenge ) ) {
           return false;

@@ -26,6 +26,9 @@ define( function( require ) {
    */
   function BalanceMassesChallenge( fixedMasses, movableMasses, solutionToDisplay ) {
     BalanceGameChallenge.call( this, 'singleColumn' );
+    //REVIEW: Are these arrays considered public (where other copies of them could be stored?)
+    //REVIEW: Otherwise, it's generally easier to read "this.movableMasses = this.movableMasses.concat( movableMasses );",
+    //REVIEW: or even better to have them be constructor parameters on BalanceGameChallenge (since they are initialized as empty)
     Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
     Array.prototype.push.apply( this.movableMasses, movableMasses );
     Array.prototype.push.apply( this.balancedConfiguration, solutionToDisplay );

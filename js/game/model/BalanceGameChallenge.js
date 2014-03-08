@@ -22,6 +22,9 @@ define( function( require ) {
     this.initialColumnState = initialColumnState;
     this.maxAttemptsAllowed = options.maxAttemptsAllowed;
 
+    //REVIEW: Would be helpful to have docs about the types of the following three arrays' elements.
+
+    //REVIEW: "List of masses" threw me off, expected an Array of <Mass> type, not of { mass: <MASS>, distance: <Number> }
     // List of masses that will initially be sitting on the balance, and which
     // the user will not manipulate.
     this.fixedMassDistancePairs = [];

@@ -45,7 +45,7 @@ define( function( require ) {
         level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
         challengeIndex: 0,
         score: 0,
-        gameState: 'choosingLevel',
+        gameState: 'choosingLevel', //REVIEW: What are the valid gameState values?
         columnState: 'singleColumns', // Valid values are none, singleColumn, doubleColumns
         elapsedTime: 0
       } );
@@ -336,6 +336,7 @@ define( function( require ) {
         }
         this.elapsedTime = 0;
         var thisModel = this;
+        //REVIEW: setInterval/clearInterval should use joist's Timer, so that Scenery input event recording options for replay will work
         this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
       },
 
