@@ -9,6 +9,7 @@
  * @author Sam Reid
  */
 
+//REVIEW: This should presumably be in scenery-phet?
 define( function( require ) {
   'use strict';
 
@@ -49,6 +50,7 @@ define( function( require ) {
     };
 
     var iconOptions = { stroke: 'black', lineWidth: 3, lineCap: 'round' };
+    //REVIEW: Is the intial lineTo( 0, 0 ) meant to draw a line? There is no line.
     var nextIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( 5, 5 ).lineTo( 0, 10 ), iconOptions );
     var previousIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( -5, 5 ).lineTo( 0, 10 ), iconOptions );
 

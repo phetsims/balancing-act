@@ -76,6 +76,8 @@ define( function( require ) {
 
   return inherit( Node, BrickStackNode, {
     updatePositionAndAngle: function() {
+      //REVIEW: For performance, generally we want to minimize node transformations. This transforms the brick stack 4 times, which (depending on the renderer)
+      //REVIEW: may be almost 4 times as expensive, and it happens during a drag.
       this.rotation = 0;
       // Set the position
       this.centerX = this.mvt.modelToViewX( this.brickStack.position.x );

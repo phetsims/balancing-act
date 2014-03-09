@@ -31,9 +31,11 @@ define( function( require ) {
    * @param {boolean} draggable
    * @constructor
    */
+   //REVIEW: That's some strange documentation for a Vector2 import statement!
   var Vector2 = require( 'DOT/Vector2' );
 
   function ImageMassNode( imageMass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
+    //REVIEW: Is it necessary for non-draggable masses to block input events? Otherwise pickable: true is unnecessary.
     Node.call( this, { cursor: 'pointer', pickable: true } );
     var thisNode = this;
 
@@ -62,6 +64,7 @@ define( function( require ) {
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
       // Debug printouts for indicating whether the image for this node is
       // reasonably scaled.  Generally, scale values between 0.5 and 1 look best.
+      //REVIEW: Should be removed from production, console.log isn't guaranteed to exist. Also, these warnings appeared when I ran the sim (does this indicate a problem?)
       if ( scalingFactor > 2 || scalingFactor < 0.5 ) {
         console.log( 'Warning: Scaling factor is too large or small, drawing size should be adjusted.  Scaling factor = ' + scalingFactor );
         console.log( '   Image src = ' + image.getAttribute( 'src' ) );

@@ -342,6 +342,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
+          //REVIEW: Setting pickable to true causes everything under it to be hit-tested. Presumably we want this.challengeLayer.pickable = null?
           this.challengeLayer.pickable = true;
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
@@ -491,6 +492,7 @@ define( function( require ) {
           thisScreen.levelCompletedNode = null;
         },
         {
+          //REVIEW: simplification: "center: thisScreen.layoutBounds.center"
           centerX: thisScreen.layoutBounds.width / 2,
           centerY: thisScreen.layoutBounds.height / 2
         } );

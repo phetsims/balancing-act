@@ -6,6 +6,8 @@
  * @author Sam Reid
  * @author John Blanco
  */
+ 
+ //REVIEW: This should presumably be in scenery-phet?
 define( function( require ) {
   'use strict';
 
@@ -43,9 +45,11 @@ define( function( require ) {
     thisNode.selectedKit = selectedKit;
 
     // Determine the max size of all the kit contents for layout purposes.
+    //REVIEW: would Dimension2.ZERO be helpful?
     var maxKitContentSize = new Dimension2( 0, 0 );
     var maxKitTitleSize = new Dimension2( 0, 0 );
     kits.forEach( function( kit ) {
+      //REVIEW: would a 'max' or 'union' method on Dimension2 be helpful?
       maxKitContentSize.width = Math.max( maxKitContentSize.width, kit.content.width );
       maxKitContentSize.height = Math.max( maxKitContentSize.height, kit.content.height );
       maxKitTitleSize.width = Math.max( maxKitTitleSize.width, kit.title.width );
@@ -55,6 +59,8 @@ define( function( require ) {
     var controlNode = new KitControlNode( kits.length, selectedKit, { titleNode: options.titleNode, minButtonXSpace: 70 } );
 
     // Construct and add the background.  Make it big enough to hold the largest kit.
+    //REVIEW: fill defaults to null, no need to specify any options (feel free to leave it if it helps as implicit documentation).
+    //REVIEW: Is the background only for layout purposes (to change bounds)? Is it only to change the input event handling (if so use mouseArea/touchArea)?
     thisNode.background = new Rectangle( 0, 0, Math.max( Math.max( maxKitContentSize.width, maxKitTitleSize.width ), controlNode.width ),
       controlNode.height + maxKitContentSize.height + maxKitTitleSize.height, 5, 5, { fill: null } );
     thisNode.addChild( thisNode.background );
