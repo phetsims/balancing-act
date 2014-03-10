@@ -43,8 +43,11 @@ define( function( require ) {
     // Function for updating the highlights
     function updateHighlights() {
       // Update the tick mark highlights by removing and redrawing them.
+      //REVIEW: Removing all of them and recreating them generally has a big performance penalty, especially with the current Scenery version.
+      //REVIEW: Noticed as slow on Nexus 7, and confirmed as a hotspot on Chrome (desktop) profiling
       tickMarkHighlightLayer.removeAllChildren();
       plank.activeDropLocations.forEach( function( location ) {
+        //REVIEW: Using Rectangle instead of a Shape and a Path is generally better (faster to draw, less overhead)
         var highlightShape = Shape.rect(
           mvt.modelToViewX( location ) - HIGHLIGHT_WIDTH / 2,
           mvt.modelToViewY( plank.unrotatedShape.bounds.minY ),
@@ -56,6 +59,7 @@ define( function( require ) {
     }
 
     // Update the tick mark highlights as the active drop locations change.
+    //REVIEW: Does this cause the updateHighlights() hotspot to be called more than once per frame (usually one add and remove?)
     plank.activeDropLocations.addItemAddedListener( updateHighlights );
     plank.activeDropLocations.addItemRemovedListener( updateHighlights );
 

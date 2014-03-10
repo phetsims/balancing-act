@@ -22,6 +22,7 @@ define( function( require ) {
 
   function GameIconNode( image, levelNumber ) {
     Node.call( this );
+    //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
     var title = new Text( levelString + ' ' + levelNumber, { font: FONT } );
     this.addChild( title );
     var imageNode = new Image( image );

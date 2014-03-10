@@ -36,6 +36,7 @@ define( function( require ) {
     thisNode.massValue = new Property( 0 );
 
     // Create and add the readout, including the background.
+    //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
     var readoutText = new Text( '0' + ' ' + kgString, { font: READOUT_FONT } );
     var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
@@ -102,6 +103,7 @@ define( function( require ) {
 
     // Update the readout text and arrow button states whenever the value changes.
     thisNode.massValue.link( function( value ) {
+      //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
       readoutText.text = value + ' ' + kgString;
       readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.setEnabled( value > 0 );

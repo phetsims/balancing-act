@@ -20,7 +20,7 @@ define( function( require ) {
       {
         fill: 'rgb( 240, 240, 0 )',
         stroke: 'black',
-        lineThickness: 1
+        lineThickness: 1 //REVIEW: there is no 'lineThickness' setting. It's lineWidth, and it defaults to 1
       } ) );
   }
 
