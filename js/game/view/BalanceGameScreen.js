@@ -84,7 +84,8 @@ define( function( require ) {
     thisScreen.rootNode.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( mvt, 3, -1 );
+    var Rectangle = require( 'DOT/Rectangle' );
+    thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( mvt, 3, -1, { modelRect: new Rectangle( -20, -20, 40, 40 ) } );
     thisScreen.rootNode.addChild( thisScreen.outsideBackgroundNode );
 
     // Add layers used to control game appearance.
