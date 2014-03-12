@@ -51,6 +51,10 @@ define( function( require ) {
     thisMass.expectedAnimationTime = 0;
     thisMass.isMystery = isMystery;
 
+    // This property is used to keep track of a function that is used to to
+    // add/remove this mass from a list of user-controlled masses.
+    thisMass.userControlledMassesUpdater = null;
+
     // Since not all objects are symmetrical, some may need to have an offset
     // that indicates where their center of mass is when placed on a balance.
     // This is the horizontal offset from the center of the shape or image.
