@@ -90,7 +90,8 @@ define( function( require ) {
     root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    root.addChild( new OutsideBackgroundNode( mvt, 3, -1 ) );
+    var skyAndGroundHeight = this.layoutBounds.height * 1.5;
+    root.addChild( new OutsideBackgroundNode( this.layoutBounds.centerX, mvt.modelToViewY( 0 ), this.layoutBounds.width * 2.5, skyAndGroundHeight, skyAndGroundHeight ) );
 
     // Set up a layer for non-mass model elements.
     thisScreen.nonMassLayer = new Node();
