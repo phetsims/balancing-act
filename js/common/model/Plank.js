@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   var Matrix3 = require( 'DOT/Matrix3' );
@@ -58,12 +59,9 @@ define( function( require ) {
     thisPlank.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
 
     // Other external visible attributes.
-    //REVIEW: is the passed-in pivotPoint or thisPlank.pivotPoint mutable? Curious about the reason why this isn't "thisPlank.pivotPoint = pivotPoint"
-    thisPlank.pivotPoint = new Vector2( pivotPoint.x, pivotPoint.y );
+    thisPlank.pivotPoint = pivotPoint;
 
     // Map of masses to distance from the plank's center.
-    //REVIEW: consider an object mapping from a mass ID => distance? No need to delete entries (but could simply with delete massDistancePairs[i]),
-    //REVIEW: and lookup is simpler and faster.
     thisPlank.massDistancePairs = [];
 
     // Variables that need to be retained for dynamic behavior, but are not
@@ -80,18 +78,7 @@ define( function( require ) {
     thisPlank.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
 
     // Unrotated shape of the plank
-    var tempShape = new Shape();
-    //REVIEW: unrotatedShape is the same as Shape.rect( x - PLANK_LENGTH / 2, y, PLANK_LENGTH, PLANK_THICKNESS )?
-    //REVIEW: Since its use only needs to be bounds (checking minY and creating a Scenery Rectangle), consider storing as
-    //REVIEW: a Bounds2.rect( x - PLANK_LENGTH / 2, y, PLANK_LENGTH, PLANK_THICKNESS )?
-    tempShape.moveTo( 0, 0 );
-    tempShape.lineTo( PLANK_LENGTH / 2, 0 );
-    tempShape.lineTo( PLANK_LENGTH / 2, PLANK_THICKNESS );
-    tempShape.lineTo( 0, PLANK_THICKNESS );
-    tempShape.lineTo( -PLANK_LENGTH / 2, PLANK_THICKNESS );
-    tempShape.lineTo( -PLANK_LENGTH / 2, 0 );
-    tempShape.lineTo( 0, 0 );
-    thisPlank.unrotatedShape = tempShape.transformed( Matrix3.translation( location.x, location.y ) );
+    thisPlank.unrotatedShape = Shape.rect( location.x - PLANK_LENGTH / 2, location.y, PLANK_LENGTH, PLANK_THICKNESS );
 
     // Listen to the support column property.  The plank goes to the level
     // position whenever there are two columns present, and into a tilted
@@ -298,7 +285,7 @@ define( function( require ) {
     },
 
     updatePlank: function() {
-      if ( this.pivotPoint.y >= this.unrotatedShape.minY ) {
+      if ( this.pivotPoint.y < this.unrotatedShape.minY ) {
         throw new Error( 'Pivot point cannot be below the plank.' );
       }
       var attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
