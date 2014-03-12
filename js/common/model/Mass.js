@@ -13,6 +13,10 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // Constants
+  var MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
+  var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
+
   function Mass( massValue, initialPosition, isMystery ) {
     var thisMass = this;
     PropertySet.call( this,
@@ -62,58 +66,47 @@ define( function( require ) {
   }
 
   return inherit( PropertySet, Mass, {
-    translate: function( translationVector ) {
-      this.position = this.position.plus( translationVector );
-    },
+      translate: function( translationVector ) {
+        this.position = this.position.plus( translationVector );
+      },
 
-    //REVIEW: prefer throw( '...' ), since it doesn't return a Vector2, and it's easier to trace down in debugging tools?
-    getMiddlePoint: function() { console.log( 'getMiddlePoint should be implemented in descendant types.' ); },
+      getMiddlePoint: function() { throw new Error( 'getMiddlePoint should be implemented in descendant types.' ); },
 
-    release: function() { this.userControlled = false; },
+      release: function() { this.userControlled = false; },
 
-    initiateAnimation: function() {
-      // Calculate velocity.  A higher velocity is used if the model element
-      // has a long way to travel, otherwise it takes too long.
-      var velocity = Math.max( this.position.distance( this.animationDestination ) / this.MAX_REMOVAL_ANIMATION_DURATION, this.MIN_ANIMATION_VELOCITY );
-      this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
-      // Calculate the animation motion vector.
-      this.animationMotionVector = new Vector2( velocity, 0 );
-      var animationAngle = Math.atan2( this.animationDestination.y - this.position.y, this.animationDestination.x - this.position.x );
-      this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
-      // Update the property that tracks the animation state.
-      this.animating = true;
-      // Save starting height - needed as a reference.
-      this.animationStartHeight = this.height;
-    },
+      initiateAnimation: function() {
+        // Calculate velocity.  A higher velocity is used if the model element
+        // has a long way to travel, otherwise it takes too long.
+        var velocity = Math.max( this.position.distance( this.animationDestination ) / MAX_REMOVAL_ANIMATION_DURATION, MIN_ANIMATION_VELOCITY );
+        this.expectedAnimationTime = this.position.distance( this.animationDestination ) / velocity; // In seconds.
+        // Calculate the animation motion vector.
+        this.animationMotionVector = new Vector2( velocity, 0 );
+        var animationAngle = Math.atan2( this.animationDestination.y - this.position.y, this.animationDestination.x - this.position.x );
+        this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
+        // Update the property that tracks the animation state.
+        this.animating = true;
+        // Save starting height - needed as a reference.
+        this.animationStartHeight = this.height;
+      },
 
-    step: function( dt ) {
-      if ( this.animating ) {
-        // Do a step of the linear animation towards the destination.
-        if ( this.position.distance( this.animationDestination ) >= this.animationMotionVector.magnitude() * dt ) {
-          // Perform next step of animation.
-          this.translate( this.animationMotionVector.times( dt ) );
-          this.animationScale = Math.max( this.animationScale - ( dt / this.expectedAnimationTime ) * 0.9, 0.1 );
+      step: function( dt ) {
+        if ( this.animating ) {
+          // Do a step of the linear animation towards the destination.
+          if ( this.position.distance( this.animationDestination ) >= this.animationMotionVector.magnitude() * dt ) {
+            // Perform next step of animation.
+            this.translate( this.animationMotionVector.times( dt ) );
+            this.animationScale = Math.max( this.animationScale - ( dt / this.expectedAnimationTime ) * 0.9, 0.1 );
+          }
+          else {
+            // Close enough - animation is complete.
+            this.position = this.animationDestination;
+            this.animating = false;
+            this.animationScale = 1;
+          }
         }
-        else {
-          // Close enough - animation is complete.
-          this.position = this.animationDestination;
-          this.animating = false;
-          this.animationScale = 1;
-        }
-      }
-    },
+      },
 
-    //REVIEW: prefer throw( '...' ), since it doesn't return a Mass, and it's easier to trace down in debugging tools?
-    createCopy: function() { console.log( 'createCopy should be implemented in descendant types.' ); },
-
-    // Public constants
-    //REVIEW: The first two are duplicated in BASharedConstants.js (where they aren't used), and these are properties on every instance.
-    //REVIEW: Presumably the BASharedConstants versions should be used, or they should be on the type itself, e.g.:
-    //REIVEW: inherit( PropertySet, Mass, { ... }, { MIN_ANIMATION_VELOCITY: 3 } );
-    //REIVEW: Thus they would be accessed either with BASharedConstants.MIN_ANIMATION_VELOCITY or Mass.MIN_ANIMATION_VELOCITY (not someMass.MIN_ANIMATION_VELOCITY)
-    MIN_ANIMATION_VELOCITY: 3, // In meters/sec.
-    MAX_REMOVAL_ANIMATION_DURATION: 0.75, // In seconds.
-    //REVIEW: DEFAULT_INITIAL_LOCATION doesn't appear to be used? Also I prefer Vector2.ZERO if you need an immutable (0,0).
-    DEFAULT_INITIAL_LOCATION: new Vector2( 0, 0 )
-  } );
+      createCopy: function() { throw new Error( 'createCopy should be implemented in descendant types.' ); }
+    }
+  );
 } );
