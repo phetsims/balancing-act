@@ -21,6 +21,7 @@ define( function( require ) {
   // Imports
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
+  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var BigRock = require( 'BALANCING_ACT/common/model/masses/BigRock' );
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
@@ -47,9 +48,6 @@ define( function( require ) {
   var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // Tolerance value used when comparing floating-point calculations.
-  var COMPARISON_TOLERANCE = 1E-6;
 
   //REVIEW: see earlier comment about refactoring to access Plank.INTER_SNAP_TO_MARKER_DISTANCE, etc.
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
@@ -129,7 +127,7 @@ define( function( require ) {
         return false;
       }
 
-      return ( fixedMassValue / movableMassValue ) % distanceIncrement <= COMPARISON_TOLERANCE;
+      return ( fixedMassValue / movableMassValue ) % distanceIncrement <= BASharedConstants.COMPARISON_TOLERANCE;
     },
 
     chooseRandomValidFixedMassDistance: function( fixedMassValue, movableMassValue ) {
@@ -257,8 +255,8 @@ define( function( require ) {
       for ( var testDistance = Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE ) {
         var possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
         if ( possibleFixedMassDistance < Plank.length / 2 &&
-             possibleFixedMassDistance >= Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE - 1E-6 &&
-             possibleFixedMassDistance % Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE < 1E-6 ) {
+             possibleFixedMassDistance >= Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
+             possibleFixedMassDistance % Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
           // This is a valid distance.
           validFixedMassDistances.push( possibleFixedMassDistance );
         }

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // Imports
+  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
@@ -117,7 +118,6 @@ define( function( require ) {
         var newTiltAngle = thisPlank.tiltAngle + thisPlank.angularVelocity * dt;
         if ( Math.abs( newTiltAngle ) > thisPlank.maxTiltAngle ) {
           // Limit the angle when one end is touching the ground.
-          //REVIEW: Consider Math.sign( thisPlank.tiltAngle ). No preference on what is used, just whatever you find most readable
           newTiltAngle = thisPlank.maxTiltAngle * ( thisPlank.tiltAngle < 0 ? -1 : 1 );
           thisPlank.angularVelocity = 0;
         }
@@ -209,8 +209,8 @@ define( function( require ) {
       if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
         throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
       }
-      //REVIEW: Consider Vector2.createPolar( distanceFromCenter, this.tiltAngle ) for the future (no extra Vector2 allocation)
-      var vectorToLocation = this.getPlankSurfaceCenter().plus( new Vector2( distanceFromCenter, 0 ).rotated( this.tiltAngle ) );
+      var vectorToLocation = this.getPlankSurfaceCenter().plus( Vector2.createPolar( distanceFromCenter, this.tiltAngle ) );
+
       // Set the position of the mass to be just above the plank at the
       // appropriate distance so that it will drop to the correct place.
       mass.position = new Vector2( vectorToLocation.x, vectorToLocation.y + 0.01 );
@@ -373,8 +373,8 @@ define( function( require ) {
     },
 
     isTickMarkOccupied: function( tickMark ) {
-      //REVIEW: Simplified with "var tickMarkCenter = tickMark.bounds.center;"
-      var tickMarkCenter = new Vector2( tickMark.bounds.centerX(), tickMark.bounds.centerY() );
+//      var tickMarkCenter = new Vector2( tickMark.bounds.centerX(), tickMark.bounds.centerY() );
+      var tickMarkCenter = tickMark.bounds.center;
       var tickMarkDistanceFromCenter = this.getPlankSurfaceCenter().distance( tickMarkCenter );
       if ( tickMarkCenter.x < this.getPlankSurfaceCenter().x ) {
         tickMarkDistanceFromCenter = -tickMarkDistanceFromCenter;
@@ -399,8 +399,7 @@ define( function( require ) {
       // Start at the absolute location of the attachment point, and add the
       // relative location of the top of the plank, accounting for its
       // rotation angle
-      //REVIEW: reason for not using this.bottomCenterLocation.plus( ... )? Overall this function makes 3 more Vector2 allocations than necessary (if GCs are an issue)
-      return new Vector2( this.bottomCenterLocation.x, this.bottomCenterLocation.y ).plus( new Vector2( 0, PLANK_THICKNESS ).rotated( this.tiltAngle ) );
+      return this.bottomCenterLocation.plus( Vector2.createPolar( PLANK_THICKNESS, this.tiltAngle + Math.PI / 2 ) );
     },
 
     // Obtain the Y value for the surface of the plank for the specified X
@@ -434,8 +433,7 @@ define( function( require ) {
       } );
 
       // Account for floating point error, just make sure it is close enough.
-      //REVIEW: I've seen various small float constants. I generally consolidate them as a specific 'epsilon' constant unless I need to adjust them independently
-      return Math.abs( unCompensatedTorque ) < 1E-6;
+      return Math.abs( unCompensatedTorque ) < BASharedConstants.COMPARISON_TOLERANCE;
     },
 
     updateNetTorque: function() {
