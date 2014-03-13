@@ -37,30 +37,22 @@ define( function( require ) {
     var plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
     thisNode.addChild( plankNode );
 
-    // Create a layer for the tick mark highlight(s).
-    var tickMarkHighlightLayer = new Node();
-    plankNode.addChild( tickMarkHighlightLayer );
+    // Function for mapping plank distance relative to the center point to a highlight.
+    function mapLocationToHighlightIndex( distanceFromCenter ) {
+      return Math.round( ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_LOCATIONS + 1 ) / Plank.LENGTH ) ) - 1;
+    }
 
     // Function for updating the highlights
     function updateHighlights() {
-      // Update the tick mark highlights by removing and redrawing them.
-      //REVIEW: Removing all of them and recreating them generally has a big performance penalty, especially with the current Scenery version.
-      //REVIEW: Noticed as slow on Nexus 7, and confirmed as a hotspot on Chrome (desktop) profiling
-      tickMarkHighlightLayer.removeAllChildren();
-      console.log( '---------------' );
+      thisNode.highlights.forEach( function( highlight ) {
+        highlight.visible = false;
+      } );
       plank.activeDropLocations.forEach( function( location ) {
-        console.log( location );
-        var tickMarkHighlight = new Rectangle(
-          mvt.modelToViewX( location ) - HIGHLIGHT_WIDTH / 2,
-          mvt.modelToViewY( plank.unrotatedShape.bounds.maxY ),
-          HIGHLIGHT_WIDTH,
-          -mvt.modelToViewDeltaY( Plank.THICKNESS ), { fill: HIGHLIGHT_COLOR } );
-        tickMarkHighlightLayer.addChild( tickMarkHighlight );
+        thisNode.highlights[ mapLocationToHighlightIndex( location ) ].visible = true;
       } );
     }
 
     // Update the tick mark highlights as the active drop locations change.
-    //REVIEW: Does this cause the updateHighlights() hotspot to be called more than once per frame (usually one add and remove?)
     plank.activeDropLocations.addItemAddedListener( updateHighlights );
     plank.activeDropLocations.addItemRemovedListener( updateHighlights );
 
@@ -70,6 +62,7 @@ define( function( require ) {
     var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
       mvt.modelToViewY( plank.getPlankSurfaceCenter().y ) );
     var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    this.highlights = [];
     for ( var i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
       var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
       if ( i % 2 === 0 ) {
@@ -78,13 +71,21 @@ define( function( require ) {
         // different places.
         tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
       }
-      tickMarkLayer.addChild( new Path( tickMarkShape,
+      var tickMark = new Path( tickMarkShape,
         {
           centerX: plankLeftEdge.x + ( i + 1 ) * tickMarkDeltaX,
           top: plankLeftEdge.y,
           lineWidth: tickMarkStroke,
           stroke: 'black'
-        } ) );
+        } );
+      var highlight = new Rectangle( tickMark.centerX - HIGHLIGHT_WIDTH / 2, tickMark.top, HIGHLIGHT_WIDTH, tickMark.bounds.height, 0, 0,
+        {
+          fill: HIGHLIGHT_COLOR,
+          visible: false
+        } );
+      tickMarkLayer.addChild( highlight );
+      this.highlights.push( highlight );
+      tickMarkLayer.addChild( tickMark );
     }
     plankNode.addChild( tickMarkLayer );
 
