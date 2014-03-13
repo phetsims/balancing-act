@@ -18,8 +18,8 @@ define( function( require ) {
     var thisNode = this;
 
     // Add the individual position markers.
-    var numTickMarks = Plank.LENGTH / plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
-    var interMarkerDistance = mvt.modelToViewDeltaX( plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    var numTickMarks = Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
+    var interMarkerDistance = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
     for ( var i = 0; i < numTickMarks; i++ ) {
       var label = Math.abs( i - Math.floor( numTickMarks / 2 ) );
       if ( label !== 0 ) {

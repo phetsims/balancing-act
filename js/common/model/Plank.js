@@ -468,8 +468,7 @@ define( function( require ) {
         }
 
         return snapToLocations;
-      },
-
+      }
     },
     {
       // Public constants.
@@ -477,6 +476,5 @@ define( function( require ) {
       THICKNESS: PLANK_THICKNESS,
       INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE,
       NUM_SNAP_TO_LOCATIONS: NUM_SNAP_TO_LOCATIONS
-
     } );
 } );

@@ -35,18 +35,10 @@ define( function( require ) {
 
     // Generate the shape of the brick stack.
     var brickStackShape = new Shape();
-    var brickOrigin = Vector2.ZERO;
+    var brickOriginY = 0;
     for ( var i = 0; i < numBricks; i++ ) {
-      //REVIEW: Easier to read as brickStackShape.rect( brickOrigin.x - BRICK_WIDTH / 2, brickOrigin.y, BRICK_WIDTH, BRICK_HEIGHT ), and these can be chained to result in the same operation
-      brickStackShape.moveTo( brickOrigin.x, brickOrigin.y );
-      brickStackShape.lineTo( brickOrigin.x + BRICK_WIDTH / 2, brickOrigin.y );
-      brickStackShape.lineTo( brickOrigin.x + BRICK_WIDTH / 2, brickOrigin.y + BRICK_HEIGHT );
-      brickStackShape.lineTo( brickOrigin.x - BRICK_WIDTH / 2, brickOrigin.y + BRICK_HEIGHT );
-      brickStackShape.lineTo( brickOrigin.x - BRICK_WIDTH / 2, brickOrigin.y );
-      brickStackShape.lineTo( brickOrigin.x, brickOrigin.y );
-      brickStackShape.close();
-      // Move origin to the next brick.
-      brickOrigin = new Vector2( brickOrigin.x, brickOrigin.y + BRICK_HEIGHT );
+      brickStackShape.rect( 0, brickOriginY, BRICK_WIDTH, BRICK_HEIGHT );
+      brickOriginY += BRICK_HEIGHT;
     }
 
     this.shape = brickStackShape;

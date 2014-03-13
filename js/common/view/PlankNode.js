@@ -13,6 +13,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -46,14 +47,14 @@ define( function( require ) {
       //REVIEW: Removing all of them and recreating them generally has a big performance penalty, especially with the current Scenery version.
       //REVIEW: Noticed as slow on Nexus 7, and confirmed as a hotspot on Chrome (desktop) profiling
       tickMarkHighlightLayer.removeAllChildren();
+      console.log( '---------------' );
       plank.activeDropLocations.forEach( function( location ) {
-        //REVIEW: Using Rectangle instead of a Shape and a Path is generally better (faster to draw, less overhead)
-        var highlightShape = Shape.rect(
+        console.log( location );
+        var tickMarkHighlight = new Rectangle(
           mvt.modelToViewX( location ) - HIGHLIGHT_WIDTH / 2,
-          mvt.modelToViewY( plank.unrotatedShape.bounds.minY ),
+          mvt.modelToViewY( plank.unrotatedShape.bounds.maxY ),
           HIGHLIGHT_WIDTH,
-          mvt.modelToViewDeltaY( plank.THICKNESS ) );
-        var tickMarkHighlight = new Path( highlightShape, { fill: HIGHLIGHT_COLOR } );
+          -mvt.modelToViewDeltaY( Plank.THICKNESS ), { fill: HIGHLIGHT_COLOR } );
         tickMarkHighlightLayer.addChild( tickMarkHighlight );
       } );
     }
