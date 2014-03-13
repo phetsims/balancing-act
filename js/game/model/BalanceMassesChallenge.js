@@ -77,7 +77,7 @@ define( function( require ) {
       var fixedMassTorque = fixedMassesList[0].mass.massValue * fixedMassesList[0].distance +
                             fixedMassesList[1].mass.massValue * fixedMassesList[1].distance;
       var solution = { mass: movableMass, distance: -fixedMassTorque / movableMass.massValue };
-      assert && assert( solution.distance % Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE === 0 ); // Verify that this is really a workable solution.
+      assert && assert( solution.distance % Plank.INTER_SNAP_TO_MARKER_DISTANCE === 0 ); // Verify that this is really a workable solution.
 
       // Create the actual challenge.
       return new BalanceMassesChallenge( fixedMassesList, movableMassesList, [ solution ] );

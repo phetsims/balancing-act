@@ -14,6 +14,7 @@ define( function( require ) {
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Shape = require( 'KITE/Shape' );
   var Transform3 = require( 'DOT/Transform3' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -29,8 +30,8 @@ define( function( require ) {
 
     // Locations for left and right edge
     //REVIEW: May be helpful to have these as methods on the Plank itself?
-    var leftEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x - plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
-    var rightEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x + plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
+    var leftEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x - Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
+    var rightEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x + Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
 
     // Draw a sort of arrow head shape.
     var leftIndicatorShape = new Shape().

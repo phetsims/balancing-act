@@ -50,7 +50,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   //REVIEW: see earlier comment about refactoring to access Plank.INTER_SNAP_TO_MARKER_DISTANCE, etc.
-  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.prototype.LENGTH / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
+  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
   // balance challenge.
@@ -174,7 +174,7 @@ define( function( require ) {
           distanceList = [];
           for ( var k = 0; k < masses.length; k++ ) {
             // Just add a linear set of distances.
-            distanceList.push( minDistance + Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE * k );
+            distanceList.push( minDistance + Plank.INTER_SNAP_TO_MARKER_DISTANCE * k );
             // Output a warning.
             console.log( ' Warning: Unable to find enough unique distances for positioning masses.' );
           }
@@ -206,17 +206,17 @@ define( function( require ) {
      * is quantized), which is why this is needed.
      */
     generateRandomValidPlankDistance: function() {
-      var maxDistance = Plank.prototype.LENGTH / 2;
-      var increment = Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
+      var maxDistance = Plank.LENGTH / 2;
+      var increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
       var maxIncrements = Math.round( maxDistance / increment ) - 1;
       return ( this.randInt( maxIncrements ) + 1 ) * increment;
     },
 
     generateRandomValidPlankDistanceRange: function( minDistance, maxDistance ) {
-      var minIncrements = Math.ceil( minDistance / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE );
-      var maxIncrements = Math.floor( maxDistance / Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE );
+      var minIncrements = Math.ceil( minDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+      var maxIncrements = Math.floor( maxDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
 
-      return ( this.randInt( maxIncrements - minIncrements + 1 ) + minIncrements ) * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE;
+      return ( this.randInt( maxIncrements - minIncrements + 1 ) + minIncrements ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
     },
 
     /**
@@ -252,11 +252,11 @@ define( function( require ) {
      */
     getPossibleDistanceList: function( massOfFixedItem, massOfMovableItem ) {
       var validFixedMassDistances = [];
-      for ( var testDistance = Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE ) {
+      for ( var testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
         var possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
         if ( possibleFixedMassDistance < Plank.length / 2 &&
-             possibleFixedMassDistance >= Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
-             possibleFixedMassDistance % Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
+             possibleFixedMassDistance >= Plank.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
+             possibleFixedMassDistance % Plank.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
           // This is a valid distance.
           validFixedMassDistances.push( possibleFixedMassDistance );
         }
@@ -360,7 +360,7 @@ define( function( require ) {
       }
       while ( !this.isChallengeSolvable( fixedMassPrototype.massValue,
         movableMass.massValue,
-        Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS ) );
 
       // Randomly choose a distance to use for the fixed mass position.
@@ -382,7 +382,7 @@ define( function( require ) {
         var fixedMass2Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
         var movableMassPrototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
         solvableChallenges = this.generateSolvableChallenges( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype,
-          Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE, Plank.prototype.LENGTH / 2 - Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE );
+          Plank.INTER_SNAP_TO_MARKER_DISTANCE, Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE );
       } while ( solvableChallenges.length === 0 );
 
       // Choose one of the solvable configurations at random.
@@ -405,8 +405,8 @@ define( function( require ) {
       // Choose a distance from the center, which will be used for
       // positioning both stacks.  The max and min values can be tweaked if
       // desired to limit the range of distances generated.
-      var distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
-        Plank.prototype.LENGTH / 2 - Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
+      var distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
 
       // Create the actual challenge from the pieces.
       return TiltPredictionChallenge.prototype.create(
@@ -426,15 +426,15 @@ define( function( require ) {
       var generateRandomValidPlankDistanceRange = 1 + this.randInt( 4 );
 
       // Generate distance for the left mass.
-      var leftMassDistance = this.generateRandomValidPlankDistanceRange( 2 * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
-        Plank.prototype.LENGTH / 2 - Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
+      var leftMassDistance = this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
 
       // Make a fixed proportion of these challenges balanced and the rest
       // not balanced.
       var rightMassDistance = -leftMassDistance;
       if ( Math.random() > 0.2 ) {
-        rightMassDistance = -this.generateRandomValidPlankDistanceRange( 2 * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
-          Plank.prototype.LENGTH / 2 - Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
+        rightMassDistance = -this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+          Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
       }
 
       // Create the actual challenge from the pieces.
@@ -457,8 +457,8 @@ define( function( require ) {
 
       // Make the masses almost but not quite balanced.
       var massDistancePairs = this.positionMassesCloseToBalancing(
-        Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
-        Plank.prototype.LENGTH / 2 - 2 * Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.LENGTH / 2 - 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         [ leftMass, rightMass ] );
 
       return new TiltPredictionChallenge( massDistancePairs );

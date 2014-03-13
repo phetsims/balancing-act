@@ -65,11 +65,11 @@ define( function( require ) {
 
     // Create and add the tick mark layer.
     var tickMarkLayer = new Node();
-    var tickMarkShape = new Shape.lineSegment( 0, 0, 0, mvt.modelToViewDeltaY( Plank.prototype.THICKNESS ) );
-    var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.prototype.LENGTH / 2 ),
+    var tickMarkShape = new Shape.lineSegment( 0, 0, 0, mvt.modelToViewDeltaY( Plank.THICKNESS ) );
+    var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
       mvt.modelToViewY( plank.getPlankSurfaceCenter().y ) );
-    var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.prototype.INTER_SNAP_TO_MARKER_DISTANCE );
-    for ( var i = 0; i < Plank.prototype.NUM_SNAP_TO_LOCATIONS; i++ ) {
+    var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    for ( var i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
       var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
       if ( i % 2 === 0 ) {
         // Make some marks bold for easier placement of masses.

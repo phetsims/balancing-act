@@ -10,6 +10,7 @@ define( function( require ) {
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PositionMarkerNode = require( 'BALANCING_ACT/common/view/PositionMarkerNode' );
 
   function PositionMarkerSetNode( plank, mvt, visibleProperty ) {
@@ -17,7 +18,7 @@ define( function( require ) {
     var thisNode = this;
 
     // Add the individual position markers.
-    var numTickMarks = plank.LENGTH / plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
+    var numTickMarks = Plank.LENGTH / plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
     var interMarkerDistance = mvt.modelToViewDeltaX( plank.INTER_SNAP_TO_MARKER_DISTANCE );
     for ( var i = 0; i < numTickMarks; i++ ) {
       var label = Math.abs( i - Math.floor( numTickMarks / 2 ) );

@@ -14,6 +14,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -35,7 +36,7 @@ define( function( require ) {
     var thisNode = this;
 
     // Set up the tick mark labels.
-    var rulerLengthInModel = plank.LENGTH - 0.5; // Take 1/2 meter off end of ruler so it doesn't exceed plank length.
+    var rulerLengthInModel = Plank.LENGTH - 0.5; // Take 1/2 meter off end of ruler so it doesn't exceed plank length.
     var numTickMarks = rulerLengthInModel * 4 + 1; // Tick marks every 1/4 meter.
     var tickMarkLabels = [];
     for ( var i = 0; i < numTickMarks; i++ ) {
