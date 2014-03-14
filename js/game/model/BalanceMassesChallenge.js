@@ -19,19 +19,16 @@ define( function( require ) {
   var balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
 
   /**
-   * @param {Array} fixedMasses - Mass-distance pairs that describe the fixed masses.
-   * @param {Array} movableMasses - Masses that can be moved by the user.
-   * @param {Array} solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
+   * @param {Array<{mass:{Mass}, distance:{Number}}>} fixedMasses - Mass-distance pairs that describe the fixed masses.
+   * @param {Array<Mass>} movableMasses - Masses that can be moved by the user.
+   * @param {Array<{mass:{Mass}, distance:{Number}}>} solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
    * @constructor
    */
   function BalanceMassesChallenge( fixedMasses, movableMasses, solutionToDisplay ) {
     BalanceGameChallenge.call( this, 'singleColumn' );
-    //REVIEW: Are these arrays considered public (where other copies of them could be stored?)
-    //REVIEW: Otherwise, it's generally easier to read "this.movableMasses = this.movableMasses.concat( movableMasses );",
-    //REVIEW: or even better to have them be constructor parameters on BalanceGameChallenge (since they are initialized as empty)
-    Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
-    Array.prototype.push.apply( this.movableMasses, movableMasses );
-    Array.prototype.push.apply( this.balancedConfiguration, solutionToDisplay );
+    this.fixedMassDistancePairs = this.fixedMassDistancePairs.concat( fixedMasses );
+    this.movableMasses = this.movableMasses.concat( movableMasses );
+    this.balancedConfiguration = this.balancedConfiguration.concat( solutionToDisplay );
 
     // Set up the challenge view configuration, which provides information to
     // the view about how this challenge should be displayed.
