@@ -21,10 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, PottedPlant,
-    {
-      createCopy: function() {
-        return new PottedPlant( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, PottedPlant );
 } );

@@ -21,10 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, smallRockImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, SmallRock,
-    {
-      createCopy: function() {
-        return new SmallRock( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, SmallRock );
 } );

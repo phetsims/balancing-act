@@ -33,8 +33,13 @@ define( function( require ) {
     var thisNode = this;
 
     // Create and position the plank.
-    //REVIEW: Consider using a Scenery Rectangle here, constructed from the plank's bounds?
-    var plankNode = new Path( mvt.modelToViewShape( plank.unrotatedShape ), { fill: 'rgb( 243, 203, 127 )', stroke: 'black', lineThickness: 1 } );
+    var plankViewBounds = mvt.modelToViewShape( plank.unrotatedShape ).bounds;
+    var plankNode = new Rectangle( plankViewBounds.minX, plankViewBounds.minY, plankViewBounds.width, plankViewBounds.height,
+      {
+        fill: 'rgb( 243, 203, 127 )',
+        stroke: 'black',
+        lineThickness: 1
+      } );
     thisNode.addChild( plankNode );
 
     // Function for mapping plank distance relative to the center point to a highlight.

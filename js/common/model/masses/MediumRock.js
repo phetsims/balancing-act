@@ -21,10 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, mediumRockImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, MediumRock,
-    {
-      createCopy: function() {
-        return new MediumRock( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, MediumRock );
 } );

@@ -33,12 +33,5 @@ define( function( require ) {
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 
-  return inherit( HumanMass, Boy,
-    {
-      createCopy: function() {
-        var copy = new Boy();
-        copy.position = this.position.copy;
-        return copy;
-      }
-    } );
+  return inherit( HumanMass, Boy );
 } );

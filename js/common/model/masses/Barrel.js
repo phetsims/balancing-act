@@ -21,10 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, barrelImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, Barrel,
-    {
-      createCopy: function() {
-        return new Barrel( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, Barrel );
 } );

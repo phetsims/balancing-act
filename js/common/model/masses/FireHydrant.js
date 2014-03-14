@@ -21,12 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, fireHydrantImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, FireHydrant,
-    {
-      //REVIEW: This createCopy() function is repeated for many ImageMasses. Consider a new subtype that has the following:
-      //REVIEW: createCopy: function() { return this.prototype.constructor( this.position.copy(), this.isMystery ); }
-      createCopy: function() {
-        return new FireHydrant( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, FireHydrant );
 } );

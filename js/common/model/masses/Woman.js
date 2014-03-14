@@ -30,11 +30,5 @@ define( function( require ) {
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
 
-  return inherit( HumanMass, Woman,
-    {
-      createCopy: function() {
-        //REVIEW: these parameters seem to be ignored, unless I'm misreading something
-        return new Woman( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( HumanMass, Woman );
 } );

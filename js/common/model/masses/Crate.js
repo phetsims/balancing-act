@@ -21,10 +21,5 @@ define( function( require ) {
     ImageMass.call( this, MASS, crateImage, HEIGHT, initialPosition, isMystery );
   }
 
-  return inherit( ImageMass, Crate,
-    {
-      createCopy: function() {
-        return new Crate( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, Crate );
 } );

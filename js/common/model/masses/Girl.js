@@ -31,12 +31,5 @@ define( function( require ) {
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
 
-  return inherit( HumanMass, Girl,
-    {
-      createCopy: function() {
-        var copy = new Girl();
-        copy.position = this.position.copy();
-        return copy;
-      }
-    } );
+  return inherit( HumanMass, Girl );
 } );

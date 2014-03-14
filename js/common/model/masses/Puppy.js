@@ -22,10 +22,5 @@ define( function( require ) {
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 
-  return inherit( ImageMass, Puppy,
-    {
-      createCopy: function() {
-        return new Puppy( this.position.copy(), this.isMystery );
-      }
-    } );
+  return inherit( ImageMass, Puppy );
 } );

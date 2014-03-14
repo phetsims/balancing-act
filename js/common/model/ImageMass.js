@@ -65,7 +65,8 @@ define( function( require ) {
     },
 
     createCopy: function() {
-      return new ImageMass( this.massValue, this.image, this.height, this.position, this.isMystery );
+      // This clever invocation supports the creation of subclassed instances.
+      return new this.constructor( this.position.copy(), this.isMystery );
     }
   } );
 } );

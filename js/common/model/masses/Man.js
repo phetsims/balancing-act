@@ -29,13 +29,5 @@ define( function( require ) {
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
 
-  return inherit( HumanMass, Man,
-    {
-      createCopy: function() {
-        //REVIEW: consider Man( initialPosition ) like other masses?
-        var copy = new Man();
-        copy.position = this.position.copy();
-        return copy;
-      }
-    } );
+  return inherit( HumanMass, Man );
 } );
