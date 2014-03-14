@@ -50,9 +50,8 @@ define( function( require ) {
     };
 
     var iconOptions = { stroke: 'black', lineWidth: 3, lineCap: 'round' };
-    //REVIEW: Is the intial lineTo( 0, 0 ) meant to draw a line? There is no line.
-    var nextIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( 5, 5 ).lineTo( 0, 10 ), iconOptions );
-    var previousIcon = new Path( new Shape().lineTo( 0, 0 ).lineTo( -5, 5 ).lineTo( 0, 10 ), iconOptions );
+    var nextIcon = new Path( new Shape().moveTo( 0, 0 ).lineTo( 5, 5 ).lineTo( 0, 10 ), iconOptions );
+    var previousIcon = new Path( new Shape().moveTo( 0, 0 ).lineTo( -5, 5 ).lineTo( 0, 10 ), iconOptions );
 
     var nextKitButton = new RoundShinyButton( function() {
       selectedKit.value = selectedKit.value + 1;

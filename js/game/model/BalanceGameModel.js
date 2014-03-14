@@ -45,8 +45,12 @@ define( function( require ) {
         level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
         challengeIndex: 0,
         score: 0,
-        gameState: 'choosingLevel', //REVIEW: What are the valid gameState values?
-        columnState: 'singleColumns', // Valid values are none, singleColumn, doubleColumns
+
+        // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
+        // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
+        // 'showingLevelResults'
+        gameState: 'choosingLevel',
+        columnState: 'singleColumns', // Valid values are 'none', 'singleColumn', 'doubleColumns'
         elapsedTime: 0
       } );
 

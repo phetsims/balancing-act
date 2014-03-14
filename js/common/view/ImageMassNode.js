@@ -23,6 +23,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param imageMass
@@ -31,12 +32,8 @@ define( function( require ) {
    * @param {boolean} draggable
    * @constructor
    */
-   //REVIEW: That's some strange documentation for a Vector2 import statement!
-  var Vector2 = require( 'DOT/Vector2' );
-
   function ImageMassNode( imageMass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
-    //REVIEW: Is it necessary for non-draggable masses to block input events? Otherwise pickable: true is unnecessary.
-    Node.call( this, { cursor: 'pointer', pickable: true } );
+    Node.call( this, { cursor: 'pointer' } );
     var thisNode = this;
 
     if ( isLabeled ) {

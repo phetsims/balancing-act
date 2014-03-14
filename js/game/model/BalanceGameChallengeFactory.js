@@ -49,7 +49,7 @@ define( function( require ) {
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  //REVIEW: see earlier comment about refactoring to access Plank.INTER_SNAP_TO_MARKER_DISTANCE, etc.
+  // Maximum allowed distance from center of balance for positioning a mass.
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique

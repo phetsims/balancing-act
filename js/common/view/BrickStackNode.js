@@ -32,6 +32,7 @@ define( function( require ) {
     var thisNode = this;
     thisNode.brickStack = brickStack;
     thisNode.mvt = mvt;
+    thisNode.previousAngle = 0;
 
     // Create and add the main shape node.
     var shapeNode = new Path( mvt.modelToViewShape( brickStack.shape ), { fill: 'rgb( 205, 38, 38 )', stroke: 'black', lineWidth: 1 } );

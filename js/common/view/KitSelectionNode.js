@@ -6,8 +6,8 @@
  * @author Sam Reid
  * @author John Blanco
  */
- 
- //REVIEW: This should presumably be in scenery-phet?
+
+  //REVIEW: This should presumably be in scenery-phet?
 define( function( require ) {
   'use strict';
 
@@ -45,7 +45,6 @@ define( function( require ) {
     thisNode.selectedKit = selectedKit;
 
     // Determine the max size of all the kit contents for layout purposes.
-    //REVIEW: would Dimension2.ZERO be helpful?
     var maxKitContentSize = new Dimension2( 0, 0 );
     var maxKitTitleSize = new Dimension2( 0, 0 );
     kits.forEach( function( kit ) {

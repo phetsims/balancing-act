@@ -29,7 +29,6 @@ define( function( require ) {
     var thisNode = this;
 
     // Locations for left and right edge
-    //REVIEW: May be helpful to have these as methods on the Plank itself?
     var leftEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x - Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
     var rightEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x + Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
 

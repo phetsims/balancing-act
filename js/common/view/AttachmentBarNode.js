@@ -26,8 +26,7 @@ define( function( require ) {
     // Add the bar, which goes from the pivot point to the bottom of the plank.
     var attachmentBarLength = mvt.modelToViewDeltaY( plank.bottomCenterLocation.y - plank.pivotPoint.y );
     var attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
-      attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', lineWidth: 1, stroke: 'rgb( 50, 50, 50 )' } );
-    //REVIEW: lineWidth: 1 is the default, not specifically necessary (but I have no problem with it left in)
+      attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', stroke: 'rgb( 50, 50, 50 )' } );
     this.addChild( attachmentBar );
 
     // Rotate the bar as the plank tilts.

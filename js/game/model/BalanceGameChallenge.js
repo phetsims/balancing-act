@@ -22,20 +22,18 @@ define( function( require ) {
     this.initialColumnState = initialColumnState;
     this.maxAttemptsAllowed = options.maxAttemptsAllowed;
 
-    //REVIEW: Would be helpful to have docs about the types of the following three arrays' elements.
-
-    //REVIEW: "List of masses" threw me off, expected an Array of <Mass> type, not of { mass: <MASS>, distance: <Number> }
-    // List of masses that will initially be sitting on the balance, and which
-    // the user will not manipulate.
+    // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
+    // where the mass is initially sitting on the balance and is not movable
+    // by the user.
     this.fixedMassDistancePairs = [];
 
     // List of masses that the user will move into the appropriate positions
     // in order to balance out the other masses.
     this.movableMasses = [];
 
-    // A set of mass-distance pairs where the movable masses balance the fixed
-    // masses.  For some challenges, this is what will be displayed to the
-    // user if they ask to see a correct answer.
+    // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
+    // where the movable masses balance the fixed masses.  For some challenges,
+    // this is what will be displayed to the user if they ask to see a correct answer.
     this.balancedConfiguration = [];
   }
 

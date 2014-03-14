@@ -185,9 +185,7 @@ define( function( require ) {
         cornerRadius: 5,
         stroke: null
       } );
-    //REVIEW: easier to set insertColumnsButton.center = mvt.modelToViewPosition( new Vector2( -0.4, -0.5 ) );
-    insertColumnsButton.centerX = mvt.modelToViewX( -0.4 );
-    insertColumnsButton.centerY = mvt.modelToViewY( -0.5 );
+    insertColumnsButton.center = mvt.modelToViewPosition( new Vector2( -0.4, -0.5 ) );
     thisScreen.nonMassLayer.addChild( insertColumnsButton );
     var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
     balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
