@@ -265,7 +265,6 @@ define( function( require ) {
     },
 
     createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
-      //REVIEW: refactor so it can be BalanceMassChallenge.create1Fixed1Movable, unless this is a workaround (and you usually call create1Fixed1Movable on an instance)
       return BalanceMassesChallenge.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
     },
 
@@ -563,10 +562,9 @@ define( function( require ) {
      * Convenience function for removing the oldest half of a list.
      */
     removeOldestHalfOfList: function( list ) {
-      var halfLength = Math.floor( list.length / 2 );
-      //REVIEW: A single list.splice( halfLength, halfLength + 1 ) should suffice here? Executing the splice halflength-times is not needed.
-      for ( var i = 0; i < halfLength; i++ ) {
-        list.splice( halfLength, halfLength );
+      if ( list.length > 2 ) {
+        var index = Math.round( list.length / 2 );
+        list.splice( index, (list.length - index ) );
       }
     },
 
@@ -617,13 +615,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueMasses: function( testChallenge, usedChallengeList ) {
-      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
-      for ( var i = 0; i < usedChallengeList.length; i++ ) {
-        if ( usedChallengeList[i].usesSameMasses( testChallenge ) ) {
-          return false;
-        }
-      }
-      return true;
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameMasses( testChallenge ) } );
     },
 
     /**
@@ -639,13 +631,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMassesAndDistances: function( testChallenge, usedChallengeList ) {
-      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
-      for ( var i = 0; i < usedChallengeList.length; i++ ) {
-        if ( usedChallengeList[i].usesSameFixedMassesAndDistances( testChallenge ) ) {
-          return false;
-        }
-      }
-      return true;
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMassesAndDistances( testChallenge ) } );
     },
 
     /**
@@ -660,13 +646,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMasses: function( testChallenge, usedChallengeList ) {
-      //REVIEW: If not concerned about allocation of anonymous functions, look into using !_.some( usedChallengeList, <predicate function> ) for readability
-      for ( var i = 0; i < usedChallengeList.length; i++ ) {
-        if ( usedChallengeList[i].usesSameFixedMasses( testChallenge ) ) {
-          return false;
-        }
-      }
-      return true;
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMasses( testChallenge ) } );
     },
 
     generateBalanceChallenge: function( level ) {
