@@ -56,10 +56,8 @@ define( function( require ) {
     var controlNode = new KitControlNode( kits.length, selectedKit, { titleNode: options.titleNode, minButtonXSpace: 70 } );
 
     // Construct and add the background.  Make it big enough to hold the largest kit.
-    //REVIEW: Is the background only for layout purposes (to change bounds)? Is it only to change the input event handling (if so use mouseArea/touchArea)?
-    thisNode.background = new Rectangle( 0, 0, Math.max( Math.max( maxKitContentSize.width, maxKitTitleSize.width ), controlNode.width ),
-      controlNode.height + maxKitContentSize.height + maxKitTitleSize.height, 5, 5 );
-    thisNode.addChild( thisNode.background );
+    thisNode.selectorSize = new Dimension2( Math.max( Math.max( maxKitContentSize.width, maxKitTitleSize.width ), controlNode.width ),
+      controlNode.height + maxKitContentSize.height + maxKitTitleSize.height );
 
     // Create the layer that contains all the kits, and add the kits side by
     // side spaced by the distance of the background so only 1 kit will be
@@ -72,26 +70,26 @@ define( function( require ) {
       // Put the title centered at the top and the content node centered in the
       // available space beneath.
       if ( kit.title ) {
-        kit.title.centerX = x + thisNode.background.width / 2;
+        kit.title.centerX = x + thisNode.selectorSize.width / 2;
         kit.title.top = 0;
         thisNode.kitLayer.addChild( kit.title );
       }
 
-      kit.content.centerX = x + thisNode.background.width / 2;
+      kit.content.centerX = x + thisNode.selectorSize.width / 2;
       kit.content.centerY = kit.title.bottom + maxKitContentSize.height / 2;
       thisNode.kitLayer.addChild( kit.content );
 
       // Move over to the next kit
-      x += thisNode.background.width;
+      x += thisNode.selectorSize.width;
     } );
 
     // Clip the kits so that the unselected ones are invisible.
-    thisNode.clipArea = new Shape.rect( 0, 0, this.background.width, this.background.height );
+    thisNode.clipArea = new Shape.rect( 0, 0, thisNode.selectorSize.width, thisNode.selectorSize.height );
 
     // Add the remaining nodes.
     thisNode.kitLayer.top = controlNode.height;
     thisNode.addChild( thisNode.kitLayer );
-    thisNode.addChild( controlNode.mutate( { top: 0, centerX: this.background.width / 2 } ) );
+    thisNode.addChild( controlNode.mutate( { top: 0, centerX: thisNode.selectorSize.width / 2 } ) );
 
     // Set up an observer to set visibility of the selected kit.
     selectedKit.link( function( kit ) {
@@ -99,7 +97,7 @@ define( function( require ) {
     } );
 
     // Set up the timer and function that will animate the carousel position.
-    var motionVelocity = thisNode.background.width / SLOT_CHANGE_TIME;
+    var motionVelocity = thisNode.selectorSize.width / SLOT_CHANGE_TIME;
     thisNode.kitLayerTargetX = thisNode.kitLayer.x;
     Timer.addStepListener( function( dt ) {
       if ( thisNode.kitLayer.x !== thisNode.kitLayerTargetX ) {
@@ -119,7 +117,7 @@ define( function( require ) {
 
   return inherit( Node, KitSelectionNode, {
     scrollTo: function( kitNumber ) {
-      this.kitLayerTargetX = -kitNumber * this.background.width;
+      this.kitLayerTargetX = -kitNumber * this.selectorSize.width;
     }
   } );
 } );

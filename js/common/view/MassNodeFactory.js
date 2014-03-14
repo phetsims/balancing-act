@@ -33,9 +33,9 @@ define( function( require ) {
         massNode = new BrickStackNode( mass, mvt, isLabeled, labelVisibleProperty, true );
       }
       else {
-        console.log( "Error: Unrecognized mass type sent to MassNodeFactory." );
+        assert && assert( true, 'Error: Unrecognized mass type sent to MassNodeFactory.' );
         // In case the ever happens out in the wild, create a fake node.
-        var textNode = new Text( "Unimplemented Mass Node" );
+        var textNode = new Text( 'Unimplemented Mass Node' );
         massNode = new Rectangle( 0, 0, textNode.width * 1.3, textNode.height * 1.3, 0, 0, { fill: 'pink', stroke: 'black'} );
         textNode.centerY = massNode.height / 2;
         massNode.addChild( textNode );
