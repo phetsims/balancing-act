@@ -61,8 +61,6 @@ define( function( require ) {
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
       // Debug printouts for indicating whether the image for this node is
       // reasonably scaled.  Generally, scale values between 0.5 and 1 look best.
-      //REVIEW: Should be removed from production, console.log isn't guaranteed to exist. Also, these warnings appeared when I ran the sim (does this indicate a problem?)
-      console.log( 'scalingFactor = ' + scalingFactor );
       assert && assert( scalingFactor >= 0.5 && scalingFactor <= 2, 'Warning: Scaling factor is too large or small, drawing size should be adjusted. Image src = ' + image.getAttribute( 'src' ) + ', scaling factor = ' + scalingFactor );
       assert && assert( scalingFactor <= 1.0, 'Warning: Scaling image up, could lead to blurriness, scaling factor = ' + scalingFactor );
       imageNode.scale( scalingFactor );

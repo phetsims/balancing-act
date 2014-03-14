@@ -48,7 +48,6 @@ define( function( require ) {
       if ( parentScreen !== null ) {
         return mvt.viewToModelPosition( parentScreen.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
       }
-      console.log( 'Warning: Unable to transform position - no parent screen set.' );
       return position;
     }
 
@@ -92,16 +91,14 @@ define( function( require ) {
     /**
      * Method overriden by subclasses to add the element that they represent to
      * the model.
-     *
-     * @param position
      */
     addElementToModel: function() {
-      console.log( 'addElementToModel should be implemented in descendant classes.' );
+      throw new Error( 'addElementToModel should be implemented in descendant classes.' );
     },
 
     setSelectionNode: function( selectionNode ) {
       if ( this.selectionNode ) {
-        console.log( 'Can\'t set selectionNode more than once.' );
+        throw new Error( 'Can\'t set selectionNode more than once.' );
       }
       this.selectionNode = selectionNode;
       this.addChild( selectionNode );
