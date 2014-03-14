@@ -16,7 +16,7 @@ define( function( require ) {
   var GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var KitSelectionNode = require( 'BALANCING_ACT/common/view/KitSelectionNode' );
+  var KitSelectionNode = require( 'SCENERY_PHET/KitSelectionNode' );
   var ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
   var MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
   var mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
