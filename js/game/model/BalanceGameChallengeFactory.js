@@ -236,7 +236,7 @@ define( function( require ) {
           var movableMassDistance = fixedMassTorque / movableMassPrototype.massValue;
           if ( movableMassDistance >= distanceIncrement && movableMassDistance <= maxDistance && movableMassDistance % distanceIncrement === 0 ) {
             // This is a solvable configuration.  Add it to the list.
-            solvableChallenges.push( BalanceMassesChallenge.prototype.create2Fixed1Movable( fixedMass1Prototype.createCopy(), fixedMass1Distance,
+            solvableChallenges.push( BalanceMassesChallenge.create2Fixed1Movable( fixedMass1Prototype.createCopy(), fixedMass1Distance,
               fixedMass2Prototype.createCopy(), fixedMass2Distance, movableMassPrototype.createCopy() ) );
           }
         }
@@ -266,7 +266,7 @@ define( function( require ) {
 
     createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
       //REVIEW: refactor so it can be BalanceMassChallenge.create1Fixed1Movable, unless this is a workaround (and you usually call create1Fixed1Movable on an instance)
-      return BalanceMassesChallenge.prototype.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
+      return BalanceMassesChallenge.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
     },
 
     /**
@@ -367,7 +367,7 @@ define( function( require ) {
       var fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass.massValue );
 
       // Create the challenge.
-      return BalanceMassesChallenge.prototype.create1Fixed1Movable( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass );
+      return BalanceMassesChallenge.create1Fixed1Movable( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass );
     },
 
     /**
