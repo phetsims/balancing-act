@@ -12,7 +12,9 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var pattern0Label1Value = require( 'string!BALANCING_ACT/pattern0Label1Value' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -22,8 +24,8 @@ define( function( require ) {
 
   function GameIconNode( image, levelNumber ) {
     Node.call( this );
-    //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
-    var title = new Text( levelString + ' ' + levelNumber, { font: FONT } );
+    debugger;
+    var title = new Text( StringUtils.format( pattern0Label1Value, levelString, levelNumber ), { font: FONT } );
     this.addChild( title );
     var imageNode = new Image( image );
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );

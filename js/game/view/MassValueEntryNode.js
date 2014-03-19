@@ -11,15 +11,17 @@ define( function( require ) {
   // Imports
   var ArrowButton = require( 'SCENERY_PHET/ArrowButton' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
+  var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var Property = require( 'AXON/Property' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var HSlider = require( 'SUN/HSlider' );
 
   // Constants
   var READOUT_FONT = new PhetFont( 16 );
@@ -36,8 +38,7 @@ define( function( require ) {
     thisNode.massValue = new Property( 0 );
 
     // Create and add the readout, including the background.
-    //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
-    var readoutText = new Text( '0' + ' ' + kgString, { font: READOUT_FONT } );
+    var readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
     var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
         fill: 'white',
@@ -103,8 +104,7 @@ define( function( require ) {
 
     // Update the readout text and arrow button states whenever the value changes.
     thisNode.massValue.link( function( value ) {
-      //REVIEW: presumably we should be using MessageFormat-style i18n so the translator can change the order
-      readoutText.text = value + ' ' + kgString;
+      readoutText.text = StringUtils.format( pattern0Value1UnitsString, value, kgString );
       readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.setEnabled( value > 0 );
       rightArrowButton.setEnabled( value < MAX_MASS );

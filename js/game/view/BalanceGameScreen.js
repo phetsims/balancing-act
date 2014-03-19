@@ -493,9 +493,7 @@ define( function( require ) {
           thisScreen.levelCompletedNode = null;
         },
         {
-          //REVIEW: simplification: "center: thisScreen.layoutBounds.center"
-          centerX: thisScreen.layoutBounds.width / 2,
-          centerY: thisScreen.layoutBounds.height / 2
+          center: thisScreen.layoutBounds.center,
         } );
 
       // Add the node.
