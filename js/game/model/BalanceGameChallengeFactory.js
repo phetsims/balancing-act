@@ -559,13 +559,11 @@ define( function( require ) {
     },
 
     /**
-     * Convenience function for removing the oldest half of a list.
+     * Convenience function for removing the oldest half of a list (which is
+     * the lower indicies).
      */
     removeOldestHalfOfList: function( list ) {
-      if ( list.length > 2 ) {
-        var index = Math.round( list.length / 2 );
-        list.splice( index, (list.length - index ) );
-      }
+      list.splice( 0, Math.round( list.length / 2 ) );
     },
 
     /**
