@@ -226,8 +226,8 @@ define( function( require ) {
           var vectorFromCenterToMass = new Vector2( thisPlank.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
 
           // Set the position and rotation of the mass.
-          mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
           mass.rotationAngle = thisPlank.tiltAngle;
+          mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
         } );
 
         // Update the force vectors from the masses.  This mostly just moves

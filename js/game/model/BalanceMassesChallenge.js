@@ -65,7 +65,6 @@ define( function( require ) {
       // Convenience method for creating this type of challenge.
       create2Fixed1Movable: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter, movableMass ) {
         // Add the fixed masses and their distances from the center of the balance.
-        debugger;
         var fixedMassesList = [];
         fixedMassesList.push( { mass: fixedMass1, distance: -fixedMass1DistanceFromCenter } );
         fixedMassesList.push( { mass: fixedMass2, distance: -fixedMass2DistanceFromCenter } );

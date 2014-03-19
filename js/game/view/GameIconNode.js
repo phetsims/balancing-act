@@ -24,7 +24,6 @@ define( function( require ) {
 
   function GameIconNode( image, levelNumber ) {
     Node.call( this );
-    debugger;
     var title = new Text( StringUtils.format( pattern0Label1Value, levelString, levelNumber ), { font: FONT } );
     this.addChild( title );
     var imageNode = new Image( image );

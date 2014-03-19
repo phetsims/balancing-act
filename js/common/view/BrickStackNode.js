@@ -61,12 +61,20 @@ define( function( require ) {
       } );
     }
 
+    // Set initial position and record so deltas can be subsequently used.
+    // This helps minimize transformation when moving the items.
+
+    var offsetToBottom = new Vector2( 0, -thisNode.height / 2 );
+    var previousRotationAngle = 0;
+
     // Monitor the brick stack for position and angle changes.
-    brickStack.rotationAngleProperty.link( function() {
-      thisNode.updatePositionAndAngle();
+    brickStack.rotationAngleProperty.link( function( newAngle ) {
+      thisNode.rotateAround( thisNode.center.plus( offsetToBottom ), previousRotationAngle - brickStack.rotationAngle );
+      offsetToBottom = offsetToBottom.rotated( previousRotationAngle - brickStack.rotationAngle );
+      previousRotationAngle = brickStack.rotationAngle;
     } );
-    brickStack.positionProperty.link( function() {
-      thisNode.updatePositionAndAngle();
+    brickStack.positionProperty.link( function( newPosition ) {
+      thisNode.center = mvt.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
     } );
 
     // Add event listener for mouse activity.
@@ -75,16 +83,5 @@ define( function( require ) {
     }
   }
 
-  return inherit( Node, BrickStackNode, {
-    updatePositionAndAngle: function() {
-      //REVIEW: For performance, generally we want to minimize node transformations. This transforms the brick stack 4 times, which (depending on the renderer)
-      //REVIEW: may be almost 4 times as expensive, and it happens during a drag.
-      this.rotation = 0;
-      // Set the position
-      this.centerX = this.mvt.modelToViewX( this.brickStack.position.x );
-      this.bottom = this.mvt.modelToViewY( this.brickStack.position.y );
-      // Set the rotation.  Rotation point is the center bottom.
-      this.rotateAround( new Vector2( this.centerX, this.bottom ), -this.brickStack.rotationAngle );
-    }
-  } );
+  return inherit( Node, BrickStackNode );
 } );
