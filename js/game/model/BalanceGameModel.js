@@ -25,6 +25,7 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
+  var Timer = require( 'JOIST/Timer' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -336,16 +337,15 @@ define( function( require ) {
 
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
-          window.clearInterval( this.gameTimerId );
+          Timer.clearInterval( this.gameTimerId );
         }
         this.elapsedTime = 0;
         var thisModel = this;
-        //REVIEW: setInterval/clearInterval should use joist's Timer, so that Scenery input event recording options for replay will work
-        this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
+        this.gameTimerId = Timer.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
       },
 
       stopGameTimer: function() {
-        window.clearInterval( this.gameTimerId );
+        Timer.clearInterval( this.gameTimerId );
         this.gameTimerId = null;
       },
 
