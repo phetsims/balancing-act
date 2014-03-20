@@ -17,12 +17,16 @@ define( function( require ) {
   var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Property = require( 'AXON/Property' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Model-view transform for scaling the node used in the tool box.  This
   // may scale the node differently than what is used in the model so that
   // items in the tool box can be sized differently (generally smaller).
   var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
+
+  // Constant for scaling the touch area.
+  var TOUCH_AREA_SCALE = 2;
 
   /**
    * @param {number} numBricks
@@ -35,7 +39,14 @@ define( function( require ) {
     MassCreatorNode.call( this, mvt, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
-    this.setSelectionNode( new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false ) );
+    var selectionNode = new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false );
+    var bounds = selectionNode.bounds;
+//    selectionNode.touchArea = new Rectangle( bounds.centerX - bounds.width * TOUCH_AREA_SCALE / 2, bounds.centerY - bounds.height * TOUCH_AREA_SCALE / 2,
+//      bounds.width * TOUCH_AREA_SCALE, bounds.height * TOUCH_AREA_SCALE );
+    selectionNode.touchArea = new Rectangle( -100, -100, 200, 200 );
+    selectionNode.mouseArea = new Rectangle( bounds.centerX - bounds.width * TOUCH_AREA_SCALE / 2, bounds.centerY - bounds.height * TOUCH_AREA_SCALE / 2,
+      bounds.width * TOUCH_AREA_SCALE, bounds.height * TOUCH_AREA_SCALE );
+    this.setSelectionNode( selectionNode );
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
   }
 
