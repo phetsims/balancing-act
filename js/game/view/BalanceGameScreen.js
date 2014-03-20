@@ -343,8 +343,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          //REVIEW: Setting pickable to true causes everything under it to be hit-tested. Presumably we want this.challengeLayer.pickable = null?
-          this.challengeLayer.pickable = null; // TODO: Work with JO to come up with good comment for why null.
+          this.challengeLayer.pickable = null; // Pass through, prunes subtree, see Scenery documentation for details.
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
             if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
