@@ -267,7 +267,6 @@ define( function( require ) {
       },
 
       removeAllMasses: function() {
-        //REVIEW: Would an ObservableArray.getDefensiveCopy() be useful/more readable?
         var copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
         var thisPlank = this;
         copyOfMassesArray.forEach( function( mass ) {
