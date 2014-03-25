@@ -25,9 +25,6 @@ define( function( require ) {
   // items in the tool box can be sized differently (generally smaller).
   var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
-  // Constant for scaling the touch area.
-  var TOUCH_AREA_SCALE = 2;
-
   /**
    * @param {number} numBricks
    * @param {BalanceLabModel} model
@@ -40,12 +37,11 @@ define( function( require ) {
     this.numBricks = numBricks;
     this.model = model;
     var selectionNode = new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false );
-    var bounds = selectionNode.bounds;
-//    selectionNode.touchArea = new Rectangle( bounds.centerX - bounds.width * TOUCH_AREA_SCALE / 2, bounds.centerY - bounds.height * TOUCH_AREA_SCALE / 2,
-//      bounds.width * TOUCH_AREA_SCALE, bounds.height * TOUCH_AREA_SCALE );
-    selectionNode.touchArea = new Rectangle( -100, -100, 200, 200 );
-    selectionNode.mouseArea = new Rectangle( bounds.centerX - bounds.width * TOUCH_AREA_SCALE / 2, bounds.centerY - bounds.height * TOUCH_AREA_SCALE / 2,
-      bounds.width * TOUCH_AREA_SCALE, bounds.height * TOUCH_AREA_SCALE );
+    var Shape = require( 'KITE/Shape' );
+
+    // Make a larger touch area.  The diameter of the circle was determined empirically.
+    selectionNode.touchArea = Shape.circle( selectionNode.bounds.width / 2, selectionNode.bounds.height / 2, selectionNode.bounds.width * 0.8 );
+
     this.setSelectionNode( selectionNode );
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
   }
