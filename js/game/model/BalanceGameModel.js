@@ -113,8 +113,7 @@ define( function( require ) {
       },
 
       reset: function() {
-        // This can only be done from the level selection screen, so it only
-        // clears best times and scores.
+        PropertySet.prototype.reset.call( this );
         this.bestScores.forEach( function( bestScoreProperty ) { bestScoreProperty.reset(); } );
         this.bestTimes = [];
         var thisModel = this;
