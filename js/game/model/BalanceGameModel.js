@@ -336,15 +336,15 @@ define( function( require ) {
 
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
-          Timer.clearInterval( this.gameTimerId );
+          window.clearInterval( this.gameTimerId );
         }
         this.elapsedTime = 0;
         var thisModel = this;
-        this.gameTimerId = Timer.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
+        this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
       },
 
       stopGameTimer: function() {
-        Timer.clearInterval( this.gameTimerId );
+        window.clearInterval( this.gameTimerId );
         this.gameTimerId = null;
       },
 
