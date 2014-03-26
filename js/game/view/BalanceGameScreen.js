@@ -491,7 +491,7 @@ define( function( require ) {
           thisScreen.levelCompletedNode = null;
         },
         {
-          center: thisScreen.layoutBounds.center,
+          center: thisScreen.layoutBounds.center
         } );
 
       // Add the node.
