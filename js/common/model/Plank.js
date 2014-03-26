@@ -10,7 +10,6 @@ define( function( require ) {
 
   // Imports
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
-  var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   var Matrix3 = require( 'DOT/Matrix3' );

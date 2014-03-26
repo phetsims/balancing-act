@@ -84,7 +84,6 @@ define( function( require ) {
     thisScreen.rootNode.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    var skyAndGroundHeight = this.layoutBounds.height * 1.5;
     thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( this.layoutBounds.centerX, mvt.modelToViewY( 0 ), this.layoutBounds.width * 2.5, this.layoutBounds.height * 1.5, this.layoutBounds.height );
     thisScreen.rootNode.addChild( thisScreen.outsideBackgroundNode );
 

@@ -17,7 +17,6 @@ define( function( require ) {
   var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Model-view transform for scaling the node used in the tool box.  This

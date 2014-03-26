@@ -613,7 +613,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueMasses: function( testChallenge, usedChallengeList ) {
-      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameMasses( testChallenge ) } );
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameMasses( testChallenge ); } );
     },
 
     /**
@@ -629,7 +629,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMassesAndDistances: function( testChallenge, usedChallengeList ) {
-      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMassesAndDistances( testChallenge ) } );
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMassesAndDistances( testChallenge ); } );
     },
 
     /**
@@ -644,7 +644,7 @@ define( function( require ) {
      * @return
      */
     usesUniqueFixedMasses: function( testChallenge, usedChallengeList ) {
-      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMasses( testChallenge ) } );
+      return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMasses( testChallenge ); } );
     },
 
     generateBalanceChallenge: function( level ) {
