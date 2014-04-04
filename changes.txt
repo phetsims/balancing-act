@@ -1,6 +1,8 @@
+Changed the mass selection carousel to have the control buttons on the sides
 # 1.0.0-dev.9
 Widened tolerance of image scaling for images before hitting assertion
 Switched back to window-based timer to avoid fast clock running when switching tabs
+Enlarged touch area for bricks on mass carousel
 Enlarged touch area for bricks on mass carousel
 Fixed issue where reset wasn't resetting timer and sound enabled states
 Fixed issue with game challenge generation
