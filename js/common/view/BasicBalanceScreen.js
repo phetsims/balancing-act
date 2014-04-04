@@ -79,7 +79,7 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.75 ),
+      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.80 ),
       105 );
     thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
@@ -185,8 +185,8 @@ define( function( require ) {
         cornerRadius: 5,
         stroke: null
       } );
-    insertColumnsButton.center = mvt.modelToViewPosition( new Vector2( -0.4, -0.5 ) );
-    thisScreen.nonMassLayer.addChild( insertColumnsButton );
+//    insertColumnsButton.center = mvt.modelToViewPosition( new Vector2( -0.4, -0.5 ) );
+//    thisScreen.nonMassLayer.addChild( insertColumnsButton );
     var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
     balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
     var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage,
@@ -196,9 +196,20 @@ define( function( require ) {
         cornerRadius: 5,
         stroke: null
       } );
-    removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
-    removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
-    thisScreen.nonMassLayer.addChild( removeColumnsButton );
+//    removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
+//    removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
+//    thisScreen.nonMassLayer.addChild( removeColumnsButton );
+
+    var columnControlPanel = new Panel(
+      new HBox( { children: [ insertColumnsButton, removeColumnsButton ], spacing: 15 } ),
+      {
+//        fill: 'green',
+//        fill: 'white',
+        fill: 'rgb( 240, 240, 240 )',
+        center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
+      }
+    );
+    thisScreen.nonMassLayer.addChild( columnControlPanel );
 
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
