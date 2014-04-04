@@ -1,3 +1,4 @@
+# 1.0.0-dev.9
 Widened tolerance of image scaling for images before hitting assertion
 Switched back to window-based timer to avoid fast clock running when switching tabs
 Enlarged touch area for bricks on mass carousel
@@ -5,7 +6,7 @@ Fixed issue where reset wasn't resetting timer and sound enabled states
 Fixed issue with game challenge generation
 Had code reviewed and responded to all comments
 Added credits
-TODO cleanup
+Cleaned up TODO items in the code
 # 1.0.0-dev.8
 Removed all non-integer masses from the games.
 Implemented major performance improvements.
