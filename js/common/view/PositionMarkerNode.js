@@ -25,7 +25,7 @@ define( function( require ) {
     this.addChild( line );
     var circle = new Circle( CIRCLE_RADIUS, { fill: color, centerX: 0, centerY: LINE_LENGTH} );
     this.addChild( circle );
-    this.addChild( new Text( labelText, { font: new PhetFont( {size: 12, weight: 'bold'} ), centerX: 0, top: circle.bottom - 2 } ) );
+    this.addChild( new Text( labelText, { font: new PhetFont( {size: 12, weight: 'bold'} ), centerX: 0, top: circle.bottom } ) );
     this.mutate( options );
   }
 
