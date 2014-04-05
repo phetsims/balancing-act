@@ -79,7 +79,7 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.80 ),
+      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.79 ),
       105 );
     thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
