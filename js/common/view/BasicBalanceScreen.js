@@ -15,6 +15,7 @@ define( function( require ) {
   var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
   var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -200,15 +201,18 @@ define( function( require ) {
 //    removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
 //    thisScreen.nonMassLayer.addChild( removeColumnsButton );
 
-    var columnControlPanel = new Panel(
-      new HBox( { children: [ insertColumnsButton, removeColumnsButton ], spacing: 15 } ),
-      {
+//    var columnControlPanel = new Panel(
+//      new HBox( { children: [ insertColumnsButton, removeColumnsButton ], spacing: 15 } ),
+//      {
 //        fill: 'green',
 //        fill: 'white',
-        fill: 'rgb( 240, 240, 240 )',
-        center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
-      }
-    );
+//        fill: 'rgb( 240, 240, 240 )',
+//        center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
+//      }
+//    );
+//    thisScreen.nonMassLayer.addChild( columnControlPanel );
+
+    var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, { center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) ) } );
     thisScreen.nonMassLayer.addChild( columnControlPanel );
 
     // Add the control panel that will allow users to control the visibility
