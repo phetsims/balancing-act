@@ -12,8 +12,6 @@ define( function( require ) {
 
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
-  var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
-  var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
@@ -21,8 +19,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var InOutRadioButton = require( 'SUN/InOutRadioButton' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -51,7 +47,6 @@ define( function( require ) {
   var VStrut = require( 'SUN/VStrut' );
 
   // Constants
-  var BUTTON_ICON_WIDTH = 60;
   var X_MARGIN_IN_PANELS = 5;
   var PANEL_TITLE_FONT = new PhetFont( 16 );
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
@@ -177,41 +172,6 @@ define( function( require ) {
     } );
 
     // Add the buttons that will control whether or not the support columns are in place.
-    var balanceWithSupportsIconImage = new Image( balanceWithSupportsIcon );
-    balanceWithSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithSupportsIconImage.width );
-    var insertColumnsButton = new InOutRadioButton( model.columnStateProperty, 'doubleColumns', balanceWithSupportsIconImage,
-      {
-        xMargin: 0,
-        yMargin: 0,
-        cornerRadius: 5,
-        stroke: null
-      } );
-//    insertColumnsButton.center = mvt.modelToViewPosition( new Vector2( -0.4, -0.5 ) );
-//    thisScreen.nonMassLayer.addChild( insertColumnsButton );
-    var balanceWithoutSupportsIconImage = new Image( balanceWithoutSupportsIcon );
-    balanceWithoutSupportsIconImage.scale( BUTTON_ICON_WIDTH / balanceWithoutSupportsIconImage.width );
-    var removeColumnsButton = new InOutRadioButton( model.columnStateProperty, 'noColumns', balanceWithoutSupportsIconImage,
-      {
-        xMargin: 0,
-        yMargin: 0,
-        cornerRadius: 5,
-        stroke: null
-      } );
-//    removeColumnsButton.centerX = mvt.modelToViewX( 0.4 );
-//    removeColumnsButton.centerY = mvt.modelToViewY( -0.5 );
-//    thisScreen.nonMassLayer.addChild( removeColumnsButton );
-
-//    var columnControlPanel = new Panel(
-//      new HBox( { children: [ insertColumnsButton, removeColumnsButton ], spacing: 15 } ),
-//      {
-//        fill: 'green',
-//        fill: 'white',
-//        fill: 'rgb( 240, 240, 240 )',
-//        center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
-//      }
-//    );
-//    thisScreen.nonMassLayer.addChild( columnControlPanel );
-
     var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, { center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) ) } );
     thisScreen.nonMassLayer.addChild( columnControlPanel );
 
