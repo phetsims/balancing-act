@@ -131,7 +131,7 @@ define( function( require ) {
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
+    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
