@@ -17,7 +17,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
 
   // Constants
-  var IMAGE_SCALE = 0.35;
+  var IMAGE_SCALE = 0.75;
 
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
