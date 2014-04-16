@@ -99,9 +99,17 @@ define( function( require ) {
     root.addChild( massesLayer );
 
     function handleMassAdded( addedMass ) {
+
       // Create and add the view representation for this mass.
       var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, thisScreen.viewProperties.massLabelsVisibleProperty );
       massesLayer.addChild( massNode );
+
+      // Move the mass to the front when grabbed so that layering stays reasonable.
+      addedMass.userControlledProperty.link( function( userControlled ) {
+        if ( userControlled ) {
+          massNode.moveToFront();
+        }
+      } );
 
       // Add the removal listener for if and when this mass is removed from the model.
       model.massList.addItemRemovedListener( function removalListener( removedMass ) {

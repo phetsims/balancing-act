@@ -104,9 +104,17 @@ define( function( require ) {
 
     // Watch the model and add/remove visual representations of masses.
     gameModel.movableMasses.addItemAddedListener( function( addedMass ) {
+
       // Create and add the view representation for this mass.
       var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, new Property( true ) );
       thisScreen.challengeLayer.addChild( massNode );
+
+      // Move the mass to the front when grabbed so that layering stays reasonable.
+      addedMass.userControlledProperty.link( function( userControlled ) {
+        if ( userControlled ) {
+          massNode.moveToFront();
+        }
+      } );
 
       // Add the removal listener for if and when this mass is removed from the model.
       gameModel.movableMasses.addItemRemovedListener( function removeMovableMass() {
