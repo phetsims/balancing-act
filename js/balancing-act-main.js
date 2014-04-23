@@ -21,6 +21,7 @@ define( function( require ) {
   // Strings & Images
   var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
   var introIcon = require( 'image!BALANCING_ACT/intro-icon.png' );
+  var introIconSmall = require( 'image!BALANCING_ACT/intro-icon-small.png' );
   var gameString = require( 'string!BALANCING_ACT/game' );
   var introString = require( 'string!BALANCING_ACT/intro' );
   var labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
@@ -41,7 +42,10 @@ define( function( require ) {
     new Sim( simTitleString, [
       new Screen( introString, new Image( introIcon ),
         function() { return new BAIntroModel(); },
-        function( model ) { return new BAIntroScreen( model ); }
+        function( model ) { return new BAIntroScreen( model ); },
+        {
+          navigationBarIcon: new Image( introIconSmall )
+        }
       ),
       new Screen( balanceLabString, new Image( labIcon ),
         function() {return new BalanceLabModel();},
