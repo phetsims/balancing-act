@@ -17,7 +17,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
 
   // Constants
-  var IMAGE_SCALE = 0.75;
+  var IMAGE_SCALE = 1.0;
 
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
@@ -25,7 +25,7 @@ define( function( require ) {
       new ABSwitch( columnState, 'doubleColumns',
         new Image( balanceWithSupportsIcon, { scale: IMAGE_SCALE } ),
         'noColumns', new Image( balanceWithoutSupportsIcon, { scale: IMAGE_SCALE } ),
-        { switchSize: new Dimension2( 26, 13 ) }
+        { switchSize: new Dimension2( 32, 16 ) }
       ), { fill: 'rgb( 240, 240, 240 )', cornerRadius: 5 } ) );
 
     this.mutate( options );
