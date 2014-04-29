@@ -21,6 +21,7 @@ define( function( require ) {
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -39,15 +40,23 @@ define( function( require ) {
 
     if ( isLabeled ) {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
-      var rasterScale = 2; // since the rasterization is done in the label's parent coordinate frame, we want additional resolution to not look blurry
+
+      // Since the rasterization is done in the label's parent coordinate
+      // frame, we need additional resolution to not look blurry.  The value
+      // was empirically determined.
+      /*
+       var rasterScale = 2;
+       var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
+       var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), scale: rasterScale } ); // apply the scale to the original
+       var massLabelRasterized = massLabel.toCanvasNodeSynchronous();
+       massLabelRasterized.scale( 1 / rasterScale ); // apply the inverse scale to the rasterized version
+       // create another Node, since overriding the localBounds of the rasterized node then gets scaled improperly (bounds = localBounds * scale)
+       var massLabelContainer = new Node( { children: [massLabelRasterized] } );
+       massLabelContainer.localBounds = massLabel.localBounds;
+       thisNode.addChild( massLabelContainer );
+       */
       var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
-      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), scale: rasterScale } ); // apply the scale to the original
-      var massLabelRasterized = massLabel.toCanvasNodeSynchronous();
-      massLabelRasterized.scale( 1 / rasterScale ); // apply the inverse scale to the rasterized version
-      // create another Node, since overriding the localBounds of the rasterized node then gets scaled improperly (bounds = localBounds * scale)
-      var massLabelContainer = new Node( { children: [massLabelRasterized] } );
-      massLabelContainer.localBounds = massLabel.localBounds;
-      massLabel = massLabelContainer; // so we don't run over other parts of the code
+      var massLabel = new RasterizedTextNode( massLabelText, { font: new PhetFont( 12 ) } );
       thisNode.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.
@@ -82,15 +91,18 @@ define( function( require ) {
 
     // Function for updating position and angle, used in multiple places below.
     function updatePositionAndAngle() {
-      thisNode.rotation = 0;
+      if ( thisNode.bounds.isFinite() ) {
 
-      // Set overall position.  Recall that positions in the model are defined
-      // as the center bottom of the item.
-      thisNode.centerX = mvt.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
-      thisNode.bottom = mvt.modelToViewY( imageMass.position.y );
+        thisNode.rotation = 0;
 
-      // Set the rotation.  Rotation point is the center bottom.
-      thisNode.rotateAround( new Vector2( mvt.modelToViewX( imageMass.position.x ), mvt.modelToViewY( imageMass.position.y ) ), -imageMass.rotationAngle );
+        // Set overall position.  Recall that positions in the model are defined
+        // as the center bottom of the item.
+        thisNode.centerX = mvt.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
+        thisNode.bottom = mvt.modelToViewY( imageMass.position.y );
+
+        // Set the rotation.  Rotation point is the center bottom.
+        thisNode.rotateAround( new Vector2( mvt.modelToViewX( imageMass.position.x ), mvt.modelToViewY( imageMass.position.y ) ), -imageMass.rotationAngle );
+      }
     }
 
     // Add the image node.
