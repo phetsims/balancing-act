@@ -39,11 +39,16 @@ define( function( require ) {
 
     if ( isLabeled ) {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
+      var rasterScale = 2; // since the rasterization is done in the label's parent coordinate frame, we want additional resolution to not look blurry
       var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
-      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
+      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), scale: rasterScale } ); // apply the scale to the original
       var massLabelRasterized = massLabel.toCanvasNodeSynchronous();
-      massLabelRasterized.localBounds = massLabel.localBounds;
-      thisNode.addChild( massLabelRasterized );
+      massLabelRasterized.scale( 1 / rasterScale ); // apply the inverse scale to the rasterized version
+      // create another Node, since overriding the localBounds of the rasterized node then gets scaled improperly (bounds = localBounds * scale)
+      var massLabelContainer = new Node( { children: [massLabelRasterized] } );
+      massLabelContainer.localBounds = massLabel.localBounds;
+      massLabel = massLabelContainer; // so we don't run over other parts of the code
+      thisNode.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.
       massLabelVisibleProperty.link( function( visible ) {
