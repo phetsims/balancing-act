@@ -28,6 +28,7 @@ define( function( require ) {
   /**
    * @param imageMass
    * @param mvt
+   * @param {boolean} isLabeled - Flag that controls whether this note include a textual label of the mass
    * @param massLabelVisibleProperty
    * @param {boolean} draggable
    * @constructor
@@ -40,7 +41,9 @@ define( function( require ) {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
       var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
       var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
-      thisNode.addChild( massLabel );
+      var massLabelRasterized = massLabel.toCanvasNodeSynchronous();
+      massLabelRasterized.localBounds = massLabel.localBounds;
+      thisNode.addChild( massLabelRasterized );
 
       // Observe changes to mass indicator label visibility.
       massLabelVisibleProperty.link( function( visible ) {
