@@ -1,3 +1,4 @@
+# 1.0.0-dev.12
 Rasterized text to solve a problem where characters would 'strobe' when rotated
 Made the column control about 25% larger
 Added small icons for the nav bar
