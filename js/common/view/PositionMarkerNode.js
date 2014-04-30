@@ -13,7 +13,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // Constants
   var color = 'rgb( 255, 153, 0 )';

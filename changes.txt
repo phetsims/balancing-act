@@ -1,3 +1,9 @@
+Rasterized text to solve a problem where characters would 'strobe' when rotated
+Made the column control about 25% larger
+Added small icons for the nav bar
+# 1.0.0-dev.11 - Test deployment
+# 1.0.0-dev.10
+Added new column control.
 Changed the mass selection carousel to have the control buttons on the sides
 # 1.0.0-dev.9
 Widened tolerance of image scaling for images before hitting assertion
