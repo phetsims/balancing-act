@@ -15,7 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -42,14 +42,14 @@ define( function( require ) {
     if ( isLabeled ) {
       var massLabel;
       if ( brickStack.isMystery ) {
-        massLabel = new Text( unknownMassString, { font: new PhetFont( 12 ) } );
+        massLabel = new RasterizedTextNode( unknownMassString, { font: new PhetFont( 12 ) } );
       }
       else {
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
         massLabel = new Node();
-        var massValueText = new Text( brickStack.massValue, { font: new PhetFont( 12 ), centerX: 0 } );
+        var massValueText = new RasterizedTextNode( brickStack.massValue, { font: new PhetFont( 12 ) }, { centerX: 0 } );
         massLabel.addChild( massValueText );
-        massLabel.addChild( new Text( kgString, { font: new PhetFont( 12 ), centerX: 0, top: massValueText.bottom - 4 } ) );
+        massLabel.addChild( new RasterizedTextNode( kgString, { font: new PhetFont( 12 ) }, { centerX: 0, top: massValueText.bottom - 4 } ) );
       }
       massLabel.centerX = shapeNode.centerX;
       massLabel.bottom = shapeNode.top - 1;
