@@ -35,7 +35,8 @@ define( function( require ) {
     Node.call( this );
     textOptions.scale = RASTER_SCALE;
     var label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
-    var labelRasterized = label.toCanvasNodeSynchronous();
+    // TODO: maybe try toImageNodeAsynchronous.
+    var labelRasterized = label.toDataURLNodeSynchronous();
     labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
     this.addChild( labelRasterized );
     this.localBounds = label.localBounds;
