@@ -15,8 +15,8 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  var RulerNodeRasterizedText = require( 'BALANCING_ACT/common/view/RulerNodeRasterizedText' );
 
   // Strings
   var metersString = require( 'string!BALANCING_ACT/meters' );
@@ -52,7 +52,7 @@ define( function( require ) {
     // Create and add the ruler node.
     var rulerLength = mvt.modelToViewDeltaX( rulerLengthInModel );
     var majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
-    var rulerNode = new RulerNode( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
+    var rulerNode = new RulerNodeRasterizedText( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
       {
         backgroundFill: 'rgba( 236, 225, 113, 0.5)',
         majorTickFont: new PhetFont( 11 ),
@@ -64,8 +64,8 @@ define( function( require ) {
     thisNode.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
 
     // Add a units label on each side.
-    thisNode.addChild( new Text( metersString, { font: UNITS_FONT, centerX: rulerNode.width * 0.25, bottom: RULER_HEIGHT } ) );
-    thisNode.addChild( new Text( metersString, { font: UNITS_FONT, centerX: rulerNode.width * 0.75, bottom: RULER_HEIGHT } ) );
+    thisNode.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, { centerX: rulerNode.width * 0.25, bottom: RULER_HEIGHT } ) );
+    thisNode.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, { centerX: rulerNode.width * 0.75, bottom: RULER_HEIGHT } ) );
 
     // Observe visibility.
     visibleProperty.link( function( visible ) {
