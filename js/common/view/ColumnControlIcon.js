@@ -65,7 +65,7 @@ define( function( require ) {
     // Create and add the fulcrum.
     var fulcrumWidth = width * 0.35;
     var fulcrumHeight = height * 0.5;
-    var legThickness = width * 0.075;
+    var legThickness = width * 0.05;
     var fulcrumShape = new Shape();
     // Start at leftmost and lowest point.
     fulcrumShape.moveTo( -fulcrumWidth / 2, 0 );
@@ -102,9 +102,9 @@ define( function( require ) {
 
     // Add the columns, if present.
     if ( showColumns ) {
-      var columnSize = new Dimension2( width * 0.175, height - plank.bottom );
-      this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.2 } ) );
-      this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.8 } ) );
+      var columnSize = new Dimension2( width * 0.15, height - plank.bottom );
+      this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.175 } ) );
+      this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.825 } ) );
     }
   }
 

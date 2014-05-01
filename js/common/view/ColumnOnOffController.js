@@ -21,7 +21,7 @@ define( function( require ) {
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
     this.addChild( new Panel(
-      new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, false ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, true ),
+      new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, true ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, false ),
         { switchSize: new Dimension2( 32, 16 ) }
       ), { fill: 'rgb( 240, 240, 240 )', cornerRadius: 5 } ) );
 
