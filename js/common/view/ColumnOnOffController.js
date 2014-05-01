@@ -8,8 +8,7 @@ define( function( require ) {
 
   // Imports
   var ABSwitch = require( 'SUN/ABSwitch' );
-  var balanceWithSupportsIcon = require( 'image!BALANCING_ACT/balance-with-supports-icon.png' );
-  var balanceWithoutSupportsIcon = require( 'image!BALANCING_ACT/balance-without-supports-icon.png' );
+  var ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -17,14 +16,12 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
 
   // Constants
-  var IMAGE_SCALE = 1.0;
+  var ICON_WIDTH = 60;
 
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
     this.addChild( new Panel(
-      new ABSwitch( columnState, 'doubleColumns',
-        new Image( balanceWithSupportsIcon, { scale: IMAGE_SCALE } ),
-        'noColumns', new Image( balanceWithoutSupportsIcon, { scale: IMAGE_SCALE } ),
+      new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, false ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, true ),
         { switchSize: new Dimension2( 32, 16 ) }
       ), { fill: 'rgb( 240, 240, 240 )', cornerRadius: 5 } ) );
 
