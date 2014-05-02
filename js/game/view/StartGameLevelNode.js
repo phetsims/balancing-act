@@ -14,7 +14,7 @@ define( function( require ) {
   var LevelStartButton = require( 'VEGAS/LevelStartButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
@@ -90,7 +90,7 @@ define( function( require ) {
     this.addChild( soundToggleButton );
 
     // Reset button.
-    var resetButton = new ResetAllButton( function() {
+    var resetButton = new ResetAllButtonDeprecated( function() {
       resetFunction();
     } );
     resetButton.scale( 0.8 ); // Empirically determined scale factor.
@@ -101,7 +101,7 @@ define( function( require ) {
     var buttonSpacingX = buttons[0].width * 1.2; // Note: Assumes all buttons are the same size.
     var buttonSpacingY = buttons[0].height * 1.2;  // Note: Assumes all buttons are the same size.
     var firstButtonOrigin = new Vector2( options.size.width / 2 - ( numColumns - 1 ) * buttonSpacingX / 2,
-      options.size.height * 0.45 - ( ( options.numButtonRows - 1 ) * buttonSpacingY ) / 2 );
+        options.size.height * 0.45 - ( ( options.numButtonRows - 1 ) * buttonSpacingY ) / 2 );
     for ( var row = 0; row < options.numButtonRows; row++ ) {
       for ( var col = 0; col < numColumns; col++ ) {
         var buttonIndex = row * numColumns + col;
