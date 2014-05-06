@@ -14,7 +14,7 @@ define( function( require ) {
   var LevelStartButton = require( 'VEGAS/LevelStartButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var SoundToggleButtonDeprecated = require( 'SCENERY_PHET/SoundToggleButtonDeprecated' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButtonDeprecated = require( 'SCENERY_PHET/TimerToggleButtonDeprecated' );
@@ -90,10 +90,7 @@ define( function( require ) {
     this.addChild( soundToggleButton );
 
     // Reset button.
-    var resetButton = new ResetAllButtonDeprecated( function() {
-      resetFunction();
-    } );
-    resetButton.scale( 0.8 ); // Empirically determined scale factor.
+    var resetButton = new ResetAllButton( { listener: resetFunction, scale: 0.8  } );
     this.addChild( resetButton );
 
     // Layout

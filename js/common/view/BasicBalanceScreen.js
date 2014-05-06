@@ -36,7 +36,7 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var showString = require( 'string!BALANCING_ACT/show' );
@@ -227,11 +227,11 @@ define( function( require ) {
       thisScreen.reset.call( thisScreen );
     }
 
-    thisScreen.nonMassLayer.addChild( new ResetAllButtonDeprecated(
-      resetClosure,
+    thisScreen.nonMassLayer.addChild( new ResetAllButton(
       {
-        radius: 18,
-        right: thisScreen.layoutBounds.width - 20,
+        listener: resetClosure,
+        radius: 20,
+        centerX: indicatorVisibilityControlPanel.centerX,
         bottom: thisScreen.layoutBounds.height - 15
       } ) );
   }
