@@ -15,9 +15,9 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
-  var SoundToggleButtonDeprecated = require( 'SCENERY_PHET/SoundToggleButtonDeprecated' );
+  var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TimerToggleButtonDeprecated = require( 'SCENERY_PHET/TimerToggleButtonDeprecated' );
+  var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Strings
@@ -84,13 +84,13 @@ define( function( require ) {
     }
 
     // Sound and timer controls.
-    var timerToggleButton = new TimerToggleButtonDeprecated( timerEnabledProperty );
+    var timerToggleButton = new TimerToggleButton( timerEnabledProperty );
     this.addChild( timerToggleButton );
-    var soundToggleButton = new SoundToggleButtonDeprecated( soundEnabledProperty );
+    var soundToggleButton = new SoundToggleButton( soundEnabledProperty );
     this.addChild( soundToggleButton );
 
     // Reset button.
-    var resetButton = new ResetAllButton( { listener: resetFunction, scale: 0.8  } );
+    var resetButton = new ResetAllButton( { listener: resetFunction, radius: 22 } );
     this.addChild( resetButton );
 
     // Layout
