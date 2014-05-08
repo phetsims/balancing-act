@@ -51,6 +51,7 @@ define( function( require ) {
   var gameLevel4Icon = require( 'image!BALANCING_ACT/game-level-4-icon.png' );
   var nextString = require( 'string!VEGAS/next' );
   var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var startOverString = require( 'string!BALANCING_ACT/startOver' );
   var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // Constants
@@ -168,7 +169,8 @@ define( function( require ) {
       gameModel.timerEnabledProperty,
       function() { gameModel.newGame(); },
       {
-        levelVisible: false,
+        levelVisible: true,
+        newGameButtonCaption: startOverString,
         centerX: this.layoutBounds.centerX,
         bottom: this.layoutBounds.maxY - 5,
         yMargin: 5
