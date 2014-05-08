@@ -37,7 +37,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
@@ -214,7 +214,7 @@ define( function( require ) {
 
     // Add and lay out the buttons.
     thisScreen.buttons = [];
-    thisScreen.checkAnswerButton = new TextPushButton( checkString, {
+    thisScreen.checkAnswerButton = new TextPushButtonDeprecated( checkString, {
       listener: function() {
         gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value );
       },
@@ -223,21 +223,21 @@ define( function( require ) {
     thisScreen.rootNode.addChild( thisScreen.checkAnswerButton );
     thisScreen.buttons.push( thisScreen.checkAnswerButton );
 
-    thisScreen.nextButton = new TextPushButton( nextString, {
+    thisScreen.nextButton = new TextPushButtonDeprecated( nextString, {
       listener: function() { gameModel.nextChallenge(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
     thisScreen.rootNode.addChild( thisScreen.nextButton );
     thisScreen.buttons.push( thisScreen.nextButton );
 
-    thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
+    thisScreen.tryAgainButton = new TextPushButtonDeprecated( tryAgainString, {
       listener: function() { gameModel.tryAgain(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
     thisScreen.rootNode.addChild( thisScreen.tryAgainButton );
     thisScreen.buttons.push( thisScreen.tryAgainButton );
 
-    thisScreen.displayCorrectAnswerButton = new TextPushButton( showAnswerString, {
+    thisScreen.displayCorrectAnswerButton = new TextPushButtonDeprecated( showAnswerString, {
       listener: function() { gameModel.displayCorrectAnswer(); },
       font: BUTTON_FONT, rectangleFillUp: BUTTON_FILL
     } );
