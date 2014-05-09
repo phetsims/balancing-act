@@ -74,7 +74,7 @@ define( function( require ) {
     // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.4, thisScreen.layoutBounds.height * 0.75 ),
+      new Vector2( thisScreen.layoutBounds.width * 0.45, thisScreen.layoutBounds.height * 0.75 ),
       115 );
     thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
@@ -171,7 +171,8 @@ define( function( require ) {
       {
         levelVisible: true,
         newGameButtonCaption: startOverString,
-        centerX: this.layoutBounds.centerX,
+        font: new PhetFont( 14 ),
+        centerX: mvt.modelToViewX( 0 ), //this.layoutBounds.centerX,
         bottom: this.layoutBounds.maxY - 5,
         yMargin: 5
       }
