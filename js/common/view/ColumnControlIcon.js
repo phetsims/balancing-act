@@ -23,21 +23,27 @@ define( function( require ) {
 
   function createMiniColumn( size, options ) {
     var rootNode = new Node();
-    var columnFill = new LinearGradient( 0, 0, size.width, 0 ).
+
+    // Create the gradient fill.
+    var columnGradient = new LinearGradient( 0, 0, size.width, 0 ).
       addColorStop( 0, 'rgb( 150, 150, 150 )' ).
       addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).
       addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).
       addColorStop( 1, 'rgb( 170, 170, 170 )' );
-    rootNode.addChild( new Rectangle( 0, 0, size.width * 0.8, size.height, 0, 0,
+
+    // Add the main body of the column.
+    rootNode.addChild( new Rectangle( 0, 0, size.width * 0.75, size.height, 0, 0,
       {
-        fill: columnFill,
+        fill: columnGradient,
         stroke: 'black',
         lineWidth: 0.5,
         centerX: 0
       } ) );
-    rootNode.addChild( new Rectangle( 0, size.height * 0.8, size.width, size.height * 0.2, 2, 2,
+
+    // Add the column base.
+    rootNode.addChild( new Rectangle( 0, size.height * 0.8, size.width, size.height * 0.2, 0.5, 0.5,
       {
-        fill: columnFill,
+        fill: columnGradient,
         stroke: 'black',
         lineWidth: 0.5,
         centerX: 0
