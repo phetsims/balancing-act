@@ -10,7 +10,6 @@ define( function( require ) {
   var ABSwitch = require( 'SUN/ABSwitch' );
   var ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
