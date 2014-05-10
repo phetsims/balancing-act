@@ -49,7 +49,7 @@ define( function( require ) {
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',
       highlightedButtonBackgroundColor: 'rgb( 224, 255, 122 )',
       numButtonRows: 1, // For layout
-      controlsInset: 10,
+      controlsInset: 12,
       size: new Dimension2( 768, 504 )
     }, options );
 
