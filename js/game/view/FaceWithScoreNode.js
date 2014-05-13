@@ -1,9 +1,13 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
+/**
+ * Node that represents a smiling face with the additional points gained for
+ * getting the answer correct shown immediately below it.
+ */
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -11,8 +15,9 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
-   * Node that represents a smiling face with the additional points gained
-   * for getting the answer correct shown immediately below it.
+   * @param faceDiameter In screen coords, which are fairly close to pixels
+   * @param options
+   * @constructor
    */
   function FaceWithScoreNode( faceDiameter, options ) {
     Node.call( this );
@@ -36,14 +41,17 @@ define( function( require ) {
   }
 
   return inherit( Node, FaceWithScoreNode, {
+
     smile: function() {
       this.faceNode.smile();
       this.pointDisplay.visible = true;
     },
+
     frown: function() {
       this.faceNode.frown();
       this.pointDisplay.visible = false;
     },
+
     setScore: function( score ) {
       assert && assert( score >= 0 );
       this.pointDisplay.text = '+' + score;
