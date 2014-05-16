@@ -12,8 +12,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // Constants
 
@@ -32,7 +32,7 @@ define( function( require ) {
     var inset = thisNode.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
-    var labelText = new RasterizedTextNode( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
+    var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
     var dimension = Math.max( labelText.width, labelText.height );
     var label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
       {
