@@ -13,7 +13,7 @@ define( function( require ) {
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Color = require( 'SCENERY/util/Color' );
-  var FaceWithScoreNode = require( 'BALANCING_ACT/game/view/FaceWithScoreNode' );
+  var FaceWithScoreNode = require( 'SCENERY_PHET/FaceWithScoreNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
