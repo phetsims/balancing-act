@@ -220,7 +220,7 @@ define( function( require ) {
     var buttonOptions = {
       font: BUTTON_FONT,
       baseColor: BUTTON_FILL,
-      cornerRounding: 4
+      cornerRadius: 4
     };
     thisScreen.checkAnswerButton = new TextPushButton( checkString, _.extend( {
       listener: function() {
