@@ -208,8 +208,9 @@ define( function( require ) {
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.
-    thisScreen.faceWithScoreNode = new FaceWithScoreNode( thisScreen.layoutBounds.width * 0.31,
+    thisScreen.faceWithScoreNode = new FaceWithScoreNode(
       {
+        faceDiameter: thisScreen.layoutBounds.width * 0.31,
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 2.2 )
       } );
