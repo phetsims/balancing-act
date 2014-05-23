@@ -8,15 +8,15 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
+  var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param model
    * @constructor
    */
-  function BAIntroScreen( model ) {
-    BasicBalanceScreen.call( this, model );
+  function BAIntroView( model ) {
+    BasicBalanceScreenView.call( this, model );
     var thisScreen = this;
 
     model.massList.forEach( function( mass ) {
@@ -46,6 +46,6 @@ define( function( require ) {
     } );
   }
 
-  return inherit( BasicBalanceScreen, BAIntroScreen );
+  return inherit( BasicBalanceScreenView, BAIntroView );
 } );
 

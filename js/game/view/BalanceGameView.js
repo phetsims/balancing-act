@@ -62,7 +62,7 @@ define( function( require ) {
    * @param {BalanceGameModel} gameModel
    * @constructor
    */
-  function BalanceGameScreen( gameModel ) {
+  function BalanceGameView( gameModel ) {
     ScreenView.call( this, { renderer: 'svg' } );
     var thisScreen = this;
     thisScreen.model = gameModel;
@@ -302,7 +302,7 @@ define( function( require ) {
     thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
   }
 
-  return inherit( ScreenView, BalanceGameScreen, {
+  return inherit( ScreenView, BalanceGameView, {
 
     updateTitle: function() {
       var balanceGameChallenge = this.model.getCurrentChallenge();

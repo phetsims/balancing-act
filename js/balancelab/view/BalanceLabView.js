@@ -8,7 +8,7 @@ define( function( require ) {
 
   // Imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var BasicBalanceScreen = require( 'BALANCING_ACT/common/view/BasicBalanceScreen' );
+  var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
   var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
   var HStrut = require( 'SUN/HStrut' );
   var Panel = require( 'SUN/Panel' );
@@ -21,18 +21,18 @@ define( function( require ) {
    * @param model
    * @constructor
    */
-  function BalanceLabScreen( model ) {
-    BasicBalanceScreen.call( this, model );
+  function BalanceLabView( model ) {
+    BasicBalanceScreenView.call( this, model );
     var thisScreen = this;
 
     // Add the mass selection carousel.
     this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.mvt );
     thisScreen.nonMassLayer.addChild( new Panel( new VBox(
-      {
-        children: [
-          new HStrut( thisScreen.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
-          this.massKitSelectionNode ]
-      } ),
+        {
+          children: [
+            new HStrut( thisScreen.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
+            this.massKitSelectionNode ]
+        } ),
       {
         centerX: thisScreen.controlPanelBounds.centerX,
         top: thisScreen.controlPanelBounds.bottom + 5,
@@ -41,10 +41,10 @@ define( function( require ) {
       } ) );
   }
 
-  return inherit( BasicBalanceScreen, BalanceLabScreen, {
+  return inherit( BasicBalanceScreenView, BalanceLabView, {
     reset: function() {
       this.massKitSelectionNode.reset();
-      BasicBalanceScreen.prototype.reset.call( this );
+      BasicBalanceScreenView.prototype.reset.call( this );
     }
   } );
 } );
