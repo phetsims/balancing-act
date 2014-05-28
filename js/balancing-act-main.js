@@ -10,8 +10,6 @@ define( function( require ) {
   var BAIntroScreen = require( 'BALANCING_ACT/intro/BAIntroScreen' );
   var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
   var BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Screen = require( 'JOIST/Screen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
