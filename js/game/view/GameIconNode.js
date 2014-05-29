@@ -30,13 +30,7 @@ define( function( require ) {
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
     imageNode.top = title.bottom + 4;
     this.addChild( imageNode );
-
-    if ( title.width > imageNode.width ) {
-      imageNode.centerX = title.width / 2;
-    }
-    else {
-      title.centerX = imageNode.width / 2;
-    }
+    imageNode.centerX = title.centerX;
   }
 
   return inherit( Node, GameIconNode );
