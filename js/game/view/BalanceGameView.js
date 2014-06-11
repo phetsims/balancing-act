@@ -13,7 +13,7 @@ define( function( require ) {
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Color = require( 'SCENERY/util/Color' );
-  var FaceWithScoreNode = require( 'SCENERY_PHET/FaceWithScoreNode' );
+  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
@@ -208,7 +208,7 @@ define( function( require ) {
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.
-    thisScreen.faceWithScoreNode = new FaceWithScoreNode(
+    thisScreen.faceWithPointsNode = new FaceWithPointsNode(
       {
         faceOpacity: 0.6,
         faceDiameter: thisScreen.layoutBounds.width * 0.31,
@@ -218,7 +218,7 @@ define( function( require ) {
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 2.2 )
       } );
-    thisScreen.addChild( thisScreen.faceWithScoreNode );
+    thisScreen.addChild( thisScreen.faceWithPointsNode );
 
     // Add and lay out the buttons.
     thisScreen.buttons = [];
@@ -389,9 +389,9 @@ define( function( require ) {
 
           // Give the user the appropriate audio and visual feedback
           this.gameAudioPlayer.correctAnswer();
-          this.faceWithScoreNode.smile();
-          this.faceWithScoreNode.setPoints( this.model.getChallengeCurrentPointValue() );
-          this.faceWithScoreNode.visible = true;
+          this.faceWithPointsNode.smile();
+          this.faceWithPointsNode.setPoints( this.model.getChallengeCurrentPointValue() );
+          this.faceWithPointsNode.visible = true;
 
           // Disable interaction with the challenge elements.
           this.challengeLayer.pickable = false;
@@ -405,9 +405,9 @@ define( function( require ) {
 
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
-          this.faceWithScoreNode.frown();
-          this.faceWithScoreNode.setPoints( this.model.score );
-          this.faceWithScoreNode.visible = true;
+          this.faceWithPointsNode.frown();
+          this.faceWithPointsNode.setPoints( this.model.score );
+          this.faceWithPointsNode.visible = true;
 
           // Disable interaction with the challenge elements.
           this.challengeLayer.pickable = false;
@@ -421,9 +421,9 @@ define( function( require ) {
 
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
-          this.faceWithScoreNode.frown();
-          this.faceWithScoreNode.setPoints( this.model.score );
-          this.faceWithScoreNode.visible = true;
+          this.faceWithPointsNode.frown();
+          this.faceWithPointsNode.setPoints( this.model.score );
+          this.faceWithPointsNode.visible = true;
 
           // Disable interaction with the challenge elements.
           this.challengeLayer.pickable = false;
@@ -475,7 +475,7 @@ define( function( require ) {
     // during the course of a challenge.
     hideAllGameNodes: function() {
       this.buttons.forEach( function( button ) { button.visible = false; } );
-      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithScoreNode, this.scoreboard,
+      this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithPointsNode, this.scoreboard,
         this.tiltPredictionSelectorNode, this.massValueEntryNode ] );
     },
 
