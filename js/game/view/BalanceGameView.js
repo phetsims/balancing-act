@@ -214,6 +214,7 @@ define( function( require ) {
         faceDiameter: thisScreen.layoutBounds.width * 0.31,
         pointsFill: 'yellow',
         pointsStroke: 'black',
+        pointsAlignment: 'rightBottom',
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 2.2 )
       } );
