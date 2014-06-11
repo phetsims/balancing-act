@@ -212,6 +212,7 @@ define( function( require ) {
       {
         faceOpacity: 0.6,
         faceDiameter: thisScreen.layoutBounds.width * 0.31,
+        pointsFill: 'yellow',
         pointsStroke: 'black',
         centerX: thisScreen.mvt.modelToViewX( 0 ),
         centerY: thisScreen.mvt.modelToViewY( 2.2 )
