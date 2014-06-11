@@ -386,7 +386,7 @@ define( function( require ) {
           // Give the user the appropriate audio and visual feedback
           this.gameAudioPlayer.correctAnswer();
           this.faceWithScoreNode.smile();
-          this.faceWithScoreNode.setScore( this.model.getChallengeCurrentPointValue() );
+          this.faceWithScoreNode.setPoints( this.model.getChallengeCurrentPointValue() );
           this.faceWithScoreNode.visible = true;
 
           // Disable interaction with the challenge elements.
@@ -402,7 +402,7 @@ define( function( require ) {
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
           this.faceWithScoreNode.frown();
-          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.setPoints( this.model.score );
           this.faceWithScoreNode.visible = true;
 
           // Disable interaction with the challenge elements.
@@ -418,7 +418,7 @@ define( function( require ) {
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
           this.faceWithScoreNode.frown();
-          this.faceWithScoreNode.setScore( this.model.score );
+          this.faceWithScoreNode.setPoints( this.model.score );
           this.faceWithScoreNode.visible = true;
 
           // Disable interaction with the challenge elements.
