@@ -1,6 +1,6 @@
 // Copyright 2002-2014, University of Colorado Boulder
 /**
- * A scenery node the rasterizes text.  This is needed due to an issue where
+ * A scenery node that rasterizes text.  This is needed due to an issue where
  * text moves in undesirable ways when rotated in Chrome and Firefox, see
  * issue #16 (https://github.com/phetsims/balancing-act/issues/16).
  *
