@@ -240,11 +240,6 @@ define( function( require ) {
     thisScreen.rootNode.addChild( thisScreen.nextButton );
     thisScreen.buttons.push( thisScreen.nextButton );
 
-    thisScreen.tryAgainButton = new TextPushButton( tryAgainString, {
-      listener: function() { gameModel.tryAgain(); },
-      font: BUTTON_FONT,
-      baseColor: BUTTON_FILL
-    } );
     thisScreen.tryAgainButton = new TextPushButton( tryAgainString, _.extend( {
       listener: function() { gameModel.tryAgain(); }
     }, buttonOptions ) );
