@@ -25,6 +25,7 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
+  var Timer = require( 'JOIST/Timer' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Constants
@@ -53,9 +54,6 @@ define( function( require ) {
         columnState: 'singleColumns', // Valid values are 'none', 'singleColumn', 'doubleColumns'
         elapsedTime: 0
       } );
-
-    // Wall time at which current game was started.
-    thisModel.gameStartTime = 0;
 
     // Best times and scores.
     thisModel.bestTimes = [];
@@ -335,15 +333,15 @@ define( function( require ) {
 
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
-          window.clearInterval( this.gameTimerId );
+          Timer.clearInterval( this.gameTimerId );
         }
         this.elapsedTime = 0;
         var thisModel = this;
-        this.gameTimerId = window.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
+        this.gameTimerId = Timer.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
       },
 
       stopGameTimer: function() {
-        window.clearInterval( this.gameTimerId );
+        Timer.clearInterval( this.gameTimerId );
         this.gameTimerId = null;
       },
 
