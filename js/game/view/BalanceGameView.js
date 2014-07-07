@@ -33,7 +33,7 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var Scoreboard = require( 'VEGAS/Scoreboard' );
+  var ScoreboardPanel = require( 'VEGAS/ScoreboardPanel' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -160,7 +160,7 @@ define( function( require ) {
     thisScreen.gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
-    this.scoreboard = new Scoreboard(
+    this.scoreboard = new ScoreboardPanel(
       gameModel.challengeIndexProperty,
       new Property( gameModel.PROBLEMS_PER_LEVEL ),
       gameModel.levelProperty,
