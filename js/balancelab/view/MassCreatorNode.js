@@ -19,7 +19,7 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @param {number} massValue
    * @param {boolean} showMassLabel
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function MassCreatorNode( mvt, massValue, showMassLabel, options ) {

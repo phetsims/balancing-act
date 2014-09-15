@@ -11,7 +11,7 @@ define( function( require ) {
 
   /**
    * @param initialColumnState
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function BalanceGameChallenge( initialColumnState, options ) {

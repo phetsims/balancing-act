@@ -28,7 +28,7 @@ define( function( require ) {
 
   /**
    * @param {Property} positionIndicatorStateProperty
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function PositionIndicatorControlPanel( positionIndicatorStateProperty, options ) {

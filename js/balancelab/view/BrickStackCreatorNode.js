@@ -28,7 +28,7 @@ define( function( require ) {
    * @param {number} numBricks
    * @param {BalanceLabModel} model
    * @param {ModelViewTransform2} mvt
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function BrickStackCreatorNode( numBricks, model, mvt, options ) {

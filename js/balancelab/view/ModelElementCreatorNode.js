@@ -25,7 +25,7 @@ define( function( require ) {
 
   /**
    * @param {ModelViewTransform} mvt
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ModelElementCreatorNode( mvt, options ) {
