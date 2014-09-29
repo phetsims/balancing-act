@@ -106,8 +106,8 @@ define( function( require ) {
     thisNode.massValue.link( function( value ) {
       readoutText.text = StringUtils.format( pattern0Value1UnitsString, value, kgString );
       readoutText.centerX = readoutBackground.centerX;
-      leftArrowButton.setEnabled( value > 0 );
-      rightArrowButton.setEnabled( value < MAX_MASS );
+      leftArrowButton.enabled = ( value > 0 );
+      rightArrowButton.enabled = ( value < MAX_MASS );
     } );
 
     thisNode.mutate( options );
