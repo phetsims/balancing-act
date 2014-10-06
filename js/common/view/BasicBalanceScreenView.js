@@ -36,7 +36,7 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var showString = require( 'string!BALANCING_ACT/show' );
