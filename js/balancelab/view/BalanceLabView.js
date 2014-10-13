@@ -37,8 +37,7 @@ define( function( require ) {
         centerX: thisScreen.controlPanelBounds.centerX,
         top: thisScreen.controlPanelBounds.bottom + 5,
         xMargin: PANEL_X_MARGIN,
-        fill: 'rgb( 240, 240, 240 )',
-        selectorPostion: 'top'
+        fill: 'rgb( 240, 240, 240 )'
       } ) );
   }
 
