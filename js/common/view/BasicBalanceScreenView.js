@@ -56,7 +56,7 @@ define( function( require ) {
    * @constructor
    */
   function BasicBalanceScreenView( model ) {
-    ScreenView.call( this, { renderer: 'svg' } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2(  0, 0, 768, 504 ) } );
     var thisScreen = this;
     thisScreen.model = model;
 
