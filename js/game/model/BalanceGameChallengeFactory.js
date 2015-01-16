@@ -195,7 +195,7 @@ define( function( require ) {
       // masses and the best randomly-generated distances.
       var repositionedMasses = [];
       for ( i = 0; i < masses.length; i++ ) {
-        repositionedMasses.push( { mass: masses[i], distance: bestDistanceList[i]} );
+        repositionedMasses.push( { mass: masses[ i ], distance: bestDistanceList[ i ] } );
       }
       return repositionedMasses;
     },
@@ -281,7 +281,7 @@ define( function( require ) {
       for ( var i = 0; i < BALANCE_CHALLENGE_MASSES.length; i++ ) {
         var candidateMassPrototype = BALANCE_CHALLENGE_MASSES[ ( i + indexOffset ) % BALANCE_CHALLENGE_MASSES.length ];
         for ( var j = 0; j < ratios.length; j++ ) {
-          if ( candidateMassPrototype.massValue * ratios[j] === massValue ) {
+          if ( candidateMassPrototype.massValue * ratios[ j ] === massValue ) {
             // We have found a matching mass.  Clone it and return it.
             return candidateMassPrototype.createCopy();
           }
@@ -445,7 +445,7 @@ define( function( require ) {
 
     generateModerateTiltPredictionChallenge: function() {
       // Select the masses, bricks on one side, non bricks on the other.
-      var leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length )].createCopy();
+      var leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
       var rightMass = new BrickStack( this.randInt( 4 ) + 1 );
       if ( Math.random() >= 0.5 ) {
         // Switch the masses.

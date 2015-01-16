@@ -29,11 +29,13 @@ define( function( require ) {
     this.tiltPredictionProperty = new Property( 'none' );
 
     var panelContents = new HBox(
-      { children: [
-        new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
-        new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
-        new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
-      ], spacing: 5 } );
+      {
+        children: [
+          new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
+        ], spacing: 5
+      } );
 
     this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
   }

@@ -230,7 +230,8 @@ define( function( require ) {
     thisScreen.checkAnswerButton = new TextPushButton( checkString, _.extend( {
       listener: function() {
         gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value );
-      } }, buttonOptions ) );
+      }
+    }, buttonOptions ) );
     thisScreen.rootNode.addChild( thisScreen.checkAnswerButton );
     thisScreen.buttons.push( thisScreen.checkAnswerButton );
 

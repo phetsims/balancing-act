@@ -56,7 +56,7 @@ define( function( require ) {
    * @constructor
    */
   function BasicBalanceScreenView( model ) {
-    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2(  0, 0, 768, 504 ) } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var thisScreen = this;
     thisScreen.model = model;
 
@@ -186,8 +186,16 @@ define( function( require ) {
     // Add the control panel that will allow users to control the visibility
     // of the various indicators.
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      { content: new Text( massLabelsString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.massLabelsVisibleProperty, label: massLabelsString },
-      { content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty, label: forcesFromObjectsString },
+      {
+        content: new Text( massLabelsString, PANEL_OPTION_FONT ),
+        property: thisScreen.viewProperties.massLabelsVisibleProperty,
+        label: massLabelsString
+      },
+      {
+        content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
+        property: thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
+        label: forcesFromObjectsString
+      },
       { content: new Text( levelString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.levelIndicatorVisibleProperty, label: levelString }
     ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 7;

@@ -32,7 +32,7 @@ define( function( require ) {
     var thisNode = this;
 
     // Create the 'mystery vector' node and add it as a child.
-    thisNode.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1} ) );
+    thisNode.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
 
     // Follow the position as it changes
     positionedVectorProperty.link( function( positionedVector ) {

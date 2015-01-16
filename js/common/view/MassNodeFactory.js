@@ -20,7 +20,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  return{
+  return {
     createMassNode: function( mass, mvt, isLabeled, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof MysteryMass ) {
@@ -36,7 +36,7 @@ define( function( require ) {
         assert && assert( true, 'Error: Unrecognized mass type sent to MassNodeFactory.' );
         // In case the ever happens out in the wild, create a fake node.
         var textNode = new Text( 'Unimplemented Mass Node' );
-        massNode = new Rectangle( 0, 0, textNode.width * 1.3, textNode.height * 1.3, 0, 0, { fill: 'pink', stroke: 'black'} );
+        massNode = new Rectangle( 0, 0, textNode.width * 1.3, textNode.height * 1.3, 0, 0, { fill: 'pink', stroke: 'black' } );
         textNode.centerY = massNode.height / 2;
         massNode.addChild( textNode );
         massNode.center = mvt.modelToViewPosition( mass.position );

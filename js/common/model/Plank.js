@@ -243,7 +243,7 @@ define( function( require ) {
 
         // Remove the mass-distance pair for this mass.
         for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
-          if ( this.massDistancePairs[i].mass === mass ) {
+          if ( this.massDistancePairs[ i ].mass === mass ) {
             this.massDistancePairs.splice( i, 1 );
             break;
           }
@@ -275,8 +275,8 @@ define( function( require ) {
 
       getMassDistanceFromCenter: function( mass ) {
         for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
-          if ( this.massDistancePairs[i].mass === mass ) {
-            return this.massDistancePairs[i].distance;
+          if ( this.massDistancePairs[ i ].mass === mass ) {
+            return this.massDistancePairs[ i ].distance;
           }
         }
         return 0;
@@ -326,9 +326,9 @@ define( function( require ) {
         var copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
         for ( var i = 0; i < copyOfCandidateLocations.length; i++ ) {
           for ( var j = 0; j < this.massesOnSurface.length; j++ ) {
-            if ( this.massesOnSurface.get( j ).position.distance( copyOfCandidateLocations[i] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+            if ( this.massesOnSurface.get( j ).position.distance( copyOfCandidateLocations[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               // This position is already occupied.
-              candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[j] );
+              candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[ j ] );
             }
           }
         }
@@ -382,7 +382,7 @@ define( function( require ) {
         // recognizing whether masses are at the same distance.
         var massAtThisTickMark = false;
         for ( var i = 0; i < this.massesOnSurface; i++ ) {
-          var massDistanceFromCenter = this.getMassDistanceFromCenter( this.massesOnSurface[i] );
+          var massDistanceFromCenter = this.getMassDistanceFromCenter( this.massesOnSurface[ i ] );
           if ( massDistanceFromCenter > tickMarkDistanceFromCenter - PLANK_THICKNESS && massDistanceFromCenter < tickMarkDistanceFromCenter + PLANK_THICKNESS ) {
             massAtThisTickMark = true;
             break;
@@ -462,7 +462,7 @@ define( function( require ) {
         var unrotatedMinX = this.unrotatedShape.bounds.minX;
         for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
           var unrotatedPoint = new Vector2( unrotatedMinX + ( i + 1 ) * INTER_SNAP_TO_MARKER_DISTANCE, unrotatedY );
-          snapToLocations[i] = rotationTransform.timesVector2( unrotatedPoint );
+          snapToLocations[ i ] = rotationTransform.timesVector2( unrotatedPoint );
         }
 
         return snapToLocations;

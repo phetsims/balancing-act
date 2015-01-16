@@ -65,7 +65,7 @@ define( function( require ) {
               parentScreen = testNode;
               break;
             }
-            testNode = testNode.parents[0]; // Move up the scene graph by one level
+            testNode = testNode.parents[ 0 ]; // Move up the scene graph by one level
           }
 
           // Create a new node and add it to the model.

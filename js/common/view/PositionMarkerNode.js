@@ -23,9 +23,9 @@ define( function( require ) {
     Node.call( this );
     var line = new Line( 0, 0, 0, LINE_LENGTH, { stroke: color, lineWidth: 2, lineDash: [ 2, 2 ] } );
     this.addChild( line );
-    var circle = new Circle( CIRCLE_RADIUS, { fill: color, centerX: 0, centerY: LINE_LENGTH} );
+    var circle = new Circle( CIRCLE_RADIUS, { fill: color, centerX: 0, centerY: LINE_LENGTH } );
     this.addChild( circle );
-    this.addChild( new RasterizedTextNode( labelText, { font: new PhetFont( {size: 12, weight: 'bold'} ) }, { centerX: 0, top: circle.bottom } ) );
+    this.addChild( new RasterizedTextNode( labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) }, { centerX: 0, top: circle.bottom } ) );
     this.mutate( options );
   }
 
