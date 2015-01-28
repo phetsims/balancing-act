@@ -11,7 +11,7 @@ define( function( require ) {
   // Imports
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LevelStartButtonDeprecated = require( 'VEGAS/LevelStartButtonDeprecated' );
+  var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -69,7 +69,7 @@ define( function( require ) {
 
     var buttons = new Array( options.numLevels );
     for ( var i = 0; i < options.numLevels; i++ ) {
-      buttons[ i ] = new LevelStartButtonDeprecated(
+      buttons[ i ] = new LevelSelectionButton(
         iconNodes[ i ],
         options.numStarsOnButtons,
         createLevelStartFunction( i ),
