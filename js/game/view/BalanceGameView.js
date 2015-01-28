@@ -12,6 +12,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Color = require( 'SCENERY/util/Color' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
@@ -63,7 +64,7 @@ define( function( require ) {
    * @constructor
    */
   function BalanceGameView( gameModel ) {
-    ScreenView.call( this, { renderer: 'svg' } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
     var thisScreen = this;
     thisScreen.model = gameModel;
 

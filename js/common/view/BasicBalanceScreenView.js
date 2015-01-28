@@ -12,6 +12,7 @@ define( function( require ) {
 
   // Imports
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
@@ -56,7 +57,7 @@ define( function( require ) {
    * @constructor
    */
   function BasicBalanceScreenView( model ) {
-    ScreenView.call( this, { renderer: 'svg', layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    ScreenView.call( this, { renderer: 'svg', layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
     var thisScreen = this;
     thisScreen.model = model;
 
