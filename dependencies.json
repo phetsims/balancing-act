@@ -47,6 +47,14 @@
     "sha": "1efbb57e7eb9516028800ec282647c027509f1e2",
     "branch": "master"
   },
+  "vegas": {
+    "sha": "be77758a944e62417ee6740c331252d207cac084",
+    "branch": "master"
+  },
+  "vibe": {
+    "sha": "6a72340d1944af36a3c782bc679e91e8bbc69617",
+    "branch": "master"
+  },
   "assert": {
     "sha": "aed00968d94640815e81e2f8f4a6fa67582010db",
     "branch": "master"
