@@ -24,7 +24,7 @@ define( function( require ) {
    * @param visibilityProperty
    * @param scalingFactor
    * @param mvt
-   * @param options
+   * @param {Object} [options]
    * @constructor
    */
   function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, mvt, options ) {
