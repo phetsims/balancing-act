@@ -19,7 +19,7 @@ require.config( {
 
 
     // third party libs
-    text: '../../sherpa/text',
+    text: '../../sherpa/text-2.0.12',
 
     // plugins
     audio: '../../chipper/js/requirejs-plugins/audio',
