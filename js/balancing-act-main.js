@@ -22,7 +22,7 @@ define( function( require ) {
       credits: {
         leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
         softwareDevelopment: 'John Blanco',
-        team: 'Micheal Dubson, Trish Loeblein'
+        team: 'Michael Dubson, Trish Loeblein'
       }
     };
 
