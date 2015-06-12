@@ -9,7 +9,7 @@ define( function( require ) {
 
   // Imports
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SUN/HStrut' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var marksString = require( 'string!BALANCING_ACT/marks' );
   var noneString = require( 'string!BALANCING_ACT/none' );
@@ -20,7 +20,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
-  var VStrut = require( 'SUN/VStrut' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // Constants
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };

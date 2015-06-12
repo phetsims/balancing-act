@@ -10,7 +10,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
   var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
-  var HStrut = require( 'SUN/HStrut' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 

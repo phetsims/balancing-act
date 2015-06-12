@@ -18,7 +18,7 @@ define( function( require ) {
   var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SUN/HStrut' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -45,7 +45,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var VStrut = require( 'SUN/VStrut' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // Constants
   var X_MARGIN_IN_PANELS = 5;
