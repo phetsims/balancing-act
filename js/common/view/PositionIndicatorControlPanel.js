@@ -33,24 +33,37 @@ define( function( require ) {
    */
   function PositionIndicatorControlPanel( positionIndicatorStateProperty, options ) {
 
-    options = _.extend(
-      {
-        titleToControlsVerticalSpace: 5,
-        minWidth: 0.1, // Can't be zero, so defaults to something small
-        fill: 'rgb( 240, 240, 240 )',
-        xMargin: 5
-      }, options );
+    options = _.extend( {
+      titleToControlsVerticalSpace: 5,
+      fill: 'rgb( 240, 240, 240 )',
+      xMargin: 5,
+      align: 'left'
+    }, options );
 
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
-      { node: new Text( noneString, PANEL_OPTION_FONT ), property: positionIndicatorStateProperty, value: 'none', label: noneString },
-      { node: new Text( rulersString, PANEL_OPTION_FONT ), property: positionIndicatorStateProperty, value: 'rulers', label: rulersString },
-      { node: new Text( marksString, PANEL_OPTION_FONT ), property: positionIndicatorStateProperty, value: 'marks', label: marksString }
+      {
+        node: new Text( noneString, PANEL_OPTION_FONT ),
+        property: positionIndicatorStateProperty,
+        value: 'none',
+        label: noneString
+      },
+      {
+        node: new Text( rulersString, PANEL_OPTION_FONT ),
+        property: positionIndicatorStateProperty,
+        value: 'rulers',
+        label: rulersString
+      },
+      {
+        node: new Text( marksString, PANEL_OPTION_FONT ),
+        property: positionIndicatorStateProperty,
+        value: 'marks',
+        label: marksString
+      }
     ], { radius: 8 } );
     var positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, PANEL_TITLE_FONT ),
         new VStrut( options.titleToControlsVerticalSpace ),
-        new HStrut( Math.max( 0.1, options.minWidth - 2 * options.xMargin ) ),
         new HBox( { children: [ new HStrut( 10 ), positionMarkerRadioButtons ] } )
       ],
       align: 'left'
