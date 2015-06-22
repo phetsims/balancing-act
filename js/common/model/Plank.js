@@ -146,7 +146,6 @@ define( function( require ) {
             if ( closestOpenLocation ) {
               var plankSurfaceCenter = thisPlank.getPlankSurfaceCenter();
               var distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
-              distanceFromCenter = Math.round( distanceFromCenter * 100 ) / 100;
               tempDropLocations.push( distanceFromCenter );
             }
           }
