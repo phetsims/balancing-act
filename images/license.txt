@@ -10,6 +10,7 @@ fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco from https:
 fire-hydrant.png source=PhET author=jblanco
 flower-pot.png source=PhET author=jblanco
 game-icon.png source=PhET author=ssiman-tov
+game-icon-small.png source=PhET author=ssiman-tov
 game-level-1-icon.png source=PhET author=ssiman-tov
 game-level-2-icon.png source=PhET author=ssiman-tov
 game-level-3-icon.png source=PhET author=ssiman-tov
@@ -30,10 +31,13 @@ mystery-object-06.png source=PhET author=jblanco
 mystery-object-07.png source=PhET author=jblanco
 mystery-object-08.png source=PhET author=jblanco
 old-television.png source=Open Clip Art notes=Modified by jblanco
+plank-balanced.png source=PhET
+plank-tipped-left.png source=PhET
+plank-tipped-right.png source=PhET
 potted-plant.png source=PhET author=jblanco
-rock_1.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
-rock_4.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
-rock_6.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
+rock-1.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
+rock-4.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
+rock-6.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
 soda-bottle.png source=PhET author=jblanco
 tiny-rock.png source=PhET author=jblanco
 tire.png source=PhET author=jblanco
