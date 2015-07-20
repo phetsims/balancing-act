@@ -6,7 +6,7 @@ boy-sitting.png source=PhET author=jblanco
 boy-standing.png source=PhET author=jblanco
 cinder-block.png source=PhET author=jblanco
 default-image.png source=PhET author=jblanco
-fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco
+fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco from https://openclipart.org/detail/27077/fire-extinguisher license=Public Domain
 fire-hydrant.png source=PhET author=jblanco
 flower-pot.png source=PhET author=jblanco
 game-icon.png source=PhET author=ssiman-tov
