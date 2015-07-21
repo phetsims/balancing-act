@@ -5,6 +5,7 @@ blue-bucket.png source=PhET author=jblanco
 boy-sitting.png source=PhET author=jblanco
 boy-standing.png source=PhET author=jblanco
 cinder-block.png source=PhET author=jblanco
+crate-tall.png source=PhET author=Noah notes=Modified from forces and motion basics crate by NP
 default-image.png source=PhET author=jblanco
 fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco from https://openclipart.org/detail/27077/fire-extinguisher license=Public Domain
 fire-hydrant.png source=PhET author=jblanco
@@ -18,7 +19,9 @@ game-level-4-icon.png source=PhET author=ssiman-tov
 girl-sitting.png source=PhET author=jblanco
 girl-standing.png source=PhET author=jblanco
 intro-icon.png source=PhET author=ssiman-tov
+intro-icon-small.png source=PhET author=ssiman-tov
 lab-icon.png source=PhET author=ssiman-tov
+lab-icon-small.png source=PhET author=ssiman-tov
 man-sitting.png source=PhET author=jblanco
 man-standing.png source=PhET author=jblanco
 metal-bucket.png source=PhET author=jblanco
@@ -34,6 +37,7 @@ old-television.png source=Open Clip Art notes=Modified by jblanco
 plank-balanced.png source=PhET
 plank-tipped-left.png source=PhET
 plank-tipped-right.png source=PhET
+puppy.png source=PhET
 potted-plant.png source=PhET author=jblanco
 rock-1.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
 rock-4.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
