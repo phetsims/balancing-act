@@ -5,7 +5,6 @@ blue-bucket.png source=PhET author=jblanco
 boy-sitting.png source=PhET author=jblanco
 boy-standing.png source=PhET author=jblanco
 cinder-block.png source=PhET author=jblanco
-crate-tall.png source=PhET author=Noah notes=Modified from forces and motion basics crate by NP
 default-image.png source=PhET author=jblanco
 fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco from https://openclipart.org/detail/27077/fire-extinguisher license=Public Domain
 fire-hydrant.png source=PhET author=jblanco
@@ -48,4 +47,5 @@ tire.png source=PhET author=jblanco
 trash-can.png source=PhET author=jblanco
 woman-sitting.png source=PhET author=jblanco
 woman-standing.png source=PhET author=jblanco
+wood-crate-tall.png source=PhET author=Noah notes=Modified from forces and motion basics crate by NP
 yellow-bucket.png source=PhET author=jblanco
