@@ -1,51 +1,410 @@
-balance-with-supports-icon.png source=PhET author=jblanco
-balance-without-supports-icon.png source=PhET author=jblanco
-barrel.png source=PhET author=jblanco
-blue-bucket.png source=PhET author=jblanco
-boy-sitting.png source=PhET author=jblanco
-boy-standing.png source=PhET author=jblanco
-cinder-block.png source=PhET author=jblanco
-default-image.png source=PhET author=jblanco
-fire-extinguisher.png source=Open Clip Art notes=Modified by jblanco from https://openclipart.org/detail/27077/fire-extinguisher license=Public Domain
-fire-hydrant.png source=PhET author=jblanco
-flower-pot.png source=PhET author=jblanco
-game-icon.png source=PhET author=ssiman-tov
-game-icon-small.png source=PhET author=ssiman-tov
-game-level-1-icon.png source=PhET author=ssiman-tov
-game-level-2-icon.png source=PhET author=ssiman-tov
-game-level-3-icon.png source=PhET author=ssiman-tov
-game-level-4-icon.png source=PhET author=ssiman-tov
-girl-sitting.png source=PhET author=jblanco
-girl-standing.png source=PhET author=jblanco
-intro-icon.png source=PhET author=ssiman-tov
-intro-icon-small.png source=PhET author=ssiman-tov
-lab-icon.png source=PhET author=ssiman-tov
-lab-icon-small.png source=PhET author=ssiman-tov
-man-sitting.png source=PhET author=jblanco
-man-standing.png source=PhET author=jblanco
-metal-bucket.png source=PhET author=jblanco
-mystery-object-01.png source=PhET author=jblanco
-mystery-object-02.png source=PhET author=jblanco
-mystery-object-03.png source=PhET author=jblanco
-mystery-object-04.png source=PhET author=jblanco
-mystery-object-05.png source=PhET author=jblanco
-mystery-object-06.png source=PhET author=jblanco
-mystery-object-07.png source=PhET author=jblanco
-mystery-object-08.png source=PhET author=jblanco
-old-television.png source=Open Clip Art notes=Modified by jblanco
-plank-balanced.png source=PhET
-plank-tipped-left.png source=PhET
-plank-tipped-right.png source=PhET
-puppy.png source=PhET
-potted-plant.png source=PhET author=jblanco
-rock-1.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
-rock-4.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
-rock-6.png source=PhET author=Noah P notes=Reused from Radioactive Dating Game sim
-soda-bottle.png source=PhET author=jblanco
-tiny-rock.png source=PhET author=jblanco
-tire.png source=PhET author=jblanco
-trash-can.png source=PhET author=jblanco
-woman-sitting.png source=PhET author=jblanco
-woman-standing.png source=PhET author=jblanco
-wood-crate-tall.png source=PhET author=Noah notes=Modified from forces and motion basics crate by NP
-yellow-bucket.png source=PhET author=jblanco
+{
+  "balance-with-supports-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "balance-without-supports-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "barrel.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "blue-bucket.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "boy-sitting.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "boy-standing.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "cinder-block.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "default-image.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "fire-extinguisher.png": {
+    "text": [
+      "Public Domain"
+    ],
+    "projectURL": "Open Clip Art",
+    "license": "Public Domain",
+    "notes": "Modified by John Blanco from https://openclipart.org/detail/27077/fire-extinguisher"
+  },
+  "fire-hydrant.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "flower-pot.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "game-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "game-icon-small.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "game-level-1-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "game-level-2-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "game-level-3-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "game-level-4-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "girl-sitting.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "girl-standing.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "intro-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "intro-icon-small.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "lab-icon.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "lab-icon-small.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "ssiman-tov"
+  },
+  "man-sitting.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "man-standing.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "metal-bucket.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-01.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-02.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-03.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-04.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-05.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-06.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-07.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "mystery-object-08.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "old-television.png": {
+    "text": [
+      "Copyright 2002-2015 "
+    ],
+    "projectURL": "Open Clip Art",
+    "license": "",
+    "notes": "Modified by jblanco"
+  },
+  "plank-balanced.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": ""
+  },
+  "plank-tipped-left.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": ""
+  },
+  "plank-tipped-right.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": ""
+  },
+  "puppy.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": ""
+  },
+  "potted-plant.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "rock-1.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
+  },
+  "rock-4.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
+  },
+  "rock-6.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
+  },
+  "soda-bottle.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "tiny-rock.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "tire.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "trash-can.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "woman-sitting.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "woman-standing.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  },
+  "wood-crate-tall.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "Modified from forces and motion basics crate by Noah Podolefsky"
+  },
+  "yellow-bucket.png": {
+    "text": [
+      "Copyright 2002-2015 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by John Blanco"
+  }
+}
