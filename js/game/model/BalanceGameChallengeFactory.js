@@ -40,8 +40,9 @@ define( function( require ) {
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
   var Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
-  var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
+  var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
   var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
+  var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
@@ -75,7 +76,8 @@ define( function( require ) {
     new Barrel( Vector2.ZERO, false ),
     new CinderBlock( Vector2.ZERO, false ),
     new Puppy( Vector2.ZERO, false ),
-    new SodaBottle( Vector2.ZERO, false )
+    new SodaBottle( Vector2.ZERO, false ),
+    new SmallBucket( Vector2.ZERO, false )
   ];
 
   // List of masses that can be used as "mystery masses" in the mass
@@ -101,7 +103,8 @@ define( function( require ) {
     new TinyRock( Vector2.ZERO, false ),
     new SmallRock( Vector2.ZERO, false ),
     new MediumRock( Vector2.ZERO, false ),
-    new CinderBlock( Vector2.ZERO, false )
+    new CinderBlock( Vector2.ZERO, false ),
+    new SmallBucket( Vector2.ZERO, false )
   ];
 
   // Lists used to keep track of the challenges generated so far so that we
