@@ -36,12 +36,11 @@ define( function( require ) {
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
   var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
-  var MediumTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
+  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
   var Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
   var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
-  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
@@ -87,7 +86,7 @@ define( function( require ) {
     new FireHydrant( Vector2.ZERO, true ),
     new Television( Vector2.ZERO, true ),
     new LargeTrashCan( Vector2.ZERO, true ),
-    new MediumTrashCan( Vector2.ZERO, true ),
+    new SmallRock( Vector2.ZERO, true ),
     new Crate( Vector2.ZERO, true ),
     new FlowerPot( Vector2.ZERO, true ),
     new MediumBucket( Vector2.ZERO, true ),
