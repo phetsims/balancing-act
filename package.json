@@ -1,6 +1,6 @@
 {
   "name": "balancing-act",
-  "version": "1.0.0-dev.12",
+  "version": "1.1.0-dev.1",
   "license": "GPLv3",
   "requirejsNamespace": "BALANCING_ACT",
   "simTitleStringKey": "BALANCING_ACT/balancing-act.name",
