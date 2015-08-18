@@ -17,7 +17,6 @@
     "requirejsNamespace": "BALANCING_ACT",
     "simTitleStringKey": "BALANCING_ACT/balancing-act.name",
     "phetLibs": [
-      "balancing-act",
       "vegas",
       "vibe"
     ]
