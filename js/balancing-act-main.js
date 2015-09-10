@@ -14,7 +14,7 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
-  var simTitleString = require( 'string!BALANCING_ACT/balancing-act.name' );
+  var simTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
 
   SimLauncher.launch( function() {
 
