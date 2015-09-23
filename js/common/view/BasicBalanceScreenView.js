@@ -47,7 +47,7 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
-  // Constants
+  // constants
   var X_MARGIN_IN_PANELS = 5;
   var PANEL_TITLE_FONT = new PhetFont( 16 );
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };

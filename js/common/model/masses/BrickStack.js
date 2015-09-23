@@ -16,7 +16,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var BRICK_WIDTH = 0.2; // In meters.
   var BRICK_HEIGHT = BRICK_WIDTH / 3;
   var BRICK_MASS = 5; // In kg.

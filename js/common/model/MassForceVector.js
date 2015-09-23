@@ -6,7 +6,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Property = require( 'AXON/Property' );
 
-  // Constants
+  // constants
   var ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
 
   /**

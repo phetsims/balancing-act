@@ -15,7 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  // Constants
+  // constants
   var PIVOT_RADIUS = 5;
   var ATTACHMENT_BAR_WIDTH = PIVOT_RADIUS * 1.5;
 

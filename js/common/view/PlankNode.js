@@ -17,7 +17,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var NORMAL_TICK_MARK_LINE_WIDTH = 1;
   var BOLD_TICK_MARK_LINE_WIDTH = 3;
   var HIGHLIGHT_COLOR = 'white';

@@ -19,7 +19,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
   var LABEL_FONT = new PhetFont( 14 );
 

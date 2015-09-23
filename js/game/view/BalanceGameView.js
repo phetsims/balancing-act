@@ -55,7 +55,7 @@ define( function( require ) {
   var startOverString = require( 'string!BALANCING_ACT/startOver' );
   var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
-  // Constants
+  // constants
   var BUTTON_FONT = new PhetFont( 24 );
   var BUTTON_FILL = new Color( 0, 255, 153 );
 

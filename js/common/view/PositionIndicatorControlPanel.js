@@ -22,7 +22,7 @@ define( function( require ) {
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
-  // Constants
+  // constants
   var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
   var PANEL_TITLE_FONT = new PhetFont( 16 );
 

@@ -14,7 +14,7 @@ define( function( require ) {
   // modules
   var Shape = require( 'KITE/Shape' );
 
-  // Constants
+  // constants
   var COLUMN_WIDTH = 0.35; // In meters
 
   /**

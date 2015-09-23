@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var bigRockImage = require( 'image!BALANCING_ACT/rock-6.png' );
 
-  // Constants
+  // constants
   var MASS = 45; // In kg
   var HEIGHT = 0.5; // In meters
 

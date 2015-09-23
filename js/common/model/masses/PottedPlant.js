@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var pottedPlantImage = require( 'image!BALANCING_ACT/potted-plant.png' );
 
-  // Constants
+  // constants
   var MASS = 10; // In kg
   var HEIGHT = 0.65; // In meters
 

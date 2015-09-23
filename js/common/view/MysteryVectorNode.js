@@ -17,7 +17,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
-  // Constants
+  // constants
   var FONT = new PhetFont( { size: 36 } );
   var Y_DIST_FROM_POSITION = 3; // In screen units.
 

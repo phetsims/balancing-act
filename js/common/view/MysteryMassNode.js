@@ -15,7 +15,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  // Constants
+  // constants
   var INSET_PROPORTION = 0.25;
 
   /**

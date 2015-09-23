@@ -14,7 +14,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
 
-  // Constants
+  // constants
   var color = 'rgb( 255, 153, 0 )';
   var LINE_LENGTH = 14; // empirically chosen
   var CIRCLE_RADIUS = 3; // empirically chosen

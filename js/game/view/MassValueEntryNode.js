@@ -23,7 +23,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  // Constants
+  // constants
   var READOUT_FONT = new PhetFont( 16 );
   var ARROW_HEIGHT = 15;
   var MAX_MASS = 100;

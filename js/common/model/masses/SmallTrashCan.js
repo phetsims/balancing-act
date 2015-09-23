@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var trashCanImage = require( 'image!BALANCING_ACT/trash-can.png' );
 
-  // Constants
+  // constants
   var MASS = 10; // In kg
   var HEIGHT = 0.55; // In meters
 

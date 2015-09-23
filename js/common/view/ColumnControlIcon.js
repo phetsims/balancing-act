@@ -17,7 +17,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
-  // Constants
+  // constants
   var CORNER_ROUNDING = 4;
   var ASPECT_RATIO = 1.6; // Ratio of width to height.
 

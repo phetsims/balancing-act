@@ -16,7 +16,7 @@ define( function( require ) {
   var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MASS = 60; // in kg
   var STANDING_HEIGHT = 1.65; // In meters.
   var SITTING_HEIGHT = 0.825; // In meters.

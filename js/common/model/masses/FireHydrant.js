@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var fireHydrantImage = require( 'image!BALANCING_ACT/fire-hydrant.png' );
 
-  // Constants
+  // constants
   var MASS = 60; // In kg
   var HEIGHT = 0.75; // In meters
 

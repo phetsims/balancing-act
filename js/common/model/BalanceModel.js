@@ -19,7 +19,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var FULCRUM_HEIGHT = 0.85; // In meters.
   var PLANK_HEIGHT = 0.75; // In meters.
 

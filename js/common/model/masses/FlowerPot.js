@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var flowerPotImage = require( 'image!BALANCING_ACT/flower-pot.png' );
 
-  // Constants
+  // constants
   var MASS = 5; // In kg
   var HEIGHT = 0.55; // In meters
 

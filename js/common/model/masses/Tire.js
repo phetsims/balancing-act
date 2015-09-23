@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var tireImage = require( 'image!BALANCING_ACT/tire.png' );
 
-  // Constants
+  // constants
   var MASS = 15; // In kg
   var HEIGHT = 0.13; // In meters
 

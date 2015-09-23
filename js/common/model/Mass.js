@@ -13,7 +13,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
   var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 

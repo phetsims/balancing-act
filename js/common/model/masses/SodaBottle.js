@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var sodaBottleImage = require( 'image!BALANCING_ACT/soda-bottle.png' );
 
-  // Constants
+  // constants
   var MASS = 2; // In kg
   var HEIGHT = 0.4; // In meters
 

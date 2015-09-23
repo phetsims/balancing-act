@@ -28,7 +28,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
 
-  // Constants
+  // constants
   var TITLE_FONT = new PhetFont( 16 );
 
   function MassKitSelectionNode( model, mvt, options ) {

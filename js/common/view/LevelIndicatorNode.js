@@ -19,7 +19,7 @@ define( function( require ) {
   var Transform3 = require( 'DOT/Transform3' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var PLANK_TO_INDICATOR_SPACING = 5;
   var LEVEL_FILL_COLOR = 'rgb( 173, 255, 47 )';
   var NON_LEVEL_FILL_COLOR = 'rgb( 230, 230, 230 )';

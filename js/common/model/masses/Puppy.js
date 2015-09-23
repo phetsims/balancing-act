@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var puppyImage = require( 'image!BALANCING_ACT/puppy.png' );
 
-  // Constants
+  // constants
   var MASS = 6; // In kg
   var HEIGHT = 0.6; // In meters
 

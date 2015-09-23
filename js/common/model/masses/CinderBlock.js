@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var cinderBlockImage = require( 'image!BALANCING_ACT/cinder-block.png' );
 
-  // Constants
+  // constants
   var MASS = 12; // In kg
   var HEIGHT = 0.2; // In meters
 

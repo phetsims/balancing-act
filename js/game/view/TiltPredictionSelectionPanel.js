@@ -13,7 +13,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  // Constants, collected here for easy appearance tweaking.
+  // constants, collected here for easy appearance tweaking.
   var PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.
   var NON_HIGHLIGHT_COLOR = 'black';
   var NON_HIGHLIGHT_LINE_WIDTH = 1;

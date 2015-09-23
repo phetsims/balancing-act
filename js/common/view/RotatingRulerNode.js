@@ -18,10 +18,10 @@ define( function( require ) {
   var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var RulerNodeRasterizedText = require( 'BALANCING_ACT/common/view/RulerNodeRasterizedText' );
 
-  // Strings
+  // strings
   var metersString = require( 'string!BALANCING_ACT/meters' );
 
-  // Constants
+  // constants
   var RULER_HEIGHT = 50; // Empirically determined
   var UNITS_FONT = new PhetFont( 14 ); // Empirically determined
 

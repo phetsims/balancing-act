@@ -18,7 +18,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var PLANK_LENGTH = 4.5;// meters
   var PLANK_THICKNESS = 0.05; // meters
   var PLANK_MASS = 75; // kg

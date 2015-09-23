@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var crateImage = require( 'image!BALANCING_ACT/wood-crate-tall.png' );
 
-  // Constants
+  // constants
   var MASS = 45; // In kg
   var HEIGHT = 0.6; // In meters
 

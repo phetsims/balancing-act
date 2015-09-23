@@ -28,7 +28,7 @@ define( function( require ) {
   var Timer = require( 'JOIST/Timer' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Constants
+  // constants
   var MAX_LEVELS = 4;
   var MAX_POINTS_PER_PROBLEM = 2;
   var CHALLENGES_PER_PROBLEM_SET = 6;

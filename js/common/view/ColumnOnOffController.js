@@ -14,7 +14,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
 
-  // Constants
+  // constants
   var ICON_WIDTH = 60;
 
   function ColumnOnOffController( columnState, options ) {

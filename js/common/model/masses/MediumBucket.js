@@ -8,7 +8,7 @@ define( function( require ) {
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var yellowBucketImage = require( 'image!BALANCING_ACT/yellow-bucket.png' );
 
-  // Constants
+  // constants
   var MASS = 20; // In kg
   var HEIGHT = 0.4; // In meters
 
