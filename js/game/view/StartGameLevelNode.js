@@ -20,7 +20,7 @@ define( function( require ) {
   var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Strings
+  // strings
   var defaultTitleString = require( 'string!VEGAS/selectLevel' );
 
   /**
