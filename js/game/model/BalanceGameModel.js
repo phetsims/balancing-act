@@ -11,7 +11,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Dimension2 = require( 'DOT/Dimension2' );

@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

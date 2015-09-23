@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var ABSwitch = require( 'SUN/ABSwitch' );
   var ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
   var Dimension2 = require( 'DOT/Dimension2' );

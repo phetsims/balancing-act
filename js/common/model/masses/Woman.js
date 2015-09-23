@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var womanSittingImage = require( 'image!BALANCING_ACT/woman-sitting.png' );
   var womanStandingImage = require( 'image!BALANCING_ACT/woman-standing.png' );
   var inherit = require( 'PHET_CORE/inherit' );

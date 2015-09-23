@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var Shape = require( 'KITE/Shape' );
 
   // Constants

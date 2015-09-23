@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
   var whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );

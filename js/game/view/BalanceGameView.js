@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );

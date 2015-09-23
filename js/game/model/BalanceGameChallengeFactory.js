@@ -18,7 +18,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );

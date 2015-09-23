@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );

@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );

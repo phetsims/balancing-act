@@ -11,7 +11,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var boySittingImage = require( 'image!BALANCING_ACT/boy-sitting.png' );
   var boyStandingImage = require( 'image!BALANCING_ACT/boy-standing.png' );
   var inherit = require( 'PHET_CORE/inherit' );

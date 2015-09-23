@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );

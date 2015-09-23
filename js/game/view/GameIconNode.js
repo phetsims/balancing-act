@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var levelString = require( 'string!BALANCING_ACT/level' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );

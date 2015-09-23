@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // module
   var inherit = require( 'PHET_CORE/inherit' );
   var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
 

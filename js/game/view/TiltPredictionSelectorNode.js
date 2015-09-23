@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );

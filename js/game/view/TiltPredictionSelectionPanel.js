@@ -6,7 +6,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var DownUpListener = require( 'SCENERY/input/DownUpListener' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );

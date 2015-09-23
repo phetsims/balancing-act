@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );

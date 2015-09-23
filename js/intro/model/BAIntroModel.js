@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );

@@ -3,7 +3,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var puppyImage = require( 'image!BALANCING_ACT/puppy.png' );

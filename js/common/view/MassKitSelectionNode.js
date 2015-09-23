@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
   var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   var bricksString = require( 'string!BALANCING_ACT/bricks' );

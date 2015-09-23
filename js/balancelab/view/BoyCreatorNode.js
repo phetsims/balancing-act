@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/ImageMassCreatorNode' );

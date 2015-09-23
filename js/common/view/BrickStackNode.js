@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );

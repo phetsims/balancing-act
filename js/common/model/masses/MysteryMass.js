@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // Imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
 
