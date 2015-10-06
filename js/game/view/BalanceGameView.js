@@ -313,7 +313,7 @@ define( function( require ) {
       else {
         // Set the value to something so that layout can be done.  This
         // string doesn't need to be translated - users should never see it.
-        this.challengeTitleNode.setText( "No challenge available." );
+        this.challengeTitleNode.setText( 'No challenge available.' );
       }
 
       // Center the title above the pivot point.

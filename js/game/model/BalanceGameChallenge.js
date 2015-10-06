@@ -141,7 +141,7 @@ define( function( require ) {
       // If a match was found for all fixed mass distance pairs, then the
       // lists are equivalent.
       return matchCount === this.fixedMassDistancePairs.length;
-    },
+    }
   };
 
   return BalanceGameChallenge;
