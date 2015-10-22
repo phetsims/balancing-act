@@ -23,7 +23,7 @@ define( function( require ) {
    * @constructor
    */
   function LevelSupportColumn( height, centerX ) {
-    this.shape = new Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
+    this.shape = Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
   }
 
   return LevelSupportColumn;

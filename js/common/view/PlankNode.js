@@ -63,7 +63,7 @@ define( function( require ) {
 
     // Create and add the tick mark layer.
     var tickMarkLayer = new Node();
-    var tickMarkShape = new Shape.lineSegment( 0, 0, 0, mvt.modelToViewDeltaY( Plank.THICKNESS ) );
+    var tickMarkShape = Shape.lineSegment( 0, 0, 0, mvt.modelToViewDeltaY( Plank.THICKNESS ) );
     var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
       mvt.modelToViewY( plank.getPlankSurfaceCenter().y ) );
     var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
