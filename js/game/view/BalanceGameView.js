@@ -184,7 +184,7 @@ define( function( require ) {
     // the appropriate state change.
     thisScreen.challengeTitleNode = new Text( '',
       {
-        font: new PhetFont( { size: 60, weight: 'bold' } ),
+        font: new PhetFont( { size: 40, weight: 'bold' } ),
         fill: 'white',
         stroke: 'black',
         lineWidth: 1.5,
