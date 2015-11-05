@@ -22,8 +22,10 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   /**
    * @param imageMass
@@ -54,7 +56,7 @@ define( function( require ) {
        massLabelContainer.localBounds = massLabel.localBounds;
        thisNode.addChild( massLabelContainer );
        */
-      var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
+      var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
       var massLabel = new RasterizedTextNode( massLabelText, { font: new PhetFont( 12 ) } );
       thisNode.addChild( massLabel );
 

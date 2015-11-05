@@ -16,8 +16,10 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
-  var unknownMassString = require( 'string!BALANCING_ACT/unknownMassLabel' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   /**
    * @param {BrickStack} brickStack
@@ -42,7 +44,7 @@ define( function( require ) {
     if ( isLabeled ) {
       var massLabel;
       if ( brickStack.isMystery ) {
-        massLabel = new RasterizedTextNode( unknownMassString, { font: new PhetFont( 12 ) } );
+        massLabel = new RasterizedTextNode( unknownMassLabelString, { font: new PhetFont( 12 ) } );
       }
       else {
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.

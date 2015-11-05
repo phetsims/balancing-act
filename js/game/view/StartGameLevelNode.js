@@ -21,7 +21,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var defaultTitleString = require( 'string!VEGAS/selectLevel' );
+  var selectLevelString = require( 'string!VEGAS/selectLevel' );
 
   /**
    * @param {Function} startLevelFunction - Function used to initiate a game
@@ -43,7 +43,7 @@ define( function( require ) {
     options = _.extend( {
       // Defaults
       numLevels: 4,
-      titleString: defaultTitleString,
+      titleString: selectLevelString,
       numStarsOnButtons: 5,
       perfectScore: 10,
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',

@@ -14,7 +14,7 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
-  var simTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
+  var balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
 
   SimLauncher.launch( function() {
 
@@ -27,6 +27,6 @@ define( function( require ) {
     };
 
     // Create and start the sim
-    new Sim( simTitleString, [ new BAIntroScreen(), new BalanceLabScreen(), new BalanceGameScreen() ], simOptions ).start();
+    new Sim( balancingActTitleString, [ new BAIntroScreen(), new BalanceLabScreen(), new BalanceGameScreen() ], simOptions ).start();
   } );
 } );

@@ -12,11 +12,13 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var pattern0Label1Value = require( 'string!BALANCING_ACT/pattern0Label1Value' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var pattern0Label1ValueString = require( 'string!BALANCING_ACT/pattern0Label1Value' );
 
   // constants
   var FONT = new PhetFont( 16 );
@@ -24,7 +26,7 @@ define( function( require ) {
 
   function GameIconNode( image, levelNumber ) {
     Node.call( this );
-    var title = new Text( StringUtils.format( pattern0Label1Value, levelString, levelNumber ), { font: FONT } );
+    var title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), { font: FONT } );
     this.addChild( title );
     var imageNode = new Image( image );
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
