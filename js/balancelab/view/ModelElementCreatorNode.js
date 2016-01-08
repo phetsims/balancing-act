@@ -45,46 +45,50 @@ define( function( require ) {
 
     // Function for translating click events to model coordinates.
     function eventToModelPosition( position ) {
-      if ( parentScreen !== null ) {
-        return mvt.viewToModelPosition( parentScreen.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+      if ( parentScreenView !== null ) {
+        return mvt.viewToModelPosition( parentScreenView.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
       }
       return position;
     }
 
     // Variable for the parent screen, which is needed for coordinate transforms.
-    var parentScreen = null;
+    var parentScreenView = null;
 
     // Set up handling of mouse events.
-    this.addInputListener( new SimpleDragHandler(
-      {
-        start: function( event ) {
+    this.addInputListener( new SimpleDragHandler( {
+
+      start: function( event ) {
+
+        if ( !parentScreenView ) {
           // Move up the scene graph until the parent screen is found.
           var testNode = thisNode;
           while ( testNode !== null ) {
             if ( testNode instanceof ScreenView ) {
-              parentScreen = testNode;
+              parentScreenView = testNode;
               break;
             }
             testNode = testNode.parents[ 0 ]; // Move up the scene graph by one level
           }
-
-          // Create a new node and add it to the model.
-          thisNode.modelElement = thisNode.addElementToModel( eventToModelPosition( event.pointer.point ) );
-        },
-
-        drag: function( event ) {
-          if ( thisNode.modelElement !== null ) {
-            // Move the node.
-            thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
-          }
-        },
-        end: function( event ) {
-          // The user has released the node.
-          thisNode.modelElement.release();
-          thisNode.modelElement = null;
-          parentScreen = null;
+          assert && assert( parentScreenView, 'unable to find parent screen view' );
         }
-      } ) );
+
+        // Create a new node and add it to the model.
+        thisNode.modelElement = thisNode.addElementToModel( eventToModelPosition( event.pointer.point ) );
+      },
+
+      drag: function( event ) {
+        if ( thisNode.modelElement !== null ) {
+          // Move the node.
+          thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
+        }
+      },
+      end: function( event ) {
+        // The user has released the node.
+        thisNode.modelElement.release();
+        thisNode.modelElement = null;
+        parentScreenView = null;
+      }
+    } ) );
   }
 
   return inherit( Node, ModelElementCreatorNode, {
