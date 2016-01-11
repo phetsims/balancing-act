@@ -59,7 +59,10 @@ define( function( require ) {
         value: 'marks',
         label: marksString
       }
-    ], { radius: 8 } );
+    ], {
+      radius: 8,
+      touchXPadding: 5
+    } );
     var positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, PANEL_TITLE_FONT ),
