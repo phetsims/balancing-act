@@ -61,7 +61,7 @@ define( function( require ) {
       }
     ], {
       radius: 8,
-      touchXPadding: 5
+      touchAreaXDilation: 5
     } );
     var positionMarkerVBox = new VBox( {
       children: [
