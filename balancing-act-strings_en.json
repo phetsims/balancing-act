@@ -5,9 +5,6 @@
   "level": {
     "value": "Level"
   },
-  "massEquals": {
-    "value": "Mass ="
-  },
   "people": {
     "value": "People"
   },
@@ -23,17 +20,11 @@
   "mysteryObjects": {
     "value": "Mystery Objects"
   },
-  "checkAnswer": {
-    "value": "Check Answer"
-  },
   "whatWillHappen": {
     "value": "What will happen?"
   },
   "massLabelH": {
     "value": "H"
-  },
-  "tryAgain": {
-    "value": "Try Again"
   },
   "massLabelG": {
     "value": "G"
@@ -43,9 +34,6 @@
   },
   "rulers": {
     "value": "Rulers"
-  },
-  "displayCorrectAnswer": {
-    "value": "Display Correct Answer"
   },
   "massLabelE": {
     "value": "E"
@@ -68,12 +56,6 @@
   "massLabelA": {
     "value": "A"
   },
-  "next": {
-    "value": "Next"
-  },
-  "addSupports": {
-    "value": "Add Supports"
-  },
   "whatIsTheMass": {
     "value": "What is the Mass?"
   },
@@ -91,9 +73,6 @@
   },
   "balancing-act.title": {
     "value": "Balancing Act"
-  },
-  "removeSupports": {
-    "value": "Remove Supports"
   },
   "show": {
     "value": "Show"
