@@ -40,23 +40,10 @@ define( function( require ) {
     var thisNode = this;
 
     if ( isLabeled ) {
-      // Add the mass indicator label.  Note that it is positioned elsewhere.
 
-      // Since the rasterization is done in the label's parent coordinate
-      // frame, we need additional resolution to not look blurry.  The value
-      // was empirically determined.
-      /*
-       var rasterScale = 2;
-       var massLabelText = imageMass.isMystery ? unknownMassString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
-       var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ), scale: rasterScale } ); // apply the scale to the original
-       var massLabelRasterized = massLabel.toCanvasNodeSynchronous();
-       massLabelRasterized.scale( 1 / rasterScale ); // apply the inverse scale to the rasterized version
-       // create another Node, since overriding the localBounds of the rasterized node then gets scaled improperly (bounds = localBounds * scale)
-       var massLabelContainer = new Node( { children: [massLabelRasterized] } );
-       massLabelContainer.localBounds = massLabel.localBounds;
-       thisNode.addChild( massLabelContainer );
-       */
-      var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format( pattern0Value1UnitsString, imageMass.massValue, kgString );
+      // Add the mass indicator label.  Note that it is positioned elsewhere.
+      var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
+        pattern0Value1UnitsString, imageMass.massValue, kgString );
       var massLabel = new RasterizedTextNode( massLabelText, { font: new PhetFont( 12 ) } );
       thisNode.addChild( massLabel );
 
@@ -77,10 +64,6 @@ define( function( require ) {
         imageNode.matrix = imageNode.matrix.timesMatrix( Matrix3.scaling( -1, 1 ) );
       }
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
-      // Debug printouts for indicating whether the image for this node is
-      // reasonably scaled.  Generally, scale values between 0.5 and 1 look best.
-      assert && assert( scalingFactor >= 0.4 && scalingFactor <= 2, 'Warning: Scaling factor is too large or small, drawing size should be adjusted. Image src = ' + image.getAttribute( 'src' ) + ', scaling factor = ' + scalingFactor );
-      assert && assert( scalingFactor <= 1.0, 'Warning: Scaling image up, could lead to blurriness, scaling factor = ' + scalingFactor );
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
       if ( isLabeled ) {
