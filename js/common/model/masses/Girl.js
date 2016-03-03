@@ -11,11 +11,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var girlSittingImage = require( 'image!BALANCING_ACT/girl-sitting.png' );
-  var girlStandingImage = require( 'image!BALANCING_ACT/girl-standing.png' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // images
+  var girlSittingImage = require( 'mipmap!BALANCING_ACT/girl-sitting.png' );
+  var girlStandingImage = require( 'mipmap!BALANCING_ACT/girl-standing.png' );
 
   // constants
   var MASS = 30; // in kg
