@@ -22,8 +22,8 @@ define( function( require ) {
   // constants
   var MASS = 30; // in kg
   var STANDING_HEIGHT = 1.3; // In meters.
-  var SITTING_HEIGHT = 0.75; // In meters.
-  var SITTING_CENTER_OF_MASS_X_OFFSET = 0.07; // In meters, determined visually.  Update if image changes.
+  var SITTING_HEIGHT = 0.70; // In meters.
+  var SITTING_CENTER_OF_MASS_X_OFFSET = 0.11; // In meters, determined visually.  Update if image changes.
 
   /**
    * @constructor
