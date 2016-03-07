@@ -150,7 +150,10 @@ define( function( require ) {
         new GameIconNode( gameLevel4Icon, 4 )
       ],
       gameModel.bestScores,
-      { numStarsOnButtons: BalanceGameModel.prototype.PROBLEMS_PER_LEVEL, perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE }
+      {
+        numStarsOnButtons: BalanceGameModel.prototype.PROBLEMS_PER_LEVEL,
+        perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE
+      }
     );
     thisScreen.rootNode.addChild( thisScreen.startGameLevelNode );
 
@@ -194,11 +197,10 @@ define( function( require ) {
 
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
-    thisScreen.massValueEntryNode = new MassValueEntryNode(
-      {
-        centerX: mvt.modelToViewX( 0 ),
-        top: thisScreen.challengeTitleNode.bounds.maxY + 4
-      } );
+    thisScreen.massValueEntryNode = new MassValueEntryNode( {
+      centerX: mvt.modelToViewX( 0 ),
+      top: thisScreen.challengeTitleNode.bounds.maxY + 4
+    } );
     thisScreen.challengeLayer.addChild( thisScreen.massValueEntryNode );
 
     // Add the node that allows the user to submit their prediction of which
@@ -360,7 +362,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          this.challengeLayer.pickable = null; // Pass through, prunes subtree, see Scenery documentation for details.
+          this.challengeLayer.pickable = true;
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
             if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
