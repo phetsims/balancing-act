@@ -152,7 +152,8 @@ define( function( require ) {
       gameModel.bestScores,
       {
         numStarsOnButtons: BalanceGameModel.prototype.PROBLEMS_PER_LEVEL,
-        perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE
+        perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE,
+        maxTitleWidth: this.layoutBounds.width
       }
     );
     thisScreen.rootNode.addChild( thisScreen.startGameLevelNode );
@@ -178,21 +179,21 @@ define( function( require ) {
         font: new PhetFont( 14 ),
         centerX: mvt.modelToViewX( 0 ), //this.layoutBounds.centerX,
         bottom: this.layoutBounds.maxY - 5,
-        yMargin: 5
+        yMargin: 5,
+        maxWidth: this.layoutBounds.width * 0.8 // limit width, multiplier empirically determined
       }
     );
     thisScreen.addChild( this.scoreboard );
 
-    // Add the title.  It is blank to start with, and is updated later at
-    // the appropriate state change.
-    thisScreen.challengeTitleNode = new Text( '',
-      {
-        font: new PhetFont( { size: 60, weight: 'bold' } ),
-        fill: 'white',
-        stroke: 'black',
-        lineWidth: 1.5,
-        top: 5 // Empirically determined based on appearance
-      } );
+    // Add the title.  It is blank to start with, and is updated later at the appropriate state change.
+    thisScreen.challengeTitleNode = new Text( '', {
+      font: new PhetFont( { size: 60, weight: 'bold' } ),
+      fill: 'white',
+      stroke: 'black',
+      lineWidth: 1.5,
+      top: 5, // empirically determined based on appearance
+      maxWidth: 550 // empirically determined based on tests with long strings
+    } );
     thisScreen.challengeLayer.addChild( thisScreen.challengeTitleNode );
 
     // Add the dialog node that is used in the mass deduction challenges
@@ -228,7 +229,8 @@ define( function( require ) {
     var buttonOptions = {
       font: BUTTON_FONT,
       baseColor: BUTTON_FILL,
-      cornerRadius: 4
+      cornerRadius: 4,
+      maxWidth: 300 // empirically determined
     };
     thisScreen.checkAnswerButton = new TextPushButton( checkString, _.extend( {
       listener: function() {
@@ -297,11 +299,13 @@ define( function( require ) {
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState,
-      {
-        right: thisScreen.layoutBounds.width - 5,
-        top: 5
-      } );
+    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState, {
+      right: thisScreen.layoutBounds.width - 5,
+      top: 5,
+
+      // specify a max width that will fit the panel between the rightmost view object and the layout bounds
+      maxWidth: thisScreen.layoutBounds.width - this.tiltPredictionSelectorNode.bounds.maxX - 10
+    } );
     thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
   }
 

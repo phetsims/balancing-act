@@ -17,6 +17,7 @@ define( function( require ) {
   var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Property = require( 'AXON/Property' );
+  var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // Model-view transform for scaling the node used in the tool box.  This
@@ -35,8 +36,13 @@ define( function( require ) {
     MassCreatorNode.call( this, mvt, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
-    var selectionNode = new BrickStackNode( new BrickStack( numBricks, Vector2.ZERO, false ), SCALING_MVT, false, new Property( false ), false );
-    var Shape = require( 'KITE/Shape' );
+    var selectionNode = new BrickStackNode(
+      new BrickStack( numBricks, Vector2.ZERO, false ),
+      SCALING_MVT,
+      false,
+      new Property( false ),
+      false
+    );
 
     // Make a larger touch area.  The diameter of the circle was determined empirically.
     selectionNode.touchArea = Shape.circle( selectionNode.bounds.width / 2, selectionNode.bounds.height / 2, selectionNode.bounds.width * 0.8 );
@@ -45,14 +51,13 @@ define( function( require ) {
     this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
   }
 
-  return inherit( MassCreatorNode, BrickStackCreatorNode,
-    {
-      addElementToModel: function( position ) {
-        var brickStack = new BrickStack( this.numBricks, position );
-        brickStack.userControlled = true;
-        brickStack.animationDestination = position;
-        this.model.addMass( brickStack );
-        return brickStack;
-      }
-    } );
+  return inherit( MassCreatorNode, BrickStackCreatorNode, {
+    addElementToModel: function( position ) {
+      var brickStack = new BrickStack( this.numBricks, position );
+      brickStack.userControlled = true;
+      brickStack.animationDestination = position;
+      this.model.addMass( brickStack );
+      return brickStack;
+    }
+  } );
 } );

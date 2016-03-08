@@ -22,6 +22,7 @@ define( function( require ) {
   // constants
   var CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
   var LABEL_FONT = new PhetFont( 14 );
+  var MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
 
   /**
    * @param {ModelViewTransform} mvt
@@ -118,6 +119,7 @@ define( function( require ) {
     updateLayout: function() {
       // This only does something if both the element node and the caption are set.
       if ( this.caption && this.selectionNode ) {
+        this.caption.maxWidth = this.selectionNode.width * MAX_CAPTION_WIDTH_PROPORTION;
         this.caption.centerX = this.selectionNode.centerX;
         this.caption.top = this.selectionNode.bottom + CAPTION_OFFSET_FROM_SELECTION_NODE;
       }

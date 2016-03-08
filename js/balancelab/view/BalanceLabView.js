@@ -37,7 +37,8 @@ define( function( require ) {
         centerX: thisScreen.controlPanelBounds.centerX,
         top: thisScreen.controlPanelBounds.bottom + 5,
         xMargin: PANEL_X_MARGIN,
-        fill: 'rgb( 240, 240, 240 )'
+        fill: 'rgb( 240, 240, 240 )',
+        maxWidth: thisScreen.controlPanelBounds.width
       } ) );
   }
 

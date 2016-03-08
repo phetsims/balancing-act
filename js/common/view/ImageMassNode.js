@@ -58,15 +58,18 @@ define( function( require ) {
     imageMass.imageProperty.link( function( image ) {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );
+
+      // Flip the image if reversed, or un-reverse it if it shouldn't be reversed.
       if ( ( imageMass.reverseImage && imageNode.matrix.getDeterminant() > 0 ) ||
            ( !imageMass.reverseImage && imageNode.matrix.getDeterminant() < 0 ) ) {
-        // Flip the image if reversed, or un-reverse it if it shouldn't be reversed.
         imageNode.matrix = imageNode.matrix.timesMatrix( Matrix3.scaling( -1, 1 ) );
       }
+
       var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
       if ( isLabeled ) {
+        massLabel.maxWidth = imageNode.width;
         massLabel.centerX = imageNode.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
         massLabel.bottom = imageNode.top;
       }
@@ -92,7 +95,7 @@ define( function( require ) {
     // Add the image node.
     thisNode.addChild( imageNode );
 
-    // Make the image node visible to descendent classes for layout purposes.
+    // Make the image node visible to descendant classes for layout purposes.
     this.imageNode = imageNode;
 
     // Observe height changes.

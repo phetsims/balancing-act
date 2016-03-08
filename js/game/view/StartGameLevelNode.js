@@ -50,7 +50,8 @@ define( function( require ) {
       highlightedButtonBackgroundColor: 'rgb( 224, 255, 122 )',
       numButtonRows: 1, // For layout
       controlsInset: 12,
-      size: new Dimension2( 768, 504 )
+      size: new Dimension2( 768, 504 ),
+      maxTitleWidth: Number.POSITIVE_INFINITY
     }, options );
 
     // Verify parameters
@@ -59,7 +60,7 @@ define( function( require ) {
     }
 
     // Title
-    var title = new Text( options.titleString, { font: new PhetFont( 30 ) } );
+    var title = new Text( options.titleString, { font: new PhetFont( 30 ), maxWidth: options.maxTitleWidth } );
     this.addChild( title );
 
     // Add the buttons

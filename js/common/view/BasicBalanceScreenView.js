@@ -1,9 +1,8 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
 /**
- * ScreenView that displays items in the balance model, primarily the balance
- * beam (i.e. the plank), the various masses, and a floating control panel for
- * controlling the visibility of labels, rulers, etc.
+ * ScreenView that displays items in the balance model, primarily the balance beam (i.e. the plank), the various masses,
+ * and a floating control panel for controlling the visibility of labels, rulers, etc.
  *
  * @author John Blanco
  */
@@ -69,19 +68,16 @@ define( function( require ) {
       positionMarkerState: 'none' // Valid values are 'none', 'rulers', and 'markers'.
     } );
 
-    // Create the model-view transform.  The primary units used in the model
-    // are meters, so significant zoom is used.  The multipliers for the 2nd
-    // parameter can be used to adjust where the point (0, 0) in the model,
-    // which is on the ground just below the center of the balance, is located
-    // in the view.
+    // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
+    // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
+    // ground just below the center of the balance, is located in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.79 ),
       105 );
     thisScreen.mvt = mvt; // Make mvt available to descendant types.
 
-    // Create a root node and send to back so that the layout bounds box can
-    // be made visible if needed.
+    // Create a root node and send to back so that the layout bounds box can be made visible if needed.
     var root = new Node();
     thisScreen.addChild( root );
     root.moveToBack();
@@ -94,8 +90,7 @@ define( function( require ) {
     thisScreen.nonMassLayer = new Node();
     root.addChild( thisScreen.nonMassLayer );
 
-    // Set up a separate layer for the masses so that they will be out in
-    // front of the other elements of the model.
+    // Set up a separate layer for the masses so that they will be out in front of the other elements of the model.
     var massesLayer = new Node();
     root.addChild( massesLayer );
 
@@ -129,7 +124,8 @@ define( function( require ) {
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     thisScreen.nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
-    thisScreen.nonMassLayer.addChild( new PlankNode( mvt, model.plank ) );
+    var plankNode = new PlankNode( mvt, model.plank );
+    thisScreen.nonMassLayer.addChild( plankNode );
     thisScreen.nonMassLayer.addChild( new AttachmentBarNode( mvt, model.plank ) );
     model.supportColumns.forEach( function( supportColumn ) {
       thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
@@ -181,11 +177,15 @@ define( function( require ) {
     } );
 
     // Add the buttons that will control whether or not the support columns are in place.
-    var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, { center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) ) } );
+    var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
+      center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
+    } );
     thisScreen.nonMassLayer.addChild( columnControlPanel );
 
-    // Add the control panel that will allow users to control the visibility
-    // of the various indicators.
+    // The panels should fit in the space to the right of the plank.
+    var maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
+
+    // Add the control panel that will allow users to control the visibility of the various indicators.
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new Text( massLabelsString, PANEL_OPTION_FONT ),
@@ -197,7 +197,11 @@ define( function( require ) {
         property: thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
         label: forcesFromObjectsString
       },
-      { content: new Text( levelString, PANEL_OPTION_FONT ), property: thisScreen.viewProperties.levelIndicatorVisibleProperty, label: levelString }
+      {
+        content: new Text( levelString, PANEL_OPTION_FONT ),
+        property: thisScreen.viewProperties.levelIndicatorVisibleProperty,
+        label: levelString
+      }
     ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
@@ -208,22 +212,24 @@ define( function( require ) {
       ],
       align: 'left'
     } );
-    var indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox,
-      {
-        xMargin: X_MARGIN_IN_PANELS,
-        fill: 'rgb( 240, 240, 240 )',
-        top: 5,
-        right: this.layoutBounds.width - 10
-      } );
+    var indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox, {
+      xMargin: X_MARGIN_IN_PANELS,
+      fill: 'rgb( 240, 240, 240 )',
+      top: 5,
+      right: this.layoutBounds.width - 10,
+      maxWidth: maxControlPanelWidth
+    } );
     thisScreen.nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
-    // Add the control panel that will allow users to select between the
-    // various position markers, i.e. ruler, position markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( thisScreen.viewProperties.positionMarkerStateProperty,
+    // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
+    // markers, or nothing.
+    var positionIndicatorControlPanel = new PositionIndicatorControlPanel(
+      thisScreen.viewProperties.positionMarkerStateProperty,
       {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 5,
-        minWidth: indicatorVisibilityControlPanel.width
+        minWidth: indicatorVisibilityControlPanel.width,
+        maxWidth: maxControlPanelWidth
       } );
     thisScreen.nonMassLayer.addChild( positionIndicatorControlPanel );
 
