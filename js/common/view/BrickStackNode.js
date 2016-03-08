@@ -14,12 +14,15 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
+
+  // constants
+  var LABEL_TEXT = new PhetFont( 12 );
 
   /**
    * @param {BrickStack} brickStack
@@ -37,7 +40,11 @@ define( function( require ) {
     thisNode.previousAngle = 0;
 
     // Create and add the main shape node.
-    var shapeNode = new Path( mvt.modelToViewShape( brickStack.shape ), { fill: 'rgb( 205, 38, 38 )', stroke: 'black', lineWidth: 1 } );
+    var shapeNode = new Path( mvt.modelToViewShape( brickStack.shape ), {
+      fill: 'rgb( 205, 38, 38 )',
+      stroke: 'black',
+      lineWidth: 1
+    } );
     thisNode.addChild( shapeNode );
 
     // Create and add the mass label.
@@ -45,24 +52,26 @@ define( function( require ) {
       var massLabel;
       var maxTextWidth = shapeNode.bounds.width;
       if ( brickStack.isMystery ) {
-        massLabel = new RasterizedTextNode( unknownMassLabelString, {
-          font: new PhetFont( 12 ),
+        massLabel = new Text( unknownMassLabelString, {
+          font: LABEL_TEXT,
           maxWidth: maxTextWidth
         } );
       }
       else {
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
         massLabel = new Node();
-        var massValueText = new RasterizedTextNode( brickStack.massValue, {
-          font: new PhetFont( 12 ) },
-          { centerX: 0, maxWidth: maxTextWidth }
-        );
+        var massValueText = new Text( brickStack.massValue, {
+          font: LABEL_TEXT,
+          centerX: 0,
+          maxWidth: maxTextWidth
+        } );
         massLabel.addChild( massValueText );
-        massLabel.addChild( new RasterizedTextNode(
-          kgString,
-          { font: new PhetFont( 12 ) },
-          { centerX: 0, top: massValueText.bottom - 4, maxWidth: maxTextWidth } )
-        );
+        massLabel.addChild( new Text( kgString, {
+          font: LABEL_TEXT,
+          centerX: 0,
+          top: massValueText.bottom - 4,
+          maxWidth: maxTextWidth
+        } ) );
       }
       massLabel.centerX = shapeNode.centerX;
       massLabel.bottom = shapeNode.top - 1;

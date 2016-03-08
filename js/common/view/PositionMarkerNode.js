@@ -12,7 +12,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   var color = 'rgb( 255, 153, 0 )';
@@ -25,7 +25,11 @@ define( function( require ) {
     this.addChild( line );
     var circle = new Circle( CIRCLE_RADIUS, { fill: color, centerX: 0, centerY: LINE_LENGTH } );
     this.addChild( circle );
-    this.addChild( new RasterizedTextNode( labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) }, { centerX: 0, top: circle.bottom } ) );
+    this.addChild( new Text( labelText, {
+      font: new PhetFont( { size: 12, weight: 'bold' } ),
+      centerX: 0,
+      top: circle.bottom
+    } ) );
     this.mutate( options );
   }
 

@@ -20,7 +20,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -44,7 +44,7 @@ define( function( require ) {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
       var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
         pattern0Value1UnitsString, imageMass.massValue, kgString );
-      var massLabel = new RasterizedTextNode( massLabelText, { font: new PhetFont( 12 ) } );
+      var massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
       thisNode.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.

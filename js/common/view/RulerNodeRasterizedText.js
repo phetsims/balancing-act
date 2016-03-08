@@ -25,7 +25,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   var DEFAULT_FONT = new PhetFont( 18 );
@@ -101,7 +101,7 @@ define( function( require ) {
 
         // Major tick label
         var majorTickLabel = majorTickLabels[ majorTickIndex ];
-        var majorTickLabelNode = new RasterizedTextNode( majorTickLabel, { font: options.majorTickFont } );
+        var majorTickLabelNode = new Text( majorTickLabel, { font: options.majorTickFont } );
         //Clamp and make sure the labels stay within the ruler, especially if the insetsWidth has been set low (or to zero)
         majorTickLabelNode.x = x - ( majorTickLabelNode.width / 2 );
         majorTickLabelNode.centerY = backgroundNode.centerY;
@@ -117,7 +117,7 @@ define( function( require ) {
 
         // units label
         if ( majorTickIndex === options.unitsMajorTickIndex ) {
-          var unitsNode = new RasterizedTextNode( units, { font: options.unitsFont } );
+          var unitsNode = new Text( units, { font: options.unitsFont } );
           ticksContainerNode.addChild( unitsNode );
           unitsNode.x = majorTickLabelNode.x + majorTickLabelNode.width + options.unitsSpacing;
           unitsNode.y = majorTickLabelNode.y + majorTickLabelNode.height - unitsNode.height;
