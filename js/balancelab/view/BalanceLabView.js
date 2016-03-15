@@ -26,7 +26,7 @@ define( function( require ) {
     var thisScreen = this;
 
     // Add the mass selection carousel.
-    this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.mvt );
+    this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.modelViewTransform );
     thisScreen.nonMassLayer.addChild( new Panel( new VBox(
         {
           children: [

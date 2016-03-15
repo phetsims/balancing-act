@@ -15,13 +15,13 @@ define( function( require ) {
 
   /**
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {ImageMass} prototypeImageMass
    * @param {boolean} showMassLabel
    * @constructor
    */
-  function ImageMassCreatorNode( model, mvt, prototypeImageMass, showMassLabel ) {
-    MassCreatorNode.call( this, mvt, prototypeImageMass.massValue, showMassLabel );
+  function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, showMassLabel ) {
+    MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
   }

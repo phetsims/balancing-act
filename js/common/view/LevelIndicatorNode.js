@@ -24,13 +24,19 @@ define( function( require ) {
   var LEVEL_FILL_COLOR = 'rgb( 173, 255, 47 )';
   var NON_LEVEL_FILL_COLOR = 'rgb( 230, 230, 230 )';
 
-  function LevelIndicatorNode( mvt, plank ) {
+  function LevelIndicatorNode( modelViewTransform, plank ) {
     Node.call( this );
     var thisNode = this;
 
     // Locations for left and right edge
-    var leftEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x - Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
-    var rightEdgeOfPlank = mvt.modelToViewPosition( new Vector2( plank.pivotPoint.x + Plank.LENGTH / 2, plank.getPlankSurfaceCenter().y ) );
+    var leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+      plank.pivotPoint.x - Plank.LENGTH / 2,
+      plank.getPlankSurfaceCenter().y
+    ) );
+    var rightEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+      plank.pivotPoint.x + Plank.LENGTH / 2,
+      plank.getPlankSurfaceCenter().y
+    ) );
 
     // Draw a sort of arrow head shape.
     var leftIndicatorShape = new Shape().

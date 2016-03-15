@@ -13,13 +13,13 @@ define( function( require ) {
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PositionMarkerNode = require( 'BALANCING_ACT/common/view/PositionMarkerNode' );
 
-  function PositionMarkerSetNode( plank, mvt, visibleProperty ) {
+  function PositionMarkerSetNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );
     var thisNode = this;
 
     // Add the individual position markers.
     var numTickMarks = Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
-    var interMarkerDistance = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    var interMarkerDistance = modelViewTransform.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
     for ( var i = 0; i < numTickMarks; i++ ) {
       var label = Math.abs( i - Math.floor( numTickMarks / 2 ) );
       if ( label !== 0 ) {
@@ -33,13 +33,13 @@ define( function( require ) {
     } );
 
     // Set initial position.
-    var topCenter = mvt.modelToViewPosition( plank.bottomCenterLocation );
+    var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocation );
     thisNode.top = topCenter.y;
     thisNode.centerX = topCenter.x;
 
     // Rotate with the plank.
     var rotationAngle = 0;
-    var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
+    var rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( angle ) {
       var deltaAngle = rotationAngle - angle;
       rotationAngle = angle;

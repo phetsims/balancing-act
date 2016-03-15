@@ -29,13 +29,13 @@ define( function( require ) {
 
   /**
    * @param imageMass
-   * @param mvt
+   * @param modelViewTransform
    * @param {boolean} isLabeled - Flag that controls whether this note include a textual label of the mass
    * @param massLabelVisibleProperty
    * @param {boolean} draggable
    * @constructor
    */
-  function ImageMassNode( imageMass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
+  function ImageMassNode( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
     var thisNode = this;
 
@@ -65,12 +65,12 @@ define( function( require ) {
         imageNode.matrix = imageNode.matrix.timesMatrix( Matrix3.scaling( -1, 1 ) );
       }
 
-      var scalingFactor = Math.abs( mvt.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
+      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
       if ( isLabeled ) {
         massLabel.maxWidth = imageNode.width;
-        massLabel.centerX = imageNode.centerX + mvt.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+        massLabel.centerX = imageNode.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
         massLabel.bottom = imageNode.top;
       }
       updatePositionAndAngle();
@@ -84,11 +84,15 @@ define( function( require ) {
 
         // Set overall position.  Recall that positions in the model are defined
         // as the center bottom of the item.
-        thisNode.centerX = mvt.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
-        thisNode.bottom = mvt.modelToViewY( imageMass.position.y );
+        thisNode.centerX = modelViewTransform.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
+        thisNode.bottom = modelViewTransform.modelToViewY( imageMass.position.y );
 
         // Set the rotation.  Rotation point is the center bottom.
-        thisNode.rotateAround( new Vector2( mvt.modelToViewX( imageMass.position.x ), mvt.modelToViewY( imageMass.position.y ) ), -imageMass.rotationAngle );
+        thisNode.rotateAround( new Vector2(
+          modelViewTransform.modelToViewX( imageMass.position.x ),
+          modelViewTransform.modelToViewY( imageMass.position.y ) ),
+          -imageMass.rotationAngle
+        );
       }
     }
 
@@ -101,7 +105,7 @@ define( function( require ) {
     // Observe height changes.
     imageMass.heightProperty.link( function( newHeight ) {
       imageNode.setScaleMagnitude( 1 );
-      var scalingFactor = Math.abs( mvt.modelToViewDeltaY( newHeight ) ) / imageNode.height;
+      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( newHeight ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       updatePositionAndAngle();
     } );
@@ -118,7 +122,7 @@ define( function( require ) {
 
     // Add the mouse event handler.
     if ( draggable ) {
-      thisNode.addInputListener( new MassDragHandler( imageMass, mvt ) );
+      thisNode.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
     }
   }
 

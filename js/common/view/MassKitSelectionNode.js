@@ -31,7 +31,7 @@ define( function( require ) {
   // constants
   var TITLE_FONT = new PhetFont( 16 );
 
-  function MassKitSelectionNode( model, mvt, options ) {
+  function MassKitSelectionNode( model, modelViewTransform, options ) {
 
     // Create the kit node for creating brick stacks of various sizes.
     var brickCreatorKit = new Node(
@@ -42,13 +42,19 @@ define( function( require ) {
               children: [
                 new HBox(
                   {
-                    children: [ new BrickStackCreatorNode( 1, model, mvt ), new BrickStackCreatorNode( 2, model, mvt ) ],
+                    children: [
+                      new BrickStackCreatorNode( 1, model, modelViewTransform ),
+                      new BrickStackCreatorNode( 2, model, modelViewTransform )
+                    ],
                     spacing: 20
 
                   } ),
                 new HBox(
                   {
-                    children: [ new BrickStackCreatorNode( 3, model, mvt ), new BrickStackCreatorNode( 4, model, mvt ) ],
+                    children: [
+                      new BrickStackCreatorNode( 3, model, modelViewTransform ),
+                      new BrickStackCreatorNode( 4, model, modelViewTransform )
+                    ],
                     spacing: 20
                   } )
               ],
@@ -65,8 +71,8 @@ define( function( require ) {
           new HBox(
             {
               children: [
-                new BoyCreatorNode( model, mvt ),
-                new ManCreatorNode( model, mvt )
+                new BoyCreatorNode( model, modelViewTransform ),
+                new ManCreatorNode( model, modelViewTransform )
               ],
               spacing: 5
             } )
@@ -80,8 +86,8 @@ define( function( require ) {
           new HBox(
             {
               children: [
-                new GirlCreatorNode( model, mvt ),
-                new WomanCreatorNode( model, mvt )
+                new GirlCreatorNode( model, modelViewTransform ),
+                new WomanCreatorNode( model, modelViewTransform )
               ],
               spacing: 5
             } )
@@ -97,13 +103,19 @@ define( function( require ) {
               children: [
                 new HBox(
                   {
-                    children: [ new MysteryMassCreatorNode( 0, model, mvt ), new MysteryMassCreatorNode( 1, model, mvt ) ],
+                    children: [
+                      new MysteryMassCreatorNode( 0, model, modelViewTransform ),
+                      new MysteryMassCreatorNode( 1, model, modelViewTransform )
+                    ],
                     spacing: 20
 
                   } ),
                 new HBox(
                   {
-                    children: [ new MysteryMassCreatorNode( 2, model, mvt ), new MysteryMassCreatorNode( 3, model, mvt ) ],
+                    children: [
+                      new MysteryMassCreatorNode( 2, model, modelViewTransform ),
+                      new MysteryMassCreatorNode( 3, model, modelViewTransform )
+                    ],
                     spacing: 20
                   } )
               ],
@@ -120,13 +132,19 @@ define( function( require ) {
               children: [
                 new HBox(
                   {
-                    children: [ new MysteryMassCreatorNode( 4, model, mvt ), new MysteryMassCreatorNode( 5, model, mvt ) ],
+                    children: [
+                      new MysteryMassCreatorNode( 4, model, modelViewTransform ),
+                      new MysteryMassCreatorNode( 5, model, modelViewTransform )
+                    ],
                     spacing: 20
 
                   } ),
                 new HBox(
                   {
-                    children: [ new MysteryMassCreatorNode( 6, model, mvt ), new MysteryMassCreatorNode( 7, model, mvt ) ],
+                    children: [
+                      new MysteryMassCreatorNode( 6, model, modelViewTransform ),
+                      new MysteryMassCreatorNode( 7, model, modelViewTransform )
+                    ],
                     spacing: 20
                   } )
               ],

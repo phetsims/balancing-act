@@ -68,16 +68,14 @@ define( function( require ) {
     var thisScreen = this;
     thisScreen.model = gameModel;
 
-    // Create the model-view transform.  The primary units used in the model
-    // are meters, so significant zoom is used.  The multipliers for the 2nd
-    // parameter can be used to adjust where the point (0, 0) in the model,
-    // which is on the ground just below the center of the balance, is located
-    // in the view.
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
+    // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
+    // ground just below the center of the balance, is located in the view.
+    var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( thisScreen.layoutBounds.width * 0.45, thisScreen.layoutBounds.height * 0.75 ),
       115 );
-    thisScreen.mvt = mvt; // Make mvt available to descendant types.
+    thisScreen.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can
     // be made visible if needed.
@@ -86,7 +84,13 @@ define( function( require ) {
     thisScreen.rootNode.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    thisScreen.outsideBackgroundNode = new OutsideBackgroundNode( this.layoutBounds.centerX, mvt.modelToViewY( 0 ), this.layoutBounds.width * 2.5, this.layoutBounds.height * 1.5, this.layoutBounds.height );
+    thisScreen.outsideBackgroundNode = new OutsideBackgroundNode(
+      this.layoutBounds.centerX,
+      modelViewTransform.modelToViewY( 0 ),
+      this.layoutBounds.width * 2.5,
+      this.layoutBounds.height * 1.5,
+      this.layoutBounds.height
+    );
     thisScreen.rootNode.addChild( thisScreen.outsideBackgroundNode );
 
     // Add layers used to control game appearance.
@@ -96,19 +100,28 @@ define( function( require ) {
     thisScreen.rootNode.addChild( thisScreen.challengeLayer );
 
     // Add the fulcrum, the columns, etc.
-    thisScreen.challengeLayer.addChild( new FulcrumNode( mvt, gameModel.fulcrum ) );
-    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode( mvt, gameModel.tiltedSupportColumn, gameModel.columnStateProperty ) );
+    thisScreen.challengeLayer.addChild( new FulcrumNode( modelViewTransform, gameModel.fulcrum ) );
+    thisScreen.challengeLayer.addChild( new TiltedSupportColumnNode(
+      modelViewTransform,
+      gameModel.tiltedSupportColumn,
+      gameModel.columnStateProperty
+    ) );
     gameModel.levelSupportColumns.forEach( function( levelSupportColumn ) {
-      thisScreen.challengeLayer.addChild( new LevelSupportColumnNode( mvt, levelSupportColumn, gameModel.columnStateProperty, false ) );
+      thisScreen.challengeLayer.addChild( new LevelSupportColumnNode(
+        modelViewTransform,
+        levelSupportColumn,
+        gameModel.columnStateProperty,
+        false
+      ) );
     } );
-    thisScreen.challengeLayer.addChild( new PlankNode( mvt, gameModel.plank ) );
-    thisScreen.challengeLayer.addChild( new AttachmentBarNode( mvt, gameModel.plank ) );
+    thisScreen.challengeLayer.addChild( new PlankNode( modelViewTransform, gameModel.plank ) );
+    thisScreen.challengeLayer.addChild( new AttachmentBarNode( modelViewTransform, gameModel.plank ) );
 
     // Watch the model and add/remove visual representations of masses.
     gameModel.movableMasses.addItemAddedListener( function( addedMass ) {
 
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, new Property( true ) );
+      var massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
       thisScreen.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
@@ -126,7 +139,7 @@ define( function( require ) {
     } );
     gameModel.fixedMasses.addItemAddedListener( function( addedMass ) {
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, new Property( true ) );
+      var massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
       massNode.pickable = false; // Fixed masses can't be moved by users.
       thisScreen.challengeLayer.addChild( massNode );
 
@@ -177,7 +190,7 @@ define( function( require ) {
         levelVisible: true,
         newGameButtonCaption: startOverString,
         font: new PhetFont( 14 ),
-        centerX: mvt.modelToViewX( 0 ), //this.layoutBounds.centerX,
+        centerX: modelViewTransform.modelToViewX( 0 ), //this.layoutBounds.centerX,
         bottom: this.layoutBounds.maxY - 5,
         yMargin: 5,
         maxWidth: this.layoutBounds.width * 0.8 // limit width, multiplier empirically determined
@@ -199,7 +212,7 @@ define( function( require ) {
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
     thisScreen.massValueEntryNode = new MassValueEntryNode( {
-      centerX: mvt.modelToViewX( 0 ),
+      centerX: modelViewTransform.modelToViewX( 0 ),
       top: thisScreen.challengeTitleNode.bounds.maxY + 4
     } );
     thisScreen.challengeLayer.addChild( thisScreen.massValueEntryNode );
@@ -208,7 +221,10 @@ define( function( require ) {
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     thisScreen.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
     thisScreen.challengeLayer.addChild( thisScreen.tiltPredictionSelectorNode );
-    thisScreen.tiltPredictionSelectorNode.center = new Vector2( mvt.modelToViewX( 0 ), thisScreen.challengeTitleNode.bounds.maxY + 100 );
+    thisScreen.tiltPredictionSelectorNode.center = new Vector2(
+      modelViewTransform.modelToViewX( 0 ),
+      thisScreen.challengeTitleNode.bounds.maxY + 100
+    );
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.
@@ -219,8 +235,8 @@ define( function( require ) {
         pointsFill: 'yellow',
         pointsStroke: 'black',
         pointsAlignment: 'rightCenter',
-        centerX: thisScreen.mvt.modelToViewX( 0 ),
-        centerY: thisScreen.mvt.modelToViewY( 2.2 )
+        centerX: thisScreen.modelViewTransform.modelToViewX( 0 ),
+        centerY: thisScreen.modelViewTransform.modelToViewY( 2.2 )
       } );
     thisScreen.addChild( thisScreen.faceWithPointsNode );
 
@@ -258,7 +274,7 @@ define( function( require ) {
     thisScreen.rootNode.addChild( thisScreen.displayCorrectAnswerButton );
     thisScreen.buttons.push( thisScreen.displayCorrectAnswerButton );
 
-    var buttonCenter = this.mvt.modelToViewPosition( new Vector2( 0, -0.3 ) );
+    var buttonCenter = this.modelViewTransform.modelToViewPosition( new Vector2( 0, -0.3 ) );
     thisScreen.buttons.forEach( function( button ) {
       button.center = buttonCenter;
     } );
@@ -274,7 +290,7 @@ define( function( require ) {
 
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
-    var levelIndicator = new LevelIndicatorNode( mvt, gameModel.plank );
+    var levelIndicator = new LevelIndicatorNode( modelViewTransform, gameModel.plank );
     gameModel.columnStateProperty.link( function( columnState ) {
       levelIndicator.visible = ( columnState === 'noColumns' );
     } );
@@ -288,14 +304,14 @@ define( function( require ) {
     positionMarkerState.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, mvt, rulersVisible ) );
+    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
     positionMarkerState.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
-    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, mvt, positionMarkersVisible ) );
+    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, modelViewTransform, positionMarkersVisible ) );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
@@ -323,7 +339,7 @@ define( function( require ) {
       }
 
       // Center the title above the pivot point.
-      this.challengeTitleNode.centerX = this.mvt.modelToViewX( this.model.plank.pivotPoint.x );
+      this.challengeTitleNode.centerX = this.modelViewTransform.modelToViewX( this.model.plank.pivotPoint.x );
     },
 
     updateCheckAnswerButtonEnabled: function() {

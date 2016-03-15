@@ -13,9 +13,9 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
 
-  function FulcrumNode( mvt, fulcrum ) {
+  function FulcrumNode( modelViewTransform, fulcrum ) {
     Node.call( this );
-    this.addChild( new Path( mvt.modelToViewShape( fulcrum.shape ),
+    this.addChild( new Path( modelViewTransform.modelToViewShape( fulcrum.shape ),
       {
         fill: 'rgb( 240, 240, 0 )',
         stroke: 'black'

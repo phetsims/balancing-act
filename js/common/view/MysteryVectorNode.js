@@ -24,10 +24,10 @@ define( function( require ) {
   /**
    * @param positionedVectorProperty
    * @param visibilityProperty
-   * @param mvt Model-view transform
+   * @param modelViewTransform Model-view transform
    * @constructor
    */
-  function MysteryVectorNode( positionedVectorProperty, visibilityProperty, mvt ) {
+  function MysteryVectorNode( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
     Node.call( this );
     var thisNode = this;
 
@@ -36,8 +36,8 @@ define( function( require ) {
 
     // Follow the position as it changes
     positionedVectorProperty.link( function( positionedVector ) {
-      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
-      thisNode.top = mvt.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
+      thisNode.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+      thisNode.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
     } );
 
     // Control visibility

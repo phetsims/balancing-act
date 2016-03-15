@@ -21,16 +21,16 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   return {
-    createMassNode: function( mass, mvt, isLabeled, labelVisibleProperty ) {
+    createMassNode: function( mass, modelViewTransform, isLabeled, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof MysteryMass ) {
-        massNode = new MysteryMassNode( mass, mvt, isLabeled, labelVisibleProperty, true );
+        massNode = new MysteryMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true );
       }
       else if ( mass instanceof ImageMass ) {
-        massNode = new ImageMassNode( mass, mvt, isLabeled, labelVisibleProperty, true );
+        massNode = new ImageMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true );
       }
       else if ( mass instanceof BrickStack ) {
-        massNode = new BrickStackNode( mass, mvt, isLabeled, labelVisibleProperty, true );
+        massNode = new BrickStackNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true );
       }
       else {
         assert && assert( true, 'Error: Unrecognized mass type sent to MassNodeFactory.' );
@@ -39,7 +39,7 @@ define( function( require ) {
         massNode = new Rectangle( 0, 0, textNode.width * 1.3, textNode.height * 1.3, 0, 0, { fill: 'pink', stroke: 'black' } );
         textNode.centerY = massNode.height / 2;
         massNode.addChild( textNode );
-        massNode.center = mvt.modelToViewPosition( mass.position );
+        massNode.center = modelViewTransform.modelToViewPosition( mass.position );
       }
       return massNode;
     }

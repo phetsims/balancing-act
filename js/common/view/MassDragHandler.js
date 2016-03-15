@@ -15,7 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
-  function MassDragHandler( mass, mvt ) {
+  function MassDragHandler( mass, modelViewTransform ) {
     SimpleDragHandler.call( this, {
 
       // Allow moving a finger (touch) across a node to pick it up.
@@ -23,7 +23,7 @@ define( function( require ) {
 
       // Handler that moves the particle in model space.
       translate: function( translationParams ) {
-        mass.position = mass.position.plus( mvt.viewToModelDelta( translationParams.delta ) );
+        mass.position = mass.position.plus( modelViewTransform.viewToModelDelta( translationParams.delta ) );
         return translationParams.position;
       },
 

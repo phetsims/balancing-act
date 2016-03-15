@@ -28,12 +28,12 @@ define( function( require ) {
   /**
    * @param {number} numBricks
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    * @constructor
    */
-  function BrickStackCreatorNode( numBricks, model, mvt, options ) {
-    MassCreatorNode.call( this, mvt, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
+  function BrickStackCreatorNode( numBricks, model, modelViewTransform, options ) {
+    MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
     var selectionNode = new BrickStackNode(
@@ -45,10 +45,14 @@ define( function( require ) {
     );
 
     // Make a larger touch area.  The diameter of the circle was determined empirically.
-    selectionNode.touchArea = Shape.circle( selectionNode.bounds.width / 2, selectionNode.bounds.height / 2, selectionNode.bounds.width * 0.8 );
+    selectionNode.touchArea = Shape.circle(
+      selectionNode.bounds.width / 2,
+      selectionNode.bounds.height / 2,
+      selectionNode.bounds.width * 0.8
+    );
 
     this.setSelectionNode( selectionNode );
-    this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
   }
 
   return inherit( MassCreatorNode, BrickStackCreatorNode, {

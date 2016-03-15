@@ -25,11 +25,11 @@ define( function( require ) {
   var MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
 
   /**
-   * @param {ModelViewTransform} mvt
+   * @param {ModelViewTransform} modelViewTransform
    * @param {Object} [options]
    * @constructor
    */
-  function ModelElementCreatorNode( mvt, options ) {
+  function ModelElementCreatorNode( modelViewTransform, options ) {
     options = _.extend( { cursor: 'pointer' }, options );
     Node.call( this, options );
     var thisNode = this;
@@ -47,7 +47,7 @@ define( function( require ) {
     // Function for translating click events to model coordinates.
     function eventToModelPosition( position ) {
       if ( parentScreenView !== null ) {
-        return mvt.viewToModelPosition( parentScreenView.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+        return modelViewTransform.viewToModelPosition( parentScreenView.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
       }
       return position;
     }

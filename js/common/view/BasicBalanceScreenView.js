@@ -71,11 +71,11 @@ define( function( require ) {
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
     // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
     // ground just below the center of the balance, is located in the view.
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.79 ),
       105 );
-    thisScreen.mvt = mvt; // Make mvt available to descendant types.
+    thisScreen.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
     var root = new Node();
@@ -84,7 +84,13 @@ define( function( require ) {
 
     // Add the background, which portrays the sky and ground.
     var skyAndGroundHeight = this.layoutBounds.height * 1.5;
-    root.addChild( new OutsideBackgroundNode( this.layoutBounds.centerX, mvt.modelToViewY( 0 ), this.layoutBounds.width * 2.5, skyAndGroundHeight, skyAndGroundHeight ) );
+    root.addChild( new OutsideBackgroundNode(
+      this.layoutBounds.centerX,
+      modelViewTransform.modelToViewY( 0 ),
+      this.layoutBounds.width * 2.5,
+      skyAndGroundHeight,
+      skyAndGroundHeight
+    ) );
 
     // Set up a layer for non-mass model elements.
     thisScreen.nonMassLayer = new Node();
@@ -97,7 +103,12 @@ define( function( require ) {
     function handleMassAdded( addedMass ) {
 
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, mvt, true, thisScreen.viewProperties.massLabelsVisibleProperty );
+      var massNode = MassNodeFactory.createMassNode(
+        addedMass,
+        modelViewTransform,
+        true,
+        thisScreen.viewProperties.massLabelsVisibleProperty
+      );
       massesLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
@@ -123,12 +134,16 @@ define( function( require ) {
     model.massList.addItemAddedListener( handleMassAdded );
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
-    thisScreen.nonMassLayer.addChild( new FulcrumNode( mvt, model.fulcrum ) );
-    var plankNode = new PlankNode( mvt, model.plank );
+    thisScreen.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
+    var plankNode = new PlankNode( modelViewTransform, model.plank );
     thisScreen.nonMassLayer.addChild( plankNode );
-    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( mvt, model.plank ) );
+    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
     model.supportColumns.forEach( function( supportColumn ) {
-      thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode( mvt, supportColumn, model.columnStateProperty ) );
+      thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode(
+        modelViewTransform,
+        supportColumn,
+        model.columnStateProperty
+      ) );
     } );
 
     // Add the ruler.
@@ -136,17 +151,17 @@ define( function( require ) {
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisible.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, mvt, rulersVisible ) );
+    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisible ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
-    thisScreen.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, mvt, positionMarkersVisible ) );
+    thisScreen.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
-    var levelIndicatorNode = new LevelIndicatorNode( mvt, model.plank );
+    var levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
     thisScreen.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
       levelIndicatorNode.visible = visible;
     } );
@@ -157,13 +172,17 @@ define( function( require ) {
       // Add a representation for the new vector.
       var forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
-        forceVectorNode = new MysteryVectorNode( addedMassForceVector.forceVectorProperty, thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty, mvt );
+        forceVectorNode = new MysteryVectorNode(
+          addedMassForceVector.forceVectorProperty,
+          thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
+          modelViewTransform
+        );
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
           0.23,  // Scaling factor, chosen to make size reasonable.
           thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
-          mvt
+          modelViewTransform
         );
       }
       thisScreen.nonMassLayer.addChild( forceVectorNode );
@@ -178,7 +197,7 @@ define( function( require ) {
 
     // Add the buttons that will control whether or not the support columns are in place.
     var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
-      center: mvt.modelToViewPosition( new Vector2( 0, -0.5 ) )
+      center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) )
     } );
     thisScreen.nonMassLayer.addChild( columnControlPanel );
 

@@ -26,13 +26,13 @@ define( function( require ) {
 
   /**
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function ManCreatorNode( model, mvt ) {
-    ImageMassCreatorNode.call( this, model, mvt, new Man(), true );
+  function ManCreatorNode( model, modelViewTransform ) {
+    ImageMassCreatorNode.call( this, model, modelViewTransform, new Man(), true );
     this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
-    this.positioningOffset = new Vector2( 0, -mvt.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
   }
 
   return inherit( ImageMassCreatorNode, ManCreatorNode );

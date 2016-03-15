@@ -16,14 +16,14 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   /**
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {number} massValue
    * @param {boolean} showMassLabel
    * @param {Object} [options]
    * @constructor
    */
-  function MassCreatorNode( mvt, massValue, showMassLabel, options ) {
-    ModelElementCreatorNode.call( this, mvt, options );
+  function MassCreatorNode( modelViewTransform, massValue, showMassLabel, options ) {
+    ModelElementCreatorNode.call( this, modelViewTransform, options );
     if ( showMassLabel ) {
       this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
     }

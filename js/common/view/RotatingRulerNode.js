@@ -27,11 +27,11 @@ define( function( require ) {
 
   /**
    * @param {Plank} plank
-   * @param {ModelViewTransform2} mvt model-view transform
+   * @param {ModelViewTransform2} modelViewTransform model-view transform
    * @param {Property} visibleProperty
    * @constructor
    */
-  function RotatingRulerNode( plank, mvt, visibleProperty ) {
+  function RotatingRulerNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );
     var thisNode = this;
 
@@ -50,7 +50,7 @@ define( function( require ) {
     }
 
     // Create and add the ruler node.
-    var rulerLength = mvt.modelToViewDeltaX( rulerLengthInModel );
+    var rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
     var majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
     var rulerNode = new RulerNodeRasterizedText( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
       {
@@ -73,13 +73,13 @@ define( function( require ) {
     } );
 
     // Set initial position.
-    var topCenter = mvt.modelToViewPosition( plank.bottomCenterLocation );
+    var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocation );
     thisNode.top = topCenter.y;
     thisNode.centerX = topCenter.x;
 
     // Rotate with the plank.
     var rulerRotationAngle = 0;
-    var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
+    var rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( angle ) {
       var deltaAngle = rulerRotationAngle - angle;
       rulerRotationAngle = angle;

@@ -19,13 +19,13 @@ define( function( require ) {
   var INSET_PROPORTION = 0.25;
 
   /**
-   * @param {ModelViewTransform} mvt
+   * @param {ModelViewTransform} modelViewTransform
    * @param {Mass} mass
    * @param {Property} massLabelVisibleProperty
    * @constructor
    */
-  function MysteryMassNode( mass, mvt, isLabeled, massLabelVisibleProperty, draggable ) {
-    ImageMassNode.call( this, mass, mvt, isLabeled, massLabelVisibleProperty, draggable );
+  function MysteryMassNode( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
+    ImageMassNode.call( this, mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable );
     var thisNode = this;
     var inset = thisNode.imageNode.width * INSET_PROPORTION;
 

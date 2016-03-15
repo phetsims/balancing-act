@@ -23,21 +23,25 @@ define( function( require ) {
 
   /**
    * @param {BrickStack} brickStack
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {boolean} isLabeled
    * @param {Property} labelVisibleProperty
    * @param {boolean} draggable
    * @constructor
    */
-  function BrickStackNode( brickStack, mvt, isLabeled, labelVisibleProperty, draggable ) {
+  function BrickStackNode( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
     var thisNode = this;
     thisNode.brickStack = brickStack;
-    thisNode.mvt = mvt;
+    thisNode.modelViewTransform = modelViewTransform;
     thisNode.previousAngle = 0;
 
     // Create and add the main shape node.
-    var shapeNode = new Path( mvt.modelToViewShape( brickStack.shape ), { fill: 'rgb( 205, 38, 38 )', stroke: 'black', lineWidth: 1 } );
+    var shapeNode = new Path( modelViewTransform.modelToViewShape( brickStack.shape ), {
+      fill: 'rgb( 205, 38, 38 )',
+      stroke: 'black',
+      lineWidth: 1
+    } );
     thisNode.addChild( shapeNode );
 
     // Create and add the mass label.
@@ -87,12 +91,12 @@ define( function( require ) {
       previousRotationAngle = brickStack.rotationAngle;
     } );
     brickStack.positionProperty.link( function( newPosition ) {
-      thisNode.center = mvt.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
+      thisNode.center = modelViewTransform.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
     } );
 
     // Add event listener for mouse activity.
     if ( draggable ) {
-      this.addInputListener( new MassDragHandler( brickStack, mvt ) );
+      this.addInputListener( new MassDragHandler( brickStack, modelViewTransform ) );
     }
   }
 

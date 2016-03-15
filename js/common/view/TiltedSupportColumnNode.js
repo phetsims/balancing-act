@@ -17,17 +17,17 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   /**
-   * @param mvt
+   * @param modelViewTransform
    * @param tiltedSupportColumn
    * @param columnState
    * @constructor
    */
-  function TiltedSupportColumnNode( mvt, tiltedSupportColumn, columnState ) {
+  function TiltedSupportColumnNode( modelViewTransform, tiltedSupportColumn, columnState ) {
     Node.call( this );
     var thisNode = this;
 
     // Create and add the main body of the column.
-    var transformedColumnShape = mvt.modelToViewShape( tiltedSupportColumn.shape );
+    var transformedColumnShape = modelViewTransform.modelToViewShape( tiltedSupportColumn.shape );
     var mainBodyGradient = new LinearGradient( transformedColumnShape.bounds.minX, 0, transformedColumnShape.bounds.maxX, 0 ).
       addColorStop( 0, 'rgb( 150, 150, 150 )' ).
       addColorStop( 0.25, 'rgb( 230, 230, 230 )' ).

@@ -24,16 +24,16 @@ define( function( require ) {
   var HIGHLIGHT_WIDTH = 12;
 
   /**
-   * @param mvt
+   * @param modelViewTransform
    * @param plank
    * @constructor
    */
-  function PlankNode( mvt, plank ) {
+  function PlankNode( modelViewTransform, plank ) {
     Node.call( this );
     var thisNode = this;
 
     // Create and position the plank.
-    var plankViewBounds = mvt.modelToViewShape( plank.unrotatedShape ).bounds;
+    var plankViewBounds = modelViewTransform.modelToViewShape( plank.unrotatedShape ).bounds;
     var plankNode = new Rectangle( plankViewBounds.minX, plankViewBounds.minY, plankViewBounds.width, plankViewBounds.height,
       {
         fill: 'rgb( 243, 203, 127 )',
@@ -63,10 +63,10 @@ define( function( require ) {
 
     // Create and add the tick mark layer.
     var tickMarkLayer = new Node();
-    var tickMarkShape = Shape.lineSegment( 0, 0, 0, mvt.modelToViewDeltaY( Plank.THICKNESS ) );
-    var plankLeftEdge = new Vector2( mvt.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
-      mvt.modelToViewY( plank.getPlankSurfaceCenter().y ) );
-    var tickMarkDeltaX = mvt.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    var tickMarkShape = Shape.lineSegment( 0, 0, 0, modelViewTransform.modelToViewDeltaY( Plank.THICKNESS ) );
+    var plankLeftEdge = new Vector2( modelViewTransform.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
+      modelViewTransform.modelToViewY( plank.getPlankSurfaceCenter().y ) );
+    var tickMarkDeltaX = modelViewTransform.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
     this.highlights = [];
     for ( var i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
       var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
@@ -83,11 +83,15 @@ define( function( require ) {
           lineWidth: tickMarkStroke,
           stroke: 'black'
         } );
-      var highlight = new Rectangle( tickMark.centerX - HIGHLIGHT_WIDTH / 2, tickMark.top, HIGHLIGHT_WIDTH, tickMark.bounds.height, 0, 0,
-        {
-          fill: HIGHLIGHT_COLOR,
-          visible: false
-        } );
+      var highlight = new Rectangle(
+        tickMark.centerX - HIGHLIGHT_WIDTH / 2,
+        tickMark.top,
+        HIGHLIGHT_WIDTH,
+        tickMark.bounds.height,
+        0,
+        0,
+        { fill: HIGHLIGHT_COLOR, visible: false }
+      );
       tickMarkLayer.addChild( highlight );
       this.highlights.push( highlight );
       tickMarkLayer.addChild( tickMark );
@@ -96,7 +100,7 @@ define( function( require ) {
 
     // Track the rotational angle of the plank and update this node accordingly.
     var nodeRotation = 0;
-    var rotationPoint = mvt.modelToViewPosition( plank.pivotPoint );
+    var rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( tiltAngle ) {
       plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
       nodeRotation = tiltAngle;

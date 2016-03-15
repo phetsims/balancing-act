@@ -23,11 +23,11 @@ define( function( require ) {
    * @param positionedVectorProperty
    * @param visibilityProperty
    * @param scalingFactor
-   * @param mvt
+   * @param modelViewTransform
    * @param {Object} [options]
    * @constructor
    */
-  function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, mvt, options ) {
+  function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, modelViewTransform, options ) {
     Node.call( this );
     var thisNode = this;
 
@@ -46,8 +46,8 @@ define( function( require ) {
     thisNode.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
     positionedVectorProperty.link( function( positionedVector ) {
-      thisNode.centerX = mvt.modelToViewX( positionedVector.origin.x );
-      thisNode.top = mvt.modelToViewY( positionedVector.origin.y );
+      thisNode.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+      thisNode.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
     } );
 
     visibilityProperty.link( function( visible ) {
