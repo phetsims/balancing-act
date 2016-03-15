@@ -147,11 +147,11 @@ define( function( require ) {
     } );
 
     // Add the ruler.
-    var rulersVisible = new Property( false );
+    var rulersVisibleProperty = new Property( false );
     thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
-      rulersVisible.value = positionMarkerState === 'rulers';
+      rulersVisibleProperty.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisible ) );
+    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );

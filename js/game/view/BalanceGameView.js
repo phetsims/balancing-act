@@ -250,7 +250,10 @@ define( function( require ) {
     };
     thisScreen.checkAnswerButton = new TextPushButton( checkString, _.extend( {
       listener: function() {
-        gameModel.checkAnswer( thisScreen.massValueEntryNode.massValue.value, thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value );
+        gameModel.checkAnswer(
+          thisScreen.massValueEntryNode.massValueProperty.value,
+          thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.value
+        );
       }
     }, buttonOptions ) );
     thisScreen.rootNode.addChild( thisScreen.checkAnswerButton );
@@ -283,7 +286,7 @@ define( function( require ) {
     gameModel.plank.massesOnSurface.addItemAddedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     gameModel.plank.massesOnSurface.addItemRemovedListener( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
     thisScreen.tiltPredictionSelectorNode.tiltPredictionProperty.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
-    thisScreen.massValueEntryNode.massValue.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
+    thisScreen.massValueEntryNode.massValueProperty.link( thisScreen.updateCheckAnswerButtonEnabled.bind( thisScreen ) );
 
     // Register for changes to the game state and update accordingly.
     gameModel.gameStateProperty.link( thisScreen.handleGameStateChange.bind( thisScreen ) );
@@ -297,25 +300,25 @@ define( function( require ) {
     thisScreen.challengeLayer.addChild( levelIndicator );
 
     // Add a panel for controlling whether the ruler or marker set are visible.
-    var positionMarkerState = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
+    var positionMarkerStateProperty = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
 
     // Add the ruler.
-    var rulersVisible = new Property( false );
-    positionMarkerState.link( function( positionMarkerState ) {
-      rulersVisible.value = positionMarkerState === 'rulers';
+    var rulersVisibleProperty = new Property( false );
+    positionMarkerStateProperty.link( function( positionMarkerState ) {
+      rulersVisibleProperty.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisible ) );
+    thisScreen.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
-    var positionMarkersVisible = new Property( false );
-    positionMarkerState.link( function( positionMarkerState ) {
-      positionMarkersVisible.value = positionMarkerState === 'marks';
+    var positionMarkersVisibleProperty = new Property( false );
+    positionMarkerStateProperty.link( function( positionMarkerState ) {
+      positionMarkersVisibleProperty.value = positionMarkerState === 'marks';
     } );
-    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, modelViewTransform, positionMarkersVisible ) );
+    thisScreen.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, modelViewTransform, positionMarkersVisibleProperty ) );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerState, {
+    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
       right: thisScreen.layoutBounds.width - 5,
       top: 5,
 
@@ -361,7 +364,7 @@ define( function( require ) {
       }
       else if ( this.model.getCurrentChallenge() instanceof MassDeductionChallenge ) {
         // The button should be enabled for any non-zero value.
-        this.checkAnswerButton.enabled = this.massValueEntryNode.massValue.value !== 0;
+        this.checkAnswerButton.enabled = this.massValueEntryNode.massValueProperty.value !== 0;
       }
     },
 

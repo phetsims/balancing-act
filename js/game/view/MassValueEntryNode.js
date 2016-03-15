@@ -35,7 +35,7 @@ define( function( require ) {
   function MassValueEntryNode( options ) {
     Node.call( this );
     var thisNode = this;
-    thisNode.massValue = new Property( 0 );
+    thisNode.massValueProperty = new Property( 0 );
 
     // Create and add the readout, including the background.
     var readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
@@ -70,24 +70,24 @@ define( function( require ) {
 
     // Hook up the slider property to the mass value so that mass only contains integer values.
     thisNode.sliderValue.link( function( value ) {
-      thisNode.massValue.value = Math.round( value );
+      thisNode.massValueProperty.value = Math.round( value );
     } );
 
     // Hook them up in the other direction so that changes to the mass value
     // that occur outside of the slider (e.g. the arrow buttons).
-    thisNode.massValue.link( function( massValue ) {
+    thisNode.massValueProperty.link( function( massValue ) {
       thisNode.sliderValue.value = massValue;
     } );
 
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValue.value--; }, arrowButtonOptions );
+    var leftArrowButton = new ArrowButton( 'left', function() { thisNode.massValueProperty.value--; }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.massValue.value++; }, arrowButtonOptions );
+    var rightArrowButton = new ArrowButton( 'right', function() { thisNode.massValueProperty.value++; }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
-    thisNode.massValue.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
+    thisNode.massValueProperty.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
     readoutBackground.centerX = slider.bounds.width / 2;
     readoutBackground.top = 0;
     slider.left = 0;
@@ -96,14 +96,14 @@ define( function( require ) {
     leftArrowButton.centerY = slider.centerY;
     rightArrowButton.left = slider.right + 12;
     rightArrowButton.centerY = slider.centerY;
-    thisNode.massValue.reset(); // Put slider back to original position.
+    thisNode.massValueProperty.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
     var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 7, yMargin: 7 } );
     thisNode.addChild( panel );
 
     // Update the readout text and arrow button states whenever the value changes.
-    thisNode.massValue.link( function( value ) {
+    thisNode.massValueProperty.link( function( value ) {
       readoutText.text = StringUtils.format( pattern0Value1UnitsString, value, kgString );
       readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.enabled = ( value > 0 );

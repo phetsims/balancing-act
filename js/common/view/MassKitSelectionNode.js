@@ -153,8 +153,8 @@ define( function( require ) {
       } );
 
     // Create the actual kit selection node.
-    this.selectedKit = new Property( 0 );
-    KitSelectionNode.call( this, this.selectedKit,
+    this.selectedKitProperty = new Property( 0 );
+    KitSelectionNode.call( this, this.selectedKitProperty,
       [
         {
           title: new Text( bricksString, { font: TITLE_FONT } ),
@@ -182,7 +182,7 @@ define( function( require ) {
   return inherit( KitSelectionNode, MassKitSelectionNode,
     {
       reset: function() {
-        this.selectedKit.reset();
+        this.selectedKitProperty.reset();
       }
     }
   );
