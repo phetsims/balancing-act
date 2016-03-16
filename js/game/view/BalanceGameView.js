@@ -180,7 +180,7 @@ define( function( require ) {
     // Create and add the game scoreboard.
     this.scoreboard = new ScoreboardPanel(
       gameModel.challengeIndexProperty,
-      new Property( gameModel.PROBLEMS_PER_LEVEL ),
+      new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
       gameModel.levelProperty,
       gameModel.scoreProperty,
       gameModel.elapsedTimeProperty,
