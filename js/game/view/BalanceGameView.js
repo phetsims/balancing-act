@@ -46,10 +46,10 @@ define( function( require ) {
 
   // Images and Strings
   var checkString = require( 'string!VEGAS/check' );
-  var gameLevel1Icon = require( 'image!BALANCING_ACT/game-level-1-icon.png' );
-  var gameLevel2Icon = require( 'image!BALANCING_ACT/game-level-2-icon.png' );
-  var gameLevel3Icon = require( 'image!BALANCING_ACT/game-level-3-icon.png' );
-  var gameLevel4Icon = require( 'image!BALANCING_ACT/game-level-4-icon.png' );
+  var gameLevel1Icon = require( 'mipmap!BALANCING_ACT/game-level-1-icon.png' );
+  var gameLevel2Icon = require( 'mipmap!BALANCING_ACT/game-level-2-icon.png' );
+  var gameLevel3Icon = require( 'mipmap!BALANCING_ACT/game-level-3-icon.png' );
+  var gameLevel4Icon = require( 'mipmap!BALANCING_ACT/game-level-4-icon.png' );
   var nextString = require( 'string!VEGAS/next' );
   var showAnswerString = require( 'string!VEGAS/showAnswer' );
   var startOverString = require( 'string!BALANCING_ACT/startOver' );
