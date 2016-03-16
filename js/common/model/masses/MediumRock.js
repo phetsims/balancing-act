@@ -10,7 +10,7 @@ define( function( require ) {
 
   // constants
   var MASS = 40; // In kg
-  var HEIGHT = 0.4; // In meters
+  var HEIGHT = 0.3; // In meters
 
   /**
    * @param initialPosition
