@@ -329,8 +329,8 @@ define( function( require ) {
 
         // Create a list of the distances at which the fixed stack may be
         // positioned to balance the movable stack.
-        validFixedStackDistances = this.getPossibleDistanceList( numBricksInFixedStack * BrickStack.prototype.BRICK_MASS,
-          numBricksInMovableStack * BrickStack.prototype.BRICK_MASS );
+        validFixedStackDistances = this.getPossibleDistanceList( numBricksInFixedStack * BrickStack.BRICK_MASS,
+          numBricksInMovableStack * BrickStack.BRICK_MASS );
       }
 
       // Randomly choose a distance to use from the identified set.
@@ -410,7 +410,7 @@ define( function( require ) {
         Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
 
       // Create the actual challenge from the pieces.
-      return TiltPredictionChallenge.prototype.create(
+      return TiltPredictionChallenge.create(
         new BrickStack( numBricksInLeftStack ),
         distanceFromPlankCenter,
         new BrickStack( numBricksInRightStack ),
@@ -439,7 +439,7 @@ define( function( require ) {
       }
 
       // Create the actual challenge from the pieces.
-      return TiltPredictionChallenge.prototype.create( new BrickStack( generateRandomValidPlankDistanceRange ),
+      return TiltPredictionChallenge.create( new BrickStack( generateRandomValidPlankDistanceRange ),
         leftMassDistance,
         new BrickStack( generateRandomValidPlankDistanceRange ),
         rightMassDistance );
@@ -504,7 +504,7 @@ define( function( require ) {
       var mysteryMassDistanceFromCenter = -this.generateRandomValidPlankDistance();
 
       // Create the challenge.
-      return MassDeductionChallenge.prototype.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
+      return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
     },
 
     /**
@@ -530,7 +530,7 @@ define( function( require ) {
       var mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
 
       // Create the challenge.
-      return MassDeductionChallenge.prototype.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
+      return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
     },
 
     /**
@@ -557,7 +557,7 @@ define( function( require ) {
       var mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
 
       // Create the challenge.
-      return MassDeductionChallenge.prototype.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
+      return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
     },
 
     /**

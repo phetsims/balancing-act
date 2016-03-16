@@ -43,21 +43,21 @@ define( function( require ) {
 
     this.shape = brickStackShape;
 
-    // Invoke superconstructor.
     Mass.call( this, numBricks * BRICK_MASS, initialPosition );
   }
 
-  return inherit( Mass, BrickStack,
-    {
-      createCopy: function() {
+  return inherit( Mass, BrickStack, {
+    createCopy: function() {
         return new BrickStack( this.numBricks, this.position );
       },
 
       getMiddlePoint: function() {
         return this.shape.bounds.center.rotated( this.rotationAngle ).plus( this.position );
-      },
+      }
 
-      // Public constants
+    },
+    {
+      // static constants
       BRICK_MASS: BRICK_MASS,
       BRICK_HEIGHT: BRICK_HEIGHT
     }

@@ -164,8 +164,8 @@ define( function( require ) {
       ],
       gameModel.bestScores,
       {
-        numStarsOnButtons: BalanceGameModel.prototype.PROBLEMS_PER_LEVEL,
-        perfectScore: BalanceGameModel.prototype.MAX_POSSIBLE_SCORE,
+        numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,
+        perfectScore: BalanceGameModel.MAX_POSSIBLE_SCORE,
         maxTitleWidth: this.layoutBounds.width
       }
     );
@@ -474,7 +474,7 @@ define( function( require ) {
           break;
 
         case 'showingLevelResults':
-          if ( this.model.score === BalanceGameModel.prototype.MAX_POSSIBLE_SCORE ) {
+          if ( this.model.score === BalanceGameModel.MAX_POSSIBLE_SCORE ) {
             this.gameAudioPlayer.gameOverPerfectScore();
           }
           else if ( this.model.score === 0 ) {
@@ -525,8 +525,8 @@ define( function( require ) {
       var thisScreen = this;
 
       // Set a new "level completed" node based on the results.
-      thisScreen.levelCompletedNode = new LevelCompletedNode( this.model.level, this.model.score, BalanceGameModel.prototype.MAX_POSSIBLE_SCORE,
-        BalanceGameModel.prototype.PROBLEMS_PER_LEVEL, this.model.timerEnabled, this.model.elapsedTime, this.model.bestTimes[ this.model.level ],
+      thisScreen.levelCompletedNode = new LevelCompletedNode( this.model.level, this.model.score, BalanceGameModel.MAX_POSSIBLE_SCORE,
+        BalanceGameModel.PROBLEMS_PER_LEVEL, this.model.timerEnabled, this.model.elapsedTime, this.model.bestTimes[ this.model.level ],
         thisScreen.model.newBestTime,
         function() {
           thisScreen.model.gameState = 'choosingLevel';

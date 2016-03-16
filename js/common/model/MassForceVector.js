@@ -3,8 +3,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Vector2 = require( 'DOT/Vector2' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
@@ -18,7 +19,7 @@ define( function( require ) {
     this.forceVectorProperty = new Property( this.generateVector( mass ) );
   }
 
-  MassForceVector.prototype = {
+  return inherit( Object, MassForceVector, {
     update: function() {
       this.forceVectorProperty.set( this.generateVector( this.mass ) );
     },
@@ -31,7 +32,5 @@ define( function( require ) {
         vector: new Vector2( 0, mass.massValue * ACCELERATION_DUE_TO_GRAVITY )
       };
     }
-  };
-
-  return MassForceVector;
+  } );
 } );

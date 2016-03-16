@@ -1,13 +1,15 @@
 // Copyright 2014-2015, University of Colorado Boulder
 
 /**
- * Base type for a single "challenge" (a.k.a. problem) that is presented to
- * the user during the balance game.
+ * Base type for a single "challenge" (a.k.a. problem) that is presented to the user during the balance game.
  *
  * @author John Blanco
  */
 define( function( require ) {
   'use strict';
+
+  // modules
+  var inherit = require( 'PHET_CORE/inherit' );
 
   /**
    * @param initialColumnState
@@ -15,10 +17,9 @@ define( function( require ) {
    * @constructor
    */
   function BalanceGameChallenge( initialColumnState, options ) {
-    options = _.extend(
-      {
-        maxAttemptsAllowed: 2
-      }, options );
+    options = _.extend( {
+      maxAttemptsAllowed: 2
+    }, options );
     this.initialColumnState = initialColumnState;
     this.maxAttemptsAllowed = options.maxAttemptsAllowed;
 
@@ -37,7 +38,7 @@ define( function( require ) {
     this.balancedConfiguration = [];
   }
 
-  BalanceGameChallenge.prototype = {
+  return inherit( Object, BalanceGameChallenge, {
 
     /**
      * Convenience function for determining whether an equivalent mass is
@@ -142,7 +143,5 @@ define( function( require ) {
       // lists are equivalent.
       return matchCount === this.fixedMassDistancePairs.length;
     }
-  };
-
-  return BalanceGameChallenge;
+  } );
 } );

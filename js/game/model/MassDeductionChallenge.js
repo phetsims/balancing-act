@@ -30,8 +30,11 @@ define( function( require ) {
     };
   }
 
-  return inherit( BalanceGameChallenge, MassDeductionChallenge, {
-    // Convenience function for create a mass deduction challenge.
+  return inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
+
+    // statics
+
+    // convenience factor method for creating a mass deduction challenge
     create: function( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
 
       // Create the mass-distance pair for the mystery mass.

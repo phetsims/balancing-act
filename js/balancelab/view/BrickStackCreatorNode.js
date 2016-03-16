@@ -33,7 +33,7 @@ define( function( require ) {
    * @constructor
    */
   function BrickStackCreatorNode( numBricks, model, modelViewTransform, options ) {
-    MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.prototype.BRICK_MASS, true, options );
+    MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
     var selectionNode = new BrickStackNode(
@@ -52,7 +52,7 @@ define( function( require ) {
     );
 
     this.setSelectionNode( selectionNode );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.prototype.BRICK_HEIGHT * numBricks / 2 ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
   }
 
   return inherit( MassCreatorNode, BrickStackCreatorNode, {

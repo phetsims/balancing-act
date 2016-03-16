@@ -30,8 +30,10 @@ define( function( require ) {
     };
   }
 
-  return inherit( BalanceGameChallenge, TiltPredictionChallenge, {
-    // Convenience method for creating this type of challenge.
+  return inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
+    // statics
+
+    // convenience factory method for creating this type of challenge
     create: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter ) {
 
       // Add the fixed masses and their distances from the center of the balance.

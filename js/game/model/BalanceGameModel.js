@@ -343,9 +343,12 @@ define( function( require ) {
       stopGameTimer: function() {
         Timer.clearInterval( this.gameTimerId );
         this.gameTimerId = null;
-      },
+      }
+    }, {
 
+      // statics
       PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,
       MAX_POSSIBLE_SCORE: MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET
+
     } );
 } );

@@ -13,6 +13,7 @@ define( function( require ) {
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
@@ -42,7 +43,7 @@ define( function( require ) {
     ];
   }
 
-  BalanceModel.prototype = {
+  return inherit( Object, BalanceModel, {
 
     // Step function, called by the framework, clocks time-dependent behavior.
     step: function( dt ) {
@@ -84,7 +85,5 @@ define( function( require ) {
       this.plank.removeAllMasses();
       this.columnStateProperty.reset();
     }
-  };
-
-  return BalanceModel;
+  } );
 } );
