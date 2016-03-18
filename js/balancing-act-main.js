@@ -12,9 +12,13 @@ define( function( require ) {
   var BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
+
+  // constants
+  var tandem = Tandem.createRootTandem();
 
   SimLauncher.launch( function() {
 
@@ -23,10 +27,15 @@ define( function( require ) {
         leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
         softwareDevelopment: 'John Blanco',
         team: 'Michael Dubson, Trish Loeblein'
-      }
+      },
+      tandem: tandem
     };
 
     // Create and start the sim
-    new Sim( balancingActTitleString, [ new BAIntroScreen(), new BalanceLabScreen(), new BalanceGameScreen() ], simOptions ).start();
+    new Sim( balancingActTitleString, [
+      new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
+      new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
+      new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) )
+    ], simOptions ).start();
   } );
 } );

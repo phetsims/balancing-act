@@ -18,6 +18,11 @@
     "phetLibs": [
       "vegas",
       "vibe"
-    ]
+    ],
+    "phet-io": {
+      "preload": [
+        "../phet-io/js/api/balancing-act-api.js"
+      ]
+    }
   }
 }

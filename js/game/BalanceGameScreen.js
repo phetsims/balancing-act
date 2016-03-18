@@ -22,14 +22,14 @@ define( function( require ) {
   var gameIcon = require( 'image!BALANCING_ACT/game-icon.png' );
   var gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
 
-  function BalanceGameScreen() {
+  function BalanceGameScreen( tandem ) {
     Screen.call( this,
       gameString,
       new Image( gameIcon ),
       function() { return new BalanceGameModel(); },
-      function( model ) { return new BalanceGameView( model ); },
-      {
-        navigationBarIcon: new Image( gameIconSmall )
+      function( model ) { return new BalanceGameView( model ); }, {
+        navigationBarIcon: new Image( gameIconSmall ),
+        tandem: tandem
       } );
   }
 

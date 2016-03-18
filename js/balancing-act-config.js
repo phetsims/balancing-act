@@ -40,6 +40,7 @@ require.config( {
     SCENERY_PHET: '../../scenery-phet/js',
     SHERPA: '../../sherpa',
     SUN: '../../sun/js',
+    TANDEM: '../../tandem/js',
     VEGAS: '../../vegas/js',
     VIBE: '../../vibe/js',
 

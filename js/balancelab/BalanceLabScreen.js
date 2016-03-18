@@ -22,15 +22,15 @@ define( function( require ) {
   var labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
   var labIconSmall = require( 'image!BALANCING_ACT/lab-icon-small.png' );
 
-  function BalanceLabScreen() {
+  function BalanceLabScreen( tandem ) {
 
     Screen.call( this,
       balanceLabString,
       new Image( labIcon ),
       function() { return new BalanceLabModel(); },
-      function( model ) {return new BalanceLabView( model ); },
-      {
-        navigationBarIcon: new Image( labIconSmall )
+      function( model ) {return new BalanceLabView( model ); }, {
+        navigationBarIcon: new Image( labIconSmall ),
+        tandem: tandem
       } );
   }
 

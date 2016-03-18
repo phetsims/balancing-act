@@ -22,15 +22,15 @@ define( function( require ) {
   var introIcon = require( 'image!BALANCING_ACT/intro-icon.png' );
   var introIconSmall = require( 'image!BALANCING_ACT/intro-icon-small.png' );
 
-  function BalanceLabScreen() {
+  function BalanceLabScreen( tandem ) {
 
     Screen.call( this,
       introString,
       new Image( introIcon ),
       function() { return new BAIntroModel(); },
-      function( model ) { return new BAIntroView( model ); },
-      {
-        navigationBarIcon: new Image( introIconSmall )
+      function( model ) { return new BAIntroView( model ); }, {
+        navigationBarIcon: new Image( introIconSmall ),
+        tandem: tandem
       } );
   }
 
