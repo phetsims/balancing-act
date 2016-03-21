@@ -261,12 +261,11 @@ define( function( require ) {
       thisScreen.reset.call( thisScreen );
     }
 
-    thisScreen.nonMassLayer.addChild( new ResetAllButton(
-      {
-        listener: resetClosure,
+    thisScreen.nonMassLayer.addChild( new ResetAllButton( {
+      listener: resetClosure,
         radius: 20,
-        centerX: indicatorVisibilityControlPanel.centerX,
-        bottom: thisScreen.layoutBounds.height - 15
+        right: indicatorVisibilityControlPanel.right,
+        bottom: thisScreen.layoutBounds.height - 10
       } ) );
   }
 
