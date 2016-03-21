@@ -49,7 +49,7 @@ define( function( require ) {
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',
       highlightedButtonBackgroundColor: 'rgb( 224, 255, 122 )',
       numButtonRows: 1, // For layout
-      controlsInset: 12,
+      controlsInset: 10,
       size: new Dimension2( 768, 504 ),
       maxTitleWidth: Number.POSITIVE_INFINITY
     }, options );
@@ -91,7 +91,7 @@ define( function( require ) {
     this.addChild( soundToggleButton );
 
     // Reset button.
-    var resetButton = new ResetAllButton( { listener: resetFunction, radius: 22 } );
+    var resetButton = new ResetAllButton( { listener: resetFunction, radius: 20 } );
     this.addChild( resetButton );
 
     // Layout
