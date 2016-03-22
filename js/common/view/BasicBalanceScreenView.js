@@ -263,10 +263,11 @@ define( function( require ) {
 
     thisScreen.nonMassLayer.addChild( new ResetAllButton( {
       listener: resetClosure,
-        radius: 20,
-        right: indicatorVisibilityControlPanel.right,
-        bottom: thisScreen.layoutBounds.height - 10
-      } ) );
+      radius: 20,
+      right: indicatorVisibilityControlPanel.right,
+      bottom: thisScreen.layoutBounds.height - 10,
+      touchAreaDilation: 8
+    } ) );
   }
 
   return inherit( ScreenView, BasicBalanceScreenView,
