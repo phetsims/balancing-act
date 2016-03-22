@@ -31,9 +31,8 @@ define( function( require ) {
    */
   function ImageMass( mass, image, height, initialPosition, isMystery ) {
     Mass.call( this, mass, initialPosition, isMystery );
-    PropertySet.call( this,
-      {
-        // Property that contains the current image.
+    PropertySet.call( this, {
+      // Property that contains the current image.
         image: image,
 
         // Property that contains the current height of the corresponding model

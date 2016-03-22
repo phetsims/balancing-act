@@ -37,10 +37,12 @@ define( function( require ) {
     thisNode.previousAngle = 0;
 
     // Create and add the main shape node.
-    var shapeNode = new Path( modelViewTransform.modelToViewShape( brickStack.shape ), {
+    var transformedBrickShape = modelViewTransform.modelToViewShape( brickStack.shape );
+    var shapeNode = new Path( transformedBrickShape, {
       fill: 'rgb( 205, 38, 38 )',
       stroke: 'black',
-      lineWidth: 1
+      lineWidth: 1,
+      touchArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
     thisNode.addChild( shapeNode );
 
@@ -49,23 +51,29 @@ define( function( require ) {
       var massLabel;
       var maxTextWidth = shapeNode.bounds.width;
       if ( brickStack.isMystery ) {
-        massLabel = new RasterizedTextNode( unknownMassLabelString, {
-          font: new PhetFont( 12 ),
-          maxWidth: maxTextWidth
-        } );
+        massLabel = new RasterizedTextNode(
+          unknownMassLabelString,
+          { font: new PhetFont( 12 ), maxWidth: maxTextWidth }
+        );
       }
       else {
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
         massLabel = new Node();
-        var massValueText = new RasterizedTextNode( brickStack.massValue, {
-          font: new PhetFont( 12 ) },
-          { centerX: 0, maxWidth: maxTextWidth }
+        var massValueText = new RasterizedTextNode(
+          brickStack.massValue,
+          { font: new PhetFont( 12 ) },
+          { centerX: 0, maxWidth: maxTextWidth, pickable: false /* set pickable to true if RasterizedTextNode is ever replaced with regular Text node */ }
         );
         massLabel.addChild( massValueText );
         massLabel.addChild( new RasterizedTextNode(
           kgString,
           { font: new PhetFont( 12 ) },
-          { centerX: 0, top: massValueText.bottom - 4, maxWidth: maxTextWidth } )
+          {
+            centerX: 0,
+            top: massValueText.bottom - 4,
+            maxWidth: maxTextWidth,
+            pickable: false // set pickable to true if RasterizedTextNode is ever replaced with regular Text node
+          } )
         );
       }
       massLabel.centerX = shapeNode.centerX;
