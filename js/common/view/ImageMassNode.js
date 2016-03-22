@@ -44,7 +44,11 @@ define( function( require ) {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
       var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
         pattern0Value1UnitsString, imageMass.massValue, kgString );
-      var massLabel = new RasterizedTextNode( massLabelText, { font: new PhetFont( 12 ) } );
+      var massLabel = new RasterizedTextNode(
+        massLabelText,
+        { font: new PhetFont( 12 ) },
+        { pickable: false } // this is done as a workaround for an issue with RasterizedTextNode, can be made pickable if replaced with Text
+      );
       thisNode.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.
