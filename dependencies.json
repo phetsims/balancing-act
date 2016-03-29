@@ -1,23 +1,23 @@
 {
-  "comment": "# balancing-act 1.1.0-dev.2 Tue Mar 08 2016 12:27:55 GMT-0700 (Mountain Standard Time)",
+  "comment": "# balancing-act 1.1.0-dev.3 Mon Mar 28 2016 20:51:07 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "master"
   },
   "axon": {
-    "sha": "2dfd7daf08482e7a25b48a8256e37f269b4f6820",
+    "sha": "8774f49c3e3896d35d002b89047b4df3c8351a8d",
     "branch": "master"
   },
   "balancing-act": {
-    "sha": "1eeecf934137bb3dad572f78d8d23e3d407ad8fe",
+    "sha": "0339f3121799fb70af8a179882fd1117387f7b58",
     "branch": "master"
   },
   "brand": {
-    "sha": "ac9ccaa74427844b170dcd1582f3e9bb931edef4",
+    "sha": "4091d2e72e51680d39a183acfd45aafcbf1be957",
     "branch": "master"
   },
   "chipper": {
-    "sha": "662df961039299702848a43ddce8d023ebb8560b",
+    "sha": "faddf283b47e13652afa4b93eadb64f7ce1ce15c",
     "branch": "master"
   },
   "dot": {
@@ -25,11 +25,11 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "095907951f6e6910032ed4b0bcc4b31ac07dfc56",
+    "sha": "150c8138c794ea7946f71345ad74f0f78de8473c",
     "branch": "master"
   },
   "kite": {
-    "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
+    "sha": "24ad131a77aee78e266436ef6b618c8353953f28",
     "branch": "master"
   },
   "phet-core": {
@@ -37,15 +37,15 @@
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "380b1fb5f15d097133bfceaf119d3eaf40a3a2d4",
+    "sha": "fb80c5859dabda4a31f05f74c5250d61ca7403ca",
     "branch": "master"
   },
   "scenery": {
-    "sha": "d342e36640afb52e5d6a5dfef87a3496e30d6cb4",
+    "sha": "ee35a4eb3d983440ce3f5472d92f6fa91a31eb0c",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "5d9dafb2b8620f3ca01054a32c6bc1592a5304f7",
+    "sha": "ddb8e53fae964c81ecf53e17f4aa9798b626d895",
     "branch": "master"
   },
   "sherpa": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "11ff76a11960b90a241538b1ce0d46e3a14f173c",
+    "sha": "953074cca0879fe5c5d1041670a45ff697796742",
     "branch": "master"
   },
   "tandem": {
