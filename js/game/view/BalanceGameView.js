@@ -385,7 +385,7 @@ define( function( require ) {
 
         case 'presentingInteractiveChallenge':
           this.updateTitle();
-          this.challengeLayer.pickable = true;
+          this.challengeLayer.pickable = null;
           this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
           if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
             if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
