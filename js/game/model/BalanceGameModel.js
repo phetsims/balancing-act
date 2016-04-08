@@ -42,7 +42,7 @@ define( function( require ) {
     PropertySet.call( this,
       {
         soundEnabled: true,
-        timerEnabled: true,
+        timerEnabled: false,
         level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
         challengeIndex: 0,
         score: 0,
