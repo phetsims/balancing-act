@@ -87,7 +87,6 @@ define( function( require ) {
         // The user has released the node.
         thisNode.modelElement.release();
         thisNode.modelElement = null;
-        parentScreenView = null;
       }
     } ) );
   }
