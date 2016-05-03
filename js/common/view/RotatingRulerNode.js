@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -86,6 +87,8 @@ define( function( require ) {
       thisNode.rotateAround( rotationPoint, deltaAngle );
     } );
   }
+
+  balancingAct.register( 'RotatingRulerNode', RotatingRulerNode );
 
   return inherit( Node, RotatingRulerNode );
 } );

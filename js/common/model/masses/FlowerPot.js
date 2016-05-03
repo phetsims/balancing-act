@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var flowerPotImage = require( 'image!BALANCING_ACT/flower-pot.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function FlowerPot( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, flowerPotImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'FlowerPot', FlowerPot );
 
   return inherit( ImageMass, FlowerPot );
 } );

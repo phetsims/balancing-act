@@ -16,6 +16,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var platform = require( 'PHET_CORE/platform' );
@@ -48,6 +49,8 @@ define( function( require ) {
     this.localBounds = label.localBounds;
     this.mutate( nodeOptions );
   }
+
+  balancingAct.register( 'RasterizedTextNode', RasterizedTextNode );
 
   return inherit( Node, RasterizedTextNode );
 } );

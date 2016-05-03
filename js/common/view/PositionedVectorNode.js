@@ -16,6 +16,7 @@ define( function( require ) {
 
   // modules
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
 
@@ -54,6 +55,8 @@ define( function( require ) {
       thisNode.visible = visible;
     } );
   }
+
+  balancingAct.register( 'PositionedVectorNode', PositionedVectorNode );
 
   return inherit( Node, PositionedVectorNode );
 } );

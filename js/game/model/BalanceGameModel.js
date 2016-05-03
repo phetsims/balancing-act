@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -96,6 +97,8 @@ define( function( require ) {
     // Fulcrum on which the plank pivots
     thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
   }
+
+  balancingAct.register( 'BalanceGameModel', BalanceGameModel );
 
   return inherit( PropertySet, BalanceGameModel,
     {

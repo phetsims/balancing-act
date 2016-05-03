@@ -11,6 +11,7 @@ define( function( require ) {
   // imports
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceGameView = require( 'BALANCING_ACT/game/view/BalanceGameView' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -23,15 +24,19 @@ define( function( require ) {
   var gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
 
   function BalanceGameScreen( tandem ) {
-    Screen.call( this,
+    Screen.call(
+      this,
       gameString,
       new Image( gameIcon ),
       function() { return new BalanceGameModel(); },
       function( model ) { return new BalanceGameView( model ); }, {
         navigationBarIcon: new Image( gameIconSmall ),
         tandem: tandem
-      } );
+      }
+    );
   }
+
+  balancingAct.register( 'BalanceGameScreen', BalanceGameScreen );
 
   return inherit( Screen, BalanceGameScreen );
 } );

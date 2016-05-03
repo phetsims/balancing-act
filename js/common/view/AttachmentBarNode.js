@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -50,6 +51,8 @@ define( function( require ) {
         center: pivotPointPosInView
       } ) );
   }
+
+  balancingAct.register( 'AttachmentBarNode', AttachmentBarNode );
 
   return inherit( Node, AttachmentBarNode );
 } );

@@ -7,6 +7,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -43,6 +44,8 @@ define( function( require ) {
       } );
     } );
   }
+
+  balancingAct.register( 'BAIntroView', BAIntroView );
 
   return inherit( BasicBalanceScreenView, BAIntroView );
 } );

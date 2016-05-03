@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -64,6 +65,8 @@ define( function( require ) {
     // This is the horizontal offset from the center of the shape or image.
     thisMass.centerOfMassXOffset = 0;
   }
+
+  balancingAct.register( 'Mass', Mass );
 
   return inherit( PropertySet, Mass, {
       translate: function( translationVector ) {

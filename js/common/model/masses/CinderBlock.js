@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var cinderBlockImage = require( 'image!BALANCING_ACT/cinder-block.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function CinderBlock( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, cinderBlockImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'CinderBlock', CinderBlock );
 
   return inherit( ImageMass, CinderBlock );
 } );

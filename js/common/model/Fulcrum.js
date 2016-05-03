@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -42,6 +43,8 @@ define( function( require ) {
     // The shape property is what will define the shape in the view.
     thisFulcrum.shape = fulcrumShape;
   }
+
+  balancingAct.register( 'Fulcrum', Fulcrum );
 
   return Fulcrum;
 } );

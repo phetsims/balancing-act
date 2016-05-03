@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
 
@@ -23,6 +24,8 @@ define( function( require ) {
     ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery );
     this.labelText = config.labelText;
   }
+
+  balancingAct.register( 'LabeledImageMass', LabeledImageMass );
 
   return inherit( ImageMass, LabeledImageMass );
 } );

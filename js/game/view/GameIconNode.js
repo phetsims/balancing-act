@@ -7,7 +7,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var levelString = require( 'string!BALANCING_ACT/level' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -18,6 +18,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
+  var levelString = require( 'string!BALANCING_ACT/level' );
   var pattern0Label1ValueString = require( 'string!BALANCING_ACT/pattern0Label1Value' );
 
   // constants
@@ -34,6 +35,8 @@ define( function( require ) {
     this.addChild( imageNode );
     imageNode.centerX = title.centerX;
   }
+
+  balancingAct.register( 'GameIconNode', GameIconNode );
 
   return inherit( Node, GameIconNode );
 } );

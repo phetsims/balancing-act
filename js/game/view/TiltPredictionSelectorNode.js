@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -39,6 +40,8 @@ define( function( require ) {
 
     this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
   }
+
+  balancingAct.register( 'TiltPredictionSelectorNode', TiltPredictionSelectorNode );
 
   return inherit( Node, TiltPredictionSelectorNode );
 } );

@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -45,6 +46,8 @@ define( function( require ) {
       thisNode.visible = visible;
     } );
   }
+
+  balancingAct.register( 'MysteryVectorNode', MysteryVectorNode );
 
   return inherit( Node, MysteryVectorNode );
 } );

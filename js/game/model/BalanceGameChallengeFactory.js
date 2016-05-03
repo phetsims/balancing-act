@@ -19,6 +19,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
@@ -112,7 +113,7 @@ define( function( require ) {
   var usedMassDeductionChallenges = [];
   var usedTiltPredictionChallenges = [];
 
-  return {
+  var BalanceGameChallengeFactory = {
 
     // Generate a random integer from 0 (inclusive) to max (exclusive)
     randInt: function( max ) {
@@ -743,5 +744,8 @@ define( function( require ) {
       return balanceChallengeList;
     }
   };
-} )
-;
+
+  balancingAct.register( 'BalanceGameChallengeFactory', BalanceGameChallengeFactory );
+
+  return BalanceGameChallengeFactory;
+} );

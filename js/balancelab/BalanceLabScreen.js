@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
   var BalanceLabView = require( 'BALANCING_ACT/balancelab/view/BalanceLabView' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -33,6 +34,8 @@ define( function( require ) {
         tandem: tandem
       } );
   }
+
+  balancingAct.register( 'BalanceLabScreen', BalanceLabScreen );
 
   return inherit( Screen, BalanceLabScreen );
 } );

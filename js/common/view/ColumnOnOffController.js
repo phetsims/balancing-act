@@ -8,6 +8,7 @@ define( function( require ) {
 
   // modules
   var ABSwitch = require( 'SUN/ABSwitch' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -26,6 +27,8 @@ define( function( require ) {
 
     this.mutate( options );
   }
+
+  balancingAct.register( 'ColumnOnOffController', ColumnOnOffController );
 
   return inherit( Node, ColumnOnOffController );
 } );

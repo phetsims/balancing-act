@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -55,6 +56,8 @@ define( function( require ) {
     // Add the label as a child.
     thisNode.addChild( label );
   }
+
+  balancingAct.register( 'MysteryMassNode', MysteryMassNode );
 
   return inherit( ImageMassNode, MysteryMassNode );
 } );

@@ -7,6 +7,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -28,6 +29,8 @@ define( function( require ) {
     this.addChild( new RasterizedTextNode( labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) }, { centerX: 0, top: circle.bottom } ) );
     this.mutate( options );
   }
+
+  balancingAct.register( 'PositionMarkerNode', PositionMarkerNode );
 
   return inherit( Node, PositionMarkerNode );
 } );

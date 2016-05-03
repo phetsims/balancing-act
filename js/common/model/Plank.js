@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
@@ -92,6 +93,8 @@ define( function( require ) {
       }
     } );
   }
+
+  balancingAct.register( 'Plank', Plank );
 
   // Inherit from base class and define the methods for this object.
   return inherit( PropertySet, Plank, {

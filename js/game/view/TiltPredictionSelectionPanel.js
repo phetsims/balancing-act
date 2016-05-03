@@ -7,6 +7,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var DownUpListener = require( 'SCENERY/input/DownUpListener' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -101,6 +102,8 @@ define( function( require ) {
       updateHighlightState();
     } );
   }
+
+  balancingAct.register( 'TiltPredictionSelectionPanel', TiltPredictionSelectionPanel );
 
   return inherit( Node, TiltPredictionSelectionPanel );
 } );

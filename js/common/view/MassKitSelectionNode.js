@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
   var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   var bricksString = require( 'string!BALANCING_ACT/bricks' );
@@ -179,8 +180,9 @@ define( function( require ) {
       ], options );
   }
 
-  return inherit( KitSelectionNode, MassKitSelectionNode,
-    {
+  balancingAct.register( 'MassKitSelectionNode', MassKitSelectionNode );
+
+  return inherit( KitSelectionNode, MassKitSelectionNode, {
       reset: function() {
         this.selectedKitProperty.reset();
       }

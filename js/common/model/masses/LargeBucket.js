@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var metalBucketImage = require( 'image!BALANCING_ACT/metal-bucket.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function LargeBucket( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, metalBucketImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'LargeBucket', LargeBucket );
 
   return inherit( ImageMass, LargeBucket );
 } );

@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/ImageMassCreatorNode' );
@@ -34,6 +35,8 @@ define( function( require ) {
     this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
     this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
   }
+
+  balancingAct.register( 'GirlCreatorNode', GirlCreatorNode );
 
   return inherit( ImageMassCreatorNode, GirlCreatorNode );
 } );

@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
   var whatIsTheMassString = require( 'string!BALANCING_ACT/whatIsTheMass' );
@@ -29,6 +30,8 @@ define( function( require ) {
       showTiltPredictionSelector: false
     };
   }
+
+  balancingAct.register( 'MassDeductionChallenge', MassDeductionChallenge );
 
   return inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
 
