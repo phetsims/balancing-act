@@ -25,7 +25,8 @@ define( function( require ) {
 
   function BAIntroScreen() {
 
-    Screen.call( this,
+    Screen.call(
+      this,
       introString,
       new Image( introIcon ),
       function() { return new BAIntroModel(); },
