@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var defaultImage = require( 'image!BALANCING_ACT/default-image.png' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -129,6 +130,8 @@ define( function( require ) {
       thisNode.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
     }
   }
+
+  balancingAct.register( 'ImageMassNode', ImageMassNode );
 
   return inherit( Node, ImageMassNode );
 } );

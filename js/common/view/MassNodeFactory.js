@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
@@ -20,7 +21,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  return {
+  var MassNodeFactory = {
     createMassNode: function( mass, modelViewTransform, isLabeled, labelVisibleProperty ) {
       var massNode;
       if ( mass instanceof MysteryMass ) {
@@ -44,4 +45,8 @@ define( function( require ) {
       return massNode;
     }
   };
+
+  balancingAct.register( 'MassNodeFactory', MassNodeFactory );
+
+  return MassNodeFactory;
 } );

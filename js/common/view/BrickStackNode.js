@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -107,6 +108,8 @@ define( function( require ) {
       this.addInputListener( new MassDragHandler( brickStack, modelViewTransform ) );
     }
   }
+
+  balancingAct.register( 'BrickStackNode', BrickStackNode );
 
   return inherit( Node, BrickStackNode );
 } );

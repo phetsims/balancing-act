@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
@@ -270,11 +271,12 @@ define( function( require ) {
     } ) );
   }
 
-  return inherit( ScreenView, BasicBalanceScreenView,
-    {
-      reset: function() {
-        this.model.reset();
-        this.viewProperties.reset();
-      }
-    } );
+  balancingAct.register( 'BasicBalanceScreenView', BasicBalanceScreenView );
+
+  return inherit( ScreenView, BasicBalanceScreenView, {
+    reset: function() {
+      this.model.reset();
+      this.viewProperties.reset();
+    }
+  } );
 } );

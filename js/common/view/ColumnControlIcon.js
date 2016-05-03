@@ -8,6 +8,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -113,6 +114,8 @@ define( function( require ) {
       this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.825 } ) );
     }
   }
+
+  balancingAct.register( 'ColumnControlIcon', ColumnControlIcon );
 
   return inherit( Node, ColumnControlIcon );
 } );

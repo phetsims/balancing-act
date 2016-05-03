@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
 
@@ -45,6 +46,8 @@ define( function( require ) {
       }
     } );
   }
+
+  balancingAct.register( 'HumanMass', HumanMass );
 
   return inherit( ImageMass, HumanMass );
 } );

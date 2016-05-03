@@ -19,6 +19,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -163,6 +164,8 @@ define( function( require ) {
     }
     return new Path( shape, { stroke: stroke, lineWidth: lineWidth } );
   };
+
+  balancingAct.register( 'RulerNodeRasterizedText', RulerNodeRasterizedText );
 
   return RulerNodeRasterizedText;
 } );

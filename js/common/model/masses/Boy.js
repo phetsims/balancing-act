@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -34,6 +35,8 @@ define( function( require ) {
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
+
+  balancingAct.register( 'Boy', Boy );
 
   return inherit( HumanMass, Boy );
 } );

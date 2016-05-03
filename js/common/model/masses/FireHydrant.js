@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var fireHydrantImage = require( 'image!BALANCING_ACT/fire-hydrant.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function FireHydrant( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, fireHydrantImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'FireHydrant', FireHydrant );
 
   return inherit( ImageMass, FireHydrant );
 } );

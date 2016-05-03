@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -112,6 +113,8 @@ define( function( require ) {
 
     thisNode.mutate( options );
   }
+
+  balancingAct.register( 'MassValueEntryNode', MassValueEntryNode );
 
   return inherit( Node, MassValueEntryNode, {
     clear: function() {

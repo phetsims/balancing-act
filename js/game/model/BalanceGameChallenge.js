@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
 
   /**
@@ -37,6 +38,8 @@ define( function( require ) {
     // this is what will be displayed to the user if they ask to see a correct answer.
     this.balancedConfiguration = [];
   }
+
+  balancingAct.register( 'BalanceGameChallenge', BalanceGameChallenge );
 
   return inherit( Object, BalanceGameChallenge, {
 

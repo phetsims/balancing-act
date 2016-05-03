@@ -12,6 +12,7 @@ define( function( require ) {
   var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Color = require( 'SCENERY/util/Color' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
@@ -327,6 +328,8 @@ define( function( require ) {
     } );
     thisScreen.controlLayer.addChild( positionIndicatorControlPanel );
   }
+
+  balancingAct.register( 'BalanceGameView', BalanceGameView );
 
   return inherit( ScreenView, BalanceGameView, {
 

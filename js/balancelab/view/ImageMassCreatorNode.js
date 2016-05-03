@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // module
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
 
@@ -25,6 +26,8 @@ define( function( require ) {
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
   }
+
+  balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
 
   return inherit( MassCreatorNode, ImageMassCreatorNode, {
 

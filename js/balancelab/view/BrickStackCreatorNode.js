@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -54,6 +55,8 @@ define( function( require ) {
     this.setSelectionNode( selectionNode );
     this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
   }
+
+  balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
 
   return inherit( MassCreatorNode, BrickStackCreatorNode, {
     addElementToModel: function( position ) {

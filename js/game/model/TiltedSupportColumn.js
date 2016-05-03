@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -29,6 +30,8 @@ define( function( require ) {
       lineTo( centerX + COLUMN_WIDTH / 2, 0 ).
       close();
   }
+
+  balancingAct.register( 'TiltedSupportColumn', TiltedSupportColumn );
 
   return TiltedSupportColumn;
 } );

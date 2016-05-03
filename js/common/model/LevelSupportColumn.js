@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -25,6 +26,8 @@ define( function( require ) {
   function LevelSupportColumn( height, centerX ) {
     this.shape = Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
   }
+
+  balancingAct.register( 'LevelSupportColumn', LevelSupportColumn );
 
   return LevelSupportColumn;
 } );

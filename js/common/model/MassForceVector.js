@@ -3,6 +3,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -18,6 +19,8 @@ define( function( require ) {
     this.mass = mass;
     this.forceVectorProperty = new Property( this.generateVector( mass ) );
   }
+
+  balancingAct.register( 'MassForceVector', MassForceVector );
 
   return inherit( Object, MassForceVector, {
     update: function() {

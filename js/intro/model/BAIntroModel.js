@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   var FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );
@@ -28,6 +29,8 @@ define( function( require ) {
     this.addMass( new FireExtinguisher( new Vector2( 3.2, 0 ), false ) );
     this.addMass( new SmallTrashCan( new Vector2( 3.7, 0 ), false ) );
   }
+
+  balancingAct.register( 'BAIntroModel', BAIntroModel );
 
   return inherit( BalanceModel, BAIntroModel, {
     reset: function() {

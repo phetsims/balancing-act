@@ -16,6 +16,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Mass = require( 'BALANCING_ACT/common/model/Mass' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -56,6 +57,8 @@ define( function( require ) {
     // Height at initiation of animation - needed for shrinking.
     this.animationStartHeight = height;
   }
+
+  balancingAct.register( 'ImageMass', ImageMass );
 
   return inherit( Mass, ImageMass, {
 

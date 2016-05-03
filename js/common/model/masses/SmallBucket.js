@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var blueBucketImage = require( 'image!BALANCING_ACT/blue-bucket.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function SmallBucket( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, blueBucketImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'SmallBucket', SmallBucket );
 
   return inherit( ImageMass, SmallBucket );
 } );

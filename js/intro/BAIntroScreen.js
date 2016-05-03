@@ -11,6 +11,7 @@ define( function( require ) {
   // imports
   var BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
   var BAIntroView = require( 'BALANCING_ACT/intro/view/BAIntroView' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -22,17 +23,18 @@ define( function( require ) {
   var introIcon = require( 'image!BALANCING_ACT/intro-icon.png' );
   var introIconSmall = require( 'image!BALANCING_ACT/intro-icon-small.png' );
 
-  function BalanceLabScreen() {
+  function BAIntroScreen() {
 
     Screen.call( this,
       introString,
       new Image( introIcon ),
       function() { return new BAIntroModel(); },
       function( model ) { return new BAIntroView( model ); },
-      {
-        navigationBarIcon: new Image( introIconSmall )
-      } );
+      { navigationBarIcon: new Image( introIconSmall ) }
+    );
   }
 
-  return inherit( Screen, BalanceLabScreen );
+  balancingAct.register( 'BAIntroScreen', BAIntroScreen );
+
+  return inherit( Screen, BAIntroScreen );
 } );

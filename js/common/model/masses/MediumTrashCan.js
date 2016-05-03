@@ -4,6 +4,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var trashCanImage = require( 'image!BALANCING_ACT/trash-can.png' );
@@ -20,6 +21,8 @@ define( function( require ) {
   function MediumTrashCan( initialPosition, isMystery ) {
     ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery );
   }
+
+  balancingAct.register( 'MediumTrashCan', MediumTrashCan );
 
   return inherit( ImageMass, MediumTrashCan );
 } );

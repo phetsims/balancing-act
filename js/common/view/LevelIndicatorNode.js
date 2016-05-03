@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -77,6 +78,8 @@ define( function( require ) {
       }
     } );
   }
+
+  balancingAct.register( 'LevelIndicatorNode', LevelIndicatorNode );
 
   return inherit( Node, LevelIndicatorNode );
 } );

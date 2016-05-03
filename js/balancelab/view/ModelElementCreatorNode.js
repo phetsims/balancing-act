@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -90,6 +91,8 @@ define( function( require ) {
       }
     } ) );
   }
+
+  balancingAct.register( 'ModelElementCreatorNode', ModelElementCreatorNode );
 
   return inherit( Node, ModelElementCreatorNode, {
     /**

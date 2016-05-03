@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Mass = require( 'BALANCING_ACT/common/model/Mass' );
   var Shape = require( 'KITE/Shape' );
@@ -45,6 +46,8 @@ define( function( require ) {
 
     Mass.call( this, numBricks * BRICK_MASS, initialPosition );
   }
+
+  balancingAct.register( 'BrickStack', BrickStack );
 
   return inherit( Mass, BrickStack, {
     createCopy: function() {

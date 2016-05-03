@@ -11,8 +11,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
+  var inherit = require( 'PHET_CORE/inherit' );
 
   /**
    * @constructor
@@ -20,6 +21,8 @@ define( function( require ) {
   function BalanceLabModel() {
     BalanceModel.call( this );
   }
+
+  balancingAct.register( 'BalanceLabModel', BalanceLabModel );
 
   return inherit( BalanceModel, BalanceLabModel, {
 

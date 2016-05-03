@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -32,6 +33,8 @@ define( function( require ) {
     HumanMass.call( this, MASS, girlStandingImage, STANDING_HEIGHT, girlSittingImage, SITTING_HEIGHT,
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
+
+  balancingAct.register( 'Girl', Girl );
 
   return inherit( HumanMass, Girl );
 } );

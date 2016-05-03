@@ -8,6 +8,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -74,6 +75,8 @@ define( function( require ) {
 
     Panel.call( this, positionMarkerVBox, options );
   }
+
+  balancingAct.register( 'PositionIndicatorControlPanel', PositionIndicatorControlPanel );
 
   return inherit( Panel, PositionIndicatorControlPanel );
 } );

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
@@ -116,6 +117,8 @@ define( function( require ) {
     timerToggleButton.left = options.controlsInset;
     timerToggleButton.bottom = soundToggleButton.top - 10;
   }
+
+  balancingAct.register( 'StartGameLevelNode', StartGameLevelNode );
 
   // Inherit from Node.
   return inherit( Node, StartGameLevelNode );

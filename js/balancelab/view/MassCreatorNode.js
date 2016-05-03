@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var ModelElementCreatorNode = require( 'BALANCING_ACT/balancelab/view/ModelElementCreatorNode' );
@@ -28,6 +29,8 @@ define( function( require ) {
       this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
     }
   }
+
+  balancingAct.register( 'MassCreatorNode', MassCreatorNode );
 
   return inherit( ModelElementCreatorNode, MassCreatorNode );
 } );

@@ -11,6 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -42,6 +43,8 @@ define( function( require ) {
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )
     ];
   }
+
+  balancingAct.register( 'BalanceModel', BalanceModel );
 
   return inherit( Object, BalanceModel, {
 

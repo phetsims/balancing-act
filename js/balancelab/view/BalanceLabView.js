@@ -7,6 +7,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
   var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
@@ -41,6 +42,8 @@ define( function( require ) {
         maxWidth: thisScreen.controlPanelBounds.width
       } ) );
   }
+
+  balancingAct.register( 'BalanceLabView', BalanceLabView );
 
   return inherit( BasicBalanceScreenView, BalanceLabView, {
     reset: function() {

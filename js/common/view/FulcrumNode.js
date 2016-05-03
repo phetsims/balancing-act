@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -21,6 +22,8 @@ define( function( require ) {
         stroke: 'black'
       } ) );
   }
+
+  balancingAct.register( 'FulcrumNode', FulcrumNode );
 
   return inherit( Node, FulcrumNode );
 } );
