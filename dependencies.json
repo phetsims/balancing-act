@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.2 Tue Jun 14 2016 10:59:09 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# balancing-act 1.1.2 Tue Jun 21 2016 15:47:10 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "a141879fba477c6c9433c1bd117321a3decb3003",
+    "sha": "0a98562f9d9697524f59d7018f3122527d4109f3",
     "branch": "1.1"
   },
   "brand": {
@@ -17,16 +17,16 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "b3a8a3c24b598badc3b1089aa0eb28c812c47fa0",
-    "branch": "HEAD"
+    "sha": "b8e27904ac17356060d042541273ecb54be52f86",
+    "branch": "balancing-act-1.1"
   },
   "dot": {
     "sha": "da78031b6f080d20bc8346beaa1d37148188371e",
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "28f510089c0f5312ca58526b10ff063466ebbc5a",
-    "branch": "HEAD"
+    "sha": "b7fb2c999f13d64992d2c9e8338a3b89d51f8a58",
+    "branch": "balancing-act-1.1"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -49,8 +49,8 @@
     "branch": "HEAD"
   },
   "sherpa": {
-    "sha": "bb68bbbc6e8e3ce98fc37a956f1e19fe8365c107",
-    "branch": "HEAD"
+    "sha": "cd375f2aeb9ef426c27b5922d6e20a7b1393b8e2",
+    "branch": "balancing-act-1.1"
   },
   "sun": {
     "sha": "2b83e994039b2d33845d5e51d7735d144c188d97",
