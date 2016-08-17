@@ -28,8 +28,7 @@ define( function( require ) {
         softwareDevelopment: 'John Blanco',
         graphicArts: 'John Blanco, Mariah Hermsmeyer',
         team: 'Michael Dubson, Trish Loeblein'
-      },
-      tandem: tandem
+      }
     };
 
     // Create and start the sim
