@@ -56,6 +56,8 @@ define( function( require ) {
     var slider = new HSlider( thisNode.sliderValue, { min: 0, max: MAX_MASS },
       {
         thumbSize: new Dimension2( 15, 30 ),
+        thumbTouchAreaXDilation: 8,
+        thumbTouchAreaYDilation: 8,
         majorTickLength: 15,
         tickLabelSpacing: 2
       } );
