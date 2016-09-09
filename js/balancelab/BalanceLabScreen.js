@@ -25,14 +25,17 @@ define( function( require ) {
 
   function BalanceLabScreen( tandem ) {
 
+    var options = {
+      name: balanceLabString,
+      homeScreenIcon: new Image( labIcon ),
+      navigationBarIcon: new Image( labIconSmall ),
+      tandem: tandem
+    };
+
     Screen.call( this,
-      balanceLabString,
-      new Image( labIcon ),
       function() { return new BalanceLabModel(); },
-      function( model ) {return new BalanceLabView( model ); }, {
-        navigationBarIcon: new Image( labIconSmall ),
-        tandem: tandem
-      } );
+      function( model ) {return new BalanceLabView( model ); },
+      options );
   }
 
   balancingAct.register( 'BalanceLabScreen', BalanceLabScreen );

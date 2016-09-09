@@ -25,14 +25,17 @@ define( function( require ) {
 
   function BAIntroScreen( tandem ) {
 
+    var options = {
+      name: introString,
+      homeScreenIcon: new Image( introIcon ),
+      navigationBarIcon: new Image( introIconSmall ),
+      tandem: tandem
+    };
+
     Screen.call( this,
-      introString,
-      new Image( introIcon ),
       function() { return new BAIntroModel(); },
-      function( model ) { return new BAIntroView( model ); }, {
-        navigationBarIcon: new Image( introIconSmall ),
-        tandem: tandem
-      } );
+      function( model ) { return new BAIntroView( model ); },
+      options );
   }
 
   balancingAct.register( 'BAIntroScreen', BAIntroScreen );

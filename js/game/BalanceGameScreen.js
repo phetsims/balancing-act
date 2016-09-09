@@ -24,16 +24,18 @@ define( function( require ) {
   var gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
 
   function BalanceGameScreen( tandem ) {
-    Screen.call(
-      this,
-      gameString,
-      new Image( gameIcon ),
+
+    var options = {
+      name: gameString,
+      homeScreenIcon: new Image( gameIcon ),
+      navigationBarIcon: new Image( gameIconSmall ),
+      tandem: tandem
+    };
+
+    Screen.call( this,
       function() { return new BalanceGameModel(); },
-      function( model ) { return new BalanceGameView( model ); }, {
-        navigationBarIcon: new Image( gameIconSmall ),
-        tandem: tandem
-      }
-    );
+      function( model ) { return new BalanceGameView( model ); },
+      options );
   }
 
   balancingAct.register( 'BalanceGameScreen', BalanceGameScreen );
