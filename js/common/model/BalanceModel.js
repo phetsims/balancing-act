@@ -30,15 +30,15 @@ define( function( require ) {
    */
   function BalanceModel() {
 
-    var thisModel = this;
+    var self = this;
 
     // Model elements
-    thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
-    thisModel.massList = new ObservableArray();
-    thisModel.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
-    thisModel.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
-    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty, this.userControlledMasses );
-    thisModel.supportColumns = [
+    self.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
+    self.massList = new ObservableArray();
+    self.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
+    self.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
+    self.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), this.columnStateProperty, this.userControlledMasses );
+    self.supportColumns = [
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )
     ];
@@ -59,16 +59,16 @@ define( function( require ) {
     // Add a mass to the model.  Subclasses generally do additional things.
     addMass: function( mass ) {
       this.massList.push( mass );
-      var thisModel = this;
+      var self = this;
 
       // Add a listener that will update the list of user controlled masses
       // that is used by the plank to update the active drop locations.
       var userControlledMassesUpdater = function( userControlled ) {
         if ( userControlled ) {
-          thisModel.userControlledMasses.push( mass );
+          self.userControlledMasses.push( mass );
         }
         else {
-          thisModel.userControlledMasses.splice( thisModel.userControlledMasses.indexOf( mass ), 1 );
+          self.userControlledMasses.splice( self.userControlledMasses.indexOf( mass ), 1 );
         }
       };
       mass.userControlledProperty.link( userControlledMassesUpdater );

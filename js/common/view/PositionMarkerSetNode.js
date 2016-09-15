@@ -16,7 +16,7 @@ define( function( require ) {
 
   function PositionMarkerSetNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Add the individual position markers.
     var numTickMarks = Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE - 1;
@@ -24,19 +24,19 @@ define( function( require ) {
     for ( var i = 0; i < numTickMarks; i++ ) {
       var label = Math.abs( i - Math.floor( numTickMarks / 2 ) );
       if ( label !== 0 ) {
-        thisNode.addChild( new PositionMarkerNode( label, { centerX: i * interMarkerDistance } ) );
+        self.addChild( new PositionMarkerNode( label, { centerX: i * interMarkerDistance } ) );
       }
     }
 
     // Observe visibility.
     visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
 
     // Set initial position.
     var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocation );
-    thisNode.top = topCenter.y;
-    thisNode.centerX = topCenter.x;
+    self.top = topCenter.y;
+    self.centerX = topCenter.x;
 
     // Rotate with the plank.
     var rotationAngle = 0;
@@ -44,7 +44,7 @@ define( function( require ) {
     plank.tiltAngleProperty.link( function( angle ) {
       var deltaAngle = rotationAngle - angle;
       rotationAngle = angle;
-      thisNode.rotateAround( rotationPoint, deltaAngle );
+      self.rotateAround( rotationPoint, deltaAngle );
     } );
   }
 

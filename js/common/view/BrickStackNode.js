@@ -32,10 +32,10 @@ define( function( require ) {
    */
   function BrickStackNode( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
-    var thisNode = this;
-    thisNode.brickStack = brickStack;
-    thisNode.modelViewTransform = modelViewTransform;
-    thisNode.previousAngle = 0;
+    var self = this;
+    self.brickStack = brickStack;
+    self.modelViewTransform = modelViewTransform;
+    self.previousAngle = 0;
 
     // Create and add the main shape node.
     var transformedBrickShape = modelViewTransform.modelToViewShape( brickStack.shape );
@@ -45,7 +45,7 @@ define( function( require ) {
       lineWidth: 1,
       touchArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
-    thisNode.addChild( shapeNode );
+    self.addChild( shapeNode );
 
     // Create and add the mass label.
     if ( isLabeled ) {
@@ -79,7 +79,7 @@ define( function( require ) {
       }
       massLabel.centerX = shapeNode.centerX;
       massLabel.bottom = shapeNode.top - 1;
-      thisNode.addChild( massLabel );
+      self.addChild( massLabel );
 
       // Control label visibility.
       labelVisibleProperty.link( function( visible ) {
@@ -90,17 +90,17 @@ define( function( require ) {
     // Set initial position and record so deltas can be subsequently used.
     // This helps minimize transformation when moving the items.
 
-    var offsetToBottom = new Vector2( 0, -thisNode.height / 2 );
+    var offsetToBottom = new Vector2( 0, -self.height / 2 );
     var previousRotationAngle = 0;
 
     // Monitor the brick stack for position and angle changes.
     brickStack.rotationAngleProperty.link( function( newAngle ) {
-      thisNode.rotateAround( thisNode.center.plus( offsetToBottom ), previousRotationAngle - brickStack.rotationAngle );
+      self.rotateAround( self.center.plus( offsetToBottom ), previousRotationAngle - brickStack.rotationAngle );
       offsetToBottom = offsetToBottom.rotated( previousRotationAngle - brickStack.rotationAngle );
       previousRotationAngle = brickStack.rotationAngle;
     } );
     brickStack.positionProperty.link( function( newPosition ) {
-      thisNode.center = modelViewTransform.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
+      self.center = modelViewTransform.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
     } );
 
     // Add event listener for mouse activity.

@@ -34,7 +34,7 @@ define( function( require ) {
    */
   function RotatingRulerNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Set up the tick mark labels.
     var rulerLengthInModel = Plank.LENGTH - 0.5; // Take 1/2 meter off end of ruler so it doesn't exceed plank length.
@@ -59,24 +59,30 @@ define( function( require ) {
         majorTickFont: new PhetFont( 11 ),
         tickMarksOnBottom: false
       } );
-    thisNode.addChild( rulerNode );
+    self.addChild( rulerNode );
 
     // Add a line in the center of the ruler to make it look like two separate rulers.
-    thisNode.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
+    self.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
 
     // Add a units label on each side.
-    thisNode.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, { centerX: rulerNode.width * 0.25, bottom: RULER_HEIGHT } ) );
-    thisNode.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, { centerX: rulerNode.width * 0.75, bottom: RULER_HEIGHT } ) );
+    self.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, {
+      centerX: rulerNode.width * 0.25,
+      bottom: RULER_HEIGHT
+    } ) );
+    self.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, {
+      centerX: rulerNode.width * 0.75,
+      bottom: RULER_HEIGHT
+    } ) );
 
     // Observe visibility.
     visibleProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
 
     // Set initial position.
     var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocation );
-    thisNode.top = topCenter.y;
-    thisNode.centerX = topCenter.x;
+    self.top = topCenter.y;
+    self.centerX = topCenter.x;
 
     // Rotate with the plank.
     var rulerRotationAngle = 0;
@@ -84,7 +90,7 @@ define( function( require ) {
     plank.tiltAngleProperty.link( function( angle ) {
       var deltaAngle = rulerRotationAngle - angle;
       rulerRotationAngle = angle;
-      thisNode.rotateAround( rotationPoint, deltaAngle );
+      self.rotateAround( rotationPoint, deltaAngle );
     } );
   }
 

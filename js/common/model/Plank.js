@@ -35,8 +35,8 @@ define( function( require ) {
    * @constructor
    */
   function Plank( location, pivotPoint, columnState, userControlledMasses ) {
-    var thisPlank = this;
-    thisPlank.userControlledMasses = userControlledMasses;
+    var self = this;
+    self.userControlledMasses = userControlledMasses;
 
     PropertySet.call( this,
       {
@@ -55,41 +55,41 @@ define( function( require ) {
       } );
 
     // Externally visible observable lists.
-    thisPlank.massesOnSurface = new ObservableArray();
-    thisPlank.forceVectors = new ObservableArray();
-    thisPlank.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
+    self.massesOnSurface = new ObservableArray();
+    self.forceVectors = new ObservableArray();
+    self.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
 
     // Other external visible attributes.
-    thisPlank.pivotPoint = pivotPoint;
+    self.pivotPoint = pivotPoint;
 
     // Map of masses to distance from the plank's center.
-    thisPlank.massDistancePairs = [];
+    self.massDistancePairs = [];
 
     // Variables that need to be retained for dynamic behavior, but are not
     // intended to be accessed externally.
-    thisPlank.columnState = columnState;
-    thisPlank.angularVelocity = 0;
-    thisPlank.currentNetTorque = 0;
+    self.columnState = columnState;
+    self.angularVelocity = 0;
+    self.currentNetTorque = 0;
 
     // Calculate the max angle at which the plank can tilt before hitting
     // the ground.  NOTE: This assumes a small distance between the pivot
     // point and the bottom of the plank.  If this assumption changes, or
     // if the fulcrum becomes movable, the way this is done will need to
     // change.
-    thisPlank.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
+    self.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
 
     // Unrotated shape of the plank
-    thisPlank.unrotatedShape = Shape.rect( location.x - PLANK_LENGTH / 2, location.y, PLANK_LENGTH, PLANK_THICKNESS );
+    self.unrotatedShape = Shape.rect( location.x - PLANK_LENGTH / 2, location.y, PLANK_LENGTH, PLANK_THICKNESS );
 
     // Listen to the support column property.  The plank goes to the level
     // position whenever there are two columns present, and into a tilted
     // position when only one is present.
     columnState.link( function( newColumnState ) {
       if ( newColumnState === 'singleColumn' ) {
-        thisPlank.forceToMaxAndStill();
+        self.forceToMaxAndStill();
       }
       else if ( newColumnState === 'doubleColumns' ) {
-        thisPlank.forceToLevelAndStill();
+        self.forceToLevelAndStill();
       }
     } );
   }
@@ -100,70 +100,70 @@ define( function( require ) {
   return inherit( PropertySet, Plank, {
 
       step: function( dt ) {
-        var thisPlank = this;
-        if ( !thisPlank.userControlled ) {
+        var self = this;
+        if ( !self.userControlled ) {
           var angularAcceleration;
-          thisPlank.updateNetTorque();
+          self.updateNetTorque();
 
           // Update the angular acceleration and velocity.  There is some
           // thresholding here to prevent the plank from oscillating forever
           // with small values, since this can cause odd-looking movements
           // of the planks and masses.  The thresholds were empirically
           // determined.
-          angularAcceleration = thisPlank.currentNetTorque / MOMENT_OF_INERTIA;
+          angularAcceleration = self.currentNetTorque / MOMENT_OF_INERTIA;
           angularAcceleration = Math.abs( angularAcceleration ) > 0.00001 ? angularAcceleration : 0;
-          thisPlank.angularVelocity += angularAcceleration;
-          thisPlank.angularVelocity = Math.abs( thisPlank.angularVelocity ) > 0.00001 ? thisPlank.angularVelocity : 0;
+          self.angularVelocity += angularAcceleration;
+          self.angularVelocity = Math.abs( self.angularVelocity ) > 0.00001 ? self.angularVelocity : 0;
 
           // Update the angle of the plank's tilt based on the angular velocity.
-          var previousTiltAngle = thisPlank.tiltAngle;
-          var newTiltAngle = thisPlank.tiltAngle + thisPlank.angularVelocity * dt;
-          if ( Math.abs( newTiltAngle ) > thisPlank.maxTiltAngle ) {
+          var previousTiltAngle = self.tiltAngle;
+          var newTiltAngle = self.tiltAngle + self.angularVelocity * dt;
+          if ( Math.abs( newTiltAngle ) > self.maxTiltAngle ) {
             // Limit the angle when one end is touching the ground.
-            newTiltAngle = thisPlank.maxTiltAngle * ( thisPlank.tiltAngle < 0 ? -1 : 1 );
-            thisPlank.angularVelocity = 0;
+            newTiltAngle = self.maxTiltAngle * ( self.tiltAngle < 0 ? -1 : 1 );
+            self.angularVelocity = 0;
           }
           else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
             // Below a certain threshold just force the tilt angle to be
             // zero so that it appears perfectly level.
             newTiltAngle = 0;
           }
-          thisPlank.tiltAngle = newTiltAngle;
+          self.tiltAngle = newTiltAngle;
 
           // Update the shape of the plank and the positions of the masses on
           // the surface, but only if the tilt angle has changed.
-          if ( thisPlank.tiltAngle !== previousTiltAngle ) {
-            thisPlank.updatePlank();
-            thisPlank.updateMassPositions();
+          if ( self.tiltAngle !== previousTiltAngle ) {
+            self.updatePlank();
+            self.updateMassPositions();
           }
 
           // Simulate friction by slowing down the rotation a little.
-          thisPlank.angularVelocity *= 0.91;
+          self.angularVelocity *= 0.91;
         }
 
         // Update the active drop locations.
         var tempDropLocations = [];
-        thisPlank.userControlledMasses.forEach( function( userControlledMass ) {
-          if ( thisPlank.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
-            var closestOpenLocation = thisPlank.getOpenMassDroppedLocation( userControlledMass.position );
+        self.userControlledMasses.forEach( function( userControlledMass ) {
+          if ( self.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
+            var closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.position );
             if ( closestOpenLocation ) {
-              var plankSurfaceCenter = thisPlank.getPlankSurfaceCenter();
+              var plankSurfaceCenter = self.getPlankSurfaceCenter();
               var distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
               tempDropLocations.push( distanceFromCenter );
             }
           }
         } );
-        var copyOfActiveDropLocations = thisPlank.activeDropLocations.getArray().slice( 0 );
+        var copyOfActiveDropLocations = self.activeDropLocations.getArray().slice( 0 );
         // Remove newly inactive drop locations.
         copyOfActiveDropLocations.forEach( function( activeDropLocation ) {
           if ( tempDropLocations.indexOf( activeDropLocation ) < 0 ) {
-            thisPlank.activeDropLocations.remove( activeDropLocation );
+            self.activeDropLocations.remove( activeDropLocation );
           }
         } );
         // Add any new active drop locations.
         tempDropLocations.forEach( function( dropLocation ) {
-          if ( !thisPlank.activeDropLocations.contains( dropLocation ) ) {
-            thisPlank.activeDropLocations.add( dropLocation );
+          if ( !self.activeDropLocations.contains( dropLocation ) ) {
+            self.activeDropLocations.add( dropLocation );
           }
         } );
       },
@@ -185,12 +185,12 @@ define( function( require ) {
           this.forceVectors.push( new MassForceVector( mass ) );
 
           // Add an observer that will remove this mass when the user picks it up.
-          var thisPlank = this;
+          var self = this;
           var userControlledObserver = function( userControlled ) {
             if ( userControlled ) {
               // The user has picked up this mass, so it is no longer
               // on the surface.
-              thisPlank.removeMassFromSurface( mass );
+              self.removeMassFromSurface( mass );
               mass.userControlledProperty.unlink( userControlledObserver );
             }
           };
@@ -220,15 +220,15 @@ define( function( require ) {
       },
 
       updateMassPositions: function() {
-        var thisPlank = this;
+        var self = this;
         this.massesOnSurface.forEach( function( mass ) {
           // Compute the vector from the center of the plank's surface to
           // the bottom of the mass, in meters.
-          var vectorFromCenterToMass = new Vector2( thisPlank.getMassDistanceFromCenter( mass ), 0 ).rotated( thisPlank.tiltAngle );
+          var vectorFromCenterToMass = new Vector2( self.getMassDistanceFromCenter( mass ), 0 ).rotated( self.tiltAngle );
 
           // Set the position and rotation of the mass.
-          mass.rotationAngle = thisPlank.tiltAngle;
-          mass.position = thisPlank.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
+          mass.rotationAngle = self.tiltAngle;
+          mass.position = self.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
         } );
 
         // Update the force vectors from the masses.  This mostly just moves
@@ -269,9 +269,9 @@ define( function( require ) {
 
       removeAllMasses: function() {
         var copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
-        var thisPlank = this;
+        var self = this;
         copyOfMassesArray.forEach( function( mass ) {
-          thisPlank.removeMassFromSurface( mass );
+          self.removeMassFromSurface( mass );
         } );
       },
 
@@ -296,7 +296,7 @@ define( function( require ) {
       // Find the best open location for a mass that was dropped at the given
       // point.  Returns null if no nearby open location is available.
       getOpenMassDroppedLocation: function( position ) {
-        var thisPlank = this;
+        var self = this;
         var closestOpenLocation = null;
         var validMassLocations = this.getSnapToLocations();
         if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
@@ -313,8 +313,8 @@ define( function( require ) {
           if ( Math.abs( validLocation.x - position.x ) > INTER_SNAP_TO_MARKER_DISTANCE * 2 ) {
             occupiedOrTooFar = true;
           }
-          for ( var i = 0; i < thisPlank.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
-            if ( thisPlank.massesOnSurface.get( i ).position.distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+          for ( var i = 0; i < self.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
+            if ( self.massesOnSurface.get( i ).position.distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               occupiedOrTooFar = true;
             }
           }
@@ -427,9 +427,9 @@ define( function( require ) {
        */
       isBalanced: function() {
         var unCompensatedTorque = 0;
-        var thisPlank = this;
+        var self = this;
         this.massesOnSurface.forEach( function( mass ) {
-          unCompensatedTorque += mass.massValue * thisPlank.getMassDistanceFromCenter( mass );
+          unCompensatedTorque += mass.massValue * self.getMassDistanceFromCenter( mass );
         } );
 
         // Account for floating point error, just make sure it is close enough.
@@ -449,10 +449,10 @@ define( function( require ) {
       },
 
       getTorqueDueToMasses: function() {
-        var thisPlank = this;
+        var self = this;
         var torque = 0;
         this.massesOnSurface.forEach( function( mass ) {
-          torque += thisPlank.pivotPoint.x - mass.position.x * mass.massValue;
+          torque += self.pivotPoint.x - mass.position.x * mass.massValue;
         } );
         return torque;
       },

@@ -33,22 +33,22 @@ define( function( require ) {
   function ModelElementCreatorNode( modelViewTransform, options ) {
     options = _.extend( { cursor: 'pointer' }, options );
     Node.call( this, options );
-    var thisNode = this;
+    var self = this;
 
     // Element in the model that is being moved by the user.  Only non-null if
     // the user performed some action that caused this to be created, such as
     // clicking on this node.
-    thisNode.modelElement = null;
+    self.modelElement = null;
 
     // Offset used when adding an element to the model.  This is useful in
     // making sure that the newly created object isn't positioned in, shall we
     // say, an awkward location with respect to the mouse.
-    thisNode.positioningOffset = Vector2.ZERO;
+    self.positioningOffset = Vector2.ZERO;
 
     // Function for translating click events to model coordinates.
     function eventToModelPosition( position ) {
       if ( parentScreenView !== null ) {
-        return modelViewTransform.viewToModelPosition( parentScreenView.globalToLocalPoint( position ).plus( thisNode.positioningOffset ) );
+        return modelViewTransform.viewToModelPosition( parentScreenView.globalToLocalPoint( position ).plus( self.positioningOffset ) );
       }
       return position;
     }
@@ -63,7 +63,7 @@ define( function( require ) {
 
         if ( !parentScreenView ) {
           // Move up the scene graph until the parent screen is found.
-          var testNode = thisNode;
+          var testNode = self;
           while ( testNode !== null ) {
             if ( testNode instanceof ScreenView ) {
               parentScreenView = testNode;
@@ -75,19 +75,19 @@ define( function( require ) {
         }
 
         // Create a new node and add it to the model.
-        thisNode.modelElement = thisNode.addElementToModel( eventToModelPosition( event.pointer.point ) );
+        self.modelElement = self.addElementToModel( eventToModelPosition( event.pointer.point ) );
       },
 
       drag: function( event ) {
-        if ( thisNode.modelElement !== null ) {
+        if ( self.modelElement !== null ) {
           // Move the node.
-          thisNode.modelElement.position = eventToModelPosition( event.pointer.point );
+          self.modelElement.position = eventToModelPosition( event.pointer.point );
         }
       },
       end: function( event ) {
         // The user has released the node.
-        thisNode.modelElement.release();
-        thisNode.modelElement = null;
+        self.modelElement.release();
+        self.modelElement = null;
         parentScreenView = null;
       }
     } ) );

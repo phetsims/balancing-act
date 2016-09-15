@@ -31,7 +31,7 @@ define( function( require ) {
    */
   function PlankNode( modelViewTransform, plank ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Create and position the plank.
     var plankViewBounds = modelViewTransform.modelToViewShape( plank.unrotatedShape ).bounds;
@@ -41,7 +41,7 @@ define( function( require ) {
         stroke: 'black',
         lineThickness: 1
       } );
-    thisNode.addChild( plankNode );
+    self.addChild( plankNode );
 
     // Function for mapping plank distance relative to the center point to a highlight.
     function mapLocationToHighlightIndex( distanceFromCenter ) {
@@ -50,11 +50,11 @@ define( function( require ) {
 
     // Function for updating the highlights
     function updateHighlights() {
-      thisNode.highlights.forEach( function( highlight ) {
+      self.highlights.forEach( function( highlight ) {
         highlight.visible = false;
       } );
       plank.activeDropLocations.forEach( function( location ) {
-        thisNode.highlights[ mapLocationToHighlightIndex( location ) ].visible = true;
+        self.highlights[ mapLocationToHighlightIndex( location ) ].visible = true;
       } );
     }
 

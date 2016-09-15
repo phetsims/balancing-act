@@ -24,23 +24,21 @@ define( function( require ) {
    */
   function BalanceLabView( model ) {
     BasicBalanceScreenView.call( this, model );
-    var thisScreen = this;
+    var self = this;
 
     // Add the mass selection carousel.
-    this.massKitSelectionNode = new MassKitSelectionNode( model, thisScreen.modelViewTransform );
-    thisScreen.nonMassLayer.addChild( new Panel( new VBox(
-        {
-          children: [
-            new HStrut( thisScreen.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
-            this.massKitSelectionNode ]
-        } ),
-      {
-        centerX: thisScreen.controlPanelBounds.centerX,
-        top: thisScreen.controlPanelBounds.bottom + 5,
-        xMargin: PANEL_X_MARGIN,
-        fill: 'rgb( 240, 240, 240 )',
-        maxWidth: thisScreen.controlPanelBounds.width
-      } ) );
+    this.massKitSelectionNode = new MassKitSelectionNode( model, self.modelViewTransform );
+    self.nonMassLayer.addChild( new Panel( new VBox( {
+      children: [
+        new HStrut( self.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
+        this.massKitSelectionNode ]
+    } ), {
+      centerX: self.controlPanelBounds.centerX,
+      top: self.controlPanelBounds.bottom + 5,
+      xMargin: PANEL_X_MARGIN,
+      fill: 'rgb( 240, 240, 240 )',
+      maxWidth: self.controlPanelBounds.width
+    } ) );
   }
 
   balancingAct.register( 'BalanceLabView', BalanceLabView );

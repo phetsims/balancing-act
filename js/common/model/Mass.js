@@ -19,51 +19,50 @@ define( function( require ) {
   var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
   function Mass( massValue, initialPosition, isMystery ) {
-    var thisMass = this;
-    PropertySet.call( this,
-      {
-        // Property that indicates whether this mass is currently user controlled,
-        // i.e. being moved around by the user.
-        userControlled: false,
+    var self = this;
+    PropertySet.call( this, {
+      // Property that indicates whether this mass is currently user controlled,
+      // i.e. being moved around by the user.
+      userControlled: false,
 
-        // Property that contains the position in model space.  By convention for
-        // this simulation, the position of a mass is the center bottom of the
-        // model object.
-        position: initialPosition,
+      // Property that contains the position in model space.  By convention for
+      // this simulation, the position of a mass is the center bottom of the
+      // model object.
+      position: initialPosition,
 
-        // Property that contains the rotation angle, in radians, of the model
-        // element.  By convention for this simulation, the point of rotation is
-        // considered to be the center bottom of the model element.
-        rotationAngle: 0,
+      // Property that contains the rotation angle, in radians, of the model
+      // element.  By convention for this simulation, the point of rotation is
+      // considered to be the center bottom of the model element.
+      rotationAngle: 0,
 
-        // Property that tracks whether this mass is on the plank, changes to
-        // which may initiate changes in the visual depiction of the mass.
-        onPlank: false,
+      // Property that tracks whether this mass is on the plank, changes to
+      // which may initiate changes in the visual depiction of the mass.
+      onPlank: false,
 
-        // Boolean property that indicates whether this model element is currently
-        // animating.  At the time of this writing, the only animation supported
-        // is a simple linear motion to a preset point.
-        animating: false
-      } );
+      // Boolean property that indicates whether this model element is currently
+      // animating.  At the time of this writing, the only animation supported
+      // is a simple linear motion to a preset point.
+      animating: false
+    } );
 
     //------------------------------------------------------------------------
     // Externally used (i.e. public) attributes that don't need to be properties.
     //------------------------------------------------------------------------
-    thisMass.massValue = massValue;
-    thisMass.animationDestination = null;
-    thisMass.animationMotionVector = null;
-    thisMass.animationScale = 1;
-    thisMass.expectedAnimationTime = 0;
-    thisMass.isMystery = isMystery;
+    self.massValue = massValue;
+    self.animationDestination = null;
+    self.animationMotionVector = null;
+    self.animationScale = 1;
+    self.expectedAnimationTime = 0;
+    self.isMystery = isMystery;
 
     // This property is used to keep track of a function that is used to to
     // add/remove this mass from a list of user-controlled masses.
-    thisMass.userControlledMassesUpdater = null;
+    self.userControlledMassesUpdater = null;
 
     // Since not all objects are symmetrical, some may need to have an offset
     // that indicates where their center of mass is when placed on a balance.
     // This is the horizontal offset from the center of the shape or image.
-    thisMass.centerOfMassXOffset = 0;
+    self.centerOfMassXOffset = 0;
   }
 
   balancingAct.register( 'Mass', Mass );

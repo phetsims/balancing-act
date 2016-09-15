@@ -76,8 +76,8 @@ define( function( require ) {
     assert && assert( options.majorTickHeight < height / 2 );
     assert && assert( options.minorTickHeight < height / 2 );
 
-    var thisNode = this;
-    Node.call( thisNode, options );
+    var self = this;
+    Node.call( self, options );
 
     // background
     var backgroundNode = new Rectangle( 0, 0, width + ( 2 * options.insetsWidth ), height,
@@ -86,7 +86,7 @@ define( function( require ) {
         stroke: options.backgroundStroke,
         lineWidth: options.backgroundLineWidth
       } );
-    thisNode.addChild( backgroundNode );
+    self.addChild( backgroundNode );
 
     // Lay out tick marks from left to right
     var minorTickWidth = majorTickWidth / ( options.minorTicksPerMajorTick + 1 );

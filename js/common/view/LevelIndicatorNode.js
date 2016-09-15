@@ -27,7 +27,7 @@ define( function( require ) {
 
   function LevelIndicatorNode( modelViewTransform, plank ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Locations for left and right edge
     var leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
@@ -54,7 +54,7 @@ define( function( require ) {
         right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
         centerY: leftEdgeOfPlank.y
       } );
-    thisNode.addChild( leftLevelIndicatorNode );
+    self.addChild( leftLevelIndicatorNode );
 
     var reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
     var rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
@@ -64,7 +64,7 @@ define( function( require ) {
         left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,
         centerY: rightEdgeOfPlank.y
       } );
-    thisNode.addChild( rightLevelIndicatorNode );
+    self.addChild( rightLevelIndicatorNode );
 
     //Highlight if the plank is level
     plank.tiltAngleProperty.link( function( tiltAngle ) {

@@ -28,21 +28,21 @@ define( function( require ) {
    */
   function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
     ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
-    var thisMass = this;
+    var self = this;
 
     // Monitor the 'onPlank' property and update the image as changes occur.
-    thisMass.onPlankProperty.link( function( onPlank ) {
+    self.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
-        thisMass.centerOfMassXOffset = sittingCenterOfMassXOffset * ( thisMass.position.x < 0 ? -1 : 1 );
-        thisMass.height = sittingHeight;
-        thisMass.reverseImage = thisMass.position.x < 0;
-        thisMass.image = sittingImage;
+        self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( self.position.x < 0 ? -1 : 1 );
+        self.height = sittingHeight;
+        self.reverseImage = self.position.x < 0;
+        self.image = sittingImage;
       }
       else {
-        thisMass.centerOfMassXOffset = 0;
-        thisMass.height = standingHeight;
-        thisMass.reverseImage = false;
-        thisMass.image = standingImage;
+        self.centerOfMassXOffset = 0;
+        self.height = standingHeight;
+        self.reverseImage = false;
+        self.image = standingImage;
       }
     } );
   }

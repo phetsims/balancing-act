@@ -30,7 +30,7 @@ define( function( require ) {
    */
   function PositionedVectorNode( positionedVectorProperty, scalingFactor, visibilityProperty, modelViewTransform, options ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     options = _.extend(
       {
@@ -44,15 +44,15 @@ define( function( require ) {
 
     // Create the vector node and add it as a child.
     var length = positionedVectorProperty.value.vector.magnitude() * scalingFactor;
-    thisNode.addChild( new ArrowNode( 0, 0, 0, length, options ) );
+    self.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
     positionedVectorProperty.link( function( positionedVector ) {
-      thisNode.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
-      thisNode.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
+      self.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+      self.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
     } );
 
     visibilityProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

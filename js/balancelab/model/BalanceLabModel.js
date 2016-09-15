@@ -32,16 +32,16 @@ define( function( require ) {
     },
 
     addMass: function( mass ) {
-      var thisModel = this;
-      BalanceModel.prototype.addMass.call( thisModel, mass );
+      var self = this;
+      BalanceModel.prototype.addMass.call( self, mass );
       mass.userControlledProperty.lazyLink( function( isUserControlled ) {
         if ( !isUserControlled ) {
           // The user has dropped this mass.
-          if ( !thisModel.plank.addMassToSurface( mass ) ) {
+          if ( !self.plank.addMassToSurface( mass ) ) {
             // The attempt to add mass to surface of plank failed,
             // probably because the area below the mass is full,
             // or because the mass wasn't over the plank.
-            thisModel.removeMassAnimated( mass );
+            self.removeMassAnimated( mass );
           }
         }
       } );
@@ -49,14 +49,14 @@ define( function( require ) {
 
     removeMassAnimated: function( mass ) {
 
-      var thisModel = this;
+      var self = this;
 
       // Register a listener for the completion of the removal animation sequence.
       mass.animatingProperty.link( function( isAnimating, wasAnimating ) {
         if ( wasAnimating && !isAnimating ) {
           // Animation sequence has completed.
           mass.animatingProperty.unlink( this );
-          BalanceModel.prototype.removeMass.call( thisModel, mass );
+          BalanceModel.prototype.removeMass.call( self, mass );
         }
       } );
 

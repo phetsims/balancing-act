@@ -25,7 +25,7 @@ define( function( require ) {
    */
   function TiltedSupportColumnNode( modelViewTransform, tiltedSupportColumn, columnState ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Create and add the main body of the column.
     var transformedColumnShape = modelViewTransform.modelToViewShape( tiltedSupportColumn.shape );
@@ -41,7 +41,7 @@ define( function( require ) {
         stroke: 'black',
         lineWidth: 1
       } );
-    thisNode.addChild( columnNode );
+    self.addChild( columnNode );
 
     // Create and add the column support.
     var supportWidth = transformedColumnShape.bounds.width * 1.3; // Empirically determined.
@@ -63,10 +63,10 @@ define( function( require ) {
         stroke: 'black',
         lineWidth: 1
       } );
-    thisNode.addChild( columnSupportNode );
+    self.addChild( columnSupportNode );
 
     columnState.link( function( state ) {
-      thisNode.visible = state === 'singleColumn';
+      self.visible = state === 'singleColumn';
     } );
   }
 

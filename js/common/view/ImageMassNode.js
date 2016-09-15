@@ -38,7 +38,7 @@ define( function( require ) {
    */
   function ImageMassNode( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
-    var thisNode = this;
+    var self = this;
 
     if ( isLabeled ) {
 
@@ -50,7 +50,7 @@ define( function( require ) {
         { font: new PhetFont( 12 ) },
         { pickable: false } // this is done as a workaround for an issue with RasterizedTextNode, can be made pickable if replaced with Text
       );
-      thisNode.addChild( massLabel );
+      self.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.
       massLabelVisibleProperty.link( function( visible ) {
@@ -83,17 +83,17 @@ define( function( require ) {
 
     // Function for updating position and angle, used in multiple places below.
     function updatePositionAndAngle() {
-      if ( thisNode.bounds.isFinite() ) {
+      if ( self.bounds.isFinite() ) {
 
-        thisNode.rotation = 0;
+        self.rotation = 0;
 
         // Set overall position.  Recall that positions in the model are defined
         // as the center bottom of the item.
-        thisNode.centerX = modelViewTransform.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
-        thisNode.bottom = modelViewTransform.modelToViewY( imageMass.position.y );
+        self.centerX = modelViewTransform.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
+        self.bottom = modelViewTransform.modelToViewY( imageMass.position.y );
 
         // Set the rotation.  Rotation point is the center bottom.
-        thisNode.rotateAround( new Vector2(
+        self.rotateAround( new Vector2(
           modelViewTransform.modelToViewX( imageMass.position.x ),
           modelViewTransform.modelToViewY( imageMass.position.y ) ),
           -imageMass.rotationAngle
@@ -102,7 +102,7 @@ define( function( require ) {
     }
 
     // Add the image node.
-    thisNode.addChild( imageNode );
+    self.addChild( imageNode );
 
     // Make the image node visible to descendant classes for layout purposes.
     this.imageNode = imageNode;
@@ -127,7 +127,7 @@ define( function( require ) {
 
     // Add the mouse event handler.
     if ( draggable ) {
-      thisNode.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
+      self.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
     }
   }
 

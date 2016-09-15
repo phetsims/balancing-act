@@ -27,8 +27,8 @@ define( function( require ) {
    */
   function MysteryMassNode( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
     ImageMassNode.call( this, mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable );
-    var thisNode = this;
-    var inset = thisNode.imageNode.width * INSET_PROPORTION;
+    var self = this;
+    var inset = self.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
     var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
@@ -42,19 +42,19 @@ define( function( require ) {
     label.addChild( labelText.mutate( { centerX: label.centerX, centerY: label.centerY } ) );
 
     // Scale the label to fit.
-    var widthScale = ( thisNode.imageNode.width - ( 2 * inset ) ) / label.width;
-    var heightScale = ( thisNode.imageNode.height - ( 2 * inset ) ) / label.height;
+    var widthScale = ( self.imageNode.width - ( 2 * inset ) ) / label.width;
+    var heightScale = ( self.imageNode.height - ( 2 * inset ) ) / label.height;
     label.scale( Math.min( widthScale, heightScale ) );
 
     // Position the label on the image.  TWEAK WARNING - These labels are
     // positioned a little below the center because it looked better on the
     // initial set of mystery masses.  May require adjustment if the artwork
     // for the mystery masses changes.
-    label.centerX = thisNode.imageNode.centerX;
-    label.centerY = thisNode.imageNode.centerY + thisNode.imageNode.height * 0.2;
+    label.centerX = self.imageNode.centerX;
+    label.centerY = self.imageNode.centerY + self.imageNode.height * 0.2;
 
     // Add the label as a child.
-    thisNode.addChild( label );
+    self.addChild( label );
   }
 
   balancingAct.register( 'MysteryMassNode', MysteryMassNode );

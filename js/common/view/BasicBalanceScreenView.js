@@ -58,11 +58,11 @@ define( function( require ) {
    */
   function BasicBalanceScreenView( model ) {
     ScreenView.call( this, { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
-    var thisScreen = this;
-    thisScreen.model = model;
+    var self = this;
+    self.model = model;
 
     // Define the properties that control visibility of various display elements.
-    thisScreen.viewProperties = new PropertySet( {
+    self.viewProperties = new PropertySet( {
       massLabelsVisible: true,
       forceVectorsFromObjectsVisible: false,
       levelIndicatorVisible: false,
@@ -74,13 +74,13 @@ define( function( require ) {
     // ground just below the center of the balance, is located in the view.
     var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.79 ),
+      new Vector2( self.layoutBounds.width * 0.375, self.layoutBounds.height * 0.79 ),
       105 );
-    thisScreen.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
+    self.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
     var root = new Node();
-    thisScreen.addChild( root );
+    self.addChild( root );
     root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
@@ -94,8 +94,8 @@ define( function( require ) {
     ) );
 
     // Set up a layer for non-mass model elements.
-    thisScreen.nonMassLayer = new Node();
-    root.addChild( thisScreen.nonMassLayer );
+    self.nonMassLayer = new Node();
+    root.addChild( self.nonMassLayer );
 
     // Set up a separate layer for the masses so that they will be out in front of the other elements of the model.
     var massesLayer = new Node();
@@ -108,7 +108,7 @@ define( function( require ) {
         addedMass,
         modelViewTransform,
         true,
-        thisScreen.viewProperties.massLabelsVisibleProperty
+        self.viewProperties.massLabelsVisibleProperty
       );
       massesLayer.addChild( massNode );
 
@@ -135,12 +135,12 @@ define( function( require ) {
     model.massList.addItemAddedListener( handleMassAdded );
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
-    thisScreen.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
+    self.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
     var plankNode = new PlankNode( modelViewTransform, model.plank );
-    thisScreen.nonMassLayer.addChild( plankNode );
-    thisScreen.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
+    self.nonMassLayer.addChild( plankNode );
+    self.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
     model.supportColumns.forEach( function( supportColumn ) {
-      thisScreen.nonMassLayer.addChild( new LevelSupportColumnNode(
+      self.nonMassLayer.addChild( new LevelSupportColumnNode(
         modelViewTransform,
         supportColumn,
         model.columnStateProperty
@@ -149,24 +149,24 @@ define( function( require ) {
 
     // Add the ruler.
     var rulersVisibleProperty = new Property( false );
-    thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisibleProperty.value = positionMarkerState === 'rulers';
     } );
-    thisScreen.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
+    self.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     var positionMarkersVisible = new Property( false );
-    thisScreen.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
-    thisScreen.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
+    self.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     var levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
-    thisScreen.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
+    self.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
       levelIndicatorNode.visible = visible;
     } );
-    thisScreen.nonMassLayer.addChild( levelIndicatorNode );
+    self.nonMassLayer.addChild( levelIndicatorNode );
 
     // Listen to the list of force vectors and manage their representations.
     model.plank.forceVectors.addItemAddedListener( function( addedMassForceVector ) {
@@ -175,23 +175,23 @@ define( function( require ) {
       if ( addedMassForceVector.isObfuscated() ) {
         forceVectorNode = new MysteryVectorNode(
           addedMassForceVector.forceVectorProperty,
-          thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
+          self.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform
         );
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
           0.23,  // Scaling factor, chosen to make size reasonable.
-          thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
+          self.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform
         );
       }
-      thisScreen.nonMassLayer.addChild( forceVectorNode );
+      self.nonMassLayer.addChild( forceVectorNode );
 
       // Remove representation when corresponding vector removed from model.
       model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
         if ( removedMassForceVector === addedMassForceVector ) {
-          thisScreen.nonMassLayer.removeChild( forceVectorNode );
+          self.nonMassLayer.removeChild( forceVectorNode );
         }
       } );
     } );
@@ -200,7 +200,7 @@ define( function( require ) {
     var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
       center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) )
     } );
-    thisScreen.nonMassLayer.addChild( columnControlPanel );
+    self.nonMassLayer.addChild( columnControlPanel );
 
     // The panels should fit in the space to the right of the plank.
     var maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
@@ -209,17 +209,17 @@ define( function( require ) {
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new Text( massLabelsString, PANEL_OPTION_FONT ),
-        property: thisScreen.viewProperties.massLabelsVisibleProperty,
+        property: self.viewProperties.massLabelsVisibleProperty,
         label: massLabelsString
       },
       {
         content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
-        property: thisScreen.viewProperties.forceVectorsFromObjectsVisibleProperty,
+        property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
         label: forcesFromObjectsString
       },
       {
         content: new Text( levelString, PANEL_OPTION_FONT ),
-        property: thisScreen.viewProperties.levelIndicatorVisibleProperty,
+        property: self.viewProperties.levelIndicatorVisibleProperty,
         label: levelString
       }
     ], { boxWidth: 15, spacing: 5 } );
@@ -239,19 +239,19 @@ define( function( require ) {
       right: this.layoutBounds.width - 10,
       maxWidth: maxControlPanelWidth
     } );
-    thisScreen.nonMassLayer.addChild( indicatorVisibilityControlPanel );
+    self.nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
     var positionIndicatorControlPanel = new PositionIndicatorControlPanel(
-      thisScreen.viewProperties.positionMarkerStateProperty,
+      self.viewProperties.positionMarkerStateProperty,
       {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 5,
         minWidth: indicatorVisibilityControlPanel.width,
         maxWidth: maxControlPanelWidth
       } );
-    thisScreen.nonMassLayer.addChild( positionIndicatorControlPanel );
+    self.nonMassLayer.addChild( positionIndicatorControlPanel );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
     this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionIndicatorControlPanel.bounds.minY,
@@ -259,14 +259,14 @@ define( function( require ) {
 
     // Reset All button.
     function resetClosure() {
-      thisScreen.reset.call( thisScreen );
+      self.reset.call( self );
     }
 
-    thisScreen.nonMassLayer.addChild( new ResetAllButton( {
+    self.nonMassLayer.addChild( new ResetAllButton( {
       listener: resetClosure,
       radius: 20,
       right: indicatorVisibilityControlPanel.right,
-      bottom: thisScreen.layoutBounds.height - 10,
+      bottom: self.layoutBounds.height - 10,
       touchAreaDilation: 8
     } ) );
   }

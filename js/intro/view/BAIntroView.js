@@ -18,7 +18,7 @@ define( function( require ) {
    */
   function BAIntroView( model ) {
     BasicBalanceScreenView.call( this, model );
-    var thisScreen = this;
+    var self = this;
 
     model.massList.forEach( function( mass ) {
       // Add a listener for when the user drops the mass.  This is done here in this case, rather than in the model,
@@ -30,8 +30,8 @@ define( function( require ) {
           if ( !model.plank.addMassToSurface( mass ) ) {
             // The attempt to add mass to surface of plank failed, probably because mass was dropped somewhere other
             // than over the plank.
-            if ( thisScreen.modelViewTransform.modelToViewX( mass.position.x ) > thisScreen.layoutBounds.minX &&
-                 thisScreen.modelViewTransform.modelToViewX( mass.position.x ) < thisScreen.layoutBounds.maxX ) {
+            if ( self.modelViewTransform.modelToViewX( mass.position.x ) > self.layoutBounds.minX &&
+                 self.modelViewTransform.modelToViewX( mass.position.x ) < self.layoutBounds.maxX ) {
               // Mass is in the visible area, so just drop it on the ground.
               mass.position = new Vector2( mass.position.x, 0 );
             }

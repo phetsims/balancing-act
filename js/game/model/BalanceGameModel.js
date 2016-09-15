@@ -38,30 +38,29 @@ define( function( require ) {
   var PLANK_HEIGHT = 0.75; // In meters.
 
   function BalanceGameModel() {
-    var thisModel = this;
+    var self = this;
 
-    PropertySet.call( this,
-      {
-        soundEnabled: true,
-        timerEnabled: false,
-        level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
-        challengeIndex: 0,
-        score: 0,
+    PropertySet.call( this, {
+      soundEnabled: true,
+      timerEnabled: false,
+      level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
+      challengeIndex: 0,
+      score: 0,
 
-        // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
-        // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
-        // 'showingLevelResults'
-        gameState: 'choosingLevel',
-        columnState: 'singleColumns', // Valid values are 'none', 'singleColumn', 'doubleColumns'
-        elapsedTime: 0
-      } );
+      // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
+      // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
+      // 'showingLevelResults'
+      gameState: 'choosingLevel',
+      columnState: 'singleColumns', // Valid values are 'none', 'singleColumn', 'doubleColumns'
+      elapsedTime: 0
+    } );
 
     // Best times and scores.
-    thisModel.bestTimes = [];
-    thisModel.bestScores = [];
+    self.bestTimes = [];
+    self.bestScores = [];
     _.times( MAX_LEVELS, function() {
-      thisModel.bestTimes.push( null );
-      thisModel.bestScores.push( new Property( 0 ) );
+      self.bestTimes.push( null );
+      self.bestScores.push( new Property( 0 ) );
     } );
 
     // Counter used to track number of incorrect answers.
@@ -69,33 +68,33 @@ define( function( require ) {
 
     // Current set of challenges, which collectively comprise a single level, on
     // which the user is currently working.
-    thisModel.challengeList = null;
+    self.challengeList = null;
 
     // Fixed masses that sit on the plank and that the user must attempt to balance.
-    thisModel.fixedMasses = new ObservableArray();
+    self.fixedMasses = new ObservableArray();
 
     // Masses that the user moves on to the plank to counterbalance the fixed masses.
-    thisModel.movableMasses = new ObservableArray();
+    self.movableMasses = new ObservableArray();
 
     // Masses that the user is (or users are) moving.
-    thisModel.userControlledMasses = [];
+    self.userControlledMasses = [];
 
     // Add the plank.
-    thisModel.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), thisModel.columnStateProperty, thisModel.userControlledMasses );
+    self.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), self.columnStateProperty, self.userControlledMasses );
 
     // Tilted support column.  In this model, there is only one.
     var tiltedSupportColumnXPos = 1.8; // Meters, empirically chosen to look good.
-    thisModel.tiltedSupportColumn = new TiltedSupportColumn( PLANK_HEIGHT + tiltedSupportColumnXPos * Math.tan( thisModel.plank.maxTiltAngle ),
-      tiltedSupportColumnXPos, -thisModel.plank.maxTiltAngle );
+    self.tiltedSupportColumn = new TiltedSupportColumn( PLANK_HEIGHT + tiltedSupportColumnXPos * Math.tan( self.plank.maxTiltAngle ),
+      tiltedSupportColumnXPos, -self.plank.maxTiltAngle );
 
     // Level support columns.
-    thisModel.levelSupportColumns = [
+    self.levelSupportColumns = [
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),
       new LevelSupportColumn( PLANK_HEIGHT, 1.625 )
     ];
 
     // Fulcrum on which the plank pivots
-    thisModel.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
+    self.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
   }
 
   balancingAct.register( 'BalanceGameModel', BalanceGameModel );
@@ -116,9 +115,9 @@ define( function( require ) {
         PropertySet.prototype.reset.call( this );
         this.bestScores.forEach( function( bestScoreProperty ) { bestScoreProperty.reset(); } );
         this.bestTimes = [];
-        var thisModel = this;
+        var self = this;
         _.times( MAX_LEVELS, function() {
-          thisModel.bestTimes.push( null );
+          self.bestTimes.push( null );
         } );
       },
 
@@ -143,25 +142,25 @@ define( function( require ) {
 
       setChallenge: function( balanceChallenge, columnState ) {
 
-        var thisModel = this;
+        var self = this;
 
         // Clear out the previous challenge (if there was one).  Start by
         // resetting the plank.
-        thisModel.plank.removeAllMasses();
-        thisModel.userControlledMasses.length = 0;
+        self.plank.removeAllMasses();
+        self.userControlledMasses.length = 0;
 
         // Force the plank to be level and still.  This prevents any floating
         // point inaccuracies when adding masses.
-        thisModel.columnState = 'doubleColumns';
+        self.columnState = 'doubleColumns';
 
         // Clear out the masses from the previous challenge.
-        thisModel.fixedMasses.clear();
-        thisModel.movableMasses.clear();
+        self.fixedMasses.clear();
+        self.movableMasses.clear();
 
         // Set up the new challenge.
         balanceChallenge.fixedMassDistancePairs.forEach( function( fixedMassDistancePair ) {
-          thisModel.fixedMasses.push( fixedMassDistancePair.mass );
-          thisModel.plank.addMassToSurfaceAt( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
+          self.fixedMasses.push( fixedMassDistancePair.mass );
+          self.plank.addMassToSurfaceAt( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
         } );
 
         balanceChallenge.movableMasses.forEach( function( mass ) {
@@ -169,12 +168,12 @@ define( function( require ) {
           mass.position = initialPosition;
           mass.userControlledProperty.link( function( userControlled ) {
             if ( userControlled ) {
-              thisModel.userControlledMasses.push( mass );
+              self.userControlledMasses.push( mass );
             }
             else {
               // The user has dropped this mass.
-              thisModel.userControlledMasses.splice( thisModel.userControlledMasses.indexOf( mass ), 1 );
-              if ( !thisModel.plank.addMassToSurface( mass ) ) {
+              self.userControlledMasses.splice( self.userControlledMasses.indexOf( mass ), 1 );
+              if ( !self.plank.addMassToSurface( mass ) ) {
                 // The attempt to add this mass to surface of plank failed,
                 // probably because the mass wasn't over the plank or there
                 // wasn't on open spot near where it was released.
@@ -182,12 +181,12 @@ define( function( require ) {
               }
             }
           } );
-          thisModel.movableMasses.add( mass );
+          self.movableMasses.add( mass );
 
         } );
 
         // Set the column state.
-        thisModel.columnState = columnState;
+        self.columnState = columnState;
       },
 
       setChoosingLevelState: function() {
@@ -305,9 +304,9 @@ define( function( require ) {
         this.setChallenge( currentChallenge, 'noColumns' );
 
         // Add the movable mass or masses to the plank according to the solution.
-        var thisModel = this;
+        var self = this;
         currentChallenge.balancedConfiguration.forEach( function( massDistancePair ) {
-          thisModel.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
+          self.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
         } );
 
         // Update the game state.
@@ -339,8 +338,8 @@ define( function( require ) {
           Timer.clearInterval( this.gameTimerId );
         }
         this.elapsedTime = 0;
-        var thisModel = this;
-        this.gameTimerId = Timer.setInterval( function() { thisModel.elapsedTime += 1; }, 1000 );
+        var self = this;
+        this.gameTimerId = Timer.setInterval( function() { self.elapsedTime += 1; }, 1000 );
       },
 
       stopGameTimer: function() {

@@ -30,20 +30,20 @@ define( function( require ) {
    */
   function MysteryVectorNode( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
     Node.call( this );
-    var thisNode = this;
+    var self = this;
 
     // Create the 'mystery vector' node and add it as a child.
-    thisNode.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
+    self.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
 
     // Follow the position as it changes
     positionedVectorProperty.link( function( positionedVector ) {
-      thisNode.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
-      thisNode.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
+      self.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+      self.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
     } );
 
     // Control visibility
     visibilityProperty.link( function( visible ) {
-      thisNode.visible = visible;
+      self.visible = visible;
     } );
   }
 

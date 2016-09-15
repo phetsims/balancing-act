@@ -22,8 +22,8 @@ define( function( require ) {
    * @constructor
    */
   function Fulcrum( size ) {
-    var thisFulcrum = this;
-    thisFulcrum.size = size;
+    var self = this;
+    self.size = size;
     var legThickness = LEG_THICKNESS_FACTOR * size.width;
 
     // Define the basic shape of the fulcrum, which is an A-frame sort of
@@ -41,7 +41,7 @@ define( function( require ) {
     fulcrumShape.close();
 
     // The shape property is what will define the shape in the view.
-    thisFulcrum.shape = fulcrumShape;
+    self.shape = fulcrumShape;
   }
 
   balancingAct.register( 'Fulcrum', Fulcrum );
