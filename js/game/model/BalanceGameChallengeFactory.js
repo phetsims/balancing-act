@@ -276,7 +276,7 @@ define( function( require ) {
      * and a list of ratios.  The created mass will have a mass value that
      * equals the original value multiplied by one of the given ratios.
      *
-     * @param {Number} massValue - Mass needed
+     * @param {number} massValue - Mass needed
      * @param {Array} ratios - Array of ratios (massValue / createdMassValue) which are acceptable.
      */
     createMassByRatio: function( massValue, ratios ) {

@@ -36,7 +36,7 @@ define( function( require ) {
    * @param {number} height
    * @param {number} majorTickWidth
    * @param {Array<String>} majorTickLabels
-   * @param {String} units
+   * @param {string} units
    * @param {Object} [options]
    * @constructor
    */
@@ -148,7 +148,7 @@ define( function( require ) {
    * @param {number} x
    * @param {number} rulerHeight
    * @param {number} tickHeight
-   * @param {String} stroke stroke color as a CSS string
+   * @param {string} stroke stroke color as a CSS string
    * @param {number} lineWidth
    * @param {boolean} drawUpper
    * @param {boolean} drawLower
