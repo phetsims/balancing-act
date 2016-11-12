@@ -226,7 +226,7 @@ define( function( require ) {
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
-        new Text( showString, PANEL_TITLE_FONT ),
+        new Text( showString, { font: PANEL_TITLE_FONT } ),
         new VStrut( titleToControlsVerticalSpace ),
         new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckBoxGroup ] } )
       ],
