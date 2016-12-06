@@ -35,7 +35,7 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var ScoreboardPanel = require( 'VEGAS/ScoreboardPanel' );
+  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -74,7 +74,7 @@ define( function( require ) {
     // ground just below the center of the balance, is located in the view.
     var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( self.layoutBounds.width * 0.45, self.layoutBounds.height * 0.75 ),
+      new Vector2( self.layoutBounds.width * 0.45, self.layoutBounds.height * 0.83 ),
       115 );
     self.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
@@ -179,7 +179,8 @@ define( function( require ) {
     self.gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
-    this.scoreboard = new ScoreboardPanel(
+    this.scoreboard = new ScoreboardBar(
+      this.layoutBounds.width,
       gameModel.challengeIndexProperty,
       new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
       gameModel.levelProperty,
@@ -189,12 +190,13 @@ define( function( require ) {
       function() { gameModel.newGame(); },
       {
         levelVisible: true,
-        newGameButtonCaption: startOverString,
+        startOverButtonText: startOverString,
         font: new PhetFont( 14 ),
-        centerX: modelViewTransform.modelToViewX( 0 ), //this.layoutBounds.centerX,
-        bottom: this.layoutBounds.maxY - 5,
-        yMargin: 5,
-        maxWidth: this.layoutBounds.width * 0.8 // limit width, multiplier empirically determined
+        centerX: this.layoutBounds.centerX,
+        top: this.layoutBounds.top,
+        leftMargin: 40,
+        rightMargin: 10, // to right align 'Start Over' button with positionIndicatorControlPanel
+        yMargin: 5
       }
     );
     self.addChild( this.scoreboard );
@@ -205,8 +207,8 @@ define( function( require ) {
       fill: 'white',
       stroke: 'black',
       lineWidth: 1.5,
-      top: 5, // empirically determined based on appearance
-      maxWidth: 550 // empirically determined based on tests with long strings
+      top: this.scoreboard.bottom + 5,
+      maxWidth: 530 // empirically determined based on tests with long strings
     } );
     self.challengeLayer.addChild( self.challengeTitleNode );
 
@@ -320,8 +322,8 @@ define( function( require ) {
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
     var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
-      right: self.layoutBounds.width - 5,
-      top: 5,
+      right: self.layoutBounds.right - 10,
+      top: this.scoreboard.bottom + 8,
 
       // specify a max width that will fit the panel between the rightmost view object and the layout bounds
       maxWidth: self.layoutBounds.width - this.tiltPredictionSelectorNode.bounds.maxX - 10
