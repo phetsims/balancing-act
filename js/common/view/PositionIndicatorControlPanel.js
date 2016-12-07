@@ -27,7 +27,7 @@ define( function( require ) {
   var rulersString = require( 'string!BALANCING_ACT/rulers' );
 
   // constants
-  var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
+  var RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };
   var PANEL_TITLE_FONT = new PhetFont( 16 );
 
   /**
@@ -46,19 +46,19 @@ define( function( require ) {
 
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
       {
-        node: new Text( noneString, PANEL_OPTION_FONT ),
+        node: new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
         property: positionIndicatorStateProperty,
         value: 'none',
         label: noneString
       },
       {
-        node: new Text( rulersString, PANEL_OPTION_FONT ),
+        node: new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
         property: positionIndicatorStateProperty,
         value: 'rulers',
         label: rulersString
       },
       {
-        node: new Text( marksString, PANEL_OPTION_FONT ),
+        node: new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
         property: positionIndicatorStateProperty,
         value: 'marks',
         label: marksString
@@ -67,6 +67,7 @@ define( function( require ) {
       radius: 8,
       touchAreaXDilation: 5
     } );
+
     var positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, PANEL_TITLE_FONT ),
