@@ -28,7 +28,7 @@ define( function( require ) {
 
   // constants
   var RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };
-  var PANEL_TITLE_FONT = new PhetFont( 16 );
+  var TITLE_TEXT_OPTIONS = { font: new PhetFont( 16 ) };
 
   /**
    * @param {Property} positionIndicatorStateProperty
@@ -70,7 +70,7 @@ define( function( require ) {
 
     var positionMarkerVBox = new VBox( {
       children: [
-        new Text( positionString, PANEL_TITLE_FONT ),
+        new Text( positionString, TITLE_TEXT_OPTIONS ),
         new VStrut( options.titleToControlsVerticalSpace ),
         new HBox( { children: [ new HStrut( 10 ), positionMarkerRadioButtons ] } )
       ],
