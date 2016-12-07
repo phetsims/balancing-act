@@ -74,7 +74,7 @@ define( function( require ) {
     // ground just below the center of the balance, is located in the view.
     var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( self.layoutBounds.width * 0.45, self.layoutBounds.height * 0.83 ),
+      new Vector2( self.layoutBounds.width * 0.45, self.layoutBounds.height * 0.86 ),
       115 );
     self.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
@@ -207,7 +207,7 @@ define( function( require ) {
       fill: 'white',
       stroke: 'black',
       lineWidth: 1.5,
-      top: this.scoreboard.bottom + 5,
+      top: this.scoreboard.bottom + 20,
       maxWidth: 530 // empirically determined based on tests with long strings
     } );
     self.challengeLayer.addChild( self.challengeTitleNode );
@@ -323,7 +323,7 @@ define( function( require ) {
     // various position markers, i.e. ruler, position markers, or nothing.
     var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
       right: self.layoutBounds.right - 10,
-      top: this.scoreboard.bottom + 8,
+      top: self.scoreboard.bottom + 23,
 
       // specify a max width that will fit the panel between the rightmost view object and the layout bounds
       maxWidth: self.layoutBounds.width - this.tiltPredictionSelectorNode.bounds.maxX - 10
