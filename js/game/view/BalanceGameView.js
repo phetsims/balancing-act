@@ -189,6 +189,7 @@ define( function( require ) {
       gameModel.timerEnabledProperty,
       function() { gameModel.newGame(); },
       {
+        backgroundFill: 'rgb( 36, 88, 151 )',
         levelVisible: true,
         startOverButtonText: startOverString,
         font: new PhetFont( 14 ),
