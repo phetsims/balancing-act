@@ -1,15 +1,15 @@
 {
-  "comment": "# balancing-act 1.2.0-dev.1 Tue Dec 06 2016 15:41:08 GMT-0700 (MST)",
+  "comment": "# balancing-act 1.2.0-dev.2 Tue Dec 06 2016 17:20:30 GMT-0700 (MST)",
   "assert": {
     "sha": "1ea1df653504bc6eeb454051cedc7fb970a10cac",
     "branch": "master"
   },
   "axon": {
-    "sha": "ab49ab620ec80820bbe3190b418134df62f3bf2e",
+    "sha": "1bd2609ee269d7f01cd8678204c527d20b4c5539",
     "branch": "master"
   },
   "balancing-act": {
-    "sha": "4127ddb02eb81f588f2d7e1dfc0ab02a4cb969e1",
+    "sha": "ef90aa7b26009da37fee8d695fb0d6953d654162",
     "branch": "master"
   },
   "brand": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "20396bac68156187df6fc7bd540084fc6d84e5a8",
+    "sha": "80cdd4f5649fed7d60dd55be0cb3ab68fd80b043",
     "branch": "master"
   },
   "tandem": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "vegas": {
-    "sha": "1a505fc16c8ce3b45aefea70ff0b36686d487176",
+    "sha": "652d0665f8e024864ec61e4c9a810d3e683aaaad",
     "branch": "master"
   },
   "vibe": {
