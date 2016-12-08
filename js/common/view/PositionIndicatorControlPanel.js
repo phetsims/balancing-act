@@ -64,7 +64,7 @@ define( function( require ) {
         label: marksString
       }
     ], {
-      radius: 8,
+      radius: 6,
       touchAreaXDilation: 5
     } );
 
