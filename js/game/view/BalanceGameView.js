@@ -164,6 +164,7 @@ define( function( require ) {
         new GameIconNode( gameLevel4Icon, 4 )
       ],
       gameModel.bestScores,
+      modelViewTransform,
       {
         numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,
         perfectScore: BalanceGameModel.MAX_POSSIBLE_SCORE,

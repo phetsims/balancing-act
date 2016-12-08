@@ -34,10 +34,12 @@ define( function( require ) {
    * should be the same, length of array must match number of levels.
    * @param {Array} scores - Current scores, used to decide which stars to
    * illuminate on the level start buttons, length must match number of levels.
+   * @param {Object} modelViewTransform
    * @param {Object} [options] - See code below for options and default values.
    * @constructor
    */
-  function StartGameLevelNode( startLevelFunction, resetFunction, timerEnabledProperty, soundEnabledProperty, iconNodes, scores, options ) {
+  function StartGameLevelNode( startLevelFunction, resetFunction, timerEnabledProperty, soundEnabledProperty,
+                               iconNodes, scores, modelViewTransform, options ) {
 
     Node.call( this );
 
@@ -112,10 +114,14 @@ define( function( require ) {
     resetButton.bottom = options.size.height - options.controlsInset;
     title.centerX = options.size.width / 2;
     title.centerY = buttons[ 0 ].top / 2;
+
+    // The sound and timer buttons are positioned such that once is above the ground and the other below because there
+    // wasn't space to put them both above or below.
+    var interButtonSpacing = 18;
     soundToggleButton.left = options.controlsInset;
-    soundToggleButton.bottom = options.size.height - options.controlsInset;
+    soundToggleButton.bottom = modelViewTransform.modelToViewY( 0 ) - interButtonSpacing / 2;
     timerToggleButton.left = options.controlsInset;
-    timerToggleButton.bottom = soundToggleButton.top - 10;
+    timerToggleButton.top = soundToggleButton.bottom + interButtonSpacing;
   }
 
   balancingAct.register( 'StartGameLevelNode', StartGameLevelNode );
