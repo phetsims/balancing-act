@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.6 Mon Dec 12 2016 16:35:20 GMT-0700 (Mountain Standard Time)",
+  "comment": "# balancing-act 1.1.7-rc.2 Mon Dec 12 2016 16:55:28 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,12 +9,12 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "360c4e6e30d58958c29f9ca29600372949e42f17",
+    "sha": "2008fc8e39a3c998e5c11b717d77a74345ff029c",
     "branch": "1.1"
   },
   "brand": {
     "sha": "ac9ccaa74427844b170dcd1582f3e9bb931edef4",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "b8e27904ac17356060d042541273ecb54be52f86",
@@ -26,7 +26,7 @@
   },
   "joist": {
     "sha": "932e492db16b3c62dd0410afda9d9b28b2942e48",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
