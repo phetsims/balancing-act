@@ -57,10 +57,10 @@ define( function( require ) {
 
     // Best times and scores.
     self.bestTimes = [];
-    self.bestScores = [];
+    self.mostRecentScores = [];
     _.times( MAX_LEVELS, function() {
       self.bestTimes.push( null );
-      self.bestScores.push( new Property( 0 ) );
+      self.mostRecentScores.push( new Property( 0 ) );
     } );
 
     // Counter used to track number of incorrect answers.
@@ -113,7 +113,7 @@ define( function( require ) {
 
       reset: function() {
         PropertySet.prototype.reset.call( this );
-        this.bestScores.forEach( function( bestScoreProperty ) { bestScoreProperty.reset(); } );
+        this.mostRecentScores.forEach( function( mostReceentScoreProperty ) { mostReceentScoreProperty.reset(); } );
         this.bestTimes = [];
         var self = this;
         _.times( MAX_LEVELS, function() {
@@ -282,7 +282,7 @@ define( function( require ) {
               this.bestTimes[ this.level ] = this.elapsedTime;
             }
           }
-          this.bestScores[ this.level ].value = this.score;
+          this.mostRecentScores[ this.level ].value = this.score;
 
           // Done with this game, show the results.
           this.gameState = 'showingLevelResults';

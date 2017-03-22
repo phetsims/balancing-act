@@ -163,7 +163,7 @@ define( function( require ) {
         new GameIconNode( gameLevel3Icon, 3 ),
         new GameIconNode( gameLevel4Icon, 4 )
       ],
-      gameModel.bestScores,
+      gameModel.mostRecentScores,
       modelViewTransform,
       {
         numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,
