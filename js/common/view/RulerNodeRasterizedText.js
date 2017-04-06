@@ -152,7 +152,7 @@ define( function( require ) {
    * @param {number} lineWidth
    * @param {boolean} drawUpper
    * @param {boolean} drawLower
-   * @return {Node}
+   * @returns {Node}
    */
   var createTickMarkNode = function( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) {
     var shape = new Shape();
