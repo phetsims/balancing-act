@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.8 Thu Apr 13 2017 15:43:22 GMT-0600 (MDT)",
+  "comment": "# balancing-act 1.1.8 Thu Apr 13 2017 16:20:02 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,12 +9,12 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "f36a7ed2567ff3d80d8e31ff7dc9b74d494826de",
+    "sha": "ccc5942fa9faa9624559f7c7f21305bea444e39a",
     "branch": "1.1"
   },
   "brand": {
     "sha": "544b13cb52df55b7ba4951d29c0563180d9ce1c9",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "b8e27904ac17356060d042541273ecb54be52f86",
@@ -38,7 +38,7 @@
   },
   "phetcommon": {
     "sha": "e1f51ae8e51b10a03c3967ba1f729ff86d7f3c51",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "4ab9fc738e721e9e293042205c48a6d31505db98",
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "vibe": {
-    "sha": "c84b3c41d026d31e208243de7b5852e2d6df69a0",
-    "branch": "HEAD"
+    "sha": "51cf879a48270639bc0db99f9dbcbfcbd9f106a7",
+    "branch": "balancing-act-1.1"
   }
 }
