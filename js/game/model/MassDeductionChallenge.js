@@ -37,7 +37,7 @@ define( function( require ) {
 
     // statics
 
-    // convenience factor method for creating a mass deduction challenge
+    // convenience factory method for creating a mass deduction challenge
     create: function( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
 
       // Create the mass-distance pair for the mystery mass.
