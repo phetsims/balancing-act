@@ -22,7 +22,6 @@ define( function( require ) {
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Property = require( 'AXON/Property' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
@@ -40,20 +39,27 @@ define( function( require ) {
   function BalanceGameModel() {
     var self = this;
 
-    PropertySet.call( this, {
-      soundEnabled: true,
-      timerEnabled: false,
-      level: 0, // Zero-based in the model, though levels appear to the user to start at 1.
-      challengeIndex: 0,
-      score: 0,
+    this.soundEnabledProperty = new Property( true );
+    this.timerEnabledProperty = new Property( false );
+    this.levelProperty = new Property( 0 ); // Zero-based in the model, though levels appear to the user to start at 1.
+    this.challengeIndexProperty = new Property( 0 );
+    this.scoreProperty = new Property( 0 );
 
-      // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
-      // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
-      // 'showingLevelResults'
-      gameState: 'choosingLevel',
-      columnState: 'singleColumns', // Valid values are 'none', 'singleColumn', 'doubleColumns'
-      elapsedTime: 0
-    } );
+    // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
+    // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
+    // 'showingLevelResults'
+    this.gameStateProperty = new Property( 'choosingLevel' );
+    this.columnStateProperty = new Property( 'singleColumns' ); // Valid values are 'none', 'singleColumn', 'doubleColumns'
+    this.elapsedTimeProperty = new Property( 0 );
+
+    Property.preventGetSet( this, 'soundEnabled' );
+    Property.preventGetSet( this, 'timerEnabled' );
+    Property.preventGetSet( this, 'level' );
+    Property.preventGetSet( this, 'challengeIndex' );
+    Property.preventGetSet( this, 'score' );
+    Property.preventGetSet( this, 'gameState' );
+    Property.preventGetSet( this, 'columnState' );
+    Property.preventGetSet( this, 'elapsedTime' );
 
     // Best times and scores.
     self.bestTimes = [];
@@ -99,7 +105,7 @@ define( function( require ) {
 
   balancingAct.register( 'BalanceGameModel', BalanceGameModel );
 
-  return inherit( PropertySet, BalanceGameModel,
+  return inherit( Object, BalanceGameModel,
     {
       step: function( dt ) {
         this.plank.step( dt );
@@ -112,8 +118,15 @@ define( function( require ) {
       },
 
       reset: function() {
-        PropertySet.prototype.reset.call( this );
-        this.mostRecentScores.forEach( function( mostReceentScoreProperty ) { mostReceentScoreProperty.reset(); } );
+        this.soundEnabledProperty.reset();
+        this.timerEnabledProperty.reset();
+        this.levelProperty.reset();
+        this.challengeIndexProperty.reset();
+        this.scoreProperty.reset();
+        this.gameStateProperty.reset();
+        this.columnStateProperty.reset();
+        this.elapsedTimeProperty.reset();
+        this.mostRecentScores.forEach( function( mostRecentScoreProperty ) { mostRecentScoreProperty.reset(); } );
         this.bestTimes = [];
         var self = this;
         _.times( MAX_LEVELS, function() {
@@ -122,9 +135,9 @@ define( function( require ) {
       },
 
       startLevel: function( level ) {
-        this.level = level;
-        this.score = 0;
-        this.challengeIndex = 0;
+        this.levelProperty.set( level );
+        this.scoreProperty.reset();
+        this.challengeIndexProperty.reset();
         this.restartGameTimer();
 
         // Set up the challenges.
@@ -134,7 +147,7 @@ define( function( require ) {
         this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
 
         // Change to new game state.
-        this.gameState = 'presentingInteractiveChallenge';
+        this.gameStateProperty.set( 'presentingInteractiveChallenge' );
 
         // Flag set to indicate new best time, cleared each time a level is started.
         this.newBestTime = false;
@@ -151,7 +164,7 @@ define( function( require ) {
 
         // Force the plank to be level and still.  This prevents any floating
         // point inaccuracies when adding masses.
-        self.columnState = 'doubleColumns';
+        self.columnStateProperty.set( 'doubleColumns' );
 
         // Clear out the masses from the previous challenge.
         self.fixedMasses.clear();
@@ -186,18 +199,18 @@ define( function( require ) {
         } );
 
         // Set the column state.
-        self.columnState = columnState;
+        self.columnStateProperty.set( columnState );
       },
 
       setChoosingLevelState: function() {
-        this.gameState = 'choosingLevel';
+        this.gameStateProperty.set( 'choosingLevel' );
       },
 
       getCurrentChallenge: function() {
-        if ( this.challengeList === null || this.challengeList.size <= this.challengeIndex ) {
+        if ( this.challengeList === null || this.challengeList.size <= this.challengeIndexProperty.get() ) {
           return null;
         }
-        return this.challengeList[ this.challengeIndex ];
+        return this.challengeList[ this.challengeIndexProperty.get() ];
       },
 
       getChallengeCurrentPointValue: function() {
@@ -209,19 +222,19 @@ define( function( require ) {
       checkAnswer: function( mass, tiltPrediction ) {
         if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
           // Turn off the column(s) so that the plank can move.
-          this.columnState = 'noColumns';
+          this.columnStateProperty.set( 'noColumns' );
 
           this.handleProposedAnswer( this.plank.isBalanced() );
         }
         else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
 
-          var isAnswerCorrect = ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
+          var isAnswerCorrect =                                                                                       ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
                                 ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
                                 ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
 
           if ( isAnswerCorrect ) {
             // Turn off the column(s) so that the plank can move.
-            this.columnState = 'noColumns';
+            this.columnStateProperty.set( 'noColumns' );
           }
 
           this.handleProposedAnswer( isAnswerCorrect );
@@ -235,7 +248,7 @@ define( function( require ) {
         var pointsEarned = 0;
         if ( answerIsCorrect ) {
           // The user answered the challenge correctly.
-          this.gameState = 'showingCorrectAnswerFeedback';
+          this.gameStateProperty.set( 'showingCorrectAnswerFeedback' );
           if ( this.incorrectGuessesOnCurrentChallenge === 0 ) {
             // User got it right the first time.
             pointsEarned = MAX_POINTS_PER_PROBLEM;
@@ -244,48 +257,49 @@ define( function( require ) {
             // User got it wrong at first, but got it right now.
             pointsEarned = MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
           }
-          this.score = this.score + pointsEarned;
+          this.scoreProperty.value += pointsEarned;
         }
         else {
           // The user got it wrong.
           this.incorrectGuessesOnCurrentChallenge++;
           if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
-            this.gameState = 'showingIncorrectAnswerFeedbackTryAgain';
+            this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackTryAgain' );
           }
           else {
-            this.gameState = 'showingIncorrectAnswerFeedbackMoveOn';
+            this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackMoveOn' );
           }
         }
       },
 
       newGame: function() {
         this.stopGameTimer();
-        this.gameState = 'choosingLevel';
+        this.gameStateProperty.set( 'choosingLevel' );
         this.incorrectGuessesOnCurrentChallenge = 0;
       },
 
       nextChallenge: function() {
-        this.challengeIndex++;
+        this.challengeIndexProperty.value++;
         this.incorrectGuessesOnCurrentChallenge = 0;
-        if ( this.challengeIndex < this.challengeList.length ) {
+        if ( this.challengeIndexProperty.get() < this.challengeList.length ) {
           // Move to the next challenge.
           this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
-          this.gameState = 'presentingInteractiveChallenge';
+          this.gameStateProperty.set( 'presentingInteractiveChallenge' );
         }
         else {
           // All challenges completed for this level.  See if this is a new
           // best time and, if so, record it.
-          if ( this.score === MAX_SCORE_PER_GAME ) {
+          var level = this.levelProperty.get();
+          if ( this.scoreProperty.get() === MAX_SCORE_PER_GAME ) {
             // Perfect game.  See if new best time.
-            if ( this.bestTimes[ this.level ] === null || this.elapsedTime < this.bestTimes[ this.level ] ) {
-              this.newBestTime = this.bestTimes[ this.level ] !== null; // Don't set this flag for the first 'best time', only when the time improves.
-              this.bestTimes[ this.level ] = this.elapsedTime;
+            if ( this.bestTimes[ level ] === null || this.elapsedTimeProperty.get() < this.bestTimes[ level ] ) {
+              this.newBestTime = this.bestTimes[ level ] !== null; // Don't set this flag for the first 'best time', only when the time improves.
+              this.bestTimes[ level ] = this.elapsedTimeProperty.get();
             }
           }
-          this.mostRecentScores[ this.level ].value = this.score;
+          this.mostRecentScores[ level ].value = this.scoreProperty.get();
 
           // Done with this game, show the results.
-          this.gameState = 'showingLevelResults';
+          this.gameStateProperty.set( 'showingLevelResults' );
         }
       },
 
@@ -293,8 +307,8 @@ define( function( require ) {
         // Restore the column(s) to the original state but don't move the
         // masses anywhere.  This makes it easier for the users to see why
         // their answer was incorrect.
-        this.columnState = this.getCurrentChallenge().initialColumnState;
-        this.gameState = 'presentingInteractiveChallenge';
+        this.columnStateProperty.set( this.getCurrentChallenge().initialColumnState );
+        this.gameStateProperty.set( 'presentingInteractiveChallenge' );
       },
 
       displayCorrectAnswer: function() {
@@ -310,7 +324,7 @@ define( function( require ) {
         } );
 
         // Update the game state.
-        this.gameState = 'displayingCorrectAnswer';
+        this.gameStateProperty.set( 'displayingCorrectAnswer' );
       },
 
       getTipDirection: function() {
@@ -337,9 +351,9 @@ define( function( require ) {
         if ( this.gameTimerId !== null ) {
           Timer.clearInterval( this.gameTimerId );
         }
-        this.elapsedTime = 0;
+        this.elapsedTimeProperty.reset();
         var self = this;
-        this.gameTimerId = Timer.setInterval( function() { self.elapsedTime += 1; }, 1000 );
+        this.gameTimerId = Timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
       },
 
       stopGameTimer: function() {

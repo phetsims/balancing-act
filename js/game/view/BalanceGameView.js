@@ -435,7 +435,7 @@ define( function( require ) {
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
           this.faceWithPointsNode.frown();
-          this.faceWithPointsNode.setPoints( this.model.score );
+          this.faceWithPointsNode.setPoints( this.model.scoreProperty.get() );
           this.faceWithPointsNode.visible = true;
 
           // Disable interaction with the challenge elements.
@@ -451,7 +451,7 @@ define( function( require ) {
           // Give the user the appropriate feedback
           this.gameAudioPlayer.wrongAnswer();
           this.faceWithPointsNode.frown();
-          this.faceWithPointsNode.setPoints( this.model.score );
+          this.faceWithPointsNode.setPoints( this.model.scoreProperty.get() );
           this.faceWithPointsNode.visible = true;
 
           // Disable interaction with the challenge elements.
@@ -481,10 +481,11 @@ define( function( require ) {
           break;
 
         case 'showingLevelResults':
-          if ( this.model.score === BalanceGameModel.MAX_POSSIBLE_SCORE ) {
+          var score = this.model.scoreProperty.get();
+          if ( score === BalanceGameModel.MAX_POSSIBLE_SCORE ) {
             this.gameAudioPlayer.gameOverPerfectScore();
           }
-          else if ( this.model.score === 0 ) {
+          else if ( score === 0 ) {
             this.gameAudioPlayer.gameOverZeroScore();
           }
           else {
@@ -532,11 +533,17 @@ define( function( require ) {
       var self = this;
 
       // Set a new "level completed" node based on the results.
-      self.levelCompletedNode = new LevelCompletedNode( this.model.level, this.model.score, BalanceGameModel.MAX_POSSIBLE_SCORE,
-        BalanceGameModel.PROBLEMS_PER_LEVEL, this.model.timerEnabled, this.model.elapsedTime, this.model.bestTimes[ this.model.level ],
+      self.levelCompletedNode = new LevelCompletedNode(
+        this.model.levelProperty.get(),
+        this.model.scoreProperty.get(),
+        BalanceGameModel.MAX_POSSIBLE_SCORE,
+        BalanceGameModel.PROBLEMS_PER_LEVEL,
+        this.model.timerEnabledProperty.get(),
+        this.model.elapsedTimeProperty.get(),
+        this.model.bestTimes[ this.model.levelProperty.get() ],
         self.model.newBestTime,
         function() {
-          self.model.gameState = 'choosingLevel';
+          self.model.gameStateProperty.set( 'choosingLevel' );
           self.rootNode.removeChild( self.levelCompletedNode );
           self.levelCompletedNode = null;
         },
