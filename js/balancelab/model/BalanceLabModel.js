@@ -38,9 +38,8 @@ define( function( require ) {
         if ( !isUserControlled ) {
           // The user has dropped this mass.
           if ( !self.plank.addMassToSurface( mass ) ) {
-            // The attempt to add mass to surface of plank failed,
-            // probably because the area below the mass is full,
-            // or because the mass wasn't over the plank.
+            // The attempt to add mass to surface of plank failed, probably because the area below the mass is full, or
+            // because the mass wasn't over the plank.
             self.removeMassAnimated( mass );
           }
         }

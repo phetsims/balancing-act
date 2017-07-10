@@ -84,7 +84,7 @@ define( function( require ) {
 
   return inherit( LabeledImageMass, MysteryMass, {
     createCopy: function() {
-      return new MysteryMass( this.position, this.mysteryMassId );
+      return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
     }
   } );
 } );

@@ -33,9 +33,10 @@ define( function( require ) {
     // Monitor the 'onPlank' property and update the image as changes occur.
     self.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
-        self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( self.position.x < 0 ? -1 : 1 );
+        var xPosition = self.positionProperty.get().x;
+        self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
         self.heightProperty.set( sittingHeight );
-        self.reverseImage = self.position.x < 0;
+        self.reverseImage = xPosition < 0;
         self.imageProperty.set( sittingImage );
       }
       else {

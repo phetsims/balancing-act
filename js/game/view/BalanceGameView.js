@@ -359,7 +359,7 @@ define( function( require ) {
         var self = this;
         var massesOnRightSide = false;
         this.model.plank.massesOnSurface.forEach( function( mass ) {
-          if ( mass.position.x > self.model.plank.getPlankSurfaceCenter().x ) {
+          if ( mass.positionProperty.get().x > self.model.plank.getPlankSurfaceCenter().x ) {
             massesOnRightSide = true;
           }
         } );

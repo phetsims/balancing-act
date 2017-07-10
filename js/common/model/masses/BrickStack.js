@@ -50,14 +50,14 @@ define( function( require ) {
   balancingAct.register( 'BrickStack', BrickStack );
 
   return inherit( Mass, BrickStack, {
-    createCopy: function() {
-        return new BrickStack( this.numBricks, this.position );
+
+      createCopy: function() {
+        return new BrickStack( this.numBricks, this.positionProperty.get() );
       },
 
       getMiddlePoint: function() {
-        return this.shape.bounds.center.rotated( this.rotationAngle ).plus( this.position );
+        return this.shape.bounds.center.rotated( this.rotationAngleProperty.get() ).plus( this.positionProperty.get() );
       }
-
     },
     {
       // static constants

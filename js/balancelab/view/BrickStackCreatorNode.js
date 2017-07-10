@@ -61,7 +61,7 @@ define( function( require ) {
   return inherit( MassCreatorNode, BrickStackCreatorNode, {
     addElementToModel: function( position ) {
       var brickStack = new BrickStack( this.numBricks, position );
-      brickStack.userControlled = true;
+      brickStack.userControlledProperty.set( true );
       brickStack.animationDestination = position;
       this.model.addMass( brickStack );
       return brickStack;

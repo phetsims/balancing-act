@@ -49,22 +49,26 @@ define( function( require ) {
 
     // Expected duration of the current animation.
     this.expectedAnimationTime = 0;
-
-    // Height at initiation of animation - needed for shrinking.
-    this.animationStartHeight = height;
   }
 
   balancingAct.register( 'ImageMass', ImageMass );
 
   return inherit( Mass, ImageMass, {
 
+    reset: function() {
+      this.heightProperty.reset();
+      this.imageProperty.reset();
+      Mass.prototype.reset.call( this );
+    },
+
     getMiddlePoint: function() {
-      return new Vector2( this.position.x, this.position.y + this.heightProperty.get() / 2 );
+      var position = this.positionProperty.get();
+      return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
     },
 
     createCopy: function() {
       // This clever invocation supports the creation of subclassed instances.
-      return new this.constructor( this.position.copy(), this.isMystery );
+      return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
     }
   } );
 } );

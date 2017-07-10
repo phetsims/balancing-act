@@ -101,51 +101,49 @@ define( function( require ) {
 
       step: function( dt ) {
         var self = this;
-        if ( !self.userControlled ) {
-          var angularAcceleration;
-          self.updateNetTorque();
+        var angularAcceleration;
+        self.updateNetTorque();
 
-          // Update the angular acceleration and velocity.  There is some
-          // thresholding here to prevent the plank from oscillating forever
-          // with small values, since this can cause odd-looking movements
-          // of the planks and masses.  The thresholds were empirically
-          // determined.
-          angularAcceleration = self.currentNetTorque / MOMENT_OF_INERTIA;
-          angularAcceleration = Math.abs( angularAcceleration ) > 0.00001 ? angularAcceleration : 0;
-          self.angularVelocity += angularAcceleration;
-          self.angularVelocity = Math.abs( self.angularVelocity ) > 0.00001 ? self.angularVelocity : 0;
+        // Update the angular acceleration and velocity.  There is some
+        // thresholding here to prevent the plank from oscillating forever
+        // with small values, since this can cause odd-looking movements
+        // of the planks and masses.  The thresholds were empirically
+        // determined.
+        angularAcceleration = self.currentNetTorque / MOMENT_OF_INERTIA;
+        angularAcceleration = Math.abs( angularAcceleration ) > 0.00001 ? angularAcceleration : 0;
+        self.angularVelocity += angularAcceleration;
+        self.angularVelocity = Math.abs( self.angularVelocity ) > 0.00001 ? self.angularVelocity : 0;
 
-          // Update the angle of the plank's tilt based on the angular velocity.
-          var previousTiltAngle = self.tiltAngle;
-          var newTiltAngle = self.tiltAngle + self.angularVelocity * dt;
-          if ( Math.abs( newTiltAngle ) > self.maxTiltAngle ) {
-            // Limit the angle when one end is touching the ground.
-            newTiltAngle = self.maxTiltAngle * ( self.tiltAngle < 0 ? -1 : 1 );
-            self.angularVelocity = 0;
-          }
-          else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
-            // Below a certain threshold just force the tilt angle to be
-            // zero so that it appears perfectly level.
-            newTiltAngle = 0;
-          }
-          self.tiltAngle = newTiltAngle;
-
-          // Update the shape of the plank and the positions of the masses on
-          // the surface, but only if the tilt angle has changed.
-          if ( self.tiltAngle !== previousTiltAngle ) {
-            self.updatePlank();
-            self.updateMassPositions();
-          }
-
-          // Simulate friction by slowing down the rotation a little.
-          self.angularVelocity *= 0.91;
+        // Update the angle of the plank's tilt based on the angular velocity.
+        var previousTiltAngle = self.tiltAngle;
+        var newTiltAngle = self.tiltAngle + self.angularVelocity * dt;
+        if ( Math.abs( newTiltAngle ) > self.maxTiltAngle ) {
+          // Limit the angle when one end is touching the ground.
+          newTiltAngle = self.maxTiltAngle * ( self.tiltAngle < 0 ? -1 : 1 );
+          self.angularVelocity = 0;
         }
+        else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
+          // Below a certain threshold just force the tilt angle to be
+          // zero so that it appears perfectly level.
+          newTiltAngle = 0;
+        }
+        self.tiltAngle = newTiltAngle;
+
+        // Update the shape of the plank and the positions of the masses on
+        // the surface, but only if the tilt angle has changed.
+        if ( self.tiltAngle !== previousTiltAngle ) {
+          self.updatePlank();
+          self.updateMassPositions();
+        }
+
+        // Simulate friction by slowing down the rotation a little.
+        self.angularVelocity *= 0.91;
 
         // Update the active drop locations.
         var tempDropLocations = [];
         self.userControlledMasses.forEach( function( userControlledMass ) {
           if ( self.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
-            var closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.position );
+            var closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.positionProperty.get() );
             if ( closestOpenLocation ) {
               var plankSurfaceCenter = self.getPlankSurfaceCenter();
               var distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
@@ -171,14 +169,15 @@ define( function( require ) {
       // Add a mass to the surface of the plank, chooses a location below the mass.
       addMassToSurface: function( mass ) {
         var massAdded = false;
-        var closestOpenLocation = this.getOpenMassDroppedLocation( mass.position );
+        var closestOpenLocation = this.getOpenMassDroppedLocation( mass.positionProperty.get() );
         if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
-          mass.position = closestOpenLocation;
-          mass.onPlank = true;
+          mass.positionProperty.set( closestOpenLocation );
+          mass.onPlankProperty.set( true );
           this.massDistancePairs.push(
             {
               mass: mass,
-              distance: this.getPlankSurfaceCenter().distance( mass.position ) * ( mass.position.x > this.getPlankSurfaceCenter().x ? 1 : -1 )
+              distance: this.getPlankSurfaceCenter().distance( mass.positionProperty.get() ) *
+                        ( mass.positionProperty.get().x > this.getPlankSurfaceCenter().x ? 1 : -1 )
             } );
 
           // Add the force vector for this mass.
@@ -214,8 +213,8 @@ define( function( require ) {
 
         // Set the position of the mass to be just above the plank at the
         // appropriate distance so that it will drop to the correct place.
-        mass.position = new Vector2( vectorToLocation.x, vectorToLocation.y + 0.01 );
-        assert && assert( this.isPointAbovePlank( mass.position ) );  // Need to fix this if mass isn't above the surface.
+        mass.positionProperty.set( new Vector2( vectorToLocation.x, vectorToLocation.y + 0.01 ) );
+        assert && assert( this.isPointAbovePlank( mass.positionProperty.get() ) );  // Need to fix this if mass isn't above the surface.
         this.addMassToSurface( mass );
       },
 
@@ -227,8 +226,8 @@ define( function( require ) {
           var vectorFromCenterToMass = new Vector2( self.getMassDistanceFromCenter( mass ), 0 ).rotated( self.tiltAngle );
 
           // Set the position and rotation of the mass.
-          mass.rotationAngle = self.tiltAngle;
-          mass.position = self.getPlankSurfaceCenter().plus( vectorFromCenterToMass );
+          mass.rotationAngleProperty.set( self.tiltAngle );
+          mass.positionProperty.set( self.getPlankSurfaceCenter().plus( vectorFromCenterToMass ) );
         } );
 
         // Update the force vectors from the masses.  This mostly just moves
@@ -252,8 +251,8 @@ define( function( require ) {
         }
 
         // Reset the attributes of the mass that may have been affected by being on the plank.
-        mass.rotationAngle = 0;
-        mass.onPlank = false;
+        mass.rotationAngleProperty.set( 0 );
+        mass.onPlankProperty.set( false );
 
         // Remove the force vector associated with this mass.
         for ( var j = 0; j < this.forceVectors.length; j++ ) {
@@ -314,7 +313,7 @@ define( function( require ) {
             occupiedOrTooFar = true;
           }
           for ( var i = 0; i < self.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
-            if ( self.massesOnSurface.get( i ).position.distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+            if ( self.massesOnSurface.get( i ).positionProperty.get().distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               occupiedOrTooFar = true;
             }
           }
@@ -328,7 +327,7 @@ define( function( require ) {
         var copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
         for ( var i = 0; i < copyOfCandidateLocations.length; i++ ) {
           for ( var j = 0; j < this.massesOnSurface.length; j++ ) {
-            if ( this.massesOnSurface.get( j ).position.distance( copyOfCandidateLocations[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+            if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidateLocations[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               // This position is already occupied.
               candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[ j ] );
             }
@@ -452,7 +451,7 @@ define( function( require ) {
         var self = this;
         var torque = 0;
         this.massesOnSurface.forEach( function( mass ) {
-          torque += self.pivotPoint.x - mass.position.x * mass.massValue;
+          torque += self.pivotPoint.x - mass.positionProperty.get().x * mass.massValue;
         } );
         return torque;
       },

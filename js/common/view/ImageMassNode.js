@@ -87,17 +87,20 @@ define( function( require ) {
       if ( self.bounds.isFinite() ) {
 
         self.rotation = 0;
+        var imageMassPosition = imageMass.positionProperty.get();
 
         // Set overall position.  Recall that positions in the model are defined
         // as the center bottom of the item.
-        self.centerX = modelViewTransform.modelToViewX( imageMass.position.x - imageMass.centerOfMassXOffset );
-        self.bottom = modelViewTransform.modelToViewY( imageMass.position.y );
+        self.centerX = modelViewTransform.modelToViewX( imageMassPosition.x - imageMass.centerOfMassXOffset );
+        self.bottom = modelViewTransform.modelToViewY( imageMassPosition.y );
 
         // Set the rotation.  Rotation point is the center bottom.
-        self.rotateAround( new Vector2(
-          modelViewTransform.modelToViewX( imageMass.position.x ),
-          modelViewTransform.modelToViewY( imageMass.position.y ) ),
-          -imageMass.rotationAngle
+        self.rotateAround(
+          new Vector2(
+            modelViewTransform.modelToViewX( imageMassPosition.x ),
+            modelViewTransform.modelToViewY( imageMassPosition.y )
+          ),
+          -imageMass.rotationAngleProperty.get()
         );
       }
     }

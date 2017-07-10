@@ -95,12 +95,12 @@ define( function( require ) {
 
     // Monitor the brick stack for position and angle changes.
     brickStack.rotationAngleProperty.link( function( newAngle ) {
-      self.rotateAround( self.center.plus( offsetToBottom ), previousRotationAngle - brickStack.rotationAngle );
-      offsetToBottom = offsetToBottom.rotated( previousRotationAngle - brickStack.rotationAngle );
-      previousRotationAngle = brickStack.rotationAngle;
+      self.rotateAround( self.center.plus( offsetToBottom ), previousRotationAngle - newAngle );
+      offsetToBottom = offsetToBottom.rotated( previousRotationAngle - newAngle );
+      previousRotationAngle = newAngle;
     } );
     brickStack.positionProperty.link( function( newPosition ) {
-      self.center = modelViewTransform.modelToViewPosition( brickStack.position ).plus( offsetToBottom );
+      self.center = modelViewTransform.modelToViewPosition( newPosition ).plus( offsetToBottom );
     } );
 
     // Add event listener for mouse activity.

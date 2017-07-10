@@ -31,7 +31,7 @@ define( function( require ) {
     },
     generateVector: function( mass ) {
       return {
-        origin: new Vector2( mass.position.x, mass.position.y ),
+        origin: new Vector2( mass.positionProperty.get().x, mass.positionProperty.get().y ),
         vector: new Vector2( 0, mass.massValue * ACCELERATION_DUE_TO_GRAVITY )
       };
     }

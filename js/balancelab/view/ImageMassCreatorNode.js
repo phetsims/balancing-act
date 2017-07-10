@@ -33,9 +33,9 @@ define( function( require ) {
 
     addElementToModel: function( position ) {
       var imageMassModelElement = this.createImageMassInstance();
-      imageMassModelElement.position = position.copy();
-      imageMassModelElement.animationDestination = imageMassModelElement.position;
-      imageMassModelElement.userControlled = true;
+      imageMassModelElement.positionProperty.set( position.copy() );
+      imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();
+      imageMassModelElement.userControlledProperty.set( true );
       this.model.addMass( imageMassModelElement );
       return imageMassModelElement;
     },

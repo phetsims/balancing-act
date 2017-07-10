@@ -40,7 +40,7 @@ define( function( require ) {
         massNode = new Rectangle( 0, 0, textNode.width * 1.3, textNode.height * 1.3, 0, 0, { fill: 'pink', stroke: 'black' } );
         textNode.centerY = massNode.height / 2;
         massNode.addChild( textNode );
-        massNode.center = modelViewTransform.modelToViewPosition( mass.position );
+        massNode.center = modelViewTransform.modelToViewPosition( mass.positionProperty.get() );
       }
       return massNode;
     }

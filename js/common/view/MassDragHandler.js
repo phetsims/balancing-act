@@ -24,16 +24,18 @@ define( function( require ) {
 
       // Handler that moves the particle in model space.
       translate: function( translationParams ) {
-        mass.position = mass.position.plus( modelViewTransform.viewToModelDelta( translationParams.delta ) );
+        mass.positionProperty.set(
+          mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
+        );
         return translationParams.position;
       },
 
       start: function( event, trail ) {
-        mass.userControlled = true;
+        mass.userControlledProperty.set( true );
       },
 
       end: function( event, trail ) {
-        mass.userControlled = false;
+        mass.userControlledProperty.set( false );
       }
     } );
   }

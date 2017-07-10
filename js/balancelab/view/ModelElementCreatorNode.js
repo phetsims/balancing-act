@@ -81,7 +81,7 @@ define( function( require ) {
       drag: function( event ) {
         if ( self.modelElement !== null ) {
           // Move the node.
-          self.modelElement.position = eventToModelPosition( event.pointer.point );
+          self.modelElement.positionProperty.set( eventToModelPosition( event.pointer.point ) );
         }
       },
       end: function( event ) {

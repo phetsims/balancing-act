@@ -165,7 +165,7 @@ define( function( require ) {
 
         balanceChallenge.movableMasses.forEach( function( mass ) {
           var initialPosition = new Vector2( 3, 0 );
-          mass.position = initialPosition;
+          mass.positionProperty.set( initialPosition );
           mass.userControlledProperty.link( function( userControlled ) {
             if ( userControlled ) {
               self.userControlledMasses.push( mass );
@@ -177,7 +177,7 @@ define( function( require ) {
                 // The attempt to add this mass to surface of plank failed,
                 // probably because the mass wasn't over the plank or there
                 // wasn't on open spot near where it was released.
-                mass.position = initialPosition;
+                mass.positionProperty.set( initialPosition );
               }
             }
           } );

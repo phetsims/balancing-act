@@ -30,10 +30,11 @@ define( function( require ) {
           if ( !model.plank.addMassToSurface( mass ) ) {
             // The attempt to add mass to surface of plank failed, probably because mass was dropped somewhere other
             // than over the plank.
-            if ( self.modelViewTransform.modelToViewX( mass.position.x ) > self.layoutBounds.minX &&
-                 self.modelViewTransform.modelToViewX( mass.position.x ) < self.layoutBounds.maxX ) {
+            var massXPosition = mass.positionProperty.get().x;
+            if ( self.modelViewTransform.modelToViewX( massXPosition ) > self.layoutBounds.minX &&
+                 self.modelViewTransform.modelToViewX( massXPosition ) < self.layoutBounds.maxX ) {
               // Mass is in the visible area, so just drop it on the ground.
-              mass.position = new Vector2( mass.position.x, 0 );
+              mass.positionProperty.set( new Vector2( massXPosition, 0 ) );
             }
             else {
               // Mass is off stage.  Return it to its original position.
