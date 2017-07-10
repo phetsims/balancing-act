@@ -25,7 +25,9 @@ define( function( require ) {
     var pivotPointPosInView = modelViewTransform.modelToViewPosition( plank.pivotPoint );
 
     // Add the bar, which goes from the pivot point to the bottom of the plank.
-    var attachmentBarLength = modelViewTransform.modelToViewDeltaY( plank.bottomCenterLocation.y - plank.pivotPoint.y );
+    var attachmentBarLength = modelViewTransform.modelToViewDeltaY(
+      plank.bottomCenterLocationProperty.get().y - plank.pivotPoint.y
+    );
     var attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
       attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', stroke: 'rgb( 50, 50, 50 )' } );
     this.addChild( attachmentBar );

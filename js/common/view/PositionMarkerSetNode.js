@@ -34,7 +34,7 @@ define( function( require ) {
     } );
 
     // Set initial position.
-    var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocation );
+    var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocationProperty.get() );
     self.top = topCenter.y;
     self.centerX = topCenter.x;
 

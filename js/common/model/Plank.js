@@ -15,7 +15,7 @@ define( function( require ) {
   var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   var Matrix3 = require( 'DOT/Matrix3' );
   var ObservableArray = require( 'AXON/ObservableArray' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -38,21 +38,17 @@ define( function( require ) {
     var self = this;
     self.userControlledMasses = userControlledMasses;
 
-    PropertySet.call( this,
-      {
-        // Angle of the plank with respect to the ground.  A value of 0
-        // indicates a level plank, positive is tilted left, negative to the
-        // right.  In radians.
-        tiltAngle: 0,
+    // Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left,
+    // negative to the right.  In radians.
+    this.tiltAngleProperty = new Property( 0 );
 
-        // Point where the bottom center of the plank is currently located.
-        // If the plank is sitting on top of the fulcrum, this point will be
-        // the same as the pivot point.  When the pivot point is above the
-        // plank, as is generally done in this simulation in order to make the
-        // plank rebalance if nothing is on it, this location will be
-        // different.
-        bottomCenterLocation: location
-      } );
+    // Point where the bottom center of the plank is currently located. If the plank is sitting on top of the fulcrum,
+    // this point will be the same as the pivot point.  When the pivot point is above the plank, as is generally done
+    // in this simulation in order to make the plank rebalance if nothing is on it, this location will be different.
+    this.bottomCenterLocationProperty = new Property( location );
+
+    Property.preventGetSet( this, 'tiltAngle' );
+    Property.preventGetSet( this, 'bottomCenterLocation' );
 
     // Externally visible observable lists.
     self.massesOnSurface = new ObservableArray();
@@ -97,8 +93,10 @@ define( function( require ) {
   balancingAct.register( 'Plank', Plank );
 
   // Inherit from base class and define the methods for this object.
-  return inherit( PropertySet, Plank, {
-
+  return inherit(
+    Object,
+    Plank,
+    {
       step: function( dt ) {
         var self = this;
         var angularAcceleration;
@@ -115,11 +113,11 @@ define( function( require ) {
         self.angularVelocity = Math.abs( self.angularVelocity ) > 0.00001 ? self.angularVelocity : 0;
 
         // Update the angle of the plank's tilt based on the angular velocity.
-        var previousTiltAngle = self.tiltAngle;
-        var newTiltAngle = self.tiltAngle + self.angularVelocity * dt;
+        var previousTiltAngle = self.tiltAngleProperty.get();
+        var newTiltAngle = self.tiltAngleProperty.get() + self.angularVelocity * dt;
         if ( Math.abs( newTiltAngle ) > self.maxTiltAngle ) {
           // Limit the angle when one end is touching the ground.
-          newTiltAngle = self.maxTiltAngle * ( self.tiltAngle < 0 ? -1 : 1 );
+          newTiltAngle = self.maxTiltAngle * ( self.tiltAngleProperty.get() < 0 ? -1 : 1 );
           self.angularVelocity = 0;
         }
         else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
@@ -127,11 +125,11 @@ define( function( require ) {
           // zero so that it appears perfectly level.
           newTiltAngle = 0;
         }
-        self.tiltAngle = newTiltAngle;
+        self.tiltAngleProperty.set( newTiltAngle );
 
         // Update the shape of the plank and the positions of the masses on
         // the surface, but only if the tilt angle has changed.
-        if ( self.tiltAngle !== previousTiltAngle ) {
+        if ( self.tiltAngleProperty.get() !== previousTiltAngle ) {
           self.updatePlank();
           self.updateMassPositions();
         }
@@ -209,7 +207,9 @@ define( function( require ) {
         if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
           throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
         }
-        var vectorToLocation = this.getPlankSurfaceCenter().plus( Vector2.createPolar( distanceFromCenter, this.tiltAngle ) );
+        var vectorToLocation = this.getPlankSurfaceCenter().plus(
+          Vector2.createPolar( distanceFromCenter, this.tiltAngleProperty.get() )
+        );
 
         // Set the position of the mass to be just above the plank at the
         // appropriate distance so that it will drop to the correct place.
@@ -223,10 +223,12 @@ define( function( require ) {
         this.massesOnSurface.forEach( function( mass ) {
           // Compute the vector from the center of the plank's surface to
           // the bottom of the mass, in meters.
-          var vectorFromCenterToMass = new Vector2( self.getMassDistanceFromCenter( mass ), 0 ).rotated( self.tiltAngle );
+          var vectorFromCenterToMass = new Vector2(
+            self.getMassDistanceFromCenter( mass ), 0 ).rotated( self.tiltAngleProperty.get()
+          );
 
           // Set the position and rotation of the mass.
-          mass.rotationAngleProperty.set( self.tiltAngle );
+          mass.rotationAngleProperty.set( self.tiltAngleProperty.get() );
           mass.positionProperty.set( self.getPlankSurfaceCenter().plus( vectorFromCenterToMass ) );
         } );
 
@@ -288,8 +290,8 @@ define( function( require ) {
           throw new Error( 'Pivot point cannot be below the plank.' );
         }
         var attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
-        attachmentBarVector = attachmentBarVector.rotated( this.tiltAngle );
-        this.bottomCenterLocation = this.pivotPoint.plus( attachmentBarVector );
+        attachmentBarVector = attachmentBarVector.rotated( this.tiltAngleProperty.get() );
+        this.bottomCenterLocationProperty.set( this.pivotPoint.plus( attachmentBarVector ) );
       },
 
       // Find the best open location for a mass that was dropped at the given
@@ -366,30 +368,9 @@ define( function( require ) {
 
       forceAngle: function( angle ) {
         this.angularVelocity = 0;
-        this.tiltAngle = angle;
+        this.tiltAngleProperty.set( angle );
         this.updatePlank();
         this.updateMassPositions();
-      },
-
-      isTickMarkOccupied: function( tickMark ) {
-//      var tickMarkCenter = new Vector2( tickMark.bounds.centerX(), tickMark.bounds.centerY() );
-        var tickMarkCenter = tickMark.bounds.center;
-        var tickMarkDistanceFromCenter = this.getPlankSurfaceCenter().distance( tickMarkCenter );
-        if ( tickMarkCenter.x < this.getPlankSurfaceCenter().x ) {
-          tickMarkDistanceFromCenter = -tickMarkDistanceFromCenter;
-        }
-        // Since the distance is from the center of the plank to the center of
-        // the tick mark, there needs to be some tolerance built in to
-        // recognizing whether masses are at the same distance.
-        var massAtThisTickMark = false;
-        for ( var i = 0; i < this.massesOnSurface; i++ ) {
-          var massDistanceFromCenter = this.getMassDistanceFromCenter( this.massesOnSurface[ i ] );
-          if ( massDistanceFromCenter > tickMarkDistanceFromCenter - PLANK_THICKNESS && massDistanceFromCenter < tickMarkDistanceFromCenter + PLANK_THICKNESS ) {
-            massAtThisTickMark = true;
-            break;
-          }
-        }
-        return massAtThisTickMark;
       },
 
       // Obtain the absolute position (in meters) of the center surface (top)
@@ -398,7 +379,9 @@ define( function( require ) {
         // Start at the absolute location of the attachment point, and add the
         // relative location of the top of the plank, accounting for its
         // rotation angle
-        return this.bottomCenterLocation.plus( Vector2.createPolar( PLANK_THICKNESS, this.tiltAngle + Math.PI / 2 ) );
+        return this.bottomCenterLocationProperty.get().plus(
+          Vector2.createPolar( PLANK_THICKNESS, this.tiltAngleProperty.get() + Math.PI / 2 )
+        );
       },
 
       // Obtain the Y value for the surface of the plank for the specified X
@@ -406,7 +389,7 @@ define( function( require ) {
       getSurfaceYValue: function( xValue ) {
         // Solve the linear equation for the line that represents the surface
         // of the plank.
-        var m = Math.tan( this.tiltAngle );
+        var m = Math.tan( this.tiltAngleProperty.get() );
         var plankSurfaceCenter = this.getPlankSurfaceCenter();
         var b = plankSurfaceCenter.y - m * plankSurfaceCenter.x;
         // Does NOT check if the xValue range is valid.
@@ -414,7 +397,7 @@ define( function( require ) {
       },
 
       isPointAbovePlank: function( p ) {
-        var plankSpan = PLANK_LENGTH * Math.cos( this.tiltAngle );
+        var plankSpan = PLANK_LENGTH * Math.cos( this.tiltAngleProperty.get() );
         var surfaceCenter = this.getPlankSurfaceCenter();
         return p.x >= surfaceCenter.x - ( plankSpan / 2 ) && p.x <= surfaceCenter.x + ( plankSpan / 2 ) && p.y > this.getSurfaceYValue( p.x );
       },
@@ -443,7 +426,7 @@ define( function( require ) {
           this.currentNetTorque += this.getTorqueDueToMasses();
 
           // Add in torque due to plank.
-          this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocation.x ) * PLANK_MASS;
+          this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocationProperty.get().x ) * PLANK_MASS;
         }
       },
 
@@ -458,7 +441,11 @@ define( function( require ) {
 
       getSnapToLocations: function() {
         var snapToLocations = new Array( NUM_SNAP_TO_LOCATIONS );
-        var rotationTransform = Matrix3.rotationAround( this.tiltAngle, this.pivotPoint.x, this.pivotPoint.y );
+        var rotationTransform = Matrix3.rotationAround(
+          this.tiltAngleProperty.get(),
+          this.pivotPoint.x,
+          this.pivotPoint.y
+        );
         var unrotatedY = this.unrotatedShape.bounds.maxY;
         var unrotatedMinX = this.unrotatedShape.bounds.minX;
         for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
@@ -475,5 +462,6 @@ define( function( require ) {
       THICKNESS: PLANK_THICKNESS,
       INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE,
       NUM_SNAP_TO_LOCATIONS: NUM_SNAP_TO_LOCATIONS
-    } );
+    }
+  );
 } );
