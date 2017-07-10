@@ -33,7 +33,7 @@ define( function( require ) {
   function GirlCreatorNode( model, modelViewTransform ) {
     ImageMassCreatorNode.call( this, model, modelViewTransform, new Girl(), true );
     this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
   }
 
   balancingAct.register( 'GirlCreatorNode', GirlCreatorNode );

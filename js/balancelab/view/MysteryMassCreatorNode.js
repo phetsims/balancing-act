@@ -28,7 +28,7 @@ define( function( require ) {
   function MysteryMassCreatorNode( mysteryMassID, model, modelViewTransform ) {
     ImageMassCreatorNode.call( this, model, modelViewTransform, new MysteryMass( Vector2.ZERO, mysteryMassID ), false );
     this.setSelectionNode( new MysteryMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.height / 2 ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
   }
 
   balancingAct.register( 'MysteryMassCreatorNode', MysteryMassCreatorNode );

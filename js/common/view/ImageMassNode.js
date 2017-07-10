@@ -70,7 +70,8 @@ define( function( require ) {
         imageNode.matrix = imageNode.matrix.timesMatrix( Matrix3.scaling( -1, 1 ) );
       }
 
-      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.height ) ) / imageNode.height;
+      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.heightProperty.get() ) ) /
+                          imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
       if ( isLabeled ) {

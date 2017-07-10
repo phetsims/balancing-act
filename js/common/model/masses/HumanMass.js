@@ -34,15 +34,15 @@ define( function( require ) {
     self.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
         self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( self.position.x < 0 ? -1 : 1 );
-        self.height = sittingHeight;
+        self.heightProperty.set( sittingHeight );
         self.reverseImage = self.position.x < 0;
-        self.image = sittingImage;
+        self.imageProperty.set( sittingImage );
       }
       else {
         self.centerOfMassXOffset = 0;
-        self.height = standingHeight;
+        self.heightProperty.set( standingHeight );
         self.reverseImage = false;
-        self.image = standingImage;
+        self.imageProperty.set( standingImage );
       }
     } );
   }

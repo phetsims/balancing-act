@@ -1,15 +1,13 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
 /**
- * This class defines a mass in the model that carries with it an associated
- * image that should be presented in the view.  The image can change at times,
- * such as when it is dropped on the balance.
+ * This class defines a mass in the model that carries with it an associated image that should be presented in the view.
+ * The image can change at times, such as when it is dropped on the balance.
  * <p/>
- * IMPORTANT: All images used by this class are assumed to have their center of
- * mass in the horizontal direction in the center of the image.  In order to
- * make this work for an image, it may be necessary to have some blank
- * transparent space on one side.
- *
+ * IMPORTANT: All images used by this class are assumed to have their center of mass in the horizontal direction in the
+ * center of the image.  In order to make this work for an image, it may be necessary to have some blank transparent
+ * space on one side.
+ * <p/>
  * @author John Blanco
  */
 define( function( require ) {
@@ -19,7 +17,7 @@ define( function( require ) {
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Mass = require( 'BALANCING_ACT/common/model/Mass' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -32,23 +30,21 @@ define( function( require ) {
    */
   function ImageMass( mass, image, height, initialPosition, isMystery ) {
     Mass.call( this, mass, initialPosition, isMystery );
-    PropertySet.call( this, {
-      // Property that contains the current image.
-        image: image,
 
-        // Property that contains the current height of the corresponding model
-        // object.  Only height is used, as opposed to both height and width,
-        // because the aspect ratio of the image is expected to be maintained, so
-        // the model element's width can be derived from a combination of its
-        // height and the the aspect ratio of the image that represents it.  A
-        // property is used because the size may change during animations.
-        height: height
+    // Property that contains the current image.
+    this.imageProperty = new Property( image );
 
-      } );
+    // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
+    // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
+    // width can be derived from a combination of its height and the the aspect ratio of the image that represents it.
+    // A property is used because the size may change during animations.
+    this.heightProperty = new Property( height );
 
-    // Flag that indicates whether this node should be represented by a
-    // reversed version of the current image, must be set prior to image
-    // updates.
+    Property.preventGetSet( this, 'image' );
+    Property.preventGetSet( this, 'height' );
+
+    // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
+    // set prior to image updates.
     this.reverseImage = false;
 
     // Expected duration of the current animation.
@@ -63,7 +59,7 @@ define( function( require ) {
   return inherit( Mass, ImageMass, {
 
     getMiddlePoint: function() {
-      return new Vector2( this.position.x, this.position.y + this.height / 2 );
+      return new Vector2( this.position.x, this.position.y + this.heightProperty.get() / 2 );
     },
 
     createCopy: function() {
