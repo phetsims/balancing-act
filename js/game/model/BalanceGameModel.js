@@ -52,15 +52,6 @@ define( function( require ) {
     this.columnStateProperty = new Property( 'singleColumns' ); // Valid values are 'none', 'singleColumn', 'doubleColumns'
     this.elapsedTimeProperty = new Property( 0 );
 
-    Property.preventGetSet( this, 'soundEnabled' );
-    Property.preventGetSet( this, 'timerEnabled' );
-    Property.preventGetSet( this, 'level' );
-    Property.preventGetSet( this, 'challengeIndex' );
-    Property.preventGetSet( this, 'score' );
-    Property.preventGetSet( this, 'gameState' );
-    Property.preventGetSet( this, 'columnState' );
-    Property.preventGetSet( this, 'elapsedTime' );
-
     // Best times and scores.
     self.bestTimes = [];
     self.mostRecentScores = [];

@@ -47,9 +47,6 @@ define( function( require ) {
     // in this simulation in order to make the plank rebalance if nothing is on it, this location will be different.
     this.bottomCenterLocationProperty = new Property( location );
 
-    Property.preventGetSet( this, 'tiltAngle' );
-    Property.preventGetSet( this, 'bottomCenterLocation' );
-
     // Externally visible observable lists.
     self.massesOnSurface = new ObservableArray();
     self.forceVectors = new ObservableArray();

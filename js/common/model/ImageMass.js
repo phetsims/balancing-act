@@ -40,9 +40,6 @@ define( function( require ) {
     // A property is used because the size may change during animations.
     this.heightProperty = new Property( height );
 
-    Property.preventGetSet( this, 'image' );
-    Property.preventGetSet( this, 'height' );
-
     // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
     // set prior to image updates.
     this.reverseImage = false;

@@ -40,12 +40,6 @@ define( function( require ) {
     // the only animation supported is a simple linear motion to a preset point.
     this.animatingProperty = new Property( false );
 
-    Property.preventGetSet( this, 'userControlled' );
-    Property.preventGetSet( this, 'position' );
-    Property.preventGetSet( this, 'rotationAngle' );
-    Property.preventGetSet( this, 'onPlank' );
-    Property.preventGetSet( this, 'animating' );
-
     //------------------------------------------------------------------------
     // Externally used (i.e. public) attributes that don't need to be properties.
     //------------------------------------------------------------------------
