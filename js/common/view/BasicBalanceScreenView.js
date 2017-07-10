@@ -36,7 +36,6 @@ define( function( require ) {
   var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -62,12 +61,12 @@ define( function( require ) {
     self.model = model;
 
     // Define the properties that control visibility of various display elements.
-    self.viewProperties = new PropertySet( {
-      massLabelsVisible: true,
-      forceVectorsFromObjectsVisible: false,
-      levelIndicatorVisible: false,
-      positionMarkerState: 'none' // Valid values are 'none', 'rulers', and 'markers'.
-    } );
+    self.viewProperties = {
+      massLabelsVisibleProperty: new Property( true ),
+      forceVectorsFromObjectsVisibleProperty: new Property( false ),
+      levelIndicatorVisibleProperty: new Property( false ),
+      positionMarkerStateProperty: new Property( 'none' ) // Valid values are 'none', 'rulers', and 'markers'.
+    };
 
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
     // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
@@ -276,7 +275,7 @@ define( function( require ) {
   return inherit( ScreenView, BasicBalanceScreenView, {
     reset: function() {
       this.model.reset();
-      this.viewProperties.reset();
+      _.values( this.viewProperties ).forEach( function( viewProperty ) { viewProperty.reset(); } );
     }
   } );
 } );
