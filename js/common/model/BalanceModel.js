@@ -85,8 +85,10 @@ define( function( require ) {
     // Remove a mass from the model.  Sub-types often do additional things.
     removeMass: function( mass ) {
       this.massList.remove( mass );
-      mass.userControlledProperty.unlink( mass.userControlledMassesUpdater );
-      mass.userControlledMassesUpdater = null;
+      if ( mass.userControlledMassesUpdater ){
+        mass.userControlledProperty.unlink( mass.userControlledMassesUpdater );
+        mass.userControlledMassesUpdater = null;
+      }
     },
 
     reset: function() {

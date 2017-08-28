@@ -51,13 +51,14 @@ define( function( require ) {
       var self = this;
 
       // Register a listener for the completion of the removal animation sequence.
-      mass.animatingProperty.link( function( isAnimating, wasAnimating ) {
+      function removeMass( isAnimating, wasAnimating ){
         if ( wasAnimating && !isAnimating ) {
           // Animation sequence has completed.
-          mass.animatingProperty.unlink( this );
+          mass.animatingProperty.unlink( removeMass );
           BalanceModel.prototype.removeMass.call( self, mass );
         }
-      } );
+      }
+      mass.animatingProperty.link( removeMass );
 
       // Kick off the animation back to the tool box.
       mass.initiateAnimation();
