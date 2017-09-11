@@ -8,10 +8,10 @@ define( function( require ) {
 
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
-  var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
   var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 

@@ -5,9 +5,9 @@ define( function( require ) {
 
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   var fireExtinguisherImage = require( 'image!BALANCING_ACT/fire-extinguisher.png' );
+  var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
+  var inherit = require( 'PHET_CORE/inherit' );
 
   // constants
   var MASS = 5; // In kg

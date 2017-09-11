@@ -12,17 +12,17 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Property = require( 'AXON/Property' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var Timer = require( 'PHET_CORE/Timer' );

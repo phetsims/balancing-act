@@ -5,8 +5,8 @@ define( function( require ) {
 
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var tireImage = require( 'image!BALANCING_ACT/tire.png' );
 
   // constants

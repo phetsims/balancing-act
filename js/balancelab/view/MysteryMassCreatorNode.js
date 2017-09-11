@@ -12,8 +12,8 @@ define( function( require ) {
 
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var ImageMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/ImageMassCreatorNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
   var MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );

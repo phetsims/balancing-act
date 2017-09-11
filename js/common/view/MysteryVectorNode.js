@@ -14,8 +14,8 @@ define( function( require ) {
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   // constants

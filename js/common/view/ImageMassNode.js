@@ -13,8 +13,8 @@ define( function( require ) {
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var defaultImage = require( 'image!BALANCING_ACT/default-image.png' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var kgString = require( 'string!BALANCING_ACT/kg' );
   var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
   var Matrix3 = require( 'DOT/Matrix3' );

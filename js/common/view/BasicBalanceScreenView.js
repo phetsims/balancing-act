@@ -20,14 +20,14 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
   var levelString = require( 'string!BALANCING_ACT/level' );
   var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
   var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
+  var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

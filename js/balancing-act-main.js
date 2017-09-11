@@ -8,8 +8,8 @@ define( function( require ) {
 
   // modules
   var BAIntroScreen = require( 'BALANCING_ACT/intro/BAIntroScreen' );
-  var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
   var BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
+  var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Tandem = require( 'TANDEM/Tandem' );

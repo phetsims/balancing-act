@@ -12,8 +12,8 @@ define( function( require ) {
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
-  var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   var bricksString = require( 'string!BALANCING_ACT/bricks' );
+  var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   var GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );

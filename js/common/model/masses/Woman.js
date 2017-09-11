@@ -11,8 +11,8 @@ define( function( require ) {
 
   // modules
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // images

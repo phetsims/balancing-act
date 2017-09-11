@@ -19,8 +19,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var BigRock = require( 'BALANCING_ACT/common/model/masses/BigRock' );
@@ -37,18 +37,18 @@ define( function( require ) {
   var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   var MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
   var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
-  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
   var Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
   var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
+  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
   var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
   var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
   var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
-  var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
 
   // Maximum allowed distance from center of balance for positioning a mass.
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;

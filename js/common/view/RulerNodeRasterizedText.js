@@ -24,9 +24,9 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
 
   // constants
   var DEFAULT_FONT = new PhetFont( 18 );
