@@ -1,4 +1,4 @@
-// Copyright 2014-2016, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * The 'Intro' screen. Conforms to the contract specified in joist/Screen.

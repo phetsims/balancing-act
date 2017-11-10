@@ -1,4 +1,4 @@
-// Copyright 2013-2016, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * This type defines a control panel that selects between the various types of

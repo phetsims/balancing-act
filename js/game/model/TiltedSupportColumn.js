@@ -1,4 +1,4 @@
-// Copyright 2014-2016, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * This is a column that can be used to support one of the ends of the plank

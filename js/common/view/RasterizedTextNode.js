@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 /**
  * A scenery node that rasterizes text.  This is needed due to an issue where
  * text moves in undesirable ways when rotated in Chrome and Firefox, see
