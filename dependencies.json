@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.10-rc.1 Fri Nov 17 2017 18:34:14 GMT-0700 (MST)",
+  "comment": "# balancing-act 1.1.10 Tue Dec 05 2017 01:27:19 GMT-0700 (MST)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "7622cf08a15a935ab7acddb7721efe1236774356",
+    "sha": "afe9f334b399f601ee7046279fbd8079b1c57db1",
     "branch": "1.1"
   },
   "brand": {
