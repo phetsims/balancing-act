@@ -205,22 +205,19 @@ define( function( require ) {
     var maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      {
-        content: new Text( massLabelsString, PANEL_OPTION_FONT ),
-        property: self.viewProperties.massLabelsVisibleProperty,
-        label: massLabelsString
-      },
-      {
-        content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
-        property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
-        label: forcesFromObjectsString
-      },
-      {
-        content: new Text( levelString, PANEL_OPTION_FONT ),
-        property: self.viewProperties.levelIndicatorVisibleProperty,
-        label: levelString
-      }
+    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+      content: new Text( massLabelsString, PANEL_OPTION_FONT ),
+      property: self.viewProperties.massLabelsVisibleProperty,
+      label: massLabelsString
+    }, {
+      content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
+      property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
+      label: forcesFromObjectsString
+    }, {
+      content: new Text( levelString, PANEL_OPTION_FONT ),
+      property: self.viewProperties.levelIndicatorVisibleProperty,
+      label: levelString
+    }
     ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
