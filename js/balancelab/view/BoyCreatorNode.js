@@ -1,7 +1,7 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
 /**
- * This type represents an adolescent boy in a tool box.  When the user clicks
+ * This type represents an adolescent boy in a toolbox.  When the user clicks
  * on this node, the corresponding model element is added to the model at the
  * user's mouse location.
  *
@@ -20,8 +20,8 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Model-view transform for scaling the node used in the tool box.  This may scale the node differently than what is
-  // used in the model so that items in the tool box can be sized differently (generally smaller).
+  // Model-view transform for scaling the node used in the toolbox.  This may scale the node differently than what is
+  // used in the model so that items in the toolbox can be sized differently (generally smaller).
   var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 80 );
 
   /**

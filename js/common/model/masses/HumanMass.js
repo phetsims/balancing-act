@@ -2,7 +2,7 @@
 
 /**
  * Base type for a model element that represents a person, a.k.a. a human, in
- * the model.  The human can be grabbed from a tool box and placed on a
+ * the model.  The human can be grabbed from a toolbox and placed on a
  * balance, so there needs to be a standing and sitting image representation.
  *
  * @author John Blanco

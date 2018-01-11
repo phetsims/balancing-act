@@ -60,7 +60,7 @@ define( function( require ) {
       }
       mass.animatingProperty.link( removeMass );
 
-      // Kick off the animation back to the tool box.
+      // Kick off the animation back to the toolbox.
       mass.initiateAnimation();
     }
   } );

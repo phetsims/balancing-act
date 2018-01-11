@@ -2,7 +2,7 @@
 
 /**
  * Base type for the Scenery nodes that appear in the view, generally in some
- * sort of tool box, and that can be clicked on by the user in order to add
+ * sort of toolbox, and that can be clicked on by the user in order to add
  * model elements to the model.
  *
  * @author John Blanco
