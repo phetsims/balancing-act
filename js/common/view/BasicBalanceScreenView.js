@@ -43,7 +43,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
@@ -205,7 +205,7 @@ define( function( require ) {
     var maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.massLabelsVisibleProperty,
       label: massLabelsString
@@ -224,7 +224,7 @@ define( function( require ) {
       children: [
         new Text( showString, { font: PANEL_TITLE_FONT } ),
         new VStrut( titleToControlsVerticalSpace ),
-        new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckBoxGroup ] } )
+        new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckboxGroup ] } )
       ],
       align: 'left'
     } );
