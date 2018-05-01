@@ -35,7 +35,7 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
+  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -180,25 +180,29 @@ define( function( require ) {
     self.gameAudioPlayer = new GameAudioPlayer( gameModel.soundEnabledProperty );
 
     // Create and add the game scoreboard.
-    this.scoreboard = new ScoreboardBar(
-      this.layoutBounds.width,
-      gameModel.challengeIndexProperty,
-      new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
-      gameModel.levelProperty,
+    this.scoreboard = new FiniteStatusBar(
+      this.layoutBounds,
+      this.visibleBoundsProperty,
       gameModel.scoreProperty,
-      gameModel.elapsedTimeProperty,
-      gameModel.timerEnabledProperty,
-      function() { gameModel.newGame(); },
       {
-        backgroundFill: 'rgb( 36, 88, 151 )',
-        levelVisible: true,
+        challengeIndexProperty: gameModel.challengeIndexProperty,
+        numberOfChallengesProperty: new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
+        levelProperty: gameModel.levelProperty,
+        elapsedTimeProperty: gameModel.elapsedTimeProperty,
+        timerEnabledProperty: gameModel.timerEnabledProperty,
         startOverButtonText: startOverString,
         font: new PhetFont( 14 ),
-        centerX: this.layoutBounds.centerX,
-        top: this.layoutBounds.top,
-        leftMargin: 40,
-        rightMargin: 10, // to right align 'Start Over' button with positionIndicatorControlPanel
-        yMargin: 5
+        textFill: 'white',
+        xMargin: 20,
+        yMargin: 5,
+        barFill: 'rgb( 36, 88, 151 )',
+        dynamicAlignment: false,
+        startOverButtonOptions: {
+          textFill: 'black',
+          baseColor: '#e5f3ff',
+          maxHeight: 30,
+          listener: function() { gameModel.newGame(); }
+        }
       }
     );
     self.addChild( this.scoreboard );
