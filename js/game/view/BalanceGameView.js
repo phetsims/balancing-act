@@ -538,7 +538,7 @@ define( function( require ) {
 
       // Set a new "level completed" node based on the results.
       self.levelCompletedNode = new LevelCompletedNode(
-        this.model.levelProperty.get(),
+        this.model.levelProperty.get() + 1,
         this.model.scoreProperty.get(),
         BalanceGameModel.MAX_POSSIBLE_SCORE,
         BalanceGameModel.PROBLEMS_PER_LEVEL,
