@@ -15,6 +15,7 @@ define( function( require ) {
   var balancingAct = require( 'BALANCING_ACT/balancingAct' );
   var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   var Color = require( 'SCENERY/util/Color' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
@@ -187,7 +188,9 @@ define( function( require ) {
       {
         challengeIndexProperty: gameModel.challengeIndexProperty,
         numberOfChallengesProperty: new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
-        levelProperty: gameModel.levelProperty,
+
+        // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #85.
+        levelProperty: new DerivedProperty( [ gameModel.levelProperty ], function( level ) { return level + 1; } ),
         elapsedTimeProperty: gameModel.elapsedTimeProperty,
         timerEnabledProperty: gameModel.timerEnabledProperty,
         startOverButtonText: startOverString,
