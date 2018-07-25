@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.11 Tue Jul 24 2018 17:10:25 GMT-0600 (MDT)",
+  "comment": "# balancing-act 1.1.12-rc.1 Tue Jul 24 2018 20:47:32 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "671967b30278cc3dfa9f6f66d34744d8069d2b0a",
+    "sha": "520f979b2c40173d1134e0b903e67fb656768c7c",
     "branch": "1.1"
   },
   "brand": {
@@ -66,6 +66,6 @@
   },
   "vibe": {
     "sha": "2203b6937987464a54dc86e0b2bd56f5a9151a11",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   }
 }
