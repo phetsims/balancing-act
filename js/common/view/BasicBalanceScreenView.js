@@ -218,7 +218,10 @@ define( function( require ) {
       property: self.viewProperties.levelIndicatorVisibleProperty,
       label: levelString
     }
-    ], { boxWidth: 15, spacing: 5 } );
+    ], {
+      checkboxOptions: { boxWidth: 15 },
+      spacing: 5
+    } );
     var titleToControlsVerticalSpace = 7;
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
