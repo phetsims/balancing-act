@@ -206,15 +206,15 @@ define( function( require ) {
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new Text( massLabelsString, PANEL_OPTION_FONT ),
+      node: new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.massLabelsVisibleProperty,
       label: massLabelsString
     }, {
-      content: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
+      node: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
       label: forcesFromObjectsString
     }, {
-      content: new Text( levelString, PANEL_OPTION_FONT ),
+      node: new Text( levelString, PANEL_OPTION_FONT ),
       property: self.viewProperties.levelIndicatorVisibleProperty,
       label: levelString
     }
