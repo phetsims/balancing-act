@@ -64,7 +64,7 @@ define( function( require ) {
         label: marksString
       }
     ], {
-      radius: 6,
+      radioButtonOptions: { radius: 6 },
       touchAreaXDilation: 5
     } );
 
