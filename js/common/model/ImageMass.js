@@ -36,7 +36,7 @@ define( function( require ) {
 
     // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
     // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
-    // width can be derived from a combination of its height and the the aspect ratio of the image that represents it.
+    // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
     // A property is used because the size may change during animations.
     this.heightProperty = new Property( height );
 
