@@ -25,7 +25,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var Timer = require( 'PHET_CORE/Timer' );
+  var timer = require( 'PHET_CORE/timer' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -340,15 +340,15 @@ define( function( require ) {
 
       restartGameTimer: function() {
         if ( this.gameTimerId !== null ) {
-          Timer.clearInterval( this.gameTimerId );
+          timer.clearInterval( this.gameTimerId );
         }
         this.elapsedTimeProperty.reset();
         var self = this;
-        this.gameTimerId = Timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
+        this.gameTimerId = timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
       },
 
       stopGameTimer: function() {
-        Timer.clearInterval( this.gameTimerId );
+        timer.clearInterval( this.gameTimerId );
         this.gameTimerId = null;
       }
     }, {
