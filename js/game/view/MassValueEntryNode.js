@@ -20,6 +20,7 @@ define( function( require ) {
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -53,7 +54,7 @@ define( function( require ) {
 
     // Create and add the slider.
     this.sliderValue = new Property( 0 );
-    var slider = new HSlider( self.sliderValue, { min: 0, max: MAX_MASS },
+    var slider = new HSlider( self.sliderValue, new Range( 0, MAX_MASS ),
       {
         thumbSize: new Dimension2( 15, 30 ),
         thumbTouchAreaXDilation: 8,
