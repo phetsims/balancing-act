@@ -17,6 +17,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
+  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
@@ -36,7 +37,6 @@ define( function( require ) {
   var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   var Property = require( 'AXON/Property' );
   var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
   var Text = require( 'SCENERY/nodes/Text' );
