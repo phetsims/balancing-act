@@ -1,4 +1,4 @@
-// Copyright 2013-2017, University of Colorado Boulder
+// Copyright 2013-2018, University of Colorado Boulder
 
 /**
  * ScreenView that displays items in the balance model, primarily the balance beam (i.e. the plank), the various masses,
