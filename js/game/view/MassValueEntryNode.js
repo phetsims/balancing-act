@@ -19,11 +19,12 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
 
   // constants
   var READOUT_FONT = new PhetFont( 16 );
@@ -37,7 +38,7 @@ define( function( require ) {
   function MassValueEntryNode( options ) {
     Node.call( this );
     var self = this;
-    self.massValueProperty = new Property( 0 );
+    self.massValueProperty = new NumberProperty( 0 );
 
     // Create and add the readout, including the background.
     var readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
@@ -53,15 +54,14 @@ define( function( require ) {
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    this.sliderValue = new Property( 0 );
-    var slider = new HSlider( self.sliderValue, new Range( 0, MAX_MASS ),
-      {
-        thumbSize: new Dimension2( 15, 30 ),
-        thumbTouchAreaXDilation: 8,
-        thumbTouchAreaYDilation: 8,
-        majorTickLength: 15,
-        tickLabelSpacing: 2
-      } );
+    var slider = new HSlider( self.massValueProperty, new Range( 0, MAX_MASS ), {
+      thumbSize: new Dimension2( 15, 30 ),
+      thumbTouchAreaXDilation: 8,
+      thumbTouchAreaYDilation: 8,
+      majorTickLength: 15,
+      tickLabelSpacing: 2,
+      constrainValue: Util.roundSymmetric
+    } );
     panelContent.addChild( slider );
     for ( var i = 0; i <= MAX_MASS; i += 10 ) {
       if ( i % 50 === 0 ) {
@@ -71,17 +71,6 @@ define( function( require ) {
         slider.addMinorTick( i, null );
       }
     }
-
-    // Hook up the slider property to the mass value so that mass only contains integer values.
-    self.sliderValue.link( function( value ) {
-      self.massValueProperty.value = Math.round( value );
-    } );
-
-    // Hook them up in the other direction so that changes to the mass value
-    // that occur outside of the slider (e.g. the arrow buttons).
-    self.massValueProperty.link( function( massValue ) {
-      self.sliderValue.value = massValue;
-    } );
 
     // Create and add the arrow buttons.
     var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
@@ -121,10 +110,10 @@ define( function( require ) {
 
   return inherit( Node, MassValueEntryNode, {
     clear: function() {
-      this.sliderValue.reset();
+      this.massValueProperty.reset();
     },
     showAnswer: function( massValue ) {
-      this.sliderValue.value = massValue;
+      this.massValueProperty.value = massValue;
     }
   } );
 } );
