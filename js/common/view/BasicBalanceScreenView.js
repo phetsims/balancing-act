@@ -265,8 +265,7 @@ define( function( require ) {
       listener: resetClosure,
       radius: 20,
       right: indicatorVisibilityControlPanel.right,
-      bottom: self.layoutBounds.height - 10,
-      touchAreaDilation: 8
+      bottom: self.layoutBounds.height - 10
     } ) );
   }
 

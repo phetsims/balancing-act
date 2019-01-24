@@ -95,7 +95,7 @@ define( function( require ) {
     this.addChild( soundToggleButton );
 
     // Reset button.
-    var resetButton = new ResetAllButton( { listener: resetFunction, radius: 20, touchAreaDilation: 8 } );
+    var resetButton = new ResetAllButton( { listener: resetFunction, radius: 20 } );
     this.addChild( resetButton );
 
     // Layout
