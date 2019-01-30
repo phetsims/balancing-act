@@ -47,11 +47,12 @@ define( function( require ) {
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
   var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
   var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
   var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
 
   // Maximum allowed distance from center of balance for positioning a mass.
-  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Math.round( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Util.roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
   // balance challenge.
@@ -211,7 +212,7 @@ define( function( require ) {
     generateRandomValidPlankDistance: function() {
       var maxDistance = Plank.LENGTH / 2;
       var increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
-      var maxIncrements = Math.round( maxDistance / increment ) - 1;
+      var maxIncrements = Util.roundSymmetric( maxDistance / increment ) - 1;
       return ( this.randInt( maxIncrements ) + 1 ) * increment;
     },
 
@@ -566,7 +567,7 @@ define( function( require ) {
      * the lower indicies).
      */
     removeOldestHalfOfList: function( list ) {
-      list.splice( 0, Math.round( list.length / 2 ) );
+      list.splice( 0, Util.roundSymmetric( list.length / 2 ) );
     },
 
     /**

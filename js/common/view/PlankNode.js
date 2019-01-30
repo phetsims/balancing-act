@@ -16,6 +16,7 @@ define( function( require ) {
   var Plank = require( 'BALANCING_ACT/common/model/Plank' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -45,7 +46,9 @@ define( function( require ) {
 
     // Function for mapping plank distance relative to the center point to a highlight.
     function mapLocationToHighlightIndex( distanceFromCenter ) {
-      return Math.round( ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_LOCATIONS + 1 ) / Plank.LENGTH ) ) - 1;
+      return Util.roundSymmetric(
+        ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_LOCATIONS + 1 ) / Plank.LENGTH )
+      ) - 1;
     }
 
     // Function for updating the highlights
