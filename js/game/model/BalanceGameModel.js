@@ -25,7 +25,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
   var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var timer = require( 'PHET_CORE/timer' );
+  var timer = require( 'AXON/timer' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
