@@ -43,7 +43,7 @@ define( function( require ) {
       }, options );
 
     // Create the vector node and add it as a child.
-    var length = positionedVectorProperty.value.vector.magnitude() * scalingFactor;
+    var length = positionedVectorProperty.value.vector.magnitude * scalingFactor;
     self.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
     positionedVectorProperty.link( function( positionedVector ) {

@@ -107,7 +107,7 @@ define( function( require ) {
       if ( this.animatingProperty.get() ) {
 
         // Do a step of the linear animation towards the destination.
-        if ( this.positionProperty.get().distance( this.animationDestination ) >= this.animationMotionVector.magnitude() * dt ) {
+        if ( this.positionProperty.get().distance( this.animationDestination ) >= this.animationMotionVector.magnitude * dt ) {
 
           // Perform next step of animation.
           this.translate( this.animationMotionVector.times( dt ) );
