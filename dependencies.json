@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.15 Tue Mar 19 2019 15:39:37 GMT-0400 (EDT)",
+  "comment": "# balancing-act 1.1.16-rc.1 Wed Mar 20 2019 12:25:43 GMT-0400 (EDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "c1338dc80714038cfb31b7927d39543c62846d6a",
+    "sha": "190e73cb82018b77759056e3698d3774d7261b5d",
     "branch": "1.1"
   },
   "brand": {
@@ -18,7 +18,7 @@
   },
   "chipper": {
     "sha": "161885a4fb320b5de43a27a6d2736d9c07bf887f",
-    "branch": "balancing-act-1.1"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "da78031b6f080d20bc8346beaa1d37148188371e",
