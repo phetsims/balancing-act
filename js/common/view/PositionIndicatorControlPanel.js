@@ -44,22 +44,19 @@ define( function( require ) {
       align: 'left'
     }, options );
 
-    var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( [
+    var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
         node: new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
-        property: positionIndicatorStateProperty,
         value: 'none',
         label: noneString
       },
       {
         node: new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
-        property: positionIndicatorStateProperty,
         value: 'rulers',
         label: rulersString
       },
       {
         node: new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
-        property: positionIndicatorStateProperty,
         value: 'marks',
         label: marksString
       }
