@@ -3,6 +3,8 @@
 /**
  * This type defines a control panel that selects between the various types of
  * position markers, i.e. ruler, position markers, or nothing.
+ *
+ * @author John Blanco
  */
 define( function( require ) {
   'use strict';
@@ -47,18 +49,15 @@ define( function( require ) {
     var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
         node: new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'none',
-        label: noneString
+        value: 'none'
       },
       {
         node: new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'rulers',
-        label: rulersString
+        value: 'rulers'
       },
       {
         node: new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'marks',
-        label: marksString
+        value: 'marks'
       }
     ], {
       radioButtonOptions: { radius: 6 },
