@@ -19,7 +19,7 @@ define( function( require ) {
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
-  var GameAudioPlayerOld = require( 'VEGAS/GameAudioPlayerOld' );
+  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
@@ -157,7 +157,6 @@ define( function( require ) {
       function( level ) { gameModel.startLevel( level ); },
       function() { gameModel.reset(); },
       gameModel.timerEnabledProperty,
-      gameModel.soundEnabledProperty,
       [
         new GameIconNode( gameLevel1Icon, 1 ),
         new GameIconNode( gameLevel2Icon, 2 ),
@@ -177,8 +176,8 @@ define( function( require ) {
     // Initialize a reference to the 'level completed' node.
     self.levelCompletedNode = null;
 
-    // Hook up the audio player to the sound settings.
-    self.gameAudioPlayer = new GameAudioPlayerOld( gameModel.soundEnabledProperty );
+    // Create the audio player for the game sounds.
+    self.gameAudioPlayer = new GameAudioPlayer();
 
     // Create and add the game scoreboard.
     this.scoreboard = new FiniteStatusBar(

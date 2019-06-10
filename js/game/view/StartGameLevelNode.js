@@ -16,7 +16,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -29,7 +28,6 @@ define( function( require ) {
    * level, will be called with a zero-based index value.
    * @param {Function} resetFunction - Function to reset game and scores.
    * @param {Property} timerEnabledProperty
-   * @param {Property} soundEnabledProperty
    * @param {Array} iconNodes - Set of iconNodes to use on the buttons, sizes
    * should be the same, length of array must match number of levels.
    * @param {Array} scores - Current scores, used to decide which stars to
@@ -38,8 +36,8 @@ define( function( require ) {
    * @param {Object} [options] - See code below for options and default values.
    * @constructor
    */
-  function StartGameLevelNode( startLevelFunction, resetFunction, timerEnabledProperty, soundEnabledProperty,
-                               iconNodes, scores, modelViewTransform, options ) {
+  function StartGameLevelNode( startLevelFunction, resetFunction, timerEnabledProperty, iconNodes, scores,
+                               modelViewTransform, options ) {
 
     Node.call( this );
 
@@ -88,11 +86,9 @@ define( function( require ) {
       this.addChild( buttons[ i ] );
     }
 
-    // Sound and timer controls.
+    // timer control
     var timerToggleButton = new TimerToggleButton( timerEnabledProperty );
     this.addChild( timerToggleButton );
-    var soundToggleButton = new SoundToggleButton( soundEnabledProperty );
-    this.addChild( soundToggleButton );
 
     // Reset button.
     var resetButton = new ResetAllButton( { listener: resetFunction, radius: 20 } );
@@ -115,14 +111,8 @@ define( function( require ) {
     resetButton.bottom = options.size.height - options.controlsInset;
     title.centerX = options.size.width / 2;
     title.centerY = buttons[ 0 ].top / 2;
-
-    // The sound and timer buttons are positioned such that once is above the ground and the other below because there
-    // wasn't space to put them both above or below.
-    var interButtonSpacing = 18;
-    soundToggleButton.left = options.controlsInset;
-    soundToggleButton.bottom = modelViewTransform.modelToViewY( 0 ) - interButtonSpacing / 2;
     timerToggleButton.left = options.controlsInset;
-    timerToggleButton.top = soundToggleButton.bottom + interButtonSpacing;
+    timerToggleButton.bottom = options.size.height - options.controlsInset;
   }
 
   balancingAct.register( 'StartGameLevelNode', StartGameLevelNode );

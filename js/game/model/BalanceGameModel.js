@@ -39,7 +39,6 @@ define( function( require ) {
   function BalanceGameModel() {
     var self = this;
 
-    this.soundEnabledProperty = new Property( true );
     this.timerEnabledProperty = new Property( false );
     this.levelProperty = new Property( 0 ); // Zero-based in the model, though levels appear to the user to start at 1.
     this.challengeIndexProperty = new Property( 0 );
@@ -109,7 +108,6 @@ define( function( require ) {
       },
 
       reset: function() {
-        this.soundEnabledProperty.reset();
         this.timerEnabledProperty.reset();
         this.levelProperty.reset();
         this.challengeIndexProperty.reset();
