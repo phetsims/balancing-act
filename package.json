@@ -12,8 +12,7 @@
   "phet": {
     "requirejsNamespace": "BALANCING_ACT",
     "phetLibs": [
-      "vegas",
-      "vibe"
+      "vegas"
     ],
     "runnable": true,
     "supportedBrands": [
