@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.19 Mon Aug 05 2019 14:32:06 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# balancing-act 1.1.19 Mon Aug 19 2019 12:37:35 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "3b4590100e3c94a6afd0c454886705cd36fcf043",
+    "sha": "320c8d595af04d69ce01a1479e6bfa964aa6c36b",
     "branch": "1.1"
   },
   "brand": {
@@ -25,8 +25,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "5d5efedd260df3087ef14865c63b176d004f5b01",
-    "branch": "HEAD"
+    "sha": "28fad076f5c12d3cc73efabf87666053d890328c",
+    "branch": "balancing-act-1.1"
   },
   "kite": {
     "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
@@ -49,8 +49,8 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "3ffbd3a4b10fa25f41ce27e24c680f93f449a788",
-    "branch": "HEAD"
+    "sha": "afcc6f5021dc6584853999834bb4ce48160af94a",
+    "branch": "balancing-act-1.1"
   },
   "sherpa": {
     "sha": "cd375f2aeb9ef426c27b5922d6e20a7b1393b8e2",
