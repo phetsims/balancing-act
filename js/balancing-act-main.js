@@ -3,19 +3,19 @@
 /**
  * Main entry point for the Balancing Act simulation.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BAIntroScreen = require( 'BALANCING_ACT/intro/BAIntroScreen' );
-  var BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
-  var BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
-  var Tandem = require( 'TANDEM/Tandem' );
+  const BAIntroScreen = require( 'BALANCING_ACT/intro/BAIntroScreen' );
+  const BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
+  const BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
-  var balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
+  const balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
 
   // constants
   var tandem = Tandem.rootTandem;

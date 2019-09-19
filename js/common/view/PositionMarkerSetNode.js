@@ -4,15 +4,15 @@
  * Node that represents a set of position markers that collectively enumerate
  * the various snap-to positions on the plank.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var PositionMarkerNode = require( 'BALANCING_ACT/common/view/PositionMarkerNode' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const PositionMarkerNode = require( 'BALANCING_ACT/common/view/PositionMarkerNode' );
 
   function PositionMarkerSetNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );

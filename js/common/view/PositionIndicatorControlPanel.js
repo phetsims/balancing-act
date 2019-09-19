@@ -6,27 +6,27 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var marksString = require( 'string!BALANCING_ACT/marks' );
-  var noneString = require( 'string!BALANCING_ACT/none' );
-  var positionString = require( 'string!BALANCING_ACT/position' );
-  var rulersString = require( 'string!BALANCING_ACT/rulers' );
+  const marksString = require( 'string!BALANCING_ACT/marks' );
+  const noneString = require( 'string!BALANCING_ACT/none' );
+  const positionString = require( 'string!BALANCING_ACT/position' );
+  const rulersString = require( 'string!BALANCING_ACT/rulers' );
 
   // constants
   var RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };

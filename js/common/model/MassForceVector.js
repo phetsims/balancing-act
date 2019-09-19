@@ -1,12 +1,12 @@
 // Copyright 2013-2017, University of Colorado Boulder
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.

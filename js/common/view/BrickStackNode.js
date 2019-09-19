@@ -5,22 +5,22 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var kgString = require( 'string!BALANCING_ACT/kg' );
-  var unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   /**
    * @param {BrickStack} brickStack

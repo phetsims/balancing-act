@@ -1,11 +1,11 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Bounds2 = require( 'DOT/Bounds2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Bounds2 = require( 'DOT/Bounds2' );
 
   var BASharedConstants = {
     COMPARISON_TOLERANCE: 1E-6,

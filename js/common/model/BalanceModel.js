@@ -7,19 +7,19 @@
  * @author John Blanco
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
+  const ObservableArray = require( 'AXON/ObservableArray' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var FULCRUM_HEIGHT = 0.85; // In meters.

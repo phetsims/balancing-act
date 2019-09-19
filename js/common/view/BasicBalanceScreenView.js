@@ -6,45 +6,45 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
-  var forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
-  var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
-  var levelString = require( 'string!BALANCING_ACT/level' );
-  var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
-  var massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
-  var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
-  var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
-  var PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
-  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
-  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
-  var Property = require( 'AXON/Property' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var showString = require( 'string!BALANCING_ACT/show' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
+  const AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
+  const forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
+  const FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
+  const levelString = require( 'string!BALANCING_ACT/level' );
+  const LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
+  const massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
+  const MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
+  const Panel = require( 'SUN/Panel' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
+  const PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
+  const PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
+  const PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+  const Property = require( 'AXON/Property' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const showString = require( 'string!BALANCING_ACT/show' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const Vector2 = require( 'DOT/Vector2' );
+  const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
   var X_MARGIN_IN_PANELS = 5;

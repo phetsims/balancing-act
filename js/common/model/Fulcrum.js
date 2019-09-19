@@ -7,12 +7,12 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Shape = require( 'KITE/Shape' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Shape = require( 'KITE/Shape' );
 
   // constants
   var LEG_THICKNESS_FACTOR = 0.09; // Thickness of legs proportional to overall width, empirically determined.

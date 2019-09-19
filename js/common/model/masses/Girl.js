@@ -7,18 +7,18 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // images
-  var girlSittingImage = require( 'mipmap!BALANCING_ACT/girl-sitting.png' );
-  var girlStandingImage = require( 'mipmap!BALANCING_ACT/girl-standing.png' );
+  const girlSittingImage = require( 'mipmap!BALANCING_ACT/girl-sitting.png' );
+  const girlStandingImage = require( 'mipmap!BALANCING_ACT/girl-standing.png' );
 
   // constants
   var MASS = 30; // in kg

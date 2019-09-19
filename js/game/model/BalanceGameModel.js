@@ -8,25 +8,25 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
-  var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
-  var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var Property = require( 'AXON/Property' );
-  var TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
-  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var timer = require( 'AXON/timer' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
+  const BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
+  const MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
+  const ObservableArray = require( 'AXON/ObservableArray' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const Property = require( 'AXON/Property' );
+  const TiltedSupportColumn = require( 'BALANCING_ACT/game/model/TiltedSupportColumn' );
+  const TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
+  const timer = require( 'AXON/timer' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var MAX_LEVELS = 4;

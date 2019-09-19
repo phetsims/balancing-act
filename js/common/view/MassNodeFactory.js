@@ -7,19 +7,19 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
-  var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
-  var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
-  var MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
-  var MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
+  const BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
+  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
+  const ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
+  const MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
+  const MysteryMassNode = require( 'BALANCING_ACT/common/view/MysteryMassNode' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   var MassNodeFactory = {
     createMassNode: function( mass, modelViewTransform, isLabeled, labelVisibleProperty ) {

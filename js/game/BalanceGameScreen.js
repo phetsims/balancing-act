@@ -5,23 +5,23 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // imports
-  var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
-  var BalanceGameView = require( 'BALANCING_ACT/game/view/BalanceGameView' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Screen = require( 'JOIST/Screen' );
+  const BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
+  const BalanceGameView = require( 'BALANCING_ACT/game/view/BalanceGameView' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var gameString = require( 'string!BALANCING_ACT/game' );
+  const gameString = require( 'string!BALANCING_ACT/game' );
 
   // images
-  var gameIcon = require( 'image!BALANCING_ACT/game-icon.png' );
-  var gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
+  const gameIcon = require( 'image!BALANCING_ACT/game-icon.png' );
+  const gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
 
   function BalanceGameScreen( tandem ) {
 

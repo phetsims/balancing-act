@@ -5,13 +5,13 @@
  * not labeled, so the users must determine it by testing it against known
  * mass values.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
 
   // Mass configurations
   var MYSTERY_MASS_CONFIGURATIONS = [

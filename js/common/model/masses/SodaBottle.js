@@ -1,13 +1,13 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var sodaBottleImage = require( 'image!BALANCING_ACT/soda-bottle.png' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const sodaBottleImage = require( 'image!BALANCING_ACT/soda-bottle.png' );
 
   // constants
   var MASS = 2; // In kg

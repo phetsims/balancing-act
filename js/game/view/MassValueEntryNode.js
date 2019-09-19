@@ -5,26 +5,26 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var kgString = require( 'string!BALANCING_ACT/kg' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
-  var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const ArrowButton = require( 'SUN/buttons/ArrowButton' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HSlider = require( 'SUN/HSlider' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
+  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // constants
   var READOUT_FONT = new PhetFont( 16 );

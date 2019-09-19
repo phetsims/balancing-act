@@ -5,23 +5,23 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // imports
-  var BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
-  var BalanceLabView = require( 'BALANCING_ACT/balancelab/view/BalanceLabView' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Screen = require( 'JOIST/Screen' );
+  const BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
+  const BalanceLabView = require( 'BALANCING_ACT/balancelab/view/BalanceLabView' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
+  const balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
 
   // images
-  var labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
-  var labIconSmall = require( 'image!BALANCING_ACT/lab-icon-small.png' );
+  const labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
+  const labIconSmall = require( 'image!BALANCING_ACT/lab-icon-small.png' );
 
   function BalanceLabScreen( tandem ) {
 

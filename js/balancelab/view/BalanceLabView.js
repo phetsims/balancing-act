@@ -3,17 +3,17 @@
 /**
  * Type that defines the "Balance Lab" screen.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
-  var Panel = require( 'SUN/Panel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
+  const Panel = require( 'SUN/Panel' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
   var PANEL_X_MARGIN = 5;

@@ -7,20 +7,20 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
-  var plankBalancedImage = require( 'image!BALANCING_ACT/plank-balanced.png' );
-  var plankTippedLeftImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
-  var plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
-  var Property = require( 'AXON/Property' );
-  var TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
+  const plankBalancedImage = require( 'image!BALANCING_ACT/plank-balanced.png' );
+  const plankTippedLeftImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
+  const plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
+  const Property = require( 'AXON/Property' );
+  const TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
 
   function TiltPredictionSelectorNode( gameStateProperty ) {
     Node.call( this );

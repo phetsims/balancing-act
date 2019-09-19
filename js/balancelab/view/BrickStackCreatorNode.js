@@ -7,19 +7,19 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
-  var BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Property = require( 'AXON/Property' );
-  var Shape = require( 'KITE/Shape' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
+  const BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Property = require( 'AXON/Property' );
+  const Shape = require( 'KITE/Shape' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // Model-view transform for scaling the node used in the toolbox.  This
   // may scale the node differently than what is used in the model so that

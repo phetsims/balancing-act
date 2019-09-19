@@ -6,19 +6,19 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Matrix3 = require( 'DOT/Matrix3' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var Shape = require( 'KITE/Shape' );
-  var Transform3 = require( 'DOT/Transform3' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Matrix3 = require( 'DOT/Matrix3' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const Shape = require( 'KITE/Shape' );
+  const Transform3 = require( 'DOT/Transform3' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var PLANK_TO_INDICATOR_SPACING = 5;

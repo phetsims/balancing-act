@@ -15,41 +15,41 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
-  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
-  var BigRock = require( 'BALANCING_ACT/common/model/masses/BigRock' );
-  var Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
-  var BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
-  var CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
-  var Crate = require( 'BALANCING_ACT/common/model/masses/Crate' );
-  var FireHydrant = require( 'BALANCING_ACT/common/model/masses/FireHydrant' );
-  var FlowerPot = require( 'BALANCING_ACT/common/model/masses/FlowerPot' );
-  var Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
-  var LargeBucket = require( 'BALANCING_ACT/common/model/masses/LargeBucket' );
-  var LargeTrashCan = require( 'BALANCING_ACT/common/model/masses/LargeTrashCan' );
-  var Man = require( 'BALANCING_ACT/common/model/masses/Man' );
-  var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
-  var MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
-  var MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
-  var Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
-  var SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
-  var SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
-  var SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
-  var Television = require( 'BALANCING_ACT/common/model/masses/Television' );
-  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
-  var Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
+  const BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const Barrel = require( 'BALANCING_ACT/common/model/masses/Barrel' );
+  const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const BigRock = require( 'BALANCING_ACT/common/model/masses/BigRock' );
+  const Boy = require( 'BALANCING_ACT/common/model/masses/Boy' );
+  const BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
+  const CinderBlock = require( 'BALANCING_ACT/common/model/masses/CinderBlock' );
+  const Crate = require( 'BALANCING_ACT/common/model/masses/Crate' );
+  const FireHydrant = require( 'BALANCING_ACT/common/model/masses/FireHydrant' );
+  const FlowerPot = require( 'BALANCING_ACT/common/model/masses/FlowerPot' );
+  const Girl = require( 'BALANCING_ACT/common/model/masses/Girl' );
+  const LargeBucket = require( 'BALANCING_ACT/common/model/masses/LargeBucket' );
+  const LargeTrashCan = require( 'BALANCING_ACT/common/model/masses/LargeTrashCan' );
+  const Man = require( 'BALANCING_ACT/common/model/masses/Man' );
+  const MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
+  const MediumBucket = require( 'BALANCING_ACT/common/model/masses/MediumBucket' );
+  const MediumRock = require( 'BALANCING_ACT/common/model/masses/MediumRock' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const PottedPlant = require( 'BALANCING_ACT/common/model/masses/PottedPlant' );
+  const Puppy = require( 'BALANCING_ACT/common/model/masses/Puppy' );
+  const SmallBucket = require( 'BALANCING_ACT/common/model/masses/SmallBucket' );
+  const SmallRock = require( 'BALANCING_ACT/common/model/masses/SmallRock' );
+  const SodaBottle = require( 'BALANCING_ACT/common/model/masses/SodaBottle' );
+  const Television = require( 'BALANCING_ACT/common/model/masses/Television' );
+  const TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
+  const TinyRock = require( 'BALANCING_ACT/common/model/masses/TinyRock' );
+  const Tire = require( 'BALANCING_ACT/common/model/masses/Tire' );
+  const Util = require( 'DOT/Util' );
+  const Vector2 = require( 'DOT/Vector2' );
+  const Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
 
   // Maximum allowed distance from center of balance for positioning a mass.
   var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Util.roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;

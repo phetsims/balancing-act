@@ -1,13 +1,13 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var whatIsTheMassString = require( 'string!BALANCING_ACT/whatIsTheMass' );
+  const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const whatIsTheMassString = require( 'string!BALANCING_ACT/whatIsTheMass' );
 
   /**
    * A challenge, used in the balance game, in which the user attempts to

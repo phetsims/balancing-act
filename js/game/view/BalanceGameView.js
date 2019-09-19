@@ -5,57 +5,57 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
-  var BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
-  var BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
-  var Color = require( 'SCENERY/util/Color' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
-  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
-  var FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
-  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
-  var GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
-  var LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
-  var LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
-  var MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
-  var MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
-  var MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
-  var PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
-  var PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
-  var Property = require( 'AXON/Property' );
-  var RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  var TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
-  var TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
-  var TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
+  const BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
+  const BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const Color = require( 'SCENERY/util/Color' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
+  const FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
+  const FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
+  const GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+  const GameIconNode = require( 'BALANCING_ACT/game/view/GameIconNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
+  const LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
+  const LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
+  const MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
+  const MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
+  const MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
+  const PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
+  const PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
+  const Property = require( 'AXON/Property' );
+  const RotatingRulerNode = require( 'BALANCING_ACT/common/view/RotatingRulerNode' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const StartGameLevelNode = require( 'BALANCING_ACT/game/view/StartGameLevelNode' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  const TiltedSupportColumnNode = require( 'BALANCING_ACT/common/view/TiltedSupportColumnNode' );
+  const TiltPredictionChallenge = require( 'BALANCING_ACT/game/model/TiltPredictionChallenge' );
+  const TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // Images and Strings
-  var checkString = require( 'string!VEGAS/check' );
-  var gameLevel1Icon = require( 'mipmap!BALANCING_ACT/game-level-1-icon.png' );
-  var gameLevel2Icon = require( 'mipmap!BALANCING_ACT/game-level-2-icon.png' );
-  var gameLevel3Icon = require( 'mipmap!BALANCING_ACT/game-level-3-icon.png' );
-  var gameLevel4Icon = require( 'mipmap!BALANCING_ACT/game-level-4-icon.png' );
-  var nextString = require( 'string!VEGAS/next' );
-  var showAnswerString = require( 'string!VEGAS/showAnswer' );
-  var startOverString = require( 'string!BALANCING_ACT/startOver' );
-  var tryAgainString = require( 'string!VEGAS/tryAgain' );
+  const checkString = require( 'string!VEGAS/check' );
+  const gameLevel1Icon = require( 'mipmap!BALANCING_ACT/game-level-1-icon.png' );
+  const gameLevel2Icon = require( 'mipmap!BALANCING_ACT/game-level-2-icon.png' );
+  const gameLevel3Icon = require( 'mipmap!BALANCING_ACT/game-level-3-icon.png' );
+  const gameLevel4Icon = require( 'mipmap!BALANCING_ACT/game-level-4-icon.png' );
+  const nextString = require( 'string!VEGAS/next' );
+  const showAnswerString = require( 'string!VEGAS/showAnswer' );
+  const startOverString = require( 'string!BALANCING_ACT/startOver' );
+  const tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // constants
   var BUTTON_FONT = new PhetFont( 24 );

@@ -3,17 +3,17 @@
 /**
  * A user interface control that is used to turn the columns on or off.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ABSwitch = require( 'SUN/ABSwitch' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
+  const ABSwitch = require( 'SUN/ABSwitch' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Panel = require( 'SUN/Panel' );
 
   // constants
   var ICON_WIDTH = 60;

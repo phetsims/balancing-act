@@ -6,21 +6,21 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  var RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
-  var RulerNodeRasterizedText = require( 'BALANCING_ACT/common/view/RulerNodeRasterizedText' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
+  const RulerNodeRasterizedText = require( 'BALANCING_ACT/common/view/RulerNodeRasterizedText' );
 
   // strings
-  var metersString = require( 'string!BALANCING_ACT/meters' );
+  const metersString = require( 'string!BALANCING_ACT/meters' );
 
   // constants
   var RULER_HEIGHT = 50; // Empirically determined

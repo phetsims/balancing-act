@@ -7,16 +7,16 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var SmallTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallTrashCan' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const SmallTrashCan = require( 'BALANCING_ACT/common/model/masses/SmallTrashCan' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @constructor

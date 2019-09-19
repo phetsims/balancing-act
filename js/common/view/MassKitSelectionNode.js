@@ -6,28 +6,28 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
-  var bricksString = require( 'string!BALANCING_ACT/bricks' );
-  var BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
-  var GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var KitSelectionNode = require( 'SCENERY_PHET/KitSelectionNode' );
-  var ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
-  var MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
-  var mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var peopleString = require( 'string!BALANCING_ACT/people' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
+  const bricksString = require( 'string!BALANCING_ACT/bricks' );
+  const BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
+  const GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const KitSelectionNode = require( 'SCENERY_PHET/KitSelectionNode' );
+  const ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
+  const MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
+  const mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const peopleString = require( 'string!BALANCING_ACT/people' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Property = require( 'AXON/Property' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
 
   // constants
   var TITLE_FONT = new PhetFont( 16 );

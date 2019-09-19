@@ -3,16 +3,16 @@
 /**
  * Node that defines a single panel for use on the tilt prediction selector node.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var DownUpListener = require( 'SCENERY/input/DownUpListener' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const DownUpListener = require( 'SCENERY/input/DownUpListener' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants, collected here for easy appearance tweaking.
   var PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.

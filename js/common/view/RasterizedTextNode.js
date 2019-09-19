@@ -11,15 +11,15 @@
  * with TextNode on April 11, 2018, and decided that the rasterized version still looked better, so that was the most
  * recent evaluation.
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var platform = require( 'PHET_CORE/platform' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const platform = require( 'PHET_CORE/platform' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // Since the rasterization is done in the label's parent coordinate frame, we need additional resolution to not look
   // blurry.  The default value was empirically determined.

@@ -6,13 +6,13 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // module
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
 
   /**
    * @param {BalanceLabModel} model

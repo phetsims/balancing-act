@@ -6,14 +6,14 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );
+  const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );
 
   /**
    * @constructor

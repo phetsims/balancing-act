@@ -5,16 +5,16 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var kgString = require( 'string!BALANCING_ACT/kg' );
-  var ModelElementCreatorNode = require( 'BALANCING_ACT/balancelab/view/ModelElementCreatorNode' );
-  var pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const ModelElementCreatorNode = require( 'BALANCING_ACT/balancelab/view/ModelElementCreatorNode' );
+  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   /**
    * @param {ModelViewTransform2} modelViewTransform

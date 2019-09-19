@@ -5,19 +5,19 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
-  var Matrix3 = require( 'DOT/Matrix3' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
-  var Property = require( 'AXON/Property' );
-  var Shape = require( 'KITE/Shape' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
+  const Matrix3 = require( 'DOT/Matrix3' );
+  const ObservableArray = require( 'AXON/ObservableArray' );
+  const Property = require( 'AXON/Property' );
+  const Shape = require( 'KITE/Shape' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var PLANK_LENGTH = 4.5;// meters

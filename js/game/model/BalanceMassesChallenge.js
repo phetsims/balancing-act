@@ -9,15 +9,15 @@
  * @author John Blanco
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
-  var balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Plank = require( 'BALANCING_ACT/common/model/Plank' );
+  const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
+  const balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Plank = require( 'BALANCING_ACT/common/model/Plank' );
 
   /**
    * @param {Array<{mass:{Mass}, distance:{number}}>} fixedMasses - Mass-distance pairs that describe the fixed masses.

@@ -7,13 +7,13 @@
  *
  * @author John Blanco
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  var ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  var inherit = require( 'PHET_CORE/inherit' );
+  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
+  const inherit = require( 'PHET_CORE/inherit' );
 
   /**
    * @param {number} massValue
