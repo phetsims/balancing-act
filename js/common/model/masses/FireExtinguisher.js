@@ -10,8 +10,8 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
 
   // constants
-  var MASS = 5; // In kg
-  var HEIGHT = 0.5; // In meters
+  const MASS = 5; // In kg
+  const HEIGHT = 0.5; // In meters
 
   /**
    * @param initialPosition

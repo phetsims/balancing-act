@@ -25,7 +25,7 @@ define( require => {
 
   function BalanceLabScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: balanceLabString,
       homeScreenIcon: new Image( labIcon ),
       navigationBarIcon: new Image( labIconSmall ),

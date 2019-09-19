@@ -21,26 +21,26 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var PLANK_TO_INDICATOR_SPACING = 5;
-  var LEVEL_FILL_COLOR = 'rgb( 173, 255, 47 )';
-  var NON_LEVEL_FILL_COLOR = 'rgb( 230, 230, 230 )';
+  const PLANK_TO_INDICATOR_SPACING = 5;
+  const LEVEL_FILL_COLOR = 'rgb( 173, 255, 47 )';
+  const NON_LEVEL_FILL_COLOR = 'rgb( 230, 230, 230 )';
 
   function LevelIndicatorNode( modelViewTransform, plank ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Locations for left and right edge
-    var leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+    const leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
       plank.pivotPoint.x - Plank.LENGTH / 2,
       plank.getPlankSurfaceCenter().y
     ) );
-    var rightEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+    const rightEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
       plank.pivotPoint.x + Plank.LENGTH / 2,
       plank.getPlankSurfaceCenter().y
     ) );
 
     // Draw a sort of arrow head shape.
-    var leftIndicatorShape = new Shape().
+    const leftIndicatorShape = new Shape().
       moveTo( 0, 0 ).
       lineTo( -25, -10 ).
       lineTo( -20, 0 ).
@@ -48,7 +48,7 @@ define( require => {
       close();
 
     //Create paths for left and right side
-    var leftLevelIndicatorNode = new Path( leftIndicatorShape,
+    const leftLevelIndicatorNode = new Path( leftIndicatorShape,
       {
         stroke: 'black',
         right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
@@ -56,9 +56,9 @@ define( require => {
       } );
     self.addChild( leftLevelIndicatorNode );
 
-    var reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
-    var rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
-    var rightLevelIndicatorNode = new Path( rightIndicatorShape,
+    const reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
+    const rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
+    const rightLevelIndicatorNode = new Path( rightIndicatorShape,
       {
         stroke: 'black',
         left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,

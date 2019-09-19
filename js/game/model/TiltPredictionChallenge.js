@@ -40,7 +40,7 @@ define( require => {
     create: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter ) {
 
       // Add the fixed masses and their distances from the center of the balance.
-      var fixedMassesList = [];
+      const fixedMassesList = [];
       fixedMassesList.push( { mass: fixedMass1, distance: fixedMass1DistanceFromCenter } );
       fixedMassesList.push( { mass: fixedMass2, distance: fixedMass2DistanceFromCenter } );
 

@@ -18,9 +18,9 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var BRICK_WIDTH = 0.2; // In meters.
-  var BRICK_HEIGHT = BRICK_WIDTH / 3;
-  var BRICK_MASS = 5; // In kg.
+  const BRICK_WIDTH = 0.2; // In meters.
+  const BRICK_HEIGHT = BRICK_WIDTH / 3;
+  const BRICK_MASS = 5; // In kg.
 
   /**
    * @param {number} numBricks
@@ -35,9 +35,9 @@ define( require => {
     initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
 
     // Generate the shape of the brick stack.
-    var brickStackShape = new Shape();
-    var brickOriginY = 0;
-    for ( var i = 0; i < numBricks; i++ ) {
+    const brickStackShape = new Shape();
+    let brickOriginY = 0;
+    for ( let i = 0; i < numBricks; i++ ) {
       brickStackShape.rect( 0, brickOriginY, BRICK_WIDTH, BRICK_HEIGHT );
       brickOriginY += BRICK_HEIGHT;
     }

@@ -50,7 +50,7 @@ define( require => {
      * more specific than just matching class and mass value.
      */
     containsEquivalentMass: function( mass, massList ) {
-      for ( var i = 0; i < massList.length; i++ ) {
+      for ( let i = 0; i < massList.length; i++ ) {
         if ( mass.massValue === massList[ i ].massValue && typeof( mass ) === typeof( massList[ i ] ) ) {
           // These masses are equivalent, so the list contains an equivalent mass.
           return true;
@@ -64,7 +64,7 @@ define( require => {
       if ( massList1.length !== massList2.length ) {
         return false;
       }
-      for ( var i = 0; i < massList1.length; i++ ) {
+      for ( let i = 0; i < massList1.length; i++ ) {
         if ( !this.containsEquivalentMass( massList1[ i ], massList2 ) ) {
           return false;
         }
@@ -74,7 +74,7 @@ define( require => {
 
     // Extract the fixed masses from the mass-distance pairs.
     getFixedMassesList: function() {
-      var fixedMassesList = [];
+      const fixedMassesList = [];
       this.fixedMassDistancePairs.forEach( function( massDistancePair ) {
         fixedMassesList.push( massDistancePair.mass );
       } );
@@ -90,8 +90,8 @@ define( require => {
         return true;
       }
 
-      var thisFixedMasses = this.getFixedMassesList();
-      var thatFixedMasses = that.getFixedMassesList();
+      const thisFixedMasses = this.getFixedMassesList();
+      const thatFixedMasses = that.getFixedMassesList();
 
       if ( !this.containsEquivalentMasses( thisFixedMasses, thatFixedMasses ) ) {
         return false;
@@ -132,7 +132,7 @@ define( require => {
         return false;
       }
 
-      var matchCount = 0;
+      let matchCount = 0;
       this.fixedMassDistancePairs.forEach( function( thisFixedMassDistancePair ) {
         that.fixedMassDistancePairs.forEach( function( thatFixedMassDistancePair ) {
           if ( thisFixedMassDistancePair.mass.massValue === thatFixedMassDistancePair.mass.massValue &&

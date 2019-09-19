@@ -22,14 +22,14 @@ define( require => {
   const pattern0Label1ValueString = require( 'string!BALANCING_ACT/pattern0Label1Value' );
 
   // constants
-  var FONT = new PhetFont( 16 );
-  var IMAGE_SIZE = new Dimension2( 100, 65 );
+  const FONT = new PhetFont( 16 );
+  const IMAGE_SIZE = new Dimension2( 100, 65 );
 
   function GameIconNode( image, levelNumber ) {
     Node.call( this );
-    var title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), { font: FONT } );
+    const title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), { font: FONT } );
     this.addChild( title );
-    var imageNode = new Image( image );
+    const imageNode = new Image( image );
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
     imageNode.top = title.bottom + 4;
     this.addChild( imageNode );

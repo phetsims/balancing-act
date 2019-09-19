@@ -10,8 +10,8 @@ define( require => {
   const puppyImage = require( 'image!BALANCING_ACT/puppy.png' );
 
   // constants
-  var MASS = 6; // In kg
-  var HEIGHT = 0.6; // In meters
+  const MASS = 6; // In kg
+  const HEIGHT = 0.6; // In meters
 
   /**
    * @param initialPosition

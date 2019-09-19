@@ -16,7 +16,7 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
-  var PANEL_X_MARGIN = 5;
+  const PANEL_X_MARGIN = 5;
 
   /**
    * @param model
@@ -24,7 +24,7 @@ define( require => {
    */
   function BalanceLabView( model ) {
     BasicBalanceScreenView.call( this, model );
-    var self = this;
+    const self = this;
 
     // Add the mass selection carousel.
     this.massKitSelectionNode = new MassKitSelectionNode( model, self.modelViewTransform );

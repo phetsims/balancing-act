@@ -10,8 +10,8 @@ define( require => {
   const televisionImage = require( 'image!BALANCING_ACT/old-television.png' );
 
   // constants
-  var MASS = 10; // In kg
-  var HEIGHT = 0.5; // In meters
+  const MASS = 10; // In kg
+  const HEIGHT = 0.5; // In meters
 
   /**
    * @param initialPosition

@@ -9,7 +9,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
+  const ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
 
   /**
    * @param {Object} mass - A mass object as used in this simulation.

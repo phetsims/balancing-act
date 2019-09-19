@@ -10,8 +10,8 @@ define( require => {
   const trashCanImage = require( 'image!BALANCING_ACT/trash-can.png' );
 
   // constants
-  var MASS = 10; // In kg
-  var HEIGHT = 0.55; // In meters
+  const MASS = 10; // In kg
+  const HEIGHT = 0.55; // In meters
 
   /**
    * @param initialPosition

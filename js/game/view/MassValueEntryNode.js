@@ -27,34 +27,34 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  var READOUT_FONT = new PhetFont( 16 );
-  var ARROW_HEIGHT = 15;
-  var MAX_MASS = 100;
-  var TICK_MARK_FONT = new PhetFont( 10 );
+  const READOUT_FONT = new PhetFont( 16 );
+  const ARROW_HEIGHT = 15;
+  const MAX_MASS = 100;
+  const TICK_MARK_FONT = new PhetFont( 10 );
 
   /**
    * @constructor
    */
   function MassValueEntryNode( options ) {
     Node.call( this );
-    var self = this;
+    const self = this;
     self.massValueProperty = new NumberProperty( 0 );
 
     // Create and add the readout, including the background.
-    var readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
-    var readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
+    const readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
+    const readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
         fill: 'white',
         stroke: 'black'
       }
     );
-    var panelContent = new Node();
+    const panelContent = new Node();
     panelContent.addChild( readoutBackground );
     readoutText.centerY = readoutBackground.centerY;
     panelContent.addChild( readoutText );
 
     // Create and add the slider.
-    var slider = new HSlider( self.massValueProperty, new Range( 0, MAX_MASS ), {
+    const slider = new HSlider( self.massValueProperty, new Range( 0, MAX_MASS ), {
       thumbSize: new Dimension2( 15, 30 ),
       thumbTouchAreaXDilation: 8,
       thumbTouchAreaYDilation: 8,
@@ -63,7 +63,7 @@ define( require => {
       constrainValue: Util.roundSymmetric
     } );
     panelContent.addChild( slider );
-    for ( var i = 0; i <= MAX_MASS; i += 10 ) {
+    for ( let i = 0; i <= MAX_MASS; i += 10 ) {
       if ( i % 50 === 0 ) {
         slider.addMajorTick( i, new Text( i, { font: TICK_MARK_FONT } ) );
       }
@@ -73,10 +73,10 @@ define( require => {
     }
 
     // Create and add the arrow buttons.
-    var arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
-    var leftArrowButton = new ArrowButton( 'left', function() { self.massValueProperty.value--; }, arrowButtonOptions );
+    const arrowButtonOptions = { arrowHeight: ARROW_HEIGHT, arrowWidth: ARROW_HEIGHT * Math.sqrt( 3 ) / 2 };
+    const leftArrowButton = new ArrowButton( 'left', function() { self.massValueProperty.value--; }, arrowButtonOptions );
     panelContent.addChild( leftArrowButton );
-    var rightArrowButton = new ArrowButton( 'right', function() { self.massValueProperty.value++; }, arrowButtonOptions );
+    const rightArrowButton = new ArrowButton( 'right', function() { self.massValueProperty.value++; }, arrowButtonOptions );
     panelContent.addChild( rightArrowButton );
 
     // layout
@@ -92,7 +92,7 @@ define( require => {
     self.massValueProperty.reset(); // Put slider back to original position.
 
     // Put the contents into a panel.
-    var panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 7, yMargin: 7 } );
+    const panel = new Panel( panelContent, { fill: 'rgb( 234, 234, 174 )', xMargin: 7, yMargin: 7 } );
     self.addChild( panel );
 
     // Update the readout text and arrow button states whenever the value changes.

@@ -10,8 +10,8 @@ define( require => {
   const yellowBucketImage = require( 'image!BALANCING_ACT/yellow-bucket.png' );
 
   // constants
-  var MASS = 20; // In kg
-  var HEIGHT = 0.4; // In meters
+  const MASS = 20; // In kg
+  const HEIGHT = 0.4; // In meters
 
   /**
    * @param initialPosition

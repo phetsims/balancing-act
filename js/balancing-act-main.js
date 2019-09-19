@@ -18,11 +18,11 @@ define( require => {
   const balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
 
   // constants
-  var tandem = Tandem.rootTandem;
+  const tandem = Tandem.rootTandem;
 
   SimLauncher.launch( function() {
 
-    var simOptions = {
+    const simOptions = {
       credits: {
         leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
         softwareDevelopment: 'John Blanco',

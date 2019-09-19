@@ -20,10 +20,10 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var NORMAL_TICK_MARK_LINE_WIDTH = 1;
-  var BOLD_TICK_MARK_LINE_WIDTH = 3;
-  var HIGHLIGHT_COLOR = 'white';
-  var HIGHLIGHT_WIDTH = 12;
+  const NORMAL_TICK_MARK_LINE_WIDTH = 1;
+  const BOLD_TICK_MARK_LINE_WIDTH = 3;
+  const HIGHLIGHT_COLOR = 'white';
+  const HIGHLIGHT_WIDTH = 12;
 
   /**
    * @param modelViewTransform
@@ -32,11 +32,11 @@ define( require => {
    */
   function PlankNode( modelViewTransform, plank ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Create and position the plank.
-    var plankViewBounds = modelViewTransform.modelToViewShape( plank.unrotatedShape ).bounds;
-    var plankNode = new Rectangle( plankViewBounds.minX, plankViewBounds.minY, plankViewBounds.width, plankViewBounds.height,
+    const plankViewBounds = modelViewTransform.modelToViewShape( plank.unrotatedShape ).bounds;
+    const plankNode = new Rectangle( plankViewBounds.minX, plankViewBounds.minY, plankViewBounds.width, plankViewBounds.height,
       {
         fill: 'rgb( 243, 203, 127 )',
         stroke: 'black',
@@ -66,28 +66,28 @@ define( require => {
     plank.activeDropLocations.addItemRemovedListener( updateHighlights );
 
     // Create and add the tick mark layer.
-    var tickMarkLayer = new Node();
-    var tickMarkShape = Shape.lineSegment( 0, 0, 0, modelViewTransform.modelToViewDeltaY( Plank.THICKNESS ) );
-    var plankLeftEdge = new Vector2( modelViewTransform.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
+    const tickMarkLayer = new Node();
+    const tickMarkShape = Shape.lineSegment( 0, 0, 0, modelViewTransform.modelToViewDeltaY( Plank.THICKNESS ) );
+    const plankLeftEdge = new Vector2( modelViewTransform.modelToViewX( plank.getPlankSurfaceCenter().x - Plank.LENGTH / 2 ),
       modelViewTransform.modelToViewY( plank.getPlankSurfaceCenter().y ) );
-    var tickMarkDeltaX = modelViewTransform.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+    const tickMarkDeltaX = modelViewTransform.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
     this.highlights = [];
-    for ( var i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
-      var tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
+    for ( let i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
+      let tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
       if ( i % 2 === 0 ) {
         // Make some marks bold for easier placement of masses.
         // The 'if' clause can be tweaked to put marks in
         // different places.
         tickMarkStroke = BOLD_TICK_MARK_LINE_WIDTH;
       }
-      var tickMark = new Path( tickMarkShape,
+      const tickMark = new Path( tickMarkShape,
         {
           centerX: plankLeftEdge.x + ( i + 1 ) * tickMarkDeltaX,
           top: plankLeftEdge.y,
           lineWidth: tickMarkStroke,
           stroke: 'black'
         } );
-      var highlight = new Rectangle(
+      const highlight = new Rectangle(
         tickMark.centerX - HIGHLIGHT_WIDTH / 2,
         tickMark.top,
         HIGHLIGHT_WIDTH,
@@ -103,8 +103,8 @@ define( require => {
     plankNode.addChild( tickMarkLayer );
 
     // Track the rotational angle of the plank and update this node accordingly.
-    var nodeRotation = 0;
-    var rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
+    let nodeRotation = 0;
+    const rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( tiltAngle ) {
       plankNode.rotateAround( rotationPoint, nodeRotation - tiltAngle );
       nodeRotation = tiltAngle;

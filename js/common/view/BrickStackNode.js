@@ -32,14 +32,14 @@ define( require => {
    */
   function BrickStackNode( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
-    var self = this;
+    const self = this;
     self.brickStack = brickStack;
     self.modelViewTransform = modelViewTransform;
     self.previousAngle = 0;
 
     // Create and add the main shape node.
-    var transformedBrickShape = modelViewTransform.modelToViewShape( brickStack.shape );
-    var shapeNode = new Path( transformedBrickShape, {
+    const transformedBrickShape = modelViewTransform.modelToViewShape( brickStack.shape );
+    const shapeNode = new Path( transformedBrickShape, {
       fill: 'rgb( 205, 38, 38 )',
       stroke: 'black',
       lineWidth: 1,
@@ -49,8 +49,8 @@ define( require => {
 
     // Create and add the mass label.
     if ( isLabeled ) {
-      var massLabel;
-      var maxTextWidth = shapeNode.bounds.width;
+      let massLabel;
+      const maxTextWidth = shapeNode.bounds.width;
       if ( brickStack.isMystery ) {
         massLabel = new RasterizedTextNode(
           unknownMassLabelString,
@@ -60,7 +60,7 @@ define( require => {
       else {
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
         massLabel = new Node();
-        var massValueText = new RasterizedTextNode(
+        const massValueText = new RasterizedTextNode(
           brickStack.massValue,
           { font: new PhetFont( 12 ) },
           { centerX: 0, maxWidth: maxTextWidth, pickable: false /* set pickable to true if RasterizedTextNode is ever replaced with regular Text node */ }
@@ -90,8 +90,8 @@ define( require => {
     // Set initial position and record so deltas can be subsequently used.
     // This helps minimize transformation when moving the items.
 
-    var offsetToBottom = new Vector2( 0, -self.height / 2 );
-    var previousRotationAngle = 0;
+    let offsetToBottom = new Vector2( 0, -self.height / 2 );
+    let previousRotationAngle = 0;
 
     // Monitor the brick stack for position and angle changes.
     brickStack.rotationAngleProperty.link( function( newAngle ) {

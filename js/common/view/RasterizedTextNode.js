@@ -23,7 +23,7 @@ define( require => {
 
   // Since the rasterization is done in the label's parent coordinate frame, we need additional resolution to not look
   // blurry.  The default value was empirically determined.
-  var RASTER_SCALE = 2;
+  const RASTER_SCALE = 2;
 
   /**
    * @param text
@@ -39,9 +39,9 @@ define( require => {
       this.renderer = 'dom';
     }
     textOptions.scale = RASTER_SCALE;
-    var label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
+    const label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
     // TODO: maybe try toImageNodeAsynchronous.
-    var labelRasterized = label.rasterized();
+    const labelRasterized = label.rasterized();
     labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
     this.addChild( labelRasterized );
     this.localBounds = label.localBounds;

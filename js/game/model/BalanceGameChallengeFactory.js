@@ -52,16 +52,16 @@ define( require => {
   const Woman = require( 'BALANCING_ACT/common/model/masses/Woman' );
 
   // Maximum allowed distance from center of balance for positioning a mass.
-  var MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Util.roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+  const MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Util.roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
 
   // Parameters that control how many attempts are made to generate a unique
   // balance challenge.
-  var MAX_GEN_ATTEMPTS = 50;
-  var MAX_HALVING_OF_PAST_LIST = 3;
+  const MAX_GEN_ATTEMPTS = 50;
+  const MAX_HALVING_OF_PAST_LIST = 3;
 
   // List of masses that can be used on either side of the balance challenges
   // or as the fixed masses in mass deduction challenges.
-  var BALANCE_CHALLENGE_MASSES = [
+  const BALANCE_CHALLENGE_MASSES = [
     new BrickStack( 1, Vector2.ZERO ),
     new BrickStack( 2, Vector2.ZERO ),
     new BrickStack( 3, Vector2.ZERO ),
@@ -84,7 +84,7 @@ define( require => {
   // List of masses that can be used as "mystery masses" in the mass
   // deduction challenges.  These should not appear in other tabs, lest the
   // user could already know their mass.
-  var MYSTERY_MASSES = [
+  const MYSTERY_MASSES = [
     new FireHydrant( Vector2.ZERO, true ),
     new Television( Vector2.ZERO, true ),
     new LargeTrashCan( Vector2.ZERO, true ),
@@ -100,7 +100,7 @@ define( require => {
   // List of masses that are "low profile", meaning that they are short.
   // This is needed for the tilt-prediction style of problem, since taller
   // masses end up going behind the tilt prediction selector.
-  var LOW_PROFILE_MASSES = [
+  const LOW_PROFILE_MASSES = [
     new TinyRock( Vector2.ZERO, false ),
     new SmallRock( Vector2.ZERO, false ),
     new MediumRock( Vector2.ZERO, false ),
@@ -110,11 +110,11 @@ define( require => {
 
   // Lists used to keep track of the challenges generated so far so that we
   // can avoid creating the same challenges multiple times.
-  var usedBalanceChallenges = [];
-  var usedMassDeductionChallenges = [];
-  var usedTiltPredictionChallenges = [];
+  const usedBalanceChallenges = [];
+  const usedMassDeductionChallenges = [];
+  const usedTiltPredictionChallenges = [];
 
-  var BalanceGameChallengeFactory = {
+  const BalanceGameChallengeFactory = {
 
     // Generate a random integer from 0 (inclusive) to max (exclusive)
     randInt: function( max ) {
@@ -135,7 +135,7 @@ define( require => {
     },
 
     chooseRandomValidFixedMassDistance: function( fixedMassValue, movableMassValue ) {
-      var validFixedMassDistances = this.getPossibleDistanceList( fixedMassValue, movableMassValue );
+      const validFixedMassDistances = this.getPossibleDistanceList( fixedMassValue, movableMassValue );
 
       // Randomly choose a distance to use from the identified set.
       return -validFixedMassDistances[ this.randInt( validFixedMassDistances.length ) ];
@@ -148,16 +148,16 @@ define( require => {
      * consolidate some code written for generating tilt-prediction challenges.
      */
     positionMassesCloseToBalancing: function( minDistance, maxDistance, masses ) {
-      var bestNetTorque = Number.POSITIVE_INFINITY;
-      var minAcceptableTorque = 1; // Determined empirically.
-      var distanceList = [];
-      var bestDistanceList = distanceList;
+      let bestNetTorque = Number.POSITIVE_INFINITY;
+      const minAcceptableTorque = 1; // Determined empirically.
+      let distanceList = [];
+      let bestDistanceList = distanceList;
       for ( var i = 0; i < MAX_GEN_ATTEMPTS; i++ ) {
         distanceList = [];
         // Generate a set of unique, random, and valid distances for the
         // placement of the masses.
-        for ( var j = 0; distanceList.length < masses.length && j < MAX_GEN_ATTEMPTS; j++ ) {
-          var candidateDistance = this.generateRandomValidPlankDistance( minDistance, maxDistance );
+        for ( let j = 0; distanceList.length < masses.length && j < MAX_GEN_ATTEMPTS; j++ ) {
+          let candidateDistance = this.generateRandomValidPlankDistance( minDistance, maxDistance );
           if ( j === 0 ) {
             // Randomly invert (or don't) the first random distance.
             candidateDistance = phet.joist.random.nextDouble() >= 0.5 ? -candidateDistance : candidateDistance;
@@ -176,7 +176,7 @@ define( require => {
         // be found.
         if ( distanceList.length !== masses.length ) {
           distanceList = [];
-          for ( var k = 0; k < masses.length; k++ ) {
+          for ( let k = 0; k < masses.length; k++ ) {
             // Just add a linear set of distances.
             distanceList.push( minDistance + Plank.INTER_SNAP_TO_MARKER_DISTANCE * k );
             // Output a warning.
@@ -184,8 +184,8 @@ define( require => {
           }
         }
         // Calculate the net torque for this set of masses.
-        var netTorque = 0;
-        for ( var m = 0; m < masses.length; m++ ) {
+        let netTorque = 0;
+        for ( let m = 0; m < masses.length; m++ ) {
           netTorque += masses[ m ].massValue * distanceList[ m ];
         }
         netTorque = Math.abs( netTorque );
@@ -197,7 +197,7 @@ define( require => {
 
       // Create the array of mass-distance pairs from the original set of
       // masses and the best randomly-generated distances.
-      var repositionedMasses = [];
+      const repositionedMasses = [];
       for ( i = 0; i < masses.length; i++ ) {
         repositionedMasses.push( { mass: masses[ i ], distance: bestDistanceList[ i ] } );
       }
@@ -210,15 +210,15 @@ define( require => {
      * is quantized), which is why this is needed.
      */
     generateRandomValidPlankDistance: function() {
-      var maxDistance = Plank.LENGTH / 2;
-      var increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
-      var maxIncrements = Util.roundSymmetric( maxDistance / increment ) - 1;
+      const maxDistance = Plank.LENGTH / 2;
+      const increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+      const maxIncrements = Util.roundSymmetric( maxDistance / increment ) - 1;
       return ( this.randInt( maxIncrements ) + 1 ) * increment;
     },
 
     generateRandomValidPlankDistanceRange: function( minDistance, maxDistance ) {
-      var minIncrements = Math.ceil( minDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
-      var maxIncrements = Math.floor( maxDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+      const minIncrements = Math.ceil( minDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+      const maxIncrements = Math.floor( maxDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
 
       return ( this.randInt( maxIncrements - minIncrements + 1 ) + minIncrements ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
     },
@@ -228,16 +228,16 @@ define( require => {
      * created from the given set of two fixed masses and one movable mass.
      */
     generateSolvableChallenges: function( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype, distanceIncrement, maxDistance ) {
-      var solvableChallenges = [];
-      for ( var fixedMass1Distance = distanceIncrement; fixedMass1Distance <= maxDistance; fixedMass1Distance += distanceIncrement ) {
-        for ( var fixedMass2Distance = distanceIncrement; fixedMass2Distance <= maxDistance; fixedMass2Distance += distanceIncrement ) {
+      const solvableChallenges = [];
+      for ( let fixedMass1Distance = distanceIncrement; fixedMass1Distance <= maxDistance; fixedMass1Distance += distanceIncrement ) {
+        for ( let fixedMass2Distance = distanceIncrement; fixedMass2Distance <= maxDistance; fixedMass2Distance += distanceIncrement ) {
           if ( fixedMass1Distance === fixedMass2Distance || Math.abs( fixedMass1Distance - fixedMass2Distance ) < 1.1 * distanceIncrement ) {
             // Skip cases where the fixed masses are at the same
             // location or just one increment apart.
             continue;
           }
-          var fixedMassTorque = fixedMass1Prototype.massValue * fixedMass1Distance + fixedMass2Prototype.massValue * fixedMass2Distance;
-          var movableMassDistance = fixedMassTorque / movableMassPrototype.massValue;
+          const fixedMassTorque = fixedMass1Prototype.massValue * fixedMass1Distance + fixedMass2Prototype.massValue * fixedMass2Distance;
+          const movableMassDistance = fixedMassTorque / movableMassPrototype.massValue;
           if ( movableMassDistance >= distanceIncrement && movableMassDistance <= maxDistance && movableMassDistance % distanceIncrement === 0 ) {
             // This is a solvable configuration.  Add it to the list.
             solvableChallenges.push( BalanceMassesChallenge.create2Fixed1Movable( fixedMass1Prototype.createCopy(), fixedMass1Distance,
@@ -255,9 +255,9 @@ define( require => {
      * other side of the fulcrum and balance the fixed mass.
      */
     getPossibleDistanceList: function( massOfFixedItem, massOfMovableItem ) {
-      var validFixedMassDistances = [];
-      for ( var testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
-        var possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
+      const validFixedMassDistances = [];
+      for ( let testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
+        const possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
         if ( possibleFixedMassDistance < Plank.length / 2 &&
              possibleFixedMassDistance >= Plank.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
              possibleFixedMassDistance % Plank.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
@@ -281,10 +281,10 @@ define( require => {
      * @param {Array} ratios - Array of ratios (massValue / createdMassValue) which are acceptable.
      */
     createMassByRatio: function( massValue, ratios ) {
-      var indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
-      for ( var i = 0; i < BALANCE_CHALLENGE_MASSES.length; i++ ) {
-        var candidateMassPrototype = BALANCE_CHALLENGE_MASSES[ ( i + indexOffset ) % BALANCE_CHALLENGE_MASSES.length ];
-        for ( var j = 0; j < ratios.length; j++ ) {
+      const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
+      for ( let i = 0; i < BALANCE_CHALLENGE_MASSES.length; i++ ) {
+        const candidateMassPrototype = BALANCE_CHALLENGE_MASSES[ ( i + indexOffset ) % BALANCE_CHALLENGE_MASSES.length ];
+        for ( let j = 0; j < ratios.length; j++ ) {
           if ( candidateMassPrototype.massValue * ratios[ j ] === massValue ) {
             // We have found a matching mass.  Clone it and return it.
             return candidateMassPrototype.createCopy();
@@ -299,8 +299,8 @@ define( require => {
 
     // Generate a simple challenge where brick stacks of equal mass appear on each side.
     generateSimpleBalanceChallenge: function() {
-      var numBricks = this.randInt( 4 ) + 1;
-      var distance = -this.generateRandomValidPlankDistance();
+      const numBricks = this.randInt( 4 ) + 1;
+      const distance = -this.generateRandomValidPlankDistance();
       return this.createTwoBrickStackChallenge( numBricks, distance, numBricks );
     },
 
@@ -312,9 +312,9 @@ define( require => {
      * Ratios used are 2:1 or 1:2.
      */
     generateEasyBalanceChallenge: function() {
-      var numBricksInFixedStack = 1;
-      var numBricksInMovableStack = 1;
-      var validFixedStackDistances = [];
+      let numBricksInFixedStack = 1;
+      let numBricksInMovableStack = 1;
+      let validFixedStackDistances = [];
 
       while ( validFixedStackDistances.length === 0 ) {
         // Choose the number of bricks in the fixed stack.  Must be 1, 2,
@@ -336,7 +336,7 @@ define( require => {
       }
 
       // Randomly choose a distance to use from the identified set.
-      var fixedStackDistanceFromCenter = -validFixedStackDistances[ this.randInt( validFixedStackDistances.length ) ];
+      const fixedStackDistanceFromCenter = -validFixedStackDistances[ this.randInt( validFixedStackDistances.length ) ];
 
       // Create the challenge.
       return this.createTwoBrickStackChallenge( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack );
@@ -349,8 +349,8 @@ define( require => {
      */
     generateModerateBalanceChallenge: function() {
 
-      var fixedMassPrototype;
-      var movableMass;
+      let fixedMassPrototype;
+      let movableMass;
 
       // Create random challenges until a solvable one is created.
       do {
@@ -367,7 +367,7 @@ define( require => {
         MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS ) );
 
       // Randomly choose a distance to use for the fixed mass position.
-      var fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass.massValue );
+      const fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass.massValue );
 
       // Create the challenge.
       return BalanceMassesChallenge.create1Fixed1Movable( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass );
@@ -378,12 +378,12 @@ define( require => {
      * balanced by a single movable mass.
      */
     generateAdvancedBalanceChallenge: function() {
-      var solvableChallenges;
+      let solvableChallenges;
 
       do {
-        var fixedMass1Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
-        var fixedMass2Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
-        var movableMassPrototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
+        const fixedMass1Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
+        const fixedMass2Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
+        const movableMassPrototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
         solvableChallenges = this.generateSolvableChallenges( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype,
           Plank.INTER_SNAP_TO_MARKER_DISTANCE, Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE );
       } while ( solvableChallenges.length === 0 );
@@ -399,8 +399,8 @@ define( require => {
     generateSimpleTiltPredictionChallenge: function() {
       // Choose two different numbers between 1 and 4 (inclusive) for the
       // number of bricks in the two stacks.
-      var numBricksInLeftStack = 1 + this.randInt( 4 );
-      var numBricksInRightStack = numBricksInLeftStack;
+      const numBricksInLeftStack = 1 + this.randInt( 4 );
+      let numBricksInRightStack = numBricksInLeftStack;
       while ( numBricksInRightStack === numBricksInLeftStack ) {
         numBricksInRightStack = 1 + this.randInt( 4 );
       }
@@ -408,7 +408,7 @@ define( require => {
       // Choose a distance from the center, which will be used for
       // positioning both stacks.  The max and min values can be tweaked if
       // desired to limit the range of distances generated.
-      var distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+      const distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
 
       // Create the actual challenge from the pieces.
@@ -426,15 +426,15 @@ define( require => {
      * @return
      */
     generateEasyTiltPredictionChallenge: function() {
-      var generateRandomValidPlankDistanceRange = 1 + this.randInt( 4 );
+      const generateRandomValidPlankDistanceRange = 1 + this.randInt( 4 );
 
       // Generate distance for the left mass.
-      var leftMassDistance = this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+      const leftMassDistance = this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
 
       // Make a fixed proportion of these challenges balanced and the rest
       // not balanced.
-      var rightMassDistance = -leftMassDistance;
+      let rightMassDistance = -leftMassDistance;
       if ( phet.joist.random.nextDouble() > 0.2 ) {
         rightMassDistance = -this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
           Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
@@ -449,17 +449,17 @@ define( require => {
 
     generateModerateTiltPredictionChallenge: function() {
       // Select the masses, bricks on one side, non bricks on the other.
-      var leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
-      var rightMass = new BrickStack( this.randInt( 4 ) + 1 );
+      let leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
+      let rightMass = new BrickStack( this.randInt( 4 ) + 1 );
       if ( phet.joist.random.nextDouble() >= 0.5 ) {
         // Switch the masses.
-        var tempMassPrototype = leftMass;
+        const tempMassPrototype = leftMass;
         leftMass = rightMass;
         rightMass = tempMassPrototype;
       }
 
       // Make the masses almost but not quite balanced.
-      var massDistancePairs = this.positionMassesCloseToBalancing(
+      const massDistancePairs = this.positionMassesCloseToBalancing(
         Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         Plank.LENGTH / 2 - 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         [ leftMass, rightMass ] );
@@ -469,13 +469,13 @@ define( require => {
 
     generateAdvancedTiltPredictionChallenge: function() {
       // Choose three random masses, bricks on one side, non-bricks on the other.
-      var mass1 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
-      var mass2 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
-      var mass3 = new BrickStack( this.randInt( 4 ) + 1 );
+      const mass1 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
+      const mass2 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
+      const mass3 = new BrickStack( this.randInt( 4 ) + 1 );
 
       // Get a set of mass-distance pairs comprised of these masses
       // positioned in such a way that they are almost, but not quite, balanced.
-      var massDistancePairs = this.positionMassesCloseToBalancing( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+      const massDistancePairs = this.positionMassesCloseToBalancing( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE, [ mass1, mass2, mass3 ] );
 
       // Create the actual challenge from the pieces.
@@ -487,12 +487,12 @@ define( require => {
      * is the same value as the known mass.
      */
     generateSimpleMassDeductionChallenge: function() {
-      var indexOffset = 1 + this.randInt( BALANCE_CHALLENGE_MASSES.length );
-      var knownMass = null;
-      var mysteryMassPrototype = null;
+      const indexOffset = 1 + this.randInt( BALANCE_CHALLENGE_MASSES.length );
+      let knownMass = null;
+      let mysteryMassPrototype = null;
 
       // Select a mystery mass and create a known mass with the same mass value.
-      for ( var i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
+      for ( let i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
         mysteryMassPrototype = MYSTERY_MASSES[ ( i + indexOffset ) % MYSTERY_MASSES.length ];
         knownMass = this.createMassByRatio( mysteryMassPrototype.massValue, [ 1 ] );
       }
@@ -503,7 +503,7 @@ define( require => {
 
       // Since the masses are equal, any position for the mystery mass should
       // create a solvable challenge.
-      var mysteryMassDistanceFromCenter = -this.generateRandomValidPlankDistance();
+      const mysteryMassDistanceFromCenter = -this.generateRandomValidPlankDistance();
 
       // Create the challenge.
       return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
@@ -514,11 +514,11 @@ define( require => {
      * is either twice as heavy or half as heavy as the known mass.
      */
     generateEasyMassDeductionChallenge: function() {
-      var indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
-      var knownMass = null;
-      var mysteryMassPrototype = null;
+      const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
+      let knownMass = null;
+      let mysteryMassPrototype = null;
 
-      for ( var i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
+      for ( let i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
         mysteryMassPrototype = MYSTERY_MASSES[ ( i + indexOffset ) % MYSTERY_MASSES.length ];
         knownMass = this.createMassByRatio( mysteryMassPrototype.massValue, [ 2, 0.5 ] );
       }
@@ -528,8 +528,8 @@ define( require => {
       assert && assert( knownMass !== null, 'Failed to generate an easy mass deduction challenge' );
 
       // Choose a distance for the mystery mass.
-      var possibleDistances = this.getPossibleDistanceList( mysteryMassPrototype.massValue, knownMass.massValue );
-      var mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
+      const possibleDistances = this.getPossibleDistanceList( mysteryMassPrototype.massValue, knownMass.massValue );
+      const mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
 
       // Create the challenge.
       return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
@@ -541,11 +541,11 @@ define( require => {
      * 2:1 or 1:2, e.g. 1:3.
      */
     generateModerateMassDeductionChallenge: function() {
-      var indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
-      var knownMass = null;
-      var mysteryMassPrototype = null;
+      const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
+      let knownMass = null;
+      let mysteryMassPrototype = null;
 
-      for ( var i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
+      for ( let i = 0; i < MYSTERY_MASSES.length && knownMass === null; i++ ) {
         mysteryMassPrototype = MYSTERY_MASSES[ ( i + indexOffset ) % MYSTERY_MASSES.length ];
         knownMass = this.createMassByRatio( mysteryMassPrototype.massValue, [ 1.5, 3, ( 1.0 / 3.0 ), ( 2.0 / 3.0 ), 4, ( 1.0 / 4.0 ) ] );
       }
@@ -555,8 +555,8 @@ define( require => {
       assert && assert( knownMass !== null, 'No combinations for mass deduction challenge generation' );
 
       // Choose a distance for the mystery mass.
-      var possibleDistances = this.getPossibleDistanceList( mysteryMassPrototype.massValue, knownMass.massValue );
-      var mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
+      const possibleDistances = this.getPossibleDistanceList( mysteryMassPrototype.massValue, knownMass.massValue );
+      const mysteryMassDistanceFromCenter = -possibleDistances[ this.randInt( possibleDistances.length ) ];
 
       // Create the challenge.
       return MassDeductionChallenge.create( mysteryMassPrototype.createCopy(), mysteryMassDistanceFromCenter, knownMass );
@@ -577,11 +577,11 @@ define( require => {
      * uniqueness, as well as a list of previous challenges to test against.
      */
     generateUniqueChallenge: function( challengeGenerator, uniquenessTest, previousChallenges ) {
-      var challenge = null;
-      var uniqueChallengeGenerated = false;
+      let challenge = null;
+      let uniqueChallengeGenerated = false;
 
-      for ( var i = 0; i < MAX_HALVING_OF_PAST_LIST && !uniqueChallengeGenerated; i++ ) {
-        for ( var j = 0; j < MAX_GEN_ATTEMPTS; j++ ) {
+      for ( let i = 0; i < MAX_HALVING_OF_PAST_LIST && !uniqueChallengeGenerated; i++ ) {
+        for ( let j = 0; j < MAX_GEN_ATTEMPTS; j++ ) {
 
           // Create a challenge.
           challenge = challengeGenerator();
@@ -700,7 +700,7 @@ define( require => {
     },
 
     generateChallengeSet: function( level ) {
-      var balanceChallengeList = [];
+      const balanceChallengeList = [];
       switch( level ) {
 
         case 0:

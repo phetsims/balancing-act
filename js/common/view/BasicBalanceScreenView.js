@@ -47,9 +47,9 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // constants
-  var X_MARGIN_IN_PANELS = 5;
-  var PANEL_TITLE_FONT = new PhetFont( 16 );
-  var PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
+  const X_MARGIN_IN_PANELS = 5;
+  const PANEL_TITLE_FONT = new PhetFont( 16 );
+  const PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
 
   /**
    * @param {BalanceModel} model
@@ -57,7 +57,7 @@ define( require => {
    */
   function BasicBalanceScreenView( model ) {
     ScreenView.call( this, { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
-    var self = this;
+    const self = this;
     self.model = model;
 
     // Define the properties that control visibility of various display elements.
@@ -71,19 +71,19 @@ define( require => {
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
     // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
     // ground just below the center of the balance, is located in the view.
-    var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( self.layoutBounds.width * 0.375, self.layoutBounds.height * 0.79 ),
       105 );
     self.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
-    var root = new Node();
+    const root = new Node();
     self.addChild( root );
     root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
-    var skyAndGroundHeight = this.layoutBounds.height * 1.5;
+    const skyAndGroundHeight = this.layoutBounds.height * 1.5;
     root.addChild( new OutsideBackgroundNode(
       this.layoutBounds.centerX,
       modelViewTransform.modelToViewY( 0 ),
@@ -97,13 +97,13 @@ define( require => {
     root.addChild( self.nonMassLayer );
 
     // Set up a separate layer for the masses so that they will be out in front of the other elements of the model.
-    var massesLayer = new Node();
+    const massesLayer = new Node();
     root.addChild( massesLayer );
 
     function handleMassAdded( addedMass ) {
 
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode(
+      const massNode = MassNodeFactory.createMassNode(
         addedMass,
         modelViewTransform,
         true,
@@ -135,7 +135,7 @@ define( require => {
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
     self.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
-    var plankNode = new PlankNode( modelViewTransform, model.plank );
+    const plankNode = new PlankNode( modelViewTransform, model.plank );
     self.nonMassLayer.addChild( plankNode );
     self.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
     model.supportColumns.forEach( function( supportColumn ) {
@@ -147,21 +147,21 @@ define( require => {
     } );
 
     // Add the ruler.
-    var rulersVisibleProperty = new Property( false );
+    const rulersVisibleProperty = new Property( false );
     self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisibleProperty.value = positionMarkerState === 'rulers';
     } );
     self.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
-    var positionMarkersVisible = new Property( false );
+    const positionMarkersVisible = new Property( false );
     self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisible.value = positionMarkerState === 'marks';
     } );
     self.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
-    var levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
+    const levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
     self.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
       levelIndicatorNode.visible = visible;
     } );
@@ -170,7 +170,7 @@ define( require => {
     // Listen to the list of force vectors and manage their representations.
     model.plank.forceVectors.addItemAddedListener( function( addedMassForceVector ) {
       // Add a representation for the new vector.
-      var forceVectorNode;
+      let forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
         forceVectorNode = new MysteryVectorNode(
           addedMassForceVector.forceVectorProperty,
@@ -196,16 +196,16 @@ define( require => {
     } );
 
     // Add the buttons that will control whether or not the support columns are in place.
-    var columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
+    const columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
       center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) )
     } );
     self.nonMassLayer.addChild( columnControlPanel );
 
     // The panels should fit in the space to the right of the plank.
-    var maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
+    const maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
-    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+    const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.massLabelsVisibleProperty,
       label: massLabelsString
@@ -222,8 +222,8 @@ define( require => {
       checkboxOptions: { boxWidth: 15 },
       spacing: 5
     } );
-    var titleToControlsVerticalSpace = 7;
-    var indicatorVisibilityControlsVBox = new VBox( {
+    const titleToControlsVerticalSpace = 7;
+    const indicatorVisibilityControlsVBox = new VBox( {
       children: [
         new Text( showString, { font: PANEL_TITLE_FONT } ),
         new VStrut( titleToControlsVerticalSpace ),
@@ -231,7 +231,7 @@ define( require => {
       ],
       align: 'left'
     } );
-    var indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox, {
+    const indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox, {
       xMargin: X_MARGIN_IN_PANELS,
       fill: 'rgb( 240, 240, 240 )',
       top: 5,
@@ -242,7 +242,7 @@ define( require => {
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel(
+    const positionIndicatorControlPanel = new PositionIndicatorControlPanel(
       self.viewProperties.positionMarkerStateProperty,
       {
         left: indicatorVisibilityControlPanel.left,

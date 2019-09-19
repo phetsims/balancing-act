@@ -38,12 +38,12 @@ define( require => {
    */
   function ImageMassNode( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
     Node.call( this, { cursor: 'pointer' } );
-    var self = this;
+    const self = this;
 
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
-      var massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
+      const massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
         pattern0Value1UnitsString, imageMass.massValue, kgString );
       var massLabel = new RasterizedTextNode(
         massLabelText,
@@ -58,7 +58,7 @@ define( require => {
       } );
     }
 
-    var imageNode = new Image( defaultImage );
+    const imageNode = new Image( defaultImage );
     // Observe image changes.
     imageMass.imageProperty.link( function( image ) {
       imageNode.setScaleMagnitude( 1 );
@@ -70,7 +70,7 @@ define( require => {
         imageNode.matrix = imageNode.matrix.timesMatrix( Matrix3.scaling( -1, 1 ) );
       }
 
-      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.heightProperty.get() ) ) /
+      const scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.heightProperty.get() ) ) /
                           imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
@@ -87,7 +87,7 @@ define( require => {
       if ( self.bounds.isFinite() ) {
 
         self.rotation = 0;
-        var imageMassPosition = imageMass.positionProperty.get();
+        const imageMassPosition = imageMass.positionProperty.get();
 
         // Set overall position.  Recall that positions in the model are defined
         // as the center bottom of the item.
@@ -114,7 +114,7 @@ define( require => {
     // Observe height changes.
     imageMass.heightProperty.link( function( newHeight ) {
       imageNode.setScaleMagnitude( 1 );
-      var scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( newHeight ) ) / imageNode.height;
+      const scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( newHeight ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       updatePositionAndAngle();
     } );

@@ -17,23 +17,23 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
-  var PIVOT_RADIUS = 5;
-  var ATTACHMENT_BAR_WIDTH = PIVOT_RADIUS * 1.5;
+  const PIVOT_RADIUS = 5;
+  const ATTACHMENT_BAR_WIDTH = PIVOT_RADIUS * 1.5;
 
   function AttachmentBarNode( modelViewTransform, plank ) {
     Node.call( this );
-    var pivotPointPosInView = modelViewTransform.modelToViewPosition( plank.pivotPoint );
+    const pivotPointPosInView = modelViewTransform.modelToViewPosition( plank.pivotPoint );
 
     // Add the bar, which goes from the pivot point to the bottom of the plank.
-    var attachmentBarLength = modelViewTransform.modelToViewDeltaY(
+    const attachmentBarLength = modelViewTransform.modelToViewDeltaY(
       plank.bottomCenterLocationProperty.get().y - plank.pivotPoint.y
     );
-    var attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
+    const attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
       attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', stroke: 'rgb( 50, 50, 50 )' } );
     this.addChild( attachmentBar );
 
     // Rotate the bar as the plank tilts.
-    var nodeRotation = 0;
+    let nodeRotation = 0;
     plank.tiltAngleProperty.link( function( angle ) {
       attachmentBar.rotateAround( pivotPointPosInView, nodeRotation - angle );
       nodeRotation = angle;

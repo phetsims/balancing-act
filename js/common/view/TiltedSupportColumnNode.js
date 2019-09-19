@@ -25,17 +25,17 @@ define( require => {
    */
   function TiltedSupportColumnNode( modelViewTransform, tiltedSupportColumn, columnState ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Create and add the main body of the column.
-    var transformedColumnShape = modelViewTransform.modelToViewShape( tiltedSupportColumn.shape );
-    var mainBodyGradient = new LinearGradient( transformedColumnShape.bounds.minX, 0, transformedColumnShape.bounds.maxX, 0 ).
+    const transformedColumnShape = modelViewTransform.modelToViewShape( tiltedSupportColumn.shape );
+    const mainBodyGradient = new LinearGradient( transformedColumnShape.bounds.minX, 0, transformedColumnShape.bounds.maxX, 0 ).
       addColorStop( 0, 'rgb( 150, 150, 150 )' ).
       addColorStop( 0.25, 'rgb( 230, 230, 230 )' ).
       addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).
       addColorStop( 1, 'rgb( 200, 200, 200 )' );
 
-    var columnNode = new Path( transformedColumnShape,
+    const columnNode = new Path( transformedColumnShape,
       {
         fill: mainBodyGradient,
         stroke: 'black',
@@ -44,14 +44,14 @@ define( require => {
     self.addChild( columnNode );
 
     // Create and add the column support.
-    var supportWidth = transformedColumnShape.bounds.width * 1.3; // Empirically determined.
-    var supportHeight = transformedColumnShape.bounds.height * 0.15; // Empirically determined.
-    var supportGradient = new LinearGradient( transformedColumnShape.bounds.centerX - supportWidth / 2, 0, transformedColumnShape.bounds.centerX + supportWidth / 2, 0 ).
+    const supportWidth = transformedColumnShape.bounds.width * 1.3; // Empirically determined.
+    const supportHeight = transformedColumnShape.bounds.height * 0.15; // Empirically determined.
+    const supportGradient = new LinearGradient( transformedColumnShape.bounds.centerX - supportWidth / 2, 0, transformedColumnShape.bounds.centerX + supportWidth / 2, 0 ).
       addColorStop( 0, 'rgb( 150, 150, 150 )' ).
       addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).
       addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).
       addColorStop( 1, 'rgb( 170, 170, 170 )' );
-    var columnSupportNode = new Rectangle(
+    const columnSupportNode = new Rectangle(
       transformedColumnShape.bounds.centerX - supportWidth / 2,
       transformedColumnShape.bounds.maxY - supportHeight,
       supportWidth,

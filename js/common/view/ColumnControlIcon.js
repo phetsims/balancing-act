@@ -19,14 +19,14 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var CORNER_ROUNDING = 4;
-  var ASPECT_RATIO = 1.6; // Ratio of width to height.
+  const CORNER_ROUNDING = 4;
+  const ASPECT_RATIO = 1.6; // Ratio of width to height.
 
   function createMiniColumn( size, options ) {
-    var rootNode = new Node();
+    const rootNode = new Node();
 
     // Create the gradient fill.
-    var columnGradient = new LinearGradient( 0, 0, size.width, 0 ).
+    const columnGradient = new LinearGradient( 0, 0, size.width, 0 ).
       addColorStop( 0, 'rgb( 150, 150, 150 )' ).
       addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).
       addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).
@@ -60,7 +60,7 @@ define( require => {
    */
   function ColumnControlIcon( width, showColumns ) {
     Node.call( this );
-    var height = width / ASPECT_RATIO;
+    const height = width / ASPECT_RATIO;
     this.addChild( new Rectangle( 0, 0, width, height, CORNER_ROUNDING, CORNER_ROUNDING,
       {
         stroke: 'black',
@@ -70,10 +70,10 @@ define( require => {
     ) );
 
     // Create and add the fulcrum.
-    var fulcrumWidth = width * 0.35;
-    var fulcrumHeight = height * 0.5;
-    var legThickness = width * 0.05;
-    var fulcrumShape = new Shape();
+    const fulcrumWidth = width * 0.35;
+    const fulcrumHeight = height * 0.5;
+    const legThickness = width * 0.05;
+    const fulcrumShape = new Shape();
     // Start at leftmost and lowest point.
     fulcrumShape.moveTo( -fulcrumWidth / 2, 0 );
     fulcrumShape.lineTo( -legThickness * 0.67, -fulcrumHeight - legThickness / 2 );
@@ -83,7 +83,7 @@ define( require => {
     fulcrumShape.lineTo( 0, -fulcrumHeight + legThickness * 0.2 );
     fulcrumShape.lineTo( -fulcrumWidth / 2 + legThickness, 0 );
     fulcrumShape.close();
-    var fulcrumNode = new Path( fulcrumShape,
+    const fulcrumNode = new Path( fulcrumShape,
       {
         fill: 'rgb( 240, 240, 0 )',
         stroke: 'black',
@@ -94,7 +94,7 @@ define( require => {
     this.addChild( fulcrumNode );
 
     // Create and add the plank.
-    var plank = new Rectangle( 0, 0, width * 0.9, width * 0.05, 0, 0,
+    const plank = new Rectangle( 0, 0, width * 0.9, width * 0.05, 0, 0,
       {
         fill: 'rgb( 243, 203, 127 )',
         stroke: 'black',
@@ -109,7 +109,7 @@ define( require => {
 
     // Add the columns, if present.
     if ( showColumns ) {
-      var columnSize = new Dimension2( width * 0.15, height - plank.bottom );
+      const columnSize = new Dimension2( width * 0.15, height - plank.bottom );
       this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.175 } ) );
       this.addChild( createMiniColumn( columnSize, { bottom: height, centerX: width * 0.825 } ) );
     }

@@ -49,15 +49,15 @@ define( require => {
       create1Fixed1Movable: function( fixedMass, fixedMassDistanceFromCenter, movableMass ) {
 
         // Add the fixed mass and its distance from the center of the balance.
-        var fixedMassesList = [
+        const fixedMassesList = [
           { mass: fixedMass, distance: fixedMassDistanceFromCenter }
         ];
 
         // Add the movable mass.
-        var movableMassesList = [ movableMass ];
+        const movableMassesList = [ movableMass ];
 
         // Create a valid solution for the challenge.
-        var solution = [
+        const solution = [
           { mass: movableMass, distance: -( fixedMass.massValue * fixedMassDistanceFromCenter / movableMass.massValue ) }
         ];
 
@@ -68,17 +68,17 @@ define( require => {
       // Convenience method for creating this type of challenge.
       create2Fixed1Movable: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter, movableMass ) {
         // Add the fixed masses and their distances from the center of the balance.
-        var fixedMassesList = [];
+        const fixedMassesList = [];
         fixedMassesList.push( { mass: fixedMass1, distance: -fixedMass1DistanceFromCenter } );
         fixedMassesList.push( { mass: fixedMass2, distance: -fixedMass2DistanceFromCenter } );
 
         // Add the movable mass.
-        var movableMassesList = [ movableMass ];
+        const movableMassesList = [ movableMass ];
 
         // Create a valid solution for the challenge.
-        var fixedMassTorque = fixedMassesList[ 0 ].mass.massValue * fixedMassesList[ 0 ].distance +
+        const fixedMassTorque = fixedMassesList[ 0 ].mass.massValue * fixedMassesList[ 0 ].distance +
                               fixedMassesList[ 1 ].mass.massValue * fixedMassesList[ 1 ].distance;
-        var solution = { mass: movableMass, distance: -fixedMassTorque / movableMass.massValue };
+        const solution = { mass: movableMass, distance: -fixedMassTorque / movableMass.massValue };
         assert && assert( solution.distance % Plank.INTER_SNAP_TO_MARKER_DISTANCE === 0 ); // Verify that this is really a workable solution.
 
         // Create the actual challenge.

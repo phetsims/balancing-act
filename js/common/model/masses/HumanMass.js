@@ -28,12 +28,12 @@ define( require => {
    */
   function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
     ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
-    var self = this;
+    const self = this;
 
     // Monitor the 'onPlank' property and update the image as changes occur.
     self.onPlankProperty.link( function( onPlank ) {
       if ( onPlank ) {
-        var xPosition = self.positionProperty.get().x;
+        const xPosition = self.positionProperty.get().x;
         self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
         self.heightProperty.set( sittingHeight );
         self.reverseImage = xPosition < 0;

@@ -16,12 +16,12 @@ define( require => {
   const Panel = require( 'SUN/Panel' );
 
   // constants
-  var ICON_WIDTH = 60;
+  const ICON_WIDTH = 60;
 
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
 
-    var contentNode = new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, true ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, false ), {
+    const contentNode = new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, true ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, false ), {
       switchSize: new Dimension2( 32, 16 ),
       thumbTouchAreaXDilation: 5,
       thumbTouchAreaYDilation: 5

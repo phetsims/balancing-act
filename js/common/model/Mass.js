@@ -15,11 +15,11 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
-  var MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
+  const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
+  const MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
   function Mass( massValue, initialPosition, isMystery ) {
-    var self = this;
+    const self = this;
 
     // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
     this.userControlledProperty = new Property( false );
@@ -84,8 +84,8 @@ define( require => {
 
       // Calculate velocity.  A higher velocity is used if the model element has a long way to travel, otherwise it
       // takes too long.
-      var position = this.positionProperty.get();
-      var velocity = Math.max(
+      const position = this.positionProperty.get();
+      const velocity = Math.max(
         position.distance( this.animationDestination ) / MAX_REMOVAL_ANIMATION_DURATION,
         MIN_ANIMATION_VELOCITY
       );
@@ -93,7 +93,7 @@ define( require => {
 
       // Calculate the animation motion vector.
       this.animationMotionVector = new Vector2( velocity, 0 );
-      var animationAngle = Math.atan2(
+      const animationAngle = Math.atan2(
         this.animationDestination.y - position.y,
         this.animationDestination.x - position.x
       );

@@ -20,10 +20,10 @@ define( require => {
   const womanStandingImage = require( 'mipmap!BALANCING_ACT/woman-standing.png' );
 
   // constants
-  var MASS = 60; // in kg
-  var STANDING_HEIGHT = 1.65; // In meters.
-  var SITTING_HEIGHT = 0.825; // In meters.
-  var SITTING_CENTER_OF_MASS_X_OFFSET = 0.1; // In meters, determined visually.  Update if image changes.
+  const MASS = 60; // in kg
+  const STANDING_HEIGHT = 1.65; // In meters.
+  const SITTING_HEIGHT = 0.825; // In meters.
+  const SITTING_CENTER_OF_MASS_X_OFFSET = 0.1; // In meters, determined visually.  Update if image changes.
 
   /**
    * @constructor

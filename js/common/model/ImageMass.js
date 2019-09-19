@@ -59,7 +59,7 @@ define( require => {
     },
 
     getMiddlePoint: function() {
-      var position = this.positionProperty.get();
+      const position = this.positionProperty.get();
       return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
     },
 

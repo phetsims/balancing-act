@@ -21,9 +21,9 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
-  var LABEL_FONT = new PhetFont( 14 );
-  var MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
+  const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
+  const LABEL_FONT = new PhetFont( 14 );
+  const MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
 
   /**
    * @param {ModelViewTransform} modelViewTransform
@@ -33,7 +33,7 @@ define( require => {
   function ModelElementCreatorNode( modelViewTransform, options ) {
     options = _.extend( { cursor: 'pointer' }, options );
     Node.call( this, options );
-    var self = this;
+    const self = this;
 
     // Element in the model that is being moved by the user.  Only non-null if
     // the user performed some action that caused this to be created, such as
@@ -63,7 +63,7 @@ define( require => {
 
         if ( !parentScreenView ) {
           // Move up the scene graph until the parent screen is found.
-          var testNode = self;
+          let testNode = self;
           while ( testNode !== null ) {
             if ( testNode instanceof ScreenView ) {
               parentScreenView = testNode;

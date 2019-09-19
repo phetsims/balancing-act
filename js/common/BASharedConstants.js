@@ -7,7 +7,7 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const Bounds2 = require( 'DOT/Bounds2' );
 
-  var BASharedConstants = {
+  const BASharedConstants = {
     COMPARISON_TOLERANCE: 1E-6,
     LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 )
   };

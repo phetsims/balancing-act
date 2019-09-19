@@ -10,8 +10,8 @@ define( require => {
   const pottedPlantImage = require( 'image!BALANCING_ACT/potted-plant.png' );
 
   // constants
-  var MASS = 10; // In kg
-  var HEIGHT = 0.65; // In meters
+  const MASS = 10; // In kg
+  const HEIGHT = 0.65; // In meters
 
   /**
    * @param initialPosition

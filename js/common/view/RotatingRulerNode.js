@@ -23,8 +23,8 @@ define( require => {
   const metersString = require( 'string!BALANCING_ACT/meters' );
 
   // constants
-  var RULER_HEIGHT = 50; // Empirically determined
-  var UNITS_FONT = new PhetFont( 14 ); // Empirically determined
+  const RULER_HEIGHT = 50; // Empirically determined
+  const UNITS_FONT = new PhetFont( 14 ); // Empirically determined
 
   /**
    * @param {Plank} plank
@@ -34,14 +34,14 @@ define( require => {
    */
   function RotatingRulerNode( plank, modelViewTransform, visibleProperty ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Set up the tick mark labels.
-    var rulerLengthInModel = Plank.LENGTH - 0.5; // Take 1/2 meter off end of ruler so it doesn't exceed plank length.
-    var numTickMarks = rulerLengthInModel * 4 + 1; // Tick marks every 1/4 meter.
-    var tickMarkLabels = [];
-    for ( var i = 0; i < numTickMarks; i++ ) {
-      var labelValue = Math.abs( ( i - ( ( numTickMarks - 1 ) / 2 ) ) / 4 );
+    const rulerLengthInModel = Plank.LENGTH - 0.5; // Take 1/2 meter off end of ruler so it doesn't exceed plank length.
+    const numTickMarks = rulerLengthInModel * 4 + 1; // Tick marks every 1/4 meter.
+    const tickMarkLabels = [];
+    for ( let i = 0; i < numTickMarks; i++ ) {
+      const labelValue = Math.abs( ( i - ( ( numTickMarks - 1 ) / 2 ) ) / 4 );
       if ( labelValue !== 0 ) {
         tickMarkLabels.push( labelValue );
       }
@@ -51,9 +51,9 @@ define( require => {
     }
 
     // Create and add the ruler node.
-    var rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
-    var majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
-    var rulerNode = new RulerNodeRasterizedText( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
+    const rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
+    const majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
+    const rulerNode = new RulerNodeRasterizedText( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
       {
         backgroundFill: 'rgba( 236, 225, 113, 0.5)',
         majorTickFont: new PhetFont( 11 ),
@@ -80,15 +80,15 @@ define( require => {
     } );
 
     // Set initial position.
-    var topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocationProperty.get() );
+    const topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocationProperty.get() );
     self.top = topCenter.y;
     self.centerX = topCenter.x;
 
     // Rotate with the plank.
-    var rulerRotationAngle = 0;
-    var rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
+    let rulerRotationAngle = 0;
+    const rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
     plank.tiltAngleProperty.link( function( angle ) {
-      var deltaAngle = rulerRotationAngle - angle;
+      const deltaAngle = rulerRotationAngle - angle;
       rulerRotationAngle = angle;
       self.rotateAround( rotationPoint, deltaAngle );
     } );

@@ -10,8 +10,8 @@ define( require => {
   const sodaBottleImage = require( 'image!BALANCING_ACT/soda-bottle.png' );
 
   // constants
-  var MASS = 2; // In kg
-  var HEIGHT = 0.4; // In meters
+  const MASS = 2; // In kg
+  const HEIGHT = 0.4; // In meters
 
   /**
    * @param initialPosition

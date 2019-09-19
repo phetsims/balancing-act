@@ -30,12 +30,12 @@ define( require => {
   const WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
 
   // constants
-  var TITLE_FONT = new PhetFont( 16 );
+  const TITLE_FONT = new PhetFont( 16 );
 
   function MassKitSelectionNode( model, modelViewTransform, options ) {
 
     // Create the kit node for creating brick stacks of various sizes.
-    var brickCreatorKit = new Node(
+    const brickCreatorKit = new Node(
       {
         children: [
           new VBox(
@@ -66,7 +66,7 @@ define( require => {
     );
 
     // Create the 1st kit node for creating people.
-    var peopleKit1 = new Node(
+    const peopleKit1 = new Node(
       {
         children: [
           new HBox(
@@ -81,7 +81,7 @@ define( require => {
       } );
 
     // Create the 2nd kit node for creating people.
-    var peopleKit2 = new Node(
+    const peopleKit2 = new Node(
       {
         children: [
           new HBox(
@@ -96,7 +96,7 @@ define( require => {
       } );
 
     // Create the 1st kit node for mystery masses.
-    var mysteryMassesKit1 = new Node(
+    const mysteryMassesKit1 = new Node(
       {
         children: [
           new VBox(
@@ -125,7 +125,7 @@ define( require => {
       } );
 
     // Create the 2nd kit node for mystery masses.
-    var mysteryMassesKit2 = new Node(
+    const mysteryMassesKit2 = new Node(
       {
         children: [
           new VBox(

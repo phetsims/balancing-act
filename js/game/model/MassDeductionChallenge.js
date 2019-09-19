@@ -41,10 +41,10 @@ define( require => {
     create: function( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
 
       // Create the mass-distance pair for the mystery mass.
-      var mysteryMassDistancePair = { mass: mysteryMass, distance: mysteryMassDistanceFromCenter };
+      const mysteryMassDistancePair = { mass: mysteryMass, distance: mysteryMassDistanceFromCenter };
 
       // Create a valid solution for the challenge.
-      var solution = { mass: knownMass, distance: -mysteryMass.massValue * mysteryMassDistanceFromCenter / knownMass.massValue };
+      const solution = { mass: knownMass, distance: -mysteryMass.massValue * mysteryMassDistanceFromCenter / knownMass.massValue };
 
       // Combine into challenge.
       return new MassDeductionChallenge( mysteryMassDistancePair, knownMass, solution );

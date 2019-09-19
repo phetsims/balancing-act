@@ -29,8 +29,8 @@ define( require => {
   const rulersString = require( 'string!BALANCING_ACT/rulers' );
 
   // constants
-  var RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };
-  var TITLE_TEXT_OPTIONS = { font: new PhetFont( 16 ) };
+  const RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };
+  const TITLE_TEXT_OPTIONS = { font: new PhetFont( 16 ) };
 
   /**
    * @param {Property} positionIndicatorStateProperty
@@ -46,7 +46,7 @@ define( require => {
       align: 'left'
     }, options );
 
-    var positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
+    const positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
         node: new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: 'none'
@@ -64,7 +64,7 @@ define( require => {
       touchAreaXDilation: 5
     } );
 
-    var positionMarkerVBox = new VBox( {
+    const positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, TITLE_TEXT_OPTIONS ),
         new VStrut( options.titleToControlsVerticalSpace ),

@@ -32,7 +32,7 @@ define( require => {
     },
 
     addMass: function( mass ) {
-      var self = this;
+      const self = this;
       BalanceModel.prototype.addMass.call( self, mass );
       mass.userControlledProperty.lazyLink( function( isUserControlled ) {
         if ( !isUserControlled ) {
@@ -48,7 +48,7 @@ define( require => {
 
     removeMassAnimated: function( mass ) {
 
-      var self = this;
+      const self = this;
 
       // Register a listener for the completion of the removal animation sequence.
       function removeMass( isAnimating, wasAnimating ){

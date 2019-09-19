@@ -23,7 +23,7 @@ define( require => {
   // Model-view transform for scaling the node used in the toolbox.  This
   // may scale the node differently than what is used in the model so that
   // items in the toolbox can be sized differently (generally smaller).
-  var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
+  const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
   function MysteryMassCreatorNode( mysteryMassID, model, modelViewTransform ) {
     ImageMassCreatorNode.call( this, model, modelViewTransform, new MysteryMass( Vector2.ZERO, mysteryMassID ), false );

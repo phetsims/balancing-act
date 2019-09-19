@@ -20,12 +20,12 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var PLANK_LENGTH = 4.5;// meters
-  var PLANK_THICKNESS = 0.05; // meters
-  var PLANK_MASS = 75; // kg
-  var INTER_SNAP_TO_MARKER_DISTANCE = 0.25; // meters
-  var NUM_SNAP_TO_LOCATIONS = Math.floor( PLANK_LENGTH / INTER_SNAP_TO_MARKER_DISTANCE - 1 );
-  var MOMENT_OF_INERTIA = PLANK_MASS * ( ( PLANK_LENGTH * PLANK_LENGTH ) + ( PLANK_THICKNESS * PLANK_THICKNESS ) ) / 12;
+  const PLANK_LENGTH = 4.5;// meters
+  const PLANK_THICKNESS = 0.05; // meters
+  const PLANK_MASS = 75; // kg
+  const INTER_SNAP_TO_MARKER_DISTANCE = 0.25; // meters
+  const NUM_SNAP_TO_LOCATIONS = Math.floor( PLANK_LENGTH / INTER_SNAP_TO_MARKER_DISTANCE - 1 );
+  const MOMENT_OF_INERTIA = PLANK_MASS * ( ( PLANK_LENGTH * PLANK_LENGTH ) + ( PLANK_THICKNESS * PLANK_THICKNESS ) ) / 12;
 
   /**
    * @param location {Vector2} Initial location of the horizontal center, vertical bottom
@@ -35,7 +35,7 @@ define( require => {
    * @constructor
    */
   function Plank( location, pivotPoint, columnState, userControlledMasses ) {
-    var self = this;
+    const self = this;
     self.userControlledMasses = userControlledMasses;
 
     // Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left,
@@ -95,8 +95,8 @@ define( require => {
     Plank,
     {
       step: function( dt ) {
-        var self = this;
-        var angularAcceleration;
+        const self = this;
+        let angularAcceleration;
         self.updateNetTorque();
 
         // Update the angular acceleration and velocity.  There is some
@@ -110,8 +110,8 @@ define( require => {
         self.angularVelocity = Math.abs( self.angularVelocity ) > 0.00001 ? self.angularVelocity : 0;
 
         // Update the angle of the plank's tilt based on the angular velocity.
-        var previousTiltAngle = self.tiltAngleProperty.get();
-        var newTiltAngle = self.tiltAngleProperty.get() + self.angularVelocity * dt;
+        const previousTiltAngle = self.tiltAngleProperty.get();
+        let newTiltAngle = self.tiltAngleProperty.get() + self.angularVelocity * dt;
         if ( Math.abs( newTiltAngle ) > self.maxTiltAngle ) {
           // Limit the angle when one end is touching the ground.
           newTiltAngle = self.maxTiltAngle * ( self.tiltAngleProperty.get() < 0 ? -1 : 1 );
@@ -135,18 +135,18 @@ define( require => {
         self.angularVelocity *= 0.91;
 
         // Update the active drop locations.
-        var tempDropLocations = [];
+        const tempDropLocations = [];
         self.userControlledMasses.forEach( function( userControlledMass ) {
           if ( self.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
-            var closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.positionProperty.get() );
+            const closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.positionProperty.get() );
             if ( closestOpenLocation ) {
-              var plankSurfaceCenter = self.getPlankSurfaceCenter();
-              var distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
+              const plankSurfaceCenter = self.getPlankSurfaceCenter();
+              const distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
               tempDropLocations.push( distanceFromCenter );
             }
           }
         } );
-        var copyOfActiveDropLocations = self.activeDropLocations.getArray().slice( 0 );
+        const copyOfActiveDropLocations = self.activeDropLocations.getArray().slice( 0 );
         // Remove newly inactive drop locations.
         copyOfActiveDropLocations.forEach( function( activeDropLocation ) {
           if ( tempDropLocations.indexOf( activeDropLocation ) < 0 ) {
@@ -163,8 +163,8 @@ define( require => {
 
       // Add a mass to the surface of the plank, chooses a location below the mass.
       addMassToSurface: function( mass ) {
-        var massAdded = false;
-        var closestOpenLocation = this.getOpenMassDroppedLocation( mass.positionProperty.get() );
+        let massAdded = false;
+        const closestOpenLocation = this.getOpenMassDroppedLocation( mass.positionProperty.get() );
         if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
           mass.positionProperty.set( closestOpenLocation );
           mass.onPlankProperty.set( true );
@@ -179,7 +179,7 @@ define( require => {
           this.forceVectors.push( new MassForceVector( mass ) );
 
           // Add an observer that will remove this mass when the user picks it up.
-          var self = this;
+          const self = this;
           var userControlledObserver = function( userControlled ) {
             if ( userControlled ) {
               // The user has picked up this mass, so it is no longer
@@ -204,7 +204,7 @@ define( require => {
         if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
           throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
         }
-        var vectorToLocation = this.getPlankSurfaceCenter().plus(
+        const vectorToLocation = this.getPlankSurfaceCenter().plus(
           Vector2.createPolar( distanceFromCenter, this.tiltAngleProperty.get() )
         );
 
@@ -216,11 +216,11 @@ define( require => {
       },
 
       updateMassPositions: function() {
-        var self = this;
+        const self = this;
         this.massesOnSurface.forEach( function( mass ) {
           // Compute the vector from the center of the plank's surface to
           // the bottom of the mass, in meters.
-          var vectorFromCenterToMass = new Vector2(
+          const vectorFromCenterToMass = new Vector2(
             self.getMassDistanceFromCenter( mass ), 0 ).rotated( self.tiltAngleProperty.get()
           );
 
@@ -242,7 +242,7 @@ define( require => {
         this.massesOnSurface.remove( mass );
 
         // Remove the mass-distance pair for this mass.
-        for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
+        for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
           if ( this.massDistancePairs[ i ].mass === mass ) {
             this.massDistancePairs.splice( i, 1 );
             break;
@@ -254,7 +254,7 @@ define( require => {
         mass.onPlankProperty.set( false );
 
         // Remove the force vector associated with this mass.
-        for ( var j = 0; j < this.forceVectors.length; j++ ) {
+        for ( let j = 0; j < this.forceVectors.length; j++ ) {
           if ( this.forceVectors.get( j ).mass === mass ) {
             this.forceVectors.remove( this.forceVectors.get( j ) );
             break;
@@ -266,15 +266,15 @@ define( require => {
       },
 
       removeAllMasses: function() {
-        var copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
-        var self = this;
+        const copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
+        const self = this;
         copyOfMassesArray.forEach( function( mass ) {
           self.removeMassFromSurface( mass );
         } );
       },
 
       getMassDistanceFromCenter: function( mass ) {
-        for ( var i = 0; i < this.massDistancePairs.length; i++ ) {
+        for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
           if ( this.massDistancePairs[ i ].mass === mass ) {
             return this.massDistancePairs[ i ].distance;
           }
@@ -286,7 +286,7 @@ define( require => {
         if ( this.pivotPoint.y < this.unrotatedShape.minY ) {
           throw new Error( 'Pivot point cannot be below the plank.' );
         }
-        var attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
+        let attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
         attachmentBarVector = attachmentBarVector.rotated( this.tiltAngleProperty.get() );
         this.bottomCenterLocationProperty.set( this.pivotPoint.plus( attachmentBarVector ) );
       },
@@ -294,9 +294,9 @@ define( require => {
       // Find the best open location for a mass that was dropped at the given
       // point.  Returns null if no nearby open location is available.
       getOpenMassDroppedLocation: function( position ) {
-        var self = this;
-        var closestOpenLocation = null;
-        var validMassLocations = this.getSnapToLocations();
+        const self = this;
+        let closestOpenLocation = null;
+        const validMassLocations = this.getSnapToLocations();
         if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
           // Remove the location at the center of the plank from the set of
           // candidates, since we don't want to allow users to place things
@@ -304,14 +304,14 @@ define( require => {
           validMassLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 );
         }
 
-        var candidateOpenLocations = [];
+        let candidateOpenLocations = [];
 
         validMassLocations.forEach( function( validLocation ) {
-          var occupiedOrTooFar = false;
+          let occupiedOrTooFar = false;
           if ( Math.abs( validLocation.x - position.x ) > INTER_SNAP_TO_MARKER_DISTANCE * 2 ) {
             occupiedOrTooFar = true;
           }
-          for ( var i = 0; i < self.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
+          for ( let i = 0; i < self.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
             if ( self.massesOnSurface.get( i ).positionProperty.get().distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               occupiedOrTooFar = true;
             }
@@ -323,9 +323,9 @@ define( require => {
 
         // Sort through the locations and eliminate those that are already
         // occupied or too far away.
-        var copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
-        for ( var i = 0; i < copyOfCandidateLocations.length; i++ ) {
-          for ( var j = 0; j < this.massesOnSurface.length; j++ ) {
+        const copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
+        for ( let i = 0; i < copyOfCandidateLocations.length; i++ ) {
+          for ( let j = 0; j < this.massesOnSurface.length; j++ ) {
             if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidateLocations[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
               // This position is already occupied.
               candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[ j ] );
@@ -386,16 +386,16 @@ define( require => {
       getSurfaceYValue: function( xValue ) {
         // Solve the linear equation for the line that represents the surface
         // of the plank.
-        var m = Math.tan( this.tiltAngleProperty.get() );
-        var plankSurfaceCenter = this.getPlankSurfaceCenter();
-        var b = plankSurfaceCenter.y - m * plankSurfaceCenter.x;
+        const m = Math.tan( this.tiltAngleProperty.get() );
+        const plankSurfaceCenter = this.getPlankSurfaceCenter();
+        const b = plankSurfaceCenter.y - m * plankSurfaceCenter.x;
         // Does NOT check if the xValue range is valid.
         return m * xValue + b;
       },
 
       isPointAbovePlank: function( p ) {
-        var plankSpan = PLANK_LENGTH * Math.cos( this.tiltAngleProperty.get() );
-        var surfaceCenter = this.getPlankSurfaceCenter();
+        const plankSpan = PLANK_LENGTH * Math.cos( this.tiltAngleProperty.get() );
+        const surfaceCenter = this.getPlankSurfaceCenter();
         return p.x >= surfaceCenter.x - ( plankSpan / 2 ) && p.x <= surfaceCenter.x + ( plankSpan / 2 ) && p.y > this.getSurfaceYValue( p.x );
       },
 
@@ -405,8 +405,8 @@ define( require => {
        * This does NOT pay attention to support columns.
        */
       isBalanced: function() {
-        var unCompensatedTorque = 0;
-        var self = this;
+        let unCompensatedTorque = 0;
+        const self = this;
         this.massesOnSurface.forEach( function( mass ) {
           unCompensatedTorque += mass.massValue * self.getMassDistanceFromCenter( mass );
         } );
@@ -428,8 +428,8 @@ define( require => {
       },
 
       getTorqueDueToMasses: function() {
-        var self = this;
-        var torque = 0;
+        const self = this;
+        let torque = 0;
         this.massesOnSurface.forEach( function( mass ) {
           torque += self.pivotPoint.x - mass.positionProperty.get().x * mass.massValue;
         } );
@@ -437,16 +437,16 @@ define( require => {
       },
 
       getSnapToLocations: function() {
-        var snapToLocations = new Array( NUM_SNAP_TO_LOCATIONS );
-        var rotationTransform = Matrix3.rotationAround(
+        const snapToLocations = new Array( NUM_SNAP_TO_LOCATIONS );
+        const rotationTransform = Matrix3.rotationAround(
           this.tiltAngleProperty.get(),
           this.pivotPoint.x,
           this.pivotPoint.y
         );
-        var unrotatedY = this.unrotatedShape.bounds.maxY;
-        var unrotatedMinX = this.unrotatedShape.bounds.minX;
-        for ( var i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
-          var unrotatedPoint = new Vector2( unrotatedMinX + ( i + 1 ) * INTER_SNAP_TO_MARKER_DISTANCE, unrotatedY );
+        const unrotatedY = this.unrotatedShape.bounds.maxY;
+        const unrotatedMinX = this.unrotatedShape.bounds.minX;
+        for ( let i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
+          const unrotatedPoint = new Vector2( unrotatedMinX + ( i + 1 ) * INTER_SNAP_TO_MARKER_DISTANCE, unrotatedY );
           snapToLocations[ i ] = rotationTransform.timesVector2( unrotatedPoint );
         }
 

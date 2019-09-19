@@ -15,24 +15,24 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants, collected here for easy appearance tweaking.
-  var PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.
-  var NON_HIGHLIGHT_COLOR = 'black';
-  var NON_HIGHLIGHT_LINE_WIDTH = 1;
-  var HOVER_LINE_WIDTH = 2;
-  var SELECTED_HIGHLIGHT_COLOR = 'rgb( 255, 215, 0 )';
-  var SELECTED_HIGHLIGHT_LINE_WIDTH = 6;
-  var CORRECT_ANSWER_HIGHLIGHT_COLOR = 'rgb( 0, 255, 0 )';
-  var INVISIBLE_COLOR = 'rgba( 0, 0, 0, 0 )';
+  const PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.
+  const NON_HIGHLIGHT_COLOR = 'black';
+  const NON_HIGHLIGHT_LINE_WIDTH = 1;
+  const HOVER_LINE_WIDTH = 2;
+  const SELECTED_HIGHLIGHT_COLOR = 'rgb( 255, 215, 0 )';
+  const SELECTED_HIGHLIGHT_LINE_WIDTH = 6;
+  const CORRECT_ANSWER_HIGHLIGHT_COLOR = 'rgb( 0, 255, 0 )';
+  const INVISIBLE_COLOR = 'rgba( 0, 0, 0, 0 )';
 
   /**
    * @constructor
    */
   function TiltPredictionSelectionPanel( image, correspondingPrediction, tiltPredictionProperty, gameStateProperty ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Add the image.
-    var imagePanel = new Image( image, { cursor: 'pointer' } );
+    const imagePanel = new Image( image, { cursor: 'pointer' } );
     imagePanel.scale( PANEL_WIDTH / imagePanel.width );
     self.addChild( imagePanel );
 

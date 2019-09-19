@@ -14,7 +14,7 @@ define( require => {
   const LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
 
   // Mass configurations
-  var MYSTERY_MASS_CONFIGURATIONS = [
+  const MYSTERY_MASS_CONFIGURATIONS = [
     // Note that the height value needs to be somewhat coordinated with the
     // image for things to look good.
     {

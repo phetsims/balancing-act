@@ -29,15 +29,15 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var MAX_LEVELS = 4;
-  var MAX_POINTS_PER_PROBLEM = 2;
-  var CHALLENGES_PER_PROBLEM_SET = 6;
-  var MAX_SCORE_PER_GAME = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
-  var FULCRUM_HEIGHT = 0.85; // In meters.
-  var PLANK_HEIGHT = 0.75; // In meters.
+  const MAX_LEVELS = 4;
+  const MAX_POINTS_PER_PROBLEM = 2;
+  const CHALLENGES_PER_PROBLEM_SET = 6;
+  const MAX_SCORE_PER_GAME = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
+  const FULCRUM_HEIGHT = 0.85; // In meters.
+  const PLANK_HEIGHT = 0.75; // In meters.
 
   function BalanceGameModel() {
-    var self = this;
+    const self = this;
 
     this.timerEnabledProperty = new Property( false );
     this.levelProperty = new Property( 0 ); // Zero-based in the model, though levels appear to the user to start at 1.
@@ -79,7 +79,7 @@ define( require => {
     self.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), self.columnStateProperty, self.userControlledMasses );
 
     // Tilted support column.  In this model, there is only one.
-    var tiltedSupportColumnXPos = 1.8; // Meters, empirically chosen to look good.
+    const tiltedSupportColumnXPos = 1.8; // Meters, empirically chosen to look good.
     self.tiltedSupportColumn = new TiltedSupportColumn( PLANK_HEIGHT + tiltedSupportColumnXPos * Math.tan( self.plank.maxTiltAngle ),
       tiltedSupportColumnXPos, -self.plank.maxTiltAngle );
 
@@ -117,7 +117,7 @@ define( require => {
         this.elapsedTimeProperty.reset();
         this.mostRecentScores.forEach( function( mostRecentScoreProperty ) { mostRecentScoreProperty.reset(); } );
         this.bestTimes = [];
-        var self = this;
+        const self = this;
         _.times( MAX_LEVELS, function() {
           self.bestTimes.push( null );
         } );
@@ -144,7 +144,7 @@ define( require => {
 
       setChallenge: function( balanceChallenge, columnState ) {
 
-        var self = this;
+        const self = this;
 
         // Clear out the previous challenge (if there was one).  Start by
         // resetting the plank.
@@ -166,7 +166,7 @@ define( require => {
         } );
 
         balanceChallenge.movableMasses.forEach( function( mass ) {
-          var initialPosition = new Vector2( 3, 0 );
+          const initialPosition = new Vector2( 3, 0 );
           mass.positionProperty.set( initialPosition );
           mass.userControlledProperty.link( function( userControlled ) {
             if ( userControlled ) {
@@ -217,7 +217,7 @@ define( require => {
         }
         else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
 
-          var isAnswerCorrect =                                                                                       ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
+          const isAnswerCorrect =                                                                                       ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
                                 ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
                                 ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
 
@@ -234,7 +234,7 @@ define( require => {
       },
 
       handleProposedAnswer: function( answerIsCorrect ) {
-        var pointsEarned = 0;
+        let pointsEarned = 0;
         if ( answerIsCorrect ) {
           // The user answered the challenge correctly.
           this.gameStateProperty.set( 'showingCorrectAnswerFeedback' );
@@ -277,7 +277,7 @@ define( require => {
         else {
           // All challenges completed for this level.  See if this is a new
           // best time and, if so, record it.
-          var level = this.levelProperty.get();
+          const level = this.levelProperty.get();
           if ( this.scoreProperty.get() === MAX_SCORE_PER_GAME ) {
             // Perfect game.  See if new best time.
             if ( this.bestTimes[ level ] === null || this.elapsedTimeProperty.get() < this.bestTimes[ level ] ) {
@@ -301,13 +301,13 @@ define( require => {
       },
 
       displayCorrectAnswer: function() {
-        var currentChallenge = this.getCurrentChallenge();
+        const currentChallenge = this.getCurrentChallenge();
 
         // Put the challenge in its initial state, but with the columns turned off.
         this.setChallenge( currentChallenge, 'noColumns' );
 
         // Add the movable mass or masses to the plank according to the solution.
-        var self = this;
+        const self = this;
         currentChallenge.balancedConfiguration.forEach( function( massDistancePair ) {
           self.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
         } );
@@ -329,7 +329,7 @@ define( require => {
       },
 
       getTotalFixedMassValue: function() {
-        var totalMass = 0;
+        let totalMass = 0;
         this.getCurrentChallenge().fixedMassDistancePairs.forEach( function( massDistancePair ) {
           totalMass += massDistancePair.mass.massValue;
         } );
@@ -341,7 +341,7 @@ define( require => {
           timer.clearInterval( this.gameTimerId );
         }
         this.elapsedTimeProperty.reset();
-        var self = this;
+        const self = this;
         this.gameTimerId = timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
       },
 

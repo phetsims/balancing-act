@@ -17,7 +17,7 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  var INSET_PROPORTION = 0.25;
+  const INSET_PROPORTION = 0.25;
 
   /**
    * @param {ModelViewTransform} modelViewTransform
@@ -27,13 +27,13 @@ define( require => {
    */
   function MysteryMassNode( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
     ImageMassNode.call( this, mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable );
-    var self = this;
-    var inset = self.imageNode.width * INSET_PROPORTION;
+    const self = this;
+    const inset = self.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
-    var labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
-    var dimension = Math.max( labelText.width, labelText.height );
-    var label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
+    const labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
+    const dimension = Math.max( labelText.width, labelText.height );
+    const label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
       {
         fill: 'white',
         stroke: 'black',
@@ -42,8 +42,8 @@ define( require => {
     label.addChild( labelText.mutate( { centerX: label.centerX, centerY: label.centerY } ) );
 
     // Scale the label to fit.
-    var widthScale = ( self.imageNode.width - ( 2 * inset ) ) / label.width;
-    var heightScale = ( self.imageNode.height - ( 2 * inset ) ) / label.height;
+    const widthScale = ( self.imageNode.width - ( 2 * inset ) ) / label.width;
+    const heightScale = ( self.imageNode.height - ( 2 * inset ) ) / label.height;
     label.scale( Math.min( widthScale, heightScale ) );
 
     // Position the label on the image.  TWEAK WARNING - These labels are

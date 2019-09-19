@@ -19,8 +19,8 @@ define( require => {
   const unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   // constants
-  var FONT = new PhetFont( { size: 36 } );
-  var Y_DIST_FROM_POSITION = 3; // In screen units.
+  const FONT = new PhetFont( { size: 36 } );
+  const Y_DIST_FROM_POSITION = 3; // In screen units.
 
   /**
    * @param positionedVectorProperty
@@ -30,7 +30,7 @@ define( require => {
    */
   function MysteryVectorNode( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // Create the 'mystery vector' node and add it as a child.
     self.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );

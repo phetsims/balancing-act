@@ -58,8 +58,8 @@ define( require => {
   const tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   // constants
-  var BUTTON_FONT = new PhetFont( 24 );
-  var BUTTON_FILL = new Color( 0, 255, 153 );
+  const BUTTON_FONT = new PhetFont( 24 );
+  const BUTTON_FILL = new Color( 0, 255, 153 );
 
   /**
    * @param {BalanceGameModel} gameModel
@@ -67,13 +67,13 @@ define( require => {
    */
   function BalanceGameView( gameModel ) {
     ScreenView.call( this, { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
-    var self = this;
+    const self = this;
     self.model = gameModel;
 
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
     // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
     // ground just below the center of the balance, is located in the view.
-    var modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( self.layoutBounds.width * 0.45, self.layoutBounds.height * 0.86 ),
       115 );
@@ -123,7 +123,7 @@ define( require => {
     gameModel.movableMasses.addItemAddedListener( function( addedMass ) {
 
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
+      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
       self.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
@@ -141,7 +141,7 @@ define( require => {
     } );
     gameModel.fixedMasses.addItemAddedListener( function( addedMass ) {
       // Create and add the view representation for this mass.
-      var massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
+      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
       massNode.pickable = false; // Fixed masses can't be moved by users.
       self.challengeLayer.addChild( massNode );
 
@@ -253,7 +253,7 @@ define( require => {
 
     // Add and lay out the buttons.
     self.buttons = [];
-    var buttonOptions = {
+    const buttonOptions = {
       font: BUTTON_FONT,
       baseColor: BUTTON_FILL,
       cornerRadius: 4,
@@ -288,7 +288,7 @@ define( require => {
     self.rootNode.addChild( self.displayCorrectAnswerButton );
     self.buttons.push( self.displayCorrectAnswerButton );
 
-    var buttonCenter = this.modelViewTransform.modelToViewPosition( new Vector2( 0, -0.3 ) );
+    const buttonCenter = this.modelViewTransform.modelToViewPosition( new Vector2( 0, -0.3 ) );
     self.buttons.forEach( function( button ) {
       button.center = buttonCenter;
     } );
@@ -304,24 +304,24 @@ define( require => {
 
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
-    var levelIndicator = new LevelIndicatorNode( modelViewTransform, gameModel.plank );
+    const levelIndicator = new LevelIndicatorNode( modelViewTransform, gameModel.plank );
     gameModel.columnStateProperty.link( function( columnState ) {
       levelIndicator.visible = ( columnState === 'noColumns' );
     } );
     self.challengeLayer.addChild( levelIndicator );
 
     // Add a panel for controlling whether the ruler or marker set are visible.
-    var positionMarkerStateProperty = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
+    const positionMarkerStateProperty = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
 
     // Add the ruler.
-    var rulersVisibleProperty = new Property( false );
+    const rulersVisibleProperty = new Property( false );
     positionMarkerStateProperty.link( function( positionMarkerState ) {
       rulersVisibleProperty.value = positionMarkerState === 'rulers';
     } );
     self.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
-    var positionMarkersVisibleProperty = new Property( false );
+    const positionMarkersVisibleProperty = new Property( false );
     positionMarkerStateProperty.link( function( positionMarkerState ) {
       positionMarkersVisibleProperty.value = positionMarkerState === 'marks';
     } );
@@ -329,7 +329,7 @@ define( require => {
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    var positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
+    const positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
       right: self.layoutBounds.right - 10,
       top: self.scoreboard.bottom + 23,
 
@@ -344,7 +344,7 @@ define( require => {
   return inherit( ScreenView, BalanceGameView, {
 
     updateTitle: function() {
-      var balanceGameChallenge = this.model.getCurrentChallenge();
+      const balanceGameChallenge = this.model.getCurrentChallenge();
       if ( balanceGameChallenge !== null ) {
         this.challengeTitleNode.text = this.model.getCurrentChallenge().viewConfig.title;
       }
@@ -362,8 +362,8 @@ define( require => {
       if ( this.model.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
         // The button should be enabled whenever there are masses on the
         // right side of the plank.
-        var self = this;
-        var massesOnRightSide = false;
+        const self = this;
+        let massesOnRightSide = false;
         this.model.plank.massesOnSurface.forEach( function( mass ) {
           if ( mass.positionProperty.get().x > self.model.plank.getPlankSurfaceCenter().x ) {
             massesOnRightSide = true;
@@ -536,7 +536,7 @@ define( require => {
     },
 
     showLevelResultsNode: function() {
-      var self = this;
+      const self = this;
 
       // Set a new "level completed" node based on the results.
       self.levelCompletedNode = new LevelCompletedNode(

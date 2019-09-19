@@ -24,7 +24,7 @@ define( require => {
   // Model-view transform for scaling the node used in the toolbox.  This
   // may scale the node differently than what is used in the model so that
   // items in the toolbox can be sized differently (generally smaller).
-  var SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
+  const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
   /**
    * @param {number} numBricks
@@ -37,7 +37,7 @@ define( require => {
     MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
-    var selectionNode = new BrickStackNode(
+    const selectionNode = new BrickStackNode(
       new BrickStack( numBricks, Vector2.ZERO, false ),
       SCALING_MVT,
       false,
@@ -60,7 +60,7 @@ define( require => {
 
   return inherit( MassCreatorNode, BrickStackCreatorNode, {
     addElementToModel: function( position ) {
-      var brickStack = new BrickStack( this.numBricks, position );
+      const brickStack = new BrickStack( this.numBricks, position );
       brickStack.userControlledProperty.set( true );
       brickStack.animationDestination = position;
       this.model.addMass( brickStack );

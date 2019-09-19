@@ -29,7 +29,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var DEFAULT_FONT = new PhetFont( 18 );
+  const DEFAULT_FONT = new PhetFont( 18 );
 
   /**
    * @param {number} width  distance between left-most and right-most tick, insets will be added to this
@@ -76,11 +76,11 @@ define( require => {
     assert && assert( options.majorTickHeight < height / 2 );
     assert && assert( options.minorTickHeight < height / 2 );
 
-    var self = this;
+    const self = this;
     Node.call( self, options );
 
     // background
-    var backgroundNode = new Rectangle( 0, 0, width + ( 2 * options.insetsWidth ), height,
+    const backgroundNode = new Rectangle( 0, 0, width + ( 2 * options.insetsWidth ), height,
       {
         fill: options.backgroundFill,
         stroke: options.backgroundStroke,
@@ -89,11 +89,11 @@ define( require => {
     self.addChild( backgroundNode );
 
     // Lay out tick marks from left to right
-    var minorTickWidth = majorTickWidth / ( options.minorTicksPerMajorTick + 1 );
-    var x = options.insetsWidth;
-    var majorTickIndex = 0;
+    const minorTickWidth = majorTickWidth / ( options.minorTicksPerMajorTick + 1 );
+    let x = options.insetsWidth;
+    let majorTickIndex = 0;
 
-    var ticksContainerNode = new Node( { pickable: false } );
+    const ticksContainerNode = new Node( { pickable: false } );
     this.addChild( ticksContainerNode );
 
     while ( x < ( width + options.insetsWidth + options.insetsWidth ) ) {
@@ -101,8 +101,8 @@ define( require => {
       if ( ( x - options.insetsWidth ) % majorTickWidth === 0 ) {
 
         // Major tick label
-        var majorTickLabel = majorTickLabels[ majorTickIndex ];
-        var majorTickLabelNode = new RasterizedTextNode( majorTickLabel, { font: options.majorTickFont } );
+        const majorTickLabel = majorTickLabels[ majorTickIndex ];
+        const majorTickLabelNode = new RasterizedTextNode( majorTickLabel, { font: options.majorTickFont } );
         //Clamp and make sure the labels stay within the ruler, especially if the insetsWidth has been set low (or to zero)
         majorTickLabelNode.x = x - ( majorTickLabelNode.width / 2 );
         majorTickLabelNode.centerY = backgroundNode.centerY;
@@ -113,12 +113,12 @@ define( require => {
         }
 
         // Major tick mark
-        var majorTickNode = createTickMarkNode( x, height, options.majorTickHeight, options.majorTickStroke, options.majorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
+        const majorTickNode = createTickMarkNode( x, height, options.majorTickHeight, options.majorTickStroke, options.majorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
         ticksContainerNode.addChild( majorTickNode );
 
         // units label
         if ( majorTickIndex === options.unitsMajorTickIndex ) {
-          var unitsNode = new RasterizedTextNode( units, { font: options.unitsFont } );
+          const unitsNode = new RasterizedTextNode( units, { font: options.unitsFont } );
           ticksContainerNode.addChild( unitsNode );
           unitsNode.x = majorTickLabelNode.x + majorTickLabelNode.width + options.unitsSpacing;
           unitsNode.y = majorTickLabelNode.y + majorTickLabelNode.height - unitsNode.height;
@@ -129,8 +129,8 @@ define( require => {
       }
       else {
         // Minor tick marks
-        for ( var k = 1; ( k <= options.minorTicksPerMajorTick ) && ( x < ( width + options.insetsWidth + options.insetsWidth ) ); k++ ) {
-          var minorTickNode = createTickMarkNode( x, height, options.minorTickHeight, options.minorTickStroke, options.minorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
+        for ( let k = 1; ( k <= options.minorTicksPerMajorTick ) && ( x < ( width + options.insetsWidth + options.insetsWidth ) ); k++ ) {
+          const minorTickNode = createTickMarkNode( x, height, options.minorTickHeight, options.minorTickStroke, options.minorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
           ticksContainerNode.addChild( minorTickNode );
           x += minorTickWidth;
         }
@@ -155,7 +155,7 @@ define( require => {
    * @returns {Node}
    */
   var createTickMarkNode = function( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) {
-    var shape = new Shape();
+    const shape = new Shape();
     if ( drawUpper ) {
       shape.moveTo( x, 0 ).lineTo( x, tickHeight );
     }

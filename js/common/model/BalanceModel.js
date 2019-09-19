@@ -22,15 +22,15 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var FULCRUM_HEIGHT = 0.85; // In meters.
-  var PLANK_HEIGHT = 0.75; // In meters.
+  const FULCRUM_HEIGHT = 0.85; // In meters.
+  const PLANK_HEIGHT = 0.75; // In meters.
 
   /**
    * @constructor
    */
   function BalanceModel() {
 
-    var self = this;
+    const self = this;
 
     // Model elements
     self.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
@@ -64,11 +64,11 @@ define( require => {
     // Add a mass to the model.  Subclasses generally do additional things.
     addMass: function( mass ) {
       this.massList.push( mass );
-      var self = this;
+      const self = this;
 
       // Add a listener that will update the list of user controlled masses
       // that is used by the plank to update the active drop locations.
-      var userControlledMassesUpdater = function( userControlled ) {
+      const userControlledMassesUpdater = function( userControlled ) {
         if ( userControlled ) {
           self.userControlledMasses.push( mass );
         }

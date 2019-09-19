@@ -10,8 +10,8 @@ define( require => {
   const smallRockImage = require( 'image!BALANCING_ACT/rock-4.png' );
 
   // constants
-  var MASS = 30; // In kg
-  var HEIGHT = 0.25; // In meters
+  const MASS = 30; // In kg
+  const HEIGHT = 0.25; // In meters
 
   /**
    * @param initialPosition

@@ -16,7 +16,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var COLUMN_WIDTH = 0.35; // In meters
+  const COLUMN_WIDTH = 0.35; // In meters
 
   /**
    * @param height

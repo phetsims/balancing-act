@@ -10,8 +10,8 @@ define( require => {
   const metalBucketImage = require( 'image!BALANCING_ACT/metal-bucket.png' );
 
   // constants
-  var MASS = 15; // In kg
-  var HEIGHT = 0.5; // In meters
+  const MASS = 15; // In kg
+  const HEIGHT = 0.5; // In meters
 
   /**
    * @param initialPosition

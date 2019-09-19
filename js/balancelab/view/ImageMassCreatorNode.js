@@ -32,7 +32,7 @@ define( require => {
   return inherit( MassCreatorNode, ImageMassCreatorNode, {
 
     addElementToModel: function( position ) {
-      var imageMassModelElement = this.createImageMassInstance();
+      const imageMassModelElement = this.createImageMassInstance();
       imageMassModelElement.positionProperty.set( position.copy() );
       imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();
       imageMassModelElement.userControlledProperty.set( true );

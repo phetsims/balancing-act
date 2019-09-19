@@ -25,7 +25,7 @@ define( require => {
 
   function BalanceGameScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: gameString,
       homeScreenIcon: new Image( gameIcon ),
       navigationBarIcon: new Image( gameIconSmall ),

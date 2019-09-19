@@ -29,7 +29,7 @@ define( require => {
     // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
     this.tiltPredictionProperty = new Property( 'none' );
 
-    var panelContents = new HBox(
+    const panelContents = new HBox(
       {
         children: [
           new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),

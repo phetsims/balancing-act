@@ -25,7 +25,7 @@ define( require => {
 
   function BAIntroScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: introString,
       homeScreenIcon: new Image( introIcon ),
       navigationBarIcon: new Image( introIconSmall ),
