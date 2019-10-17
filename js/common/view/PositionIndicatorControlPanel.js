@@ -14,6 +14,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -39,7 +40,7 @@ define( require => {
    */
   function PositionIndicatorControlPanel( positionIndicatorStateProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       titleToControlsVerticalSpace: 5,
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,

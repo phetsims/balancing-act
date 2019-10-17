@@ -13,6 +13,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -41,7 +42,7 @@ define( require => {
 
     Node.call( this );
 
-    options = _.extend( {
+    options = merge( {
       // Defaults
       numLevels: 4,
       titleString: selectLevelString,

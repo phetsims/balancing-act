@@ -21,6 +21,7 @@ define( require => {
   // imports
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -43,7 +44,7 @@ define( require => {
   function RulerNodeRasterizedText( width, height, majorTickWidth, majorTickLabels, units, options ) {
 
     // default options
-    options = _.extend(
+    options = merge(
       {
         // body of the ruler
         backgroundFill: 'rgb(236, 225, 113)',

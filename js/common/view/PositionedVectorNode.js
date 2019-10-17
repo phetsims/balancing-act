@@ -18,6 +18,7 @@ define( require => {
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   /**
@@ -32,7 +33,7 @@ define( require => {
     Node.call( this );
     const self = this;
 
-    options = _.extend(
+    options = merge(
       {
         fill: 'white',
         stroke: 'black',

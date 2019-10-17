@@ -13,6 +13,7 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ScreenView = require( 'JOIST/ScreenView' );
@@ -31,7 +32,7 @@ define( require => {
    * @constructor
    */
   function ModelElementCreatorNode( modelViewTransform, options ) {
-    options = _.extend( { cursor: 'pointer' }, options );
+    options = merge( { cursor: 'pointer' }, options );
     Node.call( this, options );
     const self = this;
 

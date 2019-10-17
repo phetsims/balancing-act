@@ -11,6 +11,7 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
 
   /**
    * @param initialColumnState
@@ -18,7 +19,7 @@ define( require => {
    * @constructor
    */
   function BalanceGameChallenge( initialColumnState, options ) {
-    options = _.extend( {
+    options = merge( {
       maxAttemptsAllowed: 2
     }, options );
     this.initialColumnState = initialColumnState;

@@ -28,6 +28,7 @@ define( require => {
   const MassDeductionChallenge = require( 'BALANCING_ACT/game/model/MassDeductionChallenge' );
   const MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   const MassValueEntryNode = require( 'BALANCING_ACT/game/view/MassValueEntryNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
@@ -259,7 +260,7 @@ define( require => {
       cornerRadius: 4,
       maxWidth: 300 // empirically determined
     };
-    self.checkAnswerButton = new TextPushButton( checkString, _.extend( {
+    self.checkAnswerButton = new TextPushButton( checkString, merge( {
       listener: function() {
         gameModel.checkAnswer(
           self.massValueEntryNode.massValueProperty.value,
@@ -270,19 +271,19 @@ define( require => {
     self.rootNode.addChild( self.checkAnswerButton );
     self.buttons.push( self.checkAnswerButton );
 
-    self.nextButton = new TextPushButton( nextString, _.extend( {
+    self.nextButton = new TextPushButton( nextString, merge( {
       listener: function() { gameModel.nextChallenge(); }
     }, buttonOptions ) );
     self.rootNode.addChild( self.nextButton );
     self.buttons.push( self.nextButton );
 
-    self.tryAgainButton = new TextPushButton( tryAgainString, _.extend( {
+    self.tryAgainButton = new TextPushButton( tryAgainString, merge( {
       listener: function() { gameModel.tryAgain(); }
     }, buttonOptions ) );
     self.rootNode.addChild( self.tryAgainButton );
     self.buttons.push( self.tryAgainButton );
 
-    self.displayCorrectAnswerButton = new TextPushButton( showAnswerString, _.extend( {
+    self.displayCorrectAnswerButton = new TextPushButton( showAnswerString, merge( {
       listener: function() { gameModel.displayCorrectAnswer(); }
     }, buttonOptions ) );
     self.rootNode.addChild( self.displayCorrectAnswerButton );
