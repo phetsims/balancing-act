@@ -258,7 +258,7 @@ define( require => {
 
     // Reset All button.
     function resetClosure() {
-      self.reset.call( self );
+      self.reset();
     }
 
     self.nonMassLayer.addChild( new ResetAllButton( {
