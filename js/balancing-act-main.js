@@ -18,7 +18,7 @@ define( require => {
   const balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
 
   // constants
-  const tandem = Tandem.rootTandem;
+  const tandem = Tandem.ROOT;
 
   SimLauncher.launch( function() {
 
