@@ -103,6 +103,11 @@ define( require => {
       self.center = modelViewTransform.modelToViewPosition( newPosition ).plus( offsetToBottom );
     } );
 
+    // Make this non-pickable when animating so that users can't grab it mid-flight.
+    brickStack.animatingProperty.link( function( animating ) {
+      self.pickable = !animating;
+    } );
+
     // Add event listener for mouse activity.
     if ( draggable ) {
       this.addInputListener( new MassDragHandler( brickStack, modelViewTransform ) );

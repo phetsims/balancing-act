@@ -59,6 +59,7 @@ define( require => {
     }
 
     const imageNode = new Image( defaultImage );
+
     // Observe image changes.
     imageMass.imageProperty.link( function( image ) {
       imageNode.setScaleMagnitude( 1 );
@@ -127,6 +128,11 @@ define( require => {
     // Observe rotational angle changes.
     imageMass.rotationAngleProperty.link( function() {
       updatePositionAndAngle();
+    } );
+
+    // Make this non-pickable when animating so that users can't grab it mid-flight.
+    imageMass.animatingProperty.link( function( animating ) {
+      self.pickable = !animating;
     } );
 
     // Add the mouse event handler.
