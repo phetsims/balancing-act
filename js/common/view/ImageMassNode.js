@@ -125,6 +125,11 @@ define( function( require ) {
       updatePositionAndAngle();
     } );
 
+    // Make this non-pickable when animating so that users can't grab it mid-flight.
+    imageMass.animatingProperty.link( function( animating ) {
+      self.pickable = !animating;
+    } );
+
     // Add the mouse event handler.
     if ( draggable ) {
       thisNode.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
