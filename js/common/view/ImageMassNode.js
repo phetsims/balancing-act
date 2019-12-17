@@ -126,6 +126,7 @@ define( function( require ) {
     } );
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
+    var self = this;
     imageMass.animatingProperty.link( function( animating ) {
       self.pickable = !animating;
     } );
