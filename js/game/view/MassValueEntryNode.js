@@ -24,7 +24,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
   const READOUT_FONT = new PhetFont( 16 );
@@ -60,7 +60,7 @@ define( require => {
       thumbTouchAreaYDilation: 8,
       majorTickLength: 15,
       tickLabelSpacing: 2,
-      constrainValue: Util.roundSymmetric
+      constrainValue: Utils.roundSymmetric
     } );
     panelContent.addChild( slider );
     for ( let i = 0; i <= MAX_MASS; i += 10 ) {
