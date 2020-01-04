@@ -90,10 +90,7 @@ define( require => {
   balancingAct.register( 'Plank', Plank );
 
   // Inherit from base class and define the methods for this object.
-  return inherit(
-    Object,
-    Plank,
-    {
+  return inherit( Object, Plank, {
       step: function( dt ) {
         const self = this;
         let angularAcceleration;
