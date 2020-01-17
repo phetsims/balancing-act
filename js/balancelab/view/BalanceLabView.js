@@ -20,10 +20,11 @@ define( require => {
 
   /**
    * @param model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BalanceLabView( model ) {
-    BasicBalanceScreenView.call( this, model );
+  function BalanceLabView( model, tandem ) {
+    BasicBalanceScreenView.call( this, model, tandem );
     const self = this;
 
     // Add the mass selection carousel.

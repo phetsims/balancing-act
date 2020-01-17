@@ -17,24 +17,30 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
   const ICON_WIDTH = 60;
 
   function ColumnOnOffController( columnState, options ) {
+
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
     Node.call( this );
 
-    const contentNode = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
+    const abSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
       switchSize: new Dimension2( 32, 16 ),
       thumbTouchAreaXDilation: 5,
-      thumbTouchAreaYDilation: 5
+      thumbTouchAreaYDilation: 5,
+      tandem: options.tandem.createTandem( 'abSwitch' )
     } );
 
     // TODO: These options were misplaced, should they be deleted?
     // fill: 'rgb( 240, 240, 240 )',
     // cornerRadius: 5
-    const panel = new Panel( contentNode );
+    const panel = new Panel( abSwitch );
     this.addChild( panel );
 
     if ( BAQueryParameters.stanford ) {

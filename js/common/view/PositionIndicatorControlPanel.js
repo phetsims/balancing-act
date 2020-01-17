@@ -17,6 +17,8 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PositionIndicatorChoice = require( 'BALANCING_ACT/common/model/PositionIndicatorChoice' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -44,32 +46,37 @@ define( require => {
       titleToControlsVerticalSpace: 5,
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
-      align: 'left'
+      align: 'left',
+      tandem: Tandem.REQUIRED
     }, options );
 
-    const positionMarkerRadioButtons = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
+    const positionRadioButtonGroup = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
         node: new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'none'
+        value: PositionIndicatorChoice.NONE,
+        tandemName: 'noneRadioButton'
       },
       {
         node: new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'rulers'
+        value: PositionIndicatorChoice.RULERS,
+        tandemName: 'rulerRadioButton'
       },
       {
         node: new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
-        value: 'marks'
+        value: PositionIndicatorChoice.MARKS,
+        tandemName: 'marksRadioButton'
       }
     ], {
       radioButtonOptions: { radius: 6 },
-      touchAreaXDilation: 5
+      touchAreaXDilation: 5,
+      tandem: options.tandem.createTandem( 'positionRadioButtonGroup' )
     } );
 
     const positionMarkerVBox = new VBox( {
       children: [
         new Text( positionString, TITLE_TEXT_OPTIONS ),
         new VStrut( options.titleToControlsVerticalSpace ),
-        new HBox( { children: [ new HStrut( 10 ), positionMarkerRadioButtons ] } )
+        new HBox( { children: [ new HStrut( 10 ), positionRadioButtonGroup ] } )
       ],
       align: 'left'
     } );

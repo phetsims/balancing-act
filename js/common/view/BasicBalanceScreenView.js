@@ -13,8 +13,10 @@ define( require => {
   const AttachmentBarNode = require( 'BALANCING_ACT/common/view/AttachmentBarNode' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   const FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -33,6 +35,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
   const PositionedVectorNode = require( 'BALANCING_ACT/common/view/PositionedVectorNode' );
+  const PositionIndicatorChoice = require( 'BALANCING_ACT/common/model/PositionIndicatorChoice' );
   const PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   const PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   const Property = require( 'AXON/Property' );
@@ -53,19 +56,28 @@ define( require => {
 
   /**
    * @param {BalanceModel} model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BasicBalanceScreenView( model ) {
+  function BasicBalanceScreenView( model, tandem ) {
     ScreenView.call( this, { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
     const self = this;
     self.model = model;
 
     // Define the properties that control visibility of various display elements.
     self.viewProperties = {
-      massLabelsVisibleProperty: new Property( true ),
-      forceVectorsFromObjectsVisibleProperty: new Property( false ),
-      levelIndicatorVisibleProperty: new Property( false ),
-      positionMarkerStateProperty: new Property( 'none' ) // Valid values are 'none', 'rulers', and 'markers'.
+      massLabelsVisibleProperty: new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'massLabelsVisibleProperty' )
+      } ),
+      forceVectorsFromObjectsVisibleProperty: new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'forceVectorsFromObjectsVisibleProperty' )
+      } ),
+      levelIndicatorVisibleProperty: new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'levelIndicatorVisibleProperty' )
+      } ),
+      positionMarkerStateProperty: new EnumerationProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE, {
+        tandem: tandem.createTandem( 'positionMarkerStateProperty' )
+      } )
     };
 
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
@@ -150,14 +162,14 @@ define( require => {
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
     self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
-      rulersVisibleProperty.value = positionMarkerState === 'rulers';
+      rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     self.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisible = new Property( false );
     self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
-      positionMarkersVisible.value = positionMarkerState === 'marks';
+      positionMarkersVisible.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     self.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
 
@@ -198,7 +210,8 @@ define( require => {
 
     // Add the buttons that will control whether or not the support columns are in place.
     const columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
-      center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) )
+      center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) ),
+      tandem: tandem.createTandem( 'columnControlPanel' )
     } );
     self.nonMassLayer.addChild( columnControlPanel );
 
@@ -206,22 +219,27 @@ define( require => {
     const maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
+    const showPanelTandem = tandem.createTandem( 'showPanel' )
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.massLabelsVisibleProperty,
-      label: massLabelsString
+      label: massLabelsString,
+      tandem: showPanelTandem.createTandem( 'massLabelsCheckbox' )
     }, {
       node: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
-      label: forcesFromObjectsString
+      label: forcesFromObjectsString,
+      tandem: showPanelTandem.createTandem( 'forcesFromObjectsCheckbox' )
     }, {
       node: new Text( levelString, PANEL_OPTION_FONT ),
       property: self.viewProperties.levelIndicatorVisibleProperty,
-      label: levelString
+      label: levelString,
+      tandem: showPanelTandem.createTandem( 'levelCheckbox' )
     }
     ], {
       checkboxOptions: { boxWidth: 15 },
-      spacing: 5
+      spacing: 5,
+      tandem: showPanelTandem
     } );
     const titleToControlsVerticalSpace = 7;
     const indicatorVisibilityControlsVBox = new VBox( {
@@ -243,19 +261,18 @@ define( require => {
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
-    const positionIndicatorControlPanel = new PositionIndicatorControlPanel(
-      self.viewProperties.positionMarkerStateProperty,
-      {
-        left: indicatorVisibilityControlPanel.left,
-        top: indicatorVisibilityControlPanel.bottom + 5,
-        minWidth: indicatorVisibilityControlPanel.width,
-        maxWidth: maxControlPanelWidth
-      } );
-    self.nonMassLayer.addChild( positionIndicatorControlPanel );
+    const positionControlPanel = new PositionIndicatorControlPanel( self.viewProperties.positionMarkerStateProperty, {
+      left: indicatorVisibilityControlPanel.left,
+      top: indicatorVisibilityControlPanel.bottom + 5,
+      minWidth: indicatorVisibilityControlPanel.width,
+      maxWidth: maxControlPanelWidth,
+      tandem: tandem.createTandem( 'positionPanel' )
+    } );
+    self.nonMassLayer.addChild( positionControlPanel );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
-    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionIndicatorControlPanel.bounds.minY,
-      indicatorVisibilityControlPanel.bounds.maxX, positionIndicatorControlPanel.bounds.maxY );
+    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionControlPanel.bounds.minY,
+      indicatorVisibilityControlPanel.bounds.maxX, positionControlPanel.bounds.maxY );
 
     // Reset All button.
     function resetClosure() {
@@ -266,7 +283,8 @@ define( require => {
       listener: resetClosure,
       radius: 20,
       right: indicatorVisibilityControlPanel.right,
-      bottom: self.layoutBounds.height - 10
+      bottom: self.layoutBounds.height - 10,
+      tandem: tandem.createTandem( 'resetAllButton' )
     } ) );
   }
 

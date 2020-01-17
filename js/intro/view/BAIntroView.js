@@ -14,10 +14,11 @@ define( require => {
 
   /**
    * @param model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BAIntroView( model ) {
-    BasicBalanceScreenView.call( this, model );
+  function BAIntroView( model, tandem ) {
+    BasicBalanceScreenView.call( this, model, tandem );
     const self = this;
 
     model.massList.forEach( function( mass ) {

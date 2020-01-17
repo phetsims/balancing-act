@@ -38,7 +38,11 @@ define( require => {
   const FULCRUM_HEIGHT = 0.85; // In meters.
   const PLANK_HEIGHT = 0.75; // In meters.
 
-  function BalanceGameModel() {
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function BalanceGameModel( tandem ) {
     const self = this;
 
     this.timerEnabledProperty = new Property( false );

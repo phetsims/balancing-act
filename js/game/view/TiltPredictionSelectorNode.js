@@ -27,7 +27,7 @@ define( require => {
 
     // Property that tracks the selected prediction.  Valid values are 'none',
     // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
-    this.tiltPredictionProperty = new Property( 'none' );
+    this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
 
     const panelContents = new HBox(
       {

@@ -17,6 +17,7 @@ define( require => {
   const Color = require( 'SCENERY/util/Color' );
   const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   const FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   const FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
@@ -35,6 +36,7 @@ define( require => {
   const OutsideBackgroundNode = require( 'SCENERY_PHET/OutsideBackgroundNode' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PlankNode = require( 'BALANCING_ACT/common/view/PlankNode' );
+  const PositionIndicatorChoice = require( 'BALANCING_ACT/common/model/PositionIndicatorChoice' );
   const PositionIndicatorControlPanel = require( 'BALANCING_ACT/common/view/PositionIndicatorControlPanel' );
   const PositionMarkerSetNode = require( 'BALANCING_ACT/common/view/PositionMarkerSetNode' );
   const Property = require( 'AXON/Property' );
@@ -65,9 +67,10 @@ define( require => {
 
   /**
    * @param {BalanceGameModel} gameModel
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BalanceGameView( gameModel ) {
+  function BalanceGameView( gameModel, tandem ) {
     ScreenView.call( this, { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
     const self = this;
     self.model = gameModel;
@@ -313,32 +316,33 @@ define( require => {
     self.challengeLayer.addChild( levelIndicator );
 
     // Add a panel for controlling whether the ruler or marker set are visible.
-    const positionMarkerStateProperty = new Property( 'none' ); // Valid values are 'none', 'rulers', and 'markers'.
+    const positionMarkerStateProperty = new EnumerationProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE );
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
     positionMarkerStateProperty.link( function( positionMarkerState ) {
-      rulersVisibleProperty.value = positionMarkerState === 'rulers';
+      rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     self.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
     positionMarkerStateProperty.link( function( positionMarkerState ) {
-      positionMarkersVisibleProperty.value = positionMarkerState === 'marks';
+      positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     self.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, modelViewTransform, positionMarkersVisibleProperty ) );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    const positionIndicatorControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
+    const positionControlPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
       right: self.layoutBounds.right - 10,
       top: self.scoreboard.bottom + 23,
 
       // specify a max width that will fit the panel between the rightmost view object and the layout bounds
-      maxWidth: self.layoutBounds.width - this.tiltPredictionSelectorNode.bounds.maxX - 10
+      maxWidth: self.layoutBounds.width - this.tiltPredictionSelectorNode.bounds.maxX - 10,
+      tandem: tandem.createTandem( 'positionPanel' )
     } );
-    self.controlLayer.addChild( positionIndicatorControlPanel );
+    self.controlLayer.addChild( positionControlPanel );
   }
 
   balancingAct.register( 'BalanceGameView', BalanceGameView );
