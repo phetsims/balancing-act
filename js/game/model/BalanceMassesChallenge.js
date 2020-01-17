@@ -16,6 +16,7 @@ define( require => {
   const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
   const balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Plank = require( 'BALANCING_ACT/common/model/Plank' );
 
@@ -26,7 +27,7 @@ define( require => {
    * @constructor
    */
   function BalanceMassesChallenge( fixedMasses, movableMasses, solutionToDisplay ) {
-    BalanceGameChallenge.call( this, 'singleColumn' );
+    BalanceGameChallenge.call( this, ColumnState.SINGLE_COLUMN );
     this.fixedMassDistancePairs = this.fixedMassDistancePairs.concat( fixedMasses );
     this.movableMasses = this.movableMasses.concat( movableMasses );
     this.balancedConfiguration = this.balancedConfiguration.concat( solutionToDisplay );

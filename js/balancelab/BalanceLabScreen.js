@@ -33,8 +33,8 @@ define( require => {
     };
 
     Screen.call( this,
-      function() { return new BalanceLabModel(); },
-      function( model ) {return new BalanceLabView( model ); },
+      function() { return new BalanceLabModel( tandem.createTandem( 'model' ) ); },
+      function( model ) {return new BalanceLabView( model, tandem.createTandem( 'view' ) ); },
       options );
   }
 

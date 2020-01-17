@@ -12,13 +12,14 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
   const ObservableArray = require( 'AXON/ObservableArray' );
   const Plank = require( 'BALANCING_ACT/common/model/Plank' );
-  const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -26,9 +27,10 @@ define( require => {
   const PLANK_HEIGHT = 0.75; // In meters.
 
   /**
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BalanceModel() {
+  function BalanceModel( tandem ) {
 
     const self = this;
 
@@ -36,7 +38,10 @@ define( require => {
     self.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
     self.massList = new ObservableArray();
     self.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
-    self.columnStateProperty = new Property( 'doubleColumns' ); // Valid values are doubleColumns, singleColumn, noColumns.
+
+    self.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
+      tandem: tandem.createTandem( 'columnStateProperty' )
+    } );
     self.plank = new Plank(
       new Vector2( 0, PLANK_HEIGHT ),
       new Vector2( 0, FULCRUM_HEIGHT ),
@@ -85,7 +90,7 @@ define( require => {
     // Remove a mass from the model.  Sub-types often do additional things.
     removeMass: function( mass ) {
       this.massList.remove( mass );
-      if ( mass.userControlledMassesUpdater ){
+      if ( mass.userControlledMassesUpdater ) {
         mass.userControlledProperty.unlink( mass.userControlledMassesUpdater );
         mass.userControlledMassesUpdater = null;
       }

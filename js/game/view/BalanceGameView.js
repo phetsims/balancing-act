@@ -15,6 +15,7 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   const Color = require( 'SCENERY/util/Color' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   const FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
@@ -307,7 +308,7 @@ define( require => {
     // balanced, but only show it when the support column has been removed.
     const levelIndicator = new LevelIndicatorNode( modelViewTransform, gameModel.plank );
     gameModel.columnStateProperty.link( function( columnState ) {
-      levelIndicator.visible = ( columnState === 'noColumns' );
+      levelIndicator.visible = ( columnState === ColumnState.NO_COLUMNS );
     } );
     self.challengeLayer.addChild( levelIndicator );
 

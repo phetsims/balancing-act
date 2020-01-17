@@ -16,10 +16,11 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
 
   /**
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BalanceLabModel() {
-    BalanceModel.call( this );
+  function BalanceLabModel( tandem ) {
+    BalanceModel.call( this, tandem );
   }
 
   balancingAct.register( 'BalanceLabModel', BalanceLabModel );
@@ -51,13 +52,14 @@ define( require => {
       const self = this;
 
       // Register a listener for the completion of the removal animation sequence.
-      function removeMass( isAnimating, wasAnimating ){
+      function removeMass( isAnimating, wasAnimating ) {
         if ( wasAnimating && !isAnimating ) {
           // Animation sequence has completed.
           mass.animatingProperty.unlink( removeMass );
           BalanceModel.prototype.removeMass.call( self, mass );
         }
       }
+
       mass.animatingProperty.link( removeMass );
 
       // Kick off the animation back to the toolbox.

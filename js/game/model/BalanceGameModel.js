@@ -15,7 +15,9 @@ define( require => {
   const BalanceGameChallengeFactory = require( 'BALANCING_ACT/game/model/BalanceGameChallengeFactory' );
   const BalanceMassesChallenge = require( 'BALANCING_ACT/game/model/BalanceMassesChallenge' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Fulcrum = require( 'BALANCING_ACT/common/model/Fulcrum' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LevelSupportColumn = require( 'BALANCING_ACT/common/model/LevelSupportColumn' );
@@ -48,7 +50,7 @@ define( require => {
     // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
     // 'showingLevelResults'
     this.gameStateProperty = new Property( 'choosingLevel' );
-    this.columnStateProperty = new Property( 'singleColumns' ); // Valid values are 'none', 'singleColumn', 'doubleColumns'
+    this.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.SINGLE_COLUMN );
     this.elapsedTimeProperty = new Property( 0 );
 
     // Best times and scores.
@@ -153,7 +155,7 @@ define( require => {
 
         // Force the plank to be level and still.  This prevents any floating
         // point inaccuracies when adding masses.
-        self.columnStateProperty.set( 'doubleColumns' );
+        self.columnStateProperty.set( ColumnState.DOUBLE_COLUMNS );
 
         // Clear out the masses from the previous challenge.
         self.fixedMasses.clear();
@@ -211,19 +213,19 @@ define( require => {
       checkAnswer: function( mass, tiltPrediction ) {
         if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
           // Turn off the column(s) so that the plank can move.
-          this.columnStateProperty.set( 'noColumns' );
+          this.columnStateProperty.set( ColumnState.NO_COLUMNS );
 
           this.handleProposedAnswer( this.plank.isBalanced() );
         }
         else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
 
-          const isAnswerCorrect =                                                                                       ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
-                                ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
-                                ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
+          const isAnswerCorrect = ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
+                                  ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
+                                  ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
 
           if ( isAnswerCorrect ) {
             // Turn off the column(s) so that the plank can move.
-            this.columnStateProperty.set( 'noColumns' );
+            this.columnStateProperty.set( ColumnState.NO_COLUMNS );
           }
 
           this.handleProposedAnswer( isAnswerCorrect );
@@ -304,7 +306,7 @@ define( require => {
         const currentChallenge = this.getCurrentChallenge();
 
         // Put the challenge in its initial state, but with the columns turned off.
-        this.setChallenge( currentChallenge, 'noColumns' );
+        this.setChallenge( currentChallenge, ColumnState.NO_COLUMNS );
 
         // Add the movable mass or masses to the plank according to the solution.
         const self = this;

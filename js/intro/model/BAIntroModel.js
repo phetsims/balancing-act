@@ -19,10 +19,11 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
+   * @param {Tandem} tandem
    * @constructor
    */
-  function BAIntroModel() {
-    BalanceModel.call( this );
+  function BAIntroModel( tandem ) {
+    BalanceModel.call( this, tandem );
 
     // Add the initial masses and save their initial positions.
     this.addMass( new FireExtinguisher( new Vector2( 2.7, 0 ), false ) );

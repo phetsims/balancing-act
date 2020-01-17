@@ -11,6 +11,7 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   const Matrix3 = require( 'DOT/Matrix3' );
@@ -78,10 +79,10 @@ define( require => {
     // position whenever there are two columns present, and into a tilted
     // position when only one is present.
     columnState.link( function( newColumnState ) {
-      if ( newColumnState === 'singleColumn' ) {
+      if ( newColumnState === ColumnState.SINGLE_COLUMN ) {
         self.forceToMaxAndStill();
       }
-      else if ( newColumnState === 'doubleColumns' ) {
+      else if ( newColumnState === ColumnState.DOUBLE_COLUMNS ) {
         self.forceToLevelAndStill();
       }
     } );
@@ -414,7 +415,7 @@ define( require => {
 
       updateNetTorque: function() {
         this.currentNetTorque = 0;
-        if ( this.columnState.value === 'noColumns' ) {
+        if ( this.columnState.value === ColumnState.NO_COLUMNS ) {
 
           // Add the torque due to the masses on the surface of the plank.
           this.currentNetTorque += this.getTorqueDueToMasses();

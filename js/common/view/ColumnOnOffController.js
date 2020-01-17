@@ -10,6 +10,7 @@ define( require => {
   const ABSwitch = require( 'SUN/ABSwitch' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const ColumnControlIcon = require( 'BALANCING_ACT/common/view/ColumnControlIcon' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -21,7 +22,7 @@ define( require => {
   function ColumnOnOffController( columnState, options ) {
     Node.call( this );
 
-    const contentNode = new ABSwitch( columnState, 'doubleColumns', new ColumnControlIcon( ICON_WIDTH, true ), 'noColumns', new ColumnControlIcon( ICON_WIDTH, false ), {
+    const contentNode = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
       switchSize: new Dimension2( 32, 16 ),
       thumbTouchAreaXDilation: 5,
       thumbTouchAreaYDilation: 5

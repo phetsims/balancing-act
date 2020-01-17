@@ -6,6 +6,7 @@ define( require => {
   // modules
   const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const whatIsTheMassString = require( 'string!BALANCING_ACT/whatIsTheMass' );
 
@@ -16,7 +17,7 @@ define( require => {
    * @author John Blanco
    */
   function MassDeductionChallenge( fixedMassDistancePair, movableMass, solutionToDisplay ) {
-    BalanceGameChallenge.call( this, 'noColumns' );
+    BalanceGameChallenge.call( this, ColumnState.NO_COLUMNS );
 
     this.fixedMassDistancePairs.push( fixedMassDistancePair );
     this.movableMasses.push( movableMass );

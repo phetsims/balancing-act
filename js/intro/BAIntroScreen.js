@@ -33,8 +33,8 @@ define( require => {
     };
 
     Screen.call( this,
-      function() { return new BAIntroModel(); },
-      function( model ) { return new BAIntroView( model ); },
+      function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
       options );
   }
 

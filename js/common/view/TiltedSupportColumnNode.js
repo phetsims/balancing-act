@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearGradient = require( 'SCENERY/util/LinearGradient' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -66,7 +67,7 @@ define( require => {
     self.addChild( columnSupportNode );
 
     columnState.link( function( state ) {
-      self.visible = state === 'singleColumn';
+      self.visible = state === ColumnState.SINGLE_COLUMN;
     } );
   }
 

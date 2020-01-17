@@ -12,6 +12,7 @@ define( require => {
   // modules
   const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );
 
@@ -19,7 +20,7 @@ define( require => {
    * @constructor
    */
   function TiltPredictionChallenge( fixedMasses ) {
-    BalanceGameChallenge.call( this, 'doubleColumns' );
+    BalanceGameChallenge.call( this, ColumnState.DOUBLE_COLUMNS );
     Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
 
     // Set up the challenge view configuration, which provides information to
