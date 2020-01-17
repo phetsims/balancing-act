@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
   const bricksString = require( 'string!BALANCING_ACT/bricks' );
   const BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
@@ -161,14 +162,14 @@ define( require => {
           title: new Text( bricksString, { font: TITLE_FONT } ),
           content: brickCreatorKit
         },
-        {
+        ...BAQueryParameters.people ? [ {
           title: new Text( peopleString, { font: TITLE_FONT } ),
           content: peopleKit1
         },
-        {
-          title: new Text( peopleString, { font: TITLE_FONT } ),
-          content: peopleKit2
-        },
+          {
+            title: new Text( peopleString, { font: TITLE_FONT } ),
+            content: peopleKit2
+          } ] : [],
         {
           title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
           content: mysteryMassesKit1
