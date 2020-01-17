@@ -82,7 +82,8 @@ define( require => {
     self.userControlledMasses = [];
 
     // Add the plank.
-    self.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), self.columnStateProperty, self.userControlledMasses );
+    self.plank = new Plank( new Vector2( 0, PLANK_HEIGHT ), new Vector2( 0, FULCRUM_HEIGHT ), self.columnStateProperty, self.userControlledMasses,
+      tandem.createTandem( 'plank' ) );
 
     // Tilted support column.  In this model, there is only one.
     const tiltedSupportColumnXPos = 1.8; // Meters, empirically chosen to look good.

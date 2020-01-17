@@ -12,9 +12,11 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
+  const Emitter = require( 'AXON/Emitter' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const NumberIO = require( 'TANDEM/types/NumberIO' );
   const ObservableArray = require( 'AXON/ObservableArray' );
   const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
@@ -33,9 +35,10 @@ define( require => {
    * @param pivotPoint {Vector2} Point around which the plank will pivot
    * @param columnState {Property} Property that indicates current state of support columns.
    * @param userControlledMasses {Array} Masses being controlled by the user, used to update active drop locations.
+   * @param {Tandem} tandem
    * @constructor
    */
-  function Plank( location, pivotPoint, columnState, userControlledMasses ) {
+  function Plank( location, pivotPoint, columnState, userControlledMasses, tandem ) {
     const self = this;
     self.userControlledMasses = userControlledMasses;
 
@@ -58,6 +61,22 @@ define( require => {
 
     // Map of masses to distance from the plank's center.
     self.massDistancePairs = [];
+
+    // @private - signify in the data stream when masses are placed and removed
+    this.massDroppedOnPlankEmitter = new Emitter( {
+      tandem: tandem.createTandem( 'massDroppedOnPlankEmitter' ),
+      parameters: [
+        { name: 'mass', phetioType: NumberIO },
+        { name: 'position', phetioType: NumberIO } ]
+    } );
+
+    // @private - signify in the data stream when masses are placed and removed
+    this.massRemovedFromPlankEmitter = new Emitter( {
+      tandem: tandem.createTandem( 'massRemovedFromPlankEmitter' ),
+      parameters: [
+        { name: 'mass', phetioType: NumberIO },
+        { name: 'position', phetioType: NumberIO } ]
+    } );
 
     // Variables that need to be retained for dynamic behavior, but are not
     // intended to be accessed externally.
@@ -166,12 +185,15 @@ define( require => {
         if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
           mass.positionProperty.set( closestOpenLocation );
           mass.onPlankProperty.set( true );
-          this.massDistancePairs.push(
-            {
-              mass: mass,
-              distance: this.getPlankSurfaceCenter().distance( mass.positionProperty.get() ) *
-                        ( mass.positionProperty.get().x > this.getPlankSurfaceCenter().x ? 1 : -1 )
-            } );
+
+          const result = {
+            mass: mass,
+            distance: this.getPlankSurfaceCenter().distance( mass.positionProperty.get() ) *
+                      ( mass.positionProperty.get().x > this.getPlankSurfaceCenter().x ? 1 : -1 )
+          };
+          this.massDistancePairs.push( result );
+
+          this.massDroppedOnPlankEmitter.emit( mass.massValue, result.distance );
 
           // Add the force vector for this mass.
           this.forceVectors.push( new MassForceVector( mass ) );
@@ -242,6 +264,7 @@ define( require => {
         // Remove the mass-distance pair for this mass.
         for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
           if ( this.massDistancePairs[ i ].mass === mass ) {
+            this.massRemovedFromPlankEmitter.emit( mass.massValue, this.massDistancePairs[ i ].distance );
             this.massDistancePairs.splice( i, 1 );
             break;
           }

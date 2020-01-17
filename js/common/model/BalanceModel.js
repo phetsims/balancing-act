@@ -46,7 +46,8 @@ define( require => {
       new Vector2( 0, PLANK_HEIGHT ),
       new Vector2( 0, FULCRUM_HEIGHT ),
       this.columnStateProperty,
-      this.userControlledMasses
+      this.userControlledMasses,
+      tandem.createTandem( 'plank' )
     );
     self.supportColumns = [
       new LevelSupportColumn( PLANK_HEIGHT, -1.625 ),

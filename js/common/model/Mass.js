@@ -18,6 +18,8 @@ define( require => {
   const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
   const MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
+  // TODO: JSDoc is missing in many places, see https://github.com/phetsims/balancing-act/issues/96
+  // TODO: Convert to ES6, see https://github.com/phetsims/balancing-act/issues/96
   function Mass( massValue, initialPosition, isMystery ) {
     const self = this;
 

@@ -219,7 +219,7 @@ define( require => {
     const maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
     // Add the control panel that will allow users to control the visibility of the various indicators.
-    const showPanelTandem = tandem.createTandem( 'showPanel' )
+    const showPanelTandem = tandem.createTandem( 'showPanel' );
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: self.viewProperties.massLabelsVisibleProperty,
