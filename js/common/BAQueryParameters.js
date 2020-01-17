@@ -14,11 +14,8 @@ define( require => {
 
   const BAQueryParameters = QueryStringMachine.getAll( {
 
-    // whether the people are visible in MassKitSelectionNode
-    people: {
-      type: 'boolean',
-      defaultValue: true
-    }
+    // whether the Stanford University customizations are enabled
+    stanford: { type: 'flag' }
   } );
 
   balancingAct.register( 'BAQueryParameters', BAQueryParameters );

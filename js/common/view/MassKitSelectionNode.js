@@ -54,7 +54,7 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new BrickStackCreatorNode( 3, model, modelViewTransform ),
+                      ...BAQueryParameters.stanford ? [] : new BrickStackCreatorNode( 3, model, modelViewTransform ),
                       new BrickStackCreatorNode( 4, model, modelViewTransform )
                     ],
                     spacing: 20
@@ -162,14 +162,14 @@ define( require => {
           title: new Text( bricksString, { font: TITLE_FONT } ),
           content: brickCreatorKit
         },
-        ...BAQueryParameters.people ? [ {
+        ...BAQueryParameters.stanford ? [] : [ {
           title: new Text( peopleString, { font: TITLE_FONT } ),
           content: peopleKit1
         },
           {
             title: new Text( peopleString, { font: TITLE_FONT } ),
             content: peopleKit2
-          } ] : [],
+          } ],
         {
           title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
           content: mysteryMassesKit1
