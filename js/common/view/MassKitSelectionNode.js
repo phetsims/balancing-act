@@ -54,7 +54,7 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      ...BAQueryParameters.stanford ? [] : new BrickStackCreatorNode( 3, model, modelViewTransform ),
+                      ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform ) ],
                       new BrickStackCreatorNode( 4, model, modelViewTransform )
                     ],
                     spacing: 20
