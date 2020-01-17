@@ -12,8 +12,10 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   const BrickStackNode = require( 'BALANCING_ACT/common/view/BrickStackNode' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -37,6 +39,13 @@ define( require => {
     MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
+
+    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
+    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
+
     const selectionNode = new BrickStackNode(
       new BrickStack( numBricks, Vector2.ZERO, false ),
       SCALING_MVT,

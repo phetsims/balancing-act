@@ -11,6 +11,8 @@ define( require => {
 
   // module
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
 
@@ -25,6 +27,12 @@ define( require => {
     MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
+
+    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
+    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
   }
 
   balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
