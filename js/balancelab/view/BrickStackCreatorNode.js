@@ -42,7 +42,8 @@ define( require => {
       SCALING_MVT,
       false,
       new Property( false ),
-      false
+      false,
+      model.columnStateProperty
     );
 
     // Make a larger touch area.  The diameter of the circle was determined empirically.

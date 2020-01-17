@@ -107,7 +107,8 @@ define( require => {
         addedMass,
         modelViewTransform,
         true,
-        self.viewProperties.massLabelsVisibleProperty
+        self.viewProperties.massLabelsVisibleProperty,
+        model.columnStateProperty
       );
       massesLayer.addChild( massNode );
 

@@ -12,6 +12,8 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const defaultImage = require( 'image!BALANCING_ACT/default-image.png' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );
@@ -34,10 +36,15 @@ define( require => {
    * @param {boolean} isLabeled - Flag that controls whether this note include a textual label of the mass
    * @param massLabelVisibleProperty
    * @param {boolean} draggable
+   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
    * @constructor
    */
-  function ImageMassNode( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
+  function ImageMassNode( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
     Node.call( this, { cursor: 'pointer' } );
+    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
     const self = this;
 
     if ( isLabeled ) {
@@ -72,7 +79,7 @@ define( require => {
       }
 
       const scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( imageMass.heightProperty.get() ) ) /
-                          imageNode.height;
+                            imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
       if ( isLabeled ) {

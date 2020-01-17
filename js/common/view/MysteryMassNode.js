@@ -20,13 +20,16 @@ define( require => {
   const INSET_PROPORTION = 0.25;
 
   /**
-   * @param {ModelViewTransform} modelViewTransform
    * @param {Mass} mass
+   * @param {ModelViewTransform} modelViewTransform
+   * @param {boolean} isLabeled
    * @param {Property} massLabelVisibleProperty
+   * @param {boolean} draggable
+   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
    * @constructor
    */
-  function MysteryMassNode( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable ) {
-    ImageMassNode.call( this, mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable );
+  function MysteryMassNode( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
+    ImageMassNode.call( this, mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty );
     const self = this;
     const inset = self.imageNode.width * INSET_PROPORTION;
 

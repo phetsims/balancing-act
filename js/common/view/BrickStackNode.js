@@ -10,6 +10,8 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
+  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -28,10 +30,16 @@ define( require => {
    * @param {boolean} isLabeled
    * @param {Property} labelVisibleProperty
    * @param {boolean} draggable
+   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
    * @constructor
    */
-  function BrickStackNode( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
+  function BrickStackNode( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable, columnStateProperty ) {
     Node.call( this, { cursor: 'pointer' } );
+
+    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
     const self = this;
     self.brickStack = brickStack;
     self.modelViewTransform = modelViewTransform;
@@ -63,7 +71,11 @@ define( require => {
         const massValueText = new RasterizedTextNode(
           brickStack.massValue,
           { font: new PhetFont( 12 ) },
-          { centerX: 0, maxWidth: maxTextWidth, pickable: false /* set pickable to true if RasterizedTextNode is ever replaced with regular Text node */ }
+          {
+            centerX: 0,
+            maxWidth: maxTextWidth,
+            pickable: false /* set pickable to true if RasterizedTextNode is ever replaced with regular Text node */
+          }
         );
         massLabel.addChild( massValueText );
         massLabel.addChild( new RasterizedTextNode(

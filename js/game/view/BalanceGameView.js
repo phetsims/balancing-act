@@ -125,7 +125,7 @@ define( require => {
     gameModel.movableMasses.addItemAddedListener( function( addedMass ) {
 
       // Create and add the view representation for this mass.
-      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
+      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ), gameModel.columnStateProperty );
       self.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
@@ -143,7 +143,7 @@ define( require => {
     } );
     gameModel.fixedMasses.addItemAddedListener( function( addedMass ) {
       // Create and add the view representation for this mass.
-      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ) );
+      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ), gameModel.columnStateProperty );
       massNode.pickable = false; // Fixed masses can't be moved by users.
       self.challengeLayer.addChild( massNode );
 

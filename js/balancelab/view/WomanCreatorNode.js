@@ -32,7 +32,7 @@ define( require => {
    */
   function WomanCreatorNode( model, modelViewTransform ) {
     ImageMassCreatorNode.call( this, model, modelViewTransform, new Woman(), true );
-    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false ) );
+    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
     this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
   }
 
