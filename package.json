@@ -17,7 +17,8 @@
     "runnable": true,
     "supportedBrands": [
       "phet",
-      "adapted-from-phet"
+      "adapted-from-phet",
+      "phet-io"
     ],
     "supportsSound": true,
     "simulation": true
