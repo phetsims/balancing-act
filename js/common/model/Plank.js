@@ -17,6 +17,7 @@ define( require => {
   const MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
   const ObjectIO = require( 'TANDEM/types/ObjectIO' );
   const ObservableArray = require( 'AXON/ObservableArray' );
   const Property = require( 'AXON/Property' );
@@ -43,9 +44,13 @@ define( require => {
     const self = this;
     self.userControlledMasses = userControlledMasses;
 
-    // Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left,
-    // negative to the right.  In radians.
-    this.tiltAngleProperty = new Property( 0 );
+    this.tiltAngleProperty = new NumberProperty( 0, {
+      phetioDocumentation: 'Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, ' +
+                           'positive is tilted left, negative to the right.',
+      units: 'radians',
+      tandem: tandem.createTandem( 'tiltAngleProperty' ),
+      phetioReadOnly: true
+    } );
 
     // Point where the bottom center of the plank is currently located. If the plank is sitting on top of the fulcrum,
     // this point will be the same as the pivot point.  When the pivot point is above the plank, as is generally done

@@ -27,6 +27,45 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
     },
+    "balancingAct.balanceLabScreen.model.plank.massDroppedOnPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.balanceLabScreen.model.plank.massRemovedFromPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.balanceLabScreen.model.plank.tiltAngleProperty": {
+      "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
+    },
     "balancingAct.balanceLabScreen.view.columnControlPanel": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -1209,6 +1248,45 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
+    },
+    "balancingAct.gameScreen.model.plank.massDroppedOnPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.gameScreen.model.plank.massRemovedFromPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.gameScreen.model.plank.tiltAngleProperty": {
+      "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
     },
     "balancingAct.gameScreen.view.positionPanel": {
       "phetioDocumentation": "",
@@ -4602,6 +4680,45 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
+    },
+    "balancingAct.introScreen.model.plank.massDroppedOnPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.introScreen.model.plank.massRemovedFromPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+    },
+    "balancingAct.introScreen.model.plank.tiltAngleProperty": {
+      "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": true,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "NumberPropertyIO"
     },
     "balancingAct.introScreen.view.columnControlPanel": {
       "phetioDocumentation": "",
