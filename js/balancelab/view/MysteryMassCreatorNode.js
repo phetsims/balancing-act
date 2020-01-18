@@ -25,8 +25,8 @@ define( require => {
   // items in the toolbox can be sized differently (generally smaller).
   const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
-  function MysteryMassCreatorNode( mysteryMassID, model, modelViewTransform ) {
-    ImageMassCreatorNode.call( this, model, modelViewTransform, new MysteryMass( Vector2.ZERO, mysteryMassID ), false );
+  function MysteryMassCreatorNode( mysteryMassID, model, modelViewTransform, options ) {
+    ImageMassCreatorNode.call( this, model, modelViewTransform, new MysteryMass( Vector2.ZERO, mysteryMassID ), false, options );
     this.setSelectionNode( new MysteryMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
     this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
   }

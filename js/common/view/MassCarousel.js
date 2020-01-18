@@ -23,6 +23,7 @@ define( require => {
   const MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
@@ -40,7 +41,9 @@ define( require => {
     options = merge( {
 
       // we do our own layout
-      itemsPerPage: 1
+      itemsPerPage: 1,
+
+      tandem: Tandem.REQUIRED
     }, options );
 
     // Create the kit node for creating brick stacks of various sizes.
@@ -53,8 +56,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new BrickStackCreatorNode( 1, model, modelViewTransform ),
-                      new BrickStackCreatorNode( 2, model, modelViewTransform )
+                      new BrickStackCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode1' ) } ),
+                      new BrickStackCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode2' ) } )
                     ],
                     spacing: 20
 
@@ -62,8 +65,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform ) ],
-                      new BrickStackCreatorNode( 4, model, modelViewTransform )
+                      ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode3' ) } ) ],
+                      new BrickStackCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode4' ) } )
                     ],
                     spacing: 20
                   } )
@@ -114,8 +117,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 0, model, modelViewTransform ),
-                      new MysteryMassCreatorNode( 1, model, modelViewTransform )
+                      new MysteryMassCreatorNode( 0, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) } ),
+                      new MysteryMassCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) } )
                     ],
                     spacing: 20
 
@@ -123,8 +126,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 2, model, modelViewTransform ),
-                      new MysteryMassCreatorNode( 3, model, modelViewTransform )
+                      new MysteryMassCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) } ),
+                      new MysteryMassCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) } )
                     ],
                     spacing: 20
                   } )
@@ -143,8 +146,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 4, model, modelViewTransform ),
-                      new MysteryMassCreatorNode( 5, model, modelViewTransform )
+                      new MysteryMassCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) } ),
+                      new MysteryMassCreatorNode( 5, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) } )
                     ],
                     spacing: 20
 
@@ -152,8 +155,8 @@ define( require => {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 6, model, modelViewTransform ),
-                      new MysteryMassCreatorNode( 7, model, modelViewTransform )
+                      new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
+                      new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } )
                     ],
                     spacing: 20
                   } )

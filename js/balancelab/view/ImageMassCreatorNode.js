@@ -23,8 +23,8 @@ define( require => {
    * @param {boolean} showMassLabel
    * @constructor
    */
-  function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, showMassLabel ) {
-    MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel );
+  function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, showMassLabel, options ) {
+    MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel, options );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
 

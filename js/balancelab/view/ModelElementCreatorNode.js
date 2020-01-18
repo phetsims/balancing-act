@@ -18,6 +18,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -32,7 +33,10 @@ define( require => {
    * @constructor
    */
   function ModelElementCreatorNode( modelViewTransform, options ) {
-    options = merge( { cursor: 'pointer' }, options );
+    options = merge( {
+      cursor: 'pointer',
+      tandem: Tandem.REQUIRED
+    }, options );
     Node.call( this, options );
     const self = this;
 
@@ -90,7 +94,8 @@ define( require => {
         self.modelElement.release();
         self.modelElement = null;
         parentScreenView = null;
-      }
+      },
+      tandem: options.tandem.createTandem( 'dragHandler' )
     } ) );
   }
 
