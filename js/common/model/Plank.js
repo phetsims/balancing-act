@@ -17,6 +17,7 @@ define( require => {
   const MassForceVector = require( 'BALANCING_ACT/common/model/MassForceVector' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const NumberIO = require( 'TANDEM/types/NumberIO' );
+  const ObjectIO = require( 'TANDEM/types/ObjectIO' );
   const ObservableArray = require( 'AXON/ObservableArray' );
   const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
@@ -67,7 +68,8 @@ define( require => {
       tandem: tandem.createTandem( 'massDroppedOnPlankEmitter' ),
       parameters: [
         { name: 'mass', phetioType: NumberIO },
-        { name: 'position', phetioType: NumberIO } ]
+        { name: 'position', phetioType: NumberIO },
+        { name: 'fullState', phetioType: ObjectIO } ]
     } );
 
     // @private - signify in the data stream when masses are placed and removed
@@ -75,7 +77,8 @@ define( require => {
       tandem: tandem.createTandem( 'massRemovedFromPlankEmitter' ),
       parameters: [
         { name: 'mass', phetioType: NumberIO },
-        { name: 'position', phetioType: NumberIO } ]
+        { name: 'position', phetioType: NumberIO },
+        { name: 'fullState', phetioType: ObjectIO } ]
     } );
 
     // Variables that need to be retained for dynamic behavior, but are not
@@ -193,7 +196,13 @@ define( require => {
           };
           this.massDistancePairs.push( result );
 
-          this.massDroppedOnPlankEmitter.emit( mass.massValue, result.distance );
+          const fullState = this.massDistancePairs.map( massDistancePair => {
+            return {
+              mass: massDistancePair.mass.massValue,
+              distance: massDistancePair.distance
+            };
+          } );
+          this.massDroppedOnPlankEmitter.emit( mass.massValue, result.distance, fullState );
 
           // Add the force vector for this mass.
           this.forceVectors.push( new MassForceVector( mass ) );
@@ -261,11 +270,22 @@ define( require => {
         // Remove the mass.
         this.massesOnSurface.remove( mass );
 
+
         // Remove the mass-distance pair for this mass.
         for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
           if ( this.massDistancePairs[ i ].mass === mass ) {
-            this.massRemovedFromPlankEmitter.emit( mass.massValue, this.massDistancePairs[ i ].distance );
+
+            const distance = this.massDistancePairs[ i ].distance;
             this.massDistancePairs.splice( i, 1 );
+
+            const fullState = this.massDistancePairs.map( massDistancePair => {
+              return {
+                mass: massDistancePair.mass.massValue,
+                distance: massDistancePair.distance
+              };
+            } );
+            this.massRemovedFromPlankEmitter.emit( mass.massValue, distance, fullState );
+
             break;
           }
         }
