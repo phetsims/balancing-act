@@ -13,64 +13,84 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
 
+  // images
+  const mysteryObject1Image = require( 'image!BALANCING_ACT/mystery-object-01.png' );
+  const mysteryObject2Image = require( 'image!BALANCING_ACT/mystery-object-02.png' );
+  const mysteryObject3Image = require( 'image!BALANCING_ACT/mystery-object-03.png' );
+  const mysteryObject4Image = require( 'image!BALANCING_ACT/mystery-object-04.png' );
+  const mysteryObject5Image = require( 'image!BALANCING_ACT/mystery-object-05.png' );
+  const mysteryObject6Image = require( 'image!BALANCING_ACT/mystery-object-06.png' );
+  const mysteryObject7Image = require( 'image!BALANCING_ACT/mystery-object-07.png' );
+  const mysteryObject8Image = require( 'image!BALANCING_ACT/mystery-object-08.png' );
+
+  // strings
+  const massLabelAString = require( 'string!BALANCING_ACT/massLabelA' );
+  const massLabelBString = require( 'string!BALANCING_ACT/massLabelB' );
+  const massLabelCString = require( 'string!BALANCING_ACT/massLabelC' );
+  const massLabelDString = require( 'string!BALANCING_ACT/massLabelD' );
+  const massLabelEString = require( 'string!BALANCING_ACT/massLabelE' );
+  const massLabelFString = require( 'string!BALANCING_ACT/massLabelF' );
+  const massLabelGString = require( 'string!BALANCING_ACT/massLabelG' );
+  const massLabelHString = require( 'string!BALANCING_ACT/massLabelH' );
+
   // Mass configurations
   const MYSTERY_MASS_CONFIGURATIONS = [
     // Note that the height value needs to be somewhat coordinated with the
     // image for things to look good.
     {
       massValue: 20, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-01.png' ),
+      image: mysteryObject1Image,
       height: 0.25, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelA' ),
+      labelText: massLabelAString,
       isMystery: true
     },
     {
       massValue: 5, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-02.png' ),
+      image: mysteryObject2Image,
       height: 0.30, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelB' ),
+      labelText: massLabelBString,
       isMystery: true
     },
     {
       massValue: 15, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-03.png' ),
+      image: mysteryObject3Image,
       height: 0.35, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelC' ),
+      labelText: massLabelCString,
       isMystery: true
     },
     {
       massValue: 10, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-04.png' ),
+      image: mysteryObject4Image,
       height: 0.4, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelD' ),
+      labelText: massLabelDString,
       isMystery: true
     },
     {
       massValue: 3, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-05.png' ),
+      image: mysteryObject5Image,
       height: 0.25, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelE' ),
+      labelText: massLabelEString,
       isMystery: true
     },
     {
       massValue: 50, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-06.png' ),
+      image: mysteryObject6Image,
       height: 0.35, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelF' ),
+      labelText: massLabelFString,
       isMystery: true
     },
     {
       massValue: 25, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-07.png' ),
+      image: mysteryObject7Image,
       height: 0.4, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelG' ),
+      labelText: massLabelGString,
       isMystery: true
     },
     {
       massValue: 7.5, // in kg
-      image: require( 'image!BALANCING_ACT/mystery-object-08.png' ),
+      image: mysteryObject8Image,
       height: 0.3, // in meters
-      labelText: require( 'string!BALANCING_ACT/massLabelH' ),
+      labelText: massLabelHString,
       isMystery: true
     }
   ];
