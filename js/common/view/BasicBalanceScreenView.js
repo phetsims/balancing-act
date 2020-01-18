@@ -48,8 +48,8 @@ define( require => {
 
   // strings
   const forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
-  const massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
   const levelString = require( 'string!BALANCING_ACT/level' );
+  const massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
 
   // constants
   const X_MARGIN_IN_PANELS = 5;
