@@ -7,6 +7,8 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   const inherit = require( 'PHET_CORE/inherit' );
+
+  // images
   const smallRockImage = require( 'image!BALANCING_ACT/rock-4.png' );
 
   // constants

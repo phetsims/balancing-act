@@ -16,6 +16,8 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
   const unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   // constants

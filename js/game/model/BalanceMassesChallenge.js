@@ -14,11 +14,13 @@ define( require => {
 
   // modules
   const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
-  const balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Plank = require( 'BALANCING_ACT/common/model/Plank' );
+
+  // strings
+  const balanceMeString = require( 'string!BALANCING_ACT/balanceMe' );
 
   /**
    * @param {Array<{mass:{Mass}, distance:{number}}>} fixedMasses - Mass-distance pairs that describe the fixed masses.

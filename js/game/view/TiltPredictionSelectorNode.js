@@ -16,11 +16,13 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
+  const Property = require( 'AXON/Property' );
+  const TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
+
+  // images
   const plankBalancedImage = require( 'image!BALANCING_ACT/plank-balanced.png' );
   const plankTippedLeftImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
   const plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
-  const Property = require( 'AXON/Property' );
-  const TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
 
   function TiltPredictionSelectorNode( gameStateProperty ) {
     Node.call( this );

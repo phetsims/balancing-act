@@ -13,7 +13,6 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
-  const bricksString = require( 'string!BALANCING_ACT/bricks' );
   const BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
   const GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -21,14 +20,17 @@ define( require => {
   const KitSelectionNode = require( 'SCENERY_PHET/KitSelectionNode' );
   const ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
   const MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
-  const mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const peopleString = require( 'string!BALANCING_ACT/people' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
+
+  // strings
+  const bricksString = require( 'string!BALANCING_ACT/bricks' );
+  const mysteryObjectsString = require( 'string!BALANCING_ACT/mysteryObjects' );
+  const peopleString = require( 'string!BALANCING_ACT/people' );
 
   // constants
   const TITLE_FONT = new PhetFont( 16 );

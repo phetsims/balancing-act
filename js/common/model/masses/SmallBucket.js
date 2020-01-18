@@ -5,9 +5,11 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const blueBucketImage = require( 'image!BALANCING_ACT/blue-bucket.png' );
   const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
   const inherit = require( 'PHET_CORE/inherit' );
+
+  // images
+  const blueBucketImage = require( 'image!BALANCING_ACT/blue-bucket.png' );
 
   // constants
   const MASS = 3; // In kg

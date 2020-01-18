@@ -11,10 +11,12 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const kgString = require( 'string!BALANCING_ACT/kg' );
   const ModelElementCreatorNode = require( 'BALANCING_ACT/balancelab/view/ModelElementCreatorNode' );
-  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+
+  // strings
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
 
   /**
    * @param {ModelViewTransform2} modelViewTransform

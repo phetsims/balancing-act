@@ -50,12 +50,14 @@ define( require => {
   const TiltPredictionSelectorNode = require( 'BALANCING_ACT/game/view/TiltPredictionSelectorNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  // Images and Strings
-  const checkString = require( 'string!VEGAS/check' );
+  // images
   const gameLevel1Icon = require( 'mipmap!BALANCING_ACT/game-level-1-icon.png' );
   const gameLevel2Icon = require( 'mipmap!BALANCING_ACT/game-level-2-icon.png' );
   const gameLevel3Icon = require( 'mipmap!BALANCING_ACT/game-level-3-icon.png' );
   const gameLevel4Icon = require( 'mipmap!BALANCING_ACT/game-level-4-icon.png' );
+
+  // strings
+  const checkString = require( 'string!VEGAS/check' );
   const nextString = require( 'string!VEGAS/next' );
   const showAnswerString = require( 'string!VEGAS/showAnswer' );
   const startOverString = require( 'string!BALANCING_ACT/startOver' );

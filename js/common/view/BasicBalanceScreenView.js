@@ -17,15 +17,12 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const ColumnOnOffController = require( 'BALANCING_ACT/common/view/ColumnOnOffController' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  const forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
   const FulcrumNode = require( 'BALANCING_ACT/common/view/FulcrumNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LevelIndicatorNode = require( 'BALANCING_ACT/common/view/LevelIndicatorNode' );
-  const levelString = require( 'string!BALANCING_ACT/level' );
   const LevelSupportColumnNode = require( 'BALANCING_ACT/common/view/LevelSupportColumnNode' );
-  const massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
   const MassNodeFactory = require( 'BALANCING_ACT/common/view/MassNodeFactory' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const MysteryVectorNode = require( 'BALANCING_ACT/common/view/MysteryVectorNode' );
@@ -48,6 +45,11 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
   const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
+
+  // strings
+  const forcesFromObjectsString = require( 'string!BALANCING_ACT/forcesFromObjects' );
+  const massLabelsString = require( 'string!BALANCING_ACT/massLabels' );
+  const levelString = require( 'string!BALANCING_ACT/level' );
 
   // constants
   const X_MARGIN_IN_PANELS = 5;

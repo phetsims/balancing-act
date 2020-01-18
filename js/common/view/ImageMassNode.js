@@ -14,20 +14,22 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
-  const defaultImage = require( 'image!BALANCING_ACT/default-image.png' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const kgString = require( 'string!BALANCING_ACT/kg' );
   const MassDragHandler = require( 'BALANCING_ACT/common/view/MassDragHandler' );
   const Matrix3 = require( 'DOT/Matrix3' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RasterizedTextNode = require( 'BALANCING_ACT/common/view/RasterizedTextNode' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Vector2 = require( 'DOT/Vector2' );
 
+  // images
+  const defaultImage = require( 'image!BALANCING_ACT/default-image.png' );
+
   // strings
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   const unknownMassLabelString = require( 'string!BALANCING_ACT/unknownMassLabel' );
 
   /**

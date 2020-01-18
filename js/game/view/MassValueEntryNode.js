@@ -14,10 +14,8 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const HSlider = require( 'SUN/HSlider' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const kgString = require( 'string!BALANCING_ACT/kg' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Panel = require( 'SUN/Panel' );
-  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Range = require( 'DOT/Range' );
@@ -25,6 +23,10 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Utils = require( 'DOT/Utils' );
+
+  // strings
+  const kgString = require( 'string!BALANCING_ACT/kg' );
+  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
 
   // constants
   const READOUT_FONT = new PhetFont( 16 );

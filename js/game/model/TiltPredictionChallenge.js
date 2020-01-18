@@ -14,6 +14,8 @@ define( require => {
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
   const inherit = require( 'PHET_CORE/inherit' );
+
+  // strings
   const whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );
 
   /**
