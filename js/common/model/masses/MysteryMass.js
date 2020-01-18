@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
 
@@ -33,61 +34,64 @@ define( require => {
   const massLabelGString = require( 'string!BALANCING_ACT/massLabelG' );
   const massLabelHString = require( 'string!BALANCING_ACT/massLabelH' );
 
+  // in kg
+  const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 54 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];
+
   // Mass configurations
   const MYSTERY_MASS_CONFIGURATIONS = [
     // Note that the height value needs to be somewhat coordinated with the
     // image for things to look good.
     {
-      massValue: 20, // in kg
+      massValue: massValues[ 0 ], // in kg
       image: mysteryObject1Image,
       height: 0.25, // in meters
       labelText: massLabelAString,
       isMystery: true
     },
     {
-      massValue: 5, // in kg
+      massValue: massValues[ 1 ], // in kg
       image: mysteryObject2Image,
       height: 0.30, // in meters
       labelText: massLabelBString,
       isMystery: true
     },
     {
-      massValue: 15, // in kg
+      massValue: massValues[ 2 ], // in kg
       image: mysteryObject3Image,
       height: 0.35, // in meters
       labelText: massLabelCString,
       isMystery: true
     },
     {
-      massValue: 10, // in kg
+      massValue: massValues[ 3 ], // in kg
       image: mysteryObject4Image,
       height: 0.4, // in meters
       labelText: massLabelDString,
       isMystery: true
     },
     {
-      massValue: 3, // in kg
+      massValue: massValues[ 4 ], // in kg
       image: mysteryObject5Image,
       height: 0.25, // in meters
       labelText: massLabelEString,
       isMystery: true
     },
     {
-      massValue: 50, // in kg
+      massValue: massValues[ 5 ], // in kg
       image: mysteryObject6Image,
       height: 0.35, // in meters
       labelText: massLabelFString,
       isMystery: true
     },
     {
-      massValue: 25, // in kg
+      massValue: massValues[ 6 ], // in kg
       image: mysteryObject7Image,
       height: 0.4, // in meters
       labelText: massLabelGString,
       isMystery: true
     },
     {
-      massValue: 7.5, // in kg
+      massValue: massValues[ 7 ], // in kg
       image: mysteryObject8Image,
       height: 0.3, // in meters
       labelText: massLabelHString,
