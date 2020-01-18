@@ -9,14 +9,8 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BasicBalanceScreenView = require( 'BALANCING_ACT/common/view/BasicBalanceScreenView' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const MassKitSelectionNode = require( 'BALANCING_ACT/common/view/MassKitSelectionNode' );
-  const Panel = require( 'SUN/Panel' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
-
-  // constants
-  const PANEL_X_MARGIN = 5;
+  const MassCarousel = require( 'BALANCING_ACT/common/view/MassCarousel' );
 
   /**
    * @param model
@@ -28,25 +22,21 @@ define( require => {
     const self = this;
 
     // Add the mass selection carousel.
-    this.massKitSelectionNode = new MassKitSelectionNode( model, self.modelViewTransform );
-    self.nonMassLayer.addChild( new Panel( new VBox( {
-      children: [
-        new HStrut( self.controlPanelBounds.width - PANEL_X_MARGIN * 2 ),
-        this.massKitSelectionNode ]
-    } ), {
+    this.massCarousel = new MassCarousel( model, self.modelViewTransform, {
       centerX: self.controlPanelBounds.centerX,
       top: self.controlPanelBounds.bottom + 5,
-      xMargin: PANEL_X_MARGIN,
       fill: 'rgb( 240, 240, 240 )',
-      maxWidth: self.controlPanelBounds.width
-    } ) );
+      maxWidth: self.controlPanelBounds.width,
+      tandem: tandem.createTandem( 'massCarousel' )
+    } );
+    self.nonMassLayer.addChild( this.massCarousel );
   }
 
   balancingAct.register( 'BalanceLabView', BalanceLabView );
 
   return inherit( BasicBalanceScreenView, BalanceLabView, {
     reset: function() {
-      this.massKitSelectionNode.reset();
+      this.massCarousel.reset();
       BasicBalanceScreenView.prototype.reset.call( this );
     }
   } );

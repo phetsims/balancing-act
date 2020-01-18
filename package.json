@@ -12,7 +12,8 @@
   "phet": {
     "requirejsNamespace": "BALANCING_ACT",
     "phetLibs": [
-      "vegas"
+      "vegas",
+      "twixt"
     ],
     "runnable": true,
     "supportedBrands": [

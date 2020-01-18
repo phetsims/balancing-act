@@ -14,15 +14,15 @@ define( require => {
   const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
   const BrickStackCreatorNode = require( 'BALANCING_ACT/balancelab/view/BrickStackCreatorNode' );
+  const Carousel = require( 'SUN/Carousel' );
   const GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const KitSelectionNode = require( 'SCENERY_PHET/KitSelectionNode' );
   const ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const MysteryMassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MysteryMassCreatorNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Property = require( 'AXON/Property' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const WomanCreatorNode = require( 'BALANCING_ACT/balancelab/view/WomanCreatorNode' );
@@ -35,7 +35,13 @@ define( require => {
   // constants
   const TITLE_FONT = new PhetFont( 16 );
 
-  function MassKitSelectionNode( model, modelViewTransform, options ) {
+  function MassCarousel( model, modelViewTransform, options ) {
+
+    options = merge( {
+
+      // we do our own layout
+      itemsPerPage: 1
+    }, options );
 
     // Create the kit node for creating brick stacks of various sizes.
     const brickCreatorKit = new Node(
@@ -156,40 +162,50 @@ define( require => {
             } ) ]
       } );
 
-    // Create the actual kit selection node.
-    this.selectedKitProperty = new Property( 0 );
-    KitSelectionNode.call( this, this.selectedKitProperty,
-      [
+    const elements = [
+      {
+        title: new Text( bricksString, { font: TITLE_FONT } ),
+        content: brickCreatorKit
+      },
+      ...BAQueryParameters.stanford ? [] : [ {
+        title: new Text( peopleString, { font: TITLE_FONT } ),
+        content: peopleKit1
+      },
         {
-          title: new Text( bricksString, { font: TITLE_FONT } ),
-          content: brickCreatorKit
-        },
-        ...BAQueryParameters.stanford ? [] : [ {
           title: new Text( peopleString, { font: TITLE_FONT } ),
-          content: peopleKit1
-        },
-          {
-            title: new Text( peopleString, { font: TITLE_FONT } ),
-            content: peopleKit2
-          } ],
-        {
-          title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
-          content: mysteryMassesKit1
-        },
-        {
-          title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
-          content: mysteryMassesKit2
-        }
-      ], options );
-  }
+          content: peopleKit2
+        } ],
+      {
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        content: mysteryMassesKit1
+      },
+      {
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        content: mysteryMassesKit2
+      }
+    ];
 
-  balancingAct.register( 'MassKitSelectionNode', MassKitSelectionNode );
-
-  return inherit( KitSelectionNode, MassKitSelectionNode, {
-      reset: function() {
-        this.selectedKitProperty.reset();
+    // Create the actual kit selection node.
+    let maxHeight = 0;
+    for ( let i = 0; i < elements.length; i++ ) {
+      const element = elements[ i ];
+      const height = element.title.height + element.content.height;
+      if ( height > maxHeight ) {
+        maxHeight = height;
       }
     }
-  );
+    const nodes = elements.map( element => {
+      const vbox = new VBox( {
+        spacing: maxHeight - element.title.height - element.content.height, // TODO: Would alignbox do this better?
+        children: [ element.title, element.content ]
+      } );
+      return vbox;
+    } );
+    Carousel.call( this, nodes, options );
+  }
+
+  balancingAct.register( 'MassCarousel', MassCarousel );
+
+  return inherit( Carousel, MassCarousel );
 } );
 
