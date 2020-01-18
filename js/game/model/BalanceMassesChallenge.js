@@ -59,7 +59,10 @@ define( require => {
 
         // Create a valid solution for the challenge.
         const solution = [
-          { mass: movableMass, distance: -( fixedMass.massValue * fixedMassDistanceFromCenter / movableMass.massValue ) }
+          {
+            mass: movableMass,
+            distance: -( fixedMass.massValue * fixedMassDistanceFromCenter / movableMass.massValue )
+          }
         ];
 
         // And we're done.
@@ -78,7 +81,7 @@ define( require => {
 
         // Create a valid solution for the challenge.
         const fixedMassTorque = fixedMassesList[ 0 ].mass.massValue * fixedMassesList[ 0 ].distance +
-                              fixedMassesList[ 1 ].mass.massValue * fixedMassesList[ 1 ].distance;
+                                fixedMassesList[ 1 ].mass.massValue * fixedMassesList[ 1 ].distance;
         const solution = { mass: movableMass, distance: -fixedMassTorque / movableMass.massValue };
         assert && assert( solution.distance % Plank.INTER_SNAP_TO_MARKER_DISTANCE === 0 ); // Verify that this is really a workable solution.
 

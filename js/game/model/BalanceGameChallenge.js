@@ -52,7 +52,7 @@ define( require => {
      */
     containsEquivalentMass: function( mass, massList ) {
       for ( let i = 0; i < massList.length; i++ ) {
-        if ( mass.massValue === massList[ i ].massValue && typeof( mass ) === typeof( massList[ i ] ) ) {
+        if ( mass.massValue === massList[ i ].massValue && typeof ( mass ) === typeof ( massList[ i ] ) ) {
           // These masses are equivalent, so the list contains an equivalent mass.
           return true;
         }

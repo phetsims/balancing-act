@@ -40,12 +40,7 @@ define( require => {
     ) );
 
     // Draw a sort of arrow head shape.
-    const leftIndicatorShape = new Shape().
-      moveTo( 0, 0 ).
-      lineTo( -25, -10 ).
-      lineTo( -20, 0 ).
-      lineTo( -25, 10 ).
-      close();
+    const leftIndicatorShape = new Shape().moveTo( 0, 0 ).lineTo( -25, -10 ).lineTo( -20, 0 ).lineTo( -25, 10 ).close();
 
     //Create paths for left and right side
     const leftLevelIndicatorNode = new Path( leftIndicatorShape,

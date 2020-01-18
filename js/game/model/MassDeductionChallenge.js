@@ -45,7 +45,10 @@ define( require => {
       const mysteryMassDistancePair = { mass: mysteryMass, distance: mysteryMassDistanceFromCenter };
 
       // Create a valid solution for the challenge.
-      const solution = { mass: knownMass, distance: -mysteryMass.massValue * mysteryMassDistanceFromCenter / knownMass.massValue };
+      const solution = {
+        mass: knownMass,
+        distance: -mysteryMass.massValue * mysteryMassDistanceFromCenter / knownMass.massValue
+      };
 
       // Combine into challenge.
       return new MassDeductionChallenge( mysteryMassDistancePair, knownMass, solution );

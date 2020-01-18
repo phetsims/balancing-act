@@ -26,11 +26,7 @@ define( require => {
     const rootNode = new Node();
 
     // Create the gradient fill.
-    const columnGradient = new LinearGradient( 0, 0, size.width, 0 ).
-      addColorStop( 0, 'rgb( 150, 150, 150 )' ).
-      addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).
-      addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).
-      addColorStop( 1, 'rgb( 170, 170, 170 )' );
+    const columnGradient = new LinearGradient( 0, 0, size.width, 0 ).addColorStop( 0, 'rgb( 150, 150, 150 )' ).addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).addColorStop( 1, 'rgb( 170, 170, 170 )' );
 
     // Add the main body of the column.
     rootNode.addChild( new Rectangle( 0, 0, size.width * 0.75, size.height, 0, 0,
@@ -105,7 +101,11 @@ define( require => {
     this.addChild( plank );
 
     // Add the rotation point.
-    this.addChild( new Circle( ( plank.top - fulcrumNode.top ) / 2, { fill: 'gray', centerX: width / 2, bottom: plank.top } ) );
+    this.addChild( new Circle( ( plank.top - fulcrumNode.top ) / 2, {
+      fill: 'gray',
+      centerX: width / 2,
+      bottom: plank.top
+    } ) );
 
     // Add the columns, if present.
     if ( showColumns ) {

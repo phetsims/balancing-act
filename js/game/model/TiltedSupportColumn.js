@@ -24,11 +24,7 @@ define( require => {
    * @constructor
    */
   function TiltedSupportColumn( height, centerX, topAngle ) {
-    this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).
-      lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).
-      lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).
-      lineTo( centerX + COLUMN_WIDTH / 2, 0 ).
-      close();
+    this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, 0 ).close();
   }
 
   balancingAct.register( 'TiltedSupportColumn', TiltedSupportColumn );
