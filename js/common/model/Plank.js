@@ -49,7 +49,8 @@ define( require => {
                            'positive is tilted left, negative to the right.',
       units: 'radians',
       tandem: tandem.createTandem( 'tiltAngleProperty' ),
-      phetioReadOnly: true
+      phetioReadOnly: true,
+      phetioHighFrequency: true
     } );
 
     // Point where the bottom center of the plank is currently located. If the plank is sitting on top of the fulcrum,
