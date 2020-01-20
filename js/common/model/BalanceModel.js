@@ -40,7 +40,8 @@ define( require => {
     self.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
 
     self.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
-      tandem: tandem.createTandem( 'columnStateProperty' )
+      tandem: tandem.createTandem( 'columnStateProperty' ),
+      phetioReadOnly: true
     } );
     self.plank = new Plank(
       new Vector2( 0, PLANK_HEIGHT ),
