@@ -1,12 +1,13 @@
 // Copyright 2014-2019, University of Colorado Boulder
 
 /**
- * TODO: This is a copy of 'RulerNodeRasterizedText' from common code as it was on
+ * TODO https://github.com/phetsims/balancing-act/issues/103:
+ * This is a copy of 'RulerNodeRasterizedText' from common code as it was on
  * 4/30/2014 with modifications - workarounds really - for an issue where the
  * text moves in undesirable ways when the ruler is rotated.  At some point,
  * the problems with rotation of text should be fixed in the browsers, at
  * which point all usages of this node can be replaces with the original
- * common-code version.  See https://github.com/phetsims/balancing-act/issues/16.
+ * common-code version.
  *
  *   ------------
  *
