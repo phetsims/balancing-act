@@ -8,7 +8,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Node = require( 'SCENERY/nodes/Node' );

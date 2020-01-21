@@ -8,7 +8,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
   const BalanceGameView = require( 'BALANCING_ACT/game/view/BalanceGameView' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
