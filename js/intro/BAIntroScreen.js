@@ -8,7 +8,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
   const BAIntroView = require( 'BALANCING_ACT/intro/view/BAIntroView' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );

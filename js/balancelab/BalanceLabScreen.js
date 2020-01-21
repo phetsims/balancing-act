@@ -8,7 +8,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
   const BalanceLabView = require( 'BALANCING_ACT/balancelab/view/BalanceLabView' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );

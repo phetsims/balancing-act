@@ -18,7 +18,7 @@
 define( require => {
   'use strict';
 
-  // imports
+  // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
