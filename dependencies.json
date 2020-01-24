@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.2.0-dev.6 Thu Jan 23 2020 21:29:50 GMT-0700 (Mountain Standard Time)",
+  "comment": "# balancing-act 1.2.0-dev.7 Thu Jan 23 2020 21:32:33 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "master"
@@ -9,7 +9,7 @@
     "branch": "master"
   },
   "balancing-act": {
-    "sha": "a937d1e94c5108a3a2a458c26332a6b8093d9a67",
+    "sha": "0fa0d4b645689200071e90da3ed9a96bef42bdf8",
     "branch": "master"
   },
   "brand": {
@@ -17,16 +17,16 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "59869ffad963b65d8999be610cb7283d7d30565b",
-    "branch": "master"
+    "sha": "aea9aeee767080985bf461ace89bacfcaaaca5cd",
+    "branch": "omit-mipmaps"
   },
   "dot": {
     "sha": "8c661a7212b512331091c8bdc2a4b8fa94b8b229",
     "branch": "master"
   },
   "joist": {
-    "sha": "3519ca6e5682a2a2d765a885136061a4a8a3ae0a",
-    "branch": "master"
+    "sha": "30f354100cea3bc55d1849fc2424f57068f6ee4a",
+    "branch": "omit-mipmaps"
   },
   "kite": {
     "sha": "38b1dddd294b8bad25408a9834b031efb44efa5f",
