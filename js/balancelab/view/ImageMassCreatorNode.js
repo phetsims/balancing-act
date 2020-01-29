@@ -39,6 +39,11 @@ define( require => {
 
   return inherit( MassCreatorNode, ImageMassCreatorNode, {
 
+    /**
+     * @param position
+     * @returns {*}
+     * @public
+     */
     addElementToModel: function( position ) {
       const imageMassModelElement = this.createImageMassInstance();
       imageMassModelElement.positionProperty.set( position.copy() );

@@ -14,6 +14,32 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
+    "balancingAct.balanceLabScreen.model.brickStackGroup": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+    },
+    "balancingAct.balanceLabScreen.model.brickStackGroup.archetype": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
     "balancingAct.balanceLabScreen.model.columnStateProperty": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
@@ -27,8 +53,8 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
     },
-    "balancingAct.balanceLabScreen.model.plank.massDroppedOnPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+    "balancingAct.balanceLabScreen.model.mysteryMassGroup": {
+      "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -38,10 +64,36 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+    },
+    "balancingAct.balanceLabScreen.model.mysteryMassGroup.archetype": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": true,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
+    "balancingAct.balanceLabScreen.model.plank.massDroppedOnPlankEmitter": {
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.balanceLabScreen.model.plank.massRemovedFromPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -51,7 +103,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.balanceLabScreen.model.plank.tiltAngleProperty": {
       "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
@@ -2914,7 +2966,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
     "balancingAct.gameScreen.model.plank.massDroppedOnPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2924,10 +2976,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.gameScreen.model.plank.massRemovedFromPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -2937,7 +2989,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.gameScreen.model.plank.tiltAngleProperty": {
       "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
@@ -6722,8 +6774,34 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
     },
+    "balancingAct.introScreen.model.fireExtinguisher1": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
+    "balancingAct.introScreen.model.fireExtinguisher2": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
+    },
     "balancingAct.introScreen.model.plank.massDroppedOnPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -6733,10 +6811,10 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.introScreen.model.plank.massRemovedFromPlankEmitter": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>mass: NumberIO</li><br/><li>position: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
+      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
       "phetioFeatured": false,
@@ -6746,7 +6824,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "EmitterIO<NumberIO, NumberIO, ObjectIO>"
+      "phetioTypeName": "EmitterIO<StringIO, NumberIO, NumberIO, ObjectIO>"
     },
     "balancingAct.introScreen.model.plank.tiltAngleProperty": {
       "phetioDocumentation": "Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, positive is tilted left, negative to the right.",
@@ -6760,6 +6838,19 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioState": true,
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
+    },
+    "balancingAct.introScreen.model.smallTrashCan": {
+      "phetioDocumentation": "",
+      "phetioDynamicElement": false,
+      "phetioEventType": "MODEL",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": true,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ReferenceIO"
     },
     "balancingAct.introScreen.view.columnControlPanel": {
       "phetioDocumentation": "",

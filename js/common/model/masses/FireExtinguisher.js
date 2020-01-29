@@ -18,10 +18,11 @@ define( require => {
   /**
    * @param initialPosition
    * @param isMystery
+   * @param {Object} [options]
    * @constructor
    */
-  function FireExtinguisher( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, fireExtinguisherImage, HEIGHT, initialPosition, isMystery );
+  function FireExtinguisher( initialPosition, isMystery, options ) {
+    ImageMass.call( this, MASS, fireExtinguisherImage, HEIGHT, initialPosition, isMystery, options );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 

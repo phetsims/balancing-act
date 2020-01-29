@@ -13,7 +13,13 @@ define( require => {
   // modules
   const BalanceModel = require( 'BALANCING_ACT/common/model/BalanceModel' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BrickStack = require( 'BALANCING_ACT/common/model/masses/BrickStack' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const MysteryMass = require( 'BALANCING_ACT/common/model/masses/MysteryMass' );
+  const PhetioGroup = require( 'TANDEM/PhetioGroup' );
+  const PhetioGroupIO = require( 'TANDEM/PhetioGroupIO' );
+  const ReferenceIO = require( 'TANDEM/types/ReferenceIO' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Tandem} tandem
@@ -21,6 +27,38 @@ define( require => {
    */
   function BalanceLabModel( tandem ) {
     BalanceModel.call( this, tandem );
+
+    // @public {PhetioGroup<BrickStack>}
+    this.brickStackGroup = new PhetioGroup( ( tandem, numberOfBricks, position ) => {
+        const brickStack = new BrickStack( numberOfBricks, position, {
+          tandem: tandem,
+          phetioDynamicElement: true
+        } );
+        brickStack.userControlledProperty.set( true );
+        brickStack.animationDestination = position;
+        return brickStack;
+      },
+      [ 1, Vector2.ZERO ], {
+        tandem: tandem.createTandem( 'brickStackGroup' ),
+        phetioType: PhetioGroupIO( ReferenceIO )
+      } );
+
+    // @public {PhetioGroup<MysteryMass>}
+    this.mysteryMassGroup = new PhetioGroup( ( tandem, position, mysteryMassId ) => {
+        const mysteryMassModelElement = new MysteryMass( position, mysteryMassId, {
+          tandem: tandem,
+          phetioDynamicElement: true
+        } );
+        mysteryMassModelElement.animationDestination = position;
+        mysteryMassModelElement.userControlledProperty.set( true );
+        return mysteryMassModelElement;
+      },
+      [ Vector2.ZERO, 0 ], {
+        tandem: tandem.createTandem( 'mysteryMassGroup' ),
+        phetioType: PhetioGroupIO( ReferenceIO )
+      } );
+
+      // TODO: Add person group here too, see https://github.com/phetsims/balancing-act/issues/99
   }
 
   balancingAct.register( 'BalanceLabModel', BalanceLabModel );

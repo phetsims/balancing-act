@@ -22,6 +22,7 @@ define( require => {
   const ObservableArray = require( 'AXON/ObservableArray' );
   const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
+  const StringIO = require( 'TANDEM/types/StringIO' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -73,8 +74,9 @@ define( require => {
     this.massDroppedOnPlankEmitter = new Emitter( {
       tandem: tandem.createTandem( 'massDroppedOnPlankEmitter' ),
       parameters: [
+        { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
-        { name: 'position', phetioType: NumberIO },
+        { name: 'distance', phetioType: NumberIO },
         { name: 'fullState', phetioType: ObjectIO } ]
     } );
 
@@ -82,8 +84,9 @@ define( require => {
     this.massRemovedFromPlankEmitter = new Emitter( {
       tandem: tandem.createTandem( 'massRemovedFromPlankEmitter' ),
       parameters: [
+        { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
-        { name: 'position', phetioType: NumberIO },
+        { name: 'distance', phetioType: NumberIO },
         { name: 'fullState', phetioType: ObjectIO } ]
     } );
 
@@ -202,20 +205,14 @@ define( require => {
           };
           this.massDistancePairs.push( result );
 
-          const fullState = this.massDistancePairs.map( massDistancePair => {
-            return {
-              mass: massDistancePair.mass.massValue,
-              distance: massDistancePair.distance
-            };
-          } );
-          this.massDroppedOnPlankEmitter.emit( mass.massValue, result.distance, fullState );
+          this.massDroppedOnPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, result.distance, this.getPhetioState() );
 
           // Add the force vector for this mass.
           this.forceVectors.push( new MassForceVector( mass ) );
 
           // Add an observer that will remove this mass when the user picks it up.
           const self = this;
-          var userControlledObserver = function( userControlled ) {
+          const userControlledObserver = function( userControlled ) {
             if ( userControlled ) {
               // The user has picked up this mass, so it is no longer
               // on the surface.
@@ -232,6 +229,21 @@ define( require => {
         }
 
         return massAdded;
+      },
+
+      /**
+       * Indicates all of the masses that are currently on the plank
+       * @returns {Object}
+       * @private
+       */
+      getPhetioState() {
+        return this.massDistancePairs.map( massDistancePair => {
+          return {
+            name: massDistancePair.mass.tandem.phetioID,
+            mass: massDistancePair.mass.massValue,
+            distance: massDistancePair.distance
+          };
+        } );
       },
 
       // Add a mass to the specified location on the plank.
@@ -283,14 +295,7 @@ define( require => {
 
             const distance = this.massDistancePairs[ i ].distance;
             this.massDistancePairs.splice( i, 1 );
-
-            const fullState = this.massDistancePairs.map( massDistancePair => {
-              return {
-                mass: massDistancePair.mass.massValue,
-                distance: massDistancePair.distance
-              };
-            } );
-            this.massRemovedFromPlankEmitter.emit( mass.massValue, distance, fullState );
+            this.massRemovedFromPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, distance, this.getPhetioState() );
 
             break;
           }

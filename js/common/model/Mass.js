@@ -11,7 +11,11 @@ define( require => {
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
+  const ReferenceIO = require( 'TANDEM/types/ReferenceIO' );
+  const PhetioObject = require( 'TANDEM/PhetioObject' );
   const Property = require( 'AXON/Property' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -20,8 +24,13 @@ define( require => {
 
   // TODO: JSDoc is missing in many places, see https://github.com/phetsims/balancing-act/issues/96
   // TODO: Convert to ES6, see https://github.com/phetsims/balancing-act/issues/96
-  function Mass( massValue, initialPosition, isMystery ) {
+  function Mass( massValue, initialPosition, isMystery, options ) {
     const self = this;
+
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      phetioType: ReferenceIO
+    }, options );
 
     // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
     this.userControlledProperty = new Property( false );
@@ -60,11 +69,14 @@ define( require => {
     // that indicates where their center of mass is when placed on a balance.
     // This is the horizontal offset from the center of the shape or image.
     self.centerOfMassXOffset = 0;
+
+    // instrumented so it can be phetioDynamicElement: true for PhetioGroups
+    PhetioObject.call( this, options );
   }
 
   balancingAct.register( 'Mass', Mass );
 
-  return inherit( Object, Mass, {
+  return inherit( PhetioObject, Mass, {
 
     reset: function() {
       this.userControlledProperty.reset();

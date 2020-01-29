@@ -26,10 +26,11 @@ define( require => {
    * @param height
    * @param initialPosition
    * @param isMystery
+   * @param {Object} [options]
    * @constructor
    */
-  function ImageMass( mass, image, height, initialPosition, isMystery ) {
-    Mass.call( this, mass, initialPosition, isMystery );
+  function ImageMass( mass, image, height, initialPosition, isMystery, options ) {
+    Mass.call( this, mass, initialPosition, isMystery, options );
 
     // Property that contains the current image.
     this.imageProperty = new Property( image );
@@ -63,6 +64,7 @@ define( require => {
       return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
     },
 
+    // TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
     createCopy: function() {
       // This clever invocation supports the creation of subclassed instances.
       return new this.constructor( this.positionProperty.get().copy(), this.isMystery );

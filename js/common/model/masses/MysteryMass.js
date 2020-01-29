@@ -13,6 +13,7 @@ define( require => {
   const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LabeledImageMass = require( 'BALANCING_ACT/common/model/masses/LabeledImageMass' );
+  const merge = require( 'PHET_CORE/merge' );
 
   // images
   const mysteryObject1Image = require( 'image!BALANCING_ACT/mystery-object-01.png' );
@@ -99,8 +100,17 @@ define( require => {
     }
   ];
 
-  function MysteryMass( initialPosition, mysteryMassId ) {
-    LabeledImageMass.call( this, initialPosition, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+  /**
+   * @param {Vector2} initialPosition
+   * @param {number} mysteryMassId
+   * @param {Object} [options]
+   * @constructor
+   */
+  function MysteryMass( initialPosition, mysteryMassId, options ) {
+    assert && assert( typeof mysteryMassId === 'number', 'mysteryMassId must be a number' );
+    const config = merge( options, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+
+    LabeledImageMass.call( this, initialPosition, config );
     this.mysteryMassId = mysteryMassId;
   }
 

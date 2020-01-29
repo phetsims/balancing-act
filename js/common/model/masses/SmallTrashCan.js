@@ -18,10 +18,11 @@ define( require => {
   /**
    * @param initialPosition
    * @param isMystery
+   * @param {Object} [options]
    * @constructor
    */
-  function SmallTrashCan( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery );
+  function SmallTrashCan( initialPosition, isMystery, options ) {
+    ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery, options );
   }
 
   balancingAct.register( 'SmallTrashCan', SmallTrashCan );

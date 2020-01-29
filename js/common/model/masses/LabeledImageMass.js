@@ -21,7 +21,7 @@ define( require => {
    * @constructor
    */
   function LabeledImageMass( initialPosition, config ) {
-    ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery );
+    ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
     this.labelText = config.labelText;
   }
 

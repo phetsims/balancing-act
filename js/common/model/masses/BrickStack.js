@@ -25,9 +25,10 @@ define( require => {
   /**
    * @param {number} numBricks
    * @param {Vector2} initialPosition
+   * @param {Object} [options]
    * @constructor
    */
-  function BrickStack( numBricks, initialPosition ) {
+  function BrickStack( numBricks, initialPosition, options ) {
 
     if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ); }
 
@@ -44,7 +45,7 @@ define( require => {
 
     this.shape = brickStackShape;
 
-    Mass.call( this, numBricks * BRICK_MASS, initialPosition );
+    Mass.call( this, numBricks * BRICK_MASS, initialPosition, false, options );
   }
 
   balancingAct.register( 'BrickStack', BrickStack );

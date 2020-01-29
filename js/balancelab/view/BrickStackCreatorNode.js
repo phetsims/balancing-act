@@ -21,6 +21,7 @@ define( require => {
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // Model-view transform for scaling the node used in the toolbox.  This
@@ -47,7 +48,7 @@ define( require => {
     } );
 
     const selectionNode = new BrickStackNode(
-      new BrickStack( numBricks, Vector2.ZERO, false ),
+      new BrickStack( numBricks, Vector2.ZERO, { tandem: Tandem.OPT_OUT } ),
       SCALING_MVT,
       false,
       new Property( false ),
@@ -70,11 +71,9 @@ define( require => {
 
   return inherit( MassCreatorNode, BrickStackCreatorNode, {
     addElementToModel: function( position ) {
-      const brickStack = new BrickStack( this.numBricks, position );
-      brickStack.userControlledProperty.set( true );
-      brickStack.animationDestination = position;
-      this.model.addMass( brickStack );
-      return brickStack;
+      const mass = this.model.brickStackGroup.createNextMember( this.numBricks, position );
+      this.model.addMass( mass );
+      return mass;
     }
   } );
 } );
