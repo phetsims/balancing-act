@@ -131,7 +131,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -144,7 +144,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.aInputListener": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.aInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -157,7 +157,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ButtonListenerIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.bInputListener": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.bInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -170,7 +170,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ButtonListenerIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -183,7 +183,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "OnOffSwitchIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.opacityProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -196,7 +196,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.pickableProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -209,7 +209,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -222,7 +222,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragAction": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -235,7 +235,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragEndAction": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -248,7 +248,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragStartAction": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -261,7 +261,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.isDraggingProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -274,7 +274,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.onOffSwitch.visibleProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.onOffSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -287,7 +287,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.opacityProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -300,7 +300,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.pickableProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -313,7 +313,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.abSwitch.visibleProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6865,7 +6865,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6878,7 +6878,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NodeIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.aInputListener": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.aInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6891,7 +6891,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ButtonListenerIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.bInputListener": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.bInputListener": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6904,7 +6904,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ButtonListenerIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -6917,7 +6917,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "OnOffSwitchIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.opacityProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6930,7 +6930,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.pickableProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6943,7 +6943,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -6956,7 +6956,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ObjectIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragAction": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6969,7 +6969,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragEndAction": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragEndAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6982,7 +6982,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.dragStartAction": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.dragStartAction": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6995,7 +6995,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "ActionIO<Vector2IO>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.simpleDragHandler.isDraggingProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.simpleDragHandler.isDraggingProperty": {
       "phetioDocumentation": "Indicates whether the object is dragging",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -7008,7 +7008,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.onOffSwitch.visibleProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.onOffSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -7021,7 +7021,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<BooleanIO>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.opacityProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -7034,7 +7034,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.pickableProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -7047,7 +7047,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.abSwitch.visibleProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",

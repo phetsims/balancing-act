@@ -30,17 +30,17 @@ define( require => {
     }, options );
     Node.call( this );
 
-    const abSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
+    const columnSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
       switchSize: new Dimension2( 32, 16 ),
       thumbTouchAreaXDilation: 5,
       thumbTouchAreaYDilation: 5,
-      tandem: options.tandem.createTandem( 'abSwitch' )
+      tandem: options.tandem.createTandem( 'columnSwitch' )
     } );
 
     // TODO: These options were misplaced, should they be deleted?
     // fill: 'rgb( 240, 240, 240 )',
     // cornerRadius: 5
-    const panel = new Panel( abSwitch );
+    const panel = new Panel( columnSwitch );
     this.addChild( panel );
 
     if ( BAQueryParameters.stanford ) {
