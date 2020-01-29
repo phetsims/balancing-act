@@ -41,7 +41,7 @@ define( require => {
 
     self.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
       tandem: tandem.createTandem( 'columnStateProperty' ),
-      phetioReadOnly: true
+      phetioStudioControl: false
     } );
     self.plank = new Plank(
       new Vector2( 0, PLANK_HEIGHT ),
