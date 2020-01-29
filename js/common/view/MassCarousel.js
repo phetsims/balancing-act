@@ -43,6 +43,10 @@ define( require => {
       // we do our own layout
       itemsPerPage: 1,
 
+      // lightweight look for the buttons since the user must drag items across the buttons
+      buttonColor: null,
+      buttonStroke: null,
+
       tandem: Tandem.REQUIRED
     }, options );
 
