@@ -10,6 +10,7 @@ define( require => {
   'use strict';
 
   // modules
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
   const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
   const BoyCreatorNode = require( 'BALANCING_ACT/balancelab/view/BoyCreatorNode' );
@@ -201,14 +202,21 @@ define( require => {
         maxHeight = height;
       }
     }
-    const nodes = elements.map( element => {
+
+    const pageAlignGroup = new AlignGroup(); // Align all pages to the top
+    const titleAlignGroup = new AlignGroup(); // Align all titles to the top
+    const contentAlignGroup = new AlignGroup(); // Align contents to the center
+
+    const pages = elements.map( element => {
       const vbox = new VBox( {
-        spacing: maxHeight - element.title.height - element.content.height, // TODO: Would alignbox do this better?
-        children: [ element.title, element.content ]
+        spacing: 5,
+        children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
       } );
-      return vbox;
+      return pageAlignGroup.createBox( vbox, {
+        yAlign: 'top'
+      } );
     } );
-    Carousel.call( this, nodes, options );
+    Carousel.call( this, pages, options );
   }
 
   balancingAct.register( 'MassCarousel', MassCarousel );
