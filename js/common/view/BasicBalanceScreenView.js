@@ -283,7 +283,7 @@ define( require => {
 
     self.nonMassLayer.addChild( new ResetAllButton( {
       listener: resetClosure,
-      radius: 20,
+      radius: BASharedConstants.RESET_ALL_BUTTON_RADIUS,
       right: indicatorVisibilityControlPanel.right,
       bottom: self.layoutBounds.height - 10,
       tandem: tandem.createTandem( 'resetAllButton' )

@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+  const BASharedConstants = require( 'BALANCING_ACT/common/BASharedConstants' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
@@ -92,7 +93,10 @@ define( require => {
     this.addChild( timerToggleButton );
 
     // Reset button.
-    const resetButton = new ResetAllButton( { listener: resetFunction, radius: 20 } );
+    const resetButton = new ResetAllButton( {
+      listener: resetFunction,
+      radius: BASharedConstants.RESET_ALL_BUTTON_RADIUS
+    } );
     this.addChild( resetButton );
 
     // Layout
