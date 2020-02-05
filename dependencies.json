@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.2.1-rc.1 Wed Feb 05 2020 18:07:41 GMT-0500 (Eastern Standard Time)",
+  "comment": "# balancing-act 1.2.1 Wed Feb 05 2020 18:16:14 GMT-0500 (Eastern Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "2730ec5b69cb8ae60ccccf466a463fdbfb770515",
+    "sha": "c0d8eb34190ad76457c45b576c19dde0f2b95cc2",
     "branch": "1.2"
   },
   "brand": {
