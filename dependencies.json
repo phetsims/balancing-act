@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.2.0 Tue Feb 04 2020 17:12:33 GMT-0700 (Mountain Standard Time)",
+  "comment": "# balancing-act 1.2.0 Wed Feb 05 2020 17:49:29 GMT-0500 (Eastern Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "63bd7ba6e46dea6bee263c860a72c541e5ed5b4c",
+    "sha": "3c3c1c9f440abe6ea5ad2264f175ee5806a9e01c",
     "branch": "1.2"
   },
   "brand": {
@@ -17,8 +17,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "b99e6aef98d906388bd680b532e1383c1c884d77",
-    "branch": "HEAD"
+    "sha": "2aa9c4c6b8e8f29bc50288065706c34ec65c3980",
+    "branch": "balancing-act-1.2"
   },
   "dot": {
     "sha": "8c661a7212b512331091c8bdc2a4b8fa94b8b229",
@@ -66,6 +66,10 @@
   },
   "sherpa": {
     "sha": "af6eeb0c19e5f75b55165c6f7e89259e3931578c",
+    "branch": "HEAD"
+  },
+  "studio": {
+    "sha": "f2dab9272a800b4200be2b40435a3a8c42573c6c",
     "branch": "HEAD"
   },
   "sun": {
