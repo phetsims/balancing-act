@@ -68,7 +68,7 @@ define( require => {
       }
     ], {
       radioButtonOptions: { radius: 6 },
-      touchAreaXDilation: 5,
+      touchAreaDilation: 5,
       tandem: options.tandem.createTandem( 'positionRadioButtonGroup' )
     } );
 
