@@ -52,10 +52,11 @@ define( require => {
   /**
    * @param width
    * @param showColumns
+   * @param {Object} [options]
    * @constructor
    */
-  function ColumnControlIcon( width, showColumns ) {
-    Node.call( this );
+  function ColumnControlIcon( width, showColumns, options ) {
+    Node.call( this, options );
     const height = width / ASPECT_RATIO;
     this.addChild( new Rectangle( 0, 0, width, height, CORNER_ROUNDING, CORNER_ROUNDING,
       {

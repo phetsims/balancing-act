@@ -30,11 +30,18 @@ define( require => {
     }, options );
     Node.call( this );
 
-    const columnSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, new ColumnControlIcon( ICON_WIDTH, true ), ColumnState.NO_COLUMNS, new ColumnControlIcon( ICON_WIDTH, false ), {
+    const columnSwitchTandem = options.tandem.createTandem( 'columnSwitch' );
+    const columnsOnNode = new ColumnControlIcon( ICON_WIDTH, true, {
+      tandem: columnSwitchTandem.createTandem( 'columnsOnNode' )
+    } );
+    const columnsOffNode = new ColumnControlIcon( ICON_WIDTH, true, {
+      tandem: columnSwitchTandem.createTandem( 'columnsOffNode' )
+    } );
+    const columnSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, columnsOnNode, ColumnState.NO_COLUMNS, columnsOffNode, {
       switchSize: new Dimension2( 32, 16 ),
       thumbTouchAreaXDilation: 5,
       thumbTouchAreaYDilation: 5,
-      tandem: options.tandem.createTandem( 'columnSwitch' )
+      tandem: columnSwitchTandem
     } );
 
     // TODO: These options were misplaced, should they be deleted?

@@ -269,20 +269,6 @@ window.phet.phetio.phetioTypes = assert &&
       "supertype": "ObjectIO",
       "typeName": "BooleanIO"
     },
-    "ButtonListenerIO": {
-      "documentation": "Button listener",
-      "events": [
-        "up",
-        "over",
-        "down",
-        "out",
-        "fire"
-      ],
-      "methodOrder": [],
-      "methods": {},
-      "supertype": "ObjectIO",
-      "typeName": "ButtonListenerIO"
-    },
     "DerivedPropertyIO<BooleanIO>": {
       "documentation": "Like PropertyIO, but not settable.  Instead it is derived from other DerivedPropertyIO or PropertyIO instances",
       "events": [
