@@ -32,10 +32,14 @@ define( require => {
     };
 
     // Create and start the sim
-    new Sim( balancingActTitleString, [
+    const screens = [
       new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
       new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
-      new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) )
-    ], simOptions ).start();
+
+      // Game screen not available in phet-io
+      ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
+    ];
+
+    new Sim( balancingActTitleString, screens, simOptions ).start();
   } );
 } );
