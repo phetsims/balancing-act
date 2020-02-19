@@ -339,7 +339,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -350,9 +350,48 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "OnOffSwitchIO"
+      "phetioTypeName": "ToggleSwitchIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.opacityProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.dragAction": {
+      "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.pressAction": {
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.releaseAction": {
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
+    },
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -365,7 +404,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.pickableProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -378,72 +417,20 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler": {
-      "phetioDocumentation": "",
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.toggleAction": {
+      "phetioDocumentation": "Occurs when the switch is toggled via user interaction The arguments are:<br/><ol><li>oldValue: EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)</li><br/><li>newValue: EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": true,
+      "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ObjectIO"
+      "phetioTypeName": "ActionIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS), EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
     },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": true,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragEndAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragStartAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.isDraggingProperty": {
-      "phetioDocumentation": "Indicates whether the object is dragging",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO<BooleanIO>"
-    },
-    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.switch.visibleProperty": {
+    "balancingAct.balanceLabScreen.view.columnControlPanel.columnSwitch.toggleSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6241,7 +6228,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch": {
       "phetioDocumentation": "",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
@@ -6252,9 +6239,48 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "OnOffSwitchIO"
+      "phetioTypeName": "ToggleSwitchIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.opacityProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.dragAction": {
+      "phetioDocumentation": "Emits whenever a drag occurs with an SceneryEventIO argument. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": true,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.pressAction": {
+      "phetioDocumentation": "Executes whenever a press occurs. The first argument when executing can be used to convey info about the SceneryEvent. The arguments are:<br/><ol><li>event: SceneryEventIO</li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<SceneryEventIO>"
+    },
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.dragListener.releaseAction": {
+      "phetioDocumentation": "Executes whenever a release occurs. The arguments are:<br/><ol><li>event: NullableIO<SceneryEventIO></li></ol>",
+      "phetioDynamicElement": false,
+      "phetioEventType": "USER",
+      "phetioFeatured": false,
+      "phetioHighFrequency": false,
+      "phetioIsArchetype": false,
+      "phetioPlayback": false,
+      "phetioReadOnly": false,
+      "phetioState": false,
+      "phetioStudioControl": true,
+      "phetioTypeName": "ActionIO<NullableIO<SceneryEventIO>>"
+    },
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.opacityProperty": {
       "phetioDocumentation": "Opacity of the parent NodeIO, between 0 (invisible) and 1 (fully visible)",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6267,7 +6293,7 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "NumberPropertyIO"
     },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.pickableProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.pickableProperty": {
       "phetioDocumentation": "Sets whether the node will be pickable (and hence interactive), see the NodeIO documentation for more details",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
@@ -6280,72 +6306,20 @@ window.phet.phetio.phetioElementsBaseline = assert &&
       "phetioStudioControl": true,
       "phetioTypeName": "PropertyIO<NullableIO<BooleanIO>>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler": {
-      "phetioDocumentation": "",
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.toggleAction": {
+      "phetioDocumentation": "Occurs when the switch is toggled via user interaction The arguments are:<br/><ol><li>oldValue: EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)</li><br/><li>newValue: EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)</li></ol>",
       "phetioDynamicElement": false,
       "phetioEventType": "USER",
       "phetioFeatured": false,
       "phetioHighFrequency": false,
       "phetioIsArchetype": false,
       "phetioPlayback": false,
-      "phetioReadOnly": true,
+      "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "ObjectIO"
+      "phetioTypeName": "ActionIO<EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS), EnumerationIO(DOUBLE_COLUMNS|SINGLE_COLUMN|NO_COLUMNS)>"
     },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": true,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragEndAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag end in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.dragStartAction": {
-      "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>point: Vector2IO. the position of the drag start in view coordinates</li></ol>",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "ActionIO<Vector2IO>"
-    },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.simpleDragHandler.isDraggingProperty": {
-      "phetioDocumentation": "Indicates whether the object is dragging",
-      "phetioDynamicElement": false,
-      "phetioEventType": "MODEL",
-      "phetioFeatured": false,
-      "phetioHighFrequency": false,
-      "phetioIsArchetype": false,
-      "phetioPlayback": false,
-      "phetioReadOnly": true,
-      "phetioState": false,
-      "phetioStudioControl": true,
-      "phetioTypeName": "PropertyIO<BooleanIO>"
-    },
-    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.switch.visibleProperty": {
+    "balancingAct.introScreen.view.columnControlPanel.columnSwitch.toggleSwitch.visibleProperty": {
       "phetioDocumentation": "Controls whether the Node will be visible (and interactive), see the NodeIO documentation for more details.",
       "phetioDynamicElement": false,
       "phetioEventType": "MODEL",
