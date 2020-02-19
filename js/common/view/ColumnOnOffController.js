@@ -38,9 +38,11 @@ define( require => {
       tandem: columnSwitchTandem.createTandem( 'columnsOffNode' )
     } );
     const columnSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, columnsOnNode, ColumnState.NO_COLUMNS, columnsOffNode, {
-      switchSize: new Dimension2( 32, 16 ),
-      thumbTouchAreaXDilation: 5,
-      thumbTouchAreaYDilation: 5,
+      toggleSwitchOptions: {
+        size: new Dimension2( 32, 16 ),
+        thumbTouchAreaXDilation: 5,
+        thumbTouchAreaYDilation: 5
+      },
       tandem: columnSwitchTandem
     } );
 
