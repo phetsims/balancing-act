@@ -85,8 +85,15 @@ define( function( require ) {
         }
       },
       end: function( event ) {
+
+        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
+        if ( thisNode.modelElement.userControlled === false ) {
+          thisNode.modelElement.userControlled = true;
+        }
+
         // The user has released the node.
-        thisNode.modelElement.release();
+        thisNode.modelElement.userControlled = false;
         thisNode.modelElement = null;
       }
     } ) );

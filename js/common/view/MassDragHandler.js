@@ -33,6 +33,13 @@ define( function( require ) {
       },
 
       end: function( event, trail ) {
+
+        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
+        if ( mass.userControlled === false ) {
+          mass.userControlled = true;
+        }
+
         mass.userControlled = false;
       }
     } );
