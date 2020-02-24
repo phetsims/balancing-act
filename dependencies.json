@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.2.1 Wed Feb 05 2020 18:16:14 GMT-0500 (Eastern Standard Time)",
+  "comment": "# balancing-act 1.2.1 Mon Feb 24 2020 12:28:48 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "c0d8eb34190ad76457c45b576c19dde0f2b95cc2",
+    "sha": "61e0d47fa632d93da2a455f358def267629215ff",
     "branch": "1.2"
   },
   "brand": {
@@ -93,7 +93,7 @@
     "branch": "HEAD"
   },
   "vegas": {
-    "sha": "ee547194db68c12bd97877d0981075b8b7164b34",
-    "branch": "HEAD"
+    "sha": "1355d46c46d42a5de02a7d9b602968f572d2f0f5",
+    "branch": "balancing-act-1.2"
   }
 }
