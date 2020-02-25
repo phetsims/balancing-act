@@ -89,9 +89,16 @@ define( require => {
           self.modelElement.positionProperty.set( eventToModelPosition( event.pointer.point ) );
         }
       },
-      end: function( event ) {
+      end: function() {
+
+        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
+        if ( self.modelElement.userControlledProperty.get() === false ) {
+          self.modelElement.userControlledProperty.set( true );
+        }
+
         // The user has released the node.
-        self.modelElement.release();
+        self.modelElement.userControlledProperty.set( false );
         self.modelElement = null;
         parentScreenView = null;
       },
