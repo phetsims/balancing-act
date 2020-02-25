@@ -92,8 +92,6 @@ define( require => {
 
     getMiddlePoint: function() { throw new Error( 'getMiddlePoint should be implemented in descendant types.' ); },
 
-    release: function() { this.userControlledProperty.set( false ); },
-
     initiateAnimation: function() {
 
       // Calculate velocity.  A higher velocity is used if the model element has a long way to travel, otherwise it
