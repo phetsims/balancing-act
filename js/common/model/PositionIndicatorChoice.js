@@ -5,15 +5,11 @@
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import balancingAct from '../../balancingAct.js';
 
-  const PositionIndicatorChoice = Enumeration.byKeys( [ 'NONE', 'RULERS', 'MARKS' ] );
-  balancingAct.register( 'PositionIndicatorChoice', PositionIndicatorChoice );
+const PositionIndicatorChoice = Enumeration.byKeys( [ 'NONE', 'RULERS', 'MARKS' ] );
+balancingAct.register( 'PositionIndicatorChoice', PositionIndicatorChoice );
 
-  return PositionIndicatorChoice;
-} );
+export default PositionIndicatorChoice;

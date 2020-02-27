@@ -5,40 +5,36 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BAIntroModel = require( 'BALANCING_ACT/intro/model/BAIntroModel' );
-  const BAIntroView = require( 'BALANCING_ACT/intro/view/BAIntroView' );
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import introIconSmall from '../../images/intro-icon-small_png.js';
+import introIcon from '../../images/intro-icon_png.js';
+import balancingActStrings from '../balancing-act-strings.js';
+import balancingAct from '../balancingAct.js';
+import BAIntroModel from './model/BAIntroModel.js';
+import BAIntroView from './view/BAIntroView.js';
 
-  // strings
-  const introString = require( 'string!BALANCING_ACT/intro' );
+const introString = balancingActStrings.intro;
 
-  // images
-  const introIcon = require( 'image!BALANCING_ACT/intro-icon.png' );
-  const introIconSmall = require( 'image!BALANCING_ACT/intro-icon-small.png' );
 
-  function BAIntroScreen( tandem ) {
+function BAIntroScreen( tandem ) {
 
-    const options = {
-      name: introString,
-      homeScreenIcon: new Image( introIcon ),
-      navigationBarIcon: new Image( introIconSmall ),
-      tandem: tandem
-    };
+  const options = {
+    name: introString,
+    homeScreenIcon: new Image( introIcon ),
+    navigationBarIcon: new Image( introIconSmall ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
+    function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
+    options );
+}
 
-  balancingAct.register( 'BAIntroScreen', BAIntroScreen );
+balancingAct.register( 'BAIntroScreen', BAIntroScreen );
 
-  return inherit( Screen, BAIntroScreen );
-} );
+inherit( Screen, BAIntroScreen );
+export default BAIntroScreen;

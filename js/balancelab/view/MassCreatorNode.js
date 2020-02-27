@@ -5,34 +5,31 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const ModelElementCreatorNode = require( 'BALANCING_ACT/balancelab/view/ModelElementCreatorNode' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import balancingActStrings from '../../balancing-act-strings.js';
+import balancingAct from '../../balancingAct.js';
+import ModelElementCreatorNode from './ModelElementCreatorNode.js';
 
-  // strings
-  const kgString = require( 'string!BALANCING_ACT/kg' );
-  const pattern0Value1UnitsString = require( 'string!BALANCING_ACT/pattern0Value1Units' );
+const kgString = balancingActStrings.kg;
+const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
 
-  /**
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {number} massValue
-   * @param {boolean} showMassLabel
-   * @param {Object} [options]
-   * @constructor
-   */
-  function MassCreatorNode( modelViewTransform, massValue, showMassLabel, options ) {
-    ModelElementCreatorNode.call( this, modelViewTransform, options );
-    if ( showMassLabel ) {
-      this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
-    }
+/**
+ * @param {ModelViewTransform2} modelViewTransform
+ * @param {number} massValue
+ * @param {boolean} showMassLabel
+ * @param {Object} [options]
+ * @constructor
+ */
+function MassCreatorNode( modelViewTransform, massValue, showMassLabel, options ) {
+  ModelElementCreatorNode.call( this, modelViewTransform, options );
+  if ( showMassLabel ) {
+    this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
   }
+}
 
-  balancingAct.register( 'MassCreatorNode', MassCreatorNode );
+balancingAct.register( 'MassCreatorNode', MassCreatorNode );
 
-  return inherit( ModelElementCreatorNode, MassCreatorNode );
-} );
+inherit( ModelElementCreatorNode, MassCreatorNode );
+export default MassCreatorNode;

@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import barrelImage from '../../../../images/barrel_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const barrelImage = require( 'image!BALANCING_ACT/barrel.png' );
+// constants
+const MASS = 90; // In kg
+const HEIGHT = 0.75; // In meters
 
-  // constants
-  const MASS = 90; // In kg
-  const HEIGHT = 0.75; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function Barrel( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, barrelImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function Barrel( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, barrelImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'Barrel', Barrel );
 
-  balancingAct.register( 'Barrel', Barrel );
-
-  return inherit( ImageMass, Barrel );
-} );
+inherit( ImageMass, Barrel );
+export default Barrel;

@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import bigRockImage from '../../../../images/rock-6_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const bigRockImage = require( 'image!BALANCING_ACT/rock-6.png' );
+// constants
+const MASS = 45; // In kg
+const HEIGHT = 0.35; // In meters
 
-  // constants
-  const MASS = 45; // In kg
-  const HEIGHT = 0.35; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function BigRock( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, bigRockImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function BigRock( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, bigRockImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'BigRock', BigRock );
 
-  balancingAct.register( 'BigRock', BigRock );
-
-  return inherit( ImageMass, BigRock );
-} );
+inherit( ImageMass, BigRock );
+export default BigRock;

@@ -10,64 +10,60 @@
  * <p/>
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Mass = require( 'BALANCING_ACT/common/model/Mass' );
-  const Property = require( 'AXON/Property' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Property from '../../../../axon/js/Property.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import balancingAct from '../../balancingAct.js';
+import Mass from './Mass.js';
 
-  /**
-   * @param mass
-   * @param image
-   * @param height
-   * @param initialPosition
-   * @param isMystery
-   * @param {Object} [options]
-   * @constructor
-   */
-  function ImageMass( mass, image, height, initialPosition, isMystery, options ) {
-    Mass.call( this, mass, initialPosition, isMystery, options );
+/**
+ * @param mass
+ * @param image
+ * @param height
+ * @param initialPosition
+ * @param isMystery
+ * @param {Object} [options]
+ * @constructor
+ */
+function ImageMass( mass, image, height, initialPosition, isMystery, options ) {
+  Mass.call( this, mass, initialPosition, isMystery, options );
 
-    // Property that contains the current image.
-    this.imageProperty = new Property( image );
+  // Property that contains the current image.
+  this.imageProperty = new Property( image );
 
-    // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
-    // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
-    // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
-    // A property is used because the size may change during animations.
-    this.heightProperty = new Property( height );
+  // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
+  // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
+  // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
+  // A property is used because the size may change during animations.
+  this.heightProperty = new Property( height );
 
-    // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
-    // set prior to image updates.
-    this.reverseImage = false;
+  // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
+  // set prior to image updates.
+  this.reverseImage = false;
 
-    // Expected duration of the current animation.
-    this.expectedAnimationTime = 0;
+  // Expected duration of the current animation.
+  this.expectedAnimationTime = 0;
+}
+
+balancingAct.register( 'ImageMass', ImageMass );
+
+export default inherit( Mass, ImageMass, {
+
+  reset: function() {
+    this.heightProperty.reset();
+    this.imageProperty.reset();
+    Mass.prototype.reset.call( this );
+  },
+
+  getMiddlePoint: function() {
+    const position = this.positionProperty.get();
+    return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
+  },
+
+  // TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
+  createCopy: function() {
+    // This clever invocation supports the creation of subclassed instances.
+    return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
-
-  balancingAct.register( 'ImageMass', ImageMass );
-
-  return inherit( Mass, ImageMass, {
-
-    reset: function() {
-      this.heightProperty.reset();
-      this.imageProperty.reset();
-      Mass.prototype.reset.call( this );
-    },
-
-    getMiddlePoint: function() {
-      const position = this.positionProperty.get();
-      return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
-    },
-
-    // TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
-    createCopy: function() {
-      // This clever invocation supports the creation of subclassed instances.
-      return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
-    }
-  } );
 } );

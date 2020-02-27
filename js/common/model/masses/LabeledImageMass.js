@@ -7,25 +7,22 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  /**
-   * @param {Vector2} initialPosition
-   * @param {Object} config - configuration information for the labeled image mass
-   * @constructor
-   */
-  function LabeledImageMass( initialPosition, config ) {
-    ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
-    this.labelText = config.labelText;
-  }
+/**
+ * @param {Vector2} initialPosition
+ * @param {Object} config - configuration information for the labeled image mass
+ * @constructor
+ */
+function LabeledImageMass( initialPosition, config ) {
+  ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
+  this.labelText = config.labelText;
+}
 
-  balancingAct.register( 'LabeledImageMass', LabeledImageMass );
+balancingAct.register( 'LabeledImageMass', LabeledImageMass );
 
-  return inherit( ImageMass, LabeledImageMass );
-} );
+inherit( ImageMass, LabeledImageMass );
+export default LabeledImageMass;

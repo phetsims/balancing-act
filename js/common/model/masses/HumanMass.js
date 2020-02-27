@@ -7,48 +7,45 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  /**
-   * @param {number} massValue
-   * @param {image} standingImage
-   * @param {number} standingHeight
-   * @param {image} sittingImage
-   * @param {number} sittingHeight
-   * @param {Vector2} initialPosition
-   * @param {number} sittingCenterOfMassXOffset
-   * @param {boolean} isMystery
-   * @constructor
-   */
-  function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
-    ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
-    const self = this;
+/**
+ * @param {number} massValue
+ * @param {image} standingImage
+ * @param {number} standingHeight
+ * @param {image} sittingImage
+ * @param {number} sittingHeight
+ * @param {Vector2} initialPosition
+ * @param {number} sittingCenterOfMassXOffset
+ * @param {boolean} isMystery
+ * @constructor
+ */
+function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
+  ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
+  const self = this;
 
-    // Monitor the 'onPlank' property and update the image as changes occur.
-    self.onPlankProperty.link( function( onPlank ) {
-      if ( onPlank ) {
-        const xPosition = self.positionProperty.get().x;
-        self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
-        self.heightProperty.set( sittingHeight );
-        self.reverseImage = xPosition < 0;
-        self.imageProperty.set( sittingImage );
-      }
-      else {
-        self.centerOfMassXOffset = 0;
-        self.heightProperty.set( standingHeight );
-        self.reverseImage = false;
-        self.imageProperty.set( standingImage );
-      }
-    } );
-  }
+  // Monitor the 'onPlank' property and update the image as changes occur.
+  self.onPlankProperty.link( function( onPlank ) {
+    if ( onPlank ) {
+      const xPosition = self.positionProperty.get().x;
+      self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
+      self.heightProperty.set( sittingHeight );
+      self.reverseImage = xPosition < 0;
+      self.imageProperty.set( sittingImage );
+    }
+    else {
+      self.centerOfMassXOffset = 0;
+      self.heightProperty.set( standingHeight );
+      self.reverseImage = false;
+      self.imageProperty.set( standingImage );
+    }
+  } );
+}
 
-  balancingAct.register( 'HumanMass', HumanMass );
+balancingAct.register( 'HumanMass', HumanMass );
 
-  return inherit( ImageMass, HumanMass );
-} );
+inherit( ImageMass, HumanMass );
+export default HumanMass;

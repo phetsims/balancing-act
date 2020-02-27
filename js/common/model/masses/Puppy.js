@@ -1,31 +1,26 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import puppyImage from '../../../../images/puppy_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const puppyImage = require( 'image!BALANCING_ACT/puppy.png' );
+// constants
+const MASS = 6; // In kg
+const HEIGHT = 0.6; // In meters
 
-  // constants
-  const MASS = 6; // In kg
-  const HEIGHT = 0.6; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function Puppy( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, puppyImage, HEIGHT, initialPosition, isMystery );
+  this.centerOfMassXOffset = 0.03; // Empirically determined.
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function Puppy( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, puppyImage, HEIGHT, initialPosition, isMystery );
-    this.centerOfMassXOffset = 0.03; // Empirically determined.
-  }
+balancingAct.register( 'Puppy', Puppy );
 
-  balancingAct.register( 'Puppy', Puppy );
-
-  return inherit( ImageMass, Puppy );
-} );
+inherit( ImageMass, Puppy );
+export default Puppy;

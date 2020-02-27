@@ -3,43 +3,39 @@
 /**
  * Main entry point for the Balancing Act simulation.
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BAIntroScreen = require( 'BALANCING_ACT/intro/BAIntroScreen' );
-  const BalanceGameScreen = require( 'BALANCING_ACT/game/BalanceGameScreen' );
-  const BalanceLabScreen = require( 'BALANCING_ACT/balancelab/BalanceLabScreen' );
-  const Sim = require( 'JOIST/Sim' );
-  const SimLauncher = require( 'JOIST/SimLauncher' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Sim from '../../joist/js/Sim.js';
+import SimLauncher from '../../joist/js/SimLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import BalanceLabScreen from './balancelab/BalanceLabScreen.js';
+import balancingActStrings from './balancing-act-strings.js';
+import BalanceGameScreen from './game/BalanceGameScreen.js';
+import BAIntroScreen from './intro/BAIntroScreen.js';
 
-  // strings
-  const balancingActTitleString = require( 'string!BALANCING_ACT/balancing-act.title' );
+const balancingActTitleString = balancingActStrings[ 'balancing-act' ].title;
 
-  // constants
-  const tandem = Tandem.ROOT;
+// constants
+const tandem = Tandem.ROOT;
 
-  SimLauncher.launch( function() {
+SimLauncher.launch( function() {
 
-    const simOptions = {
-      credits: {
-        leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
-        softwareDevelopment: 'John Blanco',
-        graphicArts: 'John Blanco, Mariah Hermsmeyer',
-        team: 'Michael Dubson, Trish Loeblein'
-      }
-    };
+  const simOptions = {
+    credits: {
+      leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
+      softwareDevelopment: 'John Blanco',
+      graphicArts: 'John Blanco, Mariah Hermsmeyer',
+      team: 'Michael Dubson, Trish Loeblein'
+    }
+  };
 
-    // Create and start the sim
-    const screens = [
-      new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
-      new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
+  // Create and start the sim
+  const screens = [
+    new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
+    new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
 
-      // Game screen not available in phet-io
-      ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
-    ];
+    // Game screen not available in phet-io
+    ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
+  ];
 
-    new Sim( balancingActTitleString, screens, simOptions ).start();
-  } );
+  new Sim( balancingActTitleString, screens, simOptions ).start();
 } );

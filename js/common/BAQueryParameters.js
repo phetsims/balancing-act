@@ -6,18 +6,14 @@
  * @author Sam Reid (PhET Interactive Simulations)
  * @author Chris Klusendorf (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
+import balancingAct from '../balancingAct.js';
 
-  const BAQueryParameters = QueryStringMachine.getAll( {
+const BAQueryParameters = QueryStringMachine.getAll( {
 
-    // whether the Stanford University customizations are enabled
-    stanford: { type: 'flag' }
-  } );
-
-  balancingAct.register( 'BAQueryParameters', BAQueryParameters );
-  return BAQueryParameters;
+  // whether the Stanford University customizations are enabled
+  stanford: { type: 'flag' }
 } );
+
+balancingAct.register( 'BAQueryParameters', BAQueryParameters );
+export default BAQueryParameters;

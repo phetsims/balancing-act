@@ -5,15 +5,11 @@
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import balancingAct from '../../balancingAct.js';
 
-  const ColumnState = Enumeration.byKeys( [ 'DOUBLE_COLUMNS', 'SINGLE_COLUMN', 'NO_COLUMNS' ] );
-  balancingAct.register( 'ColumnState', ColumnState );
+const ColumnState = Enumeration.byKeys( [ 'DOUBLE_COLUMNS', 'SINGLE_COLUMN', 'NO_COLUMNS' ] );
+balancingAct.register( 'ColumnState', ColumnState );
 
-  return ColumnState;
-} );
+export default ColumnState;

@@ -1,31 +1,26 @@
 // Copyright 2013-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import trashCanImage from '../../../../images/trash-can_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const trashCanImage = require( 'image!BALANCING_ACT/trash-can.png' );
+// constants
+const MASS = 10; // In kg
+const HEIGHT = 0.55; // In meters
 
-  // constants
-  const MASS = 10; // In kg
-  const HEIGHT = 0.55; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @param {Object} [options]
+ * @constructor
+ */
+function SmallTrashCan( initialPosition, isMystery, options ) {
+  ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery, options );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @param {Object} [options]
-   * @constructor
-   */
-  function SmallTrashCan( initialPosition, isMystery, options ) {
-    ImageMass.call( this, MASS, trashCanImage, HEIGHT, initialPosition, isMystery, options );
-  }
+balancingAct.register( 'SmallTrashCan', SmallTrashCan );
 
-  balancingAct.register( 'SmallTrashCan', SmallTrashCan );
-
-  return inherit( ImageMass, SmallTrashCan );
-} );
+inherit( ImageMass, SmallTrashCan );
+export default SmallTrashCan;

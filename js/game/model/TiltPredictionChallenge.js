@@ -6,49 +6,45 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BalanceGameChallenge = require( 'BALANCING_ACT/game/model/BalanceGameChallenge' );
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import balancingActStrings from '../../balancing-act-strings.js';
+import balancingAct from '../../balancingAct.js';
+import ColumnState from '../../common/model/ColumnState.js';
+import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-  // strings
-  const whatWillHappenString = require( 'string!BALANCING_ACT/whatWillHappen' );
+const whatWillHappenString = balancingActStrings.whatWillHappen;
 
-  /**
-   * @constructor
-   */
-  function TiltPredictionChallenge( fixedMasses ) {
-    BalanceGameChallenge.call( this, ColumnState.DOUBLE_COLUMNS );
-    Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
+/**
+ * @constructor
+ */
+function TiltPredictionChallenge( fixedMasses ) {
+  BalanceGameChallenge.call( this, ColumnState.DOUBLE_COLUMNS );
+  Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
 
-    // Set up the challenge view configuration, which provides information to
-    // the view about how this challenge should be displayed.
-    this.viewConfig = {
-      title: whatWillHappenString,
-      showMassEntryDialog: false,
-      showTiltPredictionSelector: true
-    };
+  // Set up the challenge view configuration, which provides information to
+  // the view about how this challenge should be displayed.
+  this.viewConfig = {
+    title: whatWillHappenString,
+    showMassEntryDialog: false,
+    showTiltPredictionSelector: true
+  };
+}
+
+balancingAct.register( 'TiltPredictionChallenge', TiltPredictionChallenge );
+
+export default inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
+  // statics
+
+  // convenience factory method for creating this type of challenge
+  create: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter ) {
+
+    // Add the fixed masses and their distances from the center of the balance.
+    const fixedMassesList = [];
+    fixedMassesList.push( { mass: fixedMass1, distance: fixedMass1DistanceFromCenter } );
+    fixedMassesList.push( { mass: fixedMass2, distance: fixedMass2DistanceFromCenter } );
+
+    // Create the actual challenge.
+    return new TiltPredictionChallenge( fixedMassesList );
   }
-
-  balancingAct.register( 'TiltPredictionChallenge', TiltPredictionChallenge );
-
-  return inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
-    // statics
-
-    // convenience factory method for creating this type of challenge
-    create: function( fixedMass1, fixedMass1DistanceFromCenter, fixedMass2, fixedMass2DistanceFromCenter ) {
-
-      // Add the fixed masses and their distances from the center of the balance.
-      const fixedMassesList = [];
-      fixedMassesList.push( { mass: fixedMass1, distance: fixedMass1DistanceFromCenter } );
-      fixedMassesList.push( { mass: fixedMass2, distance: fixedMass2DistanceFromCenter } );
-
-      // Create the actual challenge.
-      return new TiltPredictionChallenge( fixedMassesList );
-    }
-  } );
 } );

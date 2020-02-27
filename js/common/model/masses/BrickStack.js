@@ -7,65 +7,58 @@
  * @author John Blanco
  */
 
-define( require => {
-  'use strict';
+import Vector2 from '../../../../../dot/js/Vector2.js';
+import Shape from '../../../../../kite/js/Shape.js';
+import inherit from '../../../../../phet-core/js/inherit.js';
+import balancingAct from '../../../balancingAct.js';
+import Mass from '../Mass.js';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Mass = require( 'BALANCING_ACT/common/model/Mass' );
-  const Shape = require( 'KITE/Shape' );
-  const Vector2 = require( 'DOT/Vector2' );
+// constants
+const BRICK_WIDTH = 0.2; // In meters.
+const BRICK_HEIGHT = BRICK_WIDTH / 3;
+const BRICK_MASS = 5; // In kg.
 
-  // constants
-  const BRICK_WIDTH = 0.2; // In meters.
-  const BRICK_HEIGHT = BRICK_WIDTH / 3;
-  const BRICK_MASS = 5; // In kg.
+/**
+ * @param {number} numBricks
+ * @param {Vector2} initialPosition
+ * @param {Object} [options]
+ * @constructor
+ */
+function BrickStack( numBricks, initialPosition, options ) {
 
-  /**
-   * @param {number} numBricks
-   * @param {Vector2} initialPosition
-   * @param {Object} [options]
-   * @constructor
-   */
-  function BrickStack( numBricks, initialPosition, options ) {
+  if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ); }
 
-    if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ); }
+  this.numBricks = numBricks;
+  initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
 
-    this.numBricks = numBricks;
-    initialPosition = initialPosition || Vector2.ZERO; // Default initial position.
-
-    // Generate the shape of the brick stack.
-    const brickStackShape = new Shape();
-    let brickOriginY = 0;
-    for ( let i = 0; i < numBricks; i++ ) {
-      brickStackShape.rect( 0, brickOriginY, BRICK_WIDTH, BRICK_HEIGHT );
-      brickOriginY += BRICK_HEIGHT;
-    }
-
-    this.shape = brickStackShape;
-
-    Mass.call( this, numBricks * BRICK_MASS, initialPosition, false, options );
+  // Generate the shape of the brick stack.
+  const brickStackShape = new Shape();
+  let brickOriginY = 0;
+  for ( let i = 0; i < numBricks; i++ ) {
+    brickStackShape.rect( 0, brickOriginY, BRICK_WIDTH, BRICK_HEIGHT );
+    brickOriginY += BRICK_HEIGHT;
   }
 
-  balancingAct.register( 'BrickStack', BrickStack );
+  this.shape = brickStackShape;
 
-  return inherit( Mass, BrickStack, {
+  Mass.call( this, numBricks * BRICK_MASS, initialPosition, false, options );
+}
 
-      createCopy: function() {
-        return new BrickStack( this.numBricks, this.positionProperty.get() );
-      },
+balancingAct.register( 'BrickStack', BrickStack );
 
-      getMiddlePoint: function() {
-        return this.shape.bounds.center.rotated( this.rotationAngleProperty.get() ).plus( this.positionProperty.get() );
-      }
+export default inherit( Mass, BrickStack, {
+
+    createCopy: function() {
+      return new BrickStack( this.numBricks, this.positionProperty.get() );
     },
-    {
-      // static constants
-      BRICK_MASS: BRICK_MASS,
-      BRICK_HEIGHT: BRICK_HEIGHT
+
+    getMiddlePoint: function() {
+      return this.shape.bounds.center.rotated( this.rotationAngleProperty.get() ).plus( this.positionProperty.get() );
     }
-  );
-} );
-
-
+  },
+  {
+    // static constants
+    BRICK_MASS: BRICK_MASS,
+    BRICK_HEIGHT: BRICK_HEIGHT
+  }
+);

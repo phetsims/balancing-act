@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import televisionImage from '../../../../images/old-television_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const televisionImage = require( 'image!BALANCING_ACT/old-television.png' );
+// constants
+const MASS = 10; // In kg
+const HEIGHT = 0.5; // In meters
 
-  // constants
-  const MASS = 10; // In kg
-  const HEIGHT = 0.5; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function Television( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, televisionImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function Television( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, televisionImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'Television', Television );
 
-  balancingAct.register( 'Television', Television );
-
-  return inherit( ImageMass, Television );
-} );
+inherit( ImageMass, Television );
+export default Television;

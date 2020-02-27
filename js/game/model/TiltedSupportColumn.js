@@ -8,26 +8,22 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Shape = require( 'KITE/Shape' );
+import Shape from '../../../../kite/js/Shape.js';
+import balancingAct from '../../balancingAct.js';
 
-  // constants
-  const COLUMN_WIDTH = 0.35; // In meters
+// constants
+const COLUMN_WIDTH = 0.35; // In meters
 
-  /**
-   * @param height
-   * @param centerX
-   * @constructor
-   */
-  function TiltedSupportColumn( height, centerX, topAngle ) {
-    this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, 0 ).close();
-  }
+/**
+ * @param height
+ * @param centerX
+ * @constructor
+ */
+function TiltedSupportColumn( height, centerX, topAngle ) {
+  this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, 0 ).close();
+}
 
-  balancingAct.register( 'TiltedSupportColumn', TiltedSupportColumn );
+balancingAct.register( 'TiltedSupportColumn', TiltedSupportColumn );
 
-  return TiltedSupportColumn;
-} );
+export default TiltedSupportColumn;

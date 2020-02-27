@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import yellowBucketImage from '../../../../images/yellow-bucket_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const yellowBucketImage = require( 'image!BALANCING_ACT/yellow-bucket.png' );
+// constants
+const MASS = 20; // In kg
+const HEIGHT = 0.4; // In meters
 
-  // constants
-  const MASS = 20; // In kg
-  const HEIGHT = 0.4; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function MediumBucket( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, yellowBucketImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function MediumBucket( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, yellowBucketImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'MediumBucket', MediumBucket );
 
-  balancingAct.register( 'MediumBucket', MediumBucket );
-
-  return inherit( ImageMass, MediumBucket );
-} );
+inherit( ImageMass, MediumBucket );
+export default MediumBucket;

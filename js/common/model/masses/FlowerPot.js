@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import flowerPotImage from '../../../../images/flower-pot_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const flowerPotImage = require( 'image!BALANCING_ACT/flower-pot.png' );
+// constants
+const MASS = 5; // In kg
+const HEIGHT = 0.55; // In meters
 
-  // constants
-  const MASS = 5; // In kg
-  const HEIGHT = 0.55; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function FlowerPot( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, flowerPotImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function FlowerPot( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, flowerPotImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'FlowerPot', FlowerPot );
 
-  balancingAct.register( 'FlowerPot', FlowerPot );
-
-  return inherit( ImageMass, FlowerPot );
-} );
+inherit( ImageMass, FlowerPot );
+export default FlowerPot;

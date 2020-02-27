@@ -5,25 +5,22 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Path = require( 'SCENERY/nodes/Path' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import balancingAct from '../../balancingAct.js';
 
-  function FulcrumNode( modelViewTransform, fulcrum ) {
-    Node.call( this );
-    this.addChild( new Path( modelViewTransform.modelToViewShape( fulcrum.shape ),
-      {
-        fill: 'rgb( 240, 240, 0 )',
-        stroke: 'black'
-      } ) );
-  }
+function FulcrumNode( modelViewTransform, fulcrum ) {
+  Node.call( this );
+  this.addChild( new Path( modelViewTransform.modelToViewShape( fulcrum.shape ),
+    {
+      fill: 'rgb( 240, 240, 0 )',
+      stroke: 'black'
+    } ) );
+}
 
-  balancingAct.register( 'FulcrumNode', FulcrumNode );
+balancingAct.register( 'FulcrumNode', FulcrumNode );
 
-  return inherit( Node, FulcrumNode );
-} );
+inherit( Node, FulcrumNode );
+export default FulcrumNode;

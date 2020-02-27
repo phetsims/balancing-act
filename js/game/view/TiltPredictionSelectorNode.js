@@ -7,43 +7,38 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Panel = require( 'SUN/Panel' );
-  const Property = require( 'AXON/Property' );
-  const TiltPredictionSelectionPanel = require( 'BALANCING_ACT/game/view/TiltPredictionSelectionPanel' );
+import Property from '../../../../axon/js/Property.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Panel from '../../../../sun/js/Panel.js';
+import plankBalancedImage from '../../../images/plank-balanced_png.js';
+import plankTippedLeftImage from '../../../images/plank-tipped-left_png.js';
+import plankTippedRightImage from '../../../images/plank-tipped-right_png.js';
+import balancingAct from '../../balancingAct.js';
+import TiltPredictionSelectionPanel from './TiltPredictionSelectionPanel.js';
 
-  // images
-  const plankBalancedImage = require( 'image!BALANCING_ACT/plank-balanced.png' );
-  const plankTippedLeftImage = require( 'image!BALANCING_ACT/plank-tipped-left.png' );
-  const plankTippedRightImage = require( 'image!BALANCING_ACT/plank-tipped-right.png' );
+function TiltPredictionSelectorNode( gameStateProperty ) {
+  Node.call( this );
 
-  function TiltPredictionSelectorNode( gameStateProperty ) {
-    Node.call( this );
+  // Property that tracks the selected prediction.  Valid values are 'none',
+  // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
+  this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
 
-    // Property that tracks the selected prediction.  Valid values are 'none',
-    // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
-    this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
+  const panelContents = new HBox(
+    {
+      children: [
+        new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
+        new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
+        new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
+      ], spacing: 5
+    } );
 
-    const panelContents = new HBox(
-      {
-        children: [
-          new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
-          new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
-          new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
-        ], spacing: 5
-      } );
+  this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
+}
 
-    this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
-  }
+balancingAct.register( 'TiltPredictionSelectorNode', TiltPredictionSelectorNode );
 
-  balancingAct.register( 'TiltPredictionSelectorNode', TiltPredictionSelectorNode );
-
-  return inherit( Node, TiltPredictionSelectorNode );
-} );
+inherit( Node, TiltPredictionSelectorNode );
+export default TiltPredictionSelectorNode;

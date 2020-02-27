@@ -7,34 +7,29 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const HumanMass = require( 'BALANCING_ACT/common/model/masses/HumanMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Vector2 = require( 'DOT/Vector2' );
+import Vector2 from '../../../../../dot/js/Vector2.js';
+import inherit from '../../../../../phet-core/js/inherit.js';
+import girlSittingImage from '../../../../mipmaps/girl-sitting_png.js';
+import girlStandingImage from '../../../../mipmaps/girl-standing_png.js';
+import balancingAct from '../../../balancingAct.js';
+import HumanMass from './HumanMass.js';
 
-  // images
-  const girlSittingImage = require( 'mipmap!BALANCING_ACT/girl-sitting.png' );
-  const girlStandingImage = require( 'mipmap!BALANCING_ACT/girl-standing.png' );
+// constants
+const MASS = 30; // in kg
+const STANDING_HEIGHT = 1.3; // In meters.
+const SITTING_HEIGHT = 0.70; // In meters.
+const SITTING_CENTER_OF_MASS_X_OFFSET = 0.11; // In meters, determined visually.  Update if image changes.
 
-  // constants
-  const MASS = 30; // in kg
-  const STANDING_HEIGHT = 1.3; // In meters.
-  const SITTING_HEIGHT = 0.70; // In meters.
-  const SITTING_CENTER_OF_MASS_X_OFFSET = 0.11; // In meters, determined visually.  Update if image changes.
+/**
+ * @constructor
+ */
+function Girl() {
+  HumanMass.call( this, MASS, girlStandingImage, STANDING_HEIGHT, girlSittingImage, SITTING_HEIGHT,
+    Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
+}
 
-  /**
-   * @constructor
-   */
-  function Girl() {
-    HumanMass.call( this, MASS, girlStandingImage, STANDING_HEIGHT, girlSittingImage, SITTING_HEIGHT,
-      Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
-  }
+balancingAct.register( 'Girl', Girl );
 
-  balancingAct.register( 'Girl', Girl );
-
-  return inherit( HumanMass, Girl );
-} );
+inherit( HumanMass, Girl );
+export default Girl;

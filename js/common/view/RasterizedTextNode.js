@@ -11,44 +11,41 @@
  * with TextNode on April 11, 2018, and decided that the rasterized version still looked better, so that was the most
  * recent evaluation.
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const platform = require( 'PHET_CORE/platform' );
-  const Text = require( 'SCENERY/nodes/Text' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import platform from '../../../../phet-core/js/platform.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import balancingAct from '../../balancingAct.js';
 
-  // Since the rasterization is done in the label's parent coordinate frame, we need additional resolution to not look
-  // blurry.  The default value was empirically determined.
-  const RASTER_SCALE = 2;
+// Since the rasterization is done in the label's parent coordinate frame, we need additional resolution to not look
+// blurry.  The default value was empirically determined.
+const RASTER_SCALE = 2;
 
-  /**
-   * @param text
-   * @param textOptions
-   * @param nodeOptions
-   * @constructor
-   */
-  function RasterizedTextNode( text, textOptions, nodeOptions ) {
-    Node.call( this );
-    if ( platform.firefox ) {
-      // SVG image rotation and scaling causes jitter in Firefox, so we switch to DOM rendering for now.  See
-      // https://github.com/phetsims/balancing-act/issues/16
-      this.renderer = 'dom';
-    }
-    textOptions.scale = RASTER_SCALE;
-    const label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
-    // TODO: maybe try toImageNodeAsynchronous.
-    const labelRasterized = label.rasterized();
-    labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
-    this.addChild( labelRasterized );
-    this.localBounds = label.localBounds;
-    this.mutate( nodeOptions );
+/**
+ * @param text
+ * @param textOptions
+ * @param nodeOptions
+ * @constructor
+ */
+function RasterizedTextNode( text, textOptions, nodeOptions ) {
+  Node.call( this );
+  if ( platform.firefox ) {
+    // SVG image rotation and scaling causes jitter in Firefox, so we switch to DOM rendering for now.  See
+    // https://github.com/phetsims/balancing-act/issues/16
+    this.renderer = 'dom';
   }
+  textOptions.scale = RASTER_SCALE;
+  const label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
+  // TODO: maybe try toImageNodeAsynchronous.
+  const labelRasterized = label.rasterized();
+  labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
+  this.addChild( labelRasterized );
+  this.localBounds = label.localBounds;
+  this.mutate( nodeOptions );
+}
 
-  balancingAct.register( 'RasterizedTextNode', RasterizedTextNode );
+balancingAct.register( 'RasterizedTextNode', RasterizedTextNode );
 
-  return inherit( Node, RasterizedTextNode );
-} );
+inherit( Node, RasterizedTextNode );
+export default RasterizedTextNode;

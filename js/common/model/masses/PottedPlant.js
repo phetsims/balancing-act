@@ -1,30 +1,25 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const ImageMass = require( 'BALANCING_ACT/common/model/ImageMass' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../../phet-core/js/inherit.js';
+import pottedPlantImage from '../../../../images/potted-plant_png.js';
+import balancingAct from '../../../balancingAct.js';
+import ImageMass from '../ImageMass.js';
 
-  // images
-  const pottedPlantImage = require( 'image!BALANCING_ACT/potted-plant.png' );
+// constants
+const MASS = 10; // In kg
+const HEIGHT = 0.65; // In meters
 
-  // constants
-  const MASS = 10; // In kg
-  const HEIGHT = 0.65; // In meters
+/**
+ * @param initialPosition
+ * @param isMystery
+ * @constructor
+ */
+function PottedPlant( initialPosition, isMystery ) {
+  ImageMass.call( this, MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
+}
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @constructor
-   */
-  function PottedPlant( initialPosition, isMystery ) {
-    ImageMass.call( this, MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
-  }
+balancingAct.register( 'PottedPlant', PottedPlant );
 
-  balancingAct.register( 'PottedPlant', PottedPlant );
-
-  return inherit( ImageMass, PottedPlant );
-} );
+inherit( ImageMass, PottedPlant );
+export default PottedPlant;

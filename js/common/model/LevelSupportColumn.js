@@ -8,26 +8,22 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Shape = require( 'KITE/Shape' );
+import Shape from '../../../../kite/js/Shape.js';
+import balancingAct from '../../balancingAct.js';
 
-  // constants
-  const COLUMN_WIDTH = 0.35; // In meters
+// constants
+const COLUMN_WIDTH = 0.35; // In meters
 
-  /**
-   * @param height
-   * @param centerX
-   * @constructor
-   */
-  function LevelSupportColumn( height, centerX ) {
-    this.shape = Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
-  }
+/**
+ * @param height
+ * @param centerX
+ * @constructor
+ */
+function LevelSupportColumn( height, centerX ) {
+  this.shape = Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
+}
 
-  balancingAct.register( 'LevelSupportColumn', LevelSupportColumn );
+balancingAct.register( 'LevelSupportColumn', LevelSupportColumn );
 
-  return LevelSupportColumn;
-} );
+export default LevelSupportColumn;

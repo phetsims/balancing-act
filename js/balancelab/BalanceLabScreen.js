@@ -5,40 +5,36 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BalanceLabModel = require( 'BALANCING_ACT/balancelab/model/BalanceLabModel' );
-  const BalanceLabView = require( 'BALANCING_ACT/balancelab/view/BalanceLabView' );
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import labIconSmall from '../../images/lab-icon-small_png.js';
+import labIcon from '../../images/lab-icon_png.js';
+import balancingActStrings from '../balancing-act-strings.js';
+import balancingAct from '../balancingAct.js';
+import BalanceLabModel from './model/BalanceLabModel.js';
+import BalanceLabView from './view/BalanceLabView.js';
 
-  // strings
-  const balanceLabString = require( 'string!BALANCING_ACT/balanceLab' );
+const balanceLabString = balancingActStrings.balanceLab;
 
-  // images
-  const labIcon = require( 'image!BALANCING_ACT/lab-icon.png' );
-  const labIconSmall = require( 'image!BALANCING_ACT/lab-icon-small.png' );
 
-  function BalanceLabScreen( tandem ) {
+function BalanceLabScreen( tandem ) {
 
-    const options = {
-      name: balanceLabString,
-      homeScreenIcon: new Image( labIcon ),
-      navigationBarIcon: new Image( labIconSmall ),
-      tandem: tandem
-    };
+  const options = {
+    name: balanceLabString,
+    homeScreenIcon: new Image( labIcon ),
+    navigationBarIcon: new Image( labIconSmall ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() { return new BalanceLabModel( tandem.createTandem( 'model' ) ); },
-      function( model ) {return new BalanceLabView( model, tandem.createTandem( 'view' ) ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new BalanceLabModel( tandem.createTandem( 'model' ) ); },
+    function( model ) {return new BalanceLabView( model, tandem.createTandem( 'view' ) ); },
+    options );
+}
 
-  balancingAct.register( 'BalanceLabScreen', BalanceLabScreen );
+balancingAct.register( 'BalanceLabScreen', BalanceLabScreen );
 
-  return inherit( Screen, BalanceLabScreen );
-} );
+inherit( Screen, BalanceLabScreen );
+export default BalanceLabScreen;

@@ -5,40 +5,36 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BalanceGameModel = require( 'BALANCING_ACT/game/model/BalanceGameModel' );
-  const BalanceGameView = require( 'BALANCING_ACT/game/view/BalanceGameView' );
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import gameIconSmall from '../../images/game-icon-small_png.js';
+import gameIcon from '../../images/game-icon_png.js';
+import balancingActStrings from '../balancing-act-strings.js';
+import balancingAct from '../balancingAct.js';
+import BalanceGameModel from './model/BalanceGameModel.js';
+import BalanceGameView from './view/BalanceGameView.js';
 
-  // strings
-  const gameString = require( 'string!BALANCING_ACT/game' );
+const gameString = balancingActStrings.game;
 
-  // images
-  const gameIcon = require( 'image!BALANCING_ACT/game-icon.png' );
-  const gameIconSmall = require( 'image!BALANCING_ACT/game-icon-small.png' );
 
-  function BalanceGameScreen( tandem ) {
+function BalanceGameScreen( tandem ) {
 
-    const options = {
-      name: gameString,
-      homeScreenIcon: new Image( gameIcon ),
-      navigationBarIcon: new Image( gameIconSmall ),
-      tandem: tandem
-    };
+  const options = {
+    name: gameString,
+    homeScreenIcon: new Image( gameIcon ),
+    navigationBarIcon: new Image( gameIconSmall ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() { return new BalanceGameModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new BalanceGameView( model, tandem.createTandem( 'view' ) ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new BalanceGameModel( tandem.createTandem( 'model' ) ); },
+    function( model ) { return new BalanceGameView( model, tandem.createTandem( 'view' ) ); },
+    options );
+}
 
-  balancingAct.register( 'BalanceGameScreen', BalanceGameScreen );
+balancingAct.register( 'BalanceGameScreen', BalanceGameScreen );
 
-  return inherit( Screen, BalanceGameScreen );
-} );
+inherit( Screen, BalanceGameScreen );
+export default BalanceGameScreen;

@@ -6,59 +6,57 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // module
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const BAQueryParameters = require( 'BALANCING_ACT/common/BAQueryParameters' );
-  const ColumnState = require( 'BALANCING_ACT/common/model/ColumnState' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const MassCreatorNode = require( 'BALANCING_ACT/balancelab/view/MassCreatorNode' );
+
+// module
+import inherit from '../../../../phet-core/js/inherit.js';
+import balancingAct from '../../balancingAct.js';
+import BAQueryParameters from '../../common/BAQueryParameters.js';
+import ColumnState from '../../common/model/ColumnState.js';
+import MassCreatorNode from './MassCreatorNode.js';
+
+/**
+ * @param {BalanceLabModel} model
+ * @param {ModelViewTransform2} modelViewTransform
+ * @param {ImageMass} prototypeImageMass
+ * @param {boolean} showMassLabel
+ * @constructor
+ */
+function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, showMassLabel, options ) {
+  MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel, options );
+  this.prototypeImageMass = prototypeImageMass;
+  this.model = model;
+
+  // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
+  BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
+    this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+    this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+  } );
+}
+
+balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
+
+export default inherit( MassCreatorNode, ImageMassCreatorNode, {
 
   /**
-   * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {ImageMass} prototypeImageMass
-   * @param {boolean} showMassLabel
-   * @constructor
+   * @param position
+   * @returns {*}
+   * @public
    */
-  function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, showMassLabel, options ) {
-    MassCreatorNode.call( this, modelViewTransform, prototypeImageMass.massValue, showMassLabel, options );
-    this.prototypeImageMass = prototypeImageMass;
-    this.model = model;
+  addElementToModel: function( position ) {
+    const imageMassModelElement = this.createImageMassInstance();
+    imageMassModelElement.positionProperty.set( position.copy() );
+    imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();
+    imageMassModelElement.userControlledProperty.set( true );
+    this.model.addMass( imageMassModelElement );
+    return imageMassModelElement;
+  },
 
-    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
-    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
-      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
-      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
-    } );
+  /**
+   * Create an instance of the image mass that corresponds to this creator
+   * node.  Overridden by subclasses to create the appropriate type.
+   */
+  createImageMassInstance: function() {
+    return this.prototypeImageMass.createCopy();
   }
-
-  balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
-
-  return inherit( MassCreatorNode, ImageMassCreatorNode, {
-
-    /**
-     * @param position
-     * @returns {*}
-     * @public
-     */
-    addElementToModel: function( position ) {
-      const imageMassModelElement = this.createImageMassInstance();
-      imageMassModelElement.positionProperty.set( position.copy() );
-      imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();
-      imageMassModelElement.userControlledProperty.set( true );
-      this.model.addMass( imageMassModelElement );
-      return imageMassModelElement;
-    },
-
-    /**
-     * Create an instance of the image mass that corresponds to this creator
-     * node.  Overridden by subclasses to create the appropriate type.
-     */
-    createImageMassInstance: function() {
-      return this.prototypeImageMass.createCopy();
-    }
-  } );
 } );

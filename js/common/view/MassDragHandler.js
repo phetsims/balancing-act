@@ -8,47 +8,43 @@
  *
  * @author John Blanco
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const balancingAct = require( 'BALANCING_ACT/balancingAct' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import balancingAct from '../../balancingAct.js';
 
-  function MassDragHandler( mass, modelViewTransform ) {
-    SimpleDragHandler.call( this, {
+function MassDragHandler( mass, modelViewTransform ) {
+  SimpleDragHandler.call( this, {
 
-      // Allow moving a finger (touch) across a node to pick it up.
-      allowTouchSnag: true,
+    // Allow moving a finger (touch) across a node to pick it up.
+    allowTouchSnag: true,
 
-      // Handler that moves the particle in model space.
-      translate: function( translationParams ) {
-        mass.positionProperty.set(
-          mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
-        );
-        return translationParams.position;
-      },
+    // Handler that moves the particle in model space.
+    translate: function( translationParams ) {
+      mass.positionProperty.set(
+        mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
+      );
+      return translationParams.position;
+    },
 
-      start: function( event, trail ) {
+    start: function( event, trail ) {
+      mass.userControlledProperty.set( true );
+    },
+
+    end: function( event, trail ) {
+
+      // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+      // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
+      if ( mass.userControlledProperty.get() === false ) {
         mass.userControlledProperty.set( true );
-      },
-
-      end: function( event, trail ) {
-
-        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
-        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
-        if ( mass.userControlledProperty.get() === false ) {
-          mass.userControlledProperty.set( true );
-        }
-
-        mass.userControlledProperty.set( false );
       }
-    } );
-  }
 
-  balancingAct.register( 'MassDragHandler', MassDragHandler );
+      mass.userControlledProperty.set( false );
+    }
+  } );
+}
 
-  return inherit( SimpleDragHandler, MassDragHandler );
-} );
+balancingAct.register( 'MassDragHandler', MassDragHandler );
 
+inherit( SimpleDragHandler, MassDragHandler );
+export default MassDragHandler;
