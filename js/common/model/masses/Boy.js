@@ -1,4 +1,4 @@
-// Copyright 2013-2019, University of Colorado Boulder
+// Copyright 2013-2020, University of Colorado Boulder
 
 /**
  * Model element that represents a boy who is roughly 6 years old.  The data
