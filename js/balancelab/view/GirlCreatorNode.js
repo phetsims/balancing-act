@@ -3,7 +3,7 @@
 /**
  * This class represents an young girl in a toolbox.  When the user clicks on
  * this node, the corresponding model element is added to the model at the
- * user's mouse location.
+ * user's mouse position.
  *
  * @author John Blanco
  */

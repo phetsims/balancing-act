@@ -3,7 +3,7 @@
 /**
  * This object type represents a stack of bricks in a toolbox.  When the user
  * clicks on this node, the corresponding model element is added to the model
- * at the user's mouse location.
+ * at the user's mouse position.
  *
  * @author John Blanco
  */

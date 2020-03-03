@@ -31,7 +31,7 @@ function PositionMarkerSetNode( plank, modelViewTransform, visibleProperty ) {
   } );
 
   // Set initial position.
-  const topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterLocationProperty.get() );
+  const topCenter = modelViewTransform.modelToViewPosition( plank.bottomCenterPositionProperty.get() );
   self.top = topCenter.y;
   self.centerX = topCenter.x;
 

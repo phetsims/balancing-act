@@ -26,7 +26,7 @@ function LevelIndicatorNode( modelViewTransform, plank ) {
   Node.call( this );
   const self = this;
 
-  // Locations for left and right edge
+  // Positions for left and right edge
   const leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
     plank.pivotPoint.x - Plank.LENGTH / 2,
     plank.getPlankSurfaceCenter().y

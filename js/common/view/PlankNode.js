@@ -42,9 +42,9 @@ function PlankNode( modelViewTransform, plank ) {
   self.addChild( plankNode );
 
   // Function for mapping plank distance relative to the center point to a highlight.
-  function mapLocationToHighlightIndex( distanceFromCenter ) {
+  function mapPositionToHighlightIndex( distanceFromCenter ) {
     return Utils.roundSymmetric(
-      ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_LOCATIONS + 1 ) / Plank.LENGTH )
+      ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_POSITIONS + 1 ) / Plank.LENGTH )
     ) - 1;
   }
 
@@ -53,14 +53,14 @@ function PlankNode( modelViewTransform, plank ) {
     self.highlights.forEach( function( highlight ) {
       highlight.visible = false;
     } );
-    plank.activeDropLocations.forEach( function( location ) {
-      self.highlights[ mapLocationToHighlightIndex( location ) ].visible = true;
+    plank.activeDropPositions.forEach( function( position ) {
+      self.highlights[ mapPositionToHighlightIndex( position ) ].visible = true;
     } );
   }
 
-  // Update the tick mark highlights as the active drop locations change.
-  plank.activeDropLocations.addItemAddedListener( updateHighlights );
-  plank.activeDropLocations.addItemRemovedListener( updateHighlights );
+  // Update the tick mark highlights as the active drop positions change.
+  plank.activeDropPositions.addItemAddedListener( updateHighlights );
+  plank.activeDropPositions.addItemRemovedListener( updateHighlights );
 
   // Create and add the tick mark layer.
   const tickMarkLayer = new Node();
@@ -69,7 +69,7 @@ function PlankNode( modelViewTransform, plank ) {
     modelViewTransform.modelToViewY( plank.getPlankSurfaceCenter().y ) );
   const tickMarkDeltaX = modelViewTransform.modelToViewDeltaX( Plank.INTER_SNAP_TO_MARKER_DISTANCE );
   this.highlights = [];
-  for ( let i = 0; i < Plank.NUM_SNAP_TO_LOCATIONS; i++ ) {
+  for (let i = 0; i < Plank.NUM_SNAP_TO_POSITIONS; i++ ) {
     let tickMarkStroke = NORMAL_TICK_MARK_LINE_WIDTH;
     if ( i % 2 === 0 ) {
       // Make some marks bold for easier placement of masses.

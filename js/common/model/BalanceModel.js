@@ -70,7 +70,7 @@ export default inherit( Object, BalanceModel, {
     const self = this;
 
     // Add a listener that will update the list of user controlled masses
-    // that is used by the plank to update the active drop locations.
+    // that is used by the plank to update the active drop positions.
     const userControlledMassesUpdater = function( userControlled ) {
       if ( userControlled ) {
         self.userControlledMasses.push( mass );

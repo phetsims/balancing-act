@@ -27,18 +27,18 @@ const PLANK_LENGTH = 4.5;// meters
 const PLANK_THICKNESS = 0.05; // meters
 const PLANK_MASS = 75; // kg
 const INTER_SNAP_TO_MARKER_DISTANCE = 0.25; // meters
-const NUM_SNAP_TO_LOCATIONS = Math.floor( PLANK_LENGTH / INTER_SNAP_TO_MARKER_DISTANCE - 1 );
+const NUM_SNAP_TO_POSITIONS = Math.floor( PLANK_LENGTH / INTER_SNAP_TO_MARKER_DISTANCE - 1 );
 const MOMENT_OF_INERTIA = PLANK_MASS * ( ( PLANK_LENGTH * PLANK_LENGTH ) + ( PLANK_THICKNESS * PLANK_THICKNESS ) ) / 12;
 
 /**
- * @param location {Vector2} Initial location of the horizontal center, vertical bottom
+ * @param position {Vector2} Initial position of the horizontal center, vertical bottom
  * @param pivotPoint {Vector2} Point around which the plank will pivot
  * @param columnState {Property} Property that indicates current state of support columns.
- * @param userControlledMasses {Array} Masses being controlled by the user, used to update active drop locations.
+ * @param userControlledMasses {Array} Masses being controlled by the user, used to update active drop positions.
  * @param {Tandem} tandem
  * @constructor
  */
-function Plank( location, pivotPoint, columnState, userControlledMasses, tandem ) {
+function Plank( position, pivotPoint, columnState, userControlledMasses, tandem ) {
   const self = this;
   self.userControlledMasses = userControlledMasses;
 
@@ -51,15 +51,15 @@ function Plank( location, pivotPoint, columnState, userControlledMasses, tandem 
     phetioHighFrequency: true
   } );
 
-  // Point where the bottom center of the plank is currently located. If the plank is sitting on top of the fulcrum,
+  // Point where the bottom center of the plank is currently positioned. If the plank is sitting on top of the fulcrum,
   // this point will be the same as the pivot point.  When the pivot point is above the plank, as is generally done
-  // in this simulation in order to make the plank rebalance if nothing is on it, this location will be different.
-  this.bottomCenterLocationProperty = new Property( location );
+  // in this simulation in order to make the plank rebalance if nothing is on it, this position will be different.
+  this.bottomCenterPositionProperty = new Property( position );
 
   // Externally visible observable lists.
   self.massesOnSurface = new ObservableArray();
   self.forceVectors = new ObservableArray();
-  self.activeDropLocations = new ObservableArray(); // Locations where user-controlled masses would land if dropped, in meters from center.
+  self.activeDropPositions = new ObservableArray(); // Positions where user-controlled masses would land if dropped, in meters from center.
 
   // Other external visible attributes.
   self.pivotPoint = pivotPoint;
@@ -98,10 +98,10 @@ function Plank( location, pivotPoint, columnState, userControlledMasses, tandem 
   // point and the bottom of the plank.  If this assumption changes, or
   // if the fulcrum becomes movable, the way this is done will need to
   // change.
-  self.maxTiltAngle = Math.asin( location.y / ( PLANK_LENGTH / 2 ) );
+  self.maxTiltAngle = Math.asin( position.y / ( PLANK_LENGTH / 2 ) );
 
   // Unrotated shape of the plank
-  self.unrotatedShape = Shape.rect( location.x - PLANK_LENGTH / 2, location.y, PLANK_LENGTH, PLANK_THICKNESS );
+  self.unrotatedShape = Shape.rect( position.x - PLANK_LENGTH / 2, position.y, PLANK_LENGTH, PLANK_THICKNESS );
 
   // Listen to the support column property.  The plank goes to the level
   // position whenever there are two columns present, and into a tilted
@@ -160,39 +160,39 @@ export default inherit( Object, Plank, {
       // Simulate friction by slowing down the rotation a little.
       self.angularVelocity *= 0.91;
 
-      // Update the active drop locations.
-      const tempDropLocations = [];
+      // Update the active drop positions.
+      const tempDropPositions = [];
       self.userControlledMasses.forEach( function( userControlledMass ) {
         if ( self.isPointAbovePlank( userControlledMass.getMiddlePoint() ) ) {
-          const closestOpenLocation = self.getOpenMassDroppedLocation( userControlledMass.positionProperty.get() );
-          if ( closestOpenLocation ) {
+          const closestOpenPosition = self.getOpenMassDroppedPosition( userControlledMass.positionProperty.get() );
+          if ( closestOpenPosition ) {
             const plankSurfaceCenter = self.getPlankSurfaceCenter();
-            const distanceFromCenter = closestOpenLocation.distance( plankSurfaceCenter ) * ( closestOpenLocation.x < 0 ? -1 : 1 );
-            tempDropLocations.push( distanceFromCenter );
+            const distanceFromCenter = closestOpenPosition.distance( plankSurfaceCenter ) * ( closestOpenPosition.x < 0 ? -1 : 1 );
+            tempDropPositions.push( distanceFromCenter );
           }
         }
       } );
-      const copyOfActiveDropLocations = self.activeDropLocations.getArray().slice( 0 );
-      // Remove newly inactive drop locations.
-      copyOfActiveDropLocations.forEach( function( activeDropLocation ) {
-        if ( tempDropLocations.indexOf( activeDropLocation ) < 0 ) {
-          self.activeDropLocations.remove( activeDropLocation );
+      const copyOfActiveDropPositions = self.activeDropPositions.getArray().slice( 0 );
+      // Remove newly inactive drop positions.
+      copyOfActiveDropPositions.forEach( function( activeDropPositions ) {
+        if ( tempDropPositions.indexOf( activeDropPositions ) < 0 ) {
+          self.activeDropPositions.remove( activeDropPositions );
         }
       } );
-      // Add any new active drop locations.
-      tempDropLocations.forEach( function( dropLocation ) {
-        if ( !self.activeDropLocations.contains( dropLocation ) ) {
-          self.activeDropLocations.add( dropLocation );
+      // Add any new active drop positions.
+      tempDropPositions.forEach( function( dropPosition ) {
+        if ( !self.activeDropPositions.contains( dropPosition ) ) {
+          self.activeDropPositions.add( dropPosition );
         }
       } );
     },
 
-    // Add a mass to the surface of the plank, chooses a location below the mass.
+    // Add a mass to the surface of the plank, chooses a position below the mass.
     addMassToSurface: function( mass ) {
       let massAdded = false;
-      const closestOpenLocation = this.getOpenMassDroppedLocation( mass.positionProperty.get() );
-      if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenLocation !== null ) {
-        mass.positionProperty.set( closestOpenLocation );
+      const closestOpenPosition = this.getOpenMassDroppedPosition( mass.positionProperty.get() );
+      if ( this.isPointAbovePlank( mass.getMiddlePoint() ) && closestOpenPosition !== null ) {
+        mass.positionProperty.set( closestOpenPosition );
         mass.onPlankProperty.set( true );
 
         const result = {
@@ -243,18 +243,18 @@ export default inherit( Object, Plank, {
       } );
     },
 
-    // Add a mass to the specified location on the plank.
+    // Add a mass to the specified position on the plank.
     addMassToSurfaceAt: function( mass, distanceFromCenter ) {
       if ( Math.abs( distanceFromCenter ) > PLANK_LENGTH / 2 ) {
         throw new Error( 'Warning: Attempt to add mass at invalid distance from center' );
       }
-      const vectorToLocation = this.getPlankSurfaceCenter().plus(
+      const vectorToPosition = this.getPlankSurfaceCenter().plus(
         Vector2.createPolar( distanceFromCenter, this.tiltAngleProperty.get() )
       );
 
       // Set the position of the mass to be just above the plank at the
       // appropriate distance so that it will drop to the correct place.
-      mass.positionProperty.set( new Vector2( vectorToLocation.x, vectorToLocation.y + 0.01 ) );
+      mass.positionProperty.set( new Vector2( vectorToPosition.x, vectorToPosition.y + 0.01 ) );
       assert && assert( this.isPointAbovePlank( mass.positionProperty.get() ) );  // Need to fix this if mass isn't above the surface.
       this.addMassToSurface( mass );
     },
@@ -274,7 +274,7 @@ export default inherit( Object, Plank, {
       } );
 
       // Update the force vectors from the masses.  This mostly just moves
-      // them to the correct locations.
+      // them to the correct positions.
       this.forceVectors.forEach( function( forceVectors ) {
         forceVectors.update();
       } );
@@ -337,63 +337,63 @@ export default inherit( Object, Plank, {
       }
       let attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );
       attachmentBarVector = attachmentBarVector.rotated( this.tiltAngleProperty.get() );
-      this.bottomCenterLocationProperty.set( this.pivotPoint.plus( attachmentBarVector ) );
+      this.bottomCenterPositionProperty.set( this.pivotPoint.plus( attachmentBarVector ) );
     },
 
-    // Find the best open location for a mass that was dropped at the given
-    // point.  Returns null if no nearby open location is available.
-    getOpenMassDroppedLocation: function( position ) {
+    // Find the best open position for a mass that was dropped at the given
+    // point.  Returns null if no nearby open position is available.
+    getOpenMassDroppedPosition: function(position ) {
       const self = this;
-      let closestOpenLocation = null;
-      const validMassLocations = this.getSnapToLocations();
-      if ( NUM_SNAP_TO_LOCATIONS % 2 === 1 ) {
-        // Remove the location at the center of the plank from the set of
+      let closestOpenPosition = null;
+      const validMassPositions = this.getSnapToPositions();
+      if ( NUM_SNAP_TO_POSITIONS % 2 === 1 ) {
+        // Remove the position at the center of the plank from the set of
         // candidates, since we don't want to allow users to place things
         // there.
-        validMassLocations.splice( NUM_SNAP_TO_LOCATIONS / 2, 1 );
+        validMassPositions.splice( NUM_SNAP_TO_POSITIONS / 2, 1 );
       }
 
-      let candidateOpenLocations = [];
+      let candidateOpenPositions = [];
 
-      validMassLocations.forEach( function( validLocation ) {
+      validMassPositions.forEach( function( validPosition ) {
         let occupiedOrTooFar = false;
-        if ( Math.abs( validLocation.x - position.x ) > INTER_SNAP_TO_MARKER_DISTANCE * 2 ) {
+        if ( Math.abs( validPosition.x - position.x ) > INTER_SNAP_TO_MARKER_DISTANCE * 2 ) {
           occupiedOrTooFar = true;
         }
         for ( let i = 0; i < self.massesOnSurface.length && !occupiedOrTooFar; i++ ) {
-          if ( self.massesOnSurface.get( i ).positionProperty.get().distance( validLocation ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+          if ( self.massesOnSurface.get( i ).positionProperty.get().distance( validPosition ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
             occupiedOrTooFar = true;
           }
         }
         if ( !occupiedOrTooFar ) {
-          candidateOpenLocations.push( validLocation );
+          candidateOpenPositions.push( validPosition );
         }
       } );
 
-      // Sort through the locations and eliminate those that are already
+      // Sort through the positions and eliminate those that are already
       // occupied or too far away.
-      const copyOfCandidateLocations = candidateOpenLocations.slice( 0 );
-      for ( let i = 0; i < copyOfCandidateLocations.length; i++ ) {
+      const copyOfCandidatePositions = candidateOpenPositions.slice( 0 );
+      for ( let i = 0; i < copyOfCandidatePositions.length; i++ ) {
         for ( let j = 0; j < this.massesOnSurface.length; j++ ) {
-          if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidateLocations[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
+          if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidatePositions[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
             // This position is already occupied.
-            candidateOpenLocations = _.without( candidateOpenLocations, this.massesOnSurface[ j ] );
+            candidateOpenPositions = _.without( candidateOpenPositions, this.massesOnSurface[ j ] );
           }
         }
       }
 
-      // Find the closest of the open locations.
-      candidateOpenLocations.forEach( function( candidateOpenLocation ) {
+      // Find the closest of the open positions.
+      candidateOpenPositions.forEach( function( candidateOpenPosition ) {
         // Must be a reasonable distance away in the horizontal direction
         // so that objects don't appear to fall sideways.
-        if ( Math.abs( candidateOpenLocation.x - position.x ) <= INTER_SNAP_TO_MARKER_DISTANCE ) {
-          // This location is a potential candidate.  Is it better than what was already found?
-          if ( closestOpenLocation === null || candidateOpenLocation.distance( position ) < closestOpenLocation.distance( position ) ) {
-            closestOpenLocation = candidateOpenLocation;
+        if ( Math.abs( candidateOpenPosition.x - position.x ) <= INTER_SNAP_TO_MARKER_DISTANCE ) {
+          // This position is a potential candidate.  Is it better than what was already found?
+          if ( closestOpenPosition === null || candidateOpenPosition.distance( position ) < closestOpenPosition.distance( position ) ) {
+            closestOpenPosition = candidateOpenPosition;
           }
         }
       } );
-      return closestOpenLocation;
+      return closestOpenPosition;
     },
 
     /**
@@ -422,10 +422,10 @@ export default inherit( Object, Plank, {
     // Obtain the absolute position (in meters) of the center surface (top)
     // of the plank
     getPlankSurfaceCenter: function() {
-      // Start at the absolute location of the attachment point, and add the
-      // relative location of the top of the plank, accounting for its
+      // Start at the absolute position of the attachment point, and add the
+      // relative position of the top of the plank, accounting for its
       // rotation angle
-      return this.bottomCenterLocationProperty.get().plus(
+      return this.bottomCenterPositionProperty.get().plus(
         Vector2.createPolar( PLANK_THICKNESS, this.tiltAngleProperty.get() + Math.PI / 2 )
       );
     },
@@ -472,7 +472,7 @@ export default inherit( Object, Plank, {
         this.currentNetTorque += this.getTorqueDueToMasses();
 
         // Add in torque due to plank.
-        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterLocationProperty.get().x ) * PLANK_MASS;
+        this.currentNetTorque += ( this.pivotPoint.x - this.bottomCenterPositionProperty.get().x ) * PLANK_MASS;
       }
     },
 
@@ -485,8 +485,8 @@ export default inherit( Object, Plank, {
       return torque;
     },
 
-    getSnapToLocations: function() {
-      const snapToLocations = new Array( NUM_SNAP_TO_LOCATIONS );
+    getSnapToPositions: function() {
+      const snapToPositions = new Array( NUM_SNAP_TO_POSITIONS );
       const rotationTransform = Matrix3.rotationAround(
         this.tiltAngleProperty.get(),
         this.pivotPoint.x,
@@ -494,12 +494,12 @@ export default inherit( Object, Plank, {
       );
       const unrotatedY = this.unrotatedShape.bounds.maxY;
       const unrotatedMinX = this.unrotatedShape.bounds.minX;
-      for ( let i = 0; i < NUM_SNAP_TO_LOCATIONS; i++ ) {
+      for ( let i = 0; i < NUM_SNAP_TO_POSITIONS; i++ ) {
         const unrotatedPoint = new Vector2( unrotatedMinX + ( i + 1 ) * INTER_SNAP_TO_MARKER_DISTANCE, unrotatedY );
-        snapToLocations[ i ] = rotationTransform.timesVector2( unrotatedPoint );
+        snapToPositions[ i ] = rotationTransform.timesVector2( unrotatedPoint );
       }
 
-      return snapToLocations;
+      return snapToPositions;
     }
   },
   {
@@ -507,6 +507,6 @@ export default inherit( Object, Plank, {
     LENGTH: PLANK_LENGTH,
     THICKNESS: PLANK_THICKNESS,
     INTER_SNAP_TO_MARKER_DISTANCE: INTER_SNAP_TO_MARKER_DISTANCE,
-    NUM_SNAP_TO_LOCATIONS: NUM_SNAP_TO_LOCATIONS
+    NUM_SNAP_TO_POSITIONS: NUM_SNAP_TO_POSITIONS
   }
 );

@@ -44,7 +44,7 @@ function ModelElementCreatorNode( modelViewTransform, options ) {
 
   // Offset used when adding an element to the model.  This is useful in
   // making sure that the newly created object isn't positioned in, shall we
-  // say, an awkward location with respect to the mouse.
+  // say, an awkward position with respect to the mouse.
   self.positioningOffset = Vector2.ZERO;
 
   // Function for translating click events to model coordinates.

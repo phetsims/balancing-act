@@ -2,7 +2,7 @@
 
 /**
  * Class that depicts a "mystery vector", which is a vector that is presented to
- * the user in the appropriate location but that has a fixed size and is labeled
+ * the user in the appropriate position but that has a fixed size and is labeled
  * with a question mark (or some other symbol).
  *
  * @author John Blanco

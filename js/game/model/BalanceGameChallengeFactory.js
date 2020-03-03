@@ -230,7 +230,7 @@ const BalanceGameChallengeFactory = {
       for ( let fixedMass2Distance = distanceIncrement; fixedMass2Distance <= maxDistance; fixedMass2Distance += distanceIncrement ) {
         if ( fixedMass1Distance === fixedMass2Distance || Math.abs( fixedMass1Distance - fixedMass2Distance ) < 1.1 * distanceIncrement ) {
           // Skip cases where the fixed masses are at the same
-          // location or just one increment apart.
+          // position or just one increment apart.
           continue;
         }
         const fixedMassTorque = fixedMass1Prototype.massValue * fixedMass1Distance + fixedMass2Prototype.massValue * fixedMass2Distance;

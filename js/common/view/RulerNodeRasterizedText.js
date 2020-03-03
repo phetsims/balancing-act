@@ -140,7 +140,7 @@ function RulerNodeRasterizedText( width, height, majorTickWidth, majorTickLabels
 inherit( Node, RulerNodeRasterizedText );
 
 /**
- * Creates a tick mark at a specific x location.
+ * Creates a tick mark at a specific x position.
  * Each tick is marked at the top and bottom of the ruler.
  * If you desire a different style of tick mark, override this method.
  *

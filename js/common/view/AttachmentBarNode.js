@@ -23,7 +23,7 @@ function AttachmentBarNode( modelViewTransform, plank ) {
 
   // Add the bar, which goes from the pivot point to the bottom of the plank.
   const attachmentBarLength = modelViewTransform.modelToViewDeltaY(
-    plank.bottomCenterLocationProperty.get().y - plank.pivotPoint.y
+    plank.bottomCenterPositionProperty.get().y - plank.pivotPoint.y
   );
   const attachmentBar = new Rectangle( pivotPointPosInView.x - ATTACHMENT_BAR_WIDTH / 2, pivotPointPosInView.y, ATTACHMENT_BAR_WIDTH,
     attachmentBarLength, 0, 0, { fill: 'rgb( 200, 200, 200 )', stroke: 'rgb( 50, 50, 50 )' } );
