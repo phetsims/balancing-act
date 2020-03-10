@@ -18,7 +18,7 @@ const INSET_PROPORTION = 0.25;
 
 /**
  * @param {Mass} mass
- * @param {ModelViewTransform} modelViewTransform
+ * @param {ModelViewTransform2} modelViewTransform
  * @param {boolean} isLabeled
  * @param {Property} massLabelVisibleProperty
  * @param {boolean} draggable

@@ -25,7 +25,7 @@ const LABEL_FONT = new PhetFont( 14 );
 const MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
 
 /**
- * @param {ModelViewTransform} modelViewTransform
+ * @param {ModelViewTransform2} modelViewTransform
  * @param {Object} [options]
  * @constructor
  */
