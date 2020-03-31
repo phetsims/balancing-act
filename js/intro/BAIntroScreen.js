@@ -11,7 +11,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introIconSmall from '../../images/intro-icon-small_png.js';
 import introIcon from '../../images/intro-icon_png.js';
-import balancingActStrings from '../balancing-act-strings.js';
+import balancingActStrings from '../balancingActStrings.js';
 import balancingAct from '../balancingAct.js';
 import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';

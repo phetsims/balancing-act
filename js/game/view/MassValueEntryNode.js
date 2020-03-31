@@ -19,7 +19,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 
 const kgString = balancingActStrings.kg;

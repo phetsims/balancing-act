@@ -16,7 +16,7 @@ import mysteryObject5Image from '../../../../images/mystery-object-05_png.js';
 import mysteryObject6Image from '../../../../images/mystery-object-06_png.js';
 import mysteryObject7Image from '../../../../images/mystery-object-07_png.js';
 import mysteryObject8Image from '../../../../images/mystery-object-08_png.js';
-import balancingActStrings from '../../../balancing-act-strings.js';
+import balancingActStrings from '../../../balancingActStrings.js';
 import balancingAct from '../../../balancingAct.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass from './LabeledImageMass.js';

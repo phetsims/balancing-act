@@ -11,7 +11,7 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 import RasterizedTextNode from './RasterizedTextNode.js';

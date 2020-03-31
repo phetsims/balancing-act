@@ -18,7 +18,7 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 

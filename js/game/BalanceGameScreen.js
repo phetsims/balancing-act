@@ -11,7 +11,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import gameIconSmall from '../../images/game-icon-small_png.js';
 import gameIcon from '../../images/game-icon_png.js';
-import balancingActStrings from '../balancing-act-strings.js';
+import balancingActStrings from '../balancingActStrings.js';
 import balancingAct from '../balancingAct.js';
 import BalanceGameModel from './model/BalanceGameModel.js';
 import BalanceGameView from './view/BalanceGameView.js';

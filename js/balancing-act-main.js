@@ -8,7 +8,7 @@ import Sim from '../../joist/js/Sim.js';
 import SimLauncher from '../../joist/js/SimLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import BalanceLabScreen from './balancelab/BalanceLabScreen.js';
-import balancingActStrings from './balancing-act-strings.js';
+import balancingActStrings from './balancingActStrings.js';
 import BalanceGameScreen from './game/BalanceGameScreen.js';
 import BAIntroScreen from './intro/BAIntroScreen.js';
 

@@ -11,7 +11,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import labIconSmall from '../../images/lab-icon-small_png.js';
 import labIcon from '../../images/lab-icon_png.js';
-import balancingActStrings from '../balancing-act-strings.js';
+import balancingActStrings from '../balancingActStrings.js';
 import balancingAct from '../balancingAct.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabView from './view/BalanceLabView.js';

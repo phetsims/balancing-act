@@ -8,7 +8,7 @@
 
 import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import ModelElementCreatorNode from './ModelElementCreatorNode.js';
 

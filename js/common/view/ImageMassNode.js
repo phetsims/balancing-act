@@ -16,7 +16,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import defaultImage from '../../../images/default-image_png.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';

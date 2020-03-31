@@ -23,7 +23,7 @@ import GirlCreatorNode from '../../balancelab/view/GirlCreatorNode.js';
 import ManCreatorNode from '../../balancelab/view/ManCreatorNode.js';
 import MysteryMassCreatorNode from '../../balancelab/view/MysteryMassCreatorNode.js';
 import WomanCreatorNode from '../../balancelab/view/WomanCreatorNode.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 

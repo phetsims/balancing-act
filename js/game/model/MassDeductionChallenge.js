@@ -2,7 +2,7 @@
 
 
 import inherit from '../../../../phet-core/js/inherit.js';
-import balancingActStrings from '../../balancing-act-strings.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
