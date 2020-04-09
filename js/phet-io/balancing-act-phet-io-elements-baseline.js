@@ -38,7 +38,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+      "phetioTypeName": "PhetioGroupIO<ReferenceIO<ObjectIO>>"
     },
     "balancingAct.balanceLabScreen.model.brickStackGroup.archetype": {
       "phetioDocumentation": "",
@@ -51,7 +51,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "balancingAct.balanceLabScreen.model.columnStateProperty": {
       "phetioDocumentation": "",
@@ -77,7 +77,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": false,
       "phetioStudioControl": true,
-      "phetioTypeName": "PhetioGroupIO<ReferenceIO>"
+      "phetioTypeName": "PhetioGroupIO<ReferenceIO<ObjectIO>>"
     },
     "balancingAct.balanceLabScreen.model.mysteryMassGroup.archetype": {
       "phetioDocumentation": "",
@@ -90,7 +90,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "balancingAct.balanceLabScreen.model.plank.massDroppedOnPlankEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
@@ -5745,7 +5745,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "balancingAct.introScreen.model.fireExtinguisher2": {
       "phetioDocumentation": "",
@@ -5758,7 +5758,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "balancingAct.introScreen.model.plank.massDroppedOnPlankEmitter": {
       "phetioDocumentation": "A function that executes. The arguments are:<br/><ol><li>phetioID: StringIO</li><br/><li>mass: NumberIO</li><br/><li>distance: NumberIO</li><br/><li>fullState: ObjectIO</li></ol>",
@@ -5810,7 +5810,7 @@ window.phet.preloads.phetio.phetioElementsBaseline = assert &&
       "phetioReadOnly": false,
       "phetioState": true,
       "phetioStudioControl": true,
-      "phetioTypeName": "ReferenceIO"
+      "phetioTypeName": "ReferenceIO<ObjectIO>"
     },
     "balancingAct.introScreen.nameProperty": {
       "phetioDocumentation": "The name of the screen. Changing this value will update the screen name for the screen's corresponding button on the navigation bar and home screen, if they exist. May be null for single-screen simulations.",
