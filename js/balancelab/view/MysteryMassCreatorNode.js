@@ -40,7 +40,7 @@ export default inherit( ImageMassCreatorNode, MysteryMassCreatorNode, {
    * @override
    */
   addElementToModel: function( position ) {
-    const mass = this.model.mysteryMassGroup.createNextMember( position, this.mysteryMassId );
+    const mass = this.model.mysteryMassGroup.createNextElement( position, this.mysteryMassId );
     this.model.addMass( mass );
     return mass;
   }

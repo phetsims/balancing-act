@@ -68,7 +68,7 @@ balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
 
 export default inherit( MassCreatorNode, BrickStackCreatorNode, {
   addElementToModel: function( position ) {
-    const mass = this.model.brickStackGroup.createNextMember( this.numBricks, position );
+    const mass = this.model.brickStackGroup.createNextElement( this.numBricks, position );
     this.model.addMass( mass );
     return mass;
   }
