@@ -99,264 +99,265 @@ function BalanceGameModel( tandem ) {
 
 balancingAct.register( 'BalanceGameModel', BalanceGameModel );
 
-export default inherit( Object, BalanceGameModel,
-  {
-    step: function( dt ) {
-      this.plank.step( dt );
-      this.movableMasses.forEach( function( mass ) {
-        mass.step( dt );
-      } );
-      this.fixedMasses.forEach( function( mass ) {
-        mass.step( dt );
-      } );
-    },
+inherit( Object, BalanceGameModel, {
+  step: function( dt ) {
+    this.plank.step( dt );
+    this.movableMasses.forEach( function( mass ) {
+      mass.step( dt );
+    } );
+    this.fixedMasses.forEach( function( mass ) {
+      mass.step( dt );
+    } );
+  },
 
-    reset: function() {
-      this.timerEnabledProperty.reset();
-      this.levelProperty.reset();
-      this.challengeIndexProperty.reset();
-      this.scoreProperty.reset();
-      this.gameStateProperty.reset();
-      this.columnStateProperty.reset();
-      this.elapsedTimeProperty.reset();
-      this.mostRecentScores.forEach( function( mostRecentScoreProperty ) { mostRecentScoreProperty.reset(); } );
-      this.bestTimes = [];
-      const self = this;
-      _.times( MAX_LEVELS, function() {
-        self.bestTimes.push( null );
-      } );
-    },
+  reset: function() {
+    this.timerEnabledProperty.reset();
+    this.levelProperty.reset();
+    this.challengeIndexProperty.reset();
+    this.scoreProperty.reset();
+    this.gameStateProperty.reset();
+    this.columnStateProperty.reset();
+    this.elapsedTimeProperty.reset();
+    this.mostRecentScores.forEach( function( mostRecentScoreProperty ) { mostRecentScoreProperty.reset(); } );
+    this.bestTimes = [];
+    const self = this;
+    _.times( MAX_LEVELS, function() {
+      self.bestTimes.push( null );
+    } );
+  },
 
-    startLevel: function( level ) {
-      this.levelProperty.set( level );
-      this.scoreProperty.reset();
-      this.challengeIndexProperty.reset();
-      this.restartGameTimer();
+  startLevel: function( level ) {
+    this.levelProperty.set( level );
+    this.scoreProperty.reset();
+    this.challengeIndexProperty.reset();
+    this.restartGameTimer();
 
-      // Set up the challenges.
-      this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
+    // Set up the challenges.
+    this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
 
-      // Set up the model for the next challenge
-      this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
+    // Set up the model for the next challenge
+    this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );
 
-      // Change to new game state.
-      this.gameStateProperty.set( 'presentingInteractiveChallenge' );
+    // Change to new game state.
+    this.gameStateProperty.set( 'presentingInteractiveChallenge' );
 
-      // Flag set to indicate new best time, cleared each time a level is started.
-      this.newBestTime = false;
-    },
+    // Flag set to indicate new best time, cleared each time a level is started.
+    this.newBestTime = false;
+  },
 
-    setChallenge: function( balanceChallenge, columnState ) {
+  setChallenge: function( balanceChallenge, columnState ) {
 
-      const self = this;
+    const self = this;
 
-      // Clear out the previous challenge (if there was one).  Start by
-      // resetting the plank.
-      self.plank.removeAllMasses();
-      self.userControlledMasses.length = 0;
+    // Clear out the previous challenge (if there was one).  Start by
+    // resetting the plank.
+    self.plank.removeAllMasses();
+    self.userControlledMasses.length = 0;
 
-      // Force the plank to be level and still.  This prevents any floating
-      // point inaccuracies when adding masses.
-      self.columnStateProperty.set( ColumnState.DOUBLE_COLUMNS );
+    // Force the plank to be level and still.  This prevents any floating
+    // point inaccuracies when adding masses.
+    self.columnStateProperty.set( ColumnState.DOUBLE_COLUMNS );
 
-      // Clear out the masses from the previous challenge.
-      self.fixedMasses.clear();
-      self.movableMasses.clear();
+    // Clear out the masses from the previous challenge.
+    self.fixedMasses.clear();
+    self.movableMasses.clear();
 
-      // Set up the new challenge.
-      balanceChallenge.fixedMassDistancePairs.forEach( function( fixedMassDistancePair ) {
-        self.fixedMasses.push( fixedMassDistancePair.mass );
-        self.plank.addMassToSurfaceAt( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
-      } );
+    // Set up the new challenge.
+    balanceChallenge.fixedMassDistancePairs.forEach( function( fixedMassDistancePair ) {
+      self.fixedMasses.push( fixedMassDistancePair.mass );
+      self.plank.addMassToSurfaceAt( fixedMassDistancePair.mass, fixedMassDistancePair.distance );
+    } );
 
-      balanceChallenge.movableMasses.forEach( function( mass ) {
-        const initialPosition = new Vector2( 3, 0 );
-        mass.positionProperty.set( initialPosition );
-        mass.userControlledProperty.link( function( userControlled ) {
-          if ( userControlled ) {
-            self.userControlledMasses.push( mass );
+    balanceChallenge.movableMasses.forEach( function( mass ) {
+      const initialPosition = new Vector2( 3, 0 );
+      mass.positionProperty.set( initialPosition );
+      mass.userControlledProperty.link( function( userControlled ) {
+        if ( userControlled ) {
+          self.userControlledMasses.push( mass );
+        }
+        else {
+          // The user has dropped this mass.
+          self.userControlledMasses.splice( self.userControlledMasses.indexOf( mass ), 1 );
+          if ( !self.plank.addMassToSurface( mass ) ) {
+            // The attempt to add this mass to surface of plank failed,
+            // probably because the mass wasn't over the plank or there
+            // wasn't on open spot near where it was released.
+            mass.positionProperty.set( initialPosition );
           }
-          else {
-            // The user has dropped this mass.
-            self.userControlledMasses.splice( self.userControlledMasses.indexOf( mass ), 1 );
-            if ( !self.plank.addMassToSurface( mass ) ) {
-              // The attempt to add this mass to surface of plank failed,
-              // probably because the mass wasn't over the plank or there
-              // wasn't on open spot near where it was released.
-              mass.positionProperty.set( initialPosition );
-            }
-          }
-        } );
-        self.movableMasses.add( mass );
-
+        }
       } );
+      self.movableMasses.add( mass );
 
-      // Set the column state.
-      self.columnStateProperty.set( columnState );
-    },
+    } );
 
-    setChoosingLevelState: function() {
-      this.gameStateProperty.set( 'choosingLevel' );
-    },
+    // Set the column state.
+    self.columnStateProperty.set( columnState );
+  },
 
-    getCurrentChallenge: function() {
-      if ( this.challengeList === null || this.challengeList.size <= this.challengeIndexProperty.get() ) {
-        return null;
-      }
-      return this.challengeList[ this.challengeIndexProperty.get() ];
-    },
+  setChoosingLevelState: function() {
+    this.gameStateProperty.set( 'choosingLevel' );
+  },
 
-    getChallengeCurrentPointValue: function() {
-      return MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
-    },
+  getCurrentChallenge: function() {
+    if ( this.challengeList === null || this.challengeList.size <= this.challengeIndexProperty.get() ) {
+      return null;
+    }
+    return this.challengeList[ this.challengeIndexProperty.get() ];
+  },
 
-    // Check the user's proposed answer.  Used overloaded functions in
-    // the original Java sim, a little ugly when ported.
-    checkAnswer: function( mass, tiltPrediction ) {
-      if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
+  getChallengeCurrentPointValue: function() {
+    return MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
+  },
+
+  // Check the user's proposed answer.  Used overloaded functions in
+  // the original Java sim, a little ugly when ported.
+  checkAnswer: function( mass, tiltPrediction ) {
+    if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
+      // Turn off the column(s) so that the plank can move.
+      this.columnStateProperty.set( ColumnState.NO_COLUMNS );
+
+      this.handleProposedAnswer( this.plank.isBalanced() );
+    }
+    else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
+
+      const isAnswerCorrect = ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
+                              ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
+                              ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
+
+      if ( isAnswerCorrect ) {
         // Turn off the column(s) so that the plank can move.
         this.columnStateProperty.set( ColumnState.NO_COLUMNS );
-
-        this.handleProposedAnswer( this.plank.isBalanced() );
       }
-      else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
 
-        const isAnswerCorrect = ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
-                                ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
-                                ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
-
-        if ( isAnswerCorrect ) {
-          // Turn off the column(s) so that the plank can move.
-          this.columnStateProperty.set( ColumnState.NO_COLUMNS );
-        }
-
-        this.handleProposedAnswer( isAnswerCorrect );
-      }
-      else if ( this.getCurrentChallenge() instanceof MassDeductionChallenge ) {
-        this.handleProposedAnswer( mass === this.getTotalFixedMassValue() );
-      }
-    },
-
-    handleProposedAnswer: function( answerIsCorrect ) {
-      let pointsEarned = 0;
-      if ( answerIsCorrect ) {
-        // The user answered the challenge correctly.
-        this.gameStateProperty.set( 'showingCorrectAnswerFeedback' );
-        if ( this.incorrectGuessesOnCurrentChallenge === 0 ) {
-          // User got it right the first time.
-          pointsEarned = MAX_POINTS_PER_PROBLEM;
-        }
-        else {
-          // User got it wrong at first, but got it right now.
-          pointsEarned = MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
-        }
-        this.scoreProperty.value += pointsEarned;
-      }
-      else {
-        // The user got it wrong.
-        this.incorrectGuessesOnCurrentChallenge++;
-        if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
-          this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackTryAgain' );
-        }
-        else {
-          this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackMoveOn' );
-        }
-      }
-    },
-
-    newGame: function() {
-      this.stopGameTimer();
-      this.gameStateProperty.set( 'choosingLevel' );
-      this.incorrectGuessesOnCurrentChallenge = 0;
-    },
-
-    nextChallenge: function() {
-      this.challengeIndexProperty.value++;
-      this.incorrectGuessesOnCurrentChallenge = 0;
-      if ( this.challengeIndexProperty.get() < this.challengeList.length ) {
-        // Move to the next challenge.
-        this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
-        this.gameStateProperty.set( 'presentingInteractiveChallenge' );
-      }
-      else {
-        // All challenges completed for this level.  See if this is a new
-        // best time and, if so, record it.
-        const level = this.levelProperty.get();
-        if ( this.scoreProperty.get() === MAX_SCORE_PER_GAME ) {
-          // Perfect game.  See if new best time.
-          if ( this.bestTimes[ level ] === null || this.elapsedTimeProperty.get() < this.bestTimes[ level ] ) {
-            this.newBestTime = this.bestTimes[ level ] !== null; // Don't set this flag for the first 'best time', only when the time improves.
-            this.bestTimes[ level ] = this.elapsedTimeProperty.get();
-          }
-        }
-        this.mostRecentScores[ level ].value = this.scoreProperty.get();
-
-        // Done with this game, show the results.
-        this.gameStateProperty.set( 'showingLevelResults' );
-      }
-    },
-
-    tryAgain: function() {
-      // Restore the column(s) to the original state but don't move the
-      // masses anywhere.  This makes it easier for the users to see why
-      // their answer was incorrect.
-      this.columnStateProperty.set( this.getCurrentChallenge().initialColumnState );
-      this.gameStateProperty.set( 'presentingInteractiveChallenge' );
-    },
-
-    displayCorrectAnswer: function() {
-      const currentChallenge = this.getCurrentChallenge();
-
-      // Put the challenge in its initial state, but with the columns turned off.
-      this.setChallenge( currentChallenge, ColumnState.NO_COLUMNS );
-
-      // Add the movable mass or masses to the plank according to the solution.
-      const self = this;
-      currentChallenge.balancedConfiguration.forEach( function( massDistancePair ) {
-        self.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
-      } );
-
-      // Update the game state.
-      this.gameStateProperty.set( 'displayingCorrectAnswer' );
-    },
-
-    getTipDirection: function() {
-      if ( this.plank.getTorqueDueToMasses() < 0 ) {
-        return 'tiltDownOnRightSide';
-      }
-      else if ( this.plank.getTorqueDueToMasses() > 0 ) {
-        return 'tiltDownOnLeftSide';
-      }
-      else {
-        return 'stayBalanced';
-      }
-    },
-
-    getTotalFixedMassValue: function() {
-      let totalMass = 0;
-      this.getCurrentChallenge().fixedMassDistancePairs.forEach( function( massDistancePair ) {
-        totalMass += massDistancePair.mass.massValue;
-      } );
-      return totalMass;
-    },
-
-    restartGameTimer: function() {
-      if ( this.gameTimerId !== null ) {
-        timer.clearInterval( this.gameTimerId );
-      }
-      this.elapsedTimeProperty.reset();
-      const self = this;
-      this.gameTimerId = timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
-    },
-
-    stopGameTimer: function() {
-      timer.clearInterval( this.gameTimerId );
-      this.gameTimerId = null;
+      this.handleProposedAnswer( isAnswerCorrect );
     }
-  }, {
+    else if ( this.getCurrentChallenge() instanceof MassDeductionChallenge ) {
+      this.handleProposedAnswer( mass === this.getTotalFixedMassValue() );
+    }
+  },
 
-    // statics
-    PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,
-    MAX_POSSIBLE_SCORE: MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET
+  handleProposedAnswer: function( answerIsCorrect ) {
+    let pointsEarned = 0;
+    if ( answerIsCorrect ) {
+      // The user answered the challenge correctly.
+      this.gameStateProperty.set( 'showingCorrectAnswerFeedback' );
+      if ( this.incorrectGuessesOnCurrentChallenge === 0 ) {
+        // User got it right the first time.
+        pointsEarned = MAX_POINTS_PER_PROBLEM;
+      }
+      else {
+        // User got it wrong at first, but got it right now.
+        pointsEarned = MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
+      }
+      this.scoreProperty.value += pointsEarned;
+    }
+    else {
+      // The user got it wrong.
+      this.incorrectGuessesOnCurrentChallenge++;
+      if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
+        this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackTryAgain' );
+      }
+      else {
+        this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackMoveOn' );
+      }
+    }
+  },
 
-  } );
+  newGame: function() {
+    this.stopGameTimer();
+    this.gameStateProperty.set( 'choosingLevel' );
+    this.incorrectGuessesOnCurrentChallenge = 0;
+  },
+
+  nextChallenge: function() {
+    this.challengeIndexProperty.value++;
+    this.incorrectGuessesOnCurrentChallenge = 0;
+    if ( this.challengeIndexProperty.get() < this.challengeList.length ) {
+      // Move to the next challenge.
+      this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
+      this.gameStateProperty.set( 'presentingInteractiveChallenge' );
+    }
+    else {
+      // All challenges completed for this level.  See if this is a new
+      // best time and, if so, record it.
+      const level = this.levelProperty.get();
+      if ( this.scoreProperty.get() === MAX_SCORE_PER_GAME ) {
+        // Perfect game.  See if new best time.
+        if ( this.bestTimes[ level ] === null || this.elapsedTimeProperty.get() < this.bestTimes[ level ] ) {
+          this.newBestTime = this.bestTimes[ level ] !== null; // Don't set this flag for the first 'best time', only when the time improves.
+          this.bestTimes[ level ] = this.elapsedTimeProperty.get();
+        }
+      }
+      this.mostRecentScores[ level ].value = this.scoreProperty.get();
+
+      // Done with this game, show the results.
+      this.gameStateProperty.set( 'showingLevelResults' );
+    }
+  },
+
+  tryAgain: function() {
+    // Restore the column(s) to the original state but don't move the
+    // masses anywhere.  This makes it easier for the users to see why
+    // their answer was incorrect.
+    this.columnStateProperty.set( this.getCurrentChallenge().initialColumnState );
+    this.gameStateProperty.set( 'presentingInteractiveChallenge' );
+  },
+
+  displayCorrectAnswer: function() {
+    const currentChallenge = this.getCurrentChallenge();
+
+    // Put the challenge in its initial state, but with the columns turned off.
+    this.setChallenge( currentChallenge, ColumnState.NO_COLUMNS );
+
+    // Add the movable mass or masses to the plank according to the solution.
+    const self = this;
+    currentChallenge.balancedConfiguration.forEach( function( massDistancePair ) {
+      self.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
+    } );
+
+    // Update the game state.
+    this.gameStateProperty.set( 'displayingCorrectAnswer' );
+  },
+
+  getTipDirection: function() {
+    if ( this.plank.getTorqueDueToMasses() < 0 ) {
+      return 'tiltDownOnRightSide';
+    }
+    else if ( this.plank.getTorqueDueToMasses() > 0 ) {
+      return 'tiltDownOnLeftSide';
+    }
+    else {
+      return 'stayBalanced';
+    }
+  },
+
+  getTotalFixedMassValue: function() {
+    let totalMass = 0;
+    this.getCurrentChallenge().fixedMassDistancePairs.forEach( function( massDistancePair ) {
+      totalMass += massDistancePair.mass.massValue;
+    } );
+    return totalMass;
+  },
+
+  restartGameTimer: function() {
+    if ( this.gameTimerId !== null ) {
+      timer.clearInterval( this.gameTimerId );
+    }
+    this.elapsedTimeProperty.reset();
+    const self = this;
+    this.gameTimerId = timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
+  },
+
+  stopGameTimer: function() {
+    timer.clearInterval( this.gameTimerId );
+    this.gameTimerId = null;
+  }
+}, {
+
+  // statics
+  PROBLEMS_PER_LEVEL: CHALLENGES_PER_PROBLEM_SET,
+  MAX_POSSIBLE_SCORE: MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET
+
+} );
+
+export default BalanceGameModel;

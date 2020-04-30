@@ -41,7 +41,7 @@ function BalanceMassesChallenge( fixedMasses, movableMasses, solutionToDisplay )
 
 balancingAct.register( 'BalanceMassesChallenge', BalanceMassesChallenge );
 
-export default inherit( BalanceGameChallenge, BalanceMassesChallenge, {},
+inherit( BalanceGameChallenge, BalanceMassesChallenge, {},
   // Static methods
   {
     // Convenience method for creating this type of challenge
@@ -87,3 +87,5 @@ export default inherit( BalanceGameChallenge, BalanceMassesChallenge, {},
       return new BalanceMassesChallenge( fixedMassesList, movableMassesList, [ solution ] );
     }
   } );
+
+export default BalanceMassesChallenge;
