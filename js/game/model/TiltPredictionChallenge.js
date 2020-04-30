@@ -33,7 +33,7 @@ function TiltPredictionChallenge( fixedMasses ) {
 
 balancingAct.register( 'TiltPredictionChallenge', TiltPredictionChallenge );
 
-export default inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
+inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
   // statics
 
   // convenience factory method for creating this type of challenge
@@ -48,3 +48,5 @@ export default inherit( BalanceGameChallenge, TiltPredictionChallenge, {}, {
     return new TiltPredictionChallenge( fixedMassesList );
   }
 } );
+
+export default TiltPredictionChallenge;

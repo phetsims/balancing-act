@@ -33,7 +33,7 @@ function MassDeductionChallenge( fixedMassDistancePair, movableMass, solutionToD
 
 balancingAct.register( 'MassDeductionChallenge', MassDeductionChallenge );
 
-export default inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
+inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
 
   // statics
 
@@ -53,3 +53,5 @@ export default inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
     return new MassDeductionChallenge( mysteryMassDistancePair, knownMass, solution );
   }
 } );
+
+export default MassDeductionChallenge;
