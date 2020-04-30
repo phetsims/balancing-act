@@ -118,8 +118,7 @@ function Plank( position, pivotPoint, columnState, userControlledMasses, tandem 
 
 balancingAct.register( 'Plank', Plank );
 
-// Inherit from base class and define the methods for this object.
-export default inherit( Object, Plank, {
+inherit( Object, Plank, {
     step: function( dt ) {
       const self = this;
       let angularAcceleration;
@@ -510,3 +509,5 @@ export default inherit( Object, Plank, {
     NUM_SNAP_TO_POSITIONS: NUM_SNAP_TO_POSITIONS
   }
 );
+
+export default Plank;

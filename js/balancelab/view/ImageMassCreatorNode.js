@@ -36,7 +36,7 @@ function ImageMassCreatorNode( model, modelViewTransform, prototypeImageMass, sh
 
 balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
 
-export default inherit( MassCreatorNode, ImageMassCreatorNode, {
+inherit( MassCreatorNode, ImageMassCreatorNode, {
 
   /**
    * @param position
@@ -60,3 +60,5 @@ export default inherit( MassCreatorNode, ImageMassCreatorNode, {
     return this.prototypeImageMass.createCopy();
   }
 } );
+
+export default ImageMassCreatorNode;

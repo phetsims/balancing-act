@@ -74,7 +74,7 @@ function Mass( massValue, initialPosition, isMystery, options ) {
 
 balancingAct.register( 'Mass', Mass );
 
-export default inherit( PhetioObject, Mass, {
+inherit( PhetioObject, Mass, {
 
   reset: function() {
     this.userControlledProperty.reset();
@@ -135,3 +135,5 @@ export default inherit( PhetioObject, Mass, {
 
   createCopy: function() { throw new Error( 'createCopy should be implemented in descendant types.' ); }
 } );
+
+export default Mass;

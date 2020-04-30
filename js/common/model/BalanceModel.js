@@ -54,7 +54,7 @@ function BalanceModel( tandem ) {
 
 balancingAct.register( 'BalanceModel', BalanceModel );
 
-export default inherit( Object, BalanceModel, {
+inherit( Object, BalanceModel, {
 
   // Step function, called by the framework, clocks time-dependent behavior.
   step: function( dt ) {
@@ -99,3 +99,5 @@ export default inherit( Object, BalanceModel, {
     this.columnStateProperty.reset();
   }
 } );
+
+export default BalanceModel;

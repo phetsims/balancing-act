@@ -111,8 +111,10 @@ function MysteryMass( initialPosition, mysteryMassId, options ) {
 
 balancingAct.register( 'MysteryMass', MysteryMass );
 
-export default inherit( LabeledImageMass, MysteryMass, {
+inherit( LabeledImageMass, MysteryMass, {
   createCopy: function() {
     return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
   }
 } );
+
+export default MysteryMass;

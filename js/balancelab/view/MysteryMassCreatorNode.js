@@ -32,7 +32,7 @@ function MysteryMassCreatorNode( mysteryMassID, model, modelViewTransform, optio
 
 balancingAct.register( 'MysteryMassCreatorNode', MysteryMassCreatorNode );
 
-export default inherit( ImageMassCreatorNode, MysteryMassCreatorNode, {
+inherit( ImageMassCreatorNode, MysteryMassCreatorNode, {
 
   /**
    * @param position
@@ -45,3 +45,5 @@ export default inherit( ImageMassCreatorNode, MysteryMassCreatorNode, {
     return mass;
   }
 } );
+
+export default MysteryMassCreatorNode;

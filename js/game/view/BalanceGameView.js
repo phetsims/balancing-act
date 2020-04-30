@@ -345,7 +345,7 @@ function BalanceGameView( gameModel, tandem ) {
 
 balancingAct.register( 'BalanceGameView', BalanceGameView );
 
-export default inherit( ScreenView, BalanceGameView, {
+inherit( ScreenView, BalanceGameView, {
 
   updateTitle: function() {
     const balanceGameChallenge = this.model.getCurrentChallenge();
@@ -565,3 +565,5 @@ export default inherit( ScreenView, BalanceGameView, {
     this.rootNode.addChild( self.levelCompletedNode );
   }
 } );
+
+export default BalanceGameView;

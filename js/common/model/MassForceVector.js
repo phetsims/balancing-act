@@ -20,7 +20,7 @@ function MassForceVector( mass ) {
 
 balancingAct.register( 'MassForceVector', MassForceVector );
 
-export default inherit( Object, MassForceVector, {
+inherit( Object, MassForceVector, {
   update: function() {
     this.forceVectorProperty.set( this.generateVector( this.mass ) );
   },
@@ -34,3 +34,5 @@ export default inherit( Object, MassForceVector, {
     };
   }
 } );
+
+export default MassForceVector;

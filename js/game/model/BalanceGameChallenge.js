@@ -39,7 +39,7 @@ function BalanceGameChallenge( initialColumnState, options ) {
 
 balancingAct.register( 'BalanceGameChallenge', BalanceGameChallenge );
 
-export default inherit( Object, BalanceGameChallenge, {
+inherit( Object, BalanceGameChallenge, {
 
   /**
    * Convenience function for determining whether an equivalent mass is
@@ -145,3 +145,5 @@ export default inherit( Object, BalanceGameChallenge, {
     return matchCount === this.fixedMassDistancePairs.length;
   }
 } );
+
+export default BalanceGameChallenge;

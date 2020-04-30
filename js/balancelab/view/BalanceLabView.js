@@ -31,9 +31,11 @@ function BalanceLabView( model, tandem ) {
 
 balancingAct.register( 'BalanceLabView', BalanceLabView );
 
-export default inherit( BasicBalanceScreenView, BalanceLabView, {
+inherit( BasicBalanceScreenView, BalanceLabView, {
   reset: function() {
     this.massCarousel.reset();
     BasicBalanceScreenView.prototype.reset.call( this );
   }
 } );
+
+export default BalanceLabView;

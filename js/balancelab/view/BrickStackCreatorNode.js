@@ -66,10 +66,12 @@ function BrickStackCreatorNode( numBricks, model, modelViewTransform, options ) 
 
 balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
 
-export default inherit( MassCreatorNode, BrickStackCreatorNode, {
+inherit( MassCreatorNode, BrickStackCreatorNode, {
   addElementToModel: function( position ) {
     const mass = this.model.brickStackGroup.createNextElement( this.numBricks, position );
     this.model.addMass( mass );
     return mass;
   }
 } );
+
+export default BrickStackCreatorNode;

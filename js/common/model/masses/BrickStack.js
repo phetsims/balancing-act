@@ -46,7 +46,7 @@ function BrickStack( numBricks, initialPosition, options ) {
 
 balancingAct.register( 'BrickStack', BrickStack );
 
-export default inherit( Mass, BrickStack, {
+inherit( Mass, BrickStack, {
 
     createCopy: function() {
       return new BrickStack( this.numBricks, this.positionProperty.get() );
@@ -62,3 +62,5 @@ export default inherit( Mass, BrickStack, {
     BRICK_HEIGHT: BRICK_HEIGHT
   }
 );
+
+export default BrickStack;

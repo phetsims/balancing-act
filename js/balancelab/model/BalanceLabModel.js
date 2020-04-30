@@ -61,7 +61,7 @@ function BalanceLabModel( tandem ) {
 
 balancingAct.register( 'BalanceLabModel', BalanceLabModel );
 
-export default inherit( BalanceModel, BalanceLabModel, {
+inherit( BalanceModel, BalanceLabModel, {
 
   reset: function() {
     this.massList.clear();
@@ -102,3 +102,5 @@ export default inherit( BalanceModel, BalanceLabModel, {
     mass.initiateAnimation();
   }
 } );
+
+export default BalanceLabModel;

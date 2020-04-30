@@ -107,7 +107,7 @@ function MassValueEntryNode( options ) {
 
 balancingAct.register( 'MassValueEntryNode', MassValueEntryNode );
 
-export default inherit( Node, MassValueEntryNode, {
+inherit( Node, MassValueEntryNode, {
   clear: function() {
     this.massValueProperty.reset();
   },
@@ -115,3 +115,5 @@ export default inherit( Node, MassValueEntryNode, {
     this.massValueProperty.value = massValue;
   }
 } );
+
+export default MassValueEntryNode;

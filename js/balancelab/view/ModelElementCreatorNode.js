@@ -105,7 +105,7 @@ function ModelElementCreatorNode( modelViewTransform, options ) {
 
 balancingAct.register( 'ModelElementCreatorNode', ModelElementCreatorNode );
 
-export default inherit( Node, ModelElementCreatorNode, {
+inherit( Node, ModelElementCreatorNode, {
   /**
    * Method overriden by subclasses to add the element that they represent to
    * the model.
@@ -138,3 +138,5 @@ export default inherit( Node, ModelElementCreatorNode, {
     }
   }
 } );
+
+export default ModelElementCreatorNode;

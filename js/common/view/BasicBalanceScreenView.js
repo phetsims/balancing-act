@@ -291,9 +291,11 @@ function BasicBalanceScreenView( model, tandem ) {
 
 balancingAct.register( 'BasicBalanceScreenView', BasicBalanceScreenView );
 
-export default inherit( ScreenView, BasicBalanceScreenView, {
+inherit( ScreenView, BasicBalanceScreenView, {
   reset: function() {
     this.model.reset();
     _.values( this.viewProperties ).forEach( function( viewProperty ) { viewProperty.reset(); } );
   }
 } );
+
+export default BasicBalanceScreenView;

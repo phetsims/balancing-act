@@ -48,7 +48,7 @@ function ImageMass( mass, image, height, initialPosition, isMystery, options ) {
 
 balancingAct.register( 'ImageMass', ImageMass );
 
-export default inherit( Mass, ImageMass, {
+inherit( Mass, ImageMass, {
 
   reset: function() {
     this.heightProperty.reset();
@@ -67,3 +67,5 @@ export default inherit( Mass, ImageMass, {
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
 } );
+
+export default ImageMass;

@@ -30,7 +30,7 @@ function BAIntroModel( tandem ) {
 
 balancingAct.register( 'BAIntroModel', BAIntroModel );
 
-export default inherit( BalanceModel, BAIntroModel, {
+inherit( BalanceModel, BAIntroModel, {
   reset: function() {
     this.massList.forEach( function( mass ) {
       mass.positionProperty.reset();
@@ -39,3 +39,5 @@ export default inherit( BalanceModel, BAIntroModel, {
     BalanceModel.prototype.reset.call( this );
   }
 } );
+
+export default BAIntroModel;
