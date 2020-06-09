@@ -7,12 +7,13 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import labIconSmall from '../../images/lab-icon-small_png.js';
 import labIcon from '../../images/lab-icon_png.js';
-import balancingActStrings from '../balancingActStrings.js';
 import balancingAct from '../balancingAct.js';
+import balancingActStrings from '../balancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabView from './view/BalanceLabView.js';
 
@@ -23,8 +24,14 @@ function BalanceLabScreen( tandem ) {
 
   const options = {
     name: balanceLabString,
-    homeScreenIcon: new Image( labIcon ),
-    navigationBarIcon: new Image( labIconSmall ),
+    homeScreenIcon: new ScreenIcon( new Image( labIcon ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
+    navigationBarIcon: new ScreenIcon( new Image( labIconSmall ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 

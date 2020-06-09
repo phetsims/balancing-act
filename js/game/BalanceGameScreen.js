@@ -7,12 +7,13 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import gameIconSmall from '../../images/game-icon-small_png.js';
 import gameIcon from '../../images/game-icon_png.js';
-import balancingActStrings from '../balancingActStrings.js';
 import balancingAct from '../balancingAct.js';
+import balancingActStrings from '../balancingActStrings.js';
 import BalanceGameModel from './model/BalanceGameModel.js';
 import BalanceGameView from './view/BalanceGameView.js';
 
@@ -23,8 +24,14 @@ function BalanceGameScreen( tandem ) {
 
   const options = {
     name: gameString,
-    homeScreenIcon: new Image( gameIcon ),
-    navigationBarIcon: new Image( gameIconSmall ),
+    homeScreenIcon: new ScreenIcon( new Image( gameIcon ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
+    navigationBarIcon: new ScreenIcon( new Image( gameIconSmall ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 
