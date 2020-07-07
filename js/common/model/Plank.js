@@ -180,7 +180,7 @@ inherit( Object, Plank, {
       } );
       // Add any new active drop positions.
       tempDropPositions.forEach( function( dropPosition ) {
-        if ( !self.activeDropPositions.contains( dropPosition ) ) {
+        if ( !self.activeDropPositions.includes( dropPosition ) ) {
           self.activeDropPositions.add( dropPosition );
         }
       } );
