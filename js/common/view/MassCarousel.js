@@ -17,6 +17,7 @@ define( require => {
   const Carousel = require( 'SUN/Carousel' );
   const GirlCreatorNode = require( 'BALANCING_ACT/balancelab/view/GirlCreatorNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
   const ManCreatorNode = require( 'BALANCING_ACT/balancelab/view/ManCreatorNode' );
   const merge = require( 'PHET_CORE/merge' );
@@ -111,62 +112,18 @@ define( require => {
         ]
       } );
 
-    // Create the 1st kit node for mystery masses.
-    const mysteryMassesKit1 = new Node(
-      {
-        children: [
-          new VBox(
-            {
-              children: [
-                new HBox(
-                  {
-                    children: [
-                      new MysteryMassCreatorNode( 0, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) } ),
-                      new MysteryMassCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) } )
-                    ],
-                    spacing: 20
-
-                  } ),
-                new HBox(
-                  {
-                    children: [
-                      new MysteryMassCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) } ),
-                      new MysteryMassCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) } )
-                    ],
-                    spacing: 20
-                  } )
-              ],
-              spacing: 5
-            } ) ]
-      } );
-
     // Create the 2nd kit node for mystery masses.
     const mysteryMassesKit2 = new Node(
       {
         children: [
-          new VBox(
-            {
-              children: [
-                new HBox(
-                  {
-                    children: [
-                      new MysteryMassCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) } ),
-                      new MysteryMassCreatorNode( 5, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) } )
-                    ],
-                    spacing: 20
+          new VBox( {
+            children: [
+              new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
 
-                  } ),
-                new HBox(
-                  {
-                    children: [
-                      new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
-                      new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } )
-                    ],
-                    spacing: 20
-                  } )
-              ],
-              spacing: 5
-            } ) ]
+              // Center the icon
+              new VStrut( 61 )
+            ]
+          } ) ]
       } );
 
     const elements = [
@@ -182,10 +139,6 @@ define( require => {
           title: new Text( peopleString, { font: TITLE_FONT } ),
           content: peopleKit2
         } ],
-      {
-        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
-        content: mysteryMassesKit1
-      },
       {
         title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
         content: mysteryMassesKit2
