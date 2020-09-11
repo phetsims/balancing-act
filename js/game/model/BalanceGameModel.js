@@ -12,7 +12,7 @@
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import ObservableArray from '../../../../axon/js/ObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import timer from '../../../../axon/js/timer.js';
+import stepTimer from '../../../../axon/js/stepTimer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
@@ -341,15 +341,15 @@ inherit( Object, BalanceGameModel, {
 
   restartGameTimer: function() {
     if ( this.gameTimerId !== null ) {
-      timer.clearInterval( this.gameTimerId );
+      stepTimer.clearInterval( this.gameTimerId );
     }
     this.elapsedTimeProperty.reset();
     const self = this;
-    this.gameTimerId = timer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
+    this.gameTimerId = stepTimer.setInterval( function() { self.elapsedTimeProperty.value += 1; }, 1000 );
   },
 
   stopGameTimer: function() {
-    timer.clearInterval( this.gameTimerId );
+    stepTimer.clearInterval( this.gameTimerId );
     this.gameTimerId = null;
   }
 }, {
