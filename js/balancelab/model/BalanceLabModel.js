@@ -12,7 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import PhetioGroupIO from '../../../../tandem/js/PhetioGroupIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import balancingAct from '../../balancingAct.js';
 import BalanceModel from '../../common/model/BalanceModel.js';
@@ -38,7 +38,7 @@ function BalanceLabModel( tandem ) {
     },
     [ 1, Vector2.ZERO ], {
       tandem: tandem.createTandem( 'brickStackGroup' ),
-      phetioType: PhetioGroupIO( ReferenceIO( ObjectIO ) )
+      phetioType: PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
     } );
 
   // @public {PhetioGroup<MysteryMass>}
@@ -53,7 +53,7 @@ function BalanceLabModel( tandem ) {
     },
     [ Vector2.ZERO, 0 ], {
       tandem: tandem.createTandem( 'mysteryMassGroup' ),
-      phetioType: PhetioGroupIO( ReferenceIO( ObjectIO ) )
+      phetioType: PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
     } );
 
   // TODO: Add person group here too, see https://github.com/phetsims/balancing-act/issues/99

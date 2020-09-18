@@ -14,8 +14,8 @@ import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import inherit from '../../../../phet-core/js/inherit.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../BASharedConstants.js';
@@ -74,7 +74,7 @@ function Plank( position, pivotPoint, columnState, userControlledMasses, tandem 
       { name: 'phetioID', phetioType: StringIO },
       { name: 'mass', phetioType: NumberIO },
       { name: 'distance', phetioType: NumberIO },
-      { name: 'fullState', phetioType: ObjectIO } ]
+      { name: 'fullState', phetioType: IOType.ObjectIO } ]
   } );
 
   // @private - signify in the data stream when masses are placed and removed
@@ -84,7 +84,7 @@ function Plank( position, pivotPoint, columnState, userControlledMasses, tandem 
       { name: 'phetioID', phetioType: StringIO },
       { name: 'mass', phetioType: NumberIO },
       { name: 'distance', phetioType: NumberIO },
-      { name: 'fullState', phetioType: ObjectIO } ]
+      { name: 'fullState', phetioType: IOType.ObjectIO } ]
   } );
 
   // Variables that need to be retained for dynamic behavior, but are not

@@ -12,7 +12,7 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import balancingAct from '../../balancingAct.js';
 
@@ -27,7 +27,7 @@ function Mass( massValue, initialPosition, isMystery, options ) {
 
   options = merge( {
     tandem: Tandem.REQUIRED,
-    phetioType: ReferenceIO( ObjectIO )
+    phetioType: ReferenceIO( IOType.ObjectIO )
   }, options );
 
   // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
