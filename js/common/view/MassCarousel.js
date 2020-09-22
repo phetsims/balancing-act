@@ -7,7 +7,6 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
@@ -23,8 +22,8 @@ import GirlCreatorNode from '../../balancelab/view/GirlCreatorNode.js';
 import ManCreatorNode from '../../balancelab/view/ManCreatorNode.js';
 import MysteryMassCreatorNode from '../../balancelab/view/MysteryMassCreatorNode.js';
 import WomanCreatorNode from '../../balancelab/view/WomanCreatorNode.js';
-import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 
 const bricksString = balancingActStrings.bricks;
@@ -34,189 +33,191 @@ const peopleString = balancingActStrings.people;
 // constants
 const TITLE_FONT = new PhetFont( 16 );
 
-function MassCarousel( model, modelViewTransform, options ) {
+class MassCarousel extends Carousel {
 
-  options = merge( {
+  constructor( model, modelViewTransform, options ) {
 
-    // we do our own layout
-    itemsPerPage: 1,
+    options = merge( {
 
-    // lightweight look for the buttons since the user must drag items across the buttons
-    buttonColor: null,
-    buttonStroke: null,
+      // we do our own layout
+      itemsPerPage: 1,
 
-    tandem: Tandem.REQUIRED
-  }, options );
+      // lightweight look for the buttons since the user must drag items across the buttons
+      buttonColor: null,
+      buttonStroke: null,
 
-  // Create the kit node for creating brick stacks of various sizes.
-  const brickCreatorKit = new Node(
-    {
-      children: [
-        new VBox(
-          {
-            children: [
-              new HBox(
-                {
-                  children: [
-                    new BrickStackCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode1' ) } ),
-                    new BrickStackCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode2' ) } )
-                  ],
-                  spacing: 20
+      tandem: Tandem.REQUIRED
+    }, options );
 
-                } ),
-              new HBox(
-                {
-                  children: [
-                    ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode3' ) } ) ],
-                    new BrickStackCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode4' ) } )
-                  ],
-                  spacing: 20
-                } )
-            ],
-            spacing: 20
-          } )
-      ]
-    }
-  );
-
-  // Create the 1st kit node for creating people.
-  const peopleKit1 = new Node(
-    {
-      children: [
-        new HBox(
-          {
-            children: [
-              new BoyCreatorNode( model, modelViewTransform ),
-              new ManCreatorNode( model, modelViewTransform )
-            ],
-            spacing: 5
-          } )
-      ]
-    } );
-
-  // Create the 2nd kit node for creating people.
-  const peopleKit2 = new Node(
-    {
-      children: [
-        new HBox(
-          {
-            children: [
-              new GirlCreatorNode( model, modelViewTransform ),
-              new WomanCreatorNode( model, modelViewTransform )
-            ],
-            spacing: 5
-          } )
-      ]
-    } );
-
-  // Create the 1st kit node for mystery masses.
-  const mysteryMassesKit1 = new Node(
-    {
-      children: [
-        new VBox(
-          {
-            children: [
-              new HBox(
-                {
-                  children: [
-                    new MysteryMassCreatorNode( 0, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) } ),
-                    new MysteryMassCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) } )
-                  ],
-                  spacing: 20
-
-                } ),
-              new HBox(
-                {
-                  children: [
-                    new MysteryMassCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) } ),
-                    new MysteryMassCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) } )
-                  ],
-                  spacing: 20
-                } )
-            ],
-            spacing: 5
-          } ) ]
-    } );
-
-  // Create the 2nd kit node for mystery masses.
-  const mysteryMassesKit2 = new Node(
-    {
-      children: [
-        new VBox(
-          {
-            children: [
-              new HBox(
-                {
-                  children: [
-                    new MysteryMassCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) } ),
-                    new MysteryMassCreatorNode( 5, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) } )
-                  ],
-                  spacing: 20
-
-                } ),
-              new HBox(
-                {
-                  children: [
-                    new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
-                    new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } )
-                  ],
-                  spacing: 20
-                } )
-            ],
-            spacing: 5
-          } ) ]
-    } );
-
-  const elements = [
-    {
-      title: new Text( bricksString, { font: TITLE_FONT } ),
-      content: brickCreatorKit
-    },
-    ...BAQueryParameters.stanford ? [] : [ {
-      title: new Text( peopleString, { font: TITLE_FONT } ),
-      content: peopleKit1
-    },
+    // Create the kit node for creating brick stacks of various sizes.
+    const brickCreatorKit = new Node(
       {
+        children: [
+          new VBox(
+            {
+              children: [
+                new HBox(
+                  {
+                    children: [
+                      new BrickStackCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode1' ) } ),
+                      new BrickStackCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode2' ) } )
+                    ],
+                    spacing: 20
+
+                  } ),
+                new HBox(
+                  {
+                    children: [
+                      ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode3' ) } ) ],
+                      new BrickStackCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode4' ) } )
+                    ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 20
+            } )
+        ]
+      }
+    );
+
+    // Create the 1st kit node for creating people.
+    const peopleKit1 = new Node(
+      {
+        children: [
+          new HBox(
+            {
+              children: [
+                new BoyCreatorNode( model, modelViewTransform ),
+                new ManCreatorNode( model, modelViewTransform )
+              ],
+              spacing: 5
+            } )
+        ]
+      } );
+
+    // Create the 2nd kit node for creating people.
+    const peopleKit2 = new Node(
+      {
+        children: [
+          new HBox(
+            {
+              children: [
+                new GirlCreatorNode( model, modelViewTransform ),
+                new WomanCreatorNode( model, modelViewTransform )
+              ],
+              spacing: 5
+            } )
+        ]
+      } );
+
+    // Create the 1st kit node for mystery masses.
+    const mysteryMassesKit1 = new Node(
+      {
+        children: [
+          new VBox(
+            {
+              children: [
+                new HBox(
+                  {
+                    children: [
+                      new MysteryMassCreatorNode( 0, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) } ),
+                      new MysteryMassCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) } )
+                    ],
+                    spacing: 20
+
+                  } ),
+                new HBox(
+                  {
+                    children: [
+                      new MysteryMassCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) } ),
+                      new MysteryMassCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) } )
+                    ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 5
+            } ) ]
+      } );
+
+    // Create the 2nd kit node for mystery masses.
+    const mysteryMassesKit2 = new Node(
+      {
+        children: [
+          new VBox(
+            {
+              children: [
+                new HBox(
+                  {
+                    children: [
+                      new MysteryMassCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) } ),
+                      new MysteryMassCreatorNode( 5, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) } )
+                    ],
+                    spacing: 20
+
+                  } ),
+                new HBox(
+                  {
+                    children: [
+                      new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
+                      new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } )
+                    ],
+                    spacing: 20
+                  } )
+              ],
+              spacing: 5
+            } ) ]
+      } );
+
+    const elements = [
+      {
+        title: new Text( bricksString, { font: TITLE_FONT } ),
+        content: brickCreatorKit
+      },
+      ...BAQueryParameters.stanford ? [] : [ {
         title: new Text( peopleString, { font: TITLE_FONT } ),
-        content: peopleKit2
-      } ],
-    {
-      title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
-      content: mysteryMassesKit1
-    },
-    {
-      title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
-      content: mysteryMassesKit2
-    }
-  ];
+        content: peopleKit1
+      },
+        {
+          title: new Text( peopleString, { font: TITLE_FONT } ),
+          content: peopleKit2
+        } ],
+      {
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        content: mysteryMassesKit1
+      },
+      {
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        content: mysteryMassesKit2
+      }
+    ];
 
-  // Create the actual kit selection node.
-  let maxHeight = 0;
-  for ( let i = 0; i < elements.length; i++ ) {
-    const element = elements[ i ];
-    const height = element.title.height + element.content.height;
-    if ( height > maxHeight ) {
-      maxHeight = height;
+    // Create the actual kit selection node.
+    let maxHeight = 0;
+    for ( let i = 0; i < elements.length; i++ ) {
+      const element = elements[ i ];
+      const height = element.title.height + element.content.height;
+      if ( height > maxHeight ) {
+        maxHeight = height;
+      }
     }
+
+    const pageAlignGroup = new AlignGroup(); // Align all pages to the top
+    const titleAlignGroup = new AlignGroup(); // Align all titles to the top
+    const contentAlignGroup = new AlignGroup(); // Align contents to the center
+
+    const pages = elements.map( element => {
+      const vbox = new VBox( {
+        spacing: 5,
+        children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
+      } );
+      return pageAlignGroup.createBox( vbox, {
+        yAlign: 'top'
+      } );
+    } );
+
+    super( pages, options );
   }
-
-  const pageAlignGroup = new AlignGroup(); // Align all pages to the top
-  const titleAlignGroup = new AlignGroup(); // Align all titles to the top
-  const contentAlignGroup = new AlignGroup(); // Align contents to the center
-
-  const pages = elements.map( element => {
-    const vbox = new VBox( {
-      spacing: 5,
-      children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
-    } );
-    return pageAlignGroup.createBox( vbox, {
-      yAlign: 'top'
-    } );
-  } );
-  Carousel.call( this, pages, options );
 }
 
 balancingAct.register( 'MassCarousel', MassCarousel );
-
-inherit( Carousel, MassCarousel );
 export default MassCarousel;
