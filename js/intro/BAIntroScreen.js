@@ -8,7 +8,6 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introIconSmall from '../../images/intro-icon-small_png.js';
 import introIcon from '../../images/intro-icon_png.js';
@@ -17,31 +16,29 @@ import balancingActStrings from '../balancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';
 
-const introString = balancingActStrings.intro;
+class BAIntroScreen extends Screen {
+  constructor( tandem ) {
 
+    const options = {
+      name: balancingActStrings.intro,
+      homeScreenIcon: new ScreenIcon( new Image( introIcon ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } ),
+      navigationBarIcon: new ScreenIcon( new Image( introIconSmall ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } ),
+      tandem: tandem
+    };
 
-function BAIntroScreen( tandem ) {
-
-  const options = {
-    name: introString,
-    homeScreenIcon: new ScreenIcon( new Image( introIcon ), {
-      maxIconWidthProportion: 1,
-      maxIconHeightProportion: 1
-    } ),
-    navigationBarIcon: new ScreenIcon( new Image( introIconSmall ), {
-      maxIconWidthProportion: 1,
-      maxIconHeightProportion: 1
-    } ),
-    tandem: tandem
-  };
-
-  Screen.call( this,
-    function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
-    function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
-    options );
+    super(
+      function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
+      options
+    );
+  }
 }
 
 balancingAct.register( 'BAIntroScreen', BAIntroScreen );
-
-inherit( Screen, BAIntroScreen );
 export default BAIntroScreen;
