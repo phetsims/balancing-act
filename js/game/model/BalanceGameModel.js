@@ -10,7 +10,7 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -70,10 +70,10 @@ function BalanceGameModel( tandem ) {
   self.challengeList = null;
 
   // Fixed masses that sit on the plank and that the user must attempt to balance.
-  self.fixedMasses = new ObservableArray();
+  self.fixedMasses = createObservableArray();
 
   // Masses that the user moves on to the plank to counterbalance the fixed masses.
-  self.movableMasses = new ObservableArray();
+  self.movableMasses = createObservableArray();
 
   // Masses that the user is (or users are) moving.
   self.userControlledMasses = [];

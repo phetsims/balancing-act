@@ -8,7 +8,7 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
@@ -32,7 +32,7 @@ function BalanceModel( tandem ) {
 
   // Model elements
   self.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
-  self.massList = new ObservableArray();
+  self.massList = createObservableArray();
   self.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
 
   self.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {

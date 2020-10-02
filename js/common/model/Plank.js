@@ -8,7 +8,7 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -57,9 +57,9 @@ function Plank( position, pivotPoint, columnState, userControlledMasses, tandem 
   this.bottomCenterPositionProperty = new Property( position );
 
   // Externally visible observable lists.
-  self.massesOnSurface = new ObservableArray();
-  self.forceVectors = new ObservableArray();
-  self.activeDropPositions = new ObservableArray(); // Positions where user-controlled masses would land if dropped, in meters from center.
+  self.massesOnSurface = createObservableArray();
+  self.forceVectors = createObservableArray();
+  self.activeDropPositions = createObservableArray(); // Positions where user-controlled masses would land if dropped, in meters from center.
 
   // Other external visible attributes.
   self.pivotPoint = pivotPoint;
