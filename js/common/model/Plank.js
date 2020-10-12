@@ -171,7 +171,7 @@ inherit( Object, Plank, {
           }
         }
       } );
-      const copyOfActiveDropPositions = self.activeDropPositions.getArray().slice( 0 );
+      const copyOfActiveDropPositions = self.activeDropPositions.slice( 0 );
       // Remove newly inactive drop positions.
       copyOfActiveDropPositions.forEach( function( activeDropPositions ) {
         if ( tempDropPositions.indexOf( activeDropPositions ) < 0 ) {
@@ -314,7 +314,7 @@ inherit( Object, Plank, {
     },
 
     removeAllMasses: function() {
-      const copyOfMassesArray = this.massesOnSurface.getArray().slice( 0 );
+      const copyOfMassesArray = this.massesOnSurface.slice( 0 );
       const self = this;
       copyOfMassesArray.forEach( function( mass ) {
         self.removeMassFromSurface( mass );
