@@ -44,6 +44,7 @@ class MassCarousel extends Carousel {
 
       // lightweight look for the buttons since the user must drag items across the buttons
       buttonColor: null,
+      buttonDisabledColor: null,
       buttonStroke: null,
 
       tandem: Tandem.REQUIRED
