@@ -282,8 +282,9 @@ inherit( Object, Plank, {
     removeMassFromSurface: function( mass ) {
 
       // Remove the mass.
-      this.massesOnSurface.remove( mass );
-
+      if ( this.massesOnSurface.includes( mass ) ) {
+        this.massesOnSurface.remove( mass );
+      }
 
       // Remove the mass-distance pair for this mass.
       for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
