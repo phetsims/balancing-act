@@ -1,9 +1,8 @@
 // Copyright 2013-2020, University of Colorado Boulder
 
 /**
- * This object type represents a stack of bricks in a toolbox.  When the user
- * clicks on this node, the corresponding model element is added to the model
- * at the user's mouse position.
+ * This object type represents a stack of bricks in a toolbox.  When the user clicks on this node, the corresponding
+ * model element is added to the model at the user's mouse position.
  *
  * @author John Blanco
  */
@@ -11,7 +10,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
@@ -26,52 +24,58 @@ import MassCreatorNode from './MassCreatorNode.js';
 // items in the toolbox can be sized differently (generally smaller).
 const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
-/**
- * @param {number} numBricks
- * @param {BalanceLabModel} model
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Object} [options]
- * @constructor
- */
-function BrickStackCreatorNode( numBricks, model, modelViewTransform, options ) {
-  MassCreatorNode.call( this, modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
-  this.numBricks = numBricks;
-  this.model = model;
+class BrickStackCreatorNode extends MassCreatorNode {
 
-  // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
-  BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
-    this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
-    this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
-  } );
+  /**
+   * @param {number} numBricks
+   * @param {BalanceLabModel} model
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( numBricks, model, modelViewTransform, options ) {
+    super( modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
+    this.numBricks = numBricks;
+    this.model = model;
 
-  const selectionNode = new BrickStackNode(
-    new BrickStack( numBricks, Vector2.ZERO, { tandem: Tandem.OPT_OUT } ),
-    SCALING_MVT,
-    false,
-    new Property( false ),
-    false,
-    model.columnStateProperty
-  );
+    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
+    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
 
-  // Make a larger touch area.  The diameter of the circle was determined empirically.
-  selectionNode.touchArea = Shape.circle(
-    selectionNode.bounds.width / 2,
-    selectionNode.bounds.height / 2,
-    selectionNode.bounds.width * 0.8
-  );
+    const selectionNode = new BrickStackNode(
+      new BrickStack( numBricks, Vector2.ZERO, { tandem: Tandem.OPT_OUT } ),
+      SCALING_MVT,
+      false,
+      new Property( false ),
+      false,
+      model.columnStateProperty
+    );
 
-  this.setSelectionNode( selectionNode );
-  this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
-}
+    // Make a larger touch area.  The diameter of the circle was determined empirically.
+    selectionNode.touchArea = Shape.circle(
+      selectionNode.bounds.width / 2,
+      selectionNode.bounds.height / 2,
+      selectionNode.bounds.width * 0.8
+    );
 
-balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
+    this.setSelectionNode( selectionNode );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
+  }
 
-inherit( MassCreatorNode, BrickStackCreatorNode, {
-  addElementToModel: function( position ) {
+  /**
+   *
+   * @param {Vector2} position
+   * @returns {Mass}
+   * @public
+   */
+  addElementToModel( position ) {
     const mass = this.model.brickStackGroup.createNextElement( this.numBricks, position );
     this.model.addMass( mass );
     return mass;
   }
-} );
+}
+
+balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
 
 export default BrickStackCreatorNode;

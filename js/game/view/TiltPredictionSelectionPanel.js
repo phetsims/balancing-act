@@ -4,7 +4,6 @@
  * Node that defines a single panel for use on the tilt prediction selector node.
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import DownUpListener from '../../../../scenery/js/input/DownUpListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -21,86 +20,91 @@ const SELECTED_HIGHLIGHT_LINE_WIDTH = 6;
 const CORRECT_ANSWER_HIGHLIGHT_COLOR = 'rgb( 0, 255, 0 )';
 const INVISIBLE_COLOR = 'rgba( 0, 0, 0, 0 )';
 
-/**
- * @constructor
- */
-function TiltPredictionSelectionPanel( image, correspondingPrediction, tiltPredictionProperty, gameStateProperty ) {
-  Node.call( this );
-  const self = this;
+class TiltPredictionSelectionPanel extends Node {
 
-  // Add the image.
-  const imagePanel = new Image( image, { cursor: 'pointer' } );
-  imagePanel.scale( PANEL_WIDTH / imagePanel.width );
-  self.addChild( imagePanel );
+  /**
+   * @param image
+   * @param correspondingPrediction
+   * @param tiltPredictionProperty
+   * @param gameStateProperty
+   */
+  constructor( image, correspondingPrediction, tiltPredictionProperty, gameStateProperty ) {
+    super();
+    const self = this;
 
-  // Define a function for updating the highlight state
-  function updateHighlightState() {
-    if ( tiltPredictionProperty.value === correspondingPrediction ) {
-      self.thinOutline.stroke = INVISIBLE_COLOR;
-      if ( gameStateProperty.value === 'displayingCorrectAnswer' ) {
-        self.thickOutline.stroke = CORRECT_ANSWER_HIGHLIGHT_COLOR;
+    // Add the image.
+    const imagePanel = new Image( image, { cursor: 'pointer' } );
+    imagePanel.scale( PANEL_WIDTH / imagePanel.width );
+    this.addChild( imagePanel );
+
+    // Define a function for updating the highlight state
+    function updateHighlightState() {
+      if ( tiltPredictionProperty.value === correspondingPrediction ) {
+        self.thinOutline.stroke = INVISIBLE_COLOR;
+        if ( gameStateProperty.value === 'displayingCorrectAnswer' ) {
+          self.thickOutline.stroke = CORRECT_ANSWER_HIGHLIGHT_COLOR;
+        }
+        else {
+          self.thickOutline.stroke = SELECTED_HIGHLIGHT_COLOR;
+        }
       }
       else {
-        self.thickOutline.stroke = SELECTED_HIGHLIGHT_COLOR;
+        self.thickOutline.stroke = INVISIBLE_COLOR;
+        self.thinOutline.stroke = NON_HIGHLIGHT_COLOR;
+        if ( self.mouseOver ) {
+          self.thinOutline.lineWidth = HOVER_LINE_WIDTH;
+        }
+        else {
+          self.thinOutline.lineWidth = NON_HIGHLIGHT_LINE_WIDTH;
+        }
       }
     }
-    else {
-      self.thickOutline.stroke = INVISIBLE_COLOR;
-      self.thinOutline.stroke = NON_HIGHLIGHT_COLOR;
-      if ( self.mouseOver ) {
-        self.thinOutline.lineWidth = HOVER_LINE_WIDTH;
-      }
-      else {
-        self.thinOutline.lineWidth = NON_HIGHLIGHT_LINE_WIDTH;
-      }
-    }
+
+    // Set up mouse listener that watches to see if the user has selected this option.
+    this.addInputListener( new DownUpListener( { up: event => { tiltPredictionProperty.value = correspondingPrediction; } } ) );
+
+    // Set up a hover listener to update hover highlight.
+    this.mouseOver = false;
+    this.addInputListener(
+      {
+        over: () => {
+          this.mouseOver = true;
+          updateHighlightState();
+        },
+        out: () => {
+          this.mouseOver = false;
+          updateHighlightState();
+        }
+      } );
+
+    // Add the outline around the panel, which will be changed to depict the
+    // user's selection and the correct answer.
+    this.thinOutline = new Rectangle.bounds( imagePanel.bounds,
+      {
+        stroke: NON_HIGHLIGHT_COLOR,
+        lineWidth: NON_HIGHLIGHT_LINE_WIDTH
+      } );
+    this.addChild( this.thinOutline );
+    this.thickOutline = new Rectangle.bounds( imagePanel.bounds,
+      {
+        stroke: INVISIBLE_COLOR,
+        lineWidth: SELECTED_HIGHLIGHT_LINE_WIDTH
+      } );
+    this.addChild( this.thickOutline );
+
+    // Add listener for changes to the tilt prediction.
+    tiltPredictionProperty.link( predictionValue => {
+      // Turn the highlight on or off.
+      updateHighlightState();
+    } );
+
+    // Add listener for changes to the game state.
+    gameStateProperty.link( gameState => {
+      updateHighlightState();
+    } );
   }
-
-  // Set up mouse listener that watches to see if the user has selected this option.
-  self.addInputListener( new DownUpListener( { up: function( event ) { tiltPredictionProperty.value = correspondingPrediction; } } ) );
-
-  // Set up a hover listener to update hover highlight.
-  self.mouseOver = false;
-  self.addInputListener(
-    {
-      over: function() {
-        self.mouseOver = true;
-        updateHighlightState();
-      },
-      out: function() {
-        self.mouseOver = false;
-        updateHighlightState();
-      }
-    } );
-
-  // Add the outline around the panel, which will be changed to depict the
-  // user's selection and the correct answer.
-  self.thinOutline = new Rectangle.bounds( imagePanel.bounds,
-    {
-      stroke: NON_HIGHLIGHT_COLOR,
-      lineWidth: NON_HIGHLIGHT_LINE_WIDTH
-    } );
-  self.addChild( self.thinOutline );
-  self.thickOutline = new Rectangle.bounds( imagePanel.bounds,
-    {
-      stroke: INVISIBLE_COLOR,
-      lineWidth: SELECTED_HIGHLIGHT_LINE_WIDTH
-    } );
-  self.addChild( self.thickOutline );
-
-  // Add listener for changes to the tilt prediction.
-  tiltPredictionProperty.link( function( predictionValue ) {
-    // Turn the highlight on or off.
-    updateHighlightState();
-  } );
-
-  // Add listener for changes to the game state.
-  gameStateProperty.link( function( gameState ) {
-    updateHighlightState();
-  } );
 }
 
 balancingAct.register( 'TiltPredictionSelectionPanel', TiltPredictionSelectionPanel );
 
-inherit( Node, TiltPredictionSelectionPanel );
 export default TiltPredictionSelectionPanel;

@@ -6,7 +6,6 @@
  * mass values.
  */
 
-import inherit from '../../../../../phet-core/js/inherit.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import mysteryObject1Image from '../../../../images/mystery-object-01_png.js';
 import mysteryObject2Image from '../../../../images/mystery-object-02_png.js';
@@ -16,8 +15,8 @@ import mysteryObject5Image from '../../../../images/mystery-object-05_png.js';
 import mysteryObject6Image from '../../../../images/mystery-object-06_png.js';
 import mysteryObject7Image from '../../../../images/mystery-object-07_png.js';
 import mysteryObject8Image from '../../../../images/mystery-object-08_png.js';
-import balancingActStrings from '../../../balancingActStrings.js';
 import balancingAct from '../../../balancingAct.js';
+import balancingActStrings from '../../../balancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass from './LabeledImageMass.js';
 
@@ -95,26 +94,29 @@ const MYSTERY_MASS_CONFIGURATIONS = [
   }
 ];
 
-/**
- * @param {Vector2} initialPosition
- * @param {number} mysteryMassId
- * @param {Object} [options]
- * @constructor
- */
-function MysteryMass( initialPosition, mysteryMassId, options ) {
-  assert && assert( typeof mysteryMassId === 'number', 'mysteryMassId must be a number' );
-  const config = merge( options, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+class MysteryMass extends LabeledImageMass {
 
-  LabeledImageMass.call( this, initialPosition, config );
-  this.mysteryMassId = mysteryMassId;
+  /**
+   * @param {Vector2} initialPosition
+   * @param {number} mysteryMassId
+   * @param {Object} [options]
+   */
+  constructor( initialPosition, mysteryMassId, options ) {
+    assert && assert( typeof mysteryMassId === 'number', 'mysteryMassId must be a number' );
+    const config = merge( options, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+
+    super( initialPosition, config );
+    this.mysteryMassId = mysteryMassId;
+  }
+
+  /**
+   * @public
+   */
+  createCopy() {
+    return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
+  }
 }
 
 balancingAct.register( 'MysteryMass', MysteryMass );
-
-inherit( LabeledImageMass, MysteryMass, {
-  createCopy: function() {
-    return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
-  }
-} );
 
 export default MysteryMass;

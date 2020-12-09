@@ -8,12 +8,11 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
+import balancingActStrings from '../../balancingActStrings.js';
 
 const unknownMassLabelString = balancingActStrings.unknownMassLabel;
 
@@ -21,32 +20,32 @@ const unknownMassLabelString = balancingActStrings.unknownMassLabel;
 const FONT = new PhetFont( { size: 36 } );
 const Y_DIST_FROM_POSITION = 3; // In screen units.
 
-/**
- * @param positionedVectorProperty
- * @param visibilityProperty
- * @param modelViewTransform Model-view transform
- * @constructor
- */
-function MysteryVectorNode( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
-  Node.call( this );
-  const self = this;
+class MysteryVectorNode extends Node {
 
-  // Create the 'mystery vector' node and add it as a child.
-  self.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
+  /**
+   * @param positionedVectorProperty
+   * @param visibilityProperty
+   * @param modelViewTransform Model-view transform
+   */
+  constructor( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
+    super();
 
-  // Follow the position as it changes
-  positionedVectorProperty.link( function( positionedVector ) {
-    self.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
-    self.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
-  } );
+    // Create the 'mystery vector' node and add it as a child.
+    this.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
 
-  // Control visibility
-  visibilityProperty.link( function( visible ) {
-    self.visible = visible;
-  } );
+    // Follow the position as it changes
+    positionedVectorProperty.link( positionedVector => {
+      this.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+      this.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
+    } );
+
+    // Control visibility
+    visibilityProperty.link( visible => {
+      this.visible = visible;
+    } );
+  }
 }
 
 balancingAct.register( 'MysteryVectorNode', MysteryVectorNode );
 
-inherit( Node, MysteryVectorNode );
 export default MysteryVectorNode;

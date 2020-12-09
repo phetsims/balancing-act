@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -21,76 +20,85 @@ const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
 const MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
 // TODO: JSDoc is missing in many places, see https://github.com/phetsims/balancing-act/issues/96
-// TODO: Convert to ES6, see https://github.com/phetsims/balancing-act/issues/96
-function Mass( massValue, initialPosition, isMystery, options ) {
-  const self = this;
+class Mass extends PhetioObject {
 
-  options = merge( {
-    tandem: Tandem.REQUIRED,
-    phetioType: ReferenceIO( IOType.ObjectIO )
-  }, options );
+  constructor( massValue, initialPosition, isMystery, options ) {
 
-  // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
-  this.userControlledProperty = new Property( false );
+    options = merge( {
+      tandem: Tandem.REQUIRED,
+      phetioType: ReferenceIO( IOType.ObjectIO )
+    }, options );
 
-  // Property that contains the position in model space.  By convention for this simulation, the position of a mass is
-  // the center bottom of the model object.
-  this.positionProperty = new Property( initialPosition );
+    // instrumented so it can be phetioDynamicElement: true for PhetioGroups
+    super( options );
 
-  // Property that contains the rotation angle, in radians, of the model element.  By convention for this simulation,
-  // the point of rotation is considered to be the center bottom of the model element.
-  this.rotationAngleProperty = new Property( 0 );
+    // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
+    this.userControlledProperty = new Property( false );
 
-  // Property that tracks whether this mass is on the plank, changes to which may initiate changes in the visual
-  // depiction of the mass.
-  this.onPlankProperty = new Property( false );
+    // Property that contains the position in model space.  By convention for this simulation, the position of a mass is
+    // the center bottom of the model object.
+    this.positionProperty = new Property( initialPosition );
 
-  // Boolean property that indicates whether this model element is currently animating.  At the time of this writing,
-  // the only animation supported is a simple linear motion to a preset point.
-  this.animatingProperty = new Property( false );
+    // Property that contains the rotation angle, in radians, of the model element.  By convention for this simulation,
+    // the point of rotation is considered to be the center bottom of the model element.
+    this.rotationAngleProperty = new Property( 0 );
 
-  //------------------------------------------------------------------------
-  // Externally used (i.e. public) attributes that don't need to be properties.
-  //------------------------------------------------------------------------
-  self.massValue = massValue;
-  self.animationDestination = null;
-  self.animationMotionVector = null;
-  self.animationScale = 1;
-  self.expectedAnimationTime = 0;
-  self.isMystery = isMystery;
+    // Property that tracks whether this mass is on the plank, changes to which may initiate changes in the visual
+    // depiction of the mass.
+    this.onPlankProperty = new Property( false );
 
-  // This property is used to keep track of a function that is used to to
-  // add/remove this mass from a list of user-controlled masses.
-  self.userControlledMassesUpdater = null;
+    // Boolean property that indicates whether this model element is currently animating.  At the time of this writing,
+    // the only animation supported is a simple linear motion to a preset point.
+    this.animatingProperty = new Property( false );
 
-  // Since not all objects are symmetrical, some may need to have an offset
-  // that indicates where their center of mass is when placed on a balance.
-  // This is the horizontal offset from the center of the shape or image.
-  self.centerOfMassXOffset = 0;
+    //------------------------------------------------------------------------
+    // Externally used (i.e. public) attributes that don't need to be properties.
+    //------------------------------------------------------------------------
+    this.massValue = massValue;
+    this.animationDestination = null;
+    this.animationMotionVector = null;
+    this.animationScale = 1;
+    this.expectedAnimationTime = 0;
+    this.isMystery = isMystery;
 
-  // instrumented so it can be phetioDynamicElement: true for PhetioGroups
-  PhetioObject.call( this, options );
-}
+    // This property is used to keep track of a function that is used to to
+    // add/remove this mass from a list of user-controlled masses.
+    this.userControlledMassesUpdater = null;
 
-balancingAct.register( 'Mass', Mass );
+    // Since not all objects are symmetrical, some may need to have an offset
+    // that indicates where their center of mass is when placed on a balance.
+    // This is the horizontal offset from the center of the shape or image.
+    this.centerOfMassXOffset = 0;
 
-inherit( PhetioObject, Mass, {
+  }
 
-  reset: function() {
+  /**
+   * @public
+   */
+  reset() {
     this.userControlledProperty.reset();
     this.positionProperty.reset();
     this.rotationAngleProperty.reset();
     this.onPlankProperty.reset();
     this.animatingProperty.reset();
-  },
+  }
 
-  translate: function( translationVector ) {
+  /**
+   * @public
+   */
+  translate( translationVector ) {
     this.positionProperty.set( this.positionProperty.get().plus( translationVector ) );
-  },
+  }
 
-  getMiddlePoint: function() { throw new Error( 'getMiddlePoint should be implemented in descendant types.' ); },
+  /**
+   * @public
+   */
+  getMiddlePoint() { throw new Error( 'getMiddlePoint should be implemented in descendant types.' ); }
 
-  initiateAnimation: function() {
+  /**
+   * @public
+   */
+  initiateAnimation() {
 
     // Calculate velocity.  A higher velocity is used if the model element has a long way to travel, otherwise it
     // takes too long.
@@ -111,9 +119,12 @@ inherit( PhetioObject, Mass, {
 
     // Update the property that tracks the animation state.
     this.animatingProperty.set( true );
-  },
+  }
 
-  step: function( dt ) {
+  /**
+   * @public
+   */
+  step( dt ) {
     if ( this.animatingProperty.get() ) {
 
       // Do a step of the linear animation towards the destination.
@@ -131,9 +142,14 @@ inherit( PhetioObject, Mass, {
         this.animationScale = 1;
       }
     }
-  },
+  }
 
-  createCopy: function() { throw new Error( 'createCopy should be implemented in descendant types.' ); }
-} );
+  /**
+   * @public
+   */
+  createCopy() { throw new Error( 'createCopy should be implemented in descendant types.' ); }
+}
+
+balancingAct.register( 'Mass', Mass );
 
 export default Mass;

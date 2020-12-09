@@ -19,8 +19,7 @@ const LEG_THICKNESS_FACTOR = 0.09; // Thickness of legs proportional to overall 
  * @constructor
  */
 function Fulcrum( size ) {
-  const self = this;
-  self.size = size;
+  this.size = size;
   const legThickness = LEG_THICKNESS_FACTOR * size.width;
 
   // Define the basic shape of the fulcrum, which is an A-frame sort of
@@ -38,7 +37,7 @@ function Fulcrum( size ) {
   fulcrumShape.close();
 
   // The shape property is what will define the shape in the view.
-  self.shape = fulcrumShape;
+  this.shape = fulcrumShape;
 }
 
 balancingAct.register( 'Fulcrum', Fulcrum );

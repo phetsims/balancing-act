@@ -12,7 +12,6 @@
  * recent evaluation.
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import platform from '../../../../phet-core/js/platform.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -22,30 +21,31 @@ import balancingAct from '../../balancingAct.js';
 // blurry.  The default value was empirically determined.
 const RASTER_SCALE = 2;
 
-/**
- * @param text
- * @param textOptions
- * @param nodeOptions
- * @constructor
- */
-function RasterizedTextNode( text, textOptions, nodeOptions ) {
-  Node.call( this );
-  if ( platform.firefox ) {
-    // SVG image rotation and scaling causes jitter in Firefox, so we switch to DOM rendering for now.  See
-    // https://github.com/phetsims/balancing-act/issues/16
-    this.renderer = 'dom';
+class RasterizedTextNode extends Node {
+
+  /**
+   * @param {String} text
+   * @param {Object} textOptions
+   * @param {Object} nodeOptions
+   */
+  constructor( text, textOptions, nodeOptions ) {
+    super();
+    if ( platform.firefox ) {
+      // SVG image rotation and scaling causes jitter in Firefox, so we switch to DOM rendering for now.  See
+      // https://github.com/phetsims/balancing-act/issues/16
+      this.renderer = 'dom';
+    }
+    textOptions.scale = RASTER_SCALE;
+    const label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
+    // TODO: maybe try toImageNodeAsynchronous.
+    const labelRasterized = label.rasterized();
+    labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
+    this.addChild( labelRasterized );
+    this.localBounds = label.localBounds;
+    this.mutate( nodeOptions );
   }
-  textOptions.scale = RASTER_SCALE;
-  const label = new Text( text, textOptions ); // create scaled up node to avoid blurry look
-  // TODO: maybe try toImageNodeAsynchronous.
-  const labelRasterized = label.rasterized();
-  labelRasterized.scale( 1 / RASTER_SCALE ); // apply the inverse scale to the rasterized version
-  this.addChild( labelRasterized );
-  this.localBounds = label.localBounds;
-  this.mutate( nodeOptions );
 }
 
 balancingAct.register( 'RasterizedTextNode', RasterizedTextNode );
 
-inherit( Node, RasterizedTextNode );
 export default RasterizedTextNode;

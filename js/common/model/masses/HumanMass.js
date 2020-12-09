@@ -8,44 +8,43 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../../phet-core/js/inherit.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
-/**
- * @param {number} massValue
- * @param {image} standingImage
- * @param {number} standingHeight
- * @param {image} sittingImage
- * @param {number} sittingHeight
- * @param {Vector2} initialPosition
- * @param {number} sittingCenterOfMassXOffset
- * @param {boolean} isMystery
- * @constructor
- */
-function HumanMass( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
-  ImageMass.call( this, massValue, standingImage, standingHeight, initialPosition, isMystery );
-  const self = this;
+class HumanMass extends ImageMass {
 
-  // Monitor the 'onPlank' property and update the image as changes occur.
-  self.onPlankProperty.link( function( onPlank ) {
-    if ( onPlank ) {
-      const xPosition = self.positionProperty.get().x;
-      self.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
-      self.heightProperty.set( sittingHeight );
-      self.reverseImage = xPosition < 0;
-      self.imageProperty.set( sittingImage );
-    }
-    else {
-      self.centerOfMassXOffset = 0;
-      self.heightProperty.set( standingHeight );
-      self.reverseImage = false;
-      self.imageProperty.set( standingImage );
-    }
-  } );
+  /**
+   * @param {number} massValue
+   * @param {image} standingImage
+   * @param {number} standingHeight
+   * @param {image} sittingImage
+   * @param {number} sittingHeight
+   * @param {Vector2} initialPosition
+   * @param {number} sittingCenterOfMassXOffset
+   * @param {boolean} isMystery
+   */
+  constructor( massValue, standingImage, standingHeight, sittingImage, sittingHeight, initialPosition, sittingCenterOfMassXOffset, isMystery ) {
+    super( massValue, standingImage, standingHeight, initialPosition, isMystery );
+
+    // Monitor the 'onPlank' property and update the image as changes occur.
+    this.onPlankProperty.link( onPlank => {
+      if ( onPlank ) {
+        const xPosition = this.positionProperty.get().x;
+        this.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );
+        this.heightProperty.set( sittingHeight );
+        this.reverseImage = xPosition < 0;
+        this.imageProperty.set( sittingImage );
+      }
+      else {
+        this.centerOfMassXOffset = 0;
+        this.heightProperty.set( standingHeight );
+        this.reverseImage = false;
+        this.imageProperty.set( standingImage );
+      }
+    } );
+  }
 }
 
 balancingAct.register( 'HumanMass', HumanMass );
 
-inherit( ImageMass, HumanMass );
 export default HumanMass;

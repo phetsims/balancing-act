@@ -9,7 +9,6 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import inherit from '../../../../../phet-core/js/inherit.js';
 import girlSittingImage from '../../../../mipmaps/girl-sitting_png.js';
 import girlStandingImage from '../../../../mipmaps/girl-standing_png.js';
 import balancingAct from '../../../balancingAct.js';
@@ -21,15 +20,14 @@ const STANDING_HEIGHT = 1.3; // In meters.
 const SITTING_HEIGHT = 0.70; // In meters.
 const SITTING_CENTER_OF_MASS_X_OFFSET = 0.11; // In meters, determined visually.  Update if image changes.
 
-/**
- * @constructor
- */
-function Girl() {
-  HumanMass.call( this, MASS, girlStandingImage, STANDING_HEIGHT, girlSittingImage, SITTING_HEIGHT,
-    Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
+class Girl extends HumanMass {
+
+  constructor() {
+    super( MASS, girlStandingImage, STANDING_HEIGHT, girlSittingImage, SITTING_HEIGHT,
+      Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
+  }
 }
 
 balancingAct.register( 'Girl', Girl );
 
-inherit( HumanMass, Girl );
 export default Girl;

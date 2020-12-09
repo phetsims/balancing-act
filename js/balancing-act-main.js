@@ -17,7 +17,7 @@ const balancingActTitleString = balancingActStrings[ 'balancing-act' ].title;
 // constants
 const tandem = Tandem.ROOT;
 
-simLauncher.launch( function() {
+simLauncher.launch( () => {
 
   const simOptions = {
     credits: {

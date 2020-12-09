@@ -6,30 +6,30 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import balancingActStrings from '../../balancingActStrings.js';
 import balancingAct from '../../balancingAct.js';
+import balancingActStrings from '../../balancingActStrings.js';
 import ModelElementCreatorNode from './ModelElementCreatorNode.js';
 
 const kgString = balancingActStrings.kg;
 const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
 
-/**
- * @param {ModelViewTransform2} modelViewTransform
- * @param {number} massValue
- * @param {boolean} showMassLabel
- * @param {Object} [options]
- * @constructor
- */
-function MassCreatorNode( modelViewTransform, massValue, showMassLabel, options ) {
-  ModelElementCreatorNode.call( this, modelViewTransform, options );
-  if ( showMassLabel ) {
-    this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
+class MassCreatorNode extends ModelElementCreatorNode {
+
+  /**
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {number} massValue
+   * @param {boolean} showMassLabel
+   * @param {Object} [options]
+   */
+  constructor( modelViewTransform, massValue, showMassLabel, options ) {
+    super( modelViewTransform, options );
+    if ( showMassLabel ) {
+      this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
+    }
   }
 }
 
 balancingAct.register( 'MassCreatorNode', MassCreatorNode );
 
-inherit( ModelElementCreatorNode, MassCreatorNode );
 export default MassCreatorNode;

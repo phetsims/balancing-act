@@ -18,7 +18,6 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -30,114 +29,113 @@ import RasterizedTextNode from './RasterizedTextNode.js';
 // constants
 const DEFAULT_FONT = new PhetFont( 18 );
 
-/**
- * @param {number} width  distance between left-most and right-most tick, insets will be added to this
- * @param {number} height
- * @param {number} majorTickWidth
- * @param {Array<String>} majorTickLabels
- * @param {string} units
- * @param {Object} [options]
- * @constructor
- */
-function RulerNodeRasterizedText( width, height, majorTickWidth, majorTickLabels, units, options ) {
+class RulerNodeRasterizedText extends Node {
 
-  // default options
-  options = merge(
-    {
-      // body of the ruler
-      backgroundFill: 'rgb(236, 225, 113)',
-      backgroundStroke: 'black',
-      backgroundLineWidth: 1,
-      insetsWidth: 14, // space between the ends of the ruler and the first and last tick marks
-      // major tick options
-      majorTickFont: DEFAULT_FONT,
-      majorTickHeight: ( 0.4 * height ) / 2,
-      majorTickStroke: 'black',
-      majorTickLineWidth: 1,
-      // minor tick options
-      minorTickFont: DEFAULT_FONT,
-      minorTickHeight: ( 0.2 * height ) / 2,
-      minorTickStroke: 'black',
-      minorTickLineWidth: 1,
-      minorTicksPerMajorTick: 0,
-      // units options
-      unitsFont: DEFAULT_FONT,
-      unitsMajorTickIndex: 0, // units will be place to the right of this major tick
-      unitsSpacing: 3, // horizontal space between the tick label and the units
-      // appearance options
-      tickMarksOnTop: true,
-      tickMarksOnBottom: true
-    }, options );
+  /**
+   * @param {number} width  distance between left-most and right-most tick, insets will be added to this
+   * @param {number} height
+   * @param {number} majorTickWidth
+   * @param {Array<String>} majorTickLabels
+   * @param {string} units
+   * @param {Object} [options]
+   */
+  constructor( width, height, majorTickWidth, majorTickLabels, units, options ) {
 
-  // things you're likely to mess up, add more as needed
-  assert && assert( Math.floor( width / majorTickWidth ) + 1 === majorTickLabels.length ); // do we have enough major tick labels?
-  assert && assert( options.unitsMajorTickIndex < majorTickLabels.length );
-  assert && assert( options.majorTickHeight < height / 2 );
-  assert && assert( options.minorTickHeight < height / 2 );
+    // default options
+    options = merge(
+      {
+        // body of the ruler
+        backgroundFill: 'rgb(236, 225, 113)',
+        backgroundStroke: 'black',
+        backgroundLineWidth: 1,
+        insetsWidth: 14, // space between the ends of the ruler and the first and last tick marks
+        // major tick options
+        majorTickFont: DEFAULT_FONT,
+        majorTickHeight: ( 0.4 * height ) / 2,
+        majorTickStroke: 'black',
+        majorTickLineWidth: 1,
+        // minor tick options
+        minorTickFont: DEFAULT_FONT,
+        minorTickHeight: ( 0.2 * height ) / 2,
+        minorTickStroke: 'black',
+        minorTickLineWidth: 1,
+        minorTicksPerMajorTick: 0,
+        // units options
+        unitsFont: DEFAULT_FONT,
+        unitsMajorTickIndex: 0, // units will be place to the right of this major tick
+        unitsSpacing: 3, // horizontal space between the tick label and the units
+        // appearance options
+        tickMarksOnTop: true,
+        tickMarksOnBottom: true
+      }, options );
 
-  const self = this;
-  Node.call( self, options );
+    // things you're likely to mess up, add more as needed
+    assert && assert( Math.floor( width / majorTickWidth ) + 1 === majorTickLabels.length ); // do we have enough major tick labels?
+    assert && assert( options.unitsMajorTickIndex < majorTickLabels.length );
+    assert && assert( options.majorTickHeight < height / 2 );
+    assert && assert( options.minorTickHeight < height / 2 );
 
-  // background
-  const backgroundNode = new Rectangle( 0, 0, width + ( 2 * options.insetsWidth ), height,
-    {
-      fill: options.backgroundFill,
-      stroke: options.backgroundStroke,
-      lineWidth: options.backgroundLineWidth
-    } );
-  self.addChild( backgroundNode );
+    super( options );
 
-  // Lay out tick marks from left to right
-  const minorTickWidth = majorTickWidth / ( options.minorTicksPerMajorTick + 1 );
-  let x = options.insetsWidth;
-  let majorTickIndex = 0;
+    // background
+    const backgroundNode = new Rectangle( 0, 0, width + ( 2 * options.insetsWidth ), height,
+      {
+        fill: options.backgroundFill,
+        stroke: options.backgroundStroke,
+        lineWidth: options.backgroundLineWidth
+      } );
+    this.addChild( backgroundNode );
 
-  const ticksContainerNode = new Node( { pickable: false } );
-  this.addChild( ticksContainerNode );
+    // Lay out tick marks from left to right
+    const minorTickWidth = majorTickWidth / ( options.minorTicksPerMajorTick + 1 );
+    let x = options.insetsWidth;
+    let majorTickIndex = 0;
 
-  while ( x < ( width + options.insetsWidth + options.insetsWidth ) ) {
+    const ticksContainerNode = new Node( { pickable: false } );
+    this.addChild( ticksContainerNode );
 
-    if ( ( x - options.insetsWidth ) % majorTickWidth === 0 ) {
+    while ( x < ( width + options.insetsWidth + options.insetsWidth ) ) {
 
-      // Major tick label
-      const majorTickLabel = majorTickLabels[ majorTickIndex ];
-      const majorTickLabelNode = new RasterizedTextNode( majorTickLabel, { font: options.majorTickFont } );
-      //Clamp and make sure the labels stay within the ruler, especially if the insetsWidth has been set low (or to zero)
-      majorTickLabelNode.x = x - ( majorTickLabelNode.width / 2 );
-      majorTickLabelNode.centerY = backgroundNode.centerY;
+      if ( ( x - options.insetsWidth ) % majorTickWidth === 0 ) {
 
-      // Only add the major tick label if the insetsWidth is nonzero, or if it is not an end label
-      if ( options.insetsWidth !== 0 || ( majorTickIndex !== 0 ) ) {
-        ticksContainerNode.addChild( majorTickLabelNode );
-      }
+        // Major tick label
+        const majorTickLabel = majorTickLabels[ majorTickIndex ];
+        const majorTickLabelNode = new RasterizedTextNode( majorTickLabel, { font: options.majorTickFont } );
+        //Clamp and make sure the labels stay within the ruler, especially if the insetsWidth has been set low (or to zero)
+        majorTickLabelNode.x = x - ( majorTickLabelNode.width / 2 );
+        majorTickLabelNode.centerY = backgroundNode.centerY;
 
-      // Major tick mark
-      const majorTickNode = createTickMarkNode( x, height, options.majorTickHeight, options.majorTickStroke, options.majorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
-      ticksContainerNode.addChild( majorTickNode );
+        // Only add the major tick label if the insetsWidth is nonzero, or if it is not an end label
+        if ( options.insetsWidth !== 0 || ( majorTickIndex !== 0 ) ) {
+          ticksContainerNode.addChild( majorTickLabelNode );
+        }
 
-      // units label
-      if ( majorTickIndex === options.unitsMajorTickIndex ) {
-        const unitsNode = new RasterizedTextNode( units, { font: options.unitsFont } );
-        ticksContainerNode.addChild( unitsNode );
-        unitsNode.x = majorTickLabelNode.x + majorTickLabelNode.width + options.unitsSpacing;
-        unitsNode.y = majorTickLabelNode.y + majorTickLabelNode.height - unitsNode.height;
-      }
+        // Major tick mark
+        const majorTickNode = createTickMarkNode( x, height, options.majorTickHeight, options.majorTickStroke, options.majorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
+        ticksContainerNode.addChild( majorTickNode );
 
-      majorTickIndex++;
-      x += minorTickWidth;
-    }
-    else {
-      // Minor tick marks
-      for ( let k = 1; ( k <= options.minorTicksPerMajorTick ) && ( x < ( width + options.insetsWidth + options.insetsWidth ) ); k++ ) {
-        const minorTickNode = createTickMarkNode( x, height, options.minorTickHeight, options.minorTickStroke, options.minorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
-        ticksContainerNode.addChild( minorTickNode );
+        // units label
+        if ( majorTickIndex === options.unitsMajorTickIndex ) {
+          const unitsNode = new RasterizedTextNode( units, { font: options.unitsFont } );
+          ticksContainerNode.addChild( unitsNode );
+          unitsNode.x = majorTickLabelNode.x + majorTickLabelNode.width + options.unitsSpacing;
+          unitsNode.y = majorTickLabelNode.y + majorTickLabelNode.height - unitsNode.height;
+        }
+
+        majorTickIndex++;
         x += minorTickWidth;
+      }
+      else {
+        // Minor tick marks
+        for ( let k = 1; ( k <= options.minorTicksPerMajorTick ) && ( x < ( width + options.insetsWidth + options.insetsWidth ) ); k++ ) {
+          const minorTickNode = createTickMarkNode( x, height, options.minorTickHeight, options.minorTickStroke, options.minorTickLineWidth, options.tickMarksOnTop, options.tickMarksOnBottom );
+          ticksContainerNode.addChild( minorTickNode );
+          x += minorTickWidth;
+        }
       }
     }
   }
 }
-
-inherit( Node, RulerNodeRasterizedText );
 
 /**
  * Creates a tick mark at a specific x position.
@@ -153,7 +151,7 @@ inherit( Node, RulerNodeRasterizedText );
  * @param {boolean} drawLower
  * @returns {Node}
  */
-var createTickMarkNode = function( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) {
+var createTickMarkNode = ( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) => {
   const shape = new Shape();
   if ( drawUpper ) {
     shape.moveTo( x, 0 ).lineTo( x, tickHeight );

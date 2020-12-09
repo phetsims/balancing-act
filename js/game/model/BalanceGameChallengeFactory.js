@@ -114,7 +114,7 @@ const usedTiltPredictionChallenges = [];
 const BalanceGameChallengeFactory = {
 
   // Generate a random integer from 0 (inclusive) to max (exclusive)
-  randInt: function( max ) {
+  randInt( max ) {
     return Math.floor( phet.joist.random.nextDouble() * max );
   },
 
@@ -122,7 +122,7 @@ const BalanceGameChallengeFactory = {
    * Determine whether a challenge with the given values for the fixed and
    * movable masses and the given constraints on the plank can be solved.
    */
-  isChallengeSolvable: function( fixedMassValue, movableMassValue, distanceIncrement, maxDistance ) {
+  isChallengeSolvable( fixedMassValue, movableMassValue, distanceIncrement, maxDistance ) {
     if ( fixedMassValue * distanceIncrement > movableMassValue * maxDistance || fixedMassValue * maxDistance < movableMassValue * distanceIncrement ) {
       // The balance is not long enough to allow these masses to be balanced.
       return false;
@@ -131,7 +131,7 @@ const BalanceGameChallengeFactory = {
     return ( fixedMassValue / movableMassValue ) % distanceIncrement <= BASharedConstants.COMPARISON_TOLERANCE;
   },
 
-  chooseRandomValidFixedMassDistance: function( fixedMassValue, movableMassValue ) {
+  chooseRandomValidFixedMassDistance( fixedMassValue, movableMassValue ) {
     const validFixedMassDistances = this.getPossibleDistanceList( fixedMassValue, movableMassValue );
 
     // Randomly choose a distance to use from the identified set.
@@ -144,7 +144,7 @@ const BalanceGameChallengeFactory = {
    * NOT balanced.  This is a convenience method that was written to
    * consolidate some code written for generating tilt-prediction challenges.
    */
-  positionMassesCloseToBalancing: function( minDistance, maxDistance, masses ) {
+  positionMassesCloseToBalancing( minDistance, maxDistance, masses ) {
     let bestNetTorque = Number.POSITIVE_INFINITY;
     const minAcceptableTorque = 1; // Determined empirically.
     let distanceList = [];
@@ -206,14 +206,14 @@ const BalanceGameChallengeFactory = {
    * center of the plank.  The plank only allows discrete distances (i.e. it
    * is quantized), which is why this is needed.
    */
-  generateRandomValidPlankDistance: function() {
+  generateRandomValidPlankDistance() {
     const maxDistance = Plank.LENGTH / 2;
     const increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
     const maxIncrements = Utils.roundSymmetric( maxDistance / increment ) - 1;
     return ( this.randInt( maxIncrements ) + 1 ) * increment;
   },
 
-  generateRandomValidPlankDistanceRange: function( minDistance, maxDistance ) {
+  generateRandomValidPlankDistanceRange( minDistance, maxDistance ) {
     const minIncrements = Math.ceil( minDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
     const maxIncrements = Math.floor( maxDistance / Plank.INTER_SNAP_TO_MARKER_DISTANCE );
 
@@ -224,7 +224,7 @@ const BalanceGameChallengeFactory = {
    * Generate the list of solvable balance game challenges that can be
    * created from the given set of two fixed masses and one movable mass.
    */
-  generateSolvableChallenges: function( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype, distanceIncrement, maxDistance ) {
+  generateSolvableChallenges( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype, distanceIncrement, maxDistance ) {
     const solvableChallenges = [];
     for ( let fixedMass1Distance = distanceIncrement; fixedMass1Distance <= maxDistance; fixedMass1Distance += distanceIncrement ) {
       for ( let fixedMass2Distance = distanceIncrement; fixedMass2Distance <= maxDistance; fixedMass2Distance += distanceIncrement ) {
@@ -251,7 +251,7 @@ const BalanceGameChallengeFactory = {
    * that would allow the movable mass to be positioned somewhere on the
    * other side of the fulcrum and balance the fixed mass.
    */
-  getPossibleDistanceList: function( massOfFixedItem, massOfMovableItem ) {
+  getPossibleDistanceList( massOfFixedItem, massOfMovableItem ) {
     const validFixedMassDistances = [];
     for ( let testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
       const possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
@@ -265,7 +265,7 @@ const BalanceGameChallengeFactory = {
     return validFixedMassDistances;
   },
 
-  createTwoBrickStackChallenge: function( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
+  createTwoBrickStackChallenge( numBricksInFixedStack, fixedStackDistanceFromCenter, numBricksInMovableStack ) {
     return BalanceMassesChallenge.create1Fixed1Movable( new BrickStack( numBricksInFixedStack ), fixedStackDistanceFromCenter, new BrickStack( numBricksInMovableStack ) );
   },
 
@@ -277,7 +277,7 @@ const BalanceGameChallengeFactory = {
    * @param {number} massValue - Mass needed
    * @param {Array} ratios - Array of ratios (massValue / createdMassValue) which are acceptable.
    */
-  createMassByRatio: function( massValue, ratios ) {
+  createMassByRatio( massValue, ratios ) {
     const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
     for ( let i = 0; i < BALANCE_CHALLENGE_MASSES.length; i++ ) {
       const candidateMassPrototype = BALANCE_CHALLENGE_MASSES[ ( i + indexOffset ) % BALANCE_CHALLENGE_MASSES.length ];
@@ -295,7 +295,7 @@ const BalanceGameChallengeFactory = {
   },
 
   // Generate a simple challenge where brick stacks of equal mass appear on each side.
-  generateSimpleBalanceChallenge: function() {
+  generateSimpleBalanceChallenge() {
     const numBricks = this.randInt( 4 ) + 1;
     const distance = -this.generateRandomValidPlankDistance();
     return this.createTwoBrickStackChallenge( numBricks, distance, numBricks );
@@ -308,7 +308,7 @@ const BalanceGameChallengeFactory = {
    * <p/>
    * Ratios used are 2:1 or 1:2.
    */
-  generateEasyBalanceChallenge: function() {
+  generateEasyBalanceChallenge() {
     let numBricksInFixedStack = 1;
     let numBricksInMovableStack = 1;
     let validFixedStackDistances = [];
@@ -344,7 +344,7 @@ const BalanceGameChallengeFactory = {
    * and the distance ratios can be more complex than in the simpler
    * challenges, e.g. 3:2.
    */
-  generateModerateBalanceChallenge: function() {
+  generateModerateBalanceChallenge() {
 
     let fixedMassPrototype;
     let movableMass;
@@ -374,7 +374,7 @@ const BalanceGameChallengeFactory = {
    * Generate a challenge where there are multiple fixed masses that must be
    * balanced by a single movable mass.
    */
-  generateAdvancedBalanceChallenge: function() {
+  generateAdvancedBalanceChallenge() {
     let solvableChallenges;
 
     do {
@@ -393,7 +393,7 @@ const BalanceGameChallengeFactory = {
    * Generate a simple tilt-prediction style of challenge.  This one only
    * uses bricks, and never produces perfectly balanced challenges.
    */
-  generateSimpleTiltPredictionChallenge: function() {
+  generateSimpleTiltPredictionChallenge() {
     // Choose two different numbers between 1 and 4 (inclusive) for the
     // number of bricks in the two stacks.
     const numBricksInLeftStack = 1 + this.randInt( 4 );
@@ -422,7 +422,7 @@ const BalanceGameChallengeFactory = {
    *
    * @return
    */
-  generateEasyTiltPredictionChallenge: function() {
+  generateEasyTiltPredictionChallenge() {
     const generateRandomValidPlankDistanceRange = 1 + this.randInt( 4 );
 
     // Generate distance for the left mass.
@@ -444,7 +444,7 @@ const BalanceGameChallengeFactory = {
       rightMassDistance );
   },
 
-  generateModerateTiltPredictionChallenge: function() {
+  generateModerateTiltPredictionChallenge() {
     // Select the masses, bricks on one side, non bricks on the other.
     let leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
     let rightMass = new BrickStack( this.randInt( 4 ) + 1 );
@@ -464,7 +464,7 @@ const BalanceGameChallengeFactory = {
     return new TiltPredictionChallenge( massDistancePairs );
   },
 
-  generateAdvancedTiltPredictionChallenge: function() {
+  generateAdvancedTiltPredictionChallenge() {
     // Choose three random masses, bricks on one side, non-bricks on the other.
     const mass1 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
     const mass2 = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
@@ -483,7 +483,7 @@ const BalanceGameChallengeFactory = {
    * Generate a mass deduction style challenge where the fixed mystery mass
    * is the same value as the known mass.
    */
-  generateSimpleMassDeductionChallenge: function() {
+  generateSimpleMassDeductionChallenge() {
     const indexOffset = 1 + this.randInt( BALANCE_CHALLENGE_MASSES.length );
     let knownMass = null;
     let mysteryMassPrototype = null;
@@ -510,7 +510,7 @@ const BalanceGameChallengeFactory = {
    * Generate a mass deduction style challenge where the fixed mystery mass
    * is either twice as heavy or half as heavy as the known mass.
    */
-  generateEasyMassDeductionChallenge: function() {
+  generateEasyMassDeductionChallenge() {
     const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
     let knownMass = null;
     let mysteryMassPrototype = null;
@@ -537,7 +537,7 @@ const BalanceGameChallengeFactory = {
    * is related to the movable mass by a ratio that is more complicate than
    * 2:1 or 1:2, e.g. 1:3.
    */
-  generateModerateMassDeductionChallenge: function() {
+  generateModerateMassDeductionChallenge() {
     const indexOffset = this.randInt( BALANCE_CHALLENGE_MASSES.length );
     let knownMass = null;
     let mysteryMassPrototype = null;
@@ -563,7 +563,7 @@ const BalanceGameChallengeFactory = {
    * Convenience function for removing the oldest half of a list (which is
    * the lower indicies).
    */
-  removeOldestHalfOfList: function( list ) {
+  removeOldestHalfOfList( list ) {
     list.splice( 0, Utils.roundSymmetric( list.length / 2 ) );
   },
 
@@ -573,7 +573,7 @@ const BalanceGameChallengeFactory = {
    * provides functions for generating the challenges and testing its
    * uniqueness, as well as a list of previous challenges to test against.
    */
-  generateUniqueChallenge: function( challengeGenerator, uniquenessTest, previousChallenges ) {
+  generateUniqueChallenge( challengeGenerator, uniquenessTest, previousChallenges ) {
     let challenge = null;
     let uniqueChallengeGenerated = false;
 
@@ -613,8 +613,8 @@ const BalanceGameChallengeFactory = {
    * @param usedChallengeList
    * @return
    */
-  usesUniqueMasses: function( testChallenge, usedChallengeList ) {
-    return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameMasses( testChallenge ); } );
+  usesUniqueMasses( testChallenge, usedChallengeList ) {
+    return !_.some( usedChallengeList, challenge => challenge.usesSameMasses( testChallenge ) );
   },
 
   /**
@@ -629,8 +629,8 @@ const BalanceGameChallengeFactory = {
    * @param usedChallengeList
    * @return
    */
-  usesUniqueFixedMassesAndDistances: function( testChallenge, usedChallengeList ) {
-    return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMassesAndDistances( testChallenge ); } );
+  usesUniqueFixedMassesAndDistances( testChallenge, usedChallengeList ) {
+    return !_.some( usedChallengeList, challenge => challenge.usesSameFixedMassesAndDistances( testChallenge ) );
   },
 
   /**
@@ -644,59 +644,59 @@ const BalanceGameChallengeFactory = {
    * @param usedChallengeList
    * @return
    */
-  usesUniqueFixedMasses: function( testChallenge, usedChallengeList ) {
-    return !_.some( usedChallengeList, function( challenge ) { return challenge.usesSameFixedMasses( testChallenge ); } );
+  usesUniqueFixedMasses( testChallenge, usedChallengeList ) {
+    return !_.some( usedChallengeList, challenge => challenge.usesSameFixedMasses( testChallenge ) );
   },
 
-  generateBalanceChallenge: function( level ) {
+  generateBalanceChallenge( level ) {
     return this.generateUniqueChallenge( this.balanceChallengeGenerators[ level ].bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   },
 
-  simpleBalanceChallengeGenerator: function() {
+  simpleBalanceChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateSimpleBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   },
 
-  easyBalanceChallengeGenerator: function() {
+  easyBalanceChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateEasyBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   },
 
-  moderateBalanceChallengeGenerator: function() {
+  moderateBalanceChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateModerateBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   },
 
-  advancedBalanceChallengeGenerator: function() {
+  advancedBalanceChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateAdvancedBalanceChallenge.bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   },
 
-  simpleMassDeductionChallengeGenerator: function() {
+  simpleMassDeductionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateSimpleMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges );
   },
 
-  easyMassDeductionChallengeGenerator: function() {
+  easyMassDeductionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateEasyMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges );
   },
 
-  moderateMassDeductionChallengeGenerator: function() {
+  moderateMassDeductionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateModerateMassDeductionChallenge.bind( this ), this.usesUniqueFixedMasses, usedMassDeductionChallenges );
   },
 
-  simpleTiltPredictionChallengeGenerator: function() {
+  simpleTiltPredictionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateSimpleTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges );
   },
 
-  easyTiltPredictionChallengeGenerator: function() {
+  easyTiltPredictionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateEasyTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges );
   },
 
-  moderateTiltPredictionChallengeGenerator: function() {
+  moderateTiltPredictionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateModerateTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges );
   },
 
-  advancedTiltPredictionChallengeGenerator: function() {
+  advancedTiltPredictionChallengeGenerator() {
     return this.generateUniqueChallenge( this.generateAdvancedTiltPredictionChallenge.bind( this ), this.usesUniqueFixedMassesAndDistances, usedTiltPredictionChallenges );
   },
 
-  generateChallengeSet: function( level ) {
+  generateChallengeSet( level ) {
     const balanceChallengeList = [];
     switch( level ) {
 

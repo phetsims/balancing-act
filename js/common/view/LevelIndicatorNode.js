@@ -11,7 +11,6 @@ import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Transform3 from '../../../../dot/js/Transform3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import balancingAct from '../../balancingAct.js';
@@ -22,56 +21,61 @@ const PLANK_TO_INDICATOR_SPACING = 5;
 const LEVEL_FILL_COLOR = 'rgb( 173, 255, 47 )';
 const NON_LEVEL_FILL_COLOR = 'rgb( 230, 230, 230 )';
 
-function LevelIndicatorNode( modelViewTransform, plank ) {
-  Node.call( this );
-  const self = this;
+class LevelIndicatorNode extends Node {
 
-  // Positions for left and right edge
-  const leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
-    plank.pivotPoint.x - Plank.LENGTH / 2,
-    plank.getPlankSurfaceCenter().y
-  ) );
-  const rightEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
-    plank.pivotPoint.x + Plank.LENGTH / 2,
-    plank.getPlankSurfaceCenter().y
-  ) );
+  /**
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Plank} plank
+   */
+  constructor( modelViewTransform, plank ) {
+    super();
 
-  // Draw a sort of arrow head shape.
-  const leftIndicatorShape = new Shape().moveTo( 0, 0 ).lineTo( -25, -10 ).lineTo( -20, 0 ).lineTo( -25, 10 ).close();
+    // Positions for left and right edge
+    const leftEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+      plank.pivotPoint.x - Plank.LENGTH / 2,
+      plank.getPlankSurfaceCenter().y
+    ) );
+    const rightEdgeOfPlank = modelViewTransform.modelToViewPosition( new Vector2(
+      plank.pivotPoint.x + Plank.LENGTH / 2,
+      plank.getPlankSurfaceCenter().y
+    ) );
 
-  //Create paths for left and right side
-  const leftLevelIndicatorNode = new Path( leftIndicatorShape,
-    {
-      stroke: 'black',
-      right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
-      centerY: leftEdgeOfPlank.y
+    // Draw a sort of arrow head shape.
+    const leftIndicatorShape = new Shape().moveTo( 0, 0 ).lineTo( -25, -10 ).lineTo( -20, 0 ).lineTo( -25, 10 ).close();
+
+    //Create paths for left and right side
+    const leftLevelIndicatorNode = new Path( leftIndicatorShape,
+      {
+        stroke: 'black',
+        right: leftEdgeOfPlank.x - PLANK_TO_INDICATOR_SPACING,
+        centerY: leftEdgeOfPlank.y
+      } );
+    this.addChild( leftLevelIndicatorNode );
+
+    const reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
+    const rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
+    const rightLevelIndicatorNode = new Path( rightIndicatorShape,
+      {
+        stroke: 'black',
+        left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,
+        centerY: rightEdgeOfPlank.y
+      } );
+    this.addChild( rightLevelIndicatorNode );
+
+    //Highlight if the plank is level
+    plank.tiltAngleProperty.link( tiltAngle => {
+      if ( Math.abs( tiltAngle ) < Math.PI / 1000 ) {
+        leftLevelIndicatorNode.fill = LEVEL_FILL_COLOR;
+        rightLevelIndicatorNode.fill = LEVEL_FILL_COLOR;
+      }
+      else {
+        leftLevelIndicatorNode.fill = NON_LEVEL_FILL_COLOR;
+        rightLevelIndicatorNode.fill = NON_LEVEL_FILL_COLOR;
+      }
     } );
-  self.addChild( leftLevelIndicatorNode );
-
-  const reflectTransform = new Transform3( Matrix3.scaling( -1, 1 ) );
-  const rightIndicatorShape = reflectTransform.transformShape( leftIndicatorShape );
-  const rightLevelIndicatorNode = new Path( rightIndicatorShape,
-    {
-      stroke: 'black',
-      left: rightEdgeOfPlank.x + PLANK_TO_INDICATOR_SPACING,
-      centerY: rightEdgeOfPlank.y
-    } );
-  self.addChild( rightLevelIndicatorNode );
-
-  //Highlight if the plank is level
-  plank.tiltAngleProperty.link( function( tiltAngle ) {
-    if ( Math.abs( tiltAngle ) < Math.PI / 1000 ) {
-      leftLevelIndicatorNode.fill = LEVEL_FILL_COLOR;
-      rightLevelIndicatorNode.fill = LEVEL_FILL_COLOR;
-    }
-    else {
-      leftLevelIndicatorNode.fill = NON_LEVEL_FILL_COLOR;
-      rightLevelIndicatorNode.fill = NON_LEVEL_FILL_COLOR;
-    }
-  } );
+  }
 }
 
 balancingAct.register( 'LevelIndicatorNode', LevelIndicatorNode );
 
-inherit( Node, LevelIndicatorNode );
 export default LevelIndicatorNode;

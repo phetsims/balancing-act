@@ -10,7 +10,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import balancingAct from '../../balancingAct.js';
 import Man from '../../common/model/masses/Man.js';
@@ -22,18 +21,19 @@ import ImageMassCreatorNode from './ImageMassCreatorNode.js';
 // items in the toolbox can be sized differently (generally smaller).
 const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 80 );
 
-/**
- * @param {BalanceLabModel} model
- * @param {ModelViewTransform2} modelViewTransform
- * @constructor
- */
-function ManCreatorNode( model, modelViewTransform ) {
-  ImageMassCreatorNode.call( this, model, modelViewTransform, new Man(), true );
-  this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
-  this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
+class ManCreatorNode extends ImageMassCreatorNode {
+
+  /**
+   * @param {BalanceLabModel} model
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( model, modelViewTransform ) {
+    super( model, modelViewTransform, new Man(), true );
+    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
+    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
+  }
 }
 
 balancingAct.register( 'ManCreatorNode', ManCreatorNode );
 
-inherit( ImageMassCreatorNode, ManCreatorNode );
 export default ManCreatorNode;

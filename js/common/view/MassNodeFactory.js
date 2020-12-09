@@ -19,7 +19,7 @@ import ImageMassNode from './ImageMassNode.js';
 import MysteryMassNode from './MysteryMassNode.js';
 
 const MassNodeFactory = {
-  createMassNode: function( mass, modelViewTransform, isLabeled, labelVisibleProperty, columnStateProperty ) {
+  createMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, columnStateProperty ) {
     let massNode;
     if ( mass instanceof MysteryMass ) {
       massNode = new MysteryMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true, columnStateProperty );

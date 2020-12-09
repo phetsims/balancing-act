@@ -6,59 +6,62 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import balancingAct from '../../balancingAct.js';
 
-/**
- * @param initialColumnState
- * @param {Object} [options]
- * @constructor
- */
-function BalanceGameChallenge( initialColumnState, options ) {
-  options = merge( {
-    maxAttemptsAllowed: 2
-  }, options );
-  this.initialColumnState = initialColumnState;
-  this.maxAttemptsAllowed = options.maxAttemptsAllowed;
-
-  // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
-  // where the mass is initially sitting on the balance and is not movable
-  // by the user.
-  this.fixedMassDistancePairs = [];
-
-  // List of masses that the user will move into the appropriate positions
-  // in order to balance out the other masses.
-  this.movableMasses = [];
-
-  // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
-  // where the movable masses balance the fixed masses.  For some challenges,
-  // this is what will be displayed to the user if they ask to see a correct answer.
-  this.balancedConfiguration = [];
-}
-
-balancingAct.register( 'BalanceGameChallenge', BalanceGameChallenge );
-
-inherit( Object, BalanceGameChallenge, {
+class BalanceGameChallenge {
 
   /**
-   * Convenience function for determining whether an equivalent mass is
-   * contained on the list.  The 'contains' function for the mass list can't
-   * be used because it relies on the 'equals' function, which needs to be
-   * more specific than just matching class and mass value.
+   * @param {ColumnState} initialColumnState
+   * @param {Object} [options]
    */
-  containsEquivalentMass: function( mass, massList ) {
+  constructor( initialColumnState, options ) {
+    options = merge( {
+      maxAttemptsAllowed: 2
+    }, options );
+    this.initialColumnState = initialColumnState;
+    this.maxAttemptsAllowed = options.maxAttemptsAllowed;
+
+    // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
+    // where the mass is initially sitting on the balance and is not movable
+    // by the user.
+    this.fixedMassDistancePairs = [];
+
+    // List of masses that the user will move into the appropriate positions
+    // in order to balance out the other masses.
+    this.movableMasses = [];
+
+    // An array of mass-distance pairs, i.e. { mass: <Mass>, distance: <Number> }
+    // where the movable masses balance the fixed masses.  For some challenges,
+    // this is what will be displayed to the user if they ask to see a correct answer.
+    this.balancedConfiguration = [];
+  }
+
+  /**
+   * Convenience function for determining whether an equivalent mass is contained on the list.  The 'contains' function
+   * for the mass list can't be used because it relies on the 'equals' function, which needs to be more specific than
+   * just matching class and mass value.
+   * @private
+   */
+  containsEquivalentMass( mass, massList ) {
     for ( let i = 0; i < massList.length; i++ ) {
       if ( mass.massValue === massList[ i ].massValue && typeof ( mass ) === typeof ( massList[ i ] ) ) {
+
         // These masses are equivalent, so the list contains an equivalent mass.
         return true;
       }
     }
     return false;
-  },
+  }
 
-  // Test two mass lists to see if they contain equivalent masses.
-  containsEquivalentMasses: function( massList1, massList2 ) {
+  /**
+   * Test two mass lists to see if they contain equivalent masses.
+   * @param massList1
+   * @param massList2
+   * @returns {boolean}
+   * @private
+   */
+  containsEquivalentMasses( massList1, massList2 ) {
     if ( massList1.length !== massList2.length ) {
       return false;
     }
@@ -68,22 +71,27 @@ inherit( Object, BalanceGameChallenge, {
       }
     }
     return true;
-  },
+  }
 
-  // Extract the fixed masses from the mass-distance pairs.
-  getFixedMassesList: function() {
+  /**
+   * Extract the fixed masses from the mass-distance pairs.
+   * @returns {Mass[]}
+   * @private
+   */
+  getFixedMassesList() {
     const fixedMassesList = [];
-    this.fixedMassDistancePairs.forEach( function( massDistancePair ) {
+    this.fixedMassDistancePairs.forEach( massDistancePair => {
       fixedMassesList.push( massDistancePair.mass );
     } );
     return fixedMassesList;
-  },
+  }
 
   /**
-   * Returns true if the specified challenge uses the same fixed masses.
-   * This is used for various equivalence comparisons.
+   * Returns true if the specified challenge uses the same fixed masses. This is used for various equivalence
+   * comparisons.
+   * @public
    */
-  usesSameFixedMasses: function( that ) {
+  usesSameFixedMasses( that ) {
     if ( this === that ) {
       return true;
     }
@@ -97,29 +105,34 @@ inherit( Object, BalanceGameChallenge, {
 
     // If we made it to here, the masses are the same.
     return true;
-  },
+  }
 
-  usesSameMovableMasses: function( that ) {
+  /**
+   * @param {BalanceGameChallenge} that
+   * @returns {boolean}
+   * @private
+   */
+  usesSameMovableMasses( that ) {
     return this.containsEquivalentMasses( this.movableMasses, that.movableMasses );
-  },
+  }
 
   /**
-   * Returns true if the specified challenge uses the same masses as this
-   * challenge.  Note that "same masses" means the same classes, not just
-   * the same values.  For example, if both challenges have a movable mass
-   * that weigh 60kg but one is a rock and the other is a person, this will
-   * return false.
+   * Returns true if the specified challenge uses the same masses as this challenge.  Note that "same masses" means the
+   * same classes, not just the same values.  For example, if both challenges have a movable mass that weigh 60kg but
+   * one is a rock and the other is a person, this will return false.
+   * @returns {boolean}
+   * @public
    */
-  usesSameMasses: function( that ) {
+  usesSameMasses( that ) {
     return this.usesSameFixedMasses( that ) && this.usesSameMovableMasses( that );
-  },
+  }
 
   /**
-   * Compares the fixed masses and their distances to those of the given
-   * challenge and, if all fixed masses and distances are the same, 'true'
-   * is returned.
+   * Compares the fixed masses and their distances to those of the given challenge and, if all fixed masses and
+   * distances are the same, 'true' is returned.
+   * @public
    */
-  usesSameFixedMassesAndDistances: function( that ) {
+  usesSameFixedMassesAndDistances( that ) {
     if ( this === that ) {
       return true;
     }
@@ -131,8 +144,8 @@ inherit( Object, BalanceGameChallenge, {
     }
 
     let matchCount = 0;
-    this.fixedMassDistancePairs.forEach( function( thisFixedMassDistancePair ) {
-      that.fixedMassDistancePairs.forEach( function( thatFixedMassDistancePair ) {
+    this.fixedMassDistancePairs.forEach( thisFixedMassDistancePair => {
+      that.fixedMassDistancePairs.forEach( thatFixedMassDistancePair => {
         if ( thisFixedMassDistancePair.mass.massValue === thatFixedMassDistancePair.mass.massValue &&
              thisFixedMassDistancePair.distance === thatFixedMassDistancePair.distance ) {
           matchCount++;
@@ -144,6 +157,8 @@ inherit( Object, BalanceGameChallenge, {
     // lists are equivalent.
     return matchCount === this.fixedMassDistancePairs.length;
   }
-} );
+}
+
+balancingAct.register( 'BalanceGameChallenge', BalanceGameChallenge );
 
 export default BalanceGameChallenge;

@@ -1,44 +1,50 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
-
-import inherit from '../../../../phet-core/js/inherit.js';
-import balancingActStrings from '../../balancingActStrings.js';
-import balancingAct from '../../balancingAct.js';
-import ColumnState from '../../common/model/ColumnState.js';
-import BalanceGameChallenge from './BalanceGameChallenge.js';
-
-const whatIsTheMassString = balancingActStrings.whatIsTheMass;
-
 /**
  * A challenge, used in the balance game, in which the user attempts to
  * deduce the mass of a "mystery mass" using another mass of a known value.
  *
  * @author John Blanco
  */
-function MassDeductionChallenge( fixedMassDistancePair, movableMass, solutionToDisplay ) {
-  BalanceGameChallenge.call( this, ColumnState.NO_COLUMNS );
 
-  this.fixedMassDistancePairs.push( fixedMassDistancePair );
-  this.movableMasses.push( movableMass );
-  this.balancedConfiguration.push( solutionToDisplay );
+import balancingAct from '../../balancingAct.js';
+import balancingActStrings from '../../balancingActStrings.js';
+import ColumnState from '../../common/model/ColumnState.js';
+import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-  // Set up the challenge view configuration, which provides information to
-  // the view about how this challenge should be displayed.
-  this.viewConfig = {
-    title: whatIsTheMassString,
-    showMassEntryDialog: true,
-    showTiltPredictionSelector: false
-  };
-}
+const whatIsTheMassString = balancingActStrings.whatIsTheMass;
 
-balancingAct.register( 'MassDeductionChallenge', MassDeductionChallenge );
+class MassDeductionChallenge extends BalanceGameChallenge {
 
-inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
+  /**
+   * @param fixedMassDistancePair
+   * @param movableMass
+   * @param solutionToDisplay
+   */
+  constructor( fixedMassDistancePair, movableMass, solutionToDisplay ) {
+    super( ColumnState.NO_COLUMNS );
+
+    this.fixedMassDistancePairs.push( fixedMassDistancePair );
+    this.movableMasses.push( movableMass );
+    this.balancedConfiguration.push( solutionToDisplay );
+
+    // Set up the challenge view configuration, which provides information to the view about how this challenge should
+    // be displayed.
+    this.viewConfig = {
+      title: whatIsTheMassString,
+      showMassEntryDialog: true,
+      showTiltPredictionSelector: false
+    };
+  }
 
   // statics
 
-  // convenience factory method for creating a mass deduction challenge
-  create: function( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
+  /**
+   * convenience factory method for creating a mass deduction challenge
+   * @returns {MassDeductionChallenge}
+   * @public
+   */
+  static create( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
 
     // Create the mass-distance pair for the mystery mass.
     const mysteryMassDistancePair = { mass: mysteryMass, distance: mysteryMassDistanceFromCenter };
@@ -52,6 +58,8 @@ inherit( BalanceGameChallenge, MassDeductionChallenge, {}, {
     // Combine into challenge.
     return new MassDeductionChallenge( mysteryMassDistancePair, knownMass, solution );
   }
-} );
+}
+
+balancingAct.register( 'MassDeductionChallenge', MassDeductionChallenge );
 
 export default MassDeductionChallenge;

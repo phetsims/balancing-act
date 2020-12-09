@@ -13,59 +13,68 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import balancingAct from '../../balancingAct.js';
 import Mass from './Mass.js';
 
-/**
- * @param mass
- * @param image
- * @param height
- * @param initialPosition
- * @param isMystery
- * @param {Object} [options]
- * @constructor
- */
-function ImageMass( mass, image, height, initialPosition, isMystery, options ) {
-  Mass.call( this, mass, initialPosition, isMystery, options );
+class ImageMass extends Mass {
 
-  // Property that contains the current image.
-  this.imageProperty = new Property( image );
+  /**
+   * @param mass
+   * @param image
+   * @param height
+   * @param initialPosition
+   * @param isMystery
+   * @param {Object} [options]
+   */
+  constructor( mass, image, height, initialPosition, isMystery, options ) {
+    super( mass, initialPosition, isMystery, options );
 
-  // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
-  // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
-  // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
-  // A property is used because the size may change during animations.
-  this.heightProperty = new Property( height );
+    // Property that contains the current image.
+    this.imageProperty = new Property( image );
 
-  // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
-  // set prior to image updates.
-  this.reverseImage = false;
+    // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
+    // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
+    // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
+    // A property is used because the size may change during animations.
+    this.heightProperty = new Property( height );
 
-  // Expected duration of the current animation.
-  this.expectedAnimationTime = 0;
-}
+    // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
+    // set prior to image updates.
+    this.reverseImage = false;
 
-balancingAct.register( 'ImageMass', ImageMass );
+    // Expected duration of the current animation.
+    this.expectedAnimationTime = 0;
+  }
 
-inherit( Mass, ImageMass, {
-
-  reset: function() {
+  /**
+   * @public
+   */
+  reset() {
     this.heightProperty.reset();
     this.imageProperty.reset();
-    Mass.prototype.reset.call( this );
-  },
+    super.reset();
+  }
 
-  getMiddlePoint: function() {
+  /**
+   * @returns {Vector2}
+   * @public
+   */
+  getMiddlePoint() {
     const position = this.positionProperty.get();
     return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
-  },
+  }
 
-  // TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
-  createCopy: function() {
+  /**
+   * @returns {ImageMass}
+   * @public
+   * TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
+   */
+  createCopy() {
     // This clever invocation supports the creation of subclassed instances.
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
-} );
+}
+
+balancingAct.register( 'ImageMass', ImageMass );
 
 export default ImageMass;

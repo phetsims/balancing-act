@@ -9,7 +9,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -19,26 +18,31 @@ import plankTippedRightImage from '../../../images/plank-tipped-right_png.js';
 import balancingAct from '../../balancingAct.js';
 import TiltPredictionSelectionPanel from './TiltPredictionSelectionPanel.js';
 
-function TiltPredictionSelectorNode( gameStateProperty ) {
-  Node.call( this );
+class TiltPredictionSelectorNode extends Node {
 
-  // Property that tracks the selected prediction.  Valid values are 'none',
-  // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
-  this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
+  /**
+   * @param gameStateProperty
+   */
+  constructor( gameStateProperty ) {
+    super();
 
-  const panelContents = new HBox(
-    {
-      children: [
-        new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
-        new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
-        new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
-      ], spacing: 5
-    } );
+    // Property that tracks the selected prediction.  Valid values are 'none',
+    // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
+    this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
 
-  this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
+    const panelContents = new HBox(
+      {
+        children: [
+          new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
+        ], spacing: 5
+      } );
+
+    this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
+  }
 }
 
 balancingAct.register( 'TiltPredictionSelectorNode', TiltPredictionSelectorNode );
 
-inherit( Node, TiltPredictionSelectorNode );
 export default TiltPredictionSelectorNode;

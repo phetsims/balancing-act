@@ -9,42 +9,47 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
 import balancingAct from '../../balancingAct.js';
 
-function MassDragHandler( mass, modelViewTransform ) {
-  SimpleDragHandler.call( this, {
+class MassDragHandler extends SimpleDragHandler {
 
-    // Allow moving a finger (touch) across a node to pick it up.
-    allowTouchSnag: true,
+  /**
+   * @param {Mass} mass
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( mass, modelViewTransform ) {
+    super( {
 
-    // Handler that moves the particle in model space.
-    translate: function( translationParams ) {
-      mass.positionProperty.set(
-        mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
-      );
-      return translationParams.position;
-    },
+      // Allow moving a finger (touch) across a node to pick it up.
+      allowTouchSnag: true,
 
-    start: function( event, trail ) {
-      mass.userControlledProperty.set( true );
-    },
+      // Handler that moves the particle in model space.
+      translate: translationParams => {
+        mass.positionProperty.set(
+          mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
+        );
+        return translationParams.position;
+      },
 
-    end: function( event, trail ) {
-
-      // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
-      // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
-      if ( mass.userControlledProperty.get() === false ) {
+      start: ( event, trail ) => {
         mass.userControlledProperty.set( true );
-      }
+      },
 
-      mass.userControlledProperty.set( false );
-    }
-  } );
+      end: ( event, trail ) => {
+
+        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
+        if ( mass.userControlledProperty.get() === false ) {
+          mass.userControlledProperty.set( true );
+        }
+
+        mass.userControlledProperty.set( false );
+      }
+    } );
+  }
 }
 
 balancingAct.register( 'MassDragHandler', MassDragHandler );
 
-inherit( SimpleDragHandler, MassDragHandler );
 export default MassDragHandler;

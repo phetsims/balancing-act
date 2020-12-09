@@ -3,36 +3,49 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants
 const ACCELERATION_DUE_TO_GRAVITY = -9.8; // meters per second squared.
 
-/**
- * @param {Object} mass - A mass object as used in this simulation.
- * @constructor
- */
-function MassForceVector( mass ) {
-  this.mass = mass;
-  this.forceVectorProperty = new Property( this.generateVector( mass ) );
-}
+class MassForceVector {
 
-balancingAct.register( 'MassForceVector', MassForceVector );
+  /**
+   * @param {Object} mass - A mass object as used in this simulation.
+   */
+  constructor( mass ) {
+    this.mass = mass;
+    this.forceVectorProperty = new Property( this.generateVector( mass ) );
+  }
 
-inherit( Object, MassForceVector, {
-  update: function() {
+  /**
+   * @public
+   */
+  update() {
     this.forceVectorProperty.set( this.generateVector( this.mass ) );
-  },
-  isObfuscated: function() {
+  }
+
+  /**
+   * @returns {boolean}
+   * @public
+   */
+  isObfuscated() {
     return this.mass.isMystery;
-  },
-  generateVector: function( mass ) {
+  }
+
+  /**
+   * @param {Mass} mass
+   * @returns {Vector2}
+   * @private
+   */
+  generateVector( mass ) {
     return {
       origin: new Vector2( mass.positionProperty.get().x, mass.positionProperty.get().y ),
       vector: new Vector2( 0, mass.massValue * ACCELERATION_DUE_TO_GRAVITY )
     };
   }
-} );
+}
+
+balancingAct.register( 'MassForceVector', MassForceVector );
 
 export default MassForceVector;

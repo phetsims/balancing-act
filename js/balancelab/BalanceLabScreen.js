@@ -17,6 +17,7 @@ import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabView from './view/BalanceLabView.js';
 
 class BalanceLabScreen extends Screen {
+
   constructor( tandem ) {
 
     const options = {
@@ -33,8 +34,8 @@ class BalanceLabScreen extends Screen {
     };
 
     super(
-      function() { return new BalanceLabModel( tandem.createTandem( 'model' ) ); },
-      function( model ) {return new BalanceLabView( model, tandem.createTandem( 'view' ) ); },
+      () => new BalanceLabModel( tandem.createTandem( 'model' ) ),
+      model => new BalanceLabView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

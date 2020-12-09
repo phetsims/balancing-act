@@ -1,7 +1,6 @@
 // Copyright 2014-2020, University of Colorado Boulder
 
 
-import inherit from '../../../../../phet-core/js/inherit.js';
 import pottedPlantImage from '../../../../images/potted-plant_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -10,16 +9,17 @@ import ImageMass from '../ImageMass.js';
 const MASS = 10; // In kg
 const HEIGHT = 0.65; // In meters
 
-/**
- * @param initialPosition
- * @param isMystery
- * @constructor
- */
-function PottedPlant( initialPosition, isMystery ) {
-  ImageMass.call( this, MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
+class PottedPlant extends ImageMass {
+
+  /**
+   * @param initialPosition
+   * @param isMystery
+   */
+  constructor( initialPosition, isMystery ) {
+    super( MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
+  }
 }
 
 balancingAct.register( 'PottedPlant', PottedPlant );
 
-inherit( ImageMass, PottedPlant );
 export default PottedPlant;

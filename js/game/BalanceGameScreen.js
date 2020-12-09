@@ -17,6 +17,10 @@ import BalanceGameModel from './model/BalanceGameModel.js';
 import BalanceGameView from './view/BalanceGameView.js';
 
 class BalanceGameScreen extends Screen {
+
+  /**
+   * @param {Tandem} tandem
+   */
   constructor( tandem ) {
 
     const options = {
@@ -33,8 +37,8 @@ class BalanceGameScreen extends Screen {
     };
 
     super(
-      function() { return new BalanceGameModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new BalanceGameView( model, tandem.createTandem( 'view' ) ); },
+      () => new BalanceGameModel( tandem.createTandem( 'model' ) ),
+      model => new BalanceGameView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

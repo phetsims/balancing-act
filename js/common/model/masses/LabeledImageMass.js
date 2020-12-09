@@ -8,21 +8,21 @@
  * @author John Blanco
  */
 
-import inherit from '../../../../../phet-core/js/inherit.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
-/**
- * @param {Vector2} initialPosition
- * @param {Object} config - configuration information for the labeled image mass
- * @constructor
- */
-function LabeledImageMass( initialPosition, config ) {
-  ImageMass.call( this, config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
-  this.labelText = config.labelText;
+class LabeledImageMass extends ImageMass {
+
+  /**
+   * @param {Vector2} initialPosition
+   * @param {Object} config - configuration information for the labeled image mass
+   */
+  constructor( initialPosition, config ) {
+    super( config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
+    this.labelText = config.labelText;
+  }
 }
 
 balancingAct.register( 'LabeledImageMass', LabeledImageMass );
 
-inherit( ImageMass, LabeledImageMass );
 export default LabeledImageMass;

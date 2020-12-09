@@ -16,17 +16,15 @@ class BalanceLabView extends BasicBalanceScreenView {
    */
   constructor( model, tandem ) {
     super( model, tandem );
-    const self = this;
-
     // Add the mass selection carousel.
-    this.massCarousel = new MassCarousel( model, self.modelViewTransform, {
-      centerX: self.controlPanelBounds.centerX,
-      top: self.controlPanelBounds.bottom + 5,
+    this.massCarousel = new MassCarousel( model, this.modelViewTransform, {
+      centerX: this.controlPanelBounds.centerX,
+      top: this.controlPanelBounds.bottom + 5,
       fill: 'rgb( 240, 240, 240 )',
-      maxWidth: self.controlPanelBounds.width,
+      maxWidth: this.controlPanelBounds.width,
       tandem: tandem.createTandem( 'massCarousel' )
     } );
-    self.nonMassLayer.addChild( this.massCarousel );
+    this.nonMassLayer.addChild( this.massCarousel );
   }
 
   // @public

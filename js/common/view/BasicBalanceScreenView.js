@@ -62,10 +62,10 @@ class BasicBalanceScreenView extends ScreenView {
   constructor( model, tandem ) {
     super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
     const self = this;
-    self.model = model;
+    this.model = model;
 
     // Define the properties that control visibility of various display elements.
-    self.viewProperties = {
+    this.viewProperties = {
       massLabelsVisibleProperty: new BooleanProperty( true, {
         tandem: tandem.createTandem( 'massLabelsVisibleProperty' )
       } ),
@@ -85,13 +85,13 @@ class BasicBalanceScreenView extends ScreenView {
     // ground just below the center of the balance, is positioned in the view.
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( self.layoutBounds.width * 0.375, self.layoutBounds.height * 0.79 ),
+      new Vector2( this.layoutBounds.width * 0.375, this.layoutBounds.height * 0.79 ),
       105 );
-    self.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
+    this.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
     const root = new Node();
-    self.addChild( root );
+    this.addChild( root );
     root.moveToBack();
 
     // Add the background, which portrays the sky and ground.
@@ -105,8 +105,8 @@ class BasicBalanceScreenView extends ScreenView {
     ) );
 
     // Set up a layer for non-mass model elements.
-    self.nonMassLayer = new Node();
-    root.addChild( self.nonMassLayer );
+    this.nonMassLayer = new Node();
+    root.addChild( this.nonMassLayer );
 
     // Set up a separate layer for the masses so that they will be out in front of the other elements of the model.
     const massesLayer = new Node();
@@ -125,7 +125,7 @@ class BasicBalanceScreenView extends ScreenView {
       massesLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
-      addedMass.userControlledProperty.link( function( userControlled ) {
+      addedMass.userControlledProperty.link( userControlled => {
         if ( userControlled ) {
           massNode.moveToFront();
         }
@@ -147,12 +147,12 @@ class BasicBalanceScreenView extends ScreenView {
     model.massList.addItemAddedListener( handleMassAdded );
 
     // Add graphics for the plank, the fulcrum, the attachment bar, and the columns.
-    self.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
+    this.nonMassLayer.addChild( new FulcrumNode( modelViewTransform, model.fulcrum ) );
     const plankNode = new PlankNode( modelViewTransform, model.plank );
-    self.nonMassLayer.addChild( plankNode );
-    self.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
-    model.supportColumns.forEach( function( supportColumn ) {
-      self.nonMassLayer.addChild( new LevelSupportColumnNode(
+    this.nonMassLayer.addChild( plankNode );
+    this.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
+    model.supportColumns.forEach( supportColumn => {
+      this.nonMassLayer.addChild( new LevelSupportColumnNode(
         modelViewTransform,
         supportColumn,
         model.columnStateProperty
@@ -161,49 +161,49 @@ class BasicBalanceScreenView extends ScreenView {
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
-    self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
-    self.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
+    this.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisible = new Property( false );
-    self.viewProperties.positionMarkerStateProperty.link( function( positionMarkerState ) {
+    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
       positionMarkersVisible.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
-    self.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
+    this.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     const levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
-    self.viewProperties.levelIndicatorVisibleProperty.link( function( visible ) {
+    this.viewProperties.levelIndicatorVisibleProperty.link( visible => {
       levelIndicatorNode.visible = visible;
     } );
-    self.nonMassLayer.addChild( levelIndicatorNode );
+    this.nonMassLayer.addChild( levelIndicatorNode );
 
     // Listen to the list of force vectors and manage their representations.
-    model.plank.forceVectors.addItemAddedListener( function( addedMassForceVector ) {
+    model.plank.forceVectors.addItemAddedListener( addedMassForceVector => {
       // Add a representation for the new vector.
       let forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
         forceVectorNode = new MysteryVectorNode(
           addedMassForceVector.forceVectorProperty,
-          self.viewProperties.forceVectorsFromObjectsVisibleProperty,
+          this.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform
         );
       }
       else {
         forceVectorNode = new PositionedVectorNode( addedMassForceVector.forceVectorProperty,
           0.23,  // Scaling factor, chosen to make size reasonable.
-          self.viewProperties.forceVectorsFromObjectsVisibleProperty,
+          this.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform
         );
       }
-      self.nonMassLayer.addChild( forceVectorNode );
+      this.nonMassLayer.addChild( forceVectorNode );
 
       // Remove representation when corresponding vector removed from model.
-      model.plank.forceVectors.addItemRemovedListener( function( removedMassForceVector ) {
+      model.plank.forceVectors.addItemRemovedListener( removedMassForceVector => {
         if ( removedMassForceVector === addedMassForceVector ) {
-          self.nonMassLayer.removeChild( forceVectorNode );
+          this.nonMassLayer.removeChild( forceVectorNode );
         }
       } );
     } );
@@ -213,7 +213,7 @@ class BasicBalanceScreenView extends ScreenView {
       center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) ),
       tandem: tandem.createTandem( 'columnControlPanel' )
     } );
-    self.nonMassLayer.addChild( columnControlPanel );
+    this.nonMassLayer.addChild( columnControlPanel );
 
     // The panels should fit in the space to the right of the plank.
     const maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
@@ -222,17 +222,17 @@ class BasicBalanceScreenView extends ScreenView {
     const showPanelTandem = tandem.createTandem( 'showPanel' );
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( massLabelsString, PANEL_OPTION_FONT ),
-      property: self.viewProperties.massLabelsVisibleProperty,
+      property: this.viewProperties.massLabelsVisibleProperty,
       label: massLabelsString,
       tandem: showPanelTandem.createTandem( 'massLabelsCheckbox' )
     }, {
       node: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
-      property: self.viewProperties.forceVectorsFromObjectsVisibleProperty,
+      property: this.viewProperties.forceVectorsFromObjectsVisibleProperty,
       label: forcesFromObjectsString,
       tandem: showPanelTandem.createTandem( 'forcesFromObjectsCheckbox' )
     }, {
       node: new Text( levelString, PANEL_OPTION_FONT ),
-      property: self.viewProperties.levelIndicatorVisibleProperty,
+      property: this.viewProperties.levelIndicatorVisibleProperty,
       label: levelString,
       tandem: showPanelTandem.createTandem( 'levelCheckbox' )
     }
@@ -257,18 +257,18 @@ class BasicBalanceScreenView extends ScreenView {
       right: this.layoutBounds.width - 10,
       maxWidth: maxControlPanelWidth
     } );
-    self.nonMassLayer.addChild( indicatorVisibilityControlPanel );
+    this.nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
-    const positionControlPanel = new PositionIndicatorControlPanel( self.viewProperties.positionMarkerStateProperty, {
+    const positionControlPanel = new PositionIndicatorControlPanel( this.viewProperties.positionMarkerStateProperty, {
       left: indicatorVisibilityControlPanel.left,
       top: indicatorVisibilityControlPanel.bottom + 5,
       minWidth: indicatorVisibilityControlPanel.width,
       maxWidth: maxControlPanelWidth,
       tandem: tandem.createTandem( 'positionPanel' )
     } );
-    self.nonMassLayer.addChild( positionControlPanel );
+    this.nonMassLayer.addChild( positionControlPanel );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
     this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionControlPanel.bounds.minY,
@@ -279,11 +279,11 @@ class BasicBalanceScreenView extends ScreenView {
       self.reset();
     }
 
-    self.nonMassLayer.addChild( new ResetAllButton( {
+    this.nonMassLayer.addChild( new ResetAllButton( {
       listener: resetClosure,
       radius: BASharedConstants.RESET_ALL_BUTTON_RADIUS,
       right: indicatorVisibilityControlPanel.right,
-      bottom: self.layoutBounds.height - 10,
+      bottom: this.layoutBounds.height - 10,
       tandem: tandem.createTandem( 'resetAllButton' )
     } ) );
   }
@@ -291,7 +291,7 @@ class BasicBalanceScreenView extends ScreenView {
   // @public
   reset() {
     this.model.reset();
-    _.values( this.viewProperties ).forEach( function( viewProperty ) { viewProperty.reset(); } );
+    _.values( this.viewProperties ).forEach( viewProperty => { viewProperty.reset(); } );
   }
 }
 

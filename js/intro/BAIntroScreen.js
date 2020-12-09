@@ -17,6 +17,10 @@ import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';
 
 class BAIntroScreen extends Screen {
+
+  /**
+   * @param {Tandem} tandem
+   */
   constructor( tandem ) {
 
     const options = {
@@ -33,8 +37,8 @@ class BAIntroScreen extends Screen {
     };
 
     super(
-      function() { return new BAIntroModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new BAIntroView( model, tandem.createTandem( 'view' ) ); },
+      () => new BAIntroModel( tandem.createTandem( 'model' ) ),
+      model => new BAIntroView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }
