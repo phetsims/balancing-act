@@ -41,6 +41,7 @@ class Plank {
   constructor( position, pivotPoint, columnState, userControlledMasses, tandem ) {
     this.userControlledMasses = userControlledMasses;
 
+    // @public (read-only)
     this.tiltAngleProperty = new NumberProperty( 0, {
       phetioDocumentation: 'Angle of the plank with respect to the ground.  A value of 0 indicates a level plank, ' +
                            'positive is tilted left, negative to the right.',
@@ -50,20 +51,21 @@ class Plank {
       phetioHighFrequency: true
     } );
 
-    // Point where the bottom center of the plank is currently positioned. If the plank is sitting on top of the fulcrum,
-    // this point will be the same as the pivot point.  When the pivot point is above the plank, as is generally done
-    // in this simulation in order to make the plank rebalance if nothing is on it, this position will be different.
+    // @public (read-only) - Point where the bottom center of the plank is currently positioned. If the plank is sitting
+    // on top of the fulcrum, this point will be the same as the pivot point.  When the pivot point is above the plank,
+    // as is generally done in this simulation in order to make the plank rebalance if nothing is on it, this position
+    // will be different.
     this.bottomCenterPositionProperty = new Property( position );
 
-    // Externally visible observable lists.
+    // @public (read-only) - Externally visible observable lists.
     this.massesOnSurface = createObservableArray();
     this.forceVectors = createObservableArray();
     this.activeDropPositions = createObservableArray(); // Positions where user-controlled masses would land if dropped, in meters from center.
 
-    // Other external visible attributes.
+    // @public (read-only) {Vector2} Other external visible attributes.
     this.pivotPoint = pivotPoint;
 
-    // Map of masses to distance from the plank's center.
+    // @public (read-only) - Map of masses to distance from the plank's center.
     this.massDistancePairs = [];
 
     // @private - signify in the data stream when masses are placed and removed
@@ -86,25 +88,21 @@ class Plank {
         { name: 'fullState', phetioType: IOType.ObjectIO } ]
     } );
 
-    // Variables that need to be retained for dynamic behavior, but are not
-    // intended to be accessed externally.
+    // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally.
     this.columnState = columnState;
     this.angularVelocity = 0;
     this.currentNetTorque = 0;
 
-    // Calculate the max angle at which the plank can tilt before hitting
-    // the ground.  NOTE: This assumes a small distance between the pivot
-    // point and the bottom of the plank.  If this assumption changes, or
-    // if the fulcrum becomes movable, the way this is done will need to
-    // change.
+    // @public (read-only) - Calculate the max angle at which the plank can tilt before hitting the ground.  NOTE: This
+    // assumes a small distance between the pivot point and the bottom of the plank.  If this assumption changes, or if
+    // the fulcrum becomes movable, the way this is done will need to change.
     this.maxTiltAngle = Math.asin( position.y / ( PLANK_LENGTH / 2 ) );
 
     // Unrotated shape of the plank
     this.unrotatedShape = Shape.rect( position.x - PLANK_LENGTH / 2, position.y, PLANK_LENGTH, PLANK_THICKNESS );
 
-    // Listen to the support column property.  The plank goes to the level
-    // position whenever there are two columns present, and into a tilted
-    // position when only one is present.
+    // Listen to the support column property.  The plank goes to the level position whenever there are two columns
+    // present, and into a tilted position when only one is present.
     columnState.link( newColumnState => {
       if ( newColumnState === ColumnState.SINGLE_COLUMN ) {
         this.forceToMaxAndStill();
@@ -112,6 +110,27 @@ class Plank {
       else if ( newColumnState === ColumnState.DOUBLE_COLUMNS ) {
         this.forceToLevelAndStill();
       }
+    } );
+
+    // Listen for when masses are added to the plank and add a listener that removes that mass if the user picks is up.
+    this.massesOnSurface.addItemAddedListener( addedMass => {
+
+      // Add a listener that will remove this mass from the surface when the user picks it up.
+      const userControlledListener = userControlled => {
+        if ( userControlled ) {
+          this.removeMassFromSurface( addedMass );
+        }
+      };
+      addedMass.userControlledProperty.link( userControlledListener );
+
+      // Remove the listener when the mass is removed.
+      const self = this;
+      this.massesOnSurface.addItemRemovedListener( function massRemovalListener( removedMass ) {
+        if ( removedMass === addedMass ) {
+          removedMass.userControlledProperty.unlink( userControlledListener );
+          self.massesOnSurface.removeItemRemovedListener( massRemovalListener );
+        }
+      } );
     } );
   }
 
@@ -123,11 +142,9 @@ class Plank {
     let angularAcceleration;
     this.updateNetTorque();
 
-    // Update the angular acceleration and velocity.  There is some
-    // thresholding here to prevent the plank from oscillating forever
-    // with small values, since this can cause odd-looking movements
-    // of the planks and masses.  The thresholds were empirically
-    // determined.
+    // Update the angular acceleration and velocity.  There is some thresholding here to prevent the plank from
+    // oscillating forever with small values, since this can cause odd-looking movements of the planks and masses.  The
+    // thresholds were empirically determined.
     angularAcceleration = this.currentNetTorque / MOMENT_OF_INERTIA;
     angularAcceleration = Math.abs( angularAcceleration ) > 0.00001 ? angularAcceleration : 0;
     this.angularVelocity += angularAcceleration;
@@ -137,19 +154,20 @@ class Plank {
     const previousTiltAngle = this.tiltAngleProperty.get();
     let newTiltAngle = this.tiltAngleProperty.get() + this.angularVelocity * dt;
     if ( Math.abs( newTiltAngle ) > this.maxTiltAngle ) {
+
       // Limit the angle when one end is touching the ground.
       newTiltAngle = this.maxTiltAngle * ( this.tiltAngleProperty.get() < 0 ? -1 : 1 );
       this.angularVelocity = 0;
     }
     else if ( Math.abs( newTiltAngle ) < 0.0001 ) {
-      // Below a certain threshold just force the tilt angle to be
-      // zero so that it appears perfectly level.
+
+      // Below a certain threshold just force the tilt angle to be zero so that it appears perfectly level.
       newTiltAngle = 0;
     }
     this.tiltAngleProperty.set( newTiltAngle );
 
-    // Update the shape of the plank and the positions of the masses on
-    // the surface, but only if the tilt angle has changed.
+    // Update the shape of the plank and the positions of the masses on the surface, but only if the tilt angle has
+    // changed.
     if ( this.tiltAngleProperty.get() !== previousTiltAngle ) {
       this.updatePlank();
       this.updateMassPositions();
@@ -210,17 +228,7 @@ class Plank {
       // Add the force vector for this mass.
       this.forceVectors.push( new MassForceVector( mass ) );
 
-      // Add an observer that will remove this mass when the user picks it up.
-      const userControlledObserver = userControlled => {
-        if ( userControlled ) {
-          // The user has picked up this mass, so it is no longer
-          // on the surface.
-          this.removeMassFromSurface( mass );
-          mass.userControlledProperty.unlink( userControlledObserver );
-        }
-      };
-
-      mass.userControlledProperty.link( userControlledObserver );
+      // Final steps.
       this.massesOnSurface.push( mass );
       this.updateMassPositions();
       this.updateNetTorque();
@@ -296,9 +304,7 @@ class Plank {
   removeMassFromSurface( mass ) {
 
     // Remove the mass.
-    if ( this.massesOnSurface.includes( mass ) ) {
-      this.massesOnSurface.remove( mass );
-    }
+    this.massesOnSurface.remove( mass );
 
     // Remove the mass-distance pair for this mass.
     for ( let i = 0; i < this.massDistancePairs.length; i++ ) {
