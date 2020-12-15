@@ -79,13 +79,13 @@ class TiltPredictionSelectionPanel extends Node {
 
     // Add the outline around the panel, which will be changed to depict the
     // user's selection and the correct answer.
-    this.thinOutline = new Rectangle.bounds( imagePanel.bounds,
+    this.thinOutline = Rectangle.bounds( imagePanel.bounds,
       {
         stroke: NON_HIGHLIGHT_COLOR,
         lineWidth: NON_HIGHLIGHT_LINE_WIDTH
       } );
     this.addChild( this.thinOutline );
-    this.thickOutline = new Rectangle.bounds( imagePanel.bounds,
+    this.thickOutline = Rectangle.bounds( imagePanel.bounds,
       {
         stroke: INVISIBLE_COLOR,
         lineWidth: SELECTED_HIGHLIGHT_LINE_WIDTH
