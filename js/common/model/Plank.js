@@ -13,9 +13,9 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
+import ValueIO from '../../../../tandem/js/types/ValueIO.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../BASharedConstants.js';
 import ColumnState from './ColumnState.js';
@@ -75,7 +75,7 @@ class Plank {
         { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
         { name: 'distance', phetioType: NumberIO },
-        { name: 'fullState', phetioType: IOType.ObjectIO } ]
+        { name: 'fullState', phetioType: ValueIO } ]
     } );
 
     // @private - signify in the data stream when masses are placed and removed
@@ -85,7 +85,7 @@ class Plank {
         { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
         { name: 'distance', phetioType: NumberIO },
-        { name: 'fullState', phetioType: IOType.ObjectIO } ]
+        { name: 'fullState', phetioType: ValueIO } ]
     } );
 
     // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally.
