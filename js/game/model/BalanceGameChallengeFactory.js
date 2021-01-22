@@ -16,6 +16,7 @@
  * @author John Blanco
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import balancingAct from '../../balancingAct.js';
@@ -115,7 +116,7 @@ const BalanceGameChallengeFactory = {
 
   // Generate a random integer from 0 (inclusive) to max (exclusive)
   randInt( max ) {
-    return Math.floor( phet.joist.random.nextDouble() * max );
+    return Math.floor( dotRandom.nextDouble() * max );
   },
 
   /**
@@ -157,7 +158,7 @@ const BalanceGameChallengeFactory = {
         let candidateDistance = this.generateRandomValidPlankDistance( minDistance, maxDistance );
         if ( j === 0 ) {
           // Randomly invert (or don't) the first random distance.
-          candidateDistance = phet.joist.random.nextDouble() >= 0.5 ? -candidateDistance : candidateDistance;
+          candidateDistance = dotRandom.nextDouble() >= 0.5 ? -candidateDistance : candidateDistance;
         }
         else {
           // Make the sign of this distance be the opposite of the
@@ -319,7 +320,7 @@ const BalanceGameChallengeFactory = {
       numBricksInFixedStack = Math.pow( 2, this.randInt( 3 ) );
 
       // Choose the number of bricks in movable stack.
-      if ( numBricksInFixedStack === 1 || phet.joist.random.nextDouble() > 0.5 ) {
+      if ( numBricksInFixedStack === 1 || dotRandom.nextDouble() > 0.5 ) {
         numBricksInMovableStack = 2 * numBricksInFixedStack;
       }
       else {
@@ -432,7 +433,7 @@ const BalanceGameChallengeFactory = {
     // Make a fixed proportion of these challenges balanced and the rest
     // not balanced.
     let rightMassDistance = -leftMassDistance;
-    if ( phet.joist.random.nextDouble() > 0.2 ) {
+    if ( dotRandom.nextDouble() > 0.2 ) {
       rightMassDistance = -this.generateRandomValidPlankDistanceRange( 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
         Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 2 );
     }
@@ -448,7 +449,7 @@ const BalanceGameChallengeFactory = {
     // Select the masses, bricks on one side, non bricks on the other.
     let leftMass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
     let rightMass = new BrickStack( this.randInt( 4 ) + 1 );
-    if ( phet.joist.random.nextDouble() >= 0.5 ) {
+    if ( dotRandom.nextDouble() >= 0.5 ) {
       // Switch the masses.
       const tempMassPrototype = leftMass;
       leftMass = rightMass;
