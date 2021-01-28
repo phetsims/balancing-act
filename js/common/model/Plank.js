@@ -13,6 +13,7 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import ValueIO from '../../../../tandem/js/types/ValueIO.js';
@@ -85,7 +86,7 @@ class Plank {
         { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
         { name: 'distance', phetioType: NumberIO },
-        { name: 'fullState', phetioType: ValueIO } ]
+        { name: 'fullState', phetioType: Plank.PlankIO } ]
     } );
 
     // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally.
@@ -223,7 +224,7 @@ class Plank {
       };
       this.massDistancePairs.push( result );
 
-      this.massDroppedOnPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, result.distance, this.getPhetioState() );
+      this.massDroppedOnPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, result.distance, Plank.PlankIO.toStateObject( this ) );
 
       // Add the force vector for this mass.
       this.forceVectors.push( new MassForceVector( mass ) );
@@ -243,7 +244,7 @@ class Plank {
    * @returns {Object}
    * @private
    */
-  getPhetioState() {
+  toStateObject() {
     return this.massDistancePairs.map( massDistancePair => {
       return {
         name: massDistancePair.mass.tandem.phetioID,
@@ -568,6 +569,8 @@ Plank.LENGTH = PLANK_LENGTH;
 Plank.THICKNESS = PLANK_THICKNESS;
 Plank.INTER_SNAP_TO_MARKER_DISTANCE = INTER_SNAP_TO_MARKER_DISTANCE;
 Plank.NUM_SNAP_TO_POSITIONS = NUM_SNAP_TO_POSITIONS;
+
+Plank.PlankIO = IOType.fromCoreType( 'PlankIO', Plank );
 
 balancingAct.register( 'Plank', Plank );
 
