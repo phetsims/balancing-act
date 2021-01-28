@@ -16,7 +16,6 @@ import Shape from '../../../../kite/js/Shape.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
-import ValueIO from '../../../../tandem/js/types/ValueIO.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../BASharedConstants.js';
 import ColumnState from './ColumnState.js';
@@ -76,7 +75,7 @@ class Plank {
         { name: 'phetioID', phetioType: StringIO },
         { name: 'mass', phetioType: NumberIO },
         { name: 'distance', phetioType: NumberIO },
-        { name: 'fullState', phetioType: ValueIO } ]
+        { name: 'fullState', phetioType: Plank.PlankIO } ]
     } );
 
     // @private - signify in the data stream when masses are placed and removed
@@ -224,7 +223,7 @@ class Plank {
       };
       this.massDistancePairs.push( result );
 
-      this.massDroppedOnPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, result.distance, Plank.PlankIO.toStateObject( this ) );
+      this.massDroppedOnPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, result.distance, this );
 
       // Add the force vector for this mass.
       this.forceVectors.push( new MassForceVector( mass ) );
@@ -245,13 +244,15 @@ class Plank {
    * @private
    */
   toStateObject() {
-    return this.massDistancePairs.map( massDistancePair => {
-      return {
-        name: massDistancePair.mass.tandem.phetioID,
-        mass: massDistancePair.mass.massValue,
-        distance: massDistancePair.distance
-      };
-    } );
+    return {
+      massDistancePairs: this.massDistancePairs.map( massDistancePair => {
+        return {
+          name: massDistancePair.mass.tandem.phetioID,
+          mass: massDistancePair.mass.massValue,
+          distance: massDistancePair.distance
+        };
+      } )
+    };
   }
 
   /**
@@ -313,7 +314,7 @@ class Plank {
 
         const distance = this.massDistancePairs[ i ].distance;
         this.massDistancePairs.splice( i, 1 );
-        this.massRemovedFromPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, distance, this.getPhetioState() );
+        this.massRemovedFromPlankEmitter.emit( mass.tandem.phetioID, mass.massValue, distance, this );
 
         break;
       }
