@@ -104,7 +104,7 @@ class ModelElementCreatorNode extends Node {
   }
 
   /**
-   * Method overriden by subclasses to add the element that they represent to the model.
+   * Method overridden by subclasses to add the element that they represent to the model.
    * @public
    */
   addElementToModel() {
