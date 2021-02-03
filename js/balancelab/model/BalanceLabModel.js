@@ -24,7 +24,7 @@ class BalanceLabModel extends BalanceModel {
   constructor( tandem ) {
     super( tandem );
 
-    // @public {PhetioGroup<BrickStack>}
+    // @public {PhetioGroup.<BrickStack>}
     this.brickStackGroup = new PhetioGroup( ( tandem, numberOfBricks, position ) => {
         const brickStack = new BrickStack( numberOfBricks, position, {
           tandem: tandem,
@@ -39,7 +39,7 @@ class BalanceLabModel extends BalanceModel {
         phetioType: PhetioGroup.PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
       } );
 
-    // @public {PhetioGroup<MysteryMass>}
+    // @public {PhetioGroup.<MysteryMass>}
     this.mysteryMassGroup = new PhetioGroup( ( tandem, position, mysteryMassId ) => {
         const mysteryMassModelElement = new MysteryMass( position, mysteryMassId, {
           tandem: tandem,
