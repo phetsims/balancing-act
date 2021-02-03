@@ -35,7 +35,7 @@ class RulerNodeRasterizedText extends Node {
    * @param {number} width  distance between left-most and right-most tick, insets will be added to this
    * @param {number} height
    * @param {number} majorTickWidth
-   * @param {Array<String>} majorTickLabels
+   * @param {Array.<String>} majorTickLabels
    * @param {string} units
    * @param {Object} [options]
    */

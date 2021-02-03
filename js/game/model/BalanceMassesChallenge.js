@@ -20,9 +20,9 @@ const balanceMeString = balancingActStrings.balanceMe;
 class BalanceMassesChallenge extends BalanceGameChallenge {
 
   /**
-   * @param {Array<{mass:{Mass}, distance:{number}}>} fixedMasses - Mass-distance pairs that describe the fixed masses.
-   * @param {Array<Mass>} movableMasses - Masses that can be moved by the user.
-   * @param {Array<{mass:{Mass}, distance:{number}}>} solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
+   * @param {Array.<{mass:{Mass}, distance:{number}}>} fixedMasses - Mass-distance pairs that describe the fixed masses.
+   * @param {Array.<Mass>} movableMasses - Masses that can be moved by the user.
+   * @param {Array.<{mass:{Mass}, distance:{number}}>} solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
    */
   constructor( fixedMasses, movableMasses, solutionToDisplay ) {
     super( ColumnState.SINGLE_COLUMN );
