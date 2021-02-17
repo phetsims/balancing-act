@@ -1,42 +1,45 @@
 // Copyright 2013-2020, University of Colorado Boulder
 
 /**
- * Common drag handler for mass nodes.  Positions the corresponding model
- * element based on the movement of the mouse, and also sets and clears the
- * property that indicates whether or not the mass is being controlled by the
- * user.
+ * Common drag handler for mass nodes.  Positions the corresponding model element based on the movement of the mouse or
+ * finger, and also sets and clears the property that indicates whether or not the mass is being controlled by the user.
  *
  * @author John Blanco
  */
 
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import balancingAct from '../../balancingAct.js';
 
-class MassDragHandler extends SimpleDragHandler {
+class MassDragHandler extends DragListener {
 
   /**
    * @param {Mass} mass
    * @param {ModelViewTransform2} modelViewTransform
    */
   constructor( mass, modelViewTransform ) {
+
+    // {Vector2} - offset for dragging, in model coordinate frame
+    let dragOffset = Vector2.ZERO;
+
     super( {
 
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
 
-      // Handler that moves the particle in model space.
-      translate: translationParams => {
-        mass.positionProperty.set(
-          mass.positionProperty.get().plus( modelViewTransform.viewToModelDelta( translationParams.delta ) )
-        );
-        return translationParams.position;
-      },
-
-      start: ( event, trail ) => {
+      start: event => {
         mass.userControlledProperty.set( true );
+        const parentPoint = this.globalToParentPoint( event.pointer.point );
+        const positionInModelSpace = modelViewTransform.viewToModelPosition( parentPoint );
+        dragOffset = mass.positionProperty.value.minus( positionInModelSpace );
       },
 
-      end: ( event, trail ) => {
+      drag: event => {
+        const parentPoint = this.globalToParentPoint( event.pointer.point );
+        mass.positionProperty.set( modelViewTransform.viewToModelPosition( parentPoint ).plus( dragOffset ) );
+      },
+
+      end: () => {
 
         // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
         // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.

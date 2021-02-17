@@ -11,7 +11,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -58,7 +58,7 @@ class ModelElementCreatorNode extends Node {
     var parentScreenView = null;
 
     // Set up handling of mouse events.
-    this.addInputListener( new SimpleDragHandler( {
+    this.addInputListener( new DragListener( {
 
       start: event => {
 
@@ -86,6 +86,7 @@ class ModelElementCreatorNode extends Node {
           this.modelElement.positionProperty.set( eventToModelPosition( event.pointer.point ) );
         }
       },
+
       end: () => {
 
         // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
