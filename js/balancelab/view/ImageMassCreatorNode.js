@@ -18,12 +18,13 @@ class ImageMassCreatorNode extends MassCreatorNode {
 
   /**
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    * @param {ImageMass} prototypeImageMass
    * @param {boolean} showMassLabel
+   * @param {Object} [options]
    */
-  constructor( model, modelViewTransform, prototypeImageMass, showMassLabel, options ) {
-    super( modelViewTransform, prototypeImageMass.massValue, showMassLabel, options );
+  constructor( model, screenView, prototypeImageMass, showMassLabel, options ) {
+    super( screenView, prototypeImageMass.massValue, showMassLabel, options );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
 

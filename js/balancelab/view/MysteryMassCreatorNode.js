@@ -23,16 +23,28 @@ const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 
 class MysteryMassCreatorNode extends ImageMassCreatorNode {
 
   /**
-   * @param mysteryMassID
-   * @param model
-   * @param modelViewTransform
-   * @param options
+   * @param {number} mysteryMassID
+   * @param {BalanceLabModel} model
+   * @param {BasicBalanceScreenView} screenView
+   * @param {Object} [options]
    */
-  constructor( mysteryMassID, model, modelViewTransform, options ) {
-    super( model, modelViewTransform, new MysteryMass( Vector2.ZERO, mysteryMassID, { tandem: Tandem.OPT_OUT } ), false, options );
+  constructor( mysteryMassID, model, screenView, options ) {
+    super( model, screenView, new MysteryMass( Vector2.ZERO, mysteryMassID, { tandem: Tandem.OPT_OUT } ), false, options );
     this.mysteryMassId = mysteryMassID;
-    this.setSelectionNode( new MysteryMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
+    this.setSelectionNode(
+      new MysteryMassNode(
+        this.prototypeImageMass,
+        SCALING_MVT,
+        false,
+        new Property( false ),
+        false,
+        model.columnStateProperty
+      )
+    );
+    this.positioningOffset = new Vector2(
+      0,
+      -screenView.modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 )
+    );
   }
 
   /**

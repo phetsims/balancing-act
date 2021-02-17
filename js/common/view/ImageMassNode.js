@@ -139,9 +139,13 @@ class ImageMassNode extends Node {
       this.pickable = !animating;
     } );
 
-    // Add the mouse event handler.
+    // Add the mouse event handler if this is intended to be draggable.
     if ( draggable ) {
-      this.addInputListener( new MassDragHandler( imageMass, modelViewTransform ) );
+
+      // @public (read-only) {MassDragHandler} - drag handler, made available for use by creator nodes
+      this.dragHandler = new MassDragHandler( imageMass, modelViewTransform );
+
+      this.addInputListener( this.dragHandler );
     }
   }
 }

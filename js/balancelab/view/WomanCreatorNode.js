@@ -25,12 +25,24 @@ class WomanCreatorNode extends ImageMassCreatorNode {
 
   /**
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    */
-  constructor( model, modelViewTransform ) {
-    super( model, modelViewTransform, new Woman(), true );
-    this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
+  constructor( model, screenView ) {
+    super( model, screenView, new Woman(), true );
+    this.setSelectionNode(
+      new ImageMassNode(
+        this.prototypeImageMass,
+        SCALING_MVT,
+        false,
+        new Property( false ),
+        false,
+        model.columnStateProperty
+      )
+    );
+    this.positioningOffset = new Vector2(
+      0,
+      -screenView.modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 )
+    );
   }
 }
 

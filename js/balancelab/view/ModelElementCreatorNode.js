@@ -8,7 +8,6 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -25,10 +24,10 @@ const MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a 
 class ModelElementCreatorNode extends Node {
 
   /**
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, options ) {
+  constructor( screenView, options ) {
     options = merge( {
       cursor: 'pointer',
       tandem: Tandem.REQUIRED
@@ -44,64 +43,37 @@ class ModelElementCreatorNode extends Node {
     // isn't positioned in, shall we say, an awkward position with respect to the mouse.
     this.positioningOffset = Vector2.ZERO;
 
-    // Function for translating click events to model coordinates.
-    function eventToModelPosition( position ) {
-      if ( parentScreenView !== null ) {
-        return modelViewTransform.viewToModelPosition(
-          parentScreenView.globalToLocalPoint( position ).plus( self.positioningOffset )
-        );
+    // Function for translating click and touch events to model coordinates.
+    const modelViewTransform = screenView.modelViewTransform;
+    const eventToModelPosition = pointerPosition => {
+      return modelViewTransform.viewToModelPosition(
+        screenView.globalToLocalPoint( pointerPosition ).plus( self.positioningOffset )
+      );
+    };
+
+    // Create an input listener that will add the model element to the model and then forward events to the view node
+    // that is created as a result.
+    this.addInputListener( DragListener.createForwardingListener(
+      event => {
+
+        // Determine the initial position where this element should move to after it's created based on the position of
+        // the pointer event.
+        const initialPosition = eventToModelPosition( event.pointer.point );
+
+        // Create a new mass and add it to the model.  This will cause a view node to be created in the view.
+        this.modelElement = this.addElementToModel( initialPosition );
+
+        // Get the view node that should have appeared in the view so that events can be forwarded to its drag handler.
+        const modelElementNode = screenView.getNodeForMass( this.modelElement );
+        assert && assert( modelElementNode, 'unable to find view node for model element' );
+
+        modelElementNode.dragHandler.press( event, modelElementNode );
+      },
+      {
+        allowTouchSnag: true,
+        tandem: options.tandem.createTandem( 'dragHandler' )
       }
-      return position;
-    }
-
-    // Variable for the parent screen, which is needed for coordinate transforms.
-    var parentScreenView = null;
-
-    // Set up handling of mouse events.
-    this.addInputListener( new DragListener( {
-
-      start: event => {
-
-        if ( !parentScreenView ) {
-
-          // Move up the scene graph until the parent screen is found.
-          let testNode = this.parents[ 0 ];
-          while ( testNode !== null ) {
-            if ( testNode instanceof ScreenView ) {
-              parentScreenView = testNode;
-              break;
-            }
-            testNode = testNode.parents[ 0 ]; // Move up the scene graph by one level
-          }
-          assert && assert( parentScreenView, 'unable to find parent screen view' );
-        }
-
-        // Create a new node and add it to the model.
-        this.modelElement = this.addElementToModel( eventToModelPosition( event.pointer.point ) );
-      },
-
-      drag: event => {
-        if ( this.modelElement !== null ) {
-          // Move the node.
-          this.modelElement.positionProperty.set( eventToModelPosition( event.pointer.point ) );
-        }
-      },
-
-      end: () => {
-
-        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
-        // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
-        if ( this.modelElement.userControlledProperty.get() === false ) {
-          this.modelElement.userControlledProperty.set( true );
-        }
-
-        // The user has released the node.
-        this.modelElement.userControlledProperty.set( false );
-        this.modelElement = null;
-        parentScreenView = null;
-      },
-      tandem: options.tandem.createTandem( 'dragHandler' )
-    } ) );
+    ) );
   }
 
   /**

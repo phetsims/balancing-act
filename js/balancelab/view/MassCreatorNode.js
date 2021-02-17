@@ -17,13 +17,13 @@ const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
 class MassCreatorNode extends ModelElementCreatorNode {
 
   /**
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    * @param {number} massValue
    * @param {boolean} showMassLabel
    * @param {Object} [options]
    */
-  constructor( modelViewTransform, massValue, showMassLabel, options ) {
-    super( modelViewTransform, options );
+  constructor( screenView, massValue, showMassLabel, options ) {
+    super( screenView, options );
     if ( showMassLabel ) {
       this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
     }

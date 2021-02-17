@@ -116,9 +116,13 @@ class BrickStackNode extends Node {
       this.pickable = !animating;
     } );
 
-    // Add event listener for mouse activity.
+    // Add the drag handler if this is intended to be draggable.
     if ( draggable ) {
-      this.addInputListener( new MassDragHandler( brickStack, modelViewTransform ) );
+
+      // @public (read-only) {MassDragHandler} - drag handler, made available for use by creator nodes
+      this.dragHandler = new MassDragHandler( brickStack, modelViewTransform );
+
+      this.addInputListener( this.dragHandler );
     }
   }
 }

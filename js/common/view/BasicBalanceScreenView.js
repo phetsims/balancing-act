@@ -86,8 +86,11 @@ class BasicBalanceScreenView extends ScreenView {
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( this.layoutBounds.width * 0.375, this.layoutBounds.height * 0.79 ),
-      105 );
-    this.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
+      105
+    );
+
+    // @public {ModelViewTransform2} - model-view transform for this screen
+    this.modelViewTransform = modelViewTransform;
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
     const root = new Node();
@@ -112,7 +115,10 @@ class BasicBalanceScreenView extends ScreenView {
     const massesLayer = new Node();
     root.addChild( massesLayer );
 
-    function handleMassAdded( addedMass ) {
+    // @private {Map.<Mass,Node} - a map of masses to their corresponding view elements
+    this.massesToNodesMap = new Map();
+
+    const handleMassAdded = addedMass => {
 
       // Create and add the view representation for this mass.
       const massNode = MassNodeFactory.createMassNode(
@@ -123,6 +129,7 @@ class BasicBalanceScreenView extends ScreenView {
         model.columnStateProperty
       );
       massesLayer.addChild( massNode );
+      this.massesToNodesMap.set( addedMass, massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
       addedMass.userControlledProperty.link( userControlled => {
@@ -132,13 +139,15 @@ class BasicBalanceScreenView extends ScreenView {
       } );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      model.massList.addItemRemovedListener( function removalListener( removedMass ) {
+      const removalListener = removedMass => {
         if ( removedMass === addedMass ) {
           massesLayer.removeChild( massNode );
+          this.massesToNodesMap.delete( removedMass );
           model.massList.removeItemRemovedListener( removalListener );
         }
-      } );
-    }
+      };
+      model.massList.addItemRemovedListener( removalListener );
+    };
 
     // Add initial mass representations.
     model.massList.forEach( handleMassAdded );
@@ -286,6 +295,16 @@ class BasicBalanceScreenView extends ScreenView {
       bottom: this.layoutBounds.height - 10,
       tandem: tandem.createTandem( 'resetAllButton' )
     } ) );
+  }
+
+  /**
+   * Get the node for the provided mass.
+   * @param {Mass} mass
+   * @returns {Node|undefined}
+   * @public
+   */
+  getNodeForMass( mass ){
+    return this.massesToNodesMap.get( mass );
   }
 
   // @public

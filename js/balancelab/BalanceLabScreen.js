@@ -14,7 +14,7 @@ import labIcon from '../../images/lab-icon_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
-import BalanceLabView from './view/BalanceLabView.js';
+import BalanceLabScreenView from './view/BalanceLabScreenView.js';
 
 class BalanceLabScreen extends Screen {
 
@@ -35,7 +35,7 @@ class BalanceLabScreen extends Screen {
 
     super(
       () => new BalanceLabModel( tandem.createTandem( 'model' ) ),
-      model => new BalanceLabView( model, tandem.createTandem( 'view' ) ),
+      model => new BalanceLabScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

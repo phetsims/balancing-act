@@ -29,11 +29,11 @@ class BrickStackCreatorNode extends MassCreatorNode {
   /**
    * @param {number} numBricks
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    * @param {Object} [options]
    */
-  constructor( numBricks, model, modelViewTransform, options ) {
-    super( modelViewTransform, numBricks * BrickStack.BRICK_MASS, true, options );
+  constructor( numBricks, model, screenView, options ) {
+    super( screenView, numBricks * BrickStack.BRICK_MASS, true, options );
     this.numBricks = numBricks;
     this.model = model;
 
@@ -60,7 +60,10 @@ class BrickStackCreatorNode extends MassCreatorNode {
     );
 
     this.setSelectionNode( selectionNode );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 ) );
+    this.positioningOffset = new Vector2(
+      0,
+      -screenView.modelViewTransform.modelToViewDeltaY( BrickStack.BRICK_HEIGHT * numBricks / 2 )
+    );
   }
 
   /**

@@ -24,12 +24,15 @@ class BoyCreatorNode extends ImageMassCreatorNode {
 
   /**
    * @param {BalanceLabModel} model
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {BasicBalanceScreenView} screenView
    */
-  constructor( model, modelViewTransform ) {
-    super( model, modelViewTransform, new Boy(), true );
+  constructor( model, screenView ) {
+    super( model, screenView, new Boy(), true );
     this.setSelectionNode( new ImageMassNode( this.prototypeImageMass, SCALING_MVT, false, new Property( false ), false, model.columnStateProperty ) );
-    this.positioningOffset = new Vector2( 0, -modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 ) );
+    this.positioningOffset = new Vector2(
+      0,
+      -screenView.modelViewTransform.modelToViewDeltaY( this.prototypeImageMass.heightProperty.get() / 2 )
+    );
   }
 }
 

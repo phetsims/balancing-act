@@ -35,7 +35,12 @@ const TITLE_FONT = new PhetFont( 16 );
 
 class MassCarousel extends Carousel {
 
-  constructor( model, modelViewTransform, options ) {
+  /**
+   * @param {BalanceLabModel} model
+   * @param {BasicBalanceScreenView} screenView
+   * @param {Object} [options]
+   */
+  constructor( model, screenView, options ) {
 
     options = merge( {
 
@@ -60,8 +65,18 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      new BrickStackCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode1' ) } ),
-                      new BrickStackCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode2' ) } )
+                      new BrickStackCreatorNode(
+                        1,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'brickStackCreatorNode1' ) }
+                      ),
+                      new BrickStackCreatorNode(
+                        2,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'brickStackCreatorNode2' ) }
+                      )
                     ],
                     spacing: 20
 
@@ -69,8 +84,22 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      ...BAQueryParameters.stanford ? [] : [ new BrickStackCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode3' ) } ) ],
-                      new BrickStackCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'brickStackCreatorNode4' ) } )
+                      ...BAQueryParameters.stanford ?
+                        [] :
+                        [
+                          new BrickStackCreatorNode(
+                            3,
+                            model,
+                            screenView,
+                            { tandem: options.tandem.createTandem( 'brickStackCreatorNode3' ) }
+                          )
+                        ],
+                      new BrickStackCreatorNode(
+                        4,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'brickStackCreatorNode4' ) }
+                      )
                     ],
                     spacing: 20
                   } )
@@ -88,8 +117,8 @@ class MassCarousel extends Carousel {
           new HBox(
             {
               children: [
-                new BoyCreatorNode( model, modelViewTransform ),
-                new ManCreatorNode( model, modelViewTransform )
+                new BoyCreatorNode( model, screenView ),
+                new ManCreatorNode( model, screenView )
               ],
               spacing: 5
             } )
@@ -103,8 +132,8 @@ class MassCarousel extends Carousel {
           new HBox(
             {
               children: [
-                new GirlCreatorNode( model, modelViewTransform ),
-                new WomanCreatorNode( model, modelViewTransform )
+                new GirlCreatorNode( model, screenView ),
+                new WomanCreatorNode( model, screenView )
               ],
               spacing: 5
             } )
@@ -121,8 +150,18 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 0, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) } ),
-                      new MysteryMassCreatorNode( 1, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) } )
+                      new MysteryMassCreatorNode(
+                        0,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode0' ) }
+                      ),
+                      new MysteryMassCreatorNode(
+                        1,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode1' ) }
+                      )
                     ],
                     spacing: 20
 
@@ -130,8 +169,18 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 2, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) } ),
-                      new MysteryMassCreatorNode( 3, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) } )
+                      new MysteryMassCreatorNode(
+                        2,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) }
+                        ),
+                      new MysteryMassCreatorNode(
+                        3,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) }
+                        )
                     ],
                     spacing: 20
                   } )
@@ -150,8 +199,18 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 4, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) } ),
-                      new MysteryMassCreatorNode( 5, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) } )
+                      new MysteryMassCreatorNode(
+                        4,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) }
+                        ),
+                      new MysteryMassCreatorNode(
+                        5,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) }
+                        )
                     ],
                     spacing: 20
 
@@ -159,8 +218,18 @@ class MassCarousel extends Carousel {
                 new HBox(
                   {
                     children: [
-                      new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
-                      new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } )
+                      new MysteryMassCreatorNode(
+                        6,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) }
+                        ),
+                      new MysteryMassCreatorNode(
+                        7,
+                        model,
+                        screenView,
+                        { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) }
+                        )
                     ],
                     spacing: 20
                   } )
