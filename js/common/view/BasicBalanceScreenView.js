@@ -303,7 +303,7 @@ class BasicBalanceScreenView extends ScreenView {
    * @returns {Node|undefined}
    * @public
    */
-  getNodeForMass( mass ){
+  getNodeForMass( mass ) {
     return this.massesToNodesMap.get( mass );
   }
 

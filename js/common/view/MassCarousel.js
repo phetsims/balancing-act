@@ -174,13 +174,13 @@ class MassCarousel extends Carousel {
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode2' ) }
-                        ),
+                      ),
                       new MysteryMassCreatorNode(
                         3,
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode3' ) }
-                        )
+                      )
                     ],
                     spacing: 20
                   } )
@@ -204,13 +204,13 @@ class MassCarousel extends Carousel {
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode4' ) }
-                        ),
+                      ),
                       new MysteryMassCreatorNode(
                         5,
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode5' ) }
-                        )
+                      )
                     ],
                     spacing: 20
 
@@ -223,13 +223,13 @@ class MassCarousel extends Carousel {
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) }
-                        ),
+                      ),
                       new MysteryMassCreatorNode(
                         7,
                         model,
                         screenView,
                         { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) }
-                        )
+                      )
                     ],
                     spacing: 20
                   } )
