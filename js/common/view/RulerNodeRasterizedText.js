@@ -151,7 +151,7 @@ class RulerNodeRasterizedText extends Node {
  * @param {boolean} drawLower
  * @returns {Node}
  */
-var createTickMarkNode = ( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) => {
+const createTickMarkNode = ( x, rulerHeight, tickHeight, stroke, lineWidth, drawUpper, drawLower ) => {
   const shape = new Shape();
   if ( drawUpper ) {
     shape.moveTo( x, 0 ).lineTo( x, tickHeight );

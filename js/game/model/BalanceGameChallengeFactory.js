@@ -150,7 +150,7 @@ const BalanceGameChallengeFactory = {
     const minAcceptableTorque = 1; // Determined empirically.
     let distanceList = [];
     let bestDistanceList = distanceList;
-    for ( var i = 0; i < MAX_GEN_ATTEMPTS; i++ ) {
+    for ( let i = 0; i < MAX_GEN_ATTEMPTS; i++ ) {
       distanceList = [];
       // Generate a set of unique, random, and valid distances for the
       // placement of the masses.
@@ -196,7 +196,7 @@ const BalanceGameChallengeFactory = {
     // Create the array of mass-distance pairs from the original set of
     // masses and the best randomly-generated distances.
     const repositionedMasses = [];
-    for ( i = 0; i < masses.length; i++ ) {
+    for ( let i = 0; i < masses.length; i++ ) {
       repositionedMasses.push( { mass: masses[ i ], distance: bestDistanceList[ i ] } );
     }
     return repositionedMasses;

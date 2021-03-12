@@ -487,7 +487,7 @@ class BalanceGameView extends ScreenView {
         break;
 
       case 'showingLevelResults':
-        var score = this.model.scoreProperty.get();
+        var score = this.model.scoreProperty.get(); // eslint-disable-line no-var
         if ( score === BalanceGameModel.MAX_POSSIBLE_SCORE ) {
           this.gameAudioPlayer.gameOverPerfectScore();
         }
