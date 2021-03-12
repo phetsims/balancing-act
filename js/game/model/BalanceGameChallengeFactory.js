@@ -738,7 +738,7 @@ const BalanceGameChallengeFactory = {
         break;
 
       default:
-        throw new Error( 'Can\'t generate challenge set for requested level: ' + level );
+        throw new Error( `Can't generate challenge set for requested level: ${level}` );
     }
     return balanceChallengeList;
   }
