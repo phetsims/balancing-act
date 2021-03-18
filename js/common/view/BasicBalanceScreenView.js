@@ -115,7 +115,7 @@ class BasicBalanceScreenView extends ScreenView {
     const massesLayer = new Node();
     root.addChild( massesLayer );
 
-    // @private {Map.<Mass,Node} - a map of masses to their corresponding view elements
+    // @private {Map.<Mass,Node>} - a map of masses to their corresponding view elements
     this.massesToNodesMap = new Map();
 
     const handleMassAdded = addedMass => {
