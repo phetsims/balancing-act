@@ -389,6 +389,8 @@ class BalanceGameView extends ScreenView {
     // the current state.
     this.hideAllGameNodes();
 
+    let score;
+
     // Show the nodes appropriate to the state
     switch( gameState ) {
       case 'choosingLevel':
@@ -487,7 +489,7 @@ class BalanceGameView extends ScreenView {
         break;
 
       case 'showingLevelResults':
-        var score = this.model.scoreProperty.get(); // eslint-disable-line no-var
+        score = this.model.scoreProperty.get();
         if ( score === BalanceGameModel.MAX_POSSIBLE_SCORE ) {
           this.gameAudioPlayer.gameOverPerfectScore();
         }
