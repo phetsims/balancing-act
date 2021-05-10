@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.24 Mon Feb 24 2020 16:50:55 GMT-0700 (Mountain Standard Time)",
+  "comment": "# balancing-act 1.1.24 Mon May 10 2021 13:15:52 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "73122b8c1f2bd747e79122e5c75275bf3028c464",
+    "sha": "9e5884e33154cd709db0a2f94d8296fc03398228",
     "branch": "1.1"
   },
   "brand": {
@@ -45,8 +45,8 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "7a2ba19a21289a1caa5a7d22dadf85a8e2d405f6",
-    "branch": "HEAD"
+    "sha": "64f77385b8cbe720e3a71594dc8c32650fc5bfc0",
+    "branch": "balancing-act-1.1"
   },
   "scenery-phet": {
     "sha": "afcc6f5021dc6584853999834bb4ce48160af94a",
