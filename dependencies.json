@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.2.4-rc.1 Fri May 07 2021 20:05:03 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# balancing-act 1.2.4-rc.1 Tue May 11 2021 16:24:48 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "a99a9ce9ee0774bf3ef509bf3e31ca7383f67478",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "12b3240d76bbdebc632adfc346ddb51ef69f51f8",
+    "sha": "ab3007e661e227e4a5055b5f900ce73c6b729b71",
     "branch": "1.2"
   },
   "brand": {
@@ -17,8 +17,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "2aa9c4c6b8e8f29bc50288065706c34ec65c3980",
-    "branch": "HEAD"
+    "sha": "0bb968a6b4758741404d97b9d0bc45743689b5b2",
+    "branch": "balancing-act-1.2"
   },
   "dot": {
     "sha": "8c661a7212b512331091c8bdc2a4b8fa94b8b229",
@@ -50,7 +50,7 @@
   },
   "phetmarks": {
     "sha": "bd70b010b7a5b3fa9eb48097717d7306ac79ae06",
-    "branch": "balancing-act-1.2"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "13dabf640581378191c3454bf4f107c0a5203d3b",
