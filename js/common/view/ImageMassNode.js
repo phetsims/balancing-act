@@ -44,12 +44,13 @@ class ImageMassNode extends Node {
     } );
     const self = this;
 
+    let massLabel;
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
       const massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
         pattern0Value1UnitsString, imageMass.massValue, kgString );
-      var massLabel = new RasterizedTextNode( // eslint-disable-line no-var
+      massLabel = new RasterizedTextNode(
         massLabelText,
         { font: new PhetFont( 12 ) },
         { pickable: false } // this is done as a workaround for an issue with RasterizedTextNode, can be made pickable if replaced with Text
