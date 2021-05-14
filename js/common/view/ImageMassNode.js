@@ -1,9 +1,8 @@
 // Copyright 2013-2020, University of Colorado Boulder
 
 /**
- * This class defines a Scenery node that represents a model element in the
- * view, and the particular model element itself contains an image that is used
- * as the primary representation.
+ * This class defines a Scenery node that represents a model element in the view, and the particular model element
+ * itself contains an image that is used as the primary representation.
  *
  * @author John Blanco
  */
@@ -95,8 +94,7 @@ class ImageMassNode extends Node {
         self.rotation = 0;
         const imageMassPosition = imageMass.positionProperty.get();
 
-        // Set overall position.  Recall that positions in the model are defined
-        // as the center bottom of the item.
+        // Set overall position.  Recall that positions in the model are defined as the center bottom of the item.
         self.centerX = modelViewTransform.modelToViewX( imageMassPosition.x - imageMass.centerOfMassXOffset );
         self.bottom = modelViewTransform.modelToViewY( imageMassPosition.y );
 
