@@ -13,8 +13,10 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectLiteralIO from '../../../../tandem/js/types/ObjectLiteralIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../BASharedConstants.js';
@@ -570,6 +572,9 @@ Plank.LENGTH = PLANK_LENGTH;
 Plank.THICKNESS = PLANK_THICKNESS;
 Plank.INTER_SNAP_TO_MARKER_DISTANCE = INTER_SNAP_TO_MARKER_DISTANCE;
 Plank.NUM_SNAP_TO_POSITIONS = NUM_SNAP_TO_POSITIONS;
+Plank.STATE_SCHEMA = {
+  massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/phet-io/issues/1774 more specific schema
+};
 
 Plank.PlankIO = IOType.fromCoreType( 'PlankIO', Plank );
 
