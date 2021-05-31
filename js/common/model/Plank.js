@@ -573,7 +573,7 @@ Plank.THICKNESS = PLANK_THICKNESS;
 Plank.INTER_SNAP_TO_MARKER_DISTANCE = INTER_SNAP_TO_MARKER_DISTANCE;
 Plank.NUM_SNAP_TO_POSITIONS = NUM_SNAP_TO_POSITIONS;
 Plank.STATE_SCHEMA = {
-  massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/phet-io/issues/1774 more specific schema
+  massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/balancing-act/issues/130 more specific schema
 };
 
 Plank.PlankIO = IOType.fromCoreType( 'PlankIO', Plank );
