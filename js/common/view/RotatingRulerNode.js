@@ -8,13 +8,13 @@
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import Plank from '../model/Plank.js';
 import RasterizedTextNode from './RasterizedTextNode.js';
-import RulerNodeRasterizedText from './RulerNodeRasterizedText.js';
 
 const metersString = balancingActStrings.meters;
 
@@ -49,12 +49,11 @@ class RotatingRulerNode extends Node {
     // Create and add the ruler node.
     const rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
     const majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
-    const rulerNode = new RulerNodeRasterizedText( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '',
-      {
-        backgroundFill: 'rgba( 236, 225, 113, 0.5)',
-        majorTickFont: new PhetFont( 11 ),
-        tickMarksOnBottom: false
-      } );
+    const rulerNode = new RulerNode( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '', {
+      backgroundFill: 'rgba( 236, 225, 113, 0.5)',
+      majorTickFont: new PhetFont( 11 ),
+      tickMarksOnBottom: false
+    } );
     this.addChild( rulerNode );
 
     // Add a line in the center of the ruler to make it look like two separate rulers.
