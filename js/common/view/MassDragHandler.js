@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * Common drag handler for mass nodes.  Positions the corresponding model element based on the movement of the mouse or

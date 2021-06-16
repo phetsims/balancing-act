@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * Class that represents a stack of bricks in the model.  Note that a single brick is represented as a stack of size 1.

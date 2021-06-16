@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * Primary model class for the 'balance lab' tab in the balancing act simulation. This model depicts a plank on a

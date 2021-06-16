@@ -1,4 +1,4 @@
-// Copyright 2014-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * The 'Balance Lab' screen. Conforms to the contract specified in joist/Screen.

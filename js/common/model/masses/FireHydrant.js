@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 
 import fireHydrantImage from '../../../../images/fire-hydrant_png.js';

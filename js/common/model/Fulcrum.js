@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * Fulcrum (for lack of a better word) that has a pivot point that is above

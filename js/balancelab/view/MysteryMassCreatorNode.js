@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * This class represents a "mystery mass" in a toolbox.  When the user clicks on this node, the corresponding model

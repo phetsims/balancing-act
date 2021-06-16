@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+[object Promise]
 
 
 import tinyRockImage from '../../../../images/tiny-rock_png.js';

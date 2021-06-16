@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 
 import sodaBottleImage from '../../../../images/soda-bottle_png.js';

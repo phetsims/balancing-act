@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 /**
  * Base type for a single "challenge" (a.k.a. problem) that is presented to the user during the balance game.

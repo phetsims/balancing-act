@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * Base type for the Scenery nodes that appear in the view, generally in some sort of toolbox, and that can be clicked

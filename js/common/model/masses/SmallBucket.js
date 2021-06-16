@@ -1,4 +1,4 @@
-// Copyright 2014-2020, University of Colorado Boulder
+[object Promise]
 
 
 import blueBucketImage from '../../../../images/blue-bucket_png.js';

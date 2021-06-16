@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+[object Promise]
 
 /**
  * This class defines a Scenery node that represents a model element in the view, and the particular model element
