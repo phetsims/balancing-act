@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 
 import cinderBlockImage from '../../../../images/cinder-block_png.js';

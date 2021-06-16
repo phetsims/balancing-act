@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * A marker that is used to mark a position on the plank.

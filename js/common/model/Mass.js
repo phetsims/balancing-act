@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * Base class for all objects that can be placed on the balance.

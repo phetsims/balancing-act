@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 /**
  * Convenience type for creating the icons used on the game level start buttons.

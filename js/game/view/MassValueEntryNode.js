@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 /**
  * This class presents a dialog to the user that allows them to enter a mass value.

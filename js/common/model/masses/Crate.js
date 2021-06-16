@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 
 import crateImage from '../../../../images/wood-crate-tall_png.js';

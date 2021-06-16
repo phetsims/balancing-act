@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * Model class that represents a girl who is roughly 10 years old.  The height

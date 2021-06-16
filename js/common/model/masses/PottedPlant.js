@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 
 import pottedPlantImage from '../../../../images/potted-plant_png.js';

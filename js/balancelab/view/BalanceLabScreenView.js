@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * Screen view for the "Balance Lab" screen.

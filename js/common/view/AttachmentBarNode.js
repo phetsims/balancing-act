@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * View representation for the attachment bar which goes from the pivot point

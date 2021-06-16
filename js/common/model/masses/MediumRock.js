@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2014-2021, University of Colorado Boulder
 
 
 import mediumRockImage from '../../../../images/rock-1_png.js';

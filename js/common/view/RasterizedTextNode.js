@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2016-2021, University of Colorado Boulder
 /**
  * A scenery node that rasterizes text.  This is needed due to an issue where text moves in undesirable ways when
  * rotated in Chrome and Firefox, see issue #16 (https://github.com/phetsims/balancing-act/issues/16).

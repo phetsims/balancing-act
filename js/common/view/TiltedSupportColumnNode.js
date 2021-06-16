@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * Node that represents a support column with a non-level (a.k.a. tilted) top

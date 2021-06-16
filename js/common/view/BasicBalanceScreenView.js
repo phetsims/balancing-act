@@ -1,4 +1,4 @@
-[object Promise]
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * ScreenView that displays items in the balance model, primarily the balance beam (i.e. the plank), the various masses,
