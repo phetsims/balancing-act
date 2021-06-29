@@ -78,7 +78,8 @@ class StartGameLevelNode extends Node {
           scoreDisplayOptions: {
             numberOfStars: options.numStarsOnButtons,
             perfectScore: options.perfectScore
-          }
+          },
+          soundPlayerIndex: i
         }
       );
       this.addChild( buttons[ i ] );
