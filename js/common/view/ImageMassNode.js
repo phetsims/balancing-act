@@ -13,13 +13,13 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import defaultImage from '../../../images/default-image_png.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
-import RasterizedTextNode from './RasterizedTextNode.js';
 
 const kgString = balancingActStrings.kg;
 const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
@@ -49,11 +49,7 @@ class ImageMassNode extends Node {
       // Add the mass indicator label.  Note that it is positioned elsewhere.
       const massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
         pattern0Value1UnitsString, imageMass.massValue, kgString );
-      massLabel = new RasterizedTextNode(
-        massLabelText,
-        { font: new PhetFont( 12 ) },
-        { pickable: false } // this is done as a workaround for an issue with RasterizedTextNode, can be made pickable if replaced with Text
-      );
+      massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
       this.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.

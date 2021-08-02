@@ -8,8 +8,8 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
-import RasterizedTextNode from './RasterizedTextNode.js';
 
 // constants
 const color = 'rgb( 255, 153, 0 )';
@@ -28,12 +28,14 @@ class PositionMarkerNode extends Node {
     this.addChild( line );
     const circle = new Circle( CIRCLE_RADIUS, { fill: color, centerX: 0, centerY: LINE_LENGTH } );
     this.addChild( circle );
-    this.addChild( new RasterizedTextNode( labelText, {
+    this.addChild( new Text( labelText, {
       font: new PhetFont( {
         size: 12,
         weight: 'bold'
-      } )
-    }, { centerX: 0, top: circle.bottom } ) );
+      } ),
+      centerX: 0,
+      top: circle.bottom
+    } ) );
     this.mutate( options );
   }
 }

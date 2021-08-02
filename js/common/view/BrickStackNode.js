@@ -10,15 +10,18 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
-import RasterizedTextNode from './RasterizedTextNode.js';
 
 const kgString = balancingActStrings.kg;
 const unknownMassLabelString = balancingActStrings.unknownMassLabel;
+
+// constants
+const LABEL_FONT = new PhetFont( 12 );
 
 class BrickStackNode extends Node {
 
@@ -56,32 +59,31 @@ class BrickStackNode extends Node {
       let massLabel;
       const maxTextWidth = shapeNode.bounds.width;
       if ( brickStack.isMystery ) {
-        massLabel = new RasterizedTextNode(
-          unknownMassLabelString,
-          { font: new PhetFont( 12 ), maxWidth: maxTextWidth }
-        );
+        massLabel = new Text( unknownMassLabelString, {
+          font: LABEL_FONT,
+          maxWidth: maxTextWidth
+        } );
       }
       else {
+
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
         massLabel = new Node();
-        const massValueText = new RasterizedTextNode(
+        const massValueText = new Text(
           brickStack.massValue,
-          { font: new PhetFont( 12 ) },
           {
+            font: LABEL_FONT,
             centerX: 0,
-            maxWidth: maxTextWidth,
-            pickable: false /* set pickable to true if RasterizedTextNode is ever replaced with regular Text node */
+            maxWidth: maxTextWidth
           }
         );
         massLabel.addChild( massValueText );
-        massLabel.addChild( new RasterizedTextNode(
+        massLabel.addChild( new Text(
           kgString,
-          { font: new PhetFont( 12 ) },
           {
+            font: LABEL_FONT,
             centerX: 0,
             top: massValueText.bottom - 4,
-            maxWidth: maxTextWidth,
-            pickable: false // set pickable to true if RasterizedTextNode is ever replaced with regular Text node
+            maxWidth: maxTextWidth
           } )
         );
       }
@@ -95,8 +97,8 @@ class BrickStackNode extends Node {
       } );
     }
 
-    // Set initial position and record so deltas can be subsequently used.
-    // This helps minimize transformation when moving the items.
+    // Set initial position and record so deltas can be subsequently used. This helps minimize transformation when
+    // moving the items.
 
     let offsetToBottom = new Vector2( 0, -this.height / 2 );
     let previousRotationAngle = 0;

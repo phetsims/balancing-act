@@ -11,10 +11,10 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import Plank from '../model/Plank.js';
-import RasterizedTextNode from './RasterizedTextNode.js';
 
 const metersString = balancingActStrings.meters;
 
@@ -60,11 +60,13 @@ class RotatingRulerNode extends Node {
     this.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
 
     // Add a units label on each side.
-    this.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, {
+    this.addChild( new Text( metersString, {
+      font: UNITS_FONT,
       centerX: rulerNode.width * 0.25,
       bottom: RULER_HEIGHT
     } ) );
-    this.addChild( new RasterizedTextNode( metersString, { font: UNITS_FONT }, {
+    this.addChild( new Text( metersString, {
+      font: UNITS_FONT,
       centerX: rulerNode.width * 0.75,
       bottom: RULER_HEIGHT
     } ) );
