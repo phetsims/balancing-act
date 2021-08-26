@@ -118,7 +118,7 @@ define( require => {
         children: [
           new VBox( {
             children: [
-              new MysteryMassCreatorNode( 6, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode6' ) } ),
+              new MysteryMassCreatorNode( 7, model, modelViewTransform, { tandem: options.tandem.createTandem( 'mysteryMassCreatorNode7' ) } ),
 
               // Center the icon
               new VStrut( 61 )
