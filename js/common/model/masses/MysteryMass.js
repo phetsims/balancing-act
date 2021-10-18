@@ -36,7 +36,7 @@ define( require => {
   const massLabelHString = require( 'string!BALANCING_ACT/massLabelH' );
 
   // in kg
-  const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 54 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];
+  const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 55 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];
 
   // Mass configurations
   const MYSTERY_MASS_CONFIGURATIONS = [
