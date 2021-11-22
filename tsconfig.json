@@ -1,6 +1,16 @@
 {
   "extends": "../chipper/tsconfig-core.json",
-  "references": [{"path":"../vegas"},{"path":"../twixt"},{"path":"../joist"}],
+  "references": [
+    {
+      "path": "../vegas"
+    },
+    {
+      "path": "../twixt"
+    },
+    {
+      "path": "../joist/tsconfig-module.json"
+    }
+  ],
   "include": [
     "js/**/*",
     "sounds/**/*",
