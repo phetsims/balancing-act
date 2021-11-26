@@ -4,10 +4,10 @@
  * Node that defines a single panel for use on the tilt prediction selector node.
  */
 
-import DownUpListener from '../../../../scenery/js/input/DownUpListener.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import { DownUpListener } from '../../../../scenery/js/imports.js';
+import { Image } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants, collected here for easy appearance tweaking.

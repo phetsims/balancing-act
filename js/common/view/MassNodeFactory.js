@@ -8,8 +8,8 @@
  * @author John Blanco
  */
 
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
+import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import ImageMass from '../model/ImageMass.js';
 import BrickStack from '../model/masses/BrickStack.js';

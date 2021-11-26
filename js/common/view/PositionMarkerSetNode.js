@@ -5,7 +5,7 @@
  * the various snap-to positions on the plank.
  */
 
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 import PositionMarkerNode from './PositionMarkerNode.js';

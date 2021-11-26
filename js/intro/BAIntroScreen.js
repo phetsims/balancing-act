@@ -8,7 +8,7 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import Image from '../../../scenery/js/nodes/Image.js';
+import { Image } from '../../../scenery/js/imports.js';
 import introIconSmall from '../../images/intro-icon-small_png.js';
 import introIcon from '../../images/intro-icon_png.js';
 import balancingAct from '../balancingAct.js';
