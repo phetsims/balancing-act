@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import tireImage from '../../../../images/tire_png.js';
+import tire_png from '../../../../images/tire_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class Tire extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, tireImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, tire_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

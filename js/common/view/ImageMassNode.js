@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import { Text } from '../../../../scenery/js/imports.js';
-import defaultImage from '../../../images/default-image_png.js';
+import defaultImage_png from '../../../images/defaultImage_png.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
@@ -58,7 +58,7 @@ class ImageMassNode extends Node {
       } );
     }
 
-    const imageNode = new Image( defaultImage );
+    const imageNode = new Image( defaultImage_png );
 
     // Observe image changes.
     imageMass.imageProperty.link( image => {

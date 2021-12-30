@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import crateImage from '../../../../images/wood-crate-tall_png.js';
+import woodCrateTall_png from '../../../../images/woodCrateTall_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class Crate extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, crateImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, woodCrateTall_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

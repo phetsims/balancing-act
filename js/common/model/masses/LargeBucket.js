@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import metalBucketImage from '../../../../images/metal-bucket_png.js';
+import metalBucket_png from '../../../../images/metalBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class LargeBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, metalBucketImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, metalBucket_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

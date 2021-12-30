@@ -7,14 +7,14 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import mysteryObject1Image from '../../../../images/mystery-object-01_png.js';
-import mysteryObject2Image from '../../../../images/mystery-object-02_png.js';
-import mysteryObject3Image from '../../../../images/mystery-object-03_png.js';
-import mysteryObject4Image from '../../../../images/mystery-object-04_png.js';
-import mysteryObject5Image from '../../../../images/mystery-object-05_png.js';
-import mysteryObject6Image from '../../../../images/mystery-object-06_png.js';
-import mysteryObject7Image from '../../../../images/mystery-object-07_png.js';
-import mysteryObject8Image from '../../../../images/mystery-object-08_png.js';
+import mysteryObject01_png from '../../../../images/mysteryObject01_png.js';
+import mysteryObject02_png from '../../../../images/mysteryObject02_png.js';
+import mysteryObject03_png from '../../../../images/mysteryObject03_png.js';
+import mysteryObject04_png from '../../../../images/mysteryObject04_png.js';
+import mysteryObject05_png from '../../../../images/mysteryObject05_png.js';
+import mysteryObject06_png from '../../../../images/mysteryObject06_png.js';
+import mysteryObject07_png from '../../../../images/mysteryObject07_png.js';
+import mysteryObject08_png from '../../../../images/mysteryObject08_png.js';
 import balancingAct from '../../../balancingAct.js';
 import balancingActStrings from '../../../balancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
@@ -38,56 +38,56 @@ const MYSTERY_MASS_CONFIGURATIONS = [
   // image for things to look good.
   {
     massValue: massValues[ 0 ], // in kg
-    image: mysteryObject1Image,
+    image: mysteryObject01_png,
     height: 0.25, // in meters
     labelText: massLabelAString,
     isMystery: true
   },
   {
     massValue: massValues[ 1 ], // in kg
-    image: mysteryObject2Image,
+    image: mysteryObject02_png,
     height: 0.30, // in meters
     labelText: massLabelBString,
     isMystery: true
   },
   {
     massValue: massValues[ 2 ], // in kg
-    image: mysteryObject3Image,
+    image: mysteryObject03_png,
     height: 0.35, // in meters
     labelText: massLabelCString,
     isMystery: true
   },
   {
     massValue: massValues[ 3 ], // in kg
-    image: mysteryObject4Image,
+    image: mysteryObject04_png,
     height: 0.4, // in meters
     labelText: massLabelDString,
     isMystery: true
   },
   {
     massValue: massValues[ 4 ], // in kg
-    image: mysteryObject5Image,
+    image: mysteryObject05_png,
     height: 0.25, // in meters
     labelText: massLabelEString,
     isMystery: true
   },
   {
     massValue: massValues[ 5 ], // in kg
-    image: mysteryObject6Image,
+    image: mysteryObject06_png,
     height: 0.35, // in meters
     labelText: massLabelFString,
     isMystery: true
   },
   {
     massValue: massValues[ 6 ], // in kg
-    image: mysteryObject7Image,
+    image: mysteryObject07_png,
     height: 0.4, // in meters
     labelText: massLabelGString,
     isMystery: true
   },
   {
     massValue: massValues[ 7 ], // in kg
-    image: mysteryObject8Image,
+    image: mysteryObject08_png,
     height: 0.3, // in meters
     labelText: massLabelHString,
     isMystery: true

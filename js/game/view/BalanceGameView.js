@@ -24,10 +24,10 @@ import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import vegasStrings from '../../../../vegas/js/vegasStrings.js';
-import gameLevel1Icon from '../../../mipmaps/game-level-1-icon_png.js';
-import gameLevel2Icon from '../../../mipmaps/game-level-2-icon_png.js';
-import gameLevel3Icon from '../../../mipmaps/game-level-3-icon_png.js';
-import gameLevel4Icon from '../../../mipmaps/game-level-4-icon_png.js';
+import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
+import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
+import gameLevel3Icon_png from '../../../mipmaps/gameLevel3Icon_png.js';
+import gameLevel4Icon_png from '../../../mipmaps/gameLevel4Icon_png.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
@@ -161,10 +161,10 @@ class BalanceGameView extends ScreenView {
       () => { gameModel.reset(); },
       gameModel.timerEnabledProperty,
       [
-        new GameIconNode( gameLevel1Icon, 1 ),
-        new GameIconNode( gameLevel2Icon, 2 ),
-        new GameIconNode( gameLevel3Icon, 3 ),
-        new GameIconNode( gameLevel4Icon, 4 )
+        new GameIconNode( gameLevel1Icon_png, 1 ),
+        new GameIconNode( gameLevel2Icon_png, 2 ),
+        new GameIconNode( gameLevel3Icon_png, 3 ),
+        new GameIconNode( gameLevel4Icon_png, 4 )
       ],
       gameModel.mostRecentScores,
       modelViewTransform,

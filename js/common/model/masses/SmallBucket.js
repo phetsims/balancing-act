@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import blueBucketImage from '../../../../images/blue-bucket_png.js';
+import blueBucket_png from '../../../../images/blueBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class SmallBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, blueBucketImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, blueBucket_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

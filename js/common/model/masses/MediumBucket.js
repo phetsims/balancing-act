@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import yellowBucketImage from '../../../../images/yellow-bucket_png.js';
+import yellowBucket_png from '../../../../images/yellowBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class MediumBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, yellowBucketImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, yellowBucket_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import mediumRockImage from '../../../../images/rock-1_png.js';
+import rock1_png from '../../../../images/rock1_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class MediumRock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, mediumRockImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, rock1_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

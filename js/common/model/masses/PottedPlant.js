@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import pottedPlantImage from '../../../../images/potted-plant_png.js';
+import pottedPlant_png from '../../../../images/pottedPlant_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class PottedPlant extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, pottedPlantImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, pottedPlant_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

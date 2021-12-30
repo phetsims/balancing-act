@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import cinderBlockImage from '../../../../images/cinder-block_png.js';
+import cinderBlock_png from '../../../../images/cinderBlock_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class CinderBlock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, cinderBlockImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, cinderBlock_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

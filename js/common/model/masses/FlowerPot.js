@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import flowerPotImage from '../../../../images/flower-pot_png.js';
+import flowerPot_png from '../../../../images/flowerPot_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class FlowerPot extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, flowerPotImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, flowerPot_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

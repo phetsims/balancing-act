@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "blue-bucket.png": {
+  "blueBucket.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "cinder-block.png": {
+  "cinderBlock.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -23,7 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "default-image.png": {
+  "defaultImage.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -31,7 +31,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "fire-extinguisher.png": {
+  "fireExtinguisher.png": {
     "text": [
       "Public Domain"
     ],
@@ -39,7 +39,7 @@
     "license": "Public Domain",
     "notes": "Modified by John Blanco"
   },
-  "fire-hydrant.png": {
+  "fireHydrant.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -47,7 +47,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "flower-pot.png": {
+  "flowerPot.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -55,7 +55,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "game-icon.png": {
+  "gameIcon.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -63,7 +63,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "game-icon-small.png": {
+  "gameIconSmall.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -71,7 +71,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "intro-icon.png": {
+  "introIcon.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -79,7 +79,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "intro-icon-small.png": {
+  "introIconSmall.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -87,7 +87,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "lab-icon.png": {
+  "labIcon.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -95,7 +95,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "lab-icon-small.png": {
+  "labIconSmall.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -103,7 +103,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "ssiman-tov"
   },
-  "metal-bucket.png": {
+  "metalBucket.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -111,7 +111,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-01.png": {
+  "mysteryObject01.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -119,7 +119,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-02.png": {
+  "mysteryObject02.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -127,7 +127,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-03.png": {
+  "mysteryObject03.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -135,7 +135,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-04.png": {
+  "mysteryObject04.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -143,7 +143,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-05.png": {
+  "mysteryObject05.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -151,7 +151,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-06.png": {
+  "mysteryObject06.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -159,7 +159,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-07.png": {
+  "mysteryObject07.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -167,7 +167,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "mystery-object-08.png": {
+  "mysteryObject08.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -175,7 +175,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "old-television.png": {
+  "oldTelevision.png": {
     "text": [
       "Public Domain"
     ],
@@ -183,7 +183,7 @@
     "license": "Public Domain",
     "notes": "Modified by jblanco"
   },
-  "plank-balanced.png": {
+  "plankBalanced.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -191,7 +191,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "plank-tipped-left.png": {
+  "plankTippedLeft.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -199,7 +199,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "plank-tipped-right.png": {
+  "plankTippedRight.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -215,7 +215,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": ""
   },
-  "potted-plant.png": {
+  "pottedPlant.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -223,7 +223,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "rock-1.png": {
+  "rock1.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -231,7 +231,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
   },
-  "rock-4.png": {
+  "rock4.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -239,7 +239,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
   },
-  "rock-6.png": {
+  "rock6.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -247,7 +247,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "Reused from Radioactive Dating Game sim by Noah Podolefsky"
   },
-  "soda-bottle.png": {
+  "sodaBottle.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -255,7 +255,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "tiny-rock.png": {
+  "tinyRock.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -271,7 +271,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "trash-can.png": {
+  "trashCan.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -279,7 +279,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco"
   },
-  "wood-crate-tall.png": {
+  "woodCrateTall.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -287,7 +287,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "Modified from forces and motion basics crate by Noah Podolefsky"
   },
-  "yellow-bucket.png": {
+  "yellowBucket.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],

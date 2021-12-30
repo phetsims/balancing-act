@@ -12,9 +12,9 @@ import Property from '../../../../axon/js/Property.js';
 import { HBox } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
-import plankBalancedImage from '../../../images/plank-balanced_png.js';
-import plankTippedLeftImage from '../../../images/plank-tipped-left_png.js';
-import plankTippedRightImage from '../../../images/plank-tipped-right_png.js';
+import plankBalanced_png from '../../../images/plankBalanced_png.js';
+import plankTippedLeft_png from '../../../images/plankTippedLeft_png.js';
+import plankTippedRight_png from '../../../images/plankTippedRight_png.js';
 import balancingAct from '../../balancingAct.js';
 import TiltPredictionSelectionPanel from './TiltPredictionSelectionPanel.js';
 
@@ -33,9 +33,9 @@ class TiltPredictionSelectorNode extends Node {
     const panelContents = new HBox(
       {
         children: [
-          new TiltPredictionSelectionPanel( plankTippedLeftImage, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
-          new TiltPredictionSelectionPanel( plankBalancedImage, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
-          new TiltPredictionSelectionPanel( plankTippedRightImage, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
+          new TiltPredictionSelectionPanel( plankTippedLeft_png, 'tiltDownOnLeftSide', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankBalanced_png, 'stayBalanced', this.tiltPredictionProperty, gameStateProperty ),
+          new TiltPredictionSelectionPanel( plankTippedRight_png, 'tiltDownOnRightSide', this.tiltPredictionProperty, gameStateProperty )
         ], spacing: 5
       } );
 

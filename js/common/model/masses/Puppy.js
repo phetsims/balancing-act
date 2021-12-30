@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import puppyImage from '../../../../images/puppy_png.js';
+import puppy_png from '../../../../images/puppy_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class Puppy extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, puppyImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, puppy_png, HEIGHT, initialPosition, isMystery );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 }

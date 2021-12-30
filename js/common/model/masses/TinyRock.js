@@ -1,7 +1,7 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 
-import tinyRockImage from '../../../../images/tiny-rock_png.js';
+import tinyRock_png from '../../../../images/tinyRock_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class TinyRock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, tinyRockImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, tinyRock_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

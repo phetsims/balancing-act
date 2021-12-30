@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import sodaBottleImage from '../../../../images/soda-bottle_png.js';
+import sodaBottle_png from '../../../../images/sodaBottle_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class SodaBottle extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, sodaBottleImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, sodaBottle_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

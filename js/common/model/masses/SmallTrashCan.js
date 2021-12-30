@@ -1,7 +1,7 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 
-import trashCanImage from '../../../../images/trash-can_png.js';
+import trashCan_png from '../../../../images/trashCan_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -17,7 +17,7 @@ class SmallTrashCan extends ImageMass {
    * @param {Object} [options]
    */
   constructor( initialPosition, isMystery, options ) {
-    super( MASS, trashCanImage, HEIGHT, initialPosition, isMystery, options );
+    super( MASS, trashCan_png, HEIGHT, initialPosition, isMystery, options );
   }
 }
 

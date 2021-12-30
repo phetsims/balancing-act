@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import barrelImage from '../../../../images/barrel_png.js';
+import barrel_png from '../../../../images/barrel_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class Barrel extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, barrelImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, barrel_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

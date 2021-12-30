@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import bigRockImage from '../../../../images/rock-6_png.js';
+import rock6_png from '../../../../images/rock6_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -16,7 +16,7 @@ class BigRock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, bigRockImage, HEIGHT, initialPosition, isMystery );
+    super( MASS, rock6_png, HEIGHT, initialPosition, isMystery );
   }
 }
 

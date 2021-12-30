@@ -9,8 +9,8 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import labIconSmall from '../../images/lab-icon-small_png.js';
-import labIcon from '../../images/lab-icon_png.js';
+import labIconSmall_png from '../../images/labIconSmall_png.js';
+import labIcon_png from '../../images/labIcon_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
@@ -22,11 +22,11 @@ class BalanceLabScreen extends Screen {
 
     const options = {
       name: balancingActStrings.balanceLab,
-      homeScreenIcon: new ScreenIcon( new Image( labIcon ), {
+      homeScreenIcon: new ScreenIcon( new Image( labIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } ),
-      navigationBarIcon: new ScreenIcon( new Image( labIconSmall ), {
+      navigationBarIcon: new ScreenIcon( new Image( labIconSmall_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } ),

@@ -9,8 +9,8 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import gameIconSmall from '../../images/game-icon-small_png.js';
-import gameIcon from '../../images/game-icon_png.js';
+import gameIconSmall_png from '../../images/gameIconSmall_png.js';
+import gameIcon_png from '../../images/gameIcon_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BalanceGameModel from './model/BalanceGameModel.js';
@@ -25,11 +25,11 @@ class BalanceGameScreen extends Screen {
 
     const options = {
       name: balancingActStrings.game,
-      homeScreenIcon: new ScreenIcon( new Image( gameIcon ), {
+      homeScreenIcon: new ScreenIcon( new Image( gameIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } ),
-      navigationBarIcon: new ScreenIcon( new Image( gameIconSmall ), {
+      navigationBarIcon: new ScreenIcon( new Image( gameIconSmall_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } ),
