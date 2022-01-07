@@ -6,10 +6,10 @@
  * @author Sam Reid (PhET Interactive Simulations)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import balancingAct from '../../balancingAct.js';
 
-const PositionIndicatorChoice = Enumeration.byKeys( [ 'NONE', 'RULERS', 'MARKS' ] );
+const PositionIndicatorChoice = EnumerationDeprecated.byKeys( [ 'NONE', 'RULERS', 'MARKS' ] );
 balancingAct.register( 'PositionIndicatorChoice', PositionIndicatorChoice );
 
 export default PositionIndicatorChoice;
