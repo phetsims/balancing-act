@@ -31,7 +31,7 @@ class BrickStackNode extends Node {
    * @param {boolean} isLabeled
    * @param {Property} labelVisibleProperty
    * @param {boolean} draggable
-   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
+   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
    */
   constructor( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable, columnStateProperty ) {
     super( { cursor: 'pointer' } );

@@ -8,7 +8,7 @@
  */
 
 import createObservableArray from '../../../../axon/js/createObservableArray.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import balancingAct from '../../balancingAct.js';
@@ -34,7 +34,7 @@ class BalanceModel {
     this.massList = createObservableArray();
     this.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
 
-    this.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
+    this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
       tandem: tandem.createTandem( 'columnStateProperty' ),
       phetioStudioControl: false
     } );

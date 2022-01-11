@@ -23,7 +23,7 @@ class MysteryMassNode extends ImageMassNode {
    * @param {boolean} isLabeled
    * @param {Property} massLabelVisibleProperty
    * @param {boolean} draggable
-   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
+   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
    */
   constructor( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
     super( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty );

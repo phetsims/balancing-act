@@ -33,7 +33,7 @@ class ImageMassNode extends Node {
    * @param {boolean} isLabeled - Flag that controls whether this note include a textual label of the mass
    * @param massLabelVisibleProperty
    * @param {boolean} draggable
-   * @param {EnumerationProperty.<ColumnState>} columnStateProperty
+   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
    */
   constructor( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
     super( { cursor: 'pointer' } );

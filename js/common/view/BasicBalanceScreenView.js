@@ -8,7 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -75,7 +75,7 @@ class BasicBalanceScreenView extends ScreenView {
       levelIndicatorVisibleProperty: new BooleanProperty( false, {
         tandem: tandem.createTandem( 'levelIndicatorVisibleProperty' )
       } ),
-      positionMarkerStateProperty: new EnumerationProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE, {
+      positionMarkerStateProperty: new EnumerationDeprecatedProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE, {
         tandem: tandem.createTandem( 'positionMarkerStateProperty' )
       } )
     };

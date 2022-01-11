@@ -7,7 +7,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -314,7 +314,7 @@ class BalanceGameView extends ScreenView {
     this.challengeLayer.addChild( levelIndicator );
 
     // Add a panel for controlling whether the ruler or marker set are visible.
-    const positionMarkerStateProperty = new EnumerationProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE );
+    const positionMarkerStateProperty = new EnumerationDeprecatedProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE );
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );

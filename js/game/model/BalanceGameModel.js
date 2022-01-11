@@ -10,7 +10,7 @@
  */
 
 import createObservableArray from '../../../../axon/js/createObservableArray.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -50,7 +50,7 @@ class BalanceGameModel {
     // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
     // 'showingLevelResults'
     this.gameStateProperty = new Property( 'choosingLevel' );
-    this.columnStateProperty = new EnumerationProperty( ColumnState, ColumnState.SINGLE_COLUMN );
+    this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.SINGLE_COLUMN );
     this.elapsedTimeProperty = new Property( 0 );
 
     // Best times and scores.
