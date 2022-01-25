@@ -254,9 +254,12 @@ const BalanceGameChallengeFactory = {
    */
   getPossibleDistanceList( massOfFixedItem, massOfMovableItem ) {
     const validFixedMassDistances = [];
-    for ( let testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
+    for ( let testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+          testDistance <= Plank.MAX_VALID_MASS_DISTANCE_FROM_CENTER;
+          testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
+
       const possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
-      if ( possibleFixedMassDistance < Plank.length / 2 &&
+      if ( possibleFixedMassDistance <= Plank.MAX_VALID_MASS_DISTANCE_FROM_CENTER &&
            possibleFixedMassDistance >= Plank.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
            possibleFixedMassDistance % Plank.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
         // This is a valid distance.
