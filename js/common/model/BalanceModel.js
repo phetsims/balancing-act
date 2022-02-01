@@ -36,7 +36,7 @@ class BalanceModel {
 
     this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
       tandem: tandem.createTandem( 'columnStateProperty' ),
-      phetioStudioControl: false
+      phetioReadOnly: true
     } );
     this.plank = new Plank(
       new Vector2( 0, PLANK_HEIGHT ),
