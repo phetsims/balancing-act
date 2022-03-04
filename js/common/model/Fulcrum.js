@@ -8,7 +8,7 @@
  * @author John Blanco
  */
 
-import Shape from '../../../../kite/js/Shape.js';
+import { Shape } from '../../../../kite/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants
