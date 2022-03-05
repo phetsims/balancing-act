@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+// Copyright 2013-2022, University of Colorado Boulder
 
 /**
  * Class that represents a stack of bricks in the model.  Note that a single brick is represented as a stack of size 1.
