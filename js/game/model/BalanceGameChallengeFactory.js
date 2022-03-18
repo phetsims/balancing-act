@@ -255,9 +255,12 @@ define( function( require ) {
      */
     getPossibleDistanceList: function( massOfFixedItem, massOfMovableItem ) {
       var validFixedMassDistances = [];
-      for ( var testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE; testDistance < Plank.length / 2; testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
+      for ( var testDistance = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+            testDistance <= Plank.MAX_VALID_MASS_DISTANCE_FROM_CENTER;
+            testDistance += Plank.INTER_SNAP_TO_MARKER_DISTANCE ) {
+
         var possibleFixedMassDistance = testDistance * massOfMovableItem / massOfFixedItem;
-        if ( possibleFixedMassDistance < Plank.length / 2 &&
+        if ( possibleFixedMassDistance <= Plank.MAX_VALID_MASS_DISTANCE_FROM_CENTER &&
              possibleFixedMassDistance >= Plank.INTER_SNAP_TO_MARKER_DISTANCE - BASharedConstants.COMPARISON_TOLERANCE &&
              possibleFixedMassDistance % Plank.INTER_SNAP_TO_MARKER_DISTANCE < BASharedConstants.COMPARISON_TOLERANCE ) {
           // This is a valid distance.
