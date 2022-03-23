@@ -1,5 +1,5 @@
 {
-  "comment": "# balancing-act 1.1.27-rc.1 Fri Mar 18 2022 17:38:15 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# balancing-act 1.1.27 Wed Mar 23 2022 12:30:41 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "10935ca2f8f9a7613afeb1b7e887401b933f54d2",
+    "sha": "01d6beff7c7a91365c28c83c479a80115f09213e",
     "branch": "1.1"
   },
   "brand": {
