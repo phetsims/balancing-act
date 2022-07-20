@@ -7,11 +7,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Circle } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { LinearGradient } from '../../../../scenery/js/imports.js';
+import { Circle, LinearGradient, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants

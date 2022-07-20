@@ -7,9 +7,7 @@
  * @author John Blanco
  */
 
-import { Circle } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Circle, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants

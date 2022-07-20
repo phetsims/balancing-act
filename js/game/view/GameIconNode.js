@@ -8,9 +8,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Image, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 

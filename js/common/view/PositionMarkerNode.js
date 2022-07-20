@@ -5,10 +5,7 @@
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Circle } from '../../../../scenery/js/imports.js';
-import { Line } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Circle, Line, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants

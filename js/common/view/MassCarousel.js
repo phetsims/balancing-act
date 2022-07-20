@@ -9,11 +9,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import Carousel from '../../../../sun/js/Carousel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BoyCreatorNode from '../../balancelab/view/BoyCreatorNode.js';

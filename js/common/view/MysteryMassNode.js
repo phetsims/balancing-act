@@ -7,8 +7,7 @@
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Rectangle, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import ImageMassNode from './ImageMassNode.js';
 

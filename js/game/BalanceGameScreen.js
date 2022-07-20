@@ -9,8 +9,8 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import gameIconSmall_png from '../../images/gameIconSmall_png.js';
 import gameIcon_png from '../../images/gameIcon_png.js';
+import gameIconSmall_png from '../../images/gameIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BalanceGameModel from './model/BalanceGameModel.js';

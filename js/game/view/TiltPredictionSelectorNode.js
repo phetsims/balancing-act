@@ -9,8 +9,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { HBox, Node } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import plankBalanced_png from '../../../images/plankBalanced_png.js';
 import plankTippedLeft_png from '../../../images/plankTippedLeft_png.js';

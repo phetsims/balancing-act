@@ -11,8 +11,7 @@ import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Transform3 from '../../../../dot/js/Transform3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import { Node, Path } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 

@@ -9,8 +9,8 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import introIconSmall_png from '../../images/introIconSmall_png.js';
 import introIcon_png from '../../images/introIcon_png.js';
+import introIconSmall_png from '../../images/introIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';

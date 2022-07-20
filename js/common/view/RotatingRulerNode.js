@@ -9,9 +9,7 @@
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
-import { Line } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Line, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import Plank from '../model/Plank.js';

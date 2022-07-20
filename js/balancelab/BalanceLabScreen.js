@@ -9,8 +9,8 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import labIconSmall_png from '../../images/labIconSmall_png.js';
 import labIcon_png from '../../images/labIcon_png.js';
+import labIconSmall_png from '../../images/labIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
 import balancingActStrings from '../balancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';

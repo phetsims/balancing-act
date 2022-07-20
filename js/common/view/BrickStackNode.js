@@ -8,9 +8,7 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Node, Path, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import balancingActStrings from '../../balancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
