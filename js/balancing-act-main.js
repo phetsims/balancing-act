@@ -12,7 +12,7 @@ import balancingActStrings from './balancingActStrings.js';
 import BalanceGameScreen from './game/BalanceGameScreen.js';
 import BAIntroScreen from './intro/BAIntroScreen.js';
 
-const balancingActTitleString = balancingActStrings[ 'balancing-act' ].title;
+const balancingActTitleStringProperty = balancingActStrings[ 'balancing-act' ].titleStringProperty;
 
 // constants
 const tandem = Tandem.ROOT;
@@ -37,5 +37,5 @@ simLauncher.launch( () => {
     ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
   ];
 
-  new Sim( balancingActTitleString, screens, simOptions ).start();
+  new Sim( balancingActTitleStringProperty, screens, simOptions ).start();
 } );
