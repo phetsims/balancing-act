@@ -21,7 +21,7 @@ import { HBox, HStrut, Node, Text, VBox, VStrut } from '../../../../scenery/js/i
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../BASharedConstants.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 import AttachmentBarNode from './AttachmentBarNode.js';
@@ -38,10 +38,10 @@ import PositionMarkerSetNode from './PositionMarkerSetNode.js';
 import RotatingRulerNode from './RotatingRulerNode.js';
 
 // strings
-const forcesFromObjectsString = balancingActStrings.forcesFromObjects;
-const levelString = balancingActStrings.level;
-const massLabelsString = balancingActStrings.massLabels;
-const showString = balancingActStrings.show;
+const forcesFromObjectsString = BalancingActStrings.forcesFromObjects;
+const levelString = BalancingActStrings.level;
+const massLabelsString = BalancingActStrings.massLabels;
+const showString = BalancingActStrings.show;
 
 // constants
 const X_MARGIN_IN_PANELS = 5;

@@ -8,11 +8,11 @@ import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import BalanceLabScreen from './balancelab/BalanceLabScreen.js';
-import balancingActStrings from './balancingActStrings.js';
+import BalancingActStrings from './BalancingActStrings.js';
 import BalanceGameScreen from './game/BalanceGameScreen.js';
 import BAIntroScreen from './intro/BAIntroScreen.js';
 
-const balancingActTitleStringProperty = balancingActStrings[ 'balancing-act' ].titleStringProperty;
+const balancingActTitleStringProperty = BalancingActStrings[ 'balancing-act' ].titleStringProperty;
 
 // constants
 const tandem = Tandem.ROOT;

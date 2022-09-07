@@ -8,11 +8,11 @@
  */
 
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const whatIsTheMassString = balancingActStrings.whatIsTheMass;
+const whatIsTheMassString = BalancingActStrings.whatIsTheMass;
 
 class MassDeductionChallenge extends BalanceGameChallenge {
 

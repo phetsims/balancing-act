@@ -12,7 +12,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import gameIcon_png from '../../images/gameIcon_png.js';
 import gameIconSmall_png from '../../images/gameIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
-import balancingActStrings from '../balancingActStrings.js';
+import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceGameModel from './model/BalanceGameModel.js';
 import BalanceGameView from './view/BalanceGameView.js';
 
@@ -24,7 +24,7 @@ class BalanceGameScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: balancingActStrings.game,
+      name: BalancingActStrings.game,
       homeScreenIcon: new ScreenIcon( new Image( gameIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

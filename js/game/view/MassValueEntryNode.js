@@ -17,10 +17,10 @@ import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 
-const kgString = balancingActStrings.kg;
-const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
+const kgString = BalancingActStrings.kg;
+const pattern0Value1UnitsString = BalancingActStrings.pattern0Value1Units;
 
 // constants
 const READOUT_FONT = new PhetFont( 16 );

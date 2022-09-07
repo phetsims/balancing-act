@@ -10,12 +10,12 @@
  */
 
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Plank from '../../common/model/Plank.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const balanceMeString = balancingActStrings.balanceMe;
+const balanceMeString = BalancingActStrings.balanceMe;
 
 class BalanceMassesChallenge extends BalanceGameChallenge {
 

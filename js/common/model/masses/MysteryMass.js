@@ -16,18 +16,18 @@ import mysteryObject06_png from '../../../../images/mysteryObject06_png.js';
 import mysteryObject07_png from '../../../../images/mysteryObject07_png.js';
 import mysteryObject08_png from '../../../../images/mysteryObject08_png.js';
 import balancingAct from '../../../balancingAct.js';
-import balancingActStrings from '../../../balancingActStrings.js';
+import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass from './LabeledImageMass.js';
 
-const massLabelAString = balancingActStrings.massLabelA;
-const massLabelBString = balancingActStrings.massLabelB;
-const massLabelCString = balancingActStrings.massLabelC;
-const massLabelDString = balancingActStrings.massLabelD;
-const massLabelEString = balancingActStrings.massLabelE;
-const massLabelFString = balancingActStrings.massLabelF;
-const massLabelGString = balancingActStrings.massLabelG;
-const massLabelHString = balancingActStrings.massLabelH;
+const massLabelAString = BalancingActStrings.massLabelA;
+const massLabelBString = BalancingActStrings.massLabelB;
+const massLabelCString = BalancingActStrings.massLabelC;
+const massLabelDString = BalancingActStrings.massLabelD;
+const massLabelEString = BalancingActStrings.massLabelE;
+const massLabelFString = BalancingActStrings.massLabelF;
+const massLabelGString = BalancingActStrings.massLabelG;
+const massLabelHString = BalancingActStrings.massLabelH;
 
 // in kg
 const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 54 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];

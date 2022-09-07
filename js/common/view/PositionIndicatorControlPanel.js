@@ -14,13 +14,13 @@ import Panel from '../../../../sun/js/Panel.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 
-const marksString = balancingActStrings.marks;
-const noneString = balancingActStrings.none;
-const positionString = balancingActStrings.position;
-const rulersString = balancingActStrings.rulers;
+const marksString = BalancingActStrings.marks;
+const noneString = BalancingActStrings.none;
+const positionString = BalancingActStrings.position;
+const rulersString = BalancingActStrings.rulers;
 
 // constants
 const RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };

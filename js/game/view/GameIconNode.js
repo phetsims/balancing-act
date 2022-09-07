@@ -10,10 +10,10 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 
-const levelString = balancingActStrings.level;
-const pattern0Label1ValueString = balancingActStrings.pattern0Label1Value;
+const levelString = BalancingActStrings.level;
+const pattern0Label1ValueString = BalancingActStrings.pattern0Label1Value;
 
 // constants
 const FONT = new PhetFont( 16 );

@@ -27,7 +27,7 @@ import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
 import gameLevel3Icon_png from '../../../mipmaps/gameLevel3Icon_png.js';
 import gameLevel4Icon_png from '../../../mipmaps/gameLevel4Icon_png.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import PositionIndicatorChoice from '../../common/model/PositionIndicatorChoice.js';
@@ -53,7 +53,7 @@ import TiltPredictionSelectorNode from './TiltPredictionSelectorNode.js';
 const checkString = VegasStrings.check;
 const nextString = VegasStrings.next;
 const showAnswerString = VegasStrings.showAnswer;
-const startOverString = balancingActStrings.startOver;
+const startOverString = BalancingActStrings.startOver;
 const tryAgainString = VegasStrings.tryAgain;
 
 // constants

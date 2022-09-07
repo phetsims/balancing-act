@@ -12,7 +12,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import labIcon_png from '../../images/labIcon_png.js';
 import labIconSmall_png from '../../images/labIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
-import balancingActStrings from '../balancingActStrings.js';
+import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabScreenView from './view/BalanceLabScreenView.js';
 
@@ -21,7 +21,7 @@ class BalanceLabScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: balancingActStrings.balanceLab,
+      name: BalancingActStrings.balanceLab,
       homeScreenIcon: new ScreenIcon( new Image( labIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

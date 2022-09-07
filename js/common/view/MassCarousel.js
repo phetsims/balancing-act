@@ -19,12 +19,12 @@ import ManCreatorNode from '../../balancelab/view/ManCreatorNode.js';
 import MysteryMassCreatorNode from '../../balancelab/view/MysteryMassCreatorNode.js';
 import WomanCreatorNode from '../../balancelab/view/WomanCreatorNode.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 
-const bricksString = balancingActStrings.bricks;
-const mysteryObjectsString = balancingActStrings.mysteryObjects;
-const peopleString = balancingActStrings.people;
+const bricksString = BalancingActStrings.bricks;
+const mysteryObjectsString = BalancingActStrings.mysteryObjects;
+const peopleString = BalancingActStrings.people;
 
 // constants
 const TITLE_FONT = new PhetFont( 16 );

@@ -12,7 +12,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import introIcon_png from '../../images/introIcon_png.js';
 import introIconSmall_png from '../../images/introIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
-import balancingActStrings from '../balancingActStrings.js';
+import BalancingActStrings from '../BalancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';
 
@@ -24,7 +24,7 @@ class BAIntroScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: balancingActStrings.intro,
+      name: BalancingActStrings.intro,
       homeScreenIcon: new ScreenIcon( new Image( introIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

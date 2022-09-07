@@ -11,10 +11,10 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import { Line, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import Plank from '../model/Plank.js';
 
-const metersString = balancingActStrings.meters;
+const metersString = BalancingActStrings.meters;
 
 // constants
 const RULER_HEIGHT = 50; // Empirically determined

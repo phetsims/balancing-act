@@ -14,14 +14,14 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Node, Text } from '../../../../scenery/js/imports.js';
 import defaultImage_png from '../../../images/defaultImage_png.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
 
-const kgString = balancingActStrings.kg;
-const pattern0Value1UnitsString = balancingActStrings.pattern0Value1Units;
-const unknownMassLabelString = balancingActStrings.unknownMassLabel;
+const kgString = BalancingActStrings.kg;
+const pattern0Value1UnitsString = BalancingActStrings.pattern0Value1Units;
+const unknownMassLabelString = BalancingActStrings.unknownMassLabel;
 
 class ImageMassNode extends Node {
 

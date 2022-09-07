@@ -77,8 +77,8 @@ type StringsType = {
   'startOverStringProperty': TReadOnlyProperty<string>;
 };
 
-const balancingActStrings = getStringModule( 'BALANCING_ACT' ) as StringsType;
+const BalancingActStrings = getStringModule( 'BALANCING_ACT' ) as StringsType;
 
-balancingAct.register( 'balancingActStrings', balancingActStrings );
+balancingAct.register( 'BalancingActStrings', BalancingActStrings );
 
-export default balancingActStrings;
+export default BalancingActStrings;

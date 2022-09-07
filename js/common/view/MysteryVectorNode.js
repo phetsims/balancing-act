@@ -11,9 +11,9 @@
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
-import balancingActStrings from '../../balancingActStrings.js';
+import BalancingActStrings from '../../BalancingActStrings.js';
 
-const unknownMassLabelString = balancingActStrings.unknownMassLabel;
+const unknownMassLabelString = BalancingActStrings.unknownMassLabel;
 
 // constants
 const FONT = new PhetFont( { size: 36 } );
