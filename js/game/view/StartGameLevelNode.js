@@ -15,11 +15,11 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
-import vegasStrings from '../../../../vegas/js/vegasStrings.js';
+import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 
-const selectLevelString = vegasStrings.selectLevel;
+const selectLevelString = VegasStrings.selectLevel;
 
 class StartGameLevelNode extends Node {
 

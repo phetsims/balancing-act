@@ -21,7 +21,7 @@ import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
-import vegasStrings from '../../../../vegas/js/vegasStrings.js';
+import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
 import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
 import gameLevel3Icon_png from '../../../mipmaps/gameLevel3Icon_png.js';
@@ -50,11 +50,11 @@ import MassValueEntryNode from './MassValueEntryNode.js';
 import StartGameLevelNode from './StartGameLevelNode.js';
 import TiltPredictionSelectorNode from './TiltPredictionSelectorNode.js';
 
-const checkString = vegasStrings.check;
-const nextString = vegasStrings.next;
-const showAnswerString = vegasStrings.showAnswer;
+const checkString = VegasStrings.check;
+const nextString = VegasStrings.next;
+const showAnswerString = VegasStrings.showAnswer;
 const startOverString = balancingActStrings.startOver;
-const tryAgainString = vegasStrings.tryAgain;
+const tryAgainString = VegasStrings.tryAgain;
 
 // constants
 const BUTTON_FONT = new PhetFont( 24 );
