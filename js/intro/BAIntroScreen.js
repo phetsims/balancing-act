@@ -24,7 +24,7 @@ class BAIntroScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: BalancingActStrings.intro,
+      name: BalancingActStrings.introStringProperty,
       homeScreenIcon: new ScreenIcon( new Image( introIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

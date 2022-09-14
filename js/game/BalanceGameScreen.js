@@ -24,7 +24,7 @@ class BalanceGameScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: BalancingActStrings.game,
+      name: BalancingActStrings.gameStringProperty,
       homeScreenIcon: new ScreenIcon( new Image( gameIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

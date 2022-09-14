@@ -21,7 +21,7 @@ class BalanceLabScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: BalancingActStrings.balanceLab,
+      name: BalancingActStrings.balanceLabStringProperty,
       homeScreenIcon: new ScreenIcon( new Image( labIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
