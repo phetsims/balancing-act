@@ -225,20 +225,20 @@ class BasicBalanceScreenView extends ScreenView {
     // Add the control panel that will allow users to control the visibility of the various indicators.
     const showPanelTandem = tandem.createTandem( 'showPanel' );
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( massLabelsString, PANEL_OPTION_FONT ),
+      createNode: tandem => new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: this.viewProperties.massLabelsVisibleProperty,
       label: massLabelsString,
-      tandem: showPanelTandem.createTandem( 'massLabelsCheckbox' )
+      tandemName: 'massLabelsCheckbox'
     }, {
-      node: new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
+      createNode: tandem => new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
       property: this.viewProperties.forceVectorsFromObjectsVisibleProperty,
       label: forcesFromObjectsString,
-      tandem: showPanelTandem.createTandem( 'forcesFromObjectsCheckbox' )
+      tandemName: 'forcesFromObjectsCheckbox'
     }, {
-      node: new Text( levelString, PANEL_OPTION_FONT ),
+      createNode: tandem => new Text( levelString, PANEL_OPTION_FONT ),
       property: this.viewProperties.levelIndicatorVisibleProperty,
       label: levelString,
-      tandem: showPanelTandem.createTandem( 'levelCheckbox' )
+      tandemName: 'levelCheckbox'
     }
     ], {
       checkboxOptions: { boxWidth: 15 },
