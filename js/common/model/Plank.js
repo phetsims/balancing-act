@@ -573,11 +573,14 @@ Plank.THICKNESS = PLANK_THICKNESS;
 Plank.INTER_SNAP_TO_MARKER_DISTANCE = INTER_SNAP_TO_MARKER_DISTANCE;
 Plank.NUM_SNAP_TO_POSITIONS = NUM_SNAP_TO_POSITIONS;
 Plank.MAX_VALID_MASS_DISTANCE_FROM_CENTER = ( NUM_SNAP_TO_POSITIONS - 1 ) * INTER_SNAP_TO_MARKER_DISTANCE / 2;
-Plank.STATE_SCHEMA = {
-  massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/balancing-act/issues/130 more specific schema
-};
 
-Plank.PlankIO = IOType.fromCoreType( 'PlankIO', Plank );
+Plank.PlankIO = new IOType( 'PlankIO', {
+  valueType: Plank,
+  stateSchema: {
+    massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/balancing-act/issues/130 more specific schema
+  },
+  toStateObject: t => t.toStateObject()
+} );
 
 balancingAct.register( 'Plank', Plank );
 
