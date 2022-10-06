@@ -31,7 +31,7 @@ class ColumnOnOffController extends Node {
     const columnsOnNode = new ColumnControlIcon( ICON_WIDTH, true, {
       tandem: columnSwitchTandem.createTandem( 'columnsOnNode' )
     } );
-    const columnsOffNode = new ColumnControlIcon( ICON_WIDTH, true, {
+    const columnsOffNode = new ColumnControlIcon( ICON_WIDTH, false, {
       tandem: columnSwitchTandem.createTandem( 'columnsOffNode' )
     } );
     const columnSwitch = new ABSwitch( columnState, ColumnState.DOUBLE_COLUMNS, columnsOnNode, ColumnState.NO_COLUMNS, columnsOffNode, {
