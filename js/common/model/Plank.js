@@ -579,7 +579,7 @@ Plank.PlankIO = new IOType( 'PlankIO', {
   stateSchema: {
     massDistancePairs: ArrayIO( ObjectLiteralIO ) // TODO https://github.com/phetsims/balancing-act/issues/130 more specific schema
   },
-  toStateObject: t => t.toStateObject()
+  toStateObject: plank => plank.toStateObject()
 } );
 
 balancingAct.register( 'Plank', Plank );
