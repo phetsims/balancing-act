@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "d1e02573606c5b3370828f912f66dfc92732e218",
+    "sha": "53573ab465f96d4b0ee7586bf0f7f69ec7339991",
     "branch": "1.1"
   },
   "brand": {
@@ -49,7 +49,7 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "afcc6f5021dc6584853999834bb4ce48160af94a",
+    "sha": "b5a31711bac73aa23f31a95bc0db55f5bb55d799",
     "branch": "HEAD"
   },
   "sherpa": {
