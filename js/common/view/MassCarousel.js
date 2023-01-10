@@ -276,9 +276,11 @@ class MassCarousel extends Carousel {
         spacing: 5,
         children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
       } );
-      return pageAlignGroup.createBox( vbox, {
-        yAlign: 'top'
-      } );
+      return {
+        createNode: tandem => pageAlignGroup.createBox( vbox, {
+          yAlign: 'top'
+        } )
+      };
     } );
 
     super( pages, options );
