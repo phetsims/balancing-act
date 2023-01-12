@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "0d3fdf36ab873780efe534f39c3cf6316f012d4d",
+    "sha": "8d19e099a3acd950e93b4c3b5487a855be507b4b",
     "branch": "1.1"
   },
   "brand": {
@@ -37,7 +37,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "06cf25322f670eb4ab327c076b139fd6b78dc32c",
+    "sha": "2842ceac94e6825274dc1179be4a1d8bc5c4db6b",
     "branch": "HEAD"
   },
   "phetmarks": {
