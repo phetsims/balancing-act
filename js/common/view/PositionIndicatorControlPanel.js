@@ -44,17 +44,17 @@ class PositionIndicatorControlPanel extends Panel {
 
     const positionRadioButtonGroup = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
-        createNode: tandem => new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.NONE,
         tandemName: 'noneRadioButton'
       },
       {
-        createNode: tandem => new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.RULERS,
         tandemName: 'rulerRadioButton'
       },
       {
-        createNode: tandem => new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.MARKS,
         tandemName: 'marksRadioButton'
       }
