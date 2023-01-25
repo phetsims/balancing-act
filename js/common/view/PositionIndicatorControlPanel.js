@@ -1,4 +1,4 @@
-// Copyright 2013-2022, University of Colorado Boulder
+// Copyright 2013-2023, University of Colorado Boulder
 
 /**
  * This type defines a control panel that selects between the various types of
@@ -44,17 +44,17 @@ class PositionIndicatorControlPanel extends Panel {
 
     const positionRadioButtonGroup = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
-        createNode: tandem => new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( noneString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.NONE,
         tandemName: 'noneRadioButton'
       },
       {
-        createNode: tandem => new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( rulersString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.RULERS,
         tandemName: 'rulerRadioButton'
       },
       {
-        createNode: tandem => new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
+        createNode: () => new Text( marksString, RADIO_BUTTON_TEXT_OPTIONS ),
         value: PositionIndicatorChoice.MARKS,
         tandemName: 'marksRadioButton'
       }
