@@ -345,12 +345,12 @@ class BalanceGameView extends ScreenView {
   updateTitle() {
     const balanceGameChallenge = this.model.getCurrentChallenge();
     if ( balanceGameChallenge !== null ) {
-      this.challengeTitleNode.text = this.model.getCurrentChallenge().viewConfig.title;
+      this.challengeTitleNode.string = this.model.getCurrentChallenge().viewConfig.title;
     }
     else {
       // Set the value to something so that layout can be done.  This
       // string doesn't need to be translated - users should never see it.
-      this.challengeTitleNode.setText( 'No challenge available.' );
+      this.challengeTitleNode.setString( 'No challenge available.' );
     }
 
     // Center the title above the pivot point.

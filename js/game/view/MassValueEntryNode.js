@@ -94,7 +94,7 @@ class MassValueEntryNode extends Node {
 
     // Update the readout text and arrow button states whenever the value changes.
     this.massValueProperty.link( value => {
-      readoutText.text = StringUtils.format( pattern0Value1UnitsString, value, kgString );
+      readoutText.string = StringUtils.format( pattern0Value1UnitsString, value, kgString );
       readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.enabled = ( value > 0 );
       rightArrowButton.enabled = ( value < MAX_MASS );
