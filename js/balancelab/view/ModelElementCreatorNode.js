@@ -69,7 +69,7 @@ class ModelElementCreatorNode extends Node {
       },
       {
         allowTouchSnag: true,
-        tandem: options.tandem.createTandem( 'dragHandler' )
+        tandem: options.tandem.createTandem( 'dragListener' )
       }
     ) );
   }
