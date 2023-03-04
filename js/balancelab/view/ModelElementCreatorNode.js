@@ -1,4 +1,4 @@
-// Copyright 2013-2022, University of Colorado Boulder
+// Copyright 2013-2023, University of Colorado Boulder
 
 /**
  * Base type for the Scenery nodes that appear in the view, generally in some sort of toolbox, and that can be clicked
