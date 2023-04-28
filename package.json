@@ -22,7 +22,8 @@
       "phet-io"
     ],
     "supportsSound": true,
-    "simulation": true
+    "simulation": true,
+    "ignoreForAutomatedMaintenanceReleases": true
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
