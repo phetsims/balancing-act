@@ -18,6 +18,11 @@
     "phetLibs": [
       "vegas",
       "vibe"
+    ],
+    "screenNameKeys": [
+      "BALANCING_ACT/intro",
+      "BALANCING_ACT/balanceLab",
+      "BALANCING_ACT/game"
     ]
   }
 }
