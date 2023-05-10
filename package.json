@@ -29,7 +29,12 @@
       "validation": false
     },
     "supportsOutputJS": true,
-    "published": true
+    "published": true,
+    "screenNameKeys": [
+      "BALANCING_ACT/intro",
+      "BALANCING_ACT/balanceLab",
+      "BALANCING_ACT/game"
+    ]
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js",
