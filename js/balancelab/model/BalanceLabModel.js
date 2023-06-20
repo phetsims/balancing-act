@@ -35,7 +35,6 @@ class BalanceLabModel extends BalanceModel {
         return brickStack;
       },
       [ 1, Vector2.ZERO ], {
-        groupElementStartingIndex: 0,
         tandem: tandem.createTandem( 'brickStackGroup' ),
         phetioType: PhetioGroup.PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
       } );
@@ -51,7 +50,6 @@ class BalanceLabModel extends BalanceModel {
         return mysteryMassModelElement;
       },
       [ Vector2.ZERO, 0 ], {
-        groupElementStartingIndex: 0,
         tandem: tandem.createTandem( 'mysteryMassGroup' ),
         phetioType: PhetioGroup.PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
       } );
