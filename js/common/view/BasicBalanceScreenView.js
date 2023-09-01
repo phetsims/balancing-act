@@ -265,18 +265,18 @@ class BasicBalanceScreenView extends ScreenView {
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
-    const positionControlPanel = new PositionIndicatorControlPanel( this.viewProperties.positionMarkerStateProperty, {
+    const positionPanel = new PositionIndicatorControlPanel( this.viewProperties.positionMarkerStateProperty, {
       left: indicatorVisibilityControlPanel.left,
       top: indicatorVisibilityControlPanel.bottom + 5,
       minWidth: indicatorVisibilityControlPanel.width,
       maxWidth: maxControlPanelWidth,
       tandem: tandem.createTandem( 'positionPanel' )
     } );
-    this.nonMassLayer.addChild( positionControlPanel );
+    this.nonMassLayer.addChild( positionPanel );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
-    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionControlPanel.bounds.minY,
-      indicatorVisibilityControlPanel.bounds.maxX, positionControlPanel.bounds.maxY );
+    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionPanel.bounds.minY,
+      indicatorVisibilityControlPanel.bounds.maxX, positionPanel.bounds.maxY );
 
     // Reset All button.
     function resetClosure() {
