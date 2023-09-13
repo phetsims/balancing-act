@@ -1,7 +1,7 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
 /**
- * TODO: Documentation
+ * TODO: Documentation https://github.com/phetsims/tasks/issues/1129
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */

@@ -43,7 +43,7 @@ class ColumnOnOffController extends Node {
       tandem: columnSwitchTandem
     } );
 
-    // TODO: These options were misplaced, should they be deleted?
+    // TODO: These options were misplaced, should they be deleted? https://github.com/phetsims/tasks/issues/1129
     // fill: 'rgb( 240, 240, 240 )',
     // cornerRadius: 5
     const panel = new Panel( columnSwitch );

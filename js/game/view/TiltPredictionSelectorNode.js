@@ -27,7 +27,7 @@ class TiltPredictionSelectorNode extends Node {
 
     // Property that tracks the selected prediction.  Valid values are 'none',
     // 'tiltDownOnLeftSide', 'stayBalanced', and 'tiltDownOnRightSide'.
-    this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration
+    this.tiltPredictionProperty = new Property( 'none' ); // TODO: Enumeration https://github.com/phetsims/tasks/issues/1129
 
     const panelContents = new HBox(
       {
