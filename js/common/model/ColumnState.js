@@ -1,7 +1,7 @@
 // Copyright 2020-2023, University of Colorado Boulder
 
 /**
- * TODO: Documentation https://github.com/phetsims/tasks/issues/1129
+ * TODO https://github.com/phetsims/balancing-act/issues/139 Documentation
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */
