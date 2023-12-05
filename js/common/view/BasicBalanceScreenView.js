@@ -55,7 +55,7 @@ class BasicBalanceScreenView extends ScreenView {
    * @param {Tandem} tandem
    */
   constructor( model, tandem ) {
-    super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
+    super();
     const self = this;
     this.model = model;
 

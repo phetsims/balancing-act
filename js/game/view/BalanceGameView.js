@@ -28,7 +28,6 @@ import gameLevel3Icon_png from '../../../mipmaps/gameLevel3Icon_png.js';
 import gameLevel4Icon_png from '../../../mipmaps/gameLevel4Icon_png.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
-import BASharedConstants from '../../common/BASharedConstants.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import PositionIndicatorChoice from '../../common/model/PositionIndicatorChoice.js';
 import AttachmentBarNode from '../../common/view/AttachmentBarNode.js';
@@ -67,7 +66,7 @@ class BalanceGameView extends ScreenView {
    * @param {Tandem} tandem
    */
   constructor( gameModel, tandem ) {
-    super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
+    super();
     const self = this;
     this.model = gameModel;
 
