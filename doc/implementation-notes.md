@@ -1,11 +1,11 @@
-Implementation Nodes for Balancing Act
+# Implementation Nodes for Balancing Act
 
-Note: This description uses type names from the source code.  While these
+**Note:** This description uses type names from the source code.  While these
 type names are unlikely to change much after initial deployment of this
 simulation, it is still possible that they will, so please read accordingly
 (and update if possible).
 
-Model
+## Model
 
 The primary model classes for this simulation, which at the time of this
 writing are BalanceModel, IntroModel, BalanceLabModel, and BalanceGameModel,
@@ -21,7 +21,7 @@ There is an explicit model-view transform between the model and the view.
 Model units are in meters, kilograms, and seconds.  The distance unit – meters –
 is converted into screen units by this transform.
 
-Masses and Mass Nodes
+## Masses and Mass Nodes
 
 One of the key classes in the model is the “Mass” class, which is the base
 class for everything that can be put on to the balance.  There are two main
@@ -34,7 +34,7 @@ In the view, there is a corresponding class hierarchy of PNode-based classes
 that encapsulate the information for presenting these to the user and allowing
 the user to move them around and otherwise manipulate them.
 
-Game Classes
+## Game Classes
 
 The game module presents various challenges to the user that they solve in
 order to earn points.  The creation of these challenges is probably one of the

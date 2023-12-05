@@ -1,7 +1,7 @@
 
-Description of the models used in "Balancing Act".
+# Description of the models used in "Balancing Act".
 
-Torque Model
+## Torque Model
 
 The primary mathematical model for this simulation is the torque equation,
 which is t = r x F where t is the torque, r is the displacement vector, and F
@@ -18,7 +18,7 @@ for items on the right side when the plank is tilted to the left, and vice
 versa.  In this case, the torque only becomes equal for equal masses with equal
 displacement vectors when the plank is level.
 
-Game Ratios
+## Game Ratios
 
 In the game, the user is challenged to either balance one or more masses by
 placing a counter mass on the other side, or to deduce the mass of an unknown
