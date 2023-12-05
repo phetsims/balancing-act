@@ -66,8 +66,7 @@ class BalanceGameView extends ScreenView {
    * @param {Tandem} tandem
    */
   constructor( gameModel, tandem ) {
-    const options = {};
-    super( options );
+    super();
     const self = this;
     this.model = gameModel;
 
