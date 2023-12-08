@@ -7,13 +7,12 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
-import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
+import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import balancingAct from '../../balancingAct.js';
@@ -47,7 +46,6 @@ class StartGameLevelNode extends Node {
       perfectScore: 10,
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',
       highlightedButtonBackgroundColor: 'rgb( 224, 255, 122 )',
-      numButtonRows: 1, // For layout
       controlsInset: 10,
       size: new Dimension2( 768, 504 ),
       maxTitleWidth: Number.POSITIVE_INFINITY
@@ -67,12 +65,12 @@ class StartGameLevelNode extends Node {
       return () => { startLevelFunction( level ); };
     }
 
-    const buttons = new Array( options.numLevels );
+    const buttonItems = new Array( options.numLevels );
     for ( let i = 0; i < options.numLevels; i++ ) {
-      buttons[ i ] = new LevelSelectionButton(
-        iconNodes[ i ],
-        scores[ i ],
-        {
+      buttonItems[ i ] = {
+        icon: iconNodes[ i ],
+        scoreProperty: scores[ i ],
+        options: {
           listener: createLevelStartFunction( i ),
           baseColor: options.buttonBackgroundColor,
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
@@ -81,9 +79,14 @@ class StartGameLevelNode extends Node {
           } ),
           soundPlayerIndex: i
         }
-      );
-      this.addChild( buttons[ i ] );
+      };
     }
+    const levelSelectionButtonGroup = new LevelSelectionButtonGroup( buttonItems, {
+      flowBoxOptions: {
+        spacing: 30
+      }
+    } );
+    this.addChild( levelSelectionButtonGroup );
 
     // timer control
     const timerToggleButton = new TimerToggleButton( timerEnabledProperty );
@@ -97,22 +100,12 @@ class StartGameLevelNode extends Node {
     this.addChild( resetButton );
 
     // Layout
-    const numColumns = options.numLevels / options.numButtonRows;
-    const buttonSpacingX = buttons[ 0 ].width * 1.2; // Note: Assumes all buttons are the same size.
-    const buttonSpacingY = buttons[ 0 ].height * 1.2;  // Note: Assumes all buttons are the same size.
-    const firstButtonOrigin = new Vector2( options.size.width / 2 - ( numColumns - 1 ) * buttonSpacingX / 2,
-      options.size.height * 0.45 - ( ( options.numButtonRows - 1 ) * buttonSpacingY ) / 2 );
-    for ( let row = 0; row < options.numButtonRows; row++ ) {
-      for ( let col = 0; col < numColumns; col++ ) {
-        const buttonIndex = row * numColumns + col;
-        buttons[ buttonIndex ].centerX = firstButtonOrigin.x + col * buttonSpacingX;
-        buttons[ buttonIndex ].centerY = firstButtonOrigin.y + row * buttonSpacingY;
-      }
-    }
+    levelSelectionButtonGroup.left = 37; // empirically determined
+    levelSelectionButtonGroup.centerY = options.size.height * 0.45;
     resetButton.right = options.size.width - options.controlsInset;
     resetButton.bottom = options.size.height - options.controlsInset;
     title.centerX = options.size.width / 2;
-    title.centerY = buttons[ 0 ].top / 2;
+    title.centerY = levelSelectionButtonGroup.top / 2;
     timerToggleButton.left = options.controlsInset;
     timerToggleButton.bottom = options.size.height - options.controlsInset;
   }
