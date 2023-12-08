@@ -27,7 +27,10 @@ class GameIconNode extends Node {
    */
   constructor( image, levelNumber ) {
     super();
-    const title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), { font: FONT } );
+    const title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), {
+      font: FONT,
+      maxWidth: 100
+    } );
     this.addChild( title );
     const imageNode = new Image( image );
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
