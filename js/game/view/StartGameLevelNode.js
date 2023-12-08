@@ -92,7 +92,7 @@ class StartGameLevelNode extends Node {
     // Reset button.
     const resetButton = new ResetAllButton( {
       listener: resetFunction,
-      radius: BASharedConstants.RESET_ALL_BUTTON_RADIUS
+      scale: BASharedConstants.RESET_ALL_BUTTON_SCALE
     } );
     this.addChild( resetButton );
 
