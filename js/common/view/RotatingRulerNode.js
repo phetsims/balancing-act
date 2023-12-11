@@ -58,15 +58,18 @@ class RotatingRulerNode extends Node {
     this.addChild( new Line( rulerNode.centerX, 0, rulerNode.centerX, RULER_HEIGHT, { stroke: 'black' } ) );
 
     // Add a units label on each side.
+    const metersStringMaxWidth = rulerNode.width / 2.1; // empirically determined to visually fit within "each ruler"
     this.addChild( new Text( metersString, {
       font: UNITS_FONT,
       centerX: rulerNode.width * 0.25,
-      bottom: RULER_HEIGHT
+      bottom: RULER_HEIGHT,
+      maxWidth: metersStringMaxWidth
     } ) );
     this.addChild( new Text( metersString, {
       font: UNITS_FONT,
       centerX: rulerNode.width * 0.75,
-      bottom: RULER_HEIGHT
+      bottom: RULER_HEIGHT,
+      maxWidth: metersStringMaxWidth
     } ) );
 
     // Observe visibility.

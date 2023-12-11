@@ -38,7 +38,10 @@ class MassValueEntryNode extends Node {
     this.massValueProperty = new NumberProperty( 0 );
 
     // Create and add the readout, including the background.
-    const readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), { font: READOUT_FONT } );
+    const readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), {
+      font: READOUT_FONT,
+      maxWidth: 200 // empirically determined
+    } );
     const readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
       {
         fill: 'white',
