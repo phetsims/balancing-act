@@ -76,21 +76,22 @@ class ImageMassNode extends Node {
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
 
-      let bounds = imageNode.boundsProperty.value;
       if ( isLabeled ) {
         massLabel.maxWidth = imageNode.width;
         massLabel.centerX = imageNode.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
         massLabel.bottom = imageNode.top;
 
         // Increase the touchArea and mouseArea bounds in the x direction if the massLabel extends beyond the imageNode bounds.
+        const bounds = imageNode.boundsProperty.value;
+        let boundsXDilation = 0;
         if ( massLabel.bounds.left < bounds.left ) {
-          bounds = bounds.dilatedX( bounds.left - massLabel.bounds.left );
+          boundsXDilation = bounds.left - massLabel.bounds.left;
         }
         if ( bounds.right < massLabel.bounds.right ) {
-          bounds = bounds.dilatedX( massLabel.bounds.right - bounds.right );
+          boundsXDilation = massLabel.bounds.right - bounds.right;
         }
-        self.setTouchArea( mouseArea.union( bounds ) );
-        self.setMouseArea( touchArea.union( bounds ) );
+        self.setTouchArea( touchArea.dilateX( boundsXDilation ) );
+        self.setMouseArea( mouseArea.dilatedX( boundsXDilation ) );
       }
       updatePositionAndAngle();
     } );
@@ -106,6 +107,8 @@ class ImageMassNode extends Node {
       }
       self.setMouseArea( mouseArea );
       self.setTouchArea( touchArea );
+
+      console.log( self.mouseArea.bottom, self.touchArea.bottom );
     } );
 
     // Function for updating position and angle, used in multiple places below.
