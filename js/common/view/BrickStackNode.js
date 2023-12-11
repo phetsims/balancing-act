@@ -48,7 +48,8 @@ class BrickStackNode extends Node {
       fill: 'rgb( 205, 38, 38 )',
       stroke: 'black',
       lineWidth: 1,
-      touchArea: transformedBrickShape.bounds.dilatedY( 10 )
+      touchArea: transformedBrickShape.bounds.dilatedY( 10 ),
+      mouseArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
     this.addChild( shapeNode );
 
@@ -88,6 +89,10 @@ class BrickStackNode extends Node {
       massLabel.centerX = shapeNode.centerX;
       massLabel.bottom = shapeNode.top - 1;
       this.addChild( massLabel );
+
+      const massLabelHeightReductionFactor = massLabel.height / 3;
+      shapeNode.setTouchArea( shapeNode.touchArea.dilatedY( massLabelHeightReductionFactor ).shiftedY( -massLabelHeightReductionFactor ) );
+      shapeNode.setMouseArea( shapeNode.mouseArea.dilatedY( massLabelHeightReductionFactor ).shiftedY( -massLabelHeightReductionFactor ) );
 
       // Control label visibility.
       labelVisibleProperty.link( visible => {
