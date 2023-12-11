@@ -57,6 +57,8 @@ class ImageMassNode extends Node {
     }
 
     const imageNode = new Image( defaultImage_png );
+    let mouseArea = imageNode.boundsProperty.value;
+    let touchArea = imageNode.boundsProperty.value;
 
     // Observe image changes.
     imageMass.imageProperty.link( image => {
@@ -73,12 +75,37 @@ class ImageMassNode extends Node {
                             imageNode.height;
       imageNode.scale( scalingFactor );
       imageNode.centerX = 0;
+
+      let bounds = imageNode.boundsProperty.value;
       if ( isLabeled ) {
         massLabel.maxWidth = imageNode.width;
         massLabel.centerX = imageNode.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
         massLabel.bottom = imageNode.top;
+
+        // Increase the touchArea and mouseArea bounds in the x direction if the massLabel extends beyond the imageNode bounds.
+        if ( massLabel.bounds.left < bounds.left ) {
+          bounds = bounds.dilatedX( bounds.left - massLabel.bounds.left );
+        }
+        if ( bounds.right < massLabel.bounds.right ) {
+          bounds = bounds.dilatedX( massLabel.bounds.right - bounds.right );
+        }
+        self.setTouchArea( mouseArea.union( bounds ) );
+        self.setMouseArea( touchArea.union( bounds ) );
       }
       updatePositionAndAngle();
+    } );
+
+    // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
+    imageNode.boundsProperty.link( bounds => {
+      mouseArea = bounds;
+      touchArea = bounds;
+      if ( isLabeled ) {
+        const massLabelHeightFactor = massLabel.height / 2;
+        mouseArea = bounds.dilatedY( massLabelHeightFactor ).shiftedY( -massLabelHeightFactor );
+        touchArea = bounds.dilatedY( massLabelHeightFactor + 5 ).shiftedY( -massLabelHeightFactor + 5 );
+      }
+      self.setMouseArea( mouseArea );
+      self.setTouchArea( touchArea );
     } );
 
     // Function for updating position and angle, used in multiple places below.

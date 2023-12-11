@@ -90,9 +90,13 @@ class BrickStackNode extends Node {
       massLabel.bottom = shapeNode.top - 1;
       this.addChild( massLabel );
 
-      const massLabelHeightReductionFactor = massLabel.height / 3;
-      shapeNode.setTouchArea( shapeNode.touchArea.dilatedY( massLabelHeightReductionFactor ).shiftedY( -massLabelHeightReductionFactor ) );
-      shapeNode.setMouseArea( shapeNode.mouseArea.dilatedY( massLabelHeightReductionFactor ).shiftedY( -massLabelHeightReductionFactor ) );
+      const massLabelHeightFactorTouchArea = massLabel.height / 3;
+      const massLabelHeightFactorMouseArea = massLabel.height / 8;
+      shapeNode.setTouchArea( shapeNode.touchArea.dilatedY( massLabelHeightFactorTouchArea )
+        .shiftedY( -massLabelHeightFactorTouchArea ) );
+      shapeNode.setMouseArea( shapeNode.mouseArea.dilatedY( massLabelHeightFactorMouseArea )
+        // Mouse area ends where the shapeNode ends at the bottom.
+        .shiftedY( shapeNode.bottom - shapeNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
       labelVisibleProperty.link( visible => {
