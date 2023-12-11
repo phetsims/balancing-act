@@ -6,6 +6,7 @@
 
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
+import soundManager from '../../tambo/js/soundManager.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import BalanceLabScreen from './balancelab/BalanceLabScreen.js';
 import BalancingActStrings from './BalancingActStrings.js';
@@ -38,4 +39,6 @@ simLauncher.launch( () => {
   ];
 
   new Sim( balancingActTitleStringProperty, screens, simOptions ).start();
+
+  soundManager.setOutputLevelForCategory( 'user-interface', 0 );
 } );
