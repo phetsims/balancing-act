@@ -7,29 +7,25 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
-import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import { Image } from '../../../scenery/js/imports.js';
-import labIcon_png from '../../images/labIcon_png.js';
-import labIconSmall_png from '../../images/labIconSmall_png.js';
 import balancingAct from '../balancingAct.js';
 import BalancingActStrings from '../BalancingActStrings.js';
+import BalancerImages from '../common/view/BalancerImages.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
+import BalanceLabScreenIcon from './view/BalanceLabScreenIcon.js';
 import BalanceLabScreenView from './view/BalanceLabScreenView.js';
 
 class BalanceLabScreen extends Screen {
 
+  /**
+   * @param { Tandem } tandem
+   * @public
+   */
   constructor( tandem ) {
 
     const options = {
       name: BalancingActStrings.balanceLabStringProperty,
-      homeScreenIcon: new ScreenIcon( new Image( labIcon_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } ),
-      navigationBarIcon: new ScreenIcon( new Image( labIconSmall_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } ),
+      homeScreenIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_CHARACTER_SETS, 'home' ),
+      navigationBarIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_CHARACTER_SETS, 'nav' ),
       tandem: tandem
     };
 

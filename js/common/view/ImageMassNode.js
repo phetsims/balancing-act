@@ -107,8 +107,6 @@ class ImageMassNode extends Node {
       }
       self.setMouseArea( mouseArea );
       self.setTouchArea( touchArea );
-
-      console.log( self.mouseArea.bottom, self.touchArea.bottom );
     } );
 
     // Function for updating position and angle, used in multiple places below.

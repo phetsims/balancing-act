@@ -9,9 +9,8 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import boySitting_png from '../../../../mipmaps/boySitting_png.js';
-import boyStanding_png from '../../../../mipmaps/boyStanding_png.js';
 import balancingAct from '../../../balancingAct.js';
+import HumanTypeEnum from '../HumanTypeEnum.js';
 import HumanMass from './HumanMass.js';
 
 // constants
@@ -23,7 +22,7 @@ const SITTING_CENTER_OF_MASS_X_OFFSET = 0.1; // In meters, determined visually. 
 class Boy extends HumanMass {
 
   constructor() {
-    super( MASS, boyStanding_png, STANDING_HEIGHT, boySitting_png, SITTING_HEIGHT,
+    super( HumanTypeEnum.BOY, MASS, STANDING_HEIGHT, SITTING_HEIGHT,
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
