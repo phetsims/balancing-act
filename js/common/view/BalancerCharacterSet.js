@@ -22,6 +22,8 @@ export default class BalancerCharacterSet extends RegionAndCulturePortrayal {
    * @param manSitting { HTMLImageElement }
    * @param womanStanding { HTMLImageElement }
    * @param womanSitting { HTMLImageElement }
+   * @param levelThree { HTMLImageElement }
+   * @param levelFour { HTMLImageElement }
    * @param screenHomeIcon { HTMLImageElement }
    * @param screenNavIcon { HTMLImageElement }
    * @param queryParameterValue { string }
@@ -29,8 +31,8 @@ export default class BalancerCharacterSet extends RegionAndCulturePortrayal {
   constructor( label,
                boyStanding, boySitting, girlStanding,
                girlSitting, manStanding, manSitting,
-               womanStanding, womanSitting, screenHomeIcon,
-               screenNavIcon,
+               womanStanding, womanSitting, levelThree,
+               levelFour, screenHomeIcon, screenNavIcon,
                queryParameterValue ) {
 
     super( label, queryParameterValue, {} );
@@ -43,6 +45,8 @@ export default class BalancerCharacterSet extends RegionAndCulturePortrayal {
     this.manSitting = manSitting;
     this.womanStanding = womanStanding;
     this.womanSitting = womanSitting;
+    this.levelThree = levelThree;
+    this.levelFour = levelFour;
     this.screenHomeIcon = screenHomeIcon;
     this.screenNavIcon = screenNavIcon;
   }

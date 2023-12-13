@@ -13,6 +13,8 @@ import labIcon_png from '../../../images/labIcon_png.js';
 import labIconSmall_png from '../../../images/labIconSmall_png.js';
 import boySitting_png from '../../../mipmaps/usa/boySitting_png.js';
 import boyStanding_png from '../../../mipmaps/usa/boyStanding_png.js';
+import gameLevel3Icon_png from '../../../mipmaps/usa/gameLevel3Icon_png.js';
+import gameLevel4Icon_png from '../../../mipmaps/usa/gameLevel4Icon_png.js';
 import girlSitting_png from '../../../mipmaps/usa/girlSitting_png.js';
 import girlStanding_png from '../../../mipmaps/usa/girlStanding_png.js';
 import manSitting_png from '../../../mipmaps/usa/manSitting_png.js';
@@ -32,6 +34,8 @@ const BalancerCharacterSetUSA = new BalancerCharacterSet(
   manSitting_png,
   womanStanding_png,
   womanSitting_png,
+  gameLevel3Icon_png,
+  gameLevel4Icon_png,
   labIcon_png,
   labIconSmall_png,
   USA_REGION_AND_CULTURE_ID

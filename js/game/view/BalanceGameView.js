@@ -22,10 +22,6 @@ import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
-import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
-import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
-import gameLevel3Icon_png from '../../../mipmaps/usa/gameLevel3Icon_png.js';
-import gameLevel4Icon_png from '../../../mipmaps/usa/gameLevel4Icon_png.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
@@ -159,10 +155,10 @@ class BalanceGameView extends ScreenView {
       () => { gameModel.reset(); },
       gameModel.timerEnabledProperty,
       [
-        new GameIconNode( gameLevel1Icon_png, 1 ),
-        new GameIconNode( gameLevel2Icon_png, 2 ),
-        new GameIconNode( gameLevel3Icon_png, 3 ),
-        new GameIconNode( gameLevel4Icon_png, 4 )
+        new GameIconNode( 1 ),
+        new GameIconNode( 2 ),
+        new GameIconNode( 3 ),
+        new GameIconNode( 4 )
       ],
       gameModel.mostRecentScores,
       modelViewTransform,
