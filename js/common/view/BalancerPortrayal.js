@@ -1,7 +1,7 @@
 // Copyright 2023, University of Colorado Boulder
 
 /**
- * The BalancerCharacterSet defines what is needed for each character set in Balancing Act.
+ * The BalancerPortrayal defines what is needed for each portrayal set in Balancing Act.
  *
  * @author Luisa Vargas
  *
@@ -10,7 +10,7 @@
 import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import balancingAct from '../../balancingAct.js';
 
-export default class BalancerCharacterSet extends RegionAndCulturePortrayal {
+export default class BalancerPortrayal extends RegionAndCulturePortrayal {
 
   /**
    * @param label { LocalizedStringProperty }
@@ -52,4 +52,4 @@ export default class BalancerCharacterSet extends RegionAndCulturePortrayal {
   }
 }
 
-balancingAct.register( 'BalancerCharacterSet', BalancerCharacterSet );
+balancingAct.register( 'BalancerPortrayal', BalancerPortrayal );

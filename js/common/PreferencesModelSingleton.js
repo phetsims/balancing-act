@@ -6,7 +6,7 @@ import BalancerImages from './view/BalancerImages.js';
 
 const PreferencesModelSingleton = new PreferencesModel( {
   localizationOptions: {
-    portrayals: BalancerImages.BALANCER_CHARACTER_SETS
+    portrayals: BalancerImages.BALANCER_PORTRAYALS
   }
 } );
 

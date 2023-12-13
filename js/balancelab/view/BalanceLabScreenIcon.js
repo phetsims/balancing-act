@@ -17,17 +17,17 @@ import PreferencesModelSingleton from '../../common/PreferencesModelSingleton.js
 export default class BalanceLabScreenIcon extends ScreenIcon {
 
   /**
-   * @param { Array<BalancerCharacterSet> } characterSets
+   * @param { Array<BalancerPortrayal> } portrayals
    * @param { 'nav' | 'home' } iconType
    */
-  constructor( characterSets, iconType ) {
+  constructor( portrayals, iconType ) {
 
-    const balanceLabScreenImages = characterSets.map( set => {
-      const screenImage = iconType === 'nav' ? set.screenNavIcon : set.screenHomeIcon;
+    const balanceLabScreenImages = portrayals.map( balancerPortrayal => {
+      const screenImage = iconType === 'nav' ? balancerPortrayal.screenNavIcon : balancerPortrayal.screenHomeIcon;
       return new Image( screenImage, {
         visibleProperty: new DerivedProperty( [ PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty ],
           portrayal => {
-            return portrayal === set;
+            return portrayal === balancerPortrayal;
           } )
       } );
     } );

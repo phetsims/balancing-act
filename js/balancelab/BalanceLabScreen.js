@@ -24,8 +24,8 @@ class BalanceLabScreen extends Screen {
 
     const options = {
       name: BalancingActStrings.balanceLabStringProperty,
-      homeScreenIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_CHARACTER_SETS, 'home' ),
-      navigationBarIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_CHARACTER_SETS, 'nav' ),
+      homeScreenIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS, 'home' ),
+      navigationBarIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS, 'nav' ),
       tandem: tandem
     };
 

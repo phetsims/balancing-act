@@ -2,17 +2,17 @@
 
 /**
  * Responsible for all images for the Balancer in this sim. Collects the images to support selecting a different
- * explorer character for localization.
+ * balancer portrayal for localization.
  *
  * @author Luisa Vargas
  */
 
 import balancingAct from '../../balancingAct.js';
-import BalancerCharacterSetUSA from './BalancerCharacterSetUSA.js';
+import BalancerPortrayalUSA from './BalancerPortrayalUSA.js';
 
 const BalancerImages = {
-  BALANCER_CHARACTER_SETS: [
-    BalancerCharacterSetUSA
+  BALANCER_PORTRAYALS: [
+    BalancerPortrayalUSA
   ]
 };
 

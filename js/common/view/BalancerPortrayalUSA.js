@@ -21,10 +21,10 @@ import manSitting_png from '../../../mipmaps/usa/manSitting_png.js';
 import manStanding_png from '../../../mipmaps/usa/manStanding_png.js';
 import womanSitting_png from '../../../mipmaps/usa/womanSitting_png.js';
 import womanStanding_png from '../../../mipmaps/usa/womanStanding_png.js';
-import BalancerCharacterSet from './BalancerCharacterSet.js';
+import BalancerPortrayal from './BalancerPortrayal.js';
 
 
-const BalancerCharacterSetUSA = new BalancerCharacterSet(
+const BalancerPortrayalUSA = new BalancerPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.unitedStatesOfAmericaStringProperty,
   boyStanding_png,
   boySitting_png,
@@ -42,4 +42,4 @@ const BalancerCharacterSetUSA = new BalancerCharacterSet(
 );
 
 
-export default BalancerCharacterSetUSA;
+export default BalancerPortrayalUSA;
