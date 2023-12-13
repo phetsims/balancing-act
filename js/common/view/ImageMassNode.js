@@ -57,8 +57,8 @@ class ImageMassNode extends Node {
     }
 
     const imageNode = new Image( defaultImage_png );
-    let mouseArea = imageNode.boundsProperty.value;
-    let touchArea = imageNode.boundsProperty.value;
+    let mouseArea = imageNode.bounds.copy();
+    let touchArea = imageNode.bounds.copy();
 
     // Observe image changes.
     imageMass.imageProperty.link( image => {
@@ -82,7 +82,7 @@ class ImageMassNode extends Node {
         massLabel.bottom = imageNode.top;
 
         // Increase the touchArea and mouseArea bounds in the x direction if the massLabel extends beyond the imageNode bounds.
-        const bounds = imageNode.boundsProperty.value;
+        const bounds = imageNode.bounds.copy();
         let boundsXDilation = 0;
         if ( massLabel.bounds.left < bounds.left ) {
           boundsXDilation = bounds.left - massLabel.bounds.left;
@@ -97,9 +97,9 @@ class ImageMassNode extends Node {
     } );
 
     // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
-    imageNode.boundsProperty.link( bounds => {
-      mouseArea = bounds.copy();
-      touchArea = bounds.copy();
+    imageNode.boundsProperty.link( () => {
+      mouseArea = imageNode.bounds.copy();
+      touchArea = imageNode.bounds.copy();
       if ( isLabeled ) {
         const massLabelHeightFactor = massLabel.height / 2;
         mouseArea = mouseArea.dilatedY( massLabelHeightFactor ).shiftedY( -massLabelHeightFactor );
