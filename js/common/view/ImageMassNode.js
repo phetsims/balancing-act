@@ -98,12 +98,12 @@ class ImageMassNode extends Node {
 
     // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
     imageNode.boundsProperty.link( bounds => {
-      mouseArea = bounds;
-      touchArea = bounds;
+      mouseArea = bounds.copy();
+      touchArea = bounds.copy();
       if ( isLabeled ) {
         const massLabelHeightFactor = massLabel.height / 2;
-        mouseArea = bounds.dilatedY( massLabelHeightFactor ).shiftedY( -massLabelHeightFactor );
-        touchArea = bounds.dilatedY( massLabelHeightFactor + 5 ).shiftedY( -massLabelHeightFactor + 5 );
+        mouseArea = mouseArea.dilatedY( massLabelHeightFactor ).shiftedY( -massLabelHeightFactor );
+        touchArea = touchArea.dilatedY( massLabelHeightFactor + 5 ).shiftedY( -massLabelHeightFactor + 5 );
       }
       self.setMouseArea( mouseArea );
       self.setTouchArea( touchArea );
