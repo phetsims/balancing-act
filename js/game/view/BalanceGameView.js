@@ -151,8 +151,8 @@ class BalanceGameView extends ScreenView {
 
     // Add the node that allows the user to choose a game level to play.
     this.startGameLevelNode = new StartGameLevelNode(
-      level => { gameModel.startLevel( level ); },
-      () => { gameModel.reset(); },
+      level => { gameModel.startLevel( level ); positionMarkerStateProperty.reset(); },
+      () => { gameModel.reset(); positionMarkerStateProperty.reset(); },
       gameModel.timerEnabledProperty,
       [
         new GameIconNode( 1 ),
