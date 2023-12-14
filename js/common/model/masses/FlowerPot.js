@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import flowerPot_png from '../../../../images/flowerPot_png.js';
+import flowerPot_png from '../../../../images/objects/flowerPot_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

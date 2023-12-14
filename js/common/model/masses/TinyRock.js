@@ -1,7 +1,7 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 
-import tinyRock_png from '../../../../images/tinyRock_png.js';
+import tinyRock_png from '../../../../images/objects/tinyRock_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

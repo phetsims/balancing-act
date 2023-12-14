@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import metalBucket_png from '../../../../images/metalBucket_png.js';
+import metalBucket_png from '../../../../images/objects/metalBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

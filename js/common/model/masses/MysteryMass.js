@@ -7,14 +7,14 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import mysteryObject01_png from '../../../../images/mysteryObject01_png.js';
-import mysteryObject02_png from '../../../../images/mysteryObject02_png.js';
-import mysteryObject03_png from '../../../../images/mysteryObject03_png.js';
-import mysteryObject04_png from '../../../../images/mysteryObject04_png.js';
-import mysteryObject05_png from '../../../../images/mysteryObject05_png.js';
-import mysteryObject06_png from '../../../../images/mysteryObject06_png.js';
-import mysteryObject07_png from '../../../../images/mysteryObject07_png.js';
-import mysteryObject08_png from '../../../../images/mysteryObject08_png.js';
+import mysteryObject01_png from '../../../../images/objects/mysteryObject01_png.js';
+import mysteryObject02_png from '../../../../images/objects/mysteryObject02_png.js';
+import mysteryObject03_png from '../../../../images/objects/mysteryObject03_png.js';
+import mysteryObject04_png from '../../../../images/objects/mysteryObject04_png.js';
+import mysteryObject05_png from '../../../../images/objects/mysteryObject05_png.js';
+import mysteryObject06_png from '../../../../images/objects/mysteryObject06_png.js';
+import mysteryObject07_png from '../../../../images/objects/mysteryObject07_png.js';
+import mysteryObject08_png from '../../../../images/objects/mysteryObject08_png.js';
 import balancingAct from '../../../balancingAct.js';
 import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';

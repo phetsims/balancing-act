@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import puppy_png from '../../../../images/puppy_png.js';
+import puppy_png from '../../../../images/objects/puppy_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

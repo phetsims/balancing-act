@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import fireHydrant_png from '../../../../images/fireHydrant_png.js';
+import fireHydrant_png from '../../../../images/objects/fireHydrant_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

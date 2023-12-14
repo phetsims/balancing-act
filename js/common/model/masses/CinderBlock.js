@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import cinderBlock_png from '../../../../images/cinderBlock_png.js';
+import cinderBlock_png from '../../../../images/objects/cinderBlock_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import barrel_png from '../../../../images/barrel_png.js';
+import barrel_png from '../../../../images/objects/barrel_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

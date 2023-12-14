@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import sodaBottle_png from '../../../../images/sodaBottle_png.js';
+import sodaBottle_png from '../../../../images/objects/sodaBottle_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

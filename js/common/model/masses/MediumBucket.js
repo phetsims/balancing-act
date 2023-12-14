@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import yellowBucket_png from '../../../../images/yellowBucket_png.js';
+import yellowBucket_png from '../../../../images/objects/yellowBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import blueBucket_png from '../../../../images/blueBucket_png.js';
+import blueBucket_png from '../../../../images/objects/blueBucket_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

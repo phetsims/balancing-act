@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import rock4_png from '../../../../images/rock4_png.js';
+import rock4_png from '../../../../images/objects/rock4_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

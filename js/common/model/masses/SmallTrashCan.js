@@ -1,7 +1,7 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 
-import trashCan_png from '../../../../images/trashCan_png.js';
+import trashCan_png from '../../../../images/objects/trashCan_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

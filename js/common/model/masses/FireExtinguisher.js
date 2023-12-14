@@ -1,7 +1,7 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 
-import fireExtinguisher_png from '../../../../images/fireExtinguisher_png.js';
+import fireExtinguisher_png from '../../../../images/objects/fireExtinguisher_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 

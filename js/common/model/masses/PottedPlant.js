@@ -1,7 +1,7 @@
 // Copyright 2014-2021, University of Colorado Boulder
 
 
-import pottedPlant_png from '../../../../images/pottedPlant_png.js';
+import pottedPlant_png from '../../../../images/objects/pottedPlant_png.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
