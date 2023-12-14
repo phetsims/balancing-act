@@ -12,7 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Node, Text } from '../../../../scenery/js/imports.js';
-import defaultImage_png from '../../../images/defaultImage_png.js';
+import defaultImage_png from '../../../images/objects/defaultImage_png.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
