@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+// Copyright 2013-2023, University of Colorado Boulder
 
 
 import tinyRock_png from '../../../../images/objects/tinyRock_png.js';

@@ -1,4 +1,4 @@
-// Copyright 2014-2021, University of Colorado Boulder
+// Copyright 2014-2023, University of Colorado Boulder
 
 
 import fireHydrant_png from '../../../../images/objects/fireHydrant_png.js';
