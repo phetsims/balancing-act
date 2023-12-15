@@ -1,3 +1,30 @@
 {
-
+  "boySitting.svg": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu"
+  },
+  "boyStanding.svg": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu"
+  },
+  "manSitting.svg": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu"
+  },
+  "manStanding.svg": {
+    "text": [
+      "Copyright 2023 University of Colorado Boulder"
+    ],
+    "projectURL": "https://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu"
+  }
 }
