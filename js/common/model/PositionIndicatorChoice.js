@@ -1,7 +1,7 @@
 // Copyright 2020-2023, University of Colorado Boulder
 
 /**
- * TODO https://github.com/phetsims/balancing-act/issues/139 Documentation
+ * Enumerates the choice of position indicator.
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */

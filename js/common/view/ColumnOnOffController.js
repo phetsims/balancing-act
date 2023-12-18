@@ -43,9 +43,6 @@ class ColumnOnOffController extends Node {
       tandem: columnSwitchTandem
     } );
 
-    //TODO https://github.com/phetsims/balancing-act/issues/139 These options were misplaced, should they be deleted?
-    // fill: 'rgb( 240, 240, 240 )',
-    // cornerRadius: 5
     const panel = new Panel( columnSwitch );
     this.addChild( panel );
 
