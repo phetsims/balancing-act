@@ -12,7 +12,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { AlignBox, Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -27,6 +27,8 @@ const READOUT_FONT = new PhetFont( 16 );
 const ARROW_HEIGHT = 15;
 const MAX_MASS = 100;
 const TICK_MARK_FONT = new PhetFont( 10 );
+const READOUT_BACKGROUND_WIDTH = 100;
+const READOUT_BACKGROUND_HEIGHT = 24;
 
 class MassValueEntryNode extends Node {
 
@@ -38,6 +40,14 @@ class MassValueEntryNode extends Node {
     this.massValueProperty = new NumberProperty( 0 );
 
     // Create and add the readout, including the background.
+
+    const readoutBackground = new Rectangle( 0, 0, READOUT_BACKGROUND_WIDTH, READOUT_BACKGROUND_HEIGHT * 1.3, 4, 4,
+      {
+        fill: 'white',
+        stroke: 'black'
+      }
+    );
+
     const readoutText = new Text( new PatternStringProperty( pattern0Value1UnitsStringProperty, {
       0: this.massValueProperty,
       1: kgStringProperty
@@ -45,18 +55,16 @@ class MassValueEntryNode extends Node {
       formatNames: [ '0', '1' ]
     } ), {
       font: READOUT_FONT,
-      maxWidth: 200 // empirically determined based on tests with long strings
+      maxWidth: 95 // empirically determined based on tests with long strings
     } );
-    const readoutBackground = new Rectangle( 0, 0, readoutText.width * 2.5, readoutText.height * 1.3, 4, 4,
-      {
-        fill: 'white',
-        stroke: 'black'
-      }
-    );
+    const readoutAlignBox = new AlignBox( readoutText, {
+      xAlign: 'center',
+      yAlign: 'center',
+      alignBounds: readoutBackground.rectBounds
+    } );
     const panelContent = new Node();
     panelContent.addChild( readoutBackground );
-    readoutText.centerY = readoutBackground.centerY;
-    panelContent.addChild( readoutText );
+    panelContent.addChild( readoutAlignBox );
 
     // Create and add the slider.
     const slider = new HSlider( this.massValueProperty, new Range( 0, MAX_MASS ), {
@@ -87,6 +95,7 @@ class MassValueEntryNode extends Node {
     // layout
     this.massValueProperty.value = MAX_MASS / 2; // Make sure slider is in the middle during layout.
     readoutBackground.centerX = slider.bounds.width / 2;
+    readoutAlignBox.center = readoutBackground.center;
     readoutBackground.top = 0;
     slider.left = 0;
     slider.top = readoutBackground.bottom + 5;
@@ -102,7 +111,6 @@ class MassValueEntryNode extends Node {
 
     // Update the readout text and arrow button states whenever the value changes.
     this.massValueProperty.link( value => {
-      readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.enabled = ( value > 0 );
       rightArrowButton.enabled = ( value < MAX_MASS );
     } );
