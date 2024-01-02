@@ -15,7 +15,7 @@ import ColumnState from '../../common/model/ColumnState.js';
 import Plank from '../../common/model/Plank.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const balanceMeString = BalancingActStrings.balanceMeStringProperty;
+const balanceMeStringProperty = BalancingActStrings.balanceMeStringProperty;
 
 class BalanceMassesChallenge extends BalanceGameChallenge {
 
@@ -33,7 +33,7 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
     // Set up the challenge view configuration, which provides information to
     // the view about how this challenge should be displayed.
     this.viewConfig = {
-      title: balanceMeString,
+      title: balanceMeStringProperty,
       showMassEntryDialog: false,
       showTiltPredictionSelector: false
     };

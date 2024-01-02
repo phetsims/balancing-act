@@ -16,7 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Color, Node, Text } from '../../../../scenery/js/imports.js';
+import { Color, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
@@ -206,22 +206,14 @@ class BalanceGameView extends ScreenView {
     );
     this.addChild( this.scoreboard );
 
-    // Add the title.  It is blank to start with, and is updated later at the appropriate state change.
-    this.challengeTitleNode = new Text( '', {
-      font: new PhetFont( { size: 60, weight: 'bold' } ),
-      fill: 'white',
-      stroke: 'black',
-      lineWidth: 1.5,
-      top: this.scoreboard.bottom + 20,
-      maxWidth: 530 // empirically determined based on tests with long strings
-    } );
+    // Add the title.  It is blank to start with for layout, and is updated later at the appropriate state change.
+    this.challengeTitleNode = new Node( { children: [ new Text( '' ) ] } );
     this.challengeLayer.addChild( this.challengeTitleNode );
 
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
     this.massValueEntryNode = new MassValueEntryNode( {
-      centerX: modelViewTransform.modelToViewX( 0 ),
-      top: this.challengeTitleNode.bounds.maxY + 4
+      centerX: modelViewTransform.modelToViewX( 0 )
     } );
     this.challengeLayer.addChild( this.massValueEntryNode );
 
@@ -335,22 +327,29 @@ class BalanceGameView extends ScreenView {
       tandem: tandem.createTandem( 'positionPanel' )
     } );
     this.controlLayer.addChild( positionPanel );
+
+    ManualConstraint.create( this, [ this.challengeTitleNode, this.massValueEntryNode ], ( titleNodeProxy, massValueProxy ) => {
+      // Center the title above the pivot point.
+      titleNodeProxy.centerX = this.modelViewTransform.modelToViewX( this.model.plank.pivotPoint.x );
+      titleNodeProxy.top = this.scoreboard.bottom + 20;
+      massValueProxy.top = titleNodeProxy.bounds.maxY + 4;
+    } );
   }
 
   // @private
   updateTitle() {
     const balanceGameChallenge = this.model.getCurrentChallenge();
     if ( balanceGameChallenge !== null ) {
-      this.challengeTitleNode.string = this.model.getCurrentChallenge().viewConfig.title;
+      this.challengeTitleNode.children = [
+        new Text( this.model.getCurrentChallenge().viewConfig.title, {
+          font: new PhetFont( { size: 60, weight: 'bold' } ),
+          fill: 'white',
+          stroke: 'black',
+          lineWidth: 1.5,
+          maxWidth: 530 // empirically determined based on tests with long strings
+        } )
+      ];
     }
-    else {
-      // Set the value to something so that layout can be done.  This
-      // string doesn't need to be translated - users should never see it.
-      this.challengeTitleNode.setString( 'No challenge available.' );
-    }
-
-    // Center the title above the pivot point.
-    this.challengeTitleNode.centerX = this.modelViewTransform.modelToViewX( this.model.plank.pivotPoint.x );
   }
 
   // @private

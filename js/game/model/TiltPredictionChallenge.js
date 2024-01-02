@@ -12,7 +12,7 @@ import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const whatWillHappenString = BalancingActStrings.whatWillHappenStringProperty;
+const whatWillHappenStringProperty = BalancingActStrings.whatWillHappenStringProperty;
 
 class TiltPredictionChallenge extends BalanceGameChallenge {
 
@@ -26,7 +26,7 @@ class TiltPredictionChallenge extends BalanceGameChallenge {
     // Set up the challenge view configuration, which provides information to
     // the view about how this challenge should be displayed.
     this.viewConfig = {
-      title: whatWillHappenString,
+      title: whatWillHappenStringProperty,
       showMassEntryDialog: false,
       showTiltPredictionSelector: true
     };
