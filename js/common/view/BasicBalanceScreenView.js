@@ -10,7 +10,6 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -46,7 +45,7 @@ const showString = BalancingActStrings.showStringProperty;
 // constants
 const X_MARGIN_IN_PANELS = 5;
 const PANEL_TITLE_FONT = new PhetFont( 16 );
-const PANEL_OPTION_FONT = { font: new PhetFont( 14 ) };
+const PANEL_OPTION_FONT = { font: new PhetFont( 14 ), maxWidth: 130 };
 
 class BasicBalanceScreenView extends ScreenView {
 
@@ -261,7 +260,6 @@ class BasicBalanceScreenView extends ScreenView {
       right: this.layoutBounds.width - 10,
       maxWidth: maxControlPanelWidth
     } );
-    this.nonMassLayer.addChild( indicatorVisibilityControlPanel );
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
@@ -272,11 +270,17 @@ class BasicBalanceScreenView extends ScreenView {
       maxWidth: maxControlPanelWidth,
       tandem: tandem.createTandem( 'positionPanel' )
     } );
-    this.nonMassLayer.addChild( positionPanel );
+    const controlPanelsVBox = new VBox( {
+      children: [ indicatorVisibilityControlPanel, positionPanel ],
+      stretch: true,
+      right: this.layoutBounds.right - 10,
+      top: 5,
+      spacing: 5
+    } );
+    this.nonMassLayer.addChild( controlPanelsVBox );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
-    this.controlPanelBounds = new Bounds2( indicatorVisibilityControlPanel.bounds.minX, positionPanel.bounds.minY,
-      indicatorVisibilityControlPanel.bounds.maxX, positionPanel.bounds.maxY );
+    this.controlPanelBounds = controlPanelsVBox.bounds;
 
     // Reset All button.
     function resetClosure() {
