@@ -45,7 +45,8 @@ const showString = BalancingActStrings.showStringProperty;
 // constants
 const X_MARGIN_IN_PANELS = 5;
 const PANEL_TITLE_FONT = new PhetFont( 16 );
-const PANEL_OPTION_FONT = { font: new PhetFont( 14 ), maxWidth: 130 };
+const PANEL_TEXT_MAX_WIDTH = 130;
+const PANEL_OPTION_FONT = { font: new PhetFont( 14 ), maxWidth: PANEL_TEXT_MAX_WIDTH };
 
 class BasicBalanceScreenView extends ScreenView {
 
@@ -247,7 +248,7 @@ class BasicBalanceScreenView extends ScreenView {
     const titleToControlsVerticalSpace = 7;
     const indicatorVisibilityControlsVBox = new VBox( {
       children: [
-        new Text( showString, { font: PANEL_TITLE_FONT } ),
+        new Text( showString, { font: PANEL_TITLE_FONT, maxWidth: PANEL_TEXT_MAX_WIDTH } ),
         new VStrut( titleToControlsVerticalSpace ),
         new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckboxGroup ] } )
       ],
