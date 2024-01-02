@@ -46,11 +46,11 @@ import MassValueEntryNode from './MassValueEntryNode.js';
 import StartGameLevelNode from './StartGameLevelNode.js';
 import TiltPredictionSelectorNode from './TiltPredictionSelectorNode.js';
 
-const checkString = VegasStrings.check;
-const nextString = VegasStrings.next;
-const showAnswerString = VegasStrings.showAnswer;
-const startOverString = BalancingActStrings.startOver;
-const tryAgainString = VegasStrings.tryAgain;
+const checkString = VegasStrings.checkStringProperty;
+const nextString = VegasStrings.nextStringProperty;
+const showAnswerString = VegasStrings.showAnswerStringProperty;
+const startOverString = BalancingActStrings.startOverStringProperty;
+const tryAgainString = VegasStrings.tryAgainStringProperty;
 
 // constants
 const BUTTON_FONT = new PhetFont( 24 );

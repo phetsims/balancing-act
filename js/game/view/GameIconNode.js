@@ -4,9 +4,9 @@
  * Convenience type for creating the icons used on the game level start buttons.
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Node, Text } from '../../../../scenery/js/imports.js';
 import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
@@ -15,8 +15,8 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import PreferencesModelSingleton from '../../common/PreferencesModelSingleton.js';
 
-const levelString = BalancingActStrings.level;
-const pattern0Label1ValueString = BalancingActStrings.pattern0Label1Value;
+const levelStringProperty = BalancingActStrings.levelStringProperty;
+const pattern0Label1ValueStringProperty = BalancingActStrings.pattern0Label1ValueStringProperty;
 
 // constants
 const FONT = new PhetFont( 16 );
@@ -29,7 +29,12 @@ class GameIconNode extends Node {
    */
   constructor( levelNumber ) {
     super();
-    const title = new Text( StringUtils.format( pattern0Label1ValueString, levelString, levelNumber ), {
+    const title = new Text( new PatternStringProperty( pattern0Label1ValueStringProperty, {
+      0: levelStringProperty,
+      1: levelNumber
+    }, {
+      formatNames: [ '0', '1' ]
+    } ), {
       font: FONT,
       maxWidth: 100
     } );

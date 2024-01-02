@@ -13,7 +13,7 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 
-const unknownMassLabelString = BalancingActStrings.unknownMassLabel;
+const unknownMassLabelString = BalancingActStrings.unknownMassLabelStringProperty;
 
 // constants
 const FONT = new PhetFont( { size: 36 } );

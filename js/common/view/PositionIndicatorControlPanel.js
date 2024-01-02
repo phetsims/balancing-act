@@ -17,10 +17,10 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 
-const marksString = BalancingActStrings.marks;
-const noneString = BalancingActStrings.none;
-const positionString = BalancingActStrings.position;
-const rulersString = BalancingActStrings.rulers;
+const marksString = BalancingActStrings.marksStringProperty;
+const noneString = BalancingActStrings.noneStringProperty;
+const positionString = BalancingActStrings.positionStringProperty;
+const rulersString = BalancingActStrings.rulersStringProperty;
 
 // constants
 const RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ) };

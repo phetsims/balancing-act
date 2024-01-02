@@ -20,14 +20,14 @@ import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass from './LabeledImageMass.js';
 
-const massLabelAString = BalancingActStrings.massLabelA;
-const massLabelBString = BalancingActStrings.massLabelB;
-const massLabelCString = BalancingActStrings.massLabelC;
-const massLabelDString = BalancingActStrings.massLabelD;
-const massLabelEString = BalancingActStrings.massLabelE;
-const massLabelFString = BalancingActStrings.massLabelF;
-const massLabelGString = BalancingActStrings.massLabelG;
-const massLabelHString = BalancingActStrings.massLabelH;
+const massLabelAString = BalancingActStrings.massLabelAStringProperty;
+const massLabelBString = BalancingActStrings.massLabelBStringProperty;
+const massLabelCString = BalancingActStrings.massLabelCStringProperty;
+const massLabelDString = BalancingActStrings.massLabelDStringProperty;
+const massLabelEString = BalancingActStrings.massLabelEStringProperty;
+const massLabelFString = BalancingActStrings.massLabelFStringProperty;
+const massLabelGString = BalancingActStrings.massLabelGStringProperty;
+const massLabelHString = BalancingActStrings.massLabelHStringProperty;
 
 // in kg
 const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 54 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];

@@ -22,9 +22,9 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 
-const bricksString = BalancingActStrings.bricks;
-const mysteryObjectsString = BalancingActStrings.mysteryObjects;
-const peopleString = BalancingActStrings.people;
+const bricksString = BalancingActStrings.bricksStringProperty;
+const mysteryObjectsString = BalancingActStrings.mysteryObjectsStringProperty;
+const peopleString = BalancingActStrings.peopleStringProperty;
 
 // constants
 const TITLE_FONT = new PhetFont( 16 );

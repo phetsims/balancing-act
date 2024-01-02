@@ -23,7 +23,7 @@ import womanSitting_png from '../../../mipmaps/usa/womanSitting_png.js';
 import womanStanding_png from '../../../mipmaps/usa/womanStanding_png.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
-
+// TODO: Remove "../../../balancing-act/images/**/*", from all/tsconfig.json file once all svg files have been used. https://github.com/phetsims/balancing-act/issues/140
 const BalancerPortrayalUSA = new BalancerPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.unitedStatesOfAmericaStringProperty,
   boyStanding_png,

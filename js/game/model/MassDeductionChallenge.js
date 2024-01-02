@@ -12,7 +12,7 @@ import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const whatIsTheMassString = BalancingActStrings.whatIsTheMass;
+const whatIsTheMassString = BalancingActStrings.whatIsTheMassStringProperty;
 
 class MassDeductionChallenge extends BalanceGameChallenge {
 

@@ -15,7 +15,7 @@ import ColumnState from '../../common/model/ColumnState.js';
 import Plank from '../../common/model/Plank.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const balanceMeString = BalancingActStrings.balanceMe;
+const balanceMeString = BalancingActStrings.balanceMeStringProperty;
 
 class BalanceMassesChallenge extends BalanceGameChallenge {
 

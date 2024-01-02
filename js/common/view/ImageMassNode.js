@@ -7,9 +7,9 @@
  * @author John Blanco
  */
 
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Node, Text } from '../../../../scenery/js/imports.js';
 import defaultImage_png from '../../../images/objects/defaultImage_png.js';
@@ -19,9 +19,9 @@ import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
 
-const kgString = BalancingActStrings.kg;
-const pattern0Value1UnitsString = BalancingActStrings.pattern0Value1Units;
-const unknownMassLabelString = BalancingActStrings.unknownMassLabel;
+const kgStringProperty = BalancingActStrings.kgStringProperty;
+const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
+const unknownMassLabelStringProperty = BalancingActStrings.unknownMassLabelStringProperty;
 
 class ImageMassNode extends Node {
 
@@ -45,9 +45,14 @@ class ImageMassNode extends Node {
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
-      const massLabelText = imageMass.isMystery ? unknownMassLabelString : StringUtils.format(
-        pattern0Value1UnitsString, imageMass.massValue, kgString );
-      massLabel = new Text( massLabelText, { font: new PhetFont( 12 ) } );
+      const massLabelStringProperty = imageMass.isMystery ? unknownMassLabelStringProperty : new PatternStringProperty(
+        pattern0Value1UnitsStringProperty, {
+          0: imageMass.massValue,
+          1: kgStringProperty
+        }, {
+          formatNames: [ '0', '1' ]
+        } );
+      massLabel = new Text( massLabelStringProperty, { font: new PhetFont( 12 ) } );
       this.addChild( massLabel );
 
       // Observe changes to mass indicator label visibility.

@@ -14,7 +14,7 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import Plank from '../model/Plank.js';
 
-const metersString = BalancingActStrings.meters;
+const metersString = BalancingActStrings.metersStringProperty;
 
 // constants
 const RULER_HEIGHT = 50; // Empirically determined

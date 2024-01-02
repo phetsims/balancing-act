@@ -15,8 +15,8 @@ import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
 
-const kgString = BalancingActStrings.kg;
-const unknownMassLabelString = BalancingActStrings.unknownMassLabel;
+const kgString = BalancingActStrings.kgStringProperty;
+const unknownMassLabelString = BalancingActStrings.unknownMassLabelStringProperty;
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );

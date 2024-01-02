@@ -38,10 +38,10 @@ import PositionMarkerSetNode from './PositionMarkerSetNode.js';
 import RotatingRulerNode from './RotatingRulerNode.js';
 
 // strings
-const forcesFromObjectsString = BalancingActStrings.forcesFromObjects;
-const levelString = BalancingActStrings.level;
-const massLabelsString = BalancingActStrings.massLabels;
-const showString = BalancingActStrings.show;
+const forcesFromObjectsString = BalancingActStrings.forcesFromObjectsStringProperty;
+const levelString = BalancingActStrings.levelStringProperty;
+const massLabelsString = BalancingActStrings.massLabelsStringProperty;
+const showString = BalancingActStrings.showStringProperty;
 
 // constants
 const X_MARGIN_IN_PANELS = 5;

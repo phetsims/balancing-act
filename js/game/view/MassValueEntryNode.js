@@ -7,10 +7,10 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
@@ -19,8 +19,8 @@ import Panel from '../../../../sun/js/Panel.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 
-const kgString = BalancingActStrings.kg;
-const pattern0Value1UnitsString = BalancingActStrings.pattern0Value1Units;
+const kgStringProperty = BalancingActStrings.kgStringProperty;
+const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
 
 // constants
 const READOUT_FONT = new PhetFont( 16 );
@@ -38,7 +38,12 @@ class MassValueEntryNode extends Node {
     this.massValueProperty = new NumberProperty( 0 );
 
     // Create and add the readout, including the background.
-    const readoutText = new Text( StringUtils.format( pattern0Value1UnitsString, 0, kgString ), {
+    const readoutText = new Text( new PatternStringProperty( pattern0Value1UnitsStringProperty, {
+      0: this.massValueProperty,
+      1: kgStringProperty
+    }, {
+      formatNames: [ '0', '1' ]
+    } ), {
       font: READOUT_FONT,
       maxWidth: 200 // empirically determined based on tests with long strings
     } );
@@ -97,7 +102,6 @@ class MassValueEntryNode extends Node {
 
     // Update the readout text and arrow button states whenever the value changes.
     this.massValueProperty.link( value => {
-      readoutText.string = StringUtils.format( pattern0Value1UnitsString, value, kgString );
       readoutText.centerX = readoutBackground.centerX;
       leftArrowButton.enabled = ( value > 0 );
       rightArrowButton.enabled = ( value < MAX_MASS );

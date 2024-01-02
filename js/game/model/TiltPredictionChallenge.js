@@ -12,7 +12,7 @@ import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
 
-const whatWillHappenString = BalancingActStrings.whatWillHappen;
+const whatWillHappenString = BalancingActStrings.whatWillHappenStringProperty;
 
 class TiltPredictionChallenge extends BalanceGameChallenge {
 

@@ -6,13 +6,13 @@
  * @author John Blanco
  */
 
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ModelElementCreatorNode from './ModelElementCreatorNode.js';
 
-const kgString = BalancingActStrings.kg;
-const pattern0Value1UnitsString = BalancingActStrings.pattern0Value1Units;
+const kgStringProperty = BalancingActStrings.kgStringProperty;
+const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
 
 class MassCreatorNode extends ModelElementCreatorNode {
 
@@ -25,7 +25,12 @@ class MassCreatorNode extends ModelElementCreatorNode {
   constructor( screenView, massValue, showMassLabel, options ) {
     super( screenView, options );
     if ( showMassLabel ) {
-      this.setCaption( StringUtils.format( pattern0Value1UnitsString, massValue, kgString ) );
+      this.setCaption( new PatternStringProperty( pattern0Value1UnitsStringProperty, {
+        0: massValue,
+        1: kgStringProperty
+      }, {
+        formatNames: [ '0', '1' ]
+      } ) );
     }
   }
 }
