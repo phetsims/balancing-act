@@ -46,11 +46,11 @@ import MassValueEntryNode from './MassValueEntryNode.js';
 import StartGameLevelNode from './StartGameLevelNode.js';
 import TiltPredictionSelectorNode from './TiltPredictionSelectorNode.js';
 
-const checkString = VegasStrings.checkStringProperty;
-const nextString = VegasStrings.nextStringProperty;
-const showAnswerString = VegasStrings.showAnswerStringProperty;
-const startOverString = BalancingActStrings.startOverStringProperty;
-const tryAgainString = VegasStrings.tryAgainStringProperty;
+const checkStringProperty = VegasStrings.checkStringProperty;
+const nextStringProperty = VegasStrings.nextStringProperty;
+const showAnswerStringProperty = VegasStrings.showAnswerStringProperty;
+const startOverStringProperty = BalancingActStrings.startOverStringProperty;
+const tryAgainStringProperty = VegasStrings.tryAgainStringProperty;
 
 // constants
 const BUTTON_FONT = new PhetFont( 24 );
@@ -189,7 +189,7 @@ class BalanceGameView extends ScreenView {
         levelProperty: new DerivedProperty( [ gameModel.levelProperty ], level => level + 1 ),
         elapsedTimeProperty: gameModel.elapsedTimeProperty,
         timerEnabledProperty: gameModel.timerEnabledProperty,
-        startOverButtonText: startOverString,
+        startOverButtonText: startOverStringProperty,
         font: new PhetFont( 14 ),
         textFill: 'white',
         xMargin: 20,
@@ -246,9 +246,10 @@ class BalanceGameView extends ScreenView {
       font: BUTTON_FONT,
       baseColor: BUTTON_FILL,
       cornerRadius: 4,
+
       maxWidth: 300 // empirically determined
     };
-    this.checkAnswerButton = new TextPushButton( checkString, merge( {
+    this.checkAnswerButton = new TextPushButton( checkStringProperty, merge( {
       listener: () => {
         gameModel.checkAnswer(
           this.massValueEntryNode.massValueProperty.value,
@@ -259,27 +260,30 @@ class BalanceGameView extends ScreenView {
     this.rootNode.addChild( this.checkAnswerButton );
     this.buttons.push( this.checkAnswerButton );
 
-    this.nextButton = new TextPushButton( nextString, merge( {
+    this.nextButton = new TextPushButton( nextStringProperty, merge( {
       listener: () => { gameModel.nextChallenge(); }
     }, buttonOptions ) );
     this.rootNode.addChild( this.nextButton );
     this.buttons.push( this.nextButton );
 
-    this.tryAgainButton = new TextPushButton( tryAgainString, merge( {
+    this.tryAgainButton = new TextPushButton( tryAgainStringProperty, merge( {
       listener: () => { gameModel.tryAgain(); }
     }, buttonOptions ) );
     this.rootNode.addChild( this.tryAgainButton );
     this.buttons.push( this.tryAgainButton );
 
-    this.displayCorrectAnswerButton = new TextPushButton( showAnswerString, merge( {
+    this.displayCorrectAnswerButton = new TextPushButton( showAnswerStringProperty, merge( {
       listener: () => { gameModel.displayCorrectAnswer(); }
     }, buttonOptions ) );
     this.rootNode.addChild( this.displayCorrectAnswerButton );
     this.buttons.push( this.displayCorrectAnswerButton );
 
     const buttonCenter = this.modelViewTransform.modelToViewPosition( new Vector2( 0, -0.3 ) );
-    this.buttons.forEach( button => {
-      button.center = buttonCenter;
+
+    ManualConstraint.create( this.rootNode, this.buttons, () => {
+      this.buttons.forEach( button => {
+        button.center = buttonCenter;
+      } );
     } );
 
     // Add listeners that control the enabled state of the check answer button.
