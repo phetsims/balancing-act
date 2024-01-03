@@ -8,7 +8,7 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Path, Text } from '../../../../scenery/js/imports.js';
+import { ManualConstraint, Node, Path, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
@@ -71,20 +71,23 @@ class BrickStackNode extends Node {
           brickStack.massValue,
           {
             font: LABEL_FONT,
-            centerX: 0,
             maxWidth: maxTextWidth
           }
         );
         massLabel.addChild( massValueText );
-        massLabel.addChild( new Text(
+        const kgText = new Text(
           kgString,
           {
             font: LABEL_FONT,
-            centerX: 0,
             top: massValueText.bottom - 4,
             maxWidth: maxTextWidth
-          } )
-        );
+          } );
+        massLabel.addChild( kgText );
+
+        // A VBox was not used here because it created layout issues for the brick stack as the see-saw tilted.
+        ManualConstraint.create( massLabel, [ massValueText, kgText ], ( massValueTextProxy, kgTextProxy ) => {
+          kgTextProxy.centerX = massValueTextProxy.centerX;
+        } );
       }
       massLabel.centerX = shapeNode.centerX;
       massLabel.bottom = shapeNode.top - 1;
