@@ -8,7 +8,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Image, Node, Text } from '../../../../scenery/js/imports.js';
+import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
 import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
 import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
 import balancingAct from '../../balancingAct.js';
@@ -22,13 +22,12 @@ const pattern0Label1ValueStringProperty = BalancingActStrings.pattern0Label1Valu
 const FONT = new PhetFont( 16 );
 const IMAGE_SIZE = new Dimension2( 100, 65 );
 
-class GameIconNode extends Node {
+class GameIconNode extends VBox {
 
   /**
    * @param { number } levelNumber
    */
   constructor( levelNumber ) {
-    super();
     const title = new Text( new PatternStringProperty( pattern0Label1ValueStringProperty, {
       0: levelStringProperty,
       1: levelNumber
@@ -38,7 +37,6 @@ class GameIconNode extends Node {
       font: FONT,
       maxWidth: 100
     } );
-    this.addChild( title );
 
     let image;
     switch( levelNumber ) {
@@ -60,9 +58,12 @@ class GameIconNode extends Node {
 
     const imageNode = new Image( image );
     imageNode.scale( new Vector2( IMAGE_SIZE.width / imageNode.width, IMAGE_SIZE.height / imageNode.height ) );
-    imageNode.top = title.bottom + 4;
-    this.addChild( imageNode );
-    imageNode.centerX = title.centerX;
+
+    super( {
+      children: [ title, imageNode ],
+      spacing: 4,
+      align: 'center'
+    } );
   }
 }
 
