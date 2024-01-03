@@ -28,6 +28,7 @@ const peopleString = BalancingActStrings.peopleStringProperty;
 
 // constants
 const TITLE_FONT = new PhetFont( 16 );
+const TITLE_MAX_WIDTH = 90;
 
 class MassCarousel extends Carousel {
 
@@ -238,23 +239,23 @@ class MassCarousel extends Carousel {
 
     const elements = [
       {
-        title: new Text( bricksString, { font: TITLE_FONT } ),
+        title: new Text( bricksString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: brickCreatorKit
       },
       ...BAQueryParameters.stanford ? [] : [ {
-        title: new Text( peopleString, { font: TITLE_FONT } ),
+        title: new Text( peopleString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: peopleKit1
       },
         {
-          title: new Text( peopleString, { font: TITLE_FONT } ),
+          title: new Text( peopleString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
           content: peopleKit2
         } ],
       {
-        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: mysteryMassesKit1
       },
       {
-        title: new Text( mysteryObjectsString, { font: TITLE_FONT } ),
+        title: new Text( mysteryObjectsString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: mysteryMassesKit2
       }
     ];

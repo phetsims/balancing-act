@@ -10,14 +10,14 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { DragListener, Node, Text } from '../../../../scenery/js/imports.js';
+import { DragListener, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants
 const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
 const LABEL_FONT = new PhetFont( 14 );
-const MAX_CAPTION_WIDTH_PROPORTION = 1.5; // max width for for the caption as a proportion of the creator node
+const MAX_CAPTION_WIDTH_PROPORTION = 1; // max width for the caption as a proportion of the creator node
 
 class ModelElementCreatorNode extends Node {
 
@@ -92,7 +92,7 @@ class ModelElementCreatorNode extends Node {
     }
     this.selectionNode = selectionNode;
     this.addChild( selectionNode );
-    this.updateLayout();
+    this.createManualConstraint();
   }
 
   /**
@@ -102,19 +102,22 @@ class ModelElementCreatorNode extends Node {
   setCaption( captionText ) {
     this.caption = new Text( captionText, { font: LABEL_FONT } );
     this.addChild( this.caption );
-    this.updateLayout();
+    this.createManualConstraint();
   }
 
   /**
    * @private
+   * Create a manual constraint if both the caption and selection node are defined.
+   * This code assumes that the selectionNode and caption are only being set once by each
+   * instance in the constructor. If that ever changes this may create a memory leak.
    */
-  updateLayout() {
-
-    // This only does something if both the element node and the caption are set.
-    if ( this.caption && this.selectionNode ) {
-      this.caption.maxWidth = this.selectionNode.width * MAX_CAPTION_WIDTH_PROPORTION;
-      this.caption.centerX = this.selectionNode.centerX;
-      this.caption.top = this.selectionNode.bottom + CAPTION_OFFSET_FROM_SELECTION_NODE;
+  createManualConstraint() {
+    if ( this.selectionNode && this.caption ) {
+      ManualConstraint.create( this, [ this.caption, this.selectionNode ], ( captionProxy, selectionNodeProxy ) => {
+        captionProxy.maxWidth = selectionNodeProxy.width * MAX_CAPTION_WIDTH_PROPORTION;
+        captionProxy.centerX = selectionNodeProxy.centerX;
+        captionProxy.top = selectionNodeProxy.bottom + CAPTION_OFFSET_FROM_SELECTION_NODE;
+      } );
     }
   }
 }

@@ -29,7 +29,7 @@ class MysteryMassNode extends ImageMassNode {
     const inset = this.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
-    const labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ) } );
+    const labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ), maxWidth: 10 } );
     const dimension = Math.max( labelText.width, labelText.height );
     const label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
       {

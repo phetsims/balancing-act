@@ -281,7 +281,8 @@ class BasicBalanceScreenView extends ScreenView {
     this.nonMassLayer.addChild( controlPanelsVBox );
 
     // Add bounds for the control panels so that descendant types can see them for layout.
-    this.controlPanelBounds = controlPanelsVBox.bounds;
+    this.controlPanelMaxWidth = maxControlPanelWidth;
+    this.controlPanelVBox = controlPanelsVBox;
 
     // Reset All button.
     function resetClosure() {

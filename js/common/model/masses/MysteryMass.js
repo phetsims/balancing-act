@@ -20,14 +20,14 @@ import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass from './LabeledImageMass.js';
 
-const massLabelAString = BalancingActStrings.massLabelAStringProperty;
-const massLabelBString = BalancingActStrings.massLabelBStringProperty;
-const massLabelCString = BalancingActStrings.massLabelCStringProperty;
-const massLabelDString = BalancingActStrings.massLabelDStringProperty;
-const massLabelEString = BalancingActStrings.massLabelEStringProperty;
-const massLabelFString = BalancingActStrings.massLabelFStringProperty;
-const massLabelGString = BalancingActStrings.massLabelGStringProperty;
-const massLabelHString = BalancingActStrings.massLabelHStringProperty;
+const massLabelAStringProperty = BalancingActStrings.massLabelAStringProperty;
+const massLabelBStringProperty = BalancingActStrings.massLabelBStringProperty;
+const massLabelCStringProperty = BalancingActStrings.massLabelCStringProperty;
+const massLabelDStringProperty = BalancingActStrings.massLabelDStringProperty;
+const massLabelEStringProperty = BalancingActStrings.massLabelEStringProperty;
+const massLabelFStringProperty = BalancingActStrings.massLabelFStringProperty;
+const massLabelGStringProperty = BalancingActStrings.massLabelGStringProperty;
+const massLabelHStringProperty = BalancingActStrings.massLabelHStringProperty;
 
 // in kg
 const massValues = BAQueryParameters.stanford ? [ 15, 50, 2, 7, 32, 23, 18, 54 ] : [ 20, 5, 15, 10, 3, 50, 25, 7.5 ];
@@ -40,56 +40,56 @@ const MYSTERY_MASS_CONFIGURATIONS = [
     massValue: massValues[ 0 ], // in kg
     image: mysteryObject01_png,
     height: 0.25, // in meters
-    labelText: massLabelAString,
+    labelText: massLabelAStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 1 ], // in kg
     image: mysteryObject02_png,
     height: 0.30, // in meters
-    labelText: massLabelBString,
+    labelText: massLabelBStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 2 ], // in kg
     image: mysteryObject03_png,
     height: 0.35, // in meters
-    labelText: massLabelCString,
+    labelText: massLabelCStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 3 ], // in kg
     image: mysteryObject04_png,
     height: 0.4, // in meters
-    labelText: massLabelDString,
+    labelText: massLabelDStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 4 ], // in kg
     image: mysteryObject05_png,
     height: 0.25, // in meters
-    labelText: massLabelEString,
+    labelText: massLabelEStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 5 ], // in kg
     image: mysteryObject06_png,
     height: 0.35, // in meters
-    labelText: massLabelFString,
+    labelText: massLabelFStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 6 ], // in kg
     image: mysteryObject07_png,
     height: 0.4, // in meters
-    labelText: massLabelGString,
+    labelText: massLabelGStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 7 ], // in kg
     image: mysteryObject08_png,
     height: 0.3, // in meters
-    labelText: massLabelHString,
+    labelText: massLabelHStringProperty,
     isMystery: true
   }
 ];
