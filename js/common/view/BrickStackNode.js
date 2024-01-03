@@ -79,7 +79,6 @@ class BrickStackNode extends Node {
           kgString,
           {
             font: LABEL_FONT,
-            top: massValueText.bottom - 4,
             maxWidth: maxTextWidth
           } );
         massLabel.addChild( kgText );
@@ -87,6 +86,7 @@ class BrickStackNode extends Node {
         // A VBox was not used here because it created layout issues for the brick stack as the see-saw tilted.
         ManualConstraint.create( massLabel, [ massValueText, kgText ], ( massValueTextProxy, kgTextProxy ) => {
           kgTextProxy.centerX = massValueTextProxy.centerX;
+          kgTextProxy.top = kgTextProxy.height < 8 ? massValueTextProxy.bottom : massValueTextProxy.bottom - 4;
         } );
       }
       massLabel.centerX = shapeNode.centerX;

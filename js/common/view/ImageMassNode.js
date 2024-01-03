@@ -11,7 +11,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Image, Node, Text } from '../../../../scenery/js/imports.js';
+import { Image, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import defaultImage_png from '../../../images/objects/defaultImage_png.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
@@ -82,9 +82,12 @@ class ImageMassNode extends Node {
       imageNode.centerX = 0;
 
       if ( isLabeled ) {
-        massLabel.maxWidth = imageNode.width;
-        massLabel.centerX = imageNode.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
-        massLabel.bottom = imageNode.top;
+
+        ManualConstraint.create( this, [ massLabel, imageNode ], ( massLabelProxy, imageNodeProxy ) => {
+          massLabelProxy.maxWidth = imageNodeProxy.width;
+          massLabelProxy.centerX = imageNodeProxy.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+          massLabelProxy.bottom = imageNodeProxy.top;
+        } );
 
         // Increase the touchArea and mouseArea bounds in the x direction if the massLabel extends beyond the imageNode bounds.
         const bounds = imageNode.bounds.copy();
