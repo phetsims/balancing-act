@@ -65,12 +65,13 @@ class ImageMass extends Mass {
   }
 
   /**
+   * Create a copy.
    * @returns {ImageMass}
    * @public
-   * TODO: this seems too tricky, see https://github.com/phetsims/balancing-act/issues/107
    */
   createCopy() {
-    // This clever invocation supports the creation of subclassed instances.
+
+    // This is written such that it will work for subclasses.
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
 }
