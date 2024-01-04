@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+// Copyright 2013-2024, University of Colorado Boulder
 
 /**
  * This class defines a mass in the model that carries with it an associated image that should be presented in the view.
