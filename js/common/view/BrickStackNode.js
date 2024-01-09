@@ -9,21 +9,21 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { ManualConstraint, Node, Path, Text } from '../../../../scenery/js/imports.js';
+import { ManualConstraint, Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
 
-const kgString = BalancingActStrings.kgStringProperty;
-const unknownMassLabelString = BalancingActStrings.unknownMassLabelStringProperty;
+const kgStringProperty = BalancingActStrings.kgStringProperty;
+const unknownMassLabelStringProperty = BalancingActStrings.unknownMassLabelStringProperty;
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );
 const LINE_WIDTH = 1;
 
-class BrickStackNode extends Node {
+class BrickStackNode extends VBox {
 
   /**
    * @param {BrickStack} brickStack
@@ -36,6 +36,7 @@ class BrickStackNode extends Node {
   constructor( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable, columnStateProperty ) {
     super( { cursor: 'pointer' } );
 
+    // TODO: handle disposal of columnStateProperty, https://github.com/phetsims/balancing-act/issues/94
     BAQueryParameters.stanford && columnStateProperty.link( columnState => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
@@ -52,14 +53,15 @@ class BrickStackNode extends Node {
       touchArea: transformedBrickShape.bounds.dilatedY( 10 ),
       mouseArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
-    this.addChild( bricksNode );
+
+    // We link to this below if massLabel exists.
+    let massLabel;
 
     // Create and add the mass label.
     if ( isLabeled ) {
-      let massLabel;
       const maxTextWidth = bricksNode.bounds.width;
       if ( brickStack.isMystery ) {
-        massLabel = new Text( unknownMassLabelString, {
+        massLabel = new Text( unknownMassLabelStringProperty, {
           font: LABEL_FONT,
           maxWidth: maxTextWidth
         } );
@@ -67,7 +69,6 @@ class BrickStackNode extends Node {
       else {
 
         // NOTE: The MultiLineText node was tried for this, but the spacing looked bad.
-        massLabel = new Node();
         const massValueText = new Text(
           brickStack.massValue,
           {
@@ -75,23 +76,23 @@ class BrickStackNode extends Node {
             maxWidth: maxTextWidth
           }
         );
-        massLabel.addChild( massValueText );
         const kgText = new Text(
-          kgString,
+          kgStringProperty,
           {
             font: LABEL_FONT,
             maxWidth: maxTextWidth
           } );
-        massLabel.addChild( kgText );
 
-        // A VBox was not used here because it created layout issues for the brick stack as the see-saw tilted.
-        ManualConstraint.create( massLabel, [ massValueText, kgText ], ( massValueTextProxy, kgTextProxy ) => {
-          kgTextProxy.centerX = massValueTextProxy.centerX;
-          kgTextProxy.top = kgTextProxy.height < 8 ? massValueTextProxy.bottom : massValueTextProxy.bottom - 4;
+        massLabel = new VBox( {
+          children: [ massValueText, kgText ],
+          align: 'center'
+        } );
+
+        // As the height of the text gets smaller with translations we need to adjust the VBox spacing.
+        ManualConstraint.create( this, [ massLabel, kgText ], ( massLabelProxy, kgTextProxy ) => {
+          massLabel.spacing = kgTextProxy.height < 8 ? 0 : -4;
         } );
       }
-      massLabel.centerX = bricksNode.centerX;
-      massLabel.bottom = bricksNode.top - 1;
       this.addChild( massLabel );
 
       const massLabelHeightFactorTouchArea = massLabel.height / 3;
@@ -103,10 +104,14 @@ class BrickStackNode extends Node {
         .shiftedY( bricksNode.bottom - bricksNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
+      // TODO: handle disposal, https://github.com/phetsims/balancing-act/issues/94
       labelVisibleProperty.link( visible => {
         massLabel.visible = visible;
       } );
     }
+
+    // We addChild after the isLabeled conditional so that the bricksNode is in the bottom VBox cell.
+    this.addChild( bricksNode );
 
     // Set initial position and record so deltas can be subsequently used. This helps minimize transformation when
     // moving the items.
@@ -145,6 +150,12 @@ class BrickStackNode extends Node {
         updateNodePositionAndRotation( angle, position );
       }
     );
+
+    if ( massLabel ) {
+      this.localBoundsProperty.link( () => {
+        updateNodePositionAndRotation( brickStack.rotationAngleProperty.value, brickStack.positionProperty.value );
+      } );
+    }
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
     brickStack.animatingProperty.link( animating => {
