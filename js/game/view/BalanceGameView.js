@@ -16,7 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Color, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
+import { AlignBox, Color, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
@@ -551,13 +551,17 @@ class BalanceGameView extends ScreenView {
         this.model.gameStateProperty.set( 'choosingLevel' );
         this.rootNode.removeChild( this.levelCompletedNode );
         this.levelCompletedNode = null;
-      },
-      {
-        center: this.layoutBounds.center
+      }, {
+        contentMaxWidth: 600
       } );
 
+    const levelCompletedAlignBox = new AlignBox( this.levelCompletedNode, {
+      alignBounds: this.layoutBounds,
+      align: 'center'
+    } );
+
     // Add the node.
-    this.rootNode.addChild( this.levelCompletedNode );
+    this.rootNode.addChild( levelCompletedAlignBox );
   }
 }
 

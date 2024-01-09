@@ -9,12 +9,12 @@
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
-import { Line, Node, Text } from '../../../../scenery/js/imports.js';
+import { Line, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import Plank from '../model/Plank.js';
 
-const metersString = BalancingActStrings.metersStringProperty;
+const metersStringProperty = BalancingActStrings.metersStringProperty;
 
 // constants
 const RULER_HEIGHT = 50; // Empirically determined
@@ -59,18 +59,25 @@ class RotatingRulerNode extends Node {
 
     // Add a units label on each side.
     const metersStringMaxWidth = rulerNode.width / 2.1; // empirically determined to visually fit within "each ruler"
-    this.addChild( new Text( metersString, {
+    const leftMetersText = new Text( metersStringProperty, {
       font: UNITS_FONT,
       centerX: rulerNode.width * 0.25,
       bottom: RULER_HEIGHT,
       maxWidth: metersStringMaxWidth
-    } ) );
-    this.addChild( new Text( metersString, {
+    } );
+    const rightMetersText = new Text( metersStringProperty, {
       font: UNITS_FONT,
       centerX: rulerNode.width * 0.75,
       bottom: RULER_HEIGHT,
       maxWidth: metersStringMaxWidth
-    } ) );
+    } );
+    this.addChild( leftMetersText );
+    this.addChild( rightMetersText );
+
+    ManualConstraint.create( this, [ leftMetersText, rightMetersText ], ( leftMetersTextProxy, rightMetersTextProxy ) => {
+      leftMetersTextProxy.centerX = rulerNode.width * 0.25;
+      rightMetersTextProxy.centerX = rulerNode.width * 0.75;
+    } );
 
     // Observe visibility.
     visibleProperty.link( visible => {
