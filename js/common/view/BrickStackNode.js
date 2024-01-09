@@ -6,6 +6,7 @@
  * @author John Blanco
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { ManualConstraint, Node, Path, Text } from '../../../../scenery/js/imports.js';
@@ -20,6 +21,7 @@ const unknownMassLabelString = BalancingActStrings.unknownMassLabelStringPropert
 
 // constants
 const LABEL_FONT = new PhetFont( 12 );
+const LINE_WIDTH = 1;
 
 class BrickStackNode extends Node {
 
@@ -38,25 +40,24 @@ class BrickStackNode extends Node {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );
-    this.brickStack = brickStack;
     this.modelViewTransform = modelViewTransform;
     this.previousAngle = 0;
 
     // Create and add the main shape node.
     const transformedBrickShape = modelViewTransform.modelToViewShape( brickStack.shape );
-    const shapeNode = new Path( transformedBrickShape, {
+    const bricksNode = new Path( transformedBrickShape, {
       fill: 'rgb( 205, 38, 38 )',
       stroke: 'black',
-      lineWidth: 1,
+      lineWidth: LINE_WIDTH,
       touchArea: transformedBrickShape.bounds.dilatedY( 10 ),
       mouseArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
-    this.addChild( shapeNode );
+    this.addChild( bricksNode );
 
     // Create and add the mass label.
     if ( isLabeled ) {
       let massLabel;
-      const maxTextWidth = shapeNode.bounds.width;
+      const maxTextWidth = bricksNode.bounds.width;
       if ( brickStack.isMystery ) {
         massLabel = new Text( unknownMassLabelString, {
           font: LABEL_FONT,
@@ -89,17 +90,17 @@ class BrickStackNode extends Node {
           kgTextProxy.top = kgTextProxy.height < 8 ? massValueTextProxy.bottom : massValueTextProxy.bottom - 4;
         } );
       }
-      massLabel.centerX = shapeNode.centerX;
-      massLabel.bottom = shapeNode.top - 1;
+      massLabel.centerX = bricksNode.centerX;
+      massLabel.bottom = bricksNode.top - 1;
       this.addChild( massLabel );
 
       const massLabelHeightFactorTouchArea = massLabel.height / 3;
       const massLabelHeightFactorMouseArea = massLabel.height / 8;
-      shapeNode.setTouchArea( shapeNode.touchArea.dilatedY( massLabelHeightFactorTouchArea )
+      bricksNode.setTouchArea( bricksNode.touchArea.dilatedY( massLabelHeightFactorTouchArea )
         .shiftedY( -massLabelHeightFactorTouchArea ) );
-      shapeNode.setMouseArea( shapeNode.mouseArea.dilatedY( massLabelHeightFactorMouseArea )
-        // Mouse area ends where the shapeNode ends at the bottom.
-        .shiftedY( shapeNode.bottom - shapeNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
+      bricksNode.setMouseArea( bricksNode.mouseArea.dilatedY( massLabelHeightFactorMouseArea )
+        // Mouse area ends where the bricksNode ends at the bottom.
+        .shiftedY( bricksNode.bottom - bricksNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
       labelVisibleProperty.link( visible => {
@@ -109,19 +110,41 @@ class BrickStackNode extends Node {
 
     // Set initial position and record so deltas can be subsequently used. This helps minimize transformation when
     // moving the items.
-
-    let offsetToBottom = new Vector2( 0, -this.height / 2 );
+    let offsetToBottom = new Vector2( 0, -bricksNode.height / 2 );
     let previousRotationAngle = 0;
 
-    // Monitor the brick stack for position and angle changes.
-    brickStack.rotationAngleProperty.link( newAngle => {
-      this.rotateAround( this.center.plus( offsetToBottom ), previousRotationAngle - newAngle );
-      offsetToBottom = offsetToBottom.rotated( previousRotationAngle - newAngle );
-      previousRotationAngle = newAngle;
-    } );
-    brickStack.positionProperty.link( newPosition => {
-      this.center = modelViewTransform.modelToViewPosition( newPosition ).plus( offsetToBottom );
-    } );
+    // Define a function to update the position of the node based on the model's position and rotational angle.
+    const updateNodePositionAndRotation = ( rotationAngle, position ) => {
+
+      // Handle the rotation.
+      this.rotateAround( bricksNode.center.plus( offsetToBottom ), previousRotationAngle - rotationAngle );
+      offsetToBottom = offsetToBottom.rotated( previousRotationAngle - rotationAngle );
+      previousRotationAngle = rotationAngle;
+
+      // Handle the position.  This algorithm using a different corner to set be position depending on whether the brick
+      // stack is tilting to the left or the right.  This is so that the size of the label, which can affect the width
+      // of the node when tilted, doesn't factor into the positioning of the node.
+      const modelShapeBounds = brickStack.shape.getBounds();
+      const x = Math.cos( rotationAngle ) * modelShapeBounds.width / 2;
+      const y = Math.sin( rotationAngle ) * modelShapeBounds.width / 2;
+      if ( rotationAngle <= 0 ) {
+        const leftBottomInModelSpace = position.plusXY( -x, y );
+        const leftBottomInViewSpace = modelViewTransform.modelToViewPosition( leftBottomInModelSpace );
+        this.leftBottom = leftBottomInViewSpace.plusXY( -LINE_WIDTH / 2, LINE_WIDTH / 2 );
+      }
+      else {
+        const rightBottomInModelSpace = position.plusXY( x, -y );
+        const rightBottomInViewSpace = modelViewTransform.modelToViewPosition( rightBottomInModelSpace );
+        this.rightBottom = rightBottomInViewSpace.plusXY( LINE_WIDTH / 2, LINE_WIDTH / 2 );
+      }
+    };
+
+    Multilink.multilink(
+      [ brickStack.rotationAngleProperty, brickStack.positionProperty ],
+      ( angle, position ) => {
+        updateNodePositionAndRotation( angle, position );
+      }
+    );
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
     brickStack.animatingProperty.link( animating => {
