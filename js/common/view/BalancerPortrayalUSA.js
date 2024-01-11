@@ -9,35 +9,34 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { USA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import labIcon_png from '../../../images/labIcon_png.js';
-import labIconSmall_png from '../../../images/labIconSmall_png.js';
-import boySitting_png from '../../../mipmaps/usa/boySitting_png.js';
-import boyStanding_png from '../../../mipmaps/usa/boyStanding_png.js';
-import gameLevel3Icon_png from '../../../mipmaps/usa/gameLevel3Icon_png.js';
-import gameLevel4Icon_png from '../../../mipmaps/usa/gameLevel4Icon_png.js';
-import girlSitting_png from '../../../mipmaps/usa/girlSitting_png.js';
-import girlStanding_png from '../../../mipmaps/usa/girlStanding_png.js';
-import manSitting_png from '../../../mipmaps/usa/manSitting_png.js';
-import manStanding_png from '../../../mipmaps/usa/manStanding_png.js';
-import womanSitting_png from '../../../mipmaps/usa/womanSitting_png.js';
-import womanStanding_png from '../../../mipmaps/usa/womanStanding_png.js';
+import gameLevel3Icon_svg from '../../../images/gameLevel3Icon_svg.js';
+import gameLevel4Icon_svg from '../../../images/gameLevel4Icon_svg.js';
+import boySitting_svg from '../../../images/usa/boySitting_svg.js';
+import boyStanding_svg from '../../../images/usa/boyStanding_svg.js';
+import girlSitting_svg from '../../../images/usa/girlSitting_svg.js';
+import girlStanding_svg from '../../../images/usa/girlStanding_svg.js';
+import labIcon_svg from '../../../images/usa/labIcon_svg.js';
+import manSitting_svg from '../../../images/usa/manSitting_svg.js';
+import manStanding_svg from '../../../images/usa/manStanding_svg.js';
+import womanSitting_svg from '../../../images/usa/womanSitting_svg.js';
+import womanStanding_svg from '../../../images/usa/womanStanding_svg.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 // TODO: Remove "../../../balancing-act/images/**/*", from all/tsconfig.json file once all svg files have been used. https://github.com/phetsims/balancing-act/issues/140
 const BalancerPortrayalUSA = new BalancerPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.unitedStatesOfAmericaStringProperty,
-  boyStanding_png,
-  boySitting_png,
-  girlStanding_png,
-  girlSitting_png,
-  manStanding_png,
-  manSitting_png,
-  womanStanding_png,
-  womanSitting_png,
-  gameLevel3Icon_png,
-  gameLevel4Icon_png,
-  labIcon_png,
-  labIconSmall_png,
+  boyStanding_svg,
+  boySitting_svg,
+  girlStanding_svg,
+  girlSitting_svg,
+  manStanding_svg,
+  manSitting_svg,
+  womanStanding_svg,
+  womanSitting_svg,
+  gameLevel3Icon_svg,
+  gameLevel4Icon_svg,
+  labIcon_svg,
+  labIcon_svg,
   USA_REGION_AND_CULTURE_ID
 );
 

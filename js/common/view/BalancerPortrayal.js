@@ -45,8 +45,6 @@ export default class BalancerPortrayal extends RegionAndCulturePortrayal {
     this.manSitting = manSitting;
     this.womanStanding = womanStanding;
     this.womanSitting = womanSitting;
-    this.levelThree = levelThree;
-    this.levelFour = levelFour;
     this.screenHomeIcon = screenHomeIcon;
     this.screenNavIcon = screenNavIcon;
   }

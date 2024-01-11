@@ -11,11 +11,12 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
-import gameLevel1Icon_png from '../../../mipmaps/gameLevel1Icon_png.js';
-import gameLevel2Icon_png from '../../../mipmaps/gameLevel2Icon_png.js';
+import gameLevel1Icon_svg from '../../../images/gameLevel1Icon_svg.js';
+import gameLevel2Icon_svg from '../../../images/gameLevel2Icon_svg.js';
+import gameLevel3Icon_svg from '../../../images/gameLevel3Icon_svg.js';
+import gameLevel4Icon_svg from '../../../images/gameLevel4Icon_svg.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
-import PreferencesModelSingleton from '../../common/PreferencesModelSingleton.js';
 
 const levelStringProperty = BalancingActStrings.levelStringProperty;
 const pattern0Label1ValueStringProperty = BalancingActStrings.pattern0Label1ValueStringProperty;
@@ -43,16 +44,16 @@ class GameIconNode extends VBox {
     let image;
     switch( levelNumber ) {
       case 1:
-        image = gameLevel1Icon_png;
+        image = gameLevel1Icon_svg;
         break;
       case 2:
-        image = gameLevel2Icon_png;
+        image = gameLevel2Icon_svg;
         break;
       case 3:
-        image = PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty.value.levelThree;
+        image = gameLevel3Icon_svg;
         break;
       case 4:
-        image = PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty.value.levelFour;
+        image = gameLevel4Icon_svg;
         break;
       default:
         throw new Error( `Can't retrieve level icon image for requested level: ${levelNumber}` );
