@@ -1,8 +1,9 @@
 // Copyright 2014-2022, University of Colorado Boulder
 
 /**
- * Icon for the control the turns the column on and off, programmatically
- * drawn for best appearance.
+ * Icon for the control the turns the column on and off, programmatically drawn for best appearance.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';

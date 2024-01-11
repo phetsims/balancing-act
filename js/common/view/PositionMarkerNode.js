@@ -2,6 +2,8 @@
 
 /**
  * A marker that is used to mark a position on the plank.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';

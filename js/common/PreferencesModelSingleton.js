@@ -1,5 +1,9 @@
 // Copyright 2023, University of Colorado Boulder
 
+/**
+ * @author @author Luisa Vargas
+ */
+
 import PreferencesModel from '../../../joist/js/preferences/PreferencesModel.js';
 import balancingAct from '../balancingAct.js';
 import BalancerImages from './view/BalancerImages.js';

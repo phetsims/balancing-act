@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import barrel_png from '../../../../images/objects/barrel_png.js';
 import balancingAct from '../../../balancingAct.js';

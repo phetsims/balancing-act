@@ -5,7 +5,7 @@
  * and weight information came from:
  * http://www.disabled-world.com/artman/publish/height-weight-teens.shtml
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';

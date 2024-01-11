@@ -2,6 +2,8 @@
 
 /**
  * Main entry point for the Balancing Act simulation.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Sim from '../../joist/js/Sim.js';

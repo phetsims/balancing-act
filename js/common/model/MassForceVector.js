@@ -1,5 +1,10 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
+/**
+ * a data object that couples a Mass object with a force vector
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';

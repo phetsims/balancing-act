@@ -2,6 +2,8 @@
 
 /**
  * A user interface control that is used to turn the columns on or off.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';

@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import fireHydrant_png from '../../../../images/objects/fireHydrant_png.js';
 import balancingAct from '../../../balancingAct.js';

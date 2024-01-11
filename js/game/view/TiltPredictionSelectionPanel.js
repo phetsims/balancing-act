@@ -2,6 +2,8 @@
 
 /**
  * Node that defines a single panel for use on the tilt prediction selector node.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import { DownUpListener, Image, Node, Rectangle } from '../../../../scenery/js/imports.js';

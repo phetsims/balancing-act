@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import pottedPlant_png from '../../../../images/objects/pottedPlant_png.js';
 import balancingAct from '../../../balancingAct.js';

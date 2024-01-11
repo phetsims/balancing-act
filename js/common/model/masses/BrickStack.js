@@ -3,7 +3,7 @@
 /**
  * Class that represents a stack of bricks in the model.  Note that a single brick is represented as a stack of size 1.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';

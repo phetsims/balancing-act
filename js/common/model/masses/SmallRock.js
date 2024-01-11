@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import rock4_png from '../../../../images/objects/rock4_png.js';
 import balancingAct from '../../../balancingAct.js';

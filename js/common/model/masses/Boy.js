@@ -1,11 +1,10 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Model element that represents a boy who is roughly 6 years old.  The data
- * for his height and weight came from:
+ * Model element that represents a boy who is roughly 6 years old.  The data for his height and weight came from:
  * http://www.disabled-world.com/artman/publish/height-weight-teens.shtml
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';

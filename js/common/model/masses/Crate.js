@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import woodCrateTall_png from '../../../../images/objects/woodCrateTall_png.js';
 import balancingAct from '../../../balancingAct.js';

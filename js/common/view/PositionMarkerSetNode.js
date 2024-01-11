@@ -1,8 +1,10 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
 /**
- * Node that represents a set of position markers that collectively enumerate
- * the various snap-to positions on the plank.
+ * Node that represents a set of position markers that collectively enumerate the various snap-to positions on the
+ * plank.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import { Node } from '../../../../scenery/js/imports.js';

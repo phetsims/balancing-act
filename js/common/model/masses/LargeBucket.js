@@ -1,5 +1,8 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import metalBucket_png from '../../../../images/objects/metalBucket_png.js';
 import balancingAct from '../../../balancingAct.js';

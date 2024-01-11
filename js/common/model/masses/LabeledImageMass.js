@@ -5,7 +5,7 @@
  * was created in support of a request to label the mystery masses with
  * translatable labels.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import balancingAct from '../../../balancingAct.js';

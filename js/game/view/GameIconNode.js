@@ -2,6 +2,8 @@
 
 /**
  * Convenience type for creating the icons used on the game level start buttons.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';

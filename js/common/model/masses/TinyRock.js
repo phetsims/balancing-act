@@ -1,5 +1,8 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+/**
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import tinyRock_png from '../../../../images/objects/tinyRock_png.js';
 import balancingAct from '../../../balancingAct.js';

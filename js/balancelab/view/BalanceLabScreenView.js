@@ -2,6 +2,8 @@
 
 /**
  * Screen view for the "Balance Lab" screen.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import balancingAct from '../../balancingAct.js';

@@ -1,5 +1,10 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+/**
+ * constants shared within the Balancing Act simulation
+ *
+ * @author John Blanco (PhET Interactive Simulations)
+ */
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import balancingAct from '../balancingAct.js';

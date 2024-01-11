@@ -1,10 +1,9 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Model class that represents a woman that can be moved on and off of the
- * balance.
+ * Model class that represents a woman that can be moved on and off of the balance.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';

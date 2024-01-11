@@ -5,7 +5,7 @@
  * the model.  The human can be grabbed from a toolbox and placed on a
  * balance, so there needs to be a standing and sitting image representation.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../../axon/js/Multilink.js';

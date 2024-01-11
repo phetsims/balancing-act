@@ -1,9 +1,10 @@
 // Copyright 2013-2024, University of Colorado Boulder
 
 /**
- * Type that defines 'mystery masses', which are masses whose mass value is
- * not labeled, so the users must determine it by testing it against known
- * mass values.
+ * Type that defines 'mystery masses', which are masses whose mass value is not labeled, so the users must determine it
+ * by testing it against known mass values.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import merge from '../../../../../phet-core/js/merge.js';

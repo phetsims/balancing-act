@@ -2,6 +2,8 @@
 
 /**
  * Type that defines the "Intro" screen.
+ *
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
