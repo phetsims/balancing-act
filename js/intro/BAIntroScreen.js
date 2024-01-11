@@ -9,8 +9,7 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import introIcon_png from '../../images/introIcon_png.js';
-import introIconSmall_png from '../../images/introIconSmall_png.js';
+import introIcon_svg from '../../images/introIcon_svg.js';
 import balancingAct from '../balancingAct.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';
@@ -23,16 +22,15 @@ class BAIntroScreen extends Screen {
    */
   constructor( tandem ) {
 
+    const screenIcon = new ScreenIcon( new Image( introIcon_svg ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } );
+
     const options = {
       name: BalancingActStrings.introStringProperty,
-      homeScreenIcon: new ScreenIcon( new Image( introIcon_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } ),
-      navigationBarIcon: new ScreenIcon( new Image( introIconSmall_png ), {
-        maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1
-      } ),
+      homeScreenIcon: screenIcon,
+      navigationBarIcon: screenIcon,
       tandem: tandem
     };
 

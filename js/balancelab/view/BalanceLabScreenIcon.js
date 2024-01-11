@@ -18,13 +18,11 @@ export default class BalanceLabScreenIcon extends ScreenIcon {
 
   /**
    * @param { Array<BalancerPortrayal> } portrayals
-   * @param { 'nav' | 'home' } iconType
    */
-  constructor( portrayals, iconType ) {
+  constructor( portrayals ) {
 
     const balanceLabScreenImages = portrayals.map( balancerPortrayal => {
-      const screenImage = iconType === 'nav' ? balancerPortrayal.screenNavIcon : balancerPortrayal.screenHomeIcon;
-      return new Image( screenImage, {
+      return new Image( balancerPortrayal.screenIcon, {
         visibleProperty: new DerivedProperty( [ PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty ],
           portrayal => {
             return portrayal === balancerPortrayal;

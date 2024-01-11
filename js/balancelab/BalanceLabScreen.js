@@ -22,10 +22,12 @@ class BalanceLabScreen extends Screen {
    */
   constructor( tandem ) {
 
+    const screenIcon = new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS );
+
     const options = {
       name: BalancingActStrings.balanceLabStringProperty,
-      homeScreenIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS, 'home' ),
-      navigationBarIcon: new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS, 'nav' ),
+      homeScreenIcon: screenIcon,
+      navigationBarIcon: screenIcon,
       tandem: tandem
     };
 

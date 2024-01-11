@@ -9,8 +9,6 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { USA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import gameLevel3Icon_svg from '../../../images/gameLevel3Icon_svg.js';
-import gameLevel4Icon_svg from '../../../images/gameLevel4Icon_svg.js';
 import boySitting_svg from '../../../images/usa/boySitting_svg.js';
 import boyStanding_svg from '../../../images/usa/boyStanding_svg.js';
 import girlSitting_svg from '../../../images/usa/girlSitting_svg.js';
@@ -33,9 +31,6 @@ const BalancerPortrayalUSA = new BalancerPortrayal(
   manSitting_svg,
   womanStanding_svg,
   womanSitting_svg,
-  gameLevel3Icon_svg,
-  gameLevel4Icon_svg,
-  labIcon_svg,
   labIcon_svg,
   USA_REGION_AND_CULTURE_ID
 );
