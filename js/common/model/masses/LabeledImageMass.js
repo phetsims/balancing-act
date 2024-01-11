@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+// Copyright 2013-2024, University of Colorado Boulder
 
 /**
  * This is an extension of the ImageMass type that adds a textual label.  This
