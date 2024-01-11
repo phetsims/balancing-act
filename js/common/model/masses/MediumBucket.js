@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import yellowBucket_png from '../../../../images/objects/yellowBucket_png.js';
+import yellowBucket_svg from '../../../../images/objects/yellowBucket_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class MediumBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, yellowBucket_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, yellowBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

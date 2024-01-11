@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import tire_png from '../../../../images/objects/tire_png.js';
+import tire_svg from '../../../../images/objects/tire_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class Tire extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, tire_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, tire_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

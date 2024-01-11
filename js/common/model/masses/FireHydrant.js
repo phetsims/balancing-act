@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import fireHydrant_png from '../../../../images/objects/fireHydrant_png.js';
+import fireHydrant_svg from '../../../../images/objects/fireHydrant_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class FireHydrant extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, fireHydrant_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, fireHydrant_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

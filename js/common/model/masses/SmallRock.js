@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import rock4_png from '../../../../images/objects/rock4_png.js';
+import rock4_svg from '../../../../images/objects/rock4_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class SmallRock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, rock4_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, rock4_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

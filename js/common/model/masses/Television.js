@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import oldTelevision_png from '../../../../images/objects/oldTelevision_png.js';
+import oldTelevision_svg from '../../../../images/objects/oldTelevision_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class Television extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, oldTelevision_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, oldTelevision_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import blueBucket_png from '../../../../images/objects/blueBucket_png.js';
+import blueBucket_svg from '../../../../images/objects/blueBucket_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class SmallBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, blueBucket_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, blueBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

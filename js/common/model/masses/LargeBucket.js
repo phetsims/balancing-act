@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import metalBucket_png from '../../../../images/objects/metalBucket_png.js';
+import metalBucket_svg from '../../../../images/objects/metalBucket_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class LargeBucket extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, metalBucket_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, metalBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

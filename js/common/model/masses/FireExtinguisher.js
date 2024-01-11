@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import fireExtinguisher_png from '../../../../images/objects/fireExtinguisher_png.js';
+import fireExtinguisher_svg from '../../../../images/objects/fireExtinguisher_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -20,7 +20,7 @@ class FireExtinguisher extends ImageMass {
    * @param {Object} [options]
    */
   constructor( initialPosition, isMystery, options ) {
-    super( MASS, fireExtinguisher_png, HEIGHT, initialPosition, isMystery, options );
+    super( MASS, fireExtinguisher_svg, HEIGHT, initialPosition, isMystery, options );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 }

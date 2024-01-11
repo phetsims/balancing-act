@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import barrel_png from '../../../../images/objects/barrel_png.js';
+import barrel_svg from '../../../../images/objects/barrel_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class Barrel extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, barrel_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, barrel_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

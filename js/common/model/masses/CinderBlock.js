@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import cinderBlock_png from '../../../../images/objects/cinderBlock_png.js';
+import cinderBlock_svg from '../../../../images/objects/cinderBlock_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class CinderBlock extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, cinderBlock_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, cinderBlock_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

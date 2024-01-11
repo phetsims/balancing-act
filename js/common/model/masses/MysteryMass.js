@@ -8,14 +8,14 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import mysteryObject01_png from '../../../../images/objects/mysteryObject01_png.js';
-import mysteryObject02_png from '../../../../images/objects/mysteryObject02_png.js';
-import mysteryObject03_png from '../../../../images/objects/mysteryObject03_png.js';
-import mysteryObject04_png from '../../../../images/objects/mysteryObject04_png.js';
-import mysteryObject05_png from '../../../../images/objects/mysteryObject05_png.js';
-import mysteryObject06_png from '../../../../images/objects/mysteryObject06_png.js';
-import mysteryObject07_png from '../../../../images/objects/mysteryObject07_png.js';
-import mysteryObject08_png from '../../../../images/objects/mysteryObject08_png.js';
+import mysteryObject01_svg from '../../../../images/objects/mysteryObject01_svg.js';
+import mysteryObject02_svg from '../../../../images/objects/mysteryObject02_svg.js';
+import mysteryObject03_svg from '../../../../images/objects/mysteryObject03_svg.js';
+import mysteryObject04_svg from '../../../../images/objects/mysteryObject04_svg.js';
+import mysteryObject05_svg from '../../../../images/objects/mysteryObject05_svg.js';
+import mysteryObject06_svg from '../../../../images/objects/mysteryObject06_svg.js';
+import mysteryObject07_svg from '../../../../images/objects/mysteryObject07_svg.js';
+import mysteryObject08_svg from '../../../../images/objects/mysteryObject08_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
@@ -39,56 +39,56 @@ const MYSTERY_MASS_CONFIGURATIONS = [
   // image for things to look good.
   {
     massValue: massValues[ 0 ], // in kg
-    image: mysteryObject01_png,
+    image: mysteryObject01_svg,
     height: 0.25, // in meters
     labelText: massLabelAStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 1 ], // in kg
-    image: mysteryObject02_png,
+    image: mysteryObject02_svg,
     height: 0.30, // in meters
     labelText: massLabelBStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 2 ], // in kg
-    image: mysteryObject03_png,
+    image: mysteryObject03_svg,
     height: 0.35, // in meters
     labelText: massLabelCStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 3 ], // in kg
-    image: mysteryObject04_png,
+    image: mysteryObject04_svg,
     height: 0.4, // in meters
     labelText: massLabelDStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 4 ], // in kg
-    image: mysteryObject05_png,
+    image: mysteryObject05_svg,
     height: 0.25, // in meters
     labelText: massLabelEStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 5 ], // in kg
-    image: mysteryObject06_png,
+    image: mysteryObject06_svg,
     height: 0.35, // in meters
     labelText: massLabelFStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 6 ], // in kg
-    image: mysteryObject07_png,
+    image: mysteryObject07_svg,
     height: 0.4, // in meters
     labelText: massLabelGStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 7 ], // in kg
-    image: mysteryObject08_png,
+    image: mysteryObject08_svg,
     height: 0.3, // in meters
     labelText: massLabelHStringProperty,
     isMystery: true

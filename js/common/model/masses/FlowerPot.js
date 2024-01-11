@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import flowerPot_png from '../../../../images/objects/flowerPot_png.js';
+import flowerPot_svg from '../../../../images/objects/flowerPot_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class FlowerPot extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, flowerPot_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, flowerPot_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

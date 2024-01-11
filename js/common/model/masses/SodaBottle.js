@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import sodaBottle_png from '../../../../images/objects/sodaBottle_png.js';
+import sodaBottle_svg from '../../../../images/objects/sodaBottle_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class SodaBottle extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, sodaBottle_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, sodaBottle_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 

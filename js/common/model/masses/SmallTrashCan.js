@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import trashCan_png from '../../../../images/objects/trashCan_png.js';
+import trashCan_svg from '../../../../images/objects/trashCan_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -20,7 +20,7 @@ class SmallTrashCan extends ImageMass {
    * @param {Object} [options]
    */
   constructor( initialPosition, isMystery, options ) {
-    super( MASS, trashCan_png, HEIGHT, initialPosition, isMystery, options );
+    super( MASS, trashCan_svg, HEIGHT, initialPosition, isMystery, options );
   }
 }
 
