@@ -25,7 +25,12 @@
       "supportsSound": true,
       "supportsDynamicLocale": true,
       "supportedRegionsAndCultures": [
-        "usa"
+        "usa",
+        "africa",
+        "africaModest",
+        "asia",
+        "latinAmerica",
+        "oceania"
       ]
     },
     "simulation": true,

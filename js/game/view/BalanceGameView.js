@@ -549,7 +549,7 @@ class BalanceGameView extends ScreenView {
       this.model.newBestTime,
       () => {
         this.model.gameStateProperty.set( 'choosingLevel' );
-        this.rootNode.removeChild( this.levelCompletedNode );
+        this.rootNode.removeChild( levelCompletedAlignBox );
         this.levelCompletedNode = null;
       }, {
         contentMaxWidth: 600
