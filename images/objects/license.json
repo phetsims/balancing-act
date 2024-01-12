@@ -207,13 +207,13 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by John Blanco and Mariah Hermsmeyer"
   },
-  "woodCrateTall.png": {
+  "woodCrateTall.svg": {
     "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
+      "Copyright 2024 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": "Modified from forces and motion basics crate by Noah Podolefsky"
+    "notes": "Modified from forces and motion basics crate by Noah Podolefsky and Mariah Hermsmeyer"
   },
   "yellowBucket.svg": {
     "text": [

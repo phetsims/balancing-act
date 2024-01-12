@@ -4,7 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import woodCrateTall_png from '../../../../images/objects/woodCrateTall_png.js';
+import woodCrateTall_svg from '../../../../images/objects/woodCrateTall_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
@@ -19,7 +19,7 @@ class Crate extends ImageMass {
    * @param isMystery
    */
   constructor( initialPosition, isMystery ) {
-    super( MASS, woodCrateTall_png, HEIGHT, initialPosition, isMystery );
+    super( MASS, woodCrateTall_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 
