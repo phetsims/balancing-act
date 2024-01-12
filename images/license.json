@@ -71,28 +71,28 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by ssiman-tov and Amanda McGarry"
   },
-  "plankBalanced.png": {
+  "plankBalanced.svg": {
     "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
+      "Copyright 2024 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": ""
+    "notes": "created by Amanda McGarry"
   },
-  "plankTippedLeft.png": {
+  "plankTippedLeft.svg": {
     "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
+      "Copyright 2024 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": ""
+    "notes": "created by Amanda McGarry"
   },
-  "plankTippedRight.png": {
+  "plankTippedRight.svg": {
     "text": [
-      "Copyright 2002-2015 University of Colorado Boulder"
+      "Copyright 2024 University of Colorado Boulder"
     ],
     "projectURL": "https://phet.colorado.edu",
     "license": "contact phethelp@colorado.edu",
-    "notes": ""
+    "notes": "created by Amanda McGarry"
   }
 }
