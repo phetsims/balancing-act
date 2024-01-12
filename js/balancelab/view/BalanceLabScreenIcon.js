@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * BalanceLabScreenIcon places all the screenIcons of different region and culture representations into a single Node.
