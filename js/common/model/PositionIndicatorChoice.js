@@ -1,7 +1,9 @@
 // Copyright 2020-2023, University of Colorado Boulder
 
 /**
- * Enumerates the choice of position indicator.
+ * Enumerates the choice of position indicator. These are the valid values for which position indicator set ( rulers,
+ * marks, or no set ) is visible on the ruler. These values are shared across all screens in the sim so an enumeration
+ * is necessary.
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */
