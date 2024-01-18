@@ -1,4 +1,4 @@
-// Copyright 2020-2023, University of Colorado Boulder
+// Copyright 2020-2024, University of Colorado Boulder
 
 /**
  * Enumerates the state of the columns which hold up the plank in the simulation. The columns exist in all screens of
