@@ -1,7 +1,9 @@
 // Copyright 2020-2023, University of Colorado Boulder
 
 /**
- * Enumerates the state of the columns in the game.
+ * Enumerates the state of the columns which hold up the plank in the simulation. The columns exist in all screens of
+ * the sim so an enumeration to keep track of the number of columns (double columns, a single column, or no columns)
+ * is necessary.
  *
  * @author Sam Reid (PhET Interactive Simulations)
  */
