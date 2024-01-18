@@ -25,6 +25,7 @@ import BalanceMassesChallenge from './BalanceMassesChallenge.js';
 import MassDeductionChallenge from './MassDeductionChallenge.js';
 import TiltedSupportColumn from './TiltedSupportColumn.js';
 import TiltPredictionChallenge from './TiltPredictionChallenge.js';
+import TiltPredictionState from './TiltPredictionState.js';
 
 // constants
 const MAX_LEVELS = 4;
@@ -236,9 +237,9 @@ class BalanceGameModel {
     }
     else if ( this.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
 
-      const isAnswerCorrect = ( tiltPrediction === 'tiltDownOnLeftSide' && this.plank.getTorqueDueToMasses() > 0 ) ||
-                              ( tiltPrediction === 'tiltDownOnRightSide' && this.plank.getTorqueDueToMasses() < 0 ) ||
-                              ( tiltPrediction === 'stayBalanced' && this.plank.getTorqueDueToMasses() === 0 );
+      const isAnswerCorrect = ( tiltPrediction === TiltPredictionState.TILT_DOWN_ON_LEFT_SIDE && this.plank.getTorqueDueToMasses() > 0 ) ||
+                              ( tiltPrediction === TiltPredictionState.TILT_DOWN_ON_RIGHT_SIDE && this.plank.getTorqueDueToMasses() < 0 ) ||
+                              ( tiltPrediction === TiltPredictionState.STAY_BALANCED && this.plank.getTorqueDueToMasses() === 0 );
 
       if ( isAnswerCorrect ) {
         // Turn off the column(s) so that the plank can move.
@@ -355,13 +356,13 @@ class BalanceGameModel {
    */
   getTipDirection() {
     if ( this.plank.getTorqueDueToMasses() < 0 ) {
-      return 'tiltDownOnRightSide';
+      return TiltPredictionState.TILT_DOWN_ON_RIGHT_SIDE;
     }
     else if ( this.plank.getTorqueDueToMasses() > 0 ) {
-      return 'tiltDownOnLeftSide';
+      return TiltPredictionState.TILT_DOWN_ON_LEFT_SIDE;
     }
     else {
-      return 'stayBalanced';
+      return TiltPredictionState.STAY_BALANCED;
     }
   }
 

@@ -41,6 +41,7 @@ import BalanceGameModel from '../model/BalanceGameModel.js';
 import BalanceMassesChallenge from '../model/BalanceMassesChallenge.js';
 import MassDeductionChallenge from '../model/MassDeductionChallenge.js';
 import TiltPredictionChallenge from '../model/TiltPredictionChallenge.js';
+import TiltPredictionState from '../model/TiltPredictionState.js';
 import GameIconNode from './GameIconNode.js';
 import MassValueEntryNode from './MassValueEntryNode.js';
 import StartGameLevelNode from './StartGameLevelNode.js';
@@ -371,7 +372,7 @@ class BalanceGameView extends ScreenView {
     }
     else if ( this.model.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
       // The button should be enabled once the user has made a prediction.
-      this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value !== 'none';
+      this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value !== TiltPredictionState.NONE;
     }
     else if ( this.model.getCurrentChallenge() instanceof MassDeductionChallenge ) {
       // The button should be enabled for any non-zero value.
