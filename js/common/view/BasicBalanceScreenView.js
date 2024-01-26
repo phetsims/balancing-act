@@ -292,7 +292,7 @@ class BasicBalanceScreenView extends ScreenView {
     this.nonMassLayer.addChild( new ResetAllButton( {
       listener: resetClosure,
       scale: BASharedConstants.RESET_ALL_BUTTON_SCALE,
-      right: indicatorVisibilityControlPanel.right,
+      right: controlPanelsVBox.right,
       bottom: this.layoutBounds.height - 10,
       tandem: tandem.createTandem( 'resetAllButton' )
     } ) );
