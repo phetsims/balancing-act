@@ -16,6 +16,7 @@ import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButton
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import balancingAct from '../../balancingAct.js';
+import BAQueryParameters from '../../common/BAQueryParameters.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 
 const selectLevelString = VegasStrings.selectLevel;
@@ -84,7 +85,8 @@ class StartGameLevelNode extends Node {
     const levelSelectionButtonGroup = new LevelSelectionButtonGroup( buttonItems, {
       flowBoxOptions: {
         spacing: 30
-      }
+      },
+      gameLevels: BAQueryParameters.gameLevels
     } );
     this.addChild( levelSelectionButtonGroup );
 
@@ -100,11 +102,11 @@ class StartGameLevelNode extends Node {
     this.addChild( resetButton );
 
     // Layout
-    levelSelectionButtonGroup.left = 37; // empirically determined
+    levelSelectionButtonGroup.centerX = options.size.width / 2;
     levelSelectionButtonGroup.centerY = options.size.height * 0.45;
     resetButton.right = options.size.width - options.controlsInset;
     resetButton.bottom = options.size.height - options.controlsInset;
-    title.centerX = options.size.width / 2;
+    title.centerX = levelSelectionButtonGroup.centerX;
     title.centerY = levelSelectionButtonGroup.top / 2;
     timerToggleButton.left = options.controlsInset;
     timerToggleButton.bottom = options.size.height - options.controlsInset;
