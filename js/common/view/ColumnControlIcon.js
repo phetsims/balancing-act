@@ -10,6 +10,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Circle, LinearGradient, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
+import BASharedConstants from '../BASharedConstants.js';
 
 // constants
 const CORNER_ROUNDING = 4;
@@ -19,7 +20,7 @@ function createMiniColumn( size, options ) {
   const rootNode = new Node();
 
   // Create the gradient fill.
-  const columnGradient = new LinearGradient( 0, 0, size.width, 0 ).addColorStop( 0, 'rgb( 150, 150, 150 )' ).addColorStop( 0.25, 'rgb( 210, 210, 210 )' ).addColorStop( 0.65, 'rgb( 150, 150, 150 )' ).addColorStop( 1, 'rgb( 170, 170, 170 )' );
+  const columnGradient = BASharedConstants.GET_COLUMN_BODY_GRADIENT( new Shape().moveTo( 0, 0 ).lineTo( size.width, 0 ) );
 
   // Add the main body of the column.
   rootNode.addChild( new Rectangle( 0, 0, size.width * 0.75, size.height, 0, 0,
