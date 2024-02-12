@@ -9,7 +9,7 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { ManualConstraint, Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
@@ -76,6 +76,9 @@ class BrickStackNode extends VBox {
             maxWidth: maxTextWidth
           }
         );
+        massValueText.selfBoundsProperty.link( selfBounds => {
+          massValueText.localBounds = selfBounds.withOffsets( 0, 0, 0, -2 );
+        } );
         const kgText = new Text(
           kgStringProperty,
           {
@@ -85,12 +88,8 @@ class BrickStackNode extends VBox {
 
         massLabel = new VBox( {
           children: [ massValueText, kgText ],
-          align: 'center'
-        } );
-
-        // As the height of the text gets smaller with translations we need to adjust the VBox spacing.
-        ManualConstraint.create( this, [ massLabel, kgText ], ( massLabelProxy, kgTextProxy ) => {
-          massLabel.spacing = kgTextProxy.height < 8 ? 0 : -4;
+          align: 'center',
+          spacing: 0
         } );
       }
       this.addChild( massLabel );
