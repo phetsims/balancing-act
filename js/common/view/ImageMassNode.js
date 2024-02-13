@@ -42,6 +42,7 @@ class ImageMassNode extends Node {
     const self = this;
 
     let massLabel;
+    let massLabelContainer;
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
@@ -53,7 +54,11 @@ class ImageMassNode extends Node {
           formatNames: [ '0', '1' ]
         } );
       massLabel = new Text( massLabelStringProperty, { font: new PhetFont( 12 ) } );
-      this.addChild( massLabel );
+
+      // Avoid infinite loops like https://github.com/phetsims/axon/issues/447 by applying the maxWidth to a different Node
+      // than the one that is used for layout.
+      massLabelContainer = new Node( { children: [ massLabel ] } );
+      this.addChild( massLabelContainer );
 
       // Observe changes to mass indicator label visibility.
       massLabelVisibleProperty.link( visible => {
@@ -83,11 +88,15 @@ class ImageMassNode extends Node {
 
       if ( isLabeled ) {
 
-        ManualConstraint.create( this, [ massLabel, imageNode ], ( massLabelProxy, imageNodeProxy ) => {
-          massLabelProxy.maxWidth = imageNodeProxy.width;
-          massLabelProxy.centerX = imageNodeProxy.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
-          massLabelProxy.bottom = imageNodeProxy.top;
-        } );
+        ManualConstraint.create( this, [ massLabel, massLabelContainer, imageNode ],
+          ( massLabelProxy, massLabelContainerProxy, imageNodeProxy ) => {
+
+            // Avoid infinite loops like https://github.com/phetsims/axon/issues/447 by applying the maxWidth to a different Node
+            // than the one that is used for translation.
+            massLabelProxy.maxWidth = imageNodeProxy.width;
+            massLabelContainerProxy.centerX = imageNodeProxy.centerX + modelViewTransform.modelToViewDeltaX( imageMass.centerOfMassXOffset );
+            massLabelContainerProxy.bottom = imageNodeProxy.top;
+          } );
 
         // Increase the touchArea and mouseArea bounds in the x direction if the massLabel extends beyond the imageNode bounds.
         const bounds = imageNode.bounds.copy();
