@@ -93,10 +93,7 @@ class BalanceModel {
    */
   removeMass( mass ) {
     this.massList.remove( mass );
-    if ( mass.userControlledMassesUpdater ) {
-      mass.userControlledProperty.unlink( mass.userControlledMassesUpdater );
-      mass.userControlledMassesUpdater = null;
-    }
+    mass.dispose();
   }
 
   /**

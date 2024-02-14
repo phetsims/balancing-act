@@ -62,7 +62,7 @@ class Mass extends PhetioObject {
     this.expectedAnimationTime = 0;
     this.isMystery = isMystery;
 
-    // This property is used to keep track of a function that is used to to
+    // This property is used to keep track of a function that is used to
     // add/remove this mass from a list of user-controlled masses.
     this.userControlledMassesUpdater = null;
 
@@ -70,7 +70,18 @@ class Mass extends PhetioObject {
     // that indicates where their center of mass is when placed on a balance.
     // This is the horizontal offset from the center of the shape or image.
     this.centerOfMassXOffset = 0;
+  }
 
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    if ( this.userControlledMassesUpdater ) {
+      this.userControlledProperty.unlink( this.userControlledMassesUpdater );
+      this.userControlledMassesUpdater = null;
+    }
+    super.dispose();
   }
 
   /**
