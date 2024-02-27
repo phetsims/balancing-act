@@ -87,13 +87,12 @@ class BalanceModel {
   }
 
   /**
-   * Remove a mass from the model.  Sub-types often do additional things.
+   * Remove a mass from the model.  Subtypes often do additional things.
    * @param mass
    * @public
    */
   removeMass( mass ) {
     this.massList.remove( mass );
-    mass.dispose();
   }
 
   /**

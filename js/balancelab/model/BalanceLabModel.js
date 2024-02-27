@@ -25,7 +25,8 @@ class BalanceLabModel extends BalanceModel {
     super( tandem );
 
     // @public {PhetioGroup.<BrickStack>}
-    this.brickStackGroup = new PhetioGroup( ( tandem, numberOfBricks, position ) => {
+    this.brickStackGroup = new PhetioGroup(
+      ( tandem, numberOfBricks, position ) => {
         const brickStack = new BrickStack( numberOfBricks, position, {
           tandem: tandem,
           phetioDynamicElement: true
@@ -34,13 +35,16 @@ class BalanceLabModel extends BalanceModel {
         brickStack.animationDestination = position;
         return brickStack;
       },
-      [ 1, Vector2.ZERO ], {
+      [ 1, Vector2.ZERO ],
+      {
         tandem: tandem.createTandem( 'brickStackGroup' ),
         phetioType: PhetioGroup.PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
-      } );
+      }
+    );
 
     // @public {PhetioGroup.<MysteryMass>}
-    this.mysteryMassGroup = new PhetioGroup( ( tandem, position, mysteryMassId ) => {
+    this.mysteryMassGroup = new PhetioGroup(
+      ( tandem, position, mysteryMassId ) => {
         const mysteryMassModelElement = new MysteryMass( position, mysteryMassId, {
           tandem: tandem,
           phetioDynamicElement: true
@@ -49,10 +53,12 @@ class BalanceLabModel extends BalanceModel {
         mysteryMassModelElement.userControlledProperty.set( true );
         return mysteryMassModelElement;
       },
-      [ Vector2.ZERO, 0 ], {
+      [ Vector2.ZERO, 0 ],
+      {
         tandem: tandem.createTandem( 'mysteryMassGroup' ),
         phetioType: PhetioGroup.PhetioGroupIO( ReferenceIO( IOType.ObjectIO ) )
-      } );
+      }
+    );
 
     // TODO: Add person group here too, see https://github.com/phetsims/balancing-act/issues/99
   }
@@ -89,16 +95,18 @@ class BalanceLabModel extends BalanceModel {
    */
   removeMassAnimated( mass ) {
 
-    const self = this;
-
     // Register a listener for the completion of the removal animation sequence.
-    function removeMass( isAnimating, wasAnimating ) {
+    const removeMass = ( isAnimating, wasAnimating ) => {
       if ( wasAnimating && !isAnimating ) {
-        // Animation sequence has completed.
+
+        // Animation sequence has completed, so remove the mass from the model.
         mass.animatingProperty.unlink( removeMass );
-        BalanceModel.prototype.removeMass.call( self, mass );
+        super.removeMass( mass );
+        if ( this.brickStackGroup.includes( mass ) ) {
+          this.brickStackGroup.disposeElement( mass );
+        }
       }
-    }
+    };
 
     mass.animatingProperty.link( removeMass );
 

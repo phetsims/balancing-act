@@ -137,6 +137,7 @@ class BasicBalanceScreenView extends ScreenView {
       const removalListener = removedMass => {
         if ( removedMass === addedMass ) {
           massesLayer.removeChild( massNode );
+          massNode.dispose();
           this.massesToNodesMap.delete( removedMass );
           model.massList.removeItemRemovedListener( removalListener );
         }

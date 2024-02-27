@@ -48,8 +48,7 @@ class BrickStackCreatorNode extends MassCreatorNode {
       SCALING_MVT,
       false,
       new Property( false ),
-      false,
-      model.columnStateProperty
+      false
     );
 
     // Make a larger touch area.  The diameter of the circle was determined empirically.

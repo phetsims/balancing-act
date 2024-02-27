@@ -77,10 +77,7 @@ class Mass extends PhetioObject {
    * @override
    */
   dispose() {
-    if ( this.userControlledMassesUpdater ) {
-      this.userControlledProperty.unlink( this.userControlledMassesUpdater );
-      this.userControlledMassesUpdater = null;
-    }
+    this.userControlledProperty.unlinkAll();
     super.dispose();
   }
 

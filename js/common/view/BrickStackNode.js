@@ -12,8 +12,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Path, Text, VBox } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
-import BAQueryParameters from '../BAQueryParameters.js';
-import ColumnState from '../model/ColumnState.js';
 import MassDragHandler from './MassDragHandler.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
@@ -31,16 +29,10 @@ class BrickStackNode extends VBox {
    * @param {boolean} isLabeled
    * @param {Property} labelVisibleProperty
    * @param {boolean} draggable
-   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
    */
-  constructor( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable, columnStateProperty ) {
+  constructor( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
     super( { cursor: 'pointer' } );
 
-    // TODO: handle disposal of columnStateProperty, https://github.com/phetsims/balancing-act/issues/94
-    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
-      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
-      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
-    } );
     this.modelViewTransform = modelViewTransform;
     this.previousAngle = 0;
 
@@ -56,6 +48,10 @@ class BrickStackNode extends VBox {
 
     // We link to this below if massLabel exists.
     let massLabel;
+
+    const updateMassLabelVisibility = visible => {
+      massLabel.visible = visible;
+    };
 
     // Create and add the mass label.
     if ( isLabeled ) {
@@ -103,10 +99,7 @@ class BrickStackNode extends VBox {
         .shiftedY( bricksNode.bottom - bricksNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
-      // TODO: handle disposal, https://github.com/phetsims/balancing-act/issues/94
-      labelVisibleProperty.link( visible => {
-        massLabel.visible = visible;
-      } );
+      labelVisibleProperty.link( updateMassLabelVisibility );
     }
 
     // We addChild after the isLabeled conditional so that the bricksNode is in the bottom VBox cell.
@@ -157,9 +150,8 @@ class BrickStackNode extends VBox {
     }
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
-    brickStack.animatingProperty.link( animating => {
-      this.pickable = !animating;
-    } );
+    const updatePickabilityWhenAnimating = animating => { this.pickable = !animating; };
+    brickStack.animatingProperty.link( updatePickabilityWhenAnimating );
 
     // Add the drag handler if this is intended to be draggable.
     if ( draggable ) {
@@ -169,6 +161,26 @@ class BrickStackNode extends VBox {
 
       this.addInputListener( this.dragHandler );
     }
+
+    // Unlink any listeners that could cause memory leaks.
+    this.disposeBrickStackNode = () => {
+      brickStack.animatingProperty.unlink( updatePickabilityWhenAnimating );
+      if ( labelVisibleProperty.hasListener( updateMassLabelVisibility ) ) {
+        labelVisibleProperty.unlink( updateMassLabelVisibility );
+      }
+      if ( this.dragHandler ) {
+        this.removeInputListener( this.dragHandler );
+      }
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeBrickStackNode();
+    super.dispose();
   }
 }
 

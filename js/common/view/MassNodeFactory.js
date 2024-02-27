@@ -27,7 +27,7 @@ const MassNodeFactory = {
       massNode = new ImageMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true, columnStateProperty );
     }
     else if ( mass instanceof BrickStack ) {
-      massNode = new BrickStackNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true, columnStateProperty );
+      massNode = new BrickStackNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true );
     }
     else {
       assert && assert( true, 'Error: Unrecognized mass type sent to MassNodeFactory.' );
