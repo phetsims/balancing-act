@@ -1,4 +1,4 @@
-// Copyright 2013-2023, University of Colorado Boulder
+// Copyright 2013-2024, University of Colorado Boulder
 
 /**
  * Primary model class for the 'balance lab' tab in the balancing act simulation. This model depicts a plank on a

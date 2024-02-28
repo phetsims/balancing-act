@@ -1,4 +1,4 @@
-// Copyright 2013-2022, University of Colorado Boulder
+// Copyright 2013-2024, University of Colorado Boulder
 
 /**
  * This object type represents a stack of bricks in a toolbox.  When the user clicks on this node, the corresponding
