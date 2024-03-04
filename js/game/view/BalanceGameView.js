@@ -106,12 +106,16 @@ class BalanceGameView extends ScreenView {
       gameModel.tiltedSupportColumn,
       gameModel.columnStateProperty
     ) );
+
+    const visibleProperty = DerivedProperty.valueEqualsConstant( gameModel.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
     gameModel.levelSupportColumns.forEach( levelSupportColumn => {
-      const visibleProperty = DerivedProperty.valueEqualsConstant( gameModel.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
+      const transformedColumnShape = modelViewTransform.modelToViewShape( levelSupportColumn );
       this.challengeLayer.addChild( new LevelSupportColumnNode(
-        modelViewTransform,
-        levelSupportColumn,
         {
+          columnWidth: transformedColumnShape.bounds.width,
+          columnHeight: transformedColumnShape.bounds.height,
+          x: transformedColumnShape.bounds.x,
+          y: transformedColumnShape.bounds.y,
           visibleProperty: visibleProperty
         }
       ) );

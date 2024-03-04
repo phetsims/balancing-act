@@ -158,13 +158,17 @@ class BasicBalanceScreenView extends ScreenView {
     const plankNode = new PlankNode( modelViewTransform, model.plank );
     this.nonMassLayer.addChild( plankNode );
     this.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
+
+    const visibleProperty = DerivedProperty.valueEqualsConstant( model.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
     model.supportColumns.forEach( supportColumn => {
-      const visibleProperty = DerivedProperty.valueEqualsConstant( model.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
+      const transformedColumnShape = modelViewTransform.modelToViewShape( supportColumn );
       this.nonMassLayer.addChild( new LevelSupportColumnNode(
-        modelViewTransform,
-        supportColumn,
         {
-          visibleProperty: visibleProperty
+          columnWidth: transformedColumnShape.bounds.width,
+          columnHeight: transformedColumnShape.bounds.height,
+          visibleProperty: visibleProperty,
+          x: transformedColumnShape.bounds.x,
+          y: transformedColumnShape.bounds.y
         }
       ) );
     } );
