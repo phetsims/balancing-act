@@ -9,11 +9,13 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import { DerivedProperty } from '../../../../axon/js/imports.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, HStrut, Node, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
@@ -22,12 +24,12 @@ import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../BASharedConstants.js';
+import ColumnState from '../model/ColumnState.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 import AttachmentBarNode from './AttachmentBarNode.js';
 import ColumnOnOffController from './ColumnOnOffController.js';
 import FulcrumNode from './FulcrumNode.js';
 import LevelIndicatorNode from './LevelIndicatorNode.js';
-import LevelSupportColumnNode from './LevelSupportColumnNode.js';
 import MassNodeFactory from './MassNodeFactory.js';
 import MysteryVectorNode from './MysteryVectorNode.js';
 import PlankNode from './PlankNode.js';
@@ -157,10 +159,13 @@ class BasicBalanceScreenView extends ScreenView {
     this.nonMassLayer.addChild( plankNode );
     this.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
     model.supportColumns.forEach( supportColumn => {
+      const visibleProperty = DerivedProperty.valueEqualsConstant( model.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
       this.nonMassLayer.addChild( new LevelSupportColumnNode(
         modelViewTransform,
         supportColumn,
-        model.columnStateProperty
+        {
+          visibleProperty: visibleProperty
+        }
       ) );
     } );
 

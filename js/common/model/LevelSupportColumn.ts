@@ -20,8 +20,8 @@ const COLUMN_WIDTH = 0.35; // In meters
  * @param centerX
  * @constructor
  */
-function LevelSupportColumn( height, centerX ) {
-  this.shape = Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
+function LevelSupportColumn( height: number, centerX: number ): Shape {
+  return Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
 }
 
 balancingAct.register( 'LevelSupportColumn', LevelSupportColumn );

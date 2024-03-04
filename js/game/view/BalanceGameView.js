@@ -14,6 +14,7 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
+import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, Color, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
@@ -30,7 +31,6 @@ import PositionIndicatorChoice from '../../common/model/PositionIndicatorChoice.
 import AttachmentBarNode from '../../common/view/AttachmentBarNode.js';
 import FulcrumNode from '../../common/view/FulcrumNode.js';
 import LevelIndicatorNode from '../../common/view/LevelIndicatorNode.js';
-import LevelSupportColumnNode from '../../common/view/LevelSupportColumnNode.js';
 import MassNodeFactory from '../../common/view/MassNodeFactory.js';
 import PlankNode from '../../common/view/PlankNode.js';
 import PositionIndicatorControlPanel from '../../common/view/PositionIndicatorControlPanel.js';
@@ -107,11 +107,13 @@ class BalanceGameView extends ScreenView {
       gameModel.columnStateProperty
     ) );
     gameModel.levelSupportColumns.forEach( levelSupportColumn => {
+      const visibleProperty = DerivedProperty.valueEqualsConstant( gameModel.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
       this.challengeLayer.addChild( new LevelSupportColumnNode(
         modelViewTransform,
         levelSupportColumn,
-        gameModel.columnStateProperty,
-        false
+        {
+          visibleProperty: visibleProperty
+        }
       ) );
     } );
     this.challengeLayer.addChild( new PlankNode( modelViewTransform, gameModel.plank ) );
@@ -152,8 +154,14 @@ class BalanceGameView extends ScreenView {
 
     // Add the node that allows the user to choose a game level to play.
     this.startGameLevelNode = new StartGameLevelNode(
-      level => { gameModel.startLevel( level ); positionMarkerStateProperty.reset(); },
-      () => { gameModel.reset(); positionMarkerStateProperty.reset(); },
+      level => {
+        gameModel.startLevel( level );
+        positionMarkerStateProperty.reset();
+      },
+      () => {
+        gameModel.reset();
+        positionMarkerStateProperty.reset();
+      },
       gameModel.timerEnabledProperty,
       [
         new GameIconNode( 1 ),

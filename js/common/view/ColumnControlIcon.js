@@ -8,9 +8,9 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import { GET_COLUMN_BODY_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import { Circle, LinearGradient, Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
-import BASharedConstants from '../BASharedConstants.js';
 
 // constants
 const CORNER_ROUNDING = 4;
@@ -20,7 +20,7 @@ function createMiniColumn( size, options ) {
   const rootNode = new Node();
 
   // Create the gradient fill.
-  const columnGradient = BASharedConstants.GET_COLUMN_BODY_GRADIENT( new Shape().moveTo( 0, 0 ).lineTo( size.width, 0 ) );
+  const columnGradient = GET_COLUMN_BODY_GRADIENT( new Shape().moveTo( 0, 0 ).lineTo( size.width, 0 ) );
 
   // Add the main body of the column.
   rootNode.addChild( new Rectangle( 0, 0, size.width * 0.75, size.height, 0, 0,

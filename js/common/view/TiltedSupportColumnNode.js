@@ -7,9 +7,9 @@
  * @author John Blanco
  */
 
+import { GET_COLUMN_BODY_GRADIENT, GET_COLUMN_SUPPORT_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
 import balancingAct from '../../balancingAct.js';
-import BASharedConstants from '../BASharedConstants.js';
 import ColumnState from '../model/ColumnState.js';
 
 class TiltedSupportColumnNode extends Node {
@@ -24,7 +24,7 @@ class TiltedSupportColumnNode extends Node {
 
     // Create and add the main body of the column.
     const transformedColumnShape = modelViewTransform.modelToViewShape( tiltedSupportColumn.shape );
-    const mainBodyGradient = BASharedConstants.GET_COLUMN_BODY_GRADIENT( transformedColumnShape );
+    const mainBodyGradient = GET_COLUMN_BODY_GRADIENT( transformedColumnShape );
 
     const columnNode = new Path( transformedColumnShape,
       {
@@ -37,7 +37,7 @@ class TiltedSupportColumnNode extends Node {
     // Create and add the column support.
     const supportWidth = transformedColumnShape.bounds.width * 1.3; // Empirically determined.
     const supportHeight = transformedColumnShape.bounds.height * 0.15; // Empirically determined.
-    const supportGradient = BASharedConstants.GET_COLUMN_SUPPORT_GRADIENT( transformedColumnShape, supportWidth );
+    const supportGradient = GET_COLUMN_SUPPORT_GRADIENT( transformedColumnShape, supportWidth );
 
     const columnSupportNode = new Rectangle(
       transformedColumnShape.bounds.centerX - supportWidth / 2,
