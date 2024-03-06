@@ -174,7 +174,9 @@ class ImageMassNode extends Node {
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
     imageMass.animatingProperty.link( animating => {
-      this.pickable = !animating;
+      if ( !this.isDisposed ) {
+        this.pickable = !animating;
+      }
     } );
 
     // Add the mouse event handler if this is intended to be draggable.

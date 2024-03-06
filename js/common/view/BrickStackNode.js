@@ -150,7 +150,11 @@ class BrickStackNode extends VBox {
     }
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
-    const updatePickabilityWhenAnimating = animating => { this.pickable = !animating; };
+    const updatePickabilityWhenAnimating = animating => {
+      if ( !this.isDisposed ) {
+        this.pickable = !animating;
+      }
+    };
     brickStack.animatingProperty.link( updatePickabilityWhenAnimating );
 
     // Add the drag handler if this is intended to be draggable.
