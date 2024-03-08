@@ -196,6 +196,7 @@ class BasicBalanceScreenView extends ScreenView {
 
     // Listen to the list of force vectors and manage their representations.
     model.plank.forceVectors.addItemAddedListener( addedMassForceVector => {
+
       // Add a representation for the new vector.
       let forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
@@ -214,15 +215,18 @@ class BasicBalanceScreenView extends ScreenView {
       }
       this.nonMassLayer.addChild( forceVectorNode );
 
-      // Remove representation when corresponding vector removed from model.
-      model.plank.forceVectors.addItemRemovedListener( removedMassForceVector => {
+      // Remove view representation when corresponding force vector is removed from the model.
+      const massForceVectorRemovedListener = removedMassForceVector => {
         if ( removedMassForceVector === addedMassForceVector ) {
           this.nonMassLayer.removeChild( forceVectorNode );
+          forceVectorNode.dispose();
+          model.plank.forceVectors.removeItemRemovedListener( massForceVectorRemovedListener );
         }
-      } );
+      };
+      model.plank.forceVectors.addItemRemovedListener( massForceVectorRemovedListener );
     } );
 
-    // Add the buttons that will control whether or not the support columns are in place.
+    // Add the buttons that will control whether the support columns are in place.
     const columnControlPanel = new ColumnOnOffController( model.columnStateProperty, {
       center: modelViewTransform.modelToViewPosition( new Vector2( 0, -0.5 ) ),
       tandem: tandem.createTandem( 'columnControlPanel' )
