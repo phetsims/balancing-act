@@ -105,6 +105,16 @@ class BalanceLabModel extends BalanceModel {
         if ( this.brickStackGroup.includes( mass ) ) {
           this.brickStackGroup.disposeElement( mass );
         }
+        else if ( this.mysteryMassGroup.includes( mass ) ) {
+          this.mysteryMassGroup.disposeElement( mass );
+        }
+        else {
+
+          // This mass was not in a group.  As of 3/7/2024, there isn't a group for people, so it must be a person.
+          // Just dispose it directly.  See https://github.com/phetsims/balancing-act/issues/99 and
+          // https://github.com/phetsims/balancing-act/issues/94.
+          mass.dispose();
+        }
       }
     };
 

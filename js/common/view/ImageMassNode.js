@@ -43,6 +43,7 @@ class ImageMassNode extends Node {
 
     let massLabel;
     let massLabelContainer;
+    const massLabelVisibilityListener = visible => { massLabel.visible = visible; };
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
@@ -61,9 +62,7 @@ class ImageMassNode extends Node {
       this.addChild( massLabelContainer );
 
       // Observe changes to mass indicator label visibility.
-      massLabelVisibleProperty.link( visible => {
-        massLabel.visible = visible;
-      } );
+      massLabelVisibleProperty.link( massLabelVisibilityListener );
     }
 
     const imageNode = new Image( defaultImage_png );
@@ -71,7 +70,7 @@ class ImageMassNode extends Node {
     let touchArea = imageNode.bounds.copy();
 
     // Observe image changes.
-    imageMass.imageProperty.link( image => {
+    const imageChangeHandler = image => {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );
 
@@ -111,7 +110,8 @@ class ImageMassNode extends Node {
         self.setMouseArea( mouseArea.dilatedX( boundsXDilation ) );
       }
       updatePositionAndAngle();
-    } );
+    };
+    imageMass.imageProperty.link( imageChangeHandler );
 
     // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
     imageNode.boundsProperty.link( () => {
@@ -155,29 +155,27 @@ class ImageMassNode extends Node {
     this.imageNode = imageNode;
 
     // Observe height changes.
-    imageMass.heightProperty.link( newHeight => {
+    const heightChangeHandler = newHeight => {
       imageNode.setScaleMagnitude( 1 );
       const scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( newHeight ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
       updatePositionAndAngle();
-    } );
+    };
+    imageMass.heightProperty.link( heightChangeHandler );
 
     // Observe position changes.
-    imageMass.positionProperty.link( () => {
-      updatePositionAndAngle();
-    } );
+    imageMass.positionProperty.link( updatePositionAndAngle );
 
     // Observe rotational angle changes.
-    imageMass.rotationAngleProperty.link( () => {
-      updatePositionAndAngle();
-    } );
+    imageMass.rotationAngleProperty.link( updatePositionAndAngle );
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
-    imageMass.animatingProperty.link( animating => {
+    const animatingStateChangeHandler = animating => {
       if ( !this.isDisposed ) {
         this.pickable = !animating;
       }
-    } );
+    };
+    imageMass.animatingProperty.link( animatingStateChangeHandler );
 
     // Add the mouse event handler if this is intended to be draggable.
     if ( draggable ) {
@@ -187,6 +185,28 @@ class ImageMassNode extends Node {
 
       this.addInputListener( this.dragHandler );
     }
+
+    // Remove any linkages that could cause memory leaks.
+    this.disposeImageMassNode = () => {
+      imageMass.imageProperty.unlink( imageChangeHandler );
+      massLabel && massLabel.dispose();
+      if ( massLabelVisibleProperty.hasListener( massLabelVisibilityListener ) ) {
+        massLabelVisibleProperty.unlink( massLabelVisibilityListener );
+      }
+      imageMass.heightProperty.unlink( heightChangeHandler );
+      imageMass.positionProperty.unlink( updatePositionAndAngle );
+      imageMass.rotationAngleProperty.unlink( updatePositionAndAngle );
+      imageMass.animatingProperty.unlink( animatingStateChangeHandler );
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    super.dispose();
+    this.disposeImageMassNode();
   }
 }
 

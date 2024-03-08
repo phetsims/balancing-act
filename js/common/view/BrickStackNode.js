@@ -54,6 +54,7 @@ class BrickStackNode extends VBox {
     };
 
     // Create and add the mass label.
+    let kgText;
     if ( isLabeled ) {
       const maxTextWidth = bricksNode.bounds.width;
       if ( brickStack.isMystery ) {
@@ -75,12 +76,13 @@ class BrickStackNode extends VBox {
         massValueText.selfBoundsProperty.link( selfBounds => {
           massValueText.localBounds = selfBounds.withOffsets( 0, 0, 0, -2 );
         } );
-        const kgText = new Text(
+        kgText = new Text(
           kgStringProperty,
           {
             font: LABEL_FONT,
             maxWidth: maxTextWidth
-          } );
+          }
+        );
 
         massLabel = new VBox( {
           children: [ massValueText, kgText ],
@@ -168,6 +170,7 @@ class BrickStackNode extends VBox {
 
     // Unlink any listeners that could cause memory leaks.
     this.disposeBrickStackNode = () => {
+      kgText && kgText.dispose();
       brickStack.animatingProperty.unlink( updatePickabilityWhenAnimating );
       if ( labelVisibleProperty.hasListener( updateMassLabelVisibility ) ) {
         labelVisibleProperty.unlink( updateMassLabelVisibility );

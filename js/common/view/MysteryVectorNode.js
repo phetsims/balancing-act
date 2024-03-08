@@ -23,26 +23,40 @@ class MysteryVectorNode extends Node {
 
   /**
    * @param positionedVectorProperty
-   * @param visibilityProperty
-   * @param modelViewTransform Model-view transform
+   * @param visibleProperty
+   * @param modelViewTransform
    */
-  constructor( positionedVectorProperty, visibilityProperty, modelViewTransform ) {
-    super();
+  constructor( positionedVectorProperty, visibleProperty, modelViewTransform ) {
+
+    super( {
+      visibleProperty: visibleProperty
+    } );
 
     // Create the 'mystery vector' node and add it as a child.
     this.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
 
     // Follow the position as it changes
-    positionedVectorProperty.link( positionedVector => {
+    const positionHandler = positionedVector => {
       this.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
       this.top = modelViewTransform.modelToViewY( positionedVector.origin.y ) + Y_DIST_FROM_POSITION;
-    } );
+    };
+    positionedVectorProperty.link( positionHandler );
 
-    // Control visibility
-    visibilityProperty.link( visible => {
-      this.visible = visible;
-    } );
+    // Clean up any linkages that could cause memory leaks.
+    this.disposeMysteryVectorNode = () => {
+      positionedVectorProperty.unlink( positionHandler );
+    };
   }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeMysteryVectorNode();
+    super.dispose();
+  }
+
 }
 
 balancingAct.register( 'MysteryVectorNode', MysteryVectorNode );

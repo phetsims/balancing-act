@@ -29,7 +29,7 @@ class HumanMass extends ImageMass {
     super( massValue, humanType.standingImageProperty.value, standingHeight, initialPosition, isMystery );
 
     // Monitor the 'onPlank' property and update the image as changes occur.
-    Multilink.multilink(
+    const imageUpdateMultilink = Multilink.multilink(
       [ this.onPlankProperty, PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty,
         humanType.standingImageProperty, humanType.sittingImageProperty ],
       ( onPlank, portrayal, standingImage, sittingImage ) => {
@@ -47,6 +47,19 @@ class HumanMass extends ImageMass {
         this.imageProperty.set( standingImage );
       }
     } );
+
+    this.disposeHumanMass = () => {
+      imageUpdateMultilink.dispose();
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeHumanMass();
+    super.dispose();
   }
 }
 

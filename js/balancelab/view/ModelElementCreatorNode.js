@@ -33,10 +33,6 @@ class ModelElementCreatorNode extends Node {
     super( options );
     const self = this;
 
-    // Element in the model that is being moved by the user.  Only non-null if the user performed some action that
-    // caused this to be created, such as clicking on this node.
-    this.modelElement = null;
-
     // Offset used when adding an element to the model.  This is useful in making sure that the newly created object
     // isn't positioned in, shall we say, an awkward position with respect to the mouse.
     this.positioningOffset = Vector2.ZERO;
@@ -59,10 +55,10 @@ class ModelElementCreatorNode extends Node {
         const initialPosition = eventToModelPosition( event.pointer.point );
 
         // Create a new mass and add it to the model.  This will cause a view node to be created in the view.
-        this.modelElement = this.addElementToModel( initialPosition );
+        const modelElement = this.addElementToModel( initialPosition );
 
         // Get the view node that should have appeared in the view so that events can be forwarded to its drag handler.
-        const modelElementNode = screenView.getNodeForMass( this.modelElement );
+        const modelElementNode = screenView.getNodeForMass( modelElement );
         assert && assert( modelElementNode, 'unable to find view node for model element' );
 
         modelElementNode.dragHandler.press( event, modelElementNode );

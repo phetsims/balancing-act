@@ -21,36 +21,47 @@ class PositionedVectorNode extends Node {
 
   /**
    * @param positionedVectorProperty
-   * @param visibilityProperty
+   * @param visibleProperty
    * @param scalingFactor
    * @param modelViewTransform
    * @param {Object} [options]
    */
-  constructor( positionedVectorProperty, scalingFactor, visibilityProperty, modelViewTransform, options ) {
+  constructor( positionedVectorProperty, scalingFactor, visibleProperty, modelViewTransform, options ) {
     super();
 
-    options = merge(
-      {
-        fill: 'white',
-        stroke: 'black',
-        lineWidth: 1,
-        headHeight: 8,
-        headWidth: 12,
-        tailWidth: 5
-      }, options );
+    options = merge( {
+      visibleProperty: visibleProperty,
+      fill: 'white',
+      stroke: 'black',
+      lineWidth: 1,
+      headHeight: 8,
+      headWidth: 12,
+      tailWidth: 5
+    }, options );
 
     // Create the vector node and add it as a child.
     const length = positionedVectorProperty.value.vector.magnitude * scalingFactor;
     this.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
-    positionedVectorProperty.link( positionedVector => {
+    const positionHandler = positionedVector => {
       this.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
       this.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
-    } );
+    };
+    positionedVectorProperty.link( positionHandler );
 
-    visibilityProperty.link( visible => {
-      this.visible = visible;
-    } );
+    // Clean up any linkages that could cause memory leaks.
+    this.disposePositionedVectorNode = () => {
+      positionedVectorProperty.unlink( positionHandler );
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposePositionedVectorNode();
+    super.dispose();
   }
 }
 
