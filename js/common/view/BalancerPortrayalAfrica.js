@@ -9,28 +9,28 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { AFRICA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import boySitting_svg from '../../../images/africa/boySitting_svg.js';
-import boyStanding_svg from '../../../images/africa/boyStanding_svg.js';
-import girlSitting_svg from '../../../images/africa/girlSitting_svg.js';
-import girlStanding_svg from '../../../images/africa/girlStanding_svg.js';
-import labIcon_svg from '../../../images/africa/labIcon_svg.js';
-import manSitting_svg from '../../../images/africa/manSitting_svg.js';
-import manStanding_svg from '../../../images/africa/manStanding_svg.js';
-import womanSitting_svg from '../../../images/africa/womanSitting_svg.js';
-import womanStanding_svg from '../../../images/africa/womanStanding_svg.js';
+import africaBoySitting_svg from '../../../images/localized/africaBoySitting_svg.js';
+import africaBoyStanding_svg from '../../../images/localized/africaBoyStanding_svg.js';
+import africaGirlSitting_svg from '../../../images/localized/africaGirlSitting_svg.js';
+import africaGirlStanding_svg from '../../../images/localized/africaGirlStanding_svg.js';
+import africaLabIcon_svg from '../../../images/localized/africaLabIcon_svg.js';
+import africaManSitting_svg from '../../../images/localized/africaManSitting_svg.js';
+import africaManStanding_svg from '../../../images/localized/africaManStanding_svg.js';
+import africaWomanSitting_svg from '../../../images/localized/africaWomanSitting_svg.js';
+import africaWomanStanding_svg from '../../../images/localized/africaWomanStanding_svg.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalAfrica = new BalancerPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.africaStringProperty,
-  boyStanding_svg,
-  boySitting_svg,
-  girlStanding_svg,
-  girlSitting_svg,
-  manStanding_svg,
-  manSitting_svg,
-  womanStanding_svg,
-  womanSitting_svg,
-  labIcon_svg,
+  africaBoyStanding_svg,
+  africaBoySitting_svg,
+  africaGirlStanding_svg,
+  africaGirlSitting_svg,
+  africaManStanding_svg,
+  africaManSitting_svg,
+  africaWomanStanding_svg,
+  africaWomanSitting_svg,
+  africaLabIcon_svg,
   AFRICA_REGION_AND_CULTURE_ID
 );
 

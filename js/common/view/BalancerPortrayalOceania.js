@@ -9,28 +9,28 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { OCEANIA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import boySitting_svg from '../../../images/oceania/boySitting_svg.js';
-import boyStanding_svg from '../../../images/oceania/boyStanding_svg.js';
-import girlSitting_svg from '../../../images/oceania/girlSitting_svg.js';
-import girlStanding_svg from '../../../images/oceania/girlStanding_svg.js';
-import labIcon_svg from '../../../images/oceania/labIcon_svg.js';
-import manSitting_svg from '../../../images/oceania/manSitting_svg.js';
-import manStanding_svg from '../../../images/oceania/manStanding_svg.js';
-import womanSitting_svg from '../../../images/oceania/womanSitting_svg.js';
-import womanStanding_svg from '../../../images/oceania/womanStanding_svg.js';
+import oceaniaBoySitting_svg from '../../../images/localized/oceaniaBoySitting_svg.js';
+import oceaniaBoyStanding_svg from '../../../images/localized/oceaniaBoyStanding_svg.js';
+import oceaniaGirlSitting_svg from '../../../images/localized/oceaniaGirlSitting_svg.js';
+import oceaniaGirlStanding_svg from '../../../images/localized/oceaniaGirlStanding_svg.js';
+import oceaniaLabIcon_svg from '../../../images/localized/oceaniaLabIcon_svg.js';
+import oceaniaManSitting_svg from '../../../images/localized/oceaniaManSitting_svg.js';
+import oceaniaManStanding_svg from '../../../images/localized/oceaniaManStanding_svg.js';
+import oceaniaWomanSitting_svg from '../../../images/localized/oceaniaWomanSitting_svg.js';
+import oceaniaWomanStanding_svg from '../../../images/localized/oceaniaWomanStanding_svg.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalOceania = new BalancerPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.oceaniaStringProperty,
-  boyStanding_svg,
-  boySitting_svg,
-  girlStanding_svg,
-  girlSitting_svg,
-  manStanding_svg,
-  manSitting_svg,
-  womanStanding_svg,
-  womanSitting_svg,
-  labIcon_svg,
+  oceaniaBoyStanding_svg,
+  oceaniaBoySitting_svg,
+  oceaniaGirlStanding_svg,
+  oceaniaGirlSitting_svg,
+  oceaniaManStanding_svg,
+  oceaniaManSitting_svg,
+  oceaniaWomanStanding_svg,
+  oceaniaWomanSitting_svg,
+  oceaniaLabIcon_svg,
   OCEANIA_REGION_AND_CULTURE_ID
 );
 
