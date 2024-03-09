@@ -9,15 +9,15 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { ASIA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import asiaBoySitting_svg from '../../../images/localized/asiaBoySitting_svg.js';
-import asiaBoyStanding_svg from '../../../images/localized/asiaBoyStanding_svg.js';
-import asiaGirlSitting_svg from '../../../images/localized/asiaGirlSitting_svg.js';
-import asiaGirlStanding_svg from '../../../images/localized/asiaGirlStanding_svg.js';
-import asiaLabIcon_svg from '../../../images/localized/asiaLabIcon_svg.js';
-import asiaManSitting_svg from '../../../images/localized/asiaManSitting_svg.js';
-import asiaManStanding_svg from '../../../images/localized/asiaManStanding_svg.js';
-import asiaWomanSitting_svg from '../../../images/localized/asiaWomanSitting_svg.js';
-import asiaWomanStanding_svg from '../../../images/localized/asiaWomanStanding_svg.js';
+import asiaBoySitting_svg from '../../../images/asia/asiaBoySitting_svg.js';
+import asiaBoyStanding_svg from '../../../images/asia/asiaBoyStanding_svg.js';
+import asiaGirlSitting_svg from '../../../images/asia/asiaGirlSitting_svg.js';
+import asiaGirlStanding_svg from '../../../images/asia/asiaGirlStanding_svg.js';
+import asiaLabIcon_svg from '../../../images/asia/asiaLabIcon_svg.js';
+import asiaManSitting_svg from '../../../images/asia/asiaManSitting_svg.js';
+import asiaManStanding_svg from '../../../images/asia/asiaManStanding_svg.js';
+import asiaWomanSitting_svg from '../../../images/asia/asiaWomanSitting_svg.js';
+import asiaWomanStanding_svg from '../../../images/asia/asiaWomanStanding_svg.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalAsia = new BalancerPortrayal(

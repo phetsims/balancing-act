@@ -9,15 +9,15 @@
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { OCEANIA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import oceaniaBoySitting_svg from '../../../images/localized/oceaniaBoySitting_svg.js';
-import oceaniaBoyStanding_svg from '../../../images/localized/oceaniaBoyStanding_svg.js';
-import oceaniaGirlSitting_svg from '../../../images/localized/oceaniaGirlSitting_svg.js';
-import oceaniaGirlStanding_svg from '../../../images/localized/oceaniaGirlStanding_svg.js';
-import oceaniaLabIcon_svg from '../../../images/localized/oceaniaLabIcon_svg.js';
-import oceaniaManSitting_svg from '../../../images/localized/oceaniaManSitting_svg.js';
-import oceaniaManStanding_svg from '../../../images/localized/oceaniaManStanding_svg.js';
-import oceaniaWomanSitting_svg from '../../../images/localized/oceaniaWomanSitting_svg.js';
-import oceaniaWomanStanding_svg from '../../../images/localized/oceaniaWomanStanding_svg.js';
+import oceaniaBoySitting_svg from '../../../images/oceania/oceaniaBoySitting_svg.js';
+import oceaniaBoyStanding_svg from '../../../images/oceania/oceaniaBoyStanding_svg.js';
+import oceaniaGirlSitting_svg from '../../../images/oceania/oceaniaGirlSitting_svg.js';
+import oceaniaGirlStanding_svg from '../../../images/oceania/oceaniaGirlStanding_svg.js';
+import oceaniaLabIcon_svg from '../../../images/oceania/oceaniaLabIcon_svg.js';
+import oceaniaManSitting_svg from '../../../images/oceania/oceaniaManSitting_svg.js';
+import oceaniaManStanding_svg from '../../../images/oceania/oceaniaManStanding_svg.js';
+import oceaniaWomanSitting_svg from '../../../images/oceania/oceaniaWomanSitting_svg.js';
+import oceaniaWomanStanding_svg from '../../../images/oceania/oceaniaWomanStanding_svg.js';
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalOceania = new BalancerPortrayal(
