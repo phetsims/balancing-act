@@ -93,6 +93,7 @@ class BalanceModel {
    */
   removeMass( mass ) {
     this.massList.remove( mass );
+    mass.dispose();
   }
 
   /**

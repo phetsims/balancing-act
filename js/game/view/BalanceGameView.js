@@ -127,7 +127,13 @@ class BalanceGameView extends ScreenView {
     gameModel.movableMasses.addItemAddedListener( addedMass => {
 
       // Create and add the view representation for this mass.
-      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ), gameModel.columnStateProperty );
+      const massNode = MassNodeFactory.createMassNode(
+        addedMass,
+        modelViewTransform,
+        true,
+        new Property( true ),
+        gameModel.columnStateProperty
+      );
       this.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
@@ -138,8 +144,10 @@ class BalanceGameView extends ScreenView {
       } );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass() {
+      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass( mass ) {
         self.challengeLayer.removeChild( massNode );
+        massNode.dispose();
+        mass.dispose();
         gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
       } );
     } );

@@ -47,13 +47,12 @@ class BrickStackNode extends VBox {
     } );
 
     // We link to this below if massLabel exists.
-    let massLabel;
-
     const updateMassLabelVisibility = visible => {
       massLabel.visible = visible;
     };
 
     // Create and add the mass label.
+    let massLabel;
     let kgText;
     if ( isLabeled ) {
       const maxTextWidth = bricksNode.bounds.width;
@@ -171,6 +170,7 @@ class BrickStackNode extends VBox {
     // Unlink any listeners that could cause memory leaks.
     this.disposeBrickStackNode = () => {
       kgText && kgText.dispose();
+      massLabel && massLabel.dispose();
       brickStack.animatingProperty.unlink( updatePickabilityWhenAnimating );
       if ( labelVisibleProperty.hasListener( updateMassLabelVisibility ) ) {
         labelVisibleProperty.unlink( updateMassLabelVisibility );

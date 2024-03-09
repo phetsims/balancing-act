@@ -190,6 +190,7 @@ class ImageMassNode extends Node {
     this.disposeImageMassNode = () => {
       imageMass.imageProperty.unlink( imageChangeHandler );
       massLabel && massLabel.dispose();
+      massLabelContainer && massLabelContainer.dispose();
       if ( massLabelVisibleProperty.hasListener( massLabelVisibilityListener ) ) {
         massLabelVisibleProperty.unlink( massLabelVisibilityListener );
       }

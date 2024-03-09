@@ -67,8 +67,11 @@ class BalanceLabModel extends BalanceModel {
    * @public
    */
   reset() {
-    this.massList.clear();
     super.reset();
+
+    // Remove all masses from the model.  This must be done one at a time rather than clearing massList in order to
+    // avoid memory leaks.
+    this.massList.getArrayCopy().forEach( mass => { this.removeMass( mass ); } );
   }
 
   /**
@@ -79,9 +82,11 @@ class BalanceLabModel extends BalanceModel {
     BalanceModel.prototype.addMass.call( this, mass );
     mass.userControlledProperty.lazyLink( isUserControlled => {
       if ( !isUserControlled ) {
+
         // The user has dropped this mass.
         if ( !this.plank.addMassToSurface( mass ) ) {
-          // The attempt to add mass to surface of plank failed, probably because the area below the mass is full, or
+
+          // The attempt to add mass to surface of plank failed, probably because the area below the mass is full or
           // because the mass wasn't over the plank.
           this.removeMassAnimated( mass );
         }
@@ -90,6 +95,7 @@ class BalanceLabModel extends BalanceModel {
   }
 
   /**
+   * Return a mass to the toolbox in an animated fashion, then remove it from the model.
    * @param {Mass} mass
    * @public
    */
@@ -101,20 +107,7 @@ class BalanceLabModel extends BalanceModel {
 
         // Animation sequence has completed, so remove the mass from the model.
         mass.animatingProperty.unlink( removeMass );
-        super.removeMass( mass );
-        if ( this.brickStackGroup.includes( mass ) ) {
-          this.brickStackGroup.disposeElement( mass );
-        }
-        else if ( this.mysteryMassGroup.includes( mass ) ) {
-          this.mysteryMassGroup.disposeElement( mass );
-        }
-        else {
-
-          // This mass was not in a group.  As of 3/7/2024, there isn't a group for people, so it must be a person.
-          // Just dispose it directly.  See https://github.com/phetsims/balancing-act/issues/99 and
-          // https://github.com/phetsims/balancing-act/issues/94.
-          mass.dispose();
-        }
+        this.removeMass( mass );
       }
     };
 
@@ -122,6 +115,28 @@ class BalanceLabModel extends BalanceModel {
 
     // Kick off the animation back to the toolbox.
     mass.initiateAnimation();
+  }
+
+  /**
+   * Remove a mass from the model.
+   * @public
+   * @override
+   */
+  removeMass( mass ) {
+    this.massList.remove( mass );
+    if ( this.brickStackGroup.includes( mass ) ) {
+      this.brickStackGroup.disposeElement( mass );
+    }
+    else if ( this.mysteryMassGroup.includes( mass ) ) {
+      this.mysteryMassGroup.disposeElement( mass );
+    }
+    else {
+
+      // This mass was not in a group.  As of 3/7/2024, there isn't a phet-io group for people, so the mass should be
+      // directly disposed here. See https://github.com/phetsims/balancing-act/issues/99 and
+      // https://github.com/phetsims/balancing-act/issues/94.
+      mass.dispose();
+    }
   }
 }
 
