@@ -7,8 +7,6 @@
  *
  */
 
-import JoistStrings from '../../../../joist/js/JoistStrings.js';
-import { ASIA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import asiaBoySitting_svg from '../../../images/asia/asiaBoySitting_svg.js';
 import asiaBoyStanding_svg from '../../../images/asia/asiaBoyStanding_svg.js';
 import asiaGirlSitting_svg from '../../../images/asia/asiaGirlSitting_svg.js';
@@ -21,7 +19,7 @@ import asiaWomanStanding_svg from '../../../images/asia/asiaWomanStanding_svg.js
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalAsia = new BalancerPortrayal(
-  JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.asiaStringProperty,
+  'asia',
   asiaBoyStanding_svg,
   asiaBoySitting_svg,
   asiaGirlStanding_svg,
@@ -30,8 +28,7 @@ const BalancerPortrayalAsia = new BalancerPortrayal(
   asiaManSitting_svg,
   asiaWomanStanding_svg,
   asiaWomanSitting_svg,
-  asiaLabIcon_svg,
-  ASIA_REGION_AND_CULTURE_ID
+  asiaLabIcon_svg
 );
 
 

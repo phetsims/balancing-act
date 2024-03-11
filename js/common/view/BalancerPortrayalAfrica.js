@@ -7,8 +7,6 @@
  *
  */
 
-import JoistStrings from '../../../../joist/js/JoistStrings.js';
-import { AFRICA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import africaBoySitting_svg from '../../../images/africa/africaBoySitting_svg.js';
 import africaBoyStanding_svg from '../../../images/africa/africaBoyStanding_svg.js';
 import africaGirlSitting_svg from '../../../images/africa/africaGirlSitting_svg.js';
@@ -21,7 +19,7 @@ import africaWomanStanding_svg from '../../../images/africa/africaWomanStanding_
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalAfrica = new BalancerPortrayal(
-  JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.africaStringProperty,
+  'africa',
   africaBoyStanding_svg,
   africaBoySitting_svg,
   africaGirlStanding_svg,
@@ -30,8 +28,7 @@ const BalancerPortrayalAfrica = new BalancerPortrayal(
   africaManSitting_svg,
   africaWomanStanding_svg,
   africaWomanSitting_svg,
-  africaLabIcon_svg,
-  AFRICA_REGION_AND_CULTURE_ID
+  africaLabIcon_svg
 );
 
 

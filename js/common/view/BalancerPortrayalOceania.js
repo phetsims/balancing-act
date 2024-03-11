@@ -7,8 +7,6 @@
  *
  */
 
-import JoistStrings from '../../../../joist/js/JoistStrings.js';
-import { OCEANIA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import oceaniaBoySitting_svg from '../../../images/oceania/oceaniaBoySitting_svg.js';
 import oceaniaBoyStanding_svg from '../../../images/oceania/oceaniaBoyStanding_svg.js';
 import oceaniaGirlSitting_svg from '../../../images/oceania/oceaniaGirlSitting_svg.js';
@@ -21,7 +19,7 @@ import oceaniaWomanStanding_svg from '../../../images/oceania/oceaniaWomanStandi
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalOceania = new BalancerPortrayal(
-  JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.oceaniaStringProperty,
+  'oceania',
   oceaniaBoyStanding_svg,
   oceaniaBoySitting_svg,
   oceaniaGirlStanding_svg,
@@ -30,8 +28,7 @@ const BalancerPortrayalOceania = new BalancerPortrayal(
   oceaniaManSitting_svg,
   oceaniaWomanStanding_svg,
   oceaniaWomanSitting_svg,
-  oceaniaLabIcon_svg,
-  OCEANIA_REGION_AND_CULTURE_ID
+  oceaniaLabIcon_svg
 );
 
 

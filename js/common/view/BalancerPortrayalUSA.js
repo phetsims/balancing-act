@@ -7,8 +7,6 @@
  *
  */
 
-import JoistStrings from '../../../../joist/js/JoistStrings.js';
-import { USA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import usaBoySitting_svg from '../../../images/usa/usaBoySitting_svg.js';
 import usaBoyStanding_svg from '../../../images/usa/usaBoyStanding_svg.js';
 import usaGirlSitting_svg from '../../../images/usa/usaGirlSitting_svg.js';
@@ -22,7 +20,7 @@ import BalancerPortrayal from './BalancerPortrayal.js';
 
 // TODO: Remove "../../../balancing-act/images/**/*", from all/tsconfig.json file once all svg files have been used. https://github.com/phetsims/balancing-act/issues/140
 const BalancerPortrayalUSA = new BalancerPortrayal(
-  JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.unitedStatesOfAmericaStringProperty,
+  'usa',
   usaBoyStanding_svg,
   usaBoySitting_svg,
   usaGirlStanding_svg,
@@ -31,8 +29,7 @@ const BalancerPortrayalUSA = new BalancerPortrayal(
   usaManSitting_svg,
   usaWomanStanding_svg,
   usaWomanSitting_svg,
-  usaLabIcon_svg,
-  USA_REGION_AND_CULTURE_ID
+  usaLabIcon_svg
 );
 
 

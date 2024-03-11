@@ -7,8 +7,6 @@
  *
  */
 
-import JoistStrings from '../../../../joist/js/JoistStrings.js';
-import { LATIN_AMERICA_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import latinAmericaBoySitting_svg from '../../../images/latinAmerica/latinAmericaBoySitting_svg.js';
 import latinAmericaBoyStanding_svg from '../../../images/latinAmerica/latinAmericaBoyStanding_svg.js';
 import latinAmericaGirlSitting_svg from '../../../images/latinAmerica/latinAmericaGirlSitting_svg.js';
@@ -21,7 +19,7 @@ import latinAmericaWomanStanding_svg from '../../../images/latinAmerica/latinAme
 import BalancerPortrayal from './BalancerPortrayal.js';
 
 const BalancerPortrayalLatinAmerica = new BalancerPortrayal(
-  JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.latinAmericaStringProperty,
+  'latinAmerica',
   latinAmericaBoyStanding_svg,
   latinAmericaBoySitting_svg,
   latinAmericaGirlStanding_svg,
@@ -30,8 +28,7 @@ const BalancerPortrayalLatinAmerica = new BalancerPortrayal(
   latinAmericaManSitting_svg,
   latinAmericaWomanStanding_svg,
   latinAmericaWomanSitting_svg,
-  latinAmericaLabIcon_svg,
-  LATIN_AMERICA_REGION_AND_CULTURE_ID
+  latinAmericaLabIcon_svg
 );
 
 

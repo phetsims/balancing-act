@@ -13,7 +13,7 @@ import balancingAct from '../../balancingAct.js';
 export default class BalancerPortrayal extends RegionAndCulturePortrayal {
 
   /**
-   * @param label { LocalizedStringProperty }
+   * @param {RegionAndCulture} regionAndCulture
    * @param boyStanding { HTMLImageElement }
    * @param boySitting { HTMLImageElement }
    * @param girlStanding { HTMLImageElement }
@@ -23,15 +23,13 @@ export default class BalancerPortrayal extends RegionAndCulturePortrayal {
    * @param womanStanding { HTMLImageElement }
    * @param womanSitting { HTMLImageElement }
    * @param screenIcon { HTMLImageElement }
-   * @param queryParameterValue { string }
    */
-  constructor( label,
+  constructor( regionAndCulture,
                boyStanding, boySitting, girlStanding,
                girlSitting, manStanding, manSitting,
-               womanStanding, womanSitting, screenIcon,
-               queryParameterValue ) {
+               womanStanding, womanSitting, screenIcon ) {
 
-    super( label, queryParameterValue, {} );
+    super( regionAndCulture );
 
     this.boyStanding = boyStanding;
     this.boySitting = boySitting;
