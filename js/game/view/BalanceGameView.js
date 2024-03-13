@@ -144,10 +144,9 @@ class BalanceGameView extends ScreenView {
       } );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass( mass ) {
+      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass() {
         self.challengeLayer.removeChild( massNode );
         massNode.dispose();
-        mass.dispose();
         gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
       } );
     } );
