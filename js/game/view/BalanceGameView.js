@@ -241,10 +241,8 @@ class BalanceGameView extends ScreenView {
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     this.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
     this.challengeLayer.addChild( this.tiltPredictionSelectorNode );
-    this.tiltPredictionSelectorNode.center = new Vector2(
-      modelViewTransform.modelToViewX( 0 ),
-      this.challengeTitleNode.bounds.maxY + 100
-    );
+    this.tiltPredictionSelectorNode.centerX = modelViewTransform.modelToViewX( 0 );
+    this.tiltPredictionSelectorNode.bottom = modelViewTransform.modelToViewY( BalanceGameModel.PLANK_HEIGHT + 0.8 );
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.

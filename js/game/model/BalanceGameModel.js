@@ -401,6 +401,7 @@ class BalanceGameModel {
 // statics
 BalanceGameModel.PROBLEMS_PER_LEVEL = CHALLENGES_PER_PROBLEM_SET;
 BalanceGameModel.MAX_POSSIBLE_SCORE = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
+BalanceGameModel.PLANK_HEIGHT = PLANK_HEIGHT;
 
 balancingAct.register( 'BalanceGameModel', BalanceGameModel );
 

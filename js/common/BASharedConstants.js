@@ -17,8 +17,6 @@ const BASharedConstants = {
   // any phet-io instrumention. https://github.com/phetsims/phet-io/issues/1939
   LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
   RESET_ALL_BUTTON_SCALE: 0.96
-
-
 };
 
 balancingAct.register( 'BASharedConstants', BASharedConstants );
