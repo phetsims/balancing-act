@@ -134,10 +134,18 @@ class BalanceGameModel {
    * @public
    */
   startLevel( level ) {
+    this.plank.removeAllMasses();
     this.levelProperty.set( level );
     this.scoreProperty.reset();
     this.challengeIndexProperty.reset();
     this.restartGameTimer();
+
+    // Dispose of any challenges that are left over from the previous level.
+    if ( this.challengeList !== null && this.challengeList.length > 0 ) {
+      this.challengeList.forEach( challenge => {
+        challenge.dispose();
+      } );
+    }
 
     // Set up the challenges.
     this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );

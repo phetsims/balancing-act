@@ -57,6 +57,9 @@ const MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Utils.roundSymmetric( Plank.L
 const MAX_GEN_ATTEMPTS = 50;
 const MAX_HALVING_OF_PAST_LIST = 3;
 
+// max number of challenges of the various types to keep history of
+const MAX_CHALLENGE_HISTORY_LENGTH = 60;
+
 // List of masses that can be used on either side of the balance challenges
 // or as the fixed masses in mass deduction challenges.
 const BALANCE_CHALLENGE_MASSES = [
@@ -582,16 +585,21 @@ const BalanceGameChallengeFactory = {
     let uniqueChallengeGenerated = false;
 
     for ( let i = 0; i < MAX_HALVING_OF_PAST_LIST && !uniqueChallengeGenerated; i++ ) {
-      for ( let j = 0; j < MAX_GEN_ATTEMPTS; j++ ) {
+      for ( let j = 0; j < MAX_GEN_ATTEMPTS && !uniqueChallengeGenerated; j++ ) {
 
         // Create a challenge.
         challenge = challengeGenerator();
 
         // Check whether the challenge is unique.
         if ( uniquenessTest( challenge, previousChallenges ) ) {
+
           // If so, we're done.
           uniqueChallengeGenerated = true;
-          break;
+        }
+        else {
+
+          // Dispose of the challenge to avoid memory leaks.
+          challenge.dispose();
         }
       }
       if ( !uniqueChallengeGenerated ) {
@@ -603,6 +611,11 @@ const BalanceGameChallengeFactory = {
     }
     assert && assert( challenge !== null ); // The algorithm above should always produce something, log it if not.
     previousChallenges.push( challenge );
+    if ( previousChallenges.length > MAX_CHALLENGE_HISTORY_LENGTH ) {
+
+      // Get rid of the oldest challenge if we have enough.  This prevents memory leaks.
+      previousChallenges.shift();
+    }
     return challenge;
   },
 
@@ -744,6 +757,18 @@ const BalanceGameChallengeFactory = {
         throw new Error( `Can't generate challenge set for requested level: ${level}` );
     }
     return balanceChallengeList;
+  },
+
+  /**
+   * Test to see if the provided mass is one of the pre-allocated reusable ones.  This is generally used before deciding
+   * whether to dispose a mass when a challenge is completed.
+   * @param mass
+   * @public
+   */
+  isReusableMass( mass ) {
+    return BALANCE_CHALLENGE_MASSES.includes( mass ) ||
+           MYSTERY_MASSES.includes( mass ) ||
+           LOW_PROFILE_MASSES.includes( mass );
   }
 };
 

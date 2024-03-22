@@ -8,6 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import balancingAct from '../../balancingAct.js';
+import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
 
 class BalanceGameChallenge {
 
@@ -35,6 +36,27 @@ class BalanceGameChallenge {
     // where the movable masses balance the fixed masses.  For some challenges,
     // this is what will be displayed to the user if they ask to see a correct answer.
     this.balancedConfiguration = [];
+
+    // Clean up any memory references that could cause leaks.
+    this.disposeBalanceGameChallenge = () => {
+
+      // Here's the thing: When this code was originally written, circa 2013, masses didn't need to be disposed because
+      // simply de-referencing them wouldn't cause memory leaks.  However, with the advent of dynamic region & culture,
+      // the different image type Properties can have references to these masses, ergo, they must be disposed.  However,
+      // some of them might be shared, so we have the check this first.  Yikes.  This would have been designed
+      // differently if all of these requirements had existed at the start, but they didn't, so ya gotta do whacha gotta
+      // do.
+      this.movableMasses.forEach( mass => {
+        if ( !BalanceGameChallengeFactory.isReusableMass( mass ) ) {
+          mass.dispose();
+        }
+      } );
+      this.fixedMassDistancePairs.forEach( massDistancePair => {
+        if ( !BalanceGameChallengeFactory.isReusableMass( massDistancePair.mass ) ) {
+          massDistancePair.mass.dispose();
+        }
+      } );
+    };
   }
 
   /**
@@ -156,6 +178,14 @@ class BalanceGameChallenge {
     // If a match was found for all fixed mass distance pairs, then the
     // lists are equivalent.
     return matchCount === this.fixedMassDistancePairs.length;
+  }
+
+  /**
+   * Clean up any memory linkages that could lead to leaks.
+   * @public
+   */
+  dispose() {
+    this.disposeBalanceGameChallenge();
   }
 }
 

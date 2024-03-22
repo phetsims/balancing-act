@@ -159,6 +159,7 @@ class BalanceGameView extends ScreenView {
       // Add the removal listener for if and when this mass is removed from the model.
       gameModel.fixedMasses.addItemRemovedListener( function removeFixedMass() {
         self.challengeLayer.removeChild( massNode );
+        massNode.dispose();
         gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
       } );
     } );
@@ -376,7 +377,9 @@ class BalanceGameView extends ScreenView {
 
   // @private
   updateCheckAnswerButtonEnabled() {
+
     if ( this.model.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
+
       // The button should be enabled whenever there are masses on the
       // right side of the plank.
       let massesOnRightSide = false;
@@ -388,10 +391,12 @@ class BalanceGameView extends ScreenView {
       this.checkAnswerButton.enabled = massesOnRightSide;
     }
     else if ( this.model.getCurrentChallenge() instanceof TiltPredictionChallenge ) {
+
       // The button should be enabled once the user has made a prediction.
       this.checkAnswerButton.enabled = this.tiltPredictionSelectorNode.tiltPredictionProperty.value !== TiltPredictionState.NONE;
     }
     else if ( this.model.getCurrentChallenge() instanceof MassDeductionChallenge ) {
+
       // The button should be enabled for any non-zero value.
       this.checkAnswerButton.enabled = this.massValueEntryNode.massValueProperty.value !== 0;
     }
@@ -555,6 +560,7 @@ class BalanceGameView extends ScreenView {
 
   // @private
   showLevelResultsNode() {
+
     // Set a new "level completed" node based on the results.
     this.levelCompletedNode = new LevelCompletedNode(
       this.model.levelProperty.get() + 1,
