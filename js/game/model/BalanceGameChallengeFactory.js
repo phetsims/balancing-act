@@ -228,7 +228,12 @@ const BalanceGameChallengeFactory = {
    * Generate the list of solvable balance game challenges that can be
    * created from the given set of two fixed masses and one movable mass.
    */
-  generateSolvableChallenges( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype, distanceIncrement, maxDistance ) {
+  generateSolvableChallenges( fixedMass1Prototype,
+                              fixedMass2Prototype,
+                              movableMassPrototype,
+                              distanceIncrement,
+                              maxDistance ) {
+
     const solvableChallenges = [];
     for ( let fixedMass1Distance = distanceIncrement; fixedMass1Distance <= maxDistance; fixedMass1Distance += distanceIncrement ) {
       for ( let fixedMass2Distance = distanceIncrement; fixedMass2Distance <= maxDistance; fixedMass2Distance += distanceIncrement ) {
@@ -388,12 +393,26 @@ const BalanceGameChallengeFactory = {
       const fixedMass1Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
       const fixedMass2Prototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
       const movableMassPrototype = BALANCE_CHALLENGE_MASSES[ this.randInt( BALANCE_CHALLENGE_MASSES.length ) ];
-      solvableChallenges = this.generateSolvableChallenges( fixedMass1Prototype, fixedMass2Prototype, movableMassPrototype,
-        Plank.INTER_SNAP_TO_MARKER_DISTANCE, Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE );
+      solvableChallenges = this.generateSolvableChallenges(
+        fixedMass1Prototype,
+        fixedMass2Prototype,
+        movableMassPrototype,
+        Plank.INTER_SNAP_TO_MARKER_DISTANCE,
+        Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE
+      );
     } while ( solvableChallenges.length === 0 );
 
     // Choose one of the solvable configurations at random.
-    return solvableChallenges[ this.randInt( solvableChallenges.length ) ];
+    const solvableChallenge = solvableChallenges[ this.randInt( solvableChallenges.length ) ];
+
+    // Dispose the others to avoid memory leaks.
+    solvableChallenges.forEach( sc => {
+      if ( sc !== solvableChallenge ) {
+        sc.dispose();
+      }
+    } );
+
+    return solvableChallenge;
   },
 
   /**
