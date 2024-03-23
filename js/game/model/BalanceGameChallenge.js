@@ -1,4 +1,4 @@
-// Copyright 2014-2021, University of Colorado Boulder
+// Copyright 2014-2024, University of Colorado Boulder
 
 /**
  * Base type for a single "challenge" (a.k.a. problem) that is presented to the user during the balance game.
