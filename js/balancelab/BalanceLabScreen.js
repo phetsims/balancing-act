@@ -7,12 +7,13 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import balancingAct from '../balancingAct.js';
+import BalancingActImages from '../BalancingActImages.js';
 import BalancingActStrings from '../BalancingActStrings.js';
-import BalancerImages from '../common/view/BalancerImages.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
-import BalanceLabScreenIcon from './view/BalanceLabScreenIcon.js';
 import BalanceLabScreenView from './view/BalanceLabScreenView.js';
+import { Image } from '../../../scenery/js/imports.js';
 
 class BalanceLabScreen extends Screen {
 
@@ -22,12 +23,16 @@ class BalanceLabScreen extends Screen {
    */
   constructor( tandem ) {
 
-    const screenIcon = new BalanceLabScreenIcon( BalancerImages.BALANCER_PORTRAYALS );
-
     const options = {
       name: BalancingActStrings.balanceLabStringProperty,
-      homeScreenIcon: screenIcon,
-      navigationBarIcon: screenIcon,
+      homeScreenIcon: new ScreenIcon( new Image( BalancingActImages.labScreenIconImageProperty ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } ),
+      navigationBarIcon: new ScreenIcon( new Image( BalancingActImages.labScreenIconImageProperty ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } ),
       tandem: tandem
     };
 

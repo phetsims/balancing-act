@@ -1,0 +1,68 @@
+{
+  "usa": {
+    "boySitting": "images/usa/usaBoySitting_svg.ts",
+    "boyStanding": "images/usa/usaBoyStanding_svg.ts",
+    "girlSitting": "images/usa/usaGirlSitting_svg.ts",
+    "girlStanding": "images/usa/usaGirlStanding_svg.ts",
+    "labScreenIcon": "images/usa/usaLabScreenIcon_svg.ts",
+    "manSitting": "images/usa/usaManSitting_svg.ts",
+    "manStanding": "images/usa/usaManStanding_svg.ts",
+    "womanSitting": "images/usa/usaWomanSitting_svg.ts",
+    "womanStanding": "images/usa/usaWomanStanding_svg.ts"
+  },
+  "africa": {
+    "boySitting": "images/africa/africaBoySitting_svg.ts",
+    "boyStanding": "images/africa/africaBoyStanding_svg.ts",
+    "girlSitting": "images/africa/africaGirlSitting_svg.ts",
+    "girlStanding": "images/africa/africaGirlStanding_svg.ts",
+    "labScreenIcon": "images/africa/africaLabScreenIcon_svg.ts",
+    "manSitting": "images/africa/africaManSitting_svg.ts",
+    "manStanding": "images/africa/africaManStanding_svg.ts",
+    "womanSitting": "images/africa/africaWomanSitting_svg.ts",
+    "womanStanding": "images/africa/africaWomanStanding_svg.ts"
+  },
+  "africaModest": {
+    "boySitting": "images/africaModest/africaModestBoySitting_svg.ts",
+    "boyStanding": "images/africaModest/africaModestBoyStanding_svg.ts",
+    "girlSitting": "images/africa/africaGirlSitting_svg.ts",
+    "girlStanding": "images/africa/africaGirlStanding_svg.ts",
+    "labScreenIcon": "images/africa/africaLabScreenIcon_svg.ts",
+    "manSitting": "images/africaModest/africaModestManSitting_svg.ts",
+    "manStanding": "images/africaModest/africaModestManStanding_svg.ts",
+    "womanSitting": "images/africa/africaWomanSitting_svg.ts",
+    "womanStanding": "images/africa/africaWomanStanding_svg.ts"
+  },
+  "asia": {
+    "boySitting": "images/asia/asiaBoySitting_svg.ts",
+    "boyStanding": "images/asia/asiaBoyStanding_svg.ts",
+    "girlSitting": "images/asia/asiaGirlSitting_svg.ts",
+    "girlStanding": "images/asia/asiaGirlStanding_svg.ts",
+    "labScreenIcon": "images/asia/asiaLabScreenIcon_svg.ts",
+    "manSitting": "images/asia/asiaManSitting_svg.ts",
+    "manStanding": "images/asia/asiaManStanding_svg.ts",
+    "womanSitting": "images/asia/asiaWomanSitting_svg.ts",
+    "womanStanding": "images/asia/asiaWomanStanding_svg.ts"
+  },
+  "latinAmerica": {
+    "boySitting": "images/latinAmerica/latinAmericaBoySitting_svg.ts",
+    "boyStanding": "images/latinAmerica/latinAmericaBoyStanding_svg.ts",
+    "girlSitting": "images/latinAmerica/latinAmericaGirlSitting_svg.ts",
+    "girlStanding": "images/latinAmerica/latinAmericaGirlStanding_svg.ts",
+    "labScreenIcon": "images/latinAmerica/latinAmericaLabScreenIcon_svg.ts",
+    "manSitting": "images/latinAmerica/latinAmericaManSitting_svg.ts",
+    "manStanding": "images/latinAmerica/latinAmericaManStanding_svg.ts",
+    "womanSitting": "images/latinAmerica/latinAmericaWomanSitting_svg.ts",
+    "womanStanding": "images/latinAmerica/latinAmericaWomanStanding_svg.ts"
+  },
+  "oceania": {
+    "boySitting": "images/oceania/oceaniaBoySitting_svg.ts",
+    "boyStanding": "images/oceania/oceaniaBoyStanding_svg.ts",
+    "girlSitting": "images/oceania/oceaniaGirlSitting_svg.ts",
+    "girlStanding": "images/oceania/oceaniaGirlStanding_svg.ts",
+    "labScreenIcon": "images/oceania/oceaniaLabScreenIcon_svg.ts",
+    "manSitting": "images/oceania/oceaniaManSitting_svg.ts",
+    "manStanding": "images/oceania/oceaniaManStanding_svg.ts",
+    "womanSitting": "images/oceania/oceaniaWomanSitting_svg.ts",
+    "womanStanding": "images/oceania/oceaniaWomanStanding_svg.ts"
+  }
+}
