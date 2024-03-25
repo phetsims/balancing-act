@@ -10,7 +10,6 @@
 
 import Multilink from '../../../../../axon/js/Multilink.js';
 import balancingAct from '../../../balancingAct.js';
-import PreferencesModelSingleton from '../../PreferencesModelSingleton.js';
 import ImageMass from '../ImageMass.js';
 
 class HumanMass extends ImageMass {
@@ -30,9 +29,8 @@ class HumanMass extends ImageMass {
 
     // Monitor the 'onPlank' property and update the image as changes occur.
     const imageUpdateMultilink = Multilink.multilink(
-      [ this.onPlankProperty, PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty,
-        humanType.standingImageProperty, humanType.sittingImageProperty ],
-      ( onPlank, portrayal, standingImage, sittingImage ) => {
+      [ this.onPlankProperty, humanType.standingImageProperty, humanType.sittingImageProperty ],
+      ( onPlank, standingImage, sittingImage ) => {
       if ( onPlank ) {
         const xPosition = this.positionProperty.get().x;
         this.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );

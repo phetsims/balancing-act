@@ -6,61 +6,39 @@
  * @author Luisa Vargas
  */
 
-import MappedProperty from '../../../../axon/js/MappedProperty.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import balancingAct from '../../balancingAct.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
-import PreferencesModelSingleton from '../PreferencesModelSingleton.js';
+import BalancingActImages from '../../BalancingActImages.js';
 
-class HumanTypeEnum extends EnumerationValue {
+export class HumanTypeEnum extends EnumerationValue {
 
-  static BOY = new HumanTypeEnum( 'boy' );
-  static GIRL = new HumanTypeEnum( 'girl' );
-  static MAN = new HumanTypeEnum( 'man' );
-  static WOMAN = new HumanTypeEnum( 'woman' );
+  static BOY = new HumanTypeEnum(
+    BalancingActImages.boyStandingImageProperty,
+    BalancingActImages.boySittingImageProperty );
+
+  static GIRL = new HumanTypeEnum(
+    BalancingActImages.girlStandingImageProperty,
+    BalancingActImages.girlSittingImageProperty );
+
+  static MAN = new HumanTypeEnum(
+    BalancingActImages.manStandingImageProperty,
+    BalancingActImages.manSittingImageProperty );
+
+  static WOMAN = new HumanTypeEnum(
+    BalancingActImages.womanStandingImageProperty,
+    BalancingActImages.womanSittingImageProperty );
 
   static enumeration = new Enumeration( HumanTypeEnum );
 
   /**
-   * @param {string} humanType
+   * @param standingImageProperty
+   * @param sittingImageProperty
    */
-  constructor( humanType ) {
+  constructor( standingImageProperty, sittingImageProperty ) {
     super();
-    this.standingImageProperty = new MappedProperty( PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty, {
-      map: portrayal => {
-        if ( humanType === 'boy' ) {
-          return portrayal.boyStanding;
-        }
-        else if ( humanType === 'girl' ) {
-          return portrayal.girlStanding;
-        }
-        else if ( humanType === 'man' ) {
-          return portrayal.manStanding;
-        }
-        else {
-          assert && assert( humanType === 'woman', 'Human type must be boy, girl, man, or woman but it is ', humanType );
-          return portrayal.womanStanding;
-        }
-      }
-    } );
-
-    this.sittingImageProperty = new MappedProperty( PreferencesModelSingleton.localizationModel.regionAndCulturePortrayalProperty, {
-      map: portrayal => {
-        if ( humanType === 'boy' ) {
-          return portrayal.boySitting;
-        }
-        else if ( humanType === 'girl' ) {
-          return portrayal.girlSitting;
-        }
-        else if ( humanType === 'man' ) {
-          return portrayal.manSitting;
-        }
-        else {
-          assert && assert( humanType === 'woman', 'Human type must be boy, girl, man, or woman but it is ', humanType );
-          return portrayal.womanSitting;
-        }
-      }
-    } );
+    this.standingImageProperty = standingImageProperty;
+    this.sittingImageProperty = sittingImageProperty;
   }
 }
 

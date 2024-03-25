@@ -12,7 +12,6 @@ import soundManager from '../../tambo/js/soundManager.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import BalanceLabScreen from './balancelab/BalanceLabScreen.js';
 import BalancingActStrings from './BalancingActStrings.js';
-import PreferencesModelSingleton from './common/PreferencesModelSingleton.js';
 import BalanceGameScreen from './game/BalanceGameScreen.js';
 import BAIntroScreen from './intro/BAIntroScreen.js';
 
@@ -24,7 +23,6 @@ const tandem = Tandem.ROOT;
 simLauncher.launch( () => {
 
   const simOptions = {
-    preferencesModel: PreferencesModelSingleton,
     credits: {
       leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
       softwareDevelopment: 'John Blanco',
