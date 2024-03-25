@@ -11,7 +11,7 @@ import asiaBoySitting_svg from '../../../images/asia/asiaBoySitting_svg.js';
 import asiaBoyStanding_svg from '../../../images/asia/asiaBoyStanding_svg.js';
 import asiaGirlSitting_svg from '../../../images/asia/asiaGirlSitting_svg.js';
 import asiaGirlStanding_svg from '../../../images/asia/asiaGirlStanding_svg.js';
-import asiaLabIcon_svg from '../../../images/asia/asiaLabIcon_svg.js';
+import asiaLabScreenIcon_svg from '../../../images/asia/asiaLabScreenIcon_svg.js';
 import asiaManSitting_svg from '../../../images/asia/asiaManSitting_svg.js';
 import asiaManStanding_svg from '../../../images/asia/asiaManStanding_svg.js';
 import asiaWomanSitting_svg from '../../../images/asia/asiaWomanSitting_svg.js';
@@ -28,7 +28,7 @@ const BalancerPortrayalAsia = new BalancerPortrayal(
   asiaManSitting_svg,
   asiaWomanStanding_svg,
   asiaWomanSitting_svg,
-  asiaLabIcon_svg
+  asiaLabScreenIcon_svg
 );
 
 

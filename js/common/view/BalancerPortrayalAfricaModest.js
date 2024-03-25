@@ -9,7 +9,7 @@
 
 import africaGirlSitting_svg from '../../../images/africa/africaGirlSitting_svg.js';
 import africaGirlStanding_svg from '../../../images/africa/africaGirlStanding_svg.js';
-import africaLabIcon_svg from '../../../images/africa/africaLabIcon_svg.js';
+import africaLabScreenIcon_svg from '../../../images/africa/africaLabScreenIcon_svg.js';
 import africaWomanSitting_svg from '../../../images/africa/africaWomanSitting_svg.js';
 import africaWomanStanding_svg from '../../../images/africa/africaWomanStanding_svg.js';
 import africaModestBoySitting_svg from '../../../images/africaModest/africaModestBoySitting_svg.js';
@@ -28,7 +28,7 @@ const BalancerPortrayalAfricaModest = new BalancerPortrayal(
   africaModestManSitting_svg,
   africaWomanStanding_svg,
   africaWomanSitting_svg,
-  africaLabIcon_svg
+  africaLabScreenIcon_svg
 );
 
 

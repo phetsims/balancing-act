@@ -11,7 +11,7 @@ import latinAmericaBoySitting_svg from '../../../images/latinAmerica/latinAmeric
 import latinAmericaBoyStanding_svg from '../../../images/latinAmerica/latinAmericaBoyStanding_svg.js';
 import latinAmericaGirlSitting_svg from '../../../images/latinAmerica/latinAmericaGirlSitting_svg.js';
 import latinAmericaGirlStanding_svg from '../../../images/latinAmerica/latinAmericaGirlStanding_svg.js';
-import latinAmericaLabIcon_svg from '../../../images/latinAmerica/latinAmericaLabIcon_svg.js';
+import latinAmericaLabScreenIcon_svg from '../../../images/latinAmerica/latinAmericaLabScreenIcon_svg.js';
 import latinAmericaManSitting_svg from '../../../images/latinAmerica/latinAmericaManSitting_svg.js';
 import latinAmericaManStanding_svg from '../../../images/latinAmerica/latinAmericaManStanding_svg.js';
 import latinAmericaWomanSitting_svg from '../../../images/latinAmerica/latinAmericaWomanSitting_svg.js';
@@ -28,7 +28,7 @@ const BalancerPortrayalLatinAmerica = new BalancerPortrayal(
   latinAmericaManSitting_svg,
   latinAmericaWomanStanding_svg,
   latinAmericaWomanSitting_svg,
-  latinAmericaLabIcon_svg
+  latinAmericaLabScreenIcon_svg
 );
 
 
