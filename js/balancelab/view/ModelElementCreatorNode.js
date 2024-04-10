@@ -13,6 +13,8 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { DragListener, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
+import BAQueryParameters from '../../common/BAQueryParameters.js';
+import ColumnState from '../../common/model/ColumnState.js';
 
 // constants
 const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
@@ -23,9 +25,10 @@ class ModelElementCreatorNode extends Node {
 
   /**
    * @param {BasicBalanceScreenView} screenView
+   * @param {EnumerationDeprecatedProperty} columnStateProperty
    * @param {Object} [options]
    */
-  constructor( screenView, options ) {
+  constructor( screenView, columnStateProperty, options ) {
     options = merge( {
       cursor: 'pointer',
       tandem: Tandem.REQUIRED
@@ -68,6 +71,11 @@ class ModelElementCreatorNode extends Node {
         tandem: options.tandem.createTandem( 'dragListener' )
       }
     ) );
+
+    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
+      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
+      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
+    } );
   }
 
   /**

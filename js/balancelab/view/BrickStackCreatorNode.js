@@ -13,8 +13,6 @@ import { Shape } from '../../../../kite/js/imports.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
-import BAQueryParameters from '../../common/BAQueryParameters.js';
-import ColumnState from '../../common/model/ColumnState.js';
 import BrickStack from '../../common/model/masses/BrickStack.js';
 import BrickStackNode from '../../common/view/BrickStackNode.js';
 import MassCreatorNode from './MassCreatorNode.js';
@@ -33,15 +31,9 @@ class BrickStackCreatorNode extends MassCreatorNode {
    * @param {Object} [options]
    */
   constructor( numBricks, model, screenView, options ) {
-    super( screenView, numBricks * BrickStack.BRICK_MASS, true, options );
+    super( screenView, numBricks * BrickStack.BRICK_MASS, true, model.columnStateProperty, options );
     this.numBricks = numBricks;
     this.model = model;
-
-    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
-    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
-      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
-      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
-    } );
 
     const selectionNode = new BrickStackNode(
       new BrickStack( numBricks, Vector2.ZERO, { tandem: Tandem.OPT_OUT } ),

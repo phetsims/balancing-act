@@ -10,8 +10,6 @@
 
 // module
 import balancingAct from '../../balancingAct.js';
-import BAQueryParameters from '../../common/BAQueryParameters.js';
-import ColumnState from '../../common/model/ColumnState.js';
 import MassCreatorNode from './MassCreatorNode.js';
 
 class ImageMassCreatorNode extends MassCreatorNode {
@@ -24,15 +22,9 @@ class ImageMassCreatorNode extends MassCreatorNode {
    * @param {Object} [options]
    */
   constructor( model, screenView, prototypeImageMass, showMassLabel, options ) {
-    super( screenView, prototypeImageMass.massValue, showMassLabel, options );
+    super( screenView, prototypeImageMass.massValue, showMassLabel, model.columnStateProperty, options );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
-
-    // TODO: move this into ModelElementCreatorNode, see https://github.com/phetsims/balancing-act/issues/96
-    BAQueryParameters.stanford && model.columnStateProperty.link( columnState => {
-      this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
-      this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
-    } );
   }
 
   /**

@@ -20,10 +20,11 @@ class MassCreatorNode extends ModelElementCreatorNode {
    * @param {BasicBalanceScreenView} screenView
    * @param {number} massValue
    * @param {boolean} showMassLabel
+   * @param {EnumerationDeprecatedProperty} columnStateProperty
    * @param {Object} [options]
    */
-  constructor( screenView, massValue, showMassLabel, options ) {
-    super( screenView, options );
+  constructor( screenView, massValue, showMassLabel, columnStateProperty, options ) {
+    super( screenView, columnStateProperty, options );
     if ( showMassLabel ) {
       this.setCaption( new PatternStringProperty( pattern0Value1UnitsStringProperty, {
         0: massValue,
