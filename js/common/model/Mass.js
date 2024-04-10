@@ -19,9 +19,14 @@ import balancingAct from '../../balancingAct.js';
 const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
 const MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
 
-// TODO: JSDoc is missing in many places, see https://github.com/phetsims/balancing-act/issues/96
 class Mass extends PhetioObject {
 
+  /**
+   * @param massValue
+   * @param initialPosition
+   * @param isMystery
+   * @param {Object} [options]
+   */
   constructor( massValue, initialPosition, isMystery, options ) {
 
     options = merge( {
@@ -33,22 +38,22 @@ class Mass extends PhetioObject {
     // instrumented so it can be phetioDynamicElement: true for PhetioGroups
     super( options );
 
-    // Property that indicates whether this mass is currently user controlled, i.e. being moved around by the user.
+    // @public {Property} - Indicates whether this mass is currently user controlled, i.e. being moved around by the user.
     this.userControlledProperty = new Property( false );
 
-    // Property that contains the position in model space.  By convention for this simulation, the position of a mass is
-    // the center bottom of the model object.
+    // @public {Property} - Contains the position in model space.  By convention for this simulation, the position of a
+    // mass is the center bottom of the model object.
     this.positionProperty = new Property( initialPosition );
 
-    // Property that contains the rotation angle, in radians, of the model element.  By convention for this simulation,
+    // @public {Property} - Contains the rotation angle, in radians, of the model element.  By convention for this simulation,
     // the point of rotation is considered to be the center bottom of the model element.
     this.rotationAngleProperty = new Property( 0 );
 
-    // Property that tracks whether this mass is on the plank, changes to which may initiate changes in the visual
+    // @public {Property} - Tracks whether this mass is on the plank, changes to which may initiate changes in the visual
     // depiction of the mass.
     this.onPlankProperty = new Property( false );
 
-    // Boolean property that indicates whether this model element is currently animating.  At the time of this writing,
+    // @public {Property} - Indicates whether this model element is currently animating.  At the time of this writing,
     // the only animation supported is a simple linear motion to a preset point.
     this.animatingProperty = new Property( false );
 
@@ -62,11 +67,11 @@ class Mass extends PhetioObject {
     this.expectedAnimationTime = 0;
     this.isMystery = isMystery;
 
-    // This property is used to keep track of a function that is used to
+    // @public - This property is used to keep track of a function that is used to
     // add/remove this mass from a list of user-controlled masses.
     this.userControlledMassesUpdater = null;
 
-    // Since not all objects are symmetrical, some may need to have an offset
+    // @public {number} - Since not all objects are symmetrical, some may need to have an offset
     // that indicates where their center of mass is when placed on a balance.
     // This is the horizontal offset from the center of the shape or image.
     this.centerOfMassXOffset = 0;
@@ -93,7 +98,8 @@ class Mass extends PhetioObject {
   }
 
   /**
-   * @public
+   * @private
+   * @param {Vector2} translationVector
    */
   translate( translationVector ) {
     this.positionProperty.set( this.positionProperty.get().plus( translationVector ) );
@@ -132,6 +138,7 @@ class Mass extends PhetioObject {
 
   /**
    * @public
+   * @param dt - time step, in seconds
    */
   step( dt ) {
     if ( this.animatingProperty.get() ) {
