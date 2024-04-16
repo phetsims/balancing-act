@@ -181,7 +181,7 @@ class BalanceGameView extends ScreenView {
         new GameIconNode( 3 ),
         new GameIconNode( 4 )
       ],
-      gameModel.mostRecentScores,
+      gameModel.bestScores,
       modelViewTransform,
       {
         numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,

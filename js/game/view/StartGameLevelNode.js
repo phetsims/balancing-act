@@ -30,7 +30,7 @@ class StartGameLevelNode extends Node {
    * @param {Property} timerEnabledProperty
    * @param {Array} iconNodes - Set of iconNodes to use on the buttons, sizes
    * should be the same, length of array must match number of levels.
-   * @param {Array} scores - Current scores, used to decide which stars to
+   * @param {Array} scores - Best scores, used to decide which stars to
    * illuminate on the level start buttons, length must match number of levels.
    * @param {Object} modelViewTransform
    * @param {Object} [options] - See code below for options and default values.

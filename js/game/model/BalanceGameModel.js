@@ -56,10 +56,10 @@ class BalanceGameModel {
 
     // Best times and scores.
     this.bestTimes = [];
-    this.mostRecentScores = [];
+    this.bestScores = [];
     _.times( MAX_LEVELS, () => {
       this.bestTimes.push( null );
-      this.mostRecentScores.push( new Property( 0 ) );
+      this.bestScores.push( new Property( 0 ) );
     } );
 
     // Counter used to track number of incorrect answers.
@@ -122,7 +122,7 @@ class BalanceGameModel {
     this.gameStateProperty.reset();
     this.columnStateProperty.reset();
     this.elapsedTimeProperty.reset();
-    this.mostRecentScores.forEach( mostRecentScoreProperty => { mostRecentScoreProperty.reset(); } );
+    this.bestScores.forEach( bestScoreProperty => { bestScoreProperty.reset(); } );
     this.bestTimes = [];
     _.times( MAX_LEVELS, () => {
       this.bestTimes.push( null );
@@ -313,8 +313,9 @@ class BalanceGameModel {
       this.gameStateProperty.set( 'presentingInteractiveChallenge' );
     }
     else {
-      // All challenges completed for this level.  See if this is a new
-      // best time and, if so, record it.
+      // All challenges completed for this level.
+
+      // See if this is a new best time and, if so, record it.
       const level = this.levelProperty.get();
       if ( this.scoreProperty.get() === MAX_SCORE_PER_GAME ) {
         // Perfect game.  See if new best time.
@@ -323,7 +324,11 @@ class BalanceGameModel {
           this.bestTimes[ level ] = this.elapsedTimeProperty.get();
         }
       }
-      this.mostRecentScores[ level ].value = this.scoreProperty.get();
+
+      // Check for new best score
+      if ( this.scoreProperty.get() > this.bestScores[ level ].value ) {
+        this.bestScores[ level ].value = this.scoreProperty.get();
+      }
 
       // Done with this game, show the results.
       this.gameStateProperty.set( 'showingLevelResults' );
