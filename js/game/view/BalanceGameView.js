@@ -186,7 +186,7 @@ class BalanceGameView extends ScreenView {
       {
         numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,
         perfectScore: BalanceGameModel.MAX_POSSIBLE_SCORE,
-        maxTitleWidth: this.layoutBounds.width
+        maxTitleWidth: this.layoutBounds.width * 0.9
       }
     );
     this.rootNode.addChild( this.startGameLevelNode );

@@ -19,7 +19,7 @@ import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../../common/BAQueryParameters.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 
-const selectLevelString = VegasStrings.selectLevel;
+const selectLevelStringProperty = VegasStrings.selectLevelStringProperty;
 
 class StartGameLevelNode extends Node {
 
@@ -42,7 +42,7 @@ class StartGameLevelNode extends Node {
     options = merge( {
       // Defaults
       numLevels: 4,
-      titleString: selectLevelString,
+      titleStringProperty: selectLevelStringProperty,
       numStarsOnButtons: 5,
       perfectScore: 10,
       buttonBackgroundColor: 'rgb( 242, 255, 204 )',
@@ -58,7 +58,7 @@ class StartGameLevelNode extends Node {
     }
 
     // Title
-    const title = new Text( options.titleString, { font: new PhetFont( 30 ), maxWidth: options.maxTitleWidth } );
+    const title = new Text( options.titleStringProperty, { font: new PhetFont( 30 ), maxWidth: options.maxTitleWidth } );
     this.addChild( title );
 
     // Add the buttons
@@ -106,10 +106,14 @@ class StartGameLevelNode extends Node {
     levelSelectionButtonGroup.centerY = options.size.height * 0.45;
     resetButton.right = options.size.width - options.controlsInset;
     resetButton.bottom = options.size.height - options.controlsInset;
-    title.centerX = levelSelectionButtonGroup.centerX;
-    title.centerY = levelSelectionButtonGroup.top / 2;
     timerToggleButton.left = options.controlsInset;
     timerToggleButton.bottom = options.size.height - options.controlsInset;
+
+    // Ensure title string is centered for dynamic locale
+    options.titleStringProperty.link( () => {
+      title.centerX = levelSelectionButtonGroup.centerX;
+      title.centerY = levelSelectionButtonGroup.top / 2;
+    } );
   }
 }
 
