@@ -7,6 +7,7 @@
  * @author John Blanco
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, HStrut, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
@@ -30,9 +31,10 @@ class PositionIndicatorControlPanel extends Panel {
 
   /**
    * @param {Property} positionIndicatorStateProperty
+   * @param {number} layoutBoundsWidth
    * @param {Object} [options]
    */
-  constructor( positionIndicatorStateProperty, options ) {
+  constructor( positionIndicatorStateProperty, layoutBoundsWidth, options ) {
 
     options = merge( {
       titleToControlsVerticalSpace: 5,
@@ -74,6 +76,11 @@ class PositionIndicatorControlPanel extends Panel {
     } );
 
     super( positionMarkerVBox, options );
+
+    // Ensure the panel doesn't extend past the layout bounds when any of the strings change for dynamic locale
+    Multilink.multilink( [ positionStringProperty, marksStringProperty, noneStringProperty, rulersStringProperty ], () => {
+      this.right = layoutBoundsWidth - 10;
+    } );
   }
 }
 

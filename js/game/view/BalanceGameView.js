@@ -341,7 +341,7 @@ class BalanceGameView extends ScreenView {
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
-    const positionPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, {
+    const positionPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, this.layoutBounds.width, {
       right: this.layoutBounds.right - 10,
       top: this.scoreboard.bottom + 23,
 

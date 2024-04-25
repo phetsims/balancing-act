@@ -278,7 +278,8 @@ class BasicBalanceScreenView extends ScreenView {
 
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
-    const positionPanel = new PositionIndicatorControlPanel( this.viewProperties.positionMarkerStateProperty, {
+    const positionPanel = new PositionIndicatorControlPanel(
+      this.viewProperties.positionMarkerStateProperty, this.layoutBounds.width, {
       left: indicatorVisibilityControlPanel.left,
       top: indicatorVisibilityControlPanel.bottom + 5,
       minWidth: indicatorVisibilityControlPanel.width,
