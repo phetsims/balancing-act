@@ -51,7 +51,7 @@ class BalanceGameModel {
     // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
     // 'showingLevelResults'
     this.gameStateProperty = new Property( 'choosingLevel' );
-    this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.SINGLE_COLUMN );
+    this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS );
     this.elapsedTimeProperty = new Property( 0 );
 
     // Best times and scores.
