@@ -51,6 +51,12 @@ class MassCarousel extends Carousel {
         disabledColor: null
       },
 
+      // empirically determined to match other panels
+      cornerRadius: 10,
+      alignBoxOptions: {
+        xMargin: 8
+      },
+
       tandem: Tandem.REQUIRED
     }, options );
 
