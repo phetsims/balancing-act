@@ -9,6 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import Emitter from '../../../../axon/js/Emitter.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -104,6 +105,9 @@ class BasicBalanceScreenView extends ScreenView {
       skyAndGroundHeight
     ) );
 
+    // The drag handler on the mass node needs to be interrupted during reset.
+    this.interruptDragHandlerEmitter = new Emitter();
+
     // Set up a layer for non-mass model elements.
     this.nonMassLayer = new Node();
     root.addChild( this.nonMassLayer );
@@ -135,11 +139,18 @@ class BasicBalanceScreenView extends ScreenView {
         }
       } );
 
+      const interruptListener = () => {
+        massNode.dragHandler && massNode.dragHandler.interrupt();
+      };
+
+      this.interruptDragHandlerEmitter.addListener( interruptListener );
+
       // Add the removal listener for if and when this mass is removed from the model.
       const removalListener = removedMass => {
         if ( removedMass === addedMass ) {
           massesLayer.removeChild( massNode );
           massNode.dispose();
+          this.interruptDragHandlerEmitter.removeListener( interruptListener );
           this.massesToNodesMap.delete( removedMass );
           model.massList.removeItemRemovedListener( removalListener );
         }
@@ -325,6 +336,7 @@ class BasicBalanceScreenView extends ScreenView {
 
   // @public
   reset() {
+    this.interruptDragHandlerEmitter.emit();
     this.model.reset();
     _.values( this.viewProperties ).forEach( viewProperty => { viewProperty.reset(); } );
   }

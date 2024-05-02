@@ -83,14 +83,6 @@ class Mass extends PhetioObject {
    */
   dispose() {
     this.userControlledProperty.unlinkAll();
-
-    // Must relink and unlink userControlledMassesUpdater after all other listeners to correctly update
-    // userControlledMasses and activeDropPositions due to listener order dependency.
-    if ( this.userControlledMassesUpdater ) {
-      this.userControlledProperty.link( this.userControlledMassesUpdater );
-      this.userControlledProperty.reset();
-      this.userControlledProperty.unlink( this.userControlledMassesUpdater );
-    }
     super.dispose();
   }
 

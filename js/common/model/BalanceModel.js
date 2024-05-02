@@ -73,7 +73,7 @@ class BalanceModel {
     // Add a listener that will update the list of user controlled masses
     // that is used by the plank to update the active drop positions.
     const userControlledMassesUpdater = userControlled => {
-      if ( userControlled && !this.userControlledMasses.includes( mass ) ) {
+      if ( userControlled ) {
         this.userControlledMasses.push( mass );
       }
       else {
