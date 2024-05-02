@@ -25,8 +25,8 @@ simLauncher.launch( () => {
   const simOptions = {
     credits: {
       leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
-      softwareDevelopment: 'John Blanco',
-      graphicArts: 'John Blanco, Mariah Hermsmeyer',
+      softwareDevelopment: 'John Blanco, Luisa Vargas',
+      graphicArts: 'John Blanco, Mariah Hermsmeyer, Amanda McGarry',
       team: 'Michael Dubson, Trish Loeblein'
     }
   };
