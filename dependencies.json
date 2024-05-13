@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "balancing-act": {
-    "sha": "171ffe53d6f0b132b3c54800f6f55b331d674143",
+    "sha": "d02bac30398fb2fe5b89dae9a303381465e1b9b4",
     "branch": "1.3"
   },
   "brand": {
@@ -45,7 +45,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "01628755fa722f33324981f2cd06a9357d9517bd",
+    "sha": "0bac40bb14d17ab940f019049a43b812ad7695ec",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
