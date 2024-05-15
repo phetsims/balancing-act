@@ -247,6 +247,10 @@ class BasicBalanceScreenView extends ScreenView {
     // The panels should fit in the space to the right of the plank.
     const maxControlPanelWidth = this.layoutBounds.maxX - plankNode.bounds.maxX - 20;
 
+    // Ensures panels stay within bounds with short strings. This is crucial when wider panels (like the mass carousel)
+    // are present, as panels strive to maintain the same width.
+    const minControlPanelWidth = 170;
+
     // Add the control panel that will allow users to control the visibility of the various indicators.
     const showPanelTandem = tandem.createTandem( 'showPanel' );
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
@@ -284,6 +288,7 @@ class BasicBalanceScreenView extends ScreenView {
       fill: 'rgb( 240, 240, 240 )',
       top: 5,
       right: this.layoutBounds.width - 10,
+      minWidth: minControlPanelWidth,
       maxWidth: maxControlPanelWidth
     } );
 
@@ -293,7 +298,7 @@ class BasicBalanceScreenView extends ScreenView {
       this.viewProperties.positionMarkerStateProperty, this.layoutBounds.width, {
       left: indicatorVisibilityControlPanel.left,
       top: indicatorVisibilityControlPanel.bottom + 5,
-      minWidth: indicatorVisibilityControlPanel.width,
+      minWidth: minControlPanelWidth,
       maxWidth: maxControlPanelWidth,
       tandem: tandem.createTandem( 'positionPanel' )
     } );
