@@ -29,17 +29,29 @@ class MysteryMassNode extends ImageMassNode {
     const inset = this.imageNode.width * INSET_PROPORTION;
 
     // Create the label.
-    const labelText = new Text( mass.labelText, { font: new PhetFont( { size: 12, weight: 'bold' } ), maxWidth: 10 } );
-    const dimension = Math.max( labelText.width, labelText.height );
+    const labelText = new Text( mass.labelTextProperty, { font: new PhetFont( { size: 12, weight: 'bold' } ), maxWidth: 10 } );
+
+    // Padding around the labelText to account for the stroke width of the background label rectangle
+    const padding = 1;
+
+    const dimension = Math.max( labelText.width, labelText.height ) + padding;
     const label = new Rectangle( 0, 0, dimension, dimension, 3, 3,
       {
         fill: 'white',
         stroke: 'black',
-        lineWidth: 1
+        lineWidth: padding
       } );
     label.addChild( labelText.mutate( { centerX: label.centerX, centerY: label.centerY } ) );
 
-    // Scale the label to fit.
+    // Ensure the labelText stays centered within its background label rectangle for dynamic locale
+    const labelCenter = label.center;
+
+    // @private - Only for use in unlinking the listeners
+    this.mass = mass;
+    this.labelCenterListener = () => { labelText.center = labelCenter; };
+    mass.labelTextProperty.link( this.labelCenterListener );
+
+    // Scale the label to fit within the imageNode.
     const widthScale = ( this.imageNode.width - ( 2 * inset ) ) / label.width;
     const heightScale = ( this.imageNode.height - ( 2 * inset ) ) / label.height;
     label.scale( Math.min( widthScale, heightScale ) );
@@ -53,6 +65,15 @@ class MysteryMassNode extends ImageMassNode {
 
     // Add the label as a child.
     this.addChild( label );
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.mass.labelTextProperty.unlink( this.labelCenterListener );
+    super.dispose();
   }
 }
 

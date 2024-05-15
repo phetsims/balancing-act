@@ -41,56 +41,56 @@ const MYSTERY_MASS_CONFIGURATIONS = [
     massValue: massValues[ 0 ], // in kg
     image: mysteryObject01_svg,
     height: 0.25, // in meters
-    labelText: massLabelAStringProperty,
+    labelTextProperty: massLabelAStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 1 ], // in kg
     image: mysteryObject02_svg,
     height: 0.30, // in meters
-    labelText: massLabelBStringProperty,
+    labelTextProperty: massLabelBStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 2 ], // in kg
     image: mysteryObject03_svg,
     height: 0.35, // in meters
-    labelText: massLabelCStringProperty,
+    labelTextProperty: massLabelCStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 3 ], // in kg
     image: mysteryObject04_svg,
     height: 0.4, // in meters
-    labelText: massLabelDStringProperty,
+    labelTextProperty: massLabelDStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 4 ], // in kg
     image: mysteryObject05_svg,
     height: 0.25, // in meters
-    labelText: massLabelEStringProperty,
+    labelTextProperty: massLabelEStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 5 ], // in kg
     image: mysteryObject06_svg,
     height: 0.35, // in meters
-    labelText: massLabelFStringProperty,
+    labelTextProperty: massLabelFStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 6 ], // in kg
     image: mysteryObject07_svg,
     height: 0.4, // in meters
-    labelText: massLabelGStringProperty,
+    labelTextProperty: massLabelGStringProperty,
     isMystery: true
   },
   {
     massValue: massValues[ 7 ], // in kg
     image: mysteryObject08_svg,
     height: 0.3, // in meters
-    labelText: massLabelHStringProperty,
+    labelTextProperty: massLabelHStringProperty,
     isMystery: true
   }
 ];

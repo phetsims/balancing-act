@@ -19,7 +19,7 @@ class LabeledImageMass extends ImageMass {
    */
   constructor( initialPosition, config ) {
     super( config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
-    this.labelText = config.labelText;
+    this.labelTextProperty = config.labelTextProperty;
   }
 }
 
