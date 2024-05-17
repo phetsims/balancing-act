@@ -26,8 +26,9 @@ simLauncher.launch( () => {
     credits: {
       leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
       softwareDevelopment: 'John Blanco, Luisa Vargas',
-      graphicArts: 'John Blanco, Mariah Hermsmeyer, Amanda McGarry',
-      team: 'Michael Dubson, Trish Loeblein'
+      team: 'Michael Dubson, Trish Loeblein',
+      qualityAssurance: 'Steele Dalton, Jaron Droder, Clifford Hardin, Liam Mulhall, Nancy Salpepi, Kathryn Woessner',
+      graphicArts: 'John Blanco, Mariah Hermsmeyer, Amanda McGarry'
     }
   };
 
