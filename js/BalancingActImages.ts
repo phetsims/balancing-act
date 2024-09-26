@@ -4,7 +4,9 @@
  * Auto-generated from modulify, DO NOT manually modify.
  */
 /* eslint-disable */
+/* @formatter:off */
 import LocalizedImageProperty from '../../joist/js/i18n/LocalizedImageProperty.js';
+import balancingAct from './balancingAct.js';
 import africaBoySitting_svg from '../images/africa/africaBoySitting_svg.js';
 import africaBoyStanding_svg from '../images/africa/africaBoyStanding_svg.js';
 import africaGirlSitting_svg from '../images/africa/africaGirlSitting_svg.js';
@@ -54,7 +56,6 @@ import usaManSitting_svg from '../images/usa/usaManSitting_svg.js';
 import usaManStanding_svg from '../images/usa/usaManStanding_svg.js';
 import usaWomanSitting_svg from '../images/usa/usaWomanSitting_svg.js';
 import usaWomanStanding_svg from '../images/usa/usaWomanStanding_svg.js';
-import balancingAct from './balancingAct.js';
 
 const BalancingActImages = {
   boySittingImageProperty: new LocalizedImageProperty( 'boySitting', {
