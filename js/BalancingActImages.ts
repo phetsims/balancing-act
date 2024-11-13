@@ -1,10 +1,10 @@
 // Copyright 2024, University of Colorado Boulder
-
+/* eslint-disable */
+/* @formatter:off */
 /**
  * Auto-generated from modulify, DO NOT manually modify.
  */
-/* eslint-disable */
-/* @formatter:off */
+ 
 import LocalizedImageProperty from '../../joist/js/i18n/LocalizedImageProperty.js';
 import balancingAct from './balancingAct.js';
 import africaBoySitting_svg from '../images/africa/africaBoySitting_svg.js';
