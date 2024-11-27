@@ -6,9 +6,9 @@
  * @author Luisa Vargas
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import balancingAct from '../../balancingAct.js';
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import BalancingActImages from '../../BalancingActImages.js';
 
 export class HumanTypeEnum extends EnumerationValue {

@@ -8,12 +8,12 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import { Image } from '../../../scenery/js/imports.js';
 import balancingAct from '../balancingAct.js';
 import BalancingActImages from '../BalancingActImages.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabScreenView from './view/BalanceLabScreenView.js';
-import { Image } from '../../../scenery/js/imports.js';
 
 class BalanceLabScreen extends Screen {
 
