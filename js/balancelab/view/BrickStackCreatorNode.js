@@ -9,7 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';

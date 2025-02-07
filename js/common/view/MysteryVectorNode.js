@@ -9,7 +9,8 @@
  */
 
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 

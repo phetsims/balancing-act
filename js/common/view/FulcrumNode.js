@@ -6,7 +6,8 @@
  * @author John Blanco
  */
 
-import { Node, Path } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import balancingAct from '../../balancingAct.js';
 
 class FulcrumNode extends Node {

@@ -7,7 +7,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 import PositionMarkerNode from './PositionMarkerNode.js';

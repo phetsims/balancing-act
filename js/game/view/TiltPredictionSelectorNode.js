@@ -9,7 +9,8 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import { HBox, Node } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import plankBalanced_svg from '../../../images/plankBalanced_svg.js';
 import plankTippedLeft_svg from '../../../images/plankTippedLeft_svg.js';

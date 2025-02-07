@@ -10,7 +10,9 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Image, Text, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import gameLevel1Icon_svg from '../../../images/gameLevel1Icon_svg.js';
 import gameLevel2Icon_svg from '../../../images/gameLevel2Icon_svg.js';
 import gameLevel3Icon_svg from '../../../images/gameLevel3Icon_svg.js';

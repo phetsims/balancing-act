@@ -17,7 +17,11 @@ import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.j
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, Color, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
+import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';

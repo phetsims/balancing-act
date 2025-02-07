@@ -8,7 +8,9 @@
  */
 
 import { GET_COLUMN_BODY_GRADIENT, GET_COLUMN_SUPPORT_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
-import { Node, Path, Rectangle } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from '../model/ColumnState.js';
 

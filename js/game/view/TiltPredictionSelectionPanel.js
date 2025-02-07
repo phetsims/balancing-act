@@ -6,7 +6,10 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import { DownUpListener, Image, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import DownUpListener from '../../../../scenery/js/input/DownUpListener.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import balancingAct from '../../balancingAct.js';
 
 // constants, collected here for easy appearance tweaking.

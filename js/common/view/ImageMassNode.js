@@ -11,7 +11,10 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Image, ManualConstraint, Node, Text } from '../../../../scenery/js/imports.js';
+import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import defaultImage_png from '../../../images/objects/defaultImage_png.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';

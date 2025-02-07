@@ -7,7 +7,7 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { Shape } from '../../../../../kite/js/imports.js';
+import Shape from '../../../../../kite/js/Shape.js';
 import balancingAct from '../../../balancingAct.js';
 import Mass from '../Mass.js';
 

@@ -9,7 +9,9 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Path, Text, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import MassDragHandler from './MassDragHandler.js';

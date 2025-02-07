@@ -19,7 +19,12 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import OutsideBackgroundNode from '../../../../scenery-phet/js/OutsideBackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, HStrut, Node, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import balancingAct from '../../balancingAct.js';
