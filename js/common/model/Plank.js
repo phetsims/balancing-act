@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * This is the model for the plank upon which masses can be placed.

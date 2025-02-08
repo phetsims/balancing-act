@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * The level indicator shows triangles to the left and right of the plank to
