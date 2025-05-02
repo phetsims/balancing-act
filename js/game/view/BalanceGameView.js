@@ -207,7 +207,7 @@ class BalanceGameView extends ScreenView {
       this.visibleBoundsProperty,
       gameModel.scoreProperty,
       {
-        challengeIndexProperty: gameModel.challengeIndexProperty,
+        challengeNumberProperty: new DerivedProperty( [ gameModel.challengeIndexProperty ], challengeIndex => challengeIndex + 1 ),
         numberOfChallengesProperty: new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
 
         // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #85.
