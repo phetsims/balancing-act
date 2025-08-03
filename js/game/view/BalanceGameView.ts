@@ -171,15 +171,14 @@ export default class BalanceGameView extends ScreenView {
       } );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass( removedMass: Mass ) {
+      const removeMovableMass = ( removedMass: Mass ) => {
         if ( removedMass === addedMass ) {
-
-          // @ts-expect-error
           this.challengeLayer.removeChild( massNode );
           massNode.dispose();
           gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
         }
-      }.bind( this ) );
+      };
+      gameModel.movableMasses.addItemRemovedListener( removeMovableMass );
     } );
     gameModel.fixedMasses.addItemAddedListener( ( addedMass: Mass ) => {
       // Create and add the view representation for this mass.
@@ -188,17 +187,14 @@ export default class BalanceGameView extends ScreenView {
       this.challengeLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.fixedMasses.addItemRemovedListener( function removeFixedMass( removedMass: Mass ) {
+      const removeFixedMass = ( removedMass: Mass ) => {
         if ( removedMass === addedMass ) {
-
-          // @ts-expect-error
           this.challengeLayer.removeChild( massNode );
           massNode.dispose();
-
-          // TODO: This is crashing in the game, see https://github.com/phetsims/balancing-act/issues/168
           gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
         }
-      }.bind( this ) );
+      };
+      gameModel.fixedMasses.addItemRemovedListener( removeFixedMass );
     } );
 
     // Add the node that allows the user to choose a game level to play.
