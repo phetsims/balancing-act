@@ -406,10 +406,10 @@ export default class Plank {
     for ( let i = 0; i < copyOfCandidatePositions.length; i++ ) {
       for ( let j = 0; j < this.massesOnSurface.length; j++ ) {
         if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidatePositions[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
-          // This position is already occupied.
 
-          // @ts-expect-error
-          candidateOpenPositions = _.without( candidateOpenPositions, this.massesOnSurface[ j ] );
+          // This position is already occupied.
+          // TODO: Runtime behavior change, see https://github.com/phetsims/balancing-act/issues/168
+          candidateOpenPositions = _.without( candidateOpenPositions, this.massesOnSurface[ j ].positionProperty.value );
         }
       }
     }

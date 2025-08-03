@@ -20,7 +20,7 @@ const CIRCLE_RADIUS = 3;
 
 class PositionMarkerNode extends Node {
 
-  public constructor( labelText: string, options?: NodeOptions ) {
+  public constructor( labelText: number, options?: NodeOptions ) {
     super();
     const line = new Line( 0, 0, 0, LINE_LENGTH, { stroke: color, lineWidth: 2, lineDash: [ 2, 2 ] } );
     this.addChild( line );

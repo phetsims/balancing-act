@@ -26,7 +26,6 @@ export default class PositionMarkerSetNode extends Node {
       const label = Math.abs( i - Math.floor( numTickMarks / 2 ) );
       if ( label !== 0 ) {
 
-        // @ts-expect-error
         this.addChild( new PositionMarkerNode( label, { centerX: i * interMarkerDistance } ) );
       }
     }

@@ -36,9 +36,7 @@ class PlankNode extends Node {
       {
         fill: 'rgb( 243, 203, 127 )',
         stroke: 'black',
-
-        // @ts-expect-error
-        lineThickness: 1
+        lineWidth: 1
       } );
     this.addChild( plankNode );
 
