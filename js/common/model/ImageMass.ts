@@ -13,10 +13,9 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import balancingAct from '../../balancingAct.js';
-import Mass from './Mass.js';
+import Mass, { MassOptions } from './Mass.js';
 
 export default class ImageMass extends Mass {
 
@@ -33,7 +32,7 @@ export default class ImageMass extends Mass {
   // set prior to image updates.
   public reverseImage: boolean;
 
-  public constructor( mass: number, image: HTMLImageElement | ImageableImage, height: number, initialPosition: Vector2, isMystery: boolean, options?: IntentionalAny ) {
+  public constructor( mass: number, image: HTMLImageElement | ImageableImage, height: number, initialPosition: Vector2, isMystery: boolean, options?: MassOptions ) {
     super( mass, initialPosition, isMystery, options );
 
     this.imageProperty = new Property( image );

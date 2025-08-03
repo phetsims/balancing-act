@@ -33,7 +33,7 @@ type SelfOptions = {
   cursor?: string;
 };
 
-type ModelElementCreatorNodeOptions = SelfOptions & NodeOptions;
+export type ModelElementCreatorNodeOptions = SelfOptions & NodeOptions;
 
 export default class ModelElementCreatorNode extends Node {
 

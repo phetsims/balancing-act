@@ -8,18 +8,17 @@
 
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
-import ModelElementCreatorNode from './ModelElementCreatorNode.js';
+import ModelElementCreatorNode, { ModelElementCreatorNodeOptions } from './ModelElementCreatorNode.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
 const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
 
 export default class MassCreatorNode extends ModelElementCreatorNode {
 
-  public constructor( screenView: BasicBalanceScreenView, massValue: number, showMassLabel: boolean, columnStateProperty: EnumerationDeprecatedProperty, options?: IntentionalAny ) {
+  public constructor( screenView: BasicBalanceScreenView, massValue: number, showMassLabel: boolean, columnStateProperty: EnumerationDeprecatedProperty, options?: ModelElementCreatorNodeOptions ) {
     super( screenView, columnStateProperty, options );
     if ( showMassLabel ) {
       this.setCaption( new PatternStringProperty( pattern0Value1UnitsStringProperty, {

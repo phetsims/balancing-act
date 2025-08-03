@@ -9,7 +9,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
@@ -19,6 +18,7 @@ import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js'
 import MysteryMassNode from '../../common/view/MysteryMassNode.js';
 import BalanceLabModel from '../model/BalanceLabModel.js';
 import ImageMassCreatorNode from './ImageMassCreatorNode.js';
+import { ModelElementCreatorNodeOptions } from './ModelElementCreatorNode.js';
 
 // Model-view transform for scaling the node used in the toolbox.  This may scale the node differently than what is
 // used in the model so that items in the toolbox can be sized differently (generally smaller).
@@ -28,7 +28,7 @@ export default class MysteryMassCreatorNode extends ImageMassCreatorNode {
 
   private readonly mysteryMassId: number;
 
-  public constructor( mysteryMassID: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
+  public constructor( mysteryMassID: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: ModelElementCreatorNodeOptions ) {
     super( model, screenView, new MysteryMass( Vector2.ZERO, mysteryMassID, { tandem: Tandem.OPT_OUT } ), false, options );
     this.mysteryMassId = mysteryMassID;
     this.setSelectionNode(

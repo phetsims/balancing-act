@@ -23,7 +23,7 @@ type SelfOptions = {
   // Currently no self options
 };
 
-type MassOptions = SelfOptions & PhetioObjectOptions;
+export type MassOptions = SelfOptions & PhetioObjectOptions;
 
 export default class Mass extends PhetioObject {
 
@@ -63,7 +63,7 @@ export default class Mass extends PhetioObject {
   // This is the horizontal offset from the center of the shape or image.
   public centerOfMassXOffset: number;
 
-  public constructor( massValue: number, initialPosition: Vector2, isMystery: boolean, providedOptions: MassOptions ) {
+  public constructor( massValue: number, initialPosition: Vector2, isMystery: boolean, providedOptions?: MassOptions ) {
 
     const options = optionize<MassOptions, SelfOptions, PhetioObjectOptions>()( {
       tandem: Tandem.REQUIRED,

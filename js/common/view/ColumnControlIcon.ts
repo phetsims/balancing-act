@@ -8,10 +8,9 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import { GET_COLUMN_BODY_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
@@ -21,7 +20,7 @@ import balancingAct from '../../balancingAct.js';
 const CORNER_ROUNDING = 4;
 const ASPECT_RATIO = 1.6; // Ratio of width to height.
 
-function createMiniColumn( size: Dimension2, options: IntentionalAny ): Node {
+function createMiniColumn( size: Dimension2, options: NodeOptions ): Node {
   const rootNode = new Node();
 
   // Create the gradient fill.
@@ -50,7 +49,7 @@ function createMiniColumn( size: Dimension2, options: IntentionalAny ): Node {
 
 export default class ColumnControlIcon extends Node {
 
-  public constructor( width: number, showColumns: boolean, options?: IntentionalAny ) {
+  public constructor( width: number, showColumns: boolean, options?: NodeOptions ) {
     super( options );
     const height = width / ASPECT_RATIO;
     this.addChild( new Rectangle( 0, 0, width, height, CORNER_ROUNDING, CORNER_ROUNDING,

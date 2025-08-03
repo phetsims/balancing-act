@@ -10,7 +10,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
@@ -20,6 +19,7 @@ import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js'
 import BrickStackNode from '../../common/view/BrickStackNode.js';
 import BalanceLabModel from '../model/BalanceLabModel.js';
 import MassCreatorNode from './MassCreatorNode.js';
+import { ModelElementCreatorNodeOptions } from './ModelElementCreatorNode.js';
 
 // Model-view transform for scaling the node used in the toolbox.  This
 // may scale the node differently than what is used in the model so that
@@ -31,7 +31,7 @@ export default class BrickStackCreatorNode extends MassCreatorNode {
   private readonly numBricks: number;
   private readonly model: BalanceLabModel;
 
-  public constructor( numBricks: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
+  public constructor( numBricks: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: ModelElementCreatorNodeOptions ) {
     super( screenView, numBricks * BrickStack.BRICK_MASS, true, model.columnStateProperty, options );
     this.numBricks = numBricks;
     this.model = model;

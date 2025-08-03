@@ -11,10 +11,9 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
@@ -37,7 +36,7 @@ const READOUT_BACKGROUND_HEIGHT = 24;
 class MassValueEntryNode extends Node {
   public readonly massValueProperty: NumberProperty;
 
-  public constructor( options?: IntentionalAny ) {
+  public constructor( options?: NodeOptions ) {
     super();
     this.massValueProperty = new NumberProperty( 0 );
 

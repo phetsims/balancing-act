@@ -8,9 +8,8 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
-import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../../balancingAct.js';
-import Mass from '../Mass.js';
+import Mass, { MassOptions } from '../Mass.js';
 
 // constants
 const BRICK_WIDTH = 0.2; // In meters.
@@ -26,7 +25,7 @@ export default class BrickStack extends Mass {
   public static readonly BRICK_MASS = BRICK_MASS;
   public static readonly BRICK_HEIGHT = BRICK_HEIGHT;
 
-  public constructor( numBricks: number, initialPosition?: Vector2, options?: IntentionalAny ) {
+  public constructor( numBricks: number, initialPosition?: Vector2, options?: MassOptions ) {
 
     if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ); }
 
