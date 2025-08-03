@@ -33,11 +33,8 @@ class TiltPredictionSelectorNode extends Node {
     const panelContents = new HBox(
       {
         children: [
-          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankTippedLeft_svg, TiltPredictionState.TILT_DOWN_ON_LEFT_SIDE, this.tiltPredictionProperty, gameStateProperty ),
-          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankBalanced_svg, TiltPredictionState.STAY_BALANCED, this.tiltPredictionProperty, gameStateProperty ),
-          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankTippedRight_svg, TiltPredictionState.TILT_DOWN_ON_RIGHT_SIDE, this.tiltPredictionProperty, gameStateProperty )
         ], spacing: 5
       } );

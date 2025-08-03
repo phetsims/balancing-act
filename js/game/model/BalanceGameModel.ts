@@ -13,6 +13,7 @@ import createObservableArray, { ObservableArray } from '../../../../axon/js/crea
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
+import { TimerListener } from '../../../../axon/js/Timer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -88,7 +89,7 @@ export default class BalanceGameModel {
   public readonly fulcrum: Fulcrum;
 
   // Game timer ID
-  private gameTimerId: number | null = null;
+  private gameTimerId: TimerListener | null = null;
 
   // Flag set to indicate new best time, cleared each time a level is started
   public newBestTime = false;
@@ -296,8 +297,7 @@ export default class BalanceGameModel {
     else {
       // The user got it wrong.
       this.incorrectGuessesOnCurrentChallenge++;
-      // @ts-expect-error
-      if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
+      if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge()!.maxAttemptsAllowed ) {
         this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackTryAgain' );
       }
       else {
@@ -388,19 +388,15 @@ export default class BalanceGameModel {
 
   public restartGameTimer(): void {
     if ( this.gameTimerId !== null ) {
-      // @ts-expect-error
       stepTimer.clearInterval( this.gameTimerId );
     }
     this.elapsedTimeProperty.reset();
 
-    // @ts-expect-error
     this.gameTimerId = stepTimer.setInterval( () => { this.elapsedTimeProperty.value += 1; }, 1000 );
   }
 
   public stopGameTimer(): void {
-
-    // @ts-expect-error
-    stepTimer.clearInterval( this.gameTimerId );
+    stepTimer.clearInterval( this.gameTimerId! );
     this.gameTimerId = null;
   }
 

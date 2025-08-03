@@ -16,6 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
+import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import defaultImage_png from '../../../images/objects/defaultImage_png.js';
@@ -99,7 +100,7 @@ export default class ImageMassNode extends Node {
     };
 
     // Observe image changes.
-    const imageChangeHandler = ( image: HTMLImageElement ): void => {
+    const imageChangeHandler = ( image: ImageableImage ): void => {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );
 
@@ -141,7 +142,6 @@ export default class ImageMassNode extends Node {
       updatePositionAndAngle();
     };
 
-    // @ts-expect-error
     imageMass.imageProperty.link( imageChangeHandler );
 
     // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
@@ -198,7 +198,6 @@ export default class ImageMassNode extends Node {
     // Remove any linkages that could cause memory leaks.
     this.disposeImageMassNode = () => {
 
-      // @ts-expect-error
       imageMass.imageProperty.unlink( imageChangeHandler );
       massLabel && massLabel.dispose();
       massLabelContainer && massLabelContainer.dispose();

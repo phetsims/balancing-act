@@ -182,8 +182,7 @@ export default class BalanceGameChallengeFactory {
       // placement of the masses.
       for ( let j = 0; distanceList.length < masses.length && j < MAX_GEN_ATTEMPTS; j++ ) {
 
-        // @ts-expect-error
-        let candidateDistance = this.generateRandomValidPlankDistance( minDistance, maxDistance );
+        let candidateDistance = this.generateRandomValidPlankDistance();
         if ( j === 0 ) {
           // Randomly invert (or don't) the first random distance.
           candidateDistance = dotRandom.nextDouble() >= 0.5 ? -candidateDistance : candidateDistance;
@@ -396,15 +395,12 @@ export default class BalanceGameChallengeFactory {
       assert && assert( movableMass !== null, 'No masses match provided ratios.' );
     }
     while ( !this.isChallengeSolvable( fixedMassPrototype.massValue,
-
-      // @ts-expect-error
-      movableMass.massValue,
+      movableMass!.massValue,
       Plank.INTER_SNAP_TO_MARKER_DISTANCE,
       MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS ) );
 
     // Randomly choose a distance to use for the fixed mass position.
-    // @ts-expect-error
-    const fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass.massValue );
+    const fixedStackDistanceFromCenter = this.chooseRandomValidFixedMassDistance( fixedMassPrototype.massValue, movableMass!.massValue );
 
     // Create the challenge.
     return BalanceMassesChallenge.create1Fixed1Movable( fixedMassPrototype.createCopy(), fixedStackDistanceFromCenter, movableMass! );
@@ -460,9 +456,7 @@ export default class BalanceGameChallengeFactory {
     // positioning both stacks.  The max and min values can be tweaked if
     // desired to limit the range of distances generated.
 
-    // @ts-expect-error
-    const distanceFromPlankCenter = this.generateRandomValidPlankDistance( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
-      Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE * 3 );
+    const distanceFromPlankCenter = this.generateRandomValidPlankDistance();
 
     // Create the actual challenge from the pieces.
     return TiltPredictionChallenge.create(

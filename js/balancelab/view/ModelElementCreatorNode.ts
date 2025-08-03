@@ -79,12 +79,8 @@ export default class ModelElementCreatorNode extends Node {
 
         // @ts-expect-error - dragHandler exists on mass node types
         modelElementNode!.dragHandler.press( event, modelElementNode );
-      },
-      {
-        allowTouchSnag: true,
-
-        // @ts-expect-error
-        tandem: options.tandem.createTandem( 'dragListener' )
+      }, {
+        allowTouchSnag: true
       }
     ) );
 

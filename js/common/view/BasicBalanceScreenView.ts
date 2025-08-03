@@ -278,23 +278,14 @@ export default class BasicBalanceScreenView extends ScreenView {
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       createNode: () => new Text( BalancingActStrings.massLabelsStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.massLabelsVisibleProperty,
-
-      // @ts-expect-error
-      label: BalancingActStrings.massLabelsStringProperty,
       tandemName: 'massLabelsCheckbox'
     }, {
       createNode: () => new Text( BalancingActStrings.forcesFromObjectsStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.forceVectorsFromObjectsVisibleProperty,
-
-      // @ts-expect-error
-      label: BalancingActStrings.forcesFromObjectsStringProperty,
       tandemName: 'forcesFromObjectsCheckbox'
     }, {
       createNode: () => new Text( BalancingActStrings.levelStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.levelIndicatorVisibleProperty,
-
-      // @ts-expect-error
-      label: BalancingActStrings.levelStringProperty,
       tandemName: 'levelCheckbox'
     }
     ], {

@@ -194,6 +194,8 @@ export default class BalanceGameView extends ScreenView {
           // @ts-expect-error
           this.challengeLayer.removeChild( massNode );
           massNode.dispose();
+
+          // TODO: This is crashing in the game, see https://github.com/phetsims/balancing-act/issues/168
           gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
         }
       }.bind( this ) );

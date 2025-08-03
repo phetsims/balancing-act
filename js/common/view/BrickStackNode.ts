@@ -8,6 +8,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -49,13 +50,14 @@ export default class BrickStackNode extends VBox {
       mouseArea: transformedBrickShape.bounds.dilatedY( 10 )
     } );
 
+    // Create and add the mass label.
+    let massLabel: VBox | Text | null = null;
+
     // We link to this below if massLabel exists.
     const updateMassLabelVisibility = ( visible: boolean ): void => {
-      massLabel.visible = visible;
+      massLabel!.visible = visible;
     };
 
-    // Create and add the mass label.
-    let massLabel: VBox | Text;
     let kgText: Text;
     if ( isLabeled ) {
       const maxTextWidth = bricksNode.bounds.width;
@@ -97,16 +99,12 @@ export default class BrickStackNode extends VBox {
       const massLabelHeightFactorTouchArea = massLabel.height / 3;
       const massLabelHeightFactorMouseArea = massLabel.height / 8;
 
-      // @ts-expect-error
-      bricksNode.setTouchArea( bricksNode.touchArea!.dilatedY( massLabelHeightFactorTouchArea )
+      bricksNode.setTouchArea( ( bricksNode.touchArea as Bounds2 ).dilatedY( massLabelHeightFactorTouchArea )
         .shiftedY( -massLabelHeightFactorTouchArea ) );
 
-      // @ts-expect-error
-      bricksNode.setMouseArea( bricksNode.mouseArea!.dilatedY( massLabelHeightFactorMouseArea )
+      bricksNode.setMouseArea( ( bricksNode.mouseArea as Bounds2 ).dilatedY( massLabelHeightFactorMouseArea )
         // Mouse area ends where the bricksNode ends at the bottom.
-
-        // @ts-expect-error
-        .shiftedY( bricksNode.bottom - bricksNode.touchArea!.bottom - massLabelHeightFactorMouseArea ) );
+        .shiftedY( bricksNode.bottom - ( bricksNode.touchArea as Bounds2 ).bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
       labelVisibleProperty.link( updateMassLabelVisibility );
@@ -153,7 +151,6 @@ export default class BrickStackNode extends VBox {
       }
     );
 
-    // @ts-expect-error
     if ( massLabel ) {
       this.localBoundsProperty.link( () => {
         updateNodePositionAndRotation( brickStack.rotationAngleProperty.value, brickStack.positionProperty.value );

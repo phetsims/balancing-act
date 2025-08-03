@@ -12,6 +12,7 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import balancingAct from '../../balancingAct.js';
+import TiltPredictionState from '../model/TiltPredictionState.js';
 
 // constants, collected here for easy appearance tweaking.
 const PANEL_WIDTH = 170; // In screen coords, fairly close to pixels.  Empirically determined.
@@ -29,7 +30,7 @@ export default class TiltPredictionSelectionPanel extends Node {
   public thinOutline: Rectangle;
   public thickOutline: Rectangle;
 
-  public constructor( image: HTMLImageElement, correspondingPrediction: string, tiltPredictionProperty: Property<string>, gameStateProperty: Property<string> ) {
+  public constructor( image: HTMLImageElement, correspondingPrediction: TiltPredictionState, tiltPredictionProperty: Property<TiltPredictionState>, gameStateProperty: Property<string> ) {
     super();
 
     // Add the image.
