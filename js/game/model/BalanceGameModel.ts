@@ -23,7 +23,7 @@ import LevelSupportColumn from '../../common/model/LevelSupportColumn.js';
 import Mass from '../../common/model/Mass.js';
 import Plank from '../../common/model/Plank.js';
 import BalanceGameChallenge from './BalanceGameChallenge.js';
-import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
+import { balanceGameChallengeFactorySingleton } from './BalanceGameChallengeFactory.js';
 import BalanceMassesChallenge from './BalanceMassesChallenge.js';
 import MassDeductionChallenge from './MassDeductionChallenge.js';
 import TiltedSupportColumn from './TiltedSupportColumn.js';
@@ -181,7 +181,7 @@ export default class BalanceGameModel {
     }
 
     // Set up the challenges.
-    this.challengeList = BalanceGameChallengeFactory.generateChallengeSet( level );
+    this.challengeList = balanceGameChallengeFactorySingleton.generateChallengeSet( level );
 
     // Set up the model for the next challenge
     this.setChallenge( this.challengeList[ 0 ], this.challengeList[ 0 ].initialColumnState );

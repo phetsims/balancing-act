@@ -65,16 +65,13 @@ export default class BalanceGameChallenge {
       // some of them might be shared, so we have the check this first.  Yikes.  This would have been designed
       // differently if all of these requirements had existed at the start, but they didn't, so ya gotta do whacha gotta
       // do.
-      this.movableMasses.forEach( ( mass: Mass ) => {
+      this.movableMasses.forEach( mass => {
 
-        // @ts-expect-error
         if ( !BalanceGameChallengeFactory.isReusableMass( mass ) ) {
           mass.dispose();
         }
       } );
-      this.fixedMassDistancePairs.forEach( ( massDistancePair: MassDistancePair ) => {
-
-        // @ts-expect-error
+      this.fixedMassDistancePairs.forEach( massDistancePair => {
         if ( !BalanceGameChallengeFactory.isReusableMass( massDistancePair.mass ) ) {
           massDistancePair.mass.dispose();
         }

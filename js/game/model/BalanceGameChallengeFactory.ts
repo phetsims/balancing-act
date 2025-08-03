@@ -126,7 +126,7 @@ const usedBalanceChallenges: BalanceGameChallenge[] = [];
 const usedMassDeductionChallenges: BalanceGameChallenge[] = [];
 const usedTiltPredictionChallenges: BalanceGameChallenge[] = [];
 
-class BalanceGameChallengeFactory {
+export default class BalanceGameChallengeFactory {
 
   // Balance challenge generators for each difficulty level
   public readonly balanceChallengeGenerators: ChallengeGenerator[];
@@ -821,8 +821,6 @@ class BalanceGameChallengeFactory {
 }
 
 // Create a singleton instance for use throughout the application
-const balanceGameChallengeFactory = new BalanceGameChallengeFactory();
+export const balanceGameChallengeFactorySingleton = new BalanceGameChallengeFactory();
 
 balancingAct.register( 'BalanceGameChallengeFactory', BalanceGameChallengeFactory );
-
-export default balanceGameChallengeFactory;

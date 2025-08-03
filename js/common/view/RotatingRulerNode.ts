@@ -48,7 +48,6 @@ class RotatingRulerNode extends Node {
     const rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
     const majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
 
-    // @ts-expect-error
     const rulerNode = new RulerNode( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '', {
       backgroundFill: 'rgba( 236, 225, 113, 0.5)',
       majorTickFont: new PhetFont( 11 ),
