@@ -240,7 +240,9 @@ export default class BalanceGameView extends ScreenView {
         numberOfChallengesProperty: new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
 
         // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #85.
-        levelNumberProperty: new DerivedProperty( [ gameModel.levelProperty ], ( level: number ) => level + 1 ),
+        // @ts-expect-error - see https://github.com/phetsims/balancing-act/issues/168
+        levelProperty: new DerivedProperty( [ gameModel.levelProperty ], ( level: number ) => level + 1 ),
+
         elapsedTimeProperty: gameModel.elapsedTimeProperty,
         timerEnabledProperty: gameModel.timerEnabledProperty,
         startOverButtonText: startOverStringProperty,
