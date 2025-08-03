@@ -6,11 +6,10 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 
@@ -21,7 +20,7 @@ const CIRCLE_RADIUS = 3;
 
 class PositionMarkerNode extends Node {
 
-  public constructor( labelText: string, options?: IntentionalAny ) {
+  public constructor( labelText: string, options?: NodeOptions ) {
     super();
     const line = new Line( 0, 0, 0, LINE_LENGTH, { stroke: color, lineWidth: 2, lineDash: [ 2, 2 ] } );
     this.addChild( line );

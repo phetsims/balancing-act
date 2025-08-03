@@ -15,7 +15,6 @@ import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
@@ -194,7 +193,7 @@ export default class BalanceGameModel {
     this.newBestTime = false;
   }
 
-  private setChallenge( balanceChallenge: BalanceGameChallenge, columnState: IntentionalAny ): void {
+  private setChallenge( balanceChallenge: BalanceGameChallenge, columnState: typeof ColumnState ): void {
 
     // Clear out the previous challenge (if there was one).  Start by resetting the plank.
     this.plank.removeAllMasses();

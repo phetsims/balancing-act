@@ -41,7 +41,7 @@ type PositionIndicatorControlPanelOptions = SelfOptions & PanelOptions;
 
 export default class PositionIndicatorControlPanel extends Panel {
 
-  // TODO: PositionIndicatorChoice probably, see https://github.com/phetsims/balancing-act/issues/168
+  // TODO: typeof PositionIndicatorChoice probably, see https://github.com/phetsims/balancing-act/issues/168
   public constructor( positionIndicatorStateProperty: Property<IntentionalAny>, layoutBoundsWidth: number, providedOptions?: PositionIndicatorControlPanelOptions ) {
 
     const options = optionize<PositionIndicatorControlPanelOptions, SelfOptions, PanelOptions>()( {

@@ -11,9 +11,9 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
+import Mass from '../../common/model/Mass.js';
 import MysteryMass from '../../common/model/masses/MysteryMass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import MysteryMassNode from '../../common/view/MysteryMassNode.js';
@@ -33,7 +33,7 @@ export default class MysteryMassCreatorNode extends ImageMassCreatorNode {
     this.mysteryMassId = mysteryMassID;
     this.setSelectionNode(
       new MysteryMassNode(
-        this.prototypeImageMass,
+        this.prototypeImageMass as MysteryMass,
         SCALING_MVT,
         false,
         new Property( false ),
@@ -50,7 +50,7 @@ export default class MysteryMassCreatorNode extends ImageMassCreatorNode {
   /**
    * @param position
    */
-  public override addElementToModel( position: Vector2 ): PhetioObject {
+  public override addElementToModel( position: Vector2 ): Mass {
     const mass = this.model.mysteryMassGroup.createNextElement( position, this.mysteryMassId );
     this.model.addMass( mass );
     return mass;

@@ -8,7 +8,6 @@
 
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -26,8 +25,7 @@ export default class MysteryMassNode extends ImageMassNode {
   private readonly mass: LabeledImageMass;
   private readonly labelCenterListener: () => void;
 
-  // TODO: mass type should be LabeledImageMass | ImageMass ? See https://github.com/phetsims/balancing-act/issues/168
-  public constructor( mass: IntentionalAny, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
+  public constructor( mass: LabeledImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
     super( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty );
     const inset = this.imageNode.width * INSET_PROPORTION;
 

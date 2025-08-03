@@ -17,7 +17,7 @@ import ColumnState from '../model/ColumnState.js';
 
 class LevelSupportColumnNode extends Node {
 
-  public constructor( modelViewTransform: ModelViewTransform2, levelSupportColumn: IntentionalAny, columnState: IntentionalAny ) {
+  public constructor( modelViewTransform: ModelViewTransform2, levelSupportColumn: IntentionalAny, columnState: typeof ColumnState ) {
     super();
 
     // Create and add the main body of the column.

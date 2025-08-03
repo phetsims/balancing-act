@@ -12,6 +12,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import ImageMass from '../../common/model/ImageMass.js';
+import Mass from '../../common/model/Mass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import BalanceLabModel from '../model/BalanceLabModel.js';
 import MassCreatorNode from './MassCreatorNode.js';
@@ -27,7 +28,7 @@ export default class ImageMassCreatorNode extends MassCreatorNode {
     this.model = model;
   }
 
-  public override addElementToModel( position: Vector2 ): IntentionalAny {
+  public override addElementToModel( position: Vector2 ): Mass {
     const imageMassModelElement = this.createImageMassInstance();
     imageMassModelElement.positionProperty.set( position.copy() );
     imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();

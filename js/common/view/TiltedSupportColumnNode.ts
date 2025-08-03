@@ -18,7 +18,7 @@ import ColumnState from '../model/ColumnState.js';
 
 class TiltedSupportColumnNode extends Node {
 
-  public constructor( modelViewTransform: ModelViewTransform2, tiltedSupportColumn: IntentionalAny, columnState: IntentionalAny ) {
+  public constructor( modelViewTransform: ModelViewTransform2, tiltedSupportColumn: IntentionalAny, columnState: typeof ColumnState ) {
     super();
 
     // Create and add the main body of the column.

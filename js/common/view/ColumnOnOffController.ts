@@ -6,9 +6,9 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
@@ -30,7 +30,7 @@ type ColumnOnOffControllerOptions = SelfOptions & NodeOptions;
 
 class ColumnOnOffController extends Node {
 
-  public constructor( columnState: IntentionalAny, providedOptions?: ColumnOnOffControllerOptions ) {
+  public constructor( columnState: Property<typeof ColumnState>, providedOptions?: ColumnOnOffControllerOptions ) {
 
     const options = optionize<ColumnOnOffControllerOptions, SelfOptions, NodeOptions>()( {
       tandem: Tandem.REQUIRED

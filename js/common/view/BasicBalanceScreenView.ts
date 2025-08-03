@@ -14,7 +14,6 @@ import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprec
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
@@ -219,8 +218,7 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
 
-    // @ts-expect-error
-    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: PositionIndicatorChoice ) => {
+    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     this.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
@@ -228,8 +226,7 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
 
-    // TODO: PositionIndicatorChoice, see https://github.com/phetsims/balancing-act/issues/168
-    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
+    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
       positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     this.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisibleProperty ) );
@@ -375,7 +372,7 @@ export default class BasicBalanceScreenView extends ScreenView {
   /**
    * Get the node for the provided mass.
    */
-  public getNodeForMass( mass: Mass ): IntentionalAny {
+  public getNodeForMass( mass: Mass ): Node | undefined {
     return this.massesToNodesMap.get( mass );
   }
 

@@ -7,8 +7,8 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
+import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
 import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
 
@@ -26,7 +26,7 @@ type BalanceGameChallengeOptions = SelfOptions;
 export default class BalanceGameChallenge {
 
   // The initial state of the support columns for this challenge
-  public readonly initialColumnState: IntentionalAny;
+  public readonly initialColumnState: typeof ColumnState;
 
   // Maximum number of attempts allowed for this challenge
   public readonly maxAttemptsAllowed: number;
@@ -43,7 +43,7 @@ export default class BalanceGameChallenge {
   // Disposal function to clean up memory references
   private readonly disposeBalanceGameChallenge: () => void;
 
-  public constructor( initialColumnState: IntentionalAny, providedOptions?: BalanceGameChallengeOptions ) {
+  public constructor( initialColumnState: typeof ColumnState, providedOptions?: BalanceGameChallengeOptions ) {
 
     const options = optionize<BalanceGameChallengeOptions, SelfOptions>()( {
       maxAttemptsAllowed: 2

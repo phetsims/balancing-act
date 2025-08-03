@@ -12,7 +12,6 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
@@ -354,7 +353,7 @@ export default class BalanceGameView extends ScreenView {
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
     const levelIndicator = new LevelIndicatorNode( this.modelViewTransform, gameModel.plank );
-    gameModel.columnStateProperty.link( ( columnState: IntentionalAny ) => {
+    gameModel.columnStateProperty.link( ( columnState: typeof ColumnState ) => {
       levelIndicator.visible = ( columnState === ColumnState.NO_COLUMNS );
     } );
     this.challengeLayer.addChild( levelIndicator );
@@ -364,14 +363,14 @@ export default class BalanceGameView extends ScreenView {
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
+    positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     this.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, this.modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
+    positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
       positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     this.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, this.modelViewTransform, positionMarkersVisibleProperty ) );

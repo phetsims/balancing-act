@@ -11,16 +11,17 @@ import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprec
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
+import { PressListenerEvent } from '../../../../scenery/js/listeners/PressListener.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../../common/BAQueryParameters.js';
 import ColumnState from '../../common/model/ColumnState.js';
+import Mass from '../../common/model/Mass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 
 // constants
@@ -66,7 +67,7 @@ export default class ModelElementCreatorNode extends Node {
     // Create an input listener that will add the model element to the model and then forward events to the view node
     // that is created as a result.
     this.addInputListener( DragListener.createForwardingListener(
-      ( event: IntentionalAny ) => {
+      ( event: PressListenerEvent ) => {
 
         // Determine the initial position where this element should move to after it's created based on the position of
         // the pointer event.
@@ -79,6 +80,7 @@ export default class ModelElementCreatorNode extends Node {
         const modelElementNode = screenView.getNodeForMass( modelElement );
         assert && assert( modelElementNode, 'unable to find view node for model element' );
 
+        // @ts-expect-error - dragHandler exists on mass node types
         modelElementNode!.dragHandler.press( event, modelElementNode );
       },
       {
@@ -90,7 +92,7 @@ export default class ModelElementCreatorNode extends Node {
     ) );
 
     // TODO: https://github.com/phetsims/balancing-act/issues/168 ColumnState
-    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: IntentionalAny ) => {
+    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: typeof ColumnState ) => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );
@@ -99,7 +101,7 @@ export default class ModelElementCreatorNode extends Node {
   /**
    * Method overridden by subclasses to add the element that they represent to the model.
    */
-  public addElementToModel( position: Vector2 ): IntentionalAny {
+  public addElementToModel( position: Vector2 ): Mass {
     throw new Error( 'addElementToModel should be implemented in descendant classes.' );
   }
 

@@ -12,7 +12,6 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
@@ -44,8 +43,7 @@ export default class ImageMassNode extends Node {
   public constructor( imageMass: ImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
     super( { cursor: 'pointer' } );
 
-    // TODO https://github.com/phetsims/balancing-act/issues/168 ColumnState
-    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: IntentionalAny ) => {
+    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: typeof ColumnState ) => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );
