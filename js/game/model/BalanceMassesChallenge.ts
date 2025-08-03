@@ -23,9 +23,9 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
   public readonly viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
   /**
-   * @param Array.<{mass:{Mass}, distance:{number}}> fixedMasses - Mass-distance pairs that describe the fixed masses.
-   * @param Array.<Mass> movableMasses - Masses that can be moved by the user.
-   * @param Array.<{mass:{Mass}, distance:{number}}> solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
+   * @param fixedMasses - Mass-distance pairs that describe the fixed masses.
+   * @param movableMasses - Masses that can be moved by the user.
+   * @param solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
    */
   public constructor( fixedMasses: MassDistancePair[], movableMasses: Mass[], solutionToDisplay: MassDistancePair[] ) {
     super( ColumnState.SINGLE_COLUMN );

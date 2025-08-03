@@ -2,7 +2,7 @@
 
 /**
  * Common drag handler for mass nodes.  Positions the corresponding model element based on the movement of the mouse or
- * finger, and also sets and clears the property that indicates whether or not the mass is being controlled by the user.
+ * finger, and also sets and clears the property that indicates whether the mass is being controlled by the user.
  *
  * @author John Blanco
  */
@@ -39,7 +39,7 @@ class MassDragHandler extends DragListener {
 
       end: () => {
 
-        // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
+        // There is a rare multitouch case where userControlled may already be updated, and we need to handle it by
         // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
         if ( !mass.userControlledProperty.get() ) {
           mass.userControlledProperty.set( true );

@@ -18,7 +18,7 @@ class BAIntroView extends BasicBalanceScreenView {
     super( model, tandem );
     model.massList.forEach( mass => {
       // Add a listener for when the user drops the mass.  This is done here in this case, rather than in the model,
-      // because we need to check whether or not the user dropped it on the "stage" so that it isn't permanently dragged
+      // because we need to check whether the user dropped it on the "stage" so that it isn't permanently dragged
       // off of the screen.
       mass.userControlledProperty.lazyLink( userControlled => {
         if ( !userControlled ) {

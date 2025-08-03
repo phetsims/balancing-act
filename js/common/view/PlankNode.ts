@@ -6,7 +6,7 @@
  * @author John Blanco
  */
 
-import Utils from '../../../../dot/js/Utils.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -40,7 +40,7 @@ class PlankNode extends Node {
 
     // Function for mapping plank distance relative to the center point to a highlight.
     function mapPositionToHighlightIndex( distanceFromCenter: number ): number {
-      return Utils.roundSymmetric(
+      return roundSymmetric(
         ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_POSITIONS + 1 ) / Plank.LENGTH )
       ) - 1;
     }

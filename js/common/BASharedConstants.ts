@@ -14,7 +14,7 @@ const BASharedConstants = {
 
   // A PhET wide decision was made to not update custom layout bounds even if they do not match the
   // default layout bounds in ScreenView. Do not change these bounds as changes could break or disturb
-  // any phet-io instrumention. https://github.com/phetsims/phet-io/issues/1939
+  // any phet-io instrumentation. https://github.com/phetsims/phet-io/issues/1939
   LAYOUT_BOUNDS: new Bounds2( 0, 0, 768, 504 ),
   RESET_ALL_BUTTON_SCALE: 0.96
 };

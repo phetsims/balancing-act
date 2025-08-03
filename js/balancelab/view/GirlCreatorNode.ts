@@ -1,7 +1,7 @@
 // Copyright 2013-2024, University of Colorado Boulder
 
 /**
- * This class represents an young girl in a toolbox.  When the user clicks on
+ * This class represents a young girl in a toolbox.  When the user clicks on
  * this node, the corresponding model element is added to the model at the
  * user's mouse position.
  *

@@ -16,7 +16,7 @@ import balancingAct from '../../balancingAct.js';
 import ColumnState from '../model/ColumnState.js';
 import LevelSupportColumn from '../model/LevelSupportColumn.js';
 
-class LevelSupportColumnNode extends Node {
+export default class LevelSupportColumnNode extends Node {
 
   public constructor( modelViewTransform: ModelViewTransform2, levelSupportColumn: LevelSupportColumn, columnState: Property<typeof ColumnState> ) {
     super();
@@ -61,5 +61,3 @@ class LevelSupportColumnNode extends Node {
 }
 
 balancingAct.register( 'LevelSupportColumnNode', LevelSupportColumnNode );
-
-export default LevelSupportColumnNode;

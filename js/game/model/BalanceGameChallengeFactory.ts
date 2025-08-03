@@ -11,13 +11,13 @@
  * - Advanced
  * This is not to be confused with the numerical game levels, since there is
  * not necessarily a direct correspondence between the numerical levels and
- * all of the challenges generated for that level.
+ * all challenges generated for that level.
  *
  * @author John Blanco
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import balancingAct from '../../balancingAct.js';
@@ -61,7 +61,7 @@ type ChallengeGenerator = () => BalanceGameChallenge;
 type UniquenessTest = ( challenge: BalanceGameChallenge, usedChallenges: BalanceGameChallenge[] ) => boolean;
 
 // Maximum allowed distance from center of balance for positioning a mass.
-const MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( Utils.roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
+const MAX_DISTANCE_FROM_BALANCE_CENTER_TO_MASS = ( roundSymmetric( Plank.LENGTH / Plank.INTER_SNAP_TO_MARKER_DISTANCE / 2 ) - 1 ) * Plank.INTER_SNAP_TO_MARKER_DISTANCE;
 
 // Parameters that control how many attempts are made to generate a unique
 // balance challenge.
@@ -171,7 +171,7 @@ export default class BalanceGameChallengeFactory {
    * NOT balanced.  This is a convenience method that was written to
    * consolidate some code written for generating tilt-prediction challenges.
    */
-  private positionMassesCloseToBalancing( minDistance: number, maxDistance: number, masses: Mass[] ): MassDistancePair[] {
+  private positionMassesCloseToBalancing( minDistance: number, masses: Mass[] ): MassDistancePair[] {
     let bestNetTorque = Number.POSITIVE_INFINITY;
     const minAcceptableTorque = 1; // Determined empirically.
     let distanceList: number[] = [];
@@ -237,7 +237,7 @@ export default class BalanceGameChallengeFactory {
   private generateRandomValidPlankDistance(): number {
     const maxDistance = Plank.LENGTH / 2;
     const increment = Plank.INTER_SNAP_TO_MARKER_DISTANCE;
-    const maxIncrements = Utils.roundSymmetric( maxDistance / increment ) - 1;
+    const maxIncrements = roundSymmetric( maxDistance / increment ) - 1;
     return ( this.randInt( maxIncrements ) + 1 ) * increment;
   }
 
@@ -508,7 +508,6 @@ export default class BalanceGameChallengeFactory {
     // Make the masses almost but not quite balanced.
     const massDistancePairs = this.positionMassesCloseToBalancing(
       Plank.INTER_SNAP_TO_MARKER_DISTANCE,
-      Plank.LENGTH / 2 - 2 * Plank.INTER_SNAP_TO_MARKER_DISTANCE,
       [ leftMass, rightMass ] );
 
     return new TiltPredictionChallenge( massDistancePairs );
@@ -523,7 +522,7 @@ export default class BalanceGameChallengeFactory {
     // Get a set of mass-distance pairs comprised of these masses
     // positioned in such a way that they are almost, but not quite, balanced.
     const massDistancePairs = this.positionMassesCloseToBalancing( Plank.INTER_SNAP_TO_MARKER_DISTANCE,
-      Plank.LENGTH / 2 - Plank.INTER_SNAP_TO_MARKER_DISTANCE, [ mass1, mass2, mass3 ] );
+      [ mass1, mass2, mass3 ] );
 
     // Create the actual challenge from the pieces.
     return new TiltPredictionChallenge( massDistancePairs );
@@ -610,11 +609,10 @@ export default class BalanceGameChallengeFactory {
   }
 
   /**
-   * Convenience function for removing the oldest half of a list (which is
-   * the lower indicies).
+   * Convenience function for removing the oldest half of a list (which is the lower indices).
    */
   private removeOldestHalfOfList( list: BalanceGameChallenge[] ): void {
-    list.splice( 0, Utils.roundSymmetric( list.length / 2 ) );
+    list.splice( 0, roundSymmetric( list.length / 2 ) );
   }
 
   /**
@@ -680,7 +678,7 @@ export default class BalanceGameChallengeFactory {
 
   /**
    * Tests a challenge against a set of challenges to see whether the test
-   * challenge has unique fixed masses and distances compared to all of the
+   * challenge has unique fixed masses and distances compared to all the
    * challenges on the comparison list.  If any of the challenge on the
    * comparison list have the same fixed masses at the same distances from
    * the center, this will return false, indicating that the test challenge
@@ -696,7 +694,7 @@ export default class BalanceGameChallengeFactory {
 
   /**
    * Tests a challenge against a set of challenges to see whether the test
-   * challenge has unique fixed masses compared to all of the challenges on
+   * challenge has unique fixed masses compared to all the challenges on
    * the list.  If any of the challenge on the comparison list have the same
    * fixed masses, this will return false, indicating that the challenge is
    * not unique.
@@ -707,10 +705,6 @@ export default class BalanceGameChallengeFactory {
    */
   private usesUniqueFixedMasses( testChallenge: BalanceGameChallenge, usedChallengeList: BalanceGameChallenge[] ): boolean {
     return !_.some( usedChallengeList, ( challenge: BalanceGameChallenge ) => challenge.usesSameFixedMasses( testChallenge ) );
-  }
-
-  public generateBalanceChallenge( level: number ): BalanceGameChallenge {
-    return this.generateUniqueChallenge( this.balanceChallengeGenerators[ level ].bind( this ), this.usesUniqueMasses, usedBalanceChallenges );
   }
 
   public simpleBalanceChallengeGenerator(): BalanceGameChallenge {

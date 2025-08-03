@@ -15,7 +15,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Carousel, { CarouselOptions } from '../../../../sun/js/Carousel.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import BalanceLabModel from '../../balancelab/model/BalanceLabModel.js';
 import BoyCreatorNode from '../../balancelab/view/BoyCreatorNode.js';
 import BrickStackCreatorNode from '../../balancelab/view/BrickStackCreatorNode.js';
@@ -293,7 +292,7 @@ export default class MassCarousel extends Carousel {
         children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
       } );
       return {
-        createNode: ( tandem: Tandem ) => pageAlignGroup.createBox( vbox, {
+        createNode: () => pageAlignGroup.createBox( vbox, {
           yAlign: 'top'
         } )
       };
