@@ -20,10 +20,7 @@ import MysteryMass from '../../common/model/masses/MysteryMass.js';
 
 export default class BalanceLabModel extends BalanceModel {
 
-  // PhetioGroup for brick stacks. TODO: Type parameter, see https://github.com/phetsims/balancing-act/issues/168
   public readonly brickStackGroup: PhetioGroup<BrickStack | Mass, [ number, Vector2 ]>;
-
-  // PhetioGroup for mystery masses TODO: Type parameter, see https://github.com/phetsims/balancing-act/issues/168
   public readonly mysteryMassGroup: PhetioGroup<MysteryMass | Mass, [ Vector2, number ]>;
 
   public constructor( tandem: Tandem ) {

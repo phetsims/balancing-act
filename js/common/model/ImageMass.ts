@@ -56,7 +56,6 @@ export default class ImageMass extends Mass {
     return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
   }
 
-  // TODO: https://github.com/phetsims/balancing-act/issues/168 implement in subclasses
   public override createCopy(): ImageMass {
 
     // TODO: This is written such that it will work for the subclasses in the masses/directory, but only because it assumes they

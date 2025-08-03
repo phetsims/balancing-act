@@ -131,7 +131,6 @@ export default class Mass extends PhetioObject {
       this.animationDestination!.x - position.x
     );
 
-    // TODO: This file has a lot of type assertions https://github.com/phetsims/balancing-act/issues/168
     this.animationMotionVector = this.animationMotionVector.rotated( animationAngle );
 
     // Update the property that tracks the animation state.
