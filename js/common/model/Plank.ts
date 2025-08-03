@@ -13,7 +13,6 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import ArrayIO from '../../../../tandem/js/types/ArrayIO.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
@@ -64,8 +63,8 @@ export default class Plank {
   public readonly massDistancePairs: MassDistancePair[];
 
   // Signify in the data stream when masses are placed and removed
-  private readonly massDroppedOnPlankEmitter: Emitter<IntentionalAny>;
-  private readonly massRemovedFromPlankEmitter: Emitter<IntentionalAny>;
+  private readonly massDroppedOnPlankEmitter: Emitter<[ string, number, number, Plank ]>;
+  private readonly massRemovedFromPlankEmitter: Emitter<[ string, number, number, Plank ]>;
 
   // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally
   // eslint-disable-next-line phet/require-property-suffix
@@ -259,7 +258,7 @@ export default class Plank {
   }
 
   /**
-   * Indicates all of the masses that are currently on the plank
+   * Indicates all the masses that are currently on the plank
    */
   private toStateObject(): { massDistancePairs: { name: string; mass: number; distance: number }[] } {
     return {
