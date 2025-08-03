@@ -13,14 +13,14 @@ import balancingAct from '../../balancingAct.js';
 
 class TiltPredictionState extends EnumerationValue {
 
-  static TILT_DOWN_ON_LEFT_SIDE = new TiltPredictionState();
-  static STAY_BALANCED = new TiltPredictionState();
-  static TILT_DOWN_ON_RIGHT_SIDE = new TiltPredictionState();
-  static NONE = new TiltPredictionState();
+  public static readonly TILT_DOWN_ON_LEFT_SIDE = new TiltPredictionState();
+  public static readonly STAY_BALANCED = new TiltPredictionState();
+  public static readonly TILT_DOWN_ON_RIGHT_SIDE = new TiltPredictionState();
+  public static readonly NONE = new TiltPredictionState();
 
-  static enumeration = new Enumeration( TiltPredictionState );
+  public static readonly enumeration = new Enumeration( TiltPredictionState );
 
-  constructor() {
+  public constructor() {
     super();
   }
 }

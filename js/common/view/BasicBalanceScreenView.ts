@@ -14,6 +14,7 @@ import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprec
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
@@ -27,10 +28,15 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../BASharedConstants.js';
+import BalanceModel from '../model/BalanceModel.js';
 import ColumnState from '../model/ColumnState.js';
+import LevelSupportColumn from '../model/LevelSupportColumn.js';
+import Mass from '../model/Mass.js';
+import MassForceVector from '../model/MassForceVector.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 import AttachmentBarNode from './AttachmentBarNode.js';
 import ColumnOnOffController from './ColumnOnOffController.js';
@@ -45,9 +51,13 @@ import PositionMarkerSetNode from './PositionMarkerSetNode.js';
 import RotatingRulerNode from './RotatingRulerNode.js';
 
 // strings
+// eslint-disable-next-line phet/require-property-suffix
 const forcesFromObjectsString = BalancingActStrings.forcesFromObjectsStringProperty;
+// eslint-disable-next-line phet/require-property-suffix
 const levelString = BalancingActStrings.levelStringProperty;
+// eslint-disable-next-line phet/require-property-suffix
 const massLabelsString = BalancingActStrings.massLabelsStringProperty;
+// eslint-disable-next-line phet/require-property-suffix
 const showString = BalancingActStrings.showStringProperty;
 
 // constants
@@ -56,14 +66,31 @@ const PANEL_TITLE_FONT = new PhetFont( 16 );
 const PANEL_TEXT_MAX_WIDTH = 130;
 const PANEL_OPTION_FONT = { font: new PhetFont( 14 ), maxWidth: PANEL_TEXT_MAX_WIDTH };
 
-class BasicBalanceScreenView extends ScreenView {
+export default class BasicBalanceScreenView extends ScreenView {
 
-  /**
-   * @param {BalanceModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+  public readonly model: BalanceModel;
+  public readonly viewProperties: {
+    massLabelsVisibleProperty: Property<boolean>;
+    forceVectorsFromObjectsVisibleProperty: Property<boolean>;
+    levelIndicatorVisibleProperty: Property<boolean>;
+    positionMarkerStateProperty: EnumerationDeprecatedProperty;
+  };
+
+  // model-view transform for this screen
+  public readonly modelViewTransform: ModelViewTransform2;
+
+  private readonly interruptDragHandlerEmitter: Emitter;
+  private readonly nonMassLayer: Node;
+
+  // a map of masses to their corresponding view elements
+  private readonly massesToNodesMap: Map<Mass, Node>;
+
+  public readonly controlPanelMaxWidth: number;
+  public readonly controlPanelVBox: VBox;
+
+  public constructor( model: BalanceModel, tandem: Tandem ) {
     super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     this.model = model;
 
@@ -92,7 +119,6 @@ class BasicBalanceScreenView extends ScreenView {
       105
     );
 
-    // @public {ModelViewTransform2} - model-view transform for this screen
     this.modelViewTransform = modelViewTransform;
 
     // Create a root node and send to back so that the layout bounds box can be made visible if needed.
@@ -121,10 +147,9 @@ class BasicBalanceScreenView extends ScreenView {
     const massesLayer = new Node();
     root.addChild( massesLayer );
 
-    // @private {Map.<Mass,Node>} - a map of masses to their corresponding view elements
-    this.massesToNodesMap = new Map();
+    this.massesToNodesMap = new Map<Mass, Node>();
 
-    const handleMassAdded = addedMass => {
+    const handleMassAdded = ( addedMass: Mass ) => {
 
       // Create and add the view representation for this mass.
       const massNode = MassNodeFactory.createMassNode(
@@ -138,20 +163,21 @@ class BasicBalanceScreenView extends ScreenView {
       this.massesToNodesMap.set( addedMass, massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
-      addedMass.userControlledProperty.link( userControlled => {
+      addedMass.userControlledProperty.link( ( userControlled: boolean ) => {
         if ( userControlled ) {
           massNode.moveToFront();
         }
       } );
 
       const interruptListener = () => {
+        // @ts-expect-error
         massNode.dragHandler && massNode.dragHandler.interrupt();
       };
 
       this.interruptDragHandlerEmitter.addListener( interruptListener );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      const removalListener = removedMass => {
+      const removalListener = ( removedMass: Mass ) => {
         if ( removedMass === addedMass ) {
           massesLayer.removeChild( massNode );
           massNode.dispose();
@@ -176,7 +202,8 @@ class BasicBalanceScreenView extends ScreenView {
     this.nonMassLayer.addChild( new AttachmentBarNode( modelViewTransform, model.plank ) );
 
     const visibleProperty = DerivedProperty.valueEqualsConstant( model.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
-    model.supportColumns.forEach( supportColumn => {
+    model.supportColumns.forEach( ( supportColumn: LevelSupportColumn ) => {
+
       const transformedColumnShape = modelViewTransform.modelToViewShape( supportColumn );
       this.nonMassLayer.addChild( new LevelSupportColumnNode(
         {
@@ -191,32 +218,37 @@ class BasicBalanceScreenView extends ScreenView {
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
-    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
+
+    // @ts-expect-error
+    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: PositionIndicatorChoice ) => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     this.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
-    const positionMarkersVisible = new Property( false );
-    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
-      positionMarkersVisible.value = positionMarkerState === PositionIndicatorChoice.MARKS;
+    const positionMarkersVisibleProperty = new Property( false );
+
+    // TODO: PositionIndicatorChoice, see https://github.com/phetsims/balancing-act/issues/168
+    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
+      positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
-    this.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisible ) );
+    this.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisibleProperty ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     const levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
-    this.viewProperties.levelIndicatorVisibleProperty.link( visible => {
+    this.viewProperties.levelIndicatorVisibleProperty.link( ( visible: boolean ) => {
       levelIndicatorNode.visible = visible;
     } );
     this.nonMassLayer.addChild( levelIndicatorNode );
 
     // Listen to the list of force vectors and manage their representations.
-    model.plank.forceVectors.addItemAddedListener( addedMassForceVector => {
+    model.plank.forceVectors.addItemAddedListener( ( addedMassForceVector: MassForceVector ) => {
 
       // Add a representation for the new vector.
       let forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
         forceVectorNode = new MysteryVectorNode(
+          // @ts-expect-error
           addedMassForceVector.forceVectorProperty,
           this.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform
@@ -232,7 +264,7 @@ class BasicBalanceScreenView extends ScreenView {
       this.nonMassLayer.addChild( forceVectorNode );
 
       // Remove view representation when corresponding force vector is removed from the model.
-      const massForceVectorRemovedListener = removedMassForceVector => {
+      const massForceVectorRemovedListener = ( removedMassForceVector: MassForceVector ) => {
         if ( removedMassForceVector === addedMassForceVector ) {
           this.nonMassLayer.removeChild( forceVectorNode );
           forceVectorNode.dispose();
@@ -261,16 +293,22 @@ class BasicBalanceScreenView extends ScreenView {
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       createNode: () => new Text( massLabelsString, PANEL_OPTION_FONT ),
       property: this.viewProperties.massLabelsVisibleProperty,
+
+      // @ts-expect-error
       label: massLabelsString,
       tandemName: 'massLabelsCheckbox'
     }, {
       createNode: () => new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
       property: this.viewProperties.forceVectorsFromObjectsVisibleProperty,
+
+      // @ts-expect-error
       label: forcesFromObjectsString,
       tandemName: 'forcesFromObjectsCheckbox'
     }, {
       createNode: () => new Text( levelString, PANEL_OPTION_FONT ),
       property: this.viewProperties.levelIndicatorVisibleProperty,
+
+      // @ts-expect-error
       label: levelString,
       tandemName: 'levelCheckbox'
     }
@@ -301,12 +339,14 @@ class BasicBalanceScreenView extends ScreenView {
     // markers, or nothing.
     const positionPanel = new PositionIndicatorControlPanel(
       this.viewProperties.positionMarkerStateProperty, this.layoutBounds.width, {
-      left: indicatorVisibilityControlPanel.left,
-      top: indicatorVisibilityControlPanel.bottom + 5,
-      minWidth: minControlPanelWidth,
-      maxWidth: maxControlPanelWidth,
-      tandem: tandem.createTandem( 'positionPanel' )
-    } );
+
+        // @ts-expect-error
+        left: indicatorVisibilityControlPanel.left,
+        top: indicatorVisibilityControlPanel.bottom + 5,
+        minWidth: minControlPanelWidth,
+        maxWidth: maxControlPanelWidth,
+        tandem: tandem.createTandem( 'positionPanel' )
+      } );
     const controlPanelsVBox = new VBox( {
       children: [ indicatorVisibilityControlPanel, positionPanel ],
       stretch: true,
@@ -321,7 +361,7 @@ class BasicBalanceScreenView extends ScreenView {
     this.controlPanelVBox = controlPanelsVBox;
 
     // Reset All button.
-    function resetClosure() {
+    function resetClosure(): void {
       self.reset();
     }
 
@@ -336,16 +376,12 @@ class BasicBalanceScreenView extends ScreenView {
 
   /**
    * Get the node for the provided mass.
-   * @param {Mass} mass
-   * @returns {Node|undefined}
-   * @public
    */
-  getNodeForMass( mass ) {
+  public getNodeForMass( mass: Mass ): IntentionalAny {
     return this.massesToNodesMap.get( mass );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.interruptDragHandlerEmitter.emit();
     this.model.reset();
     _.values( this.viewProperties ).forEach( viewProperty => { viewProperty.reset(); } );
@@ -353,4 +389,3 @@ class BasicBalanceScreenView extends ScreenView {
 }
 
 balancingAct.register( 'BasicBalanceScreenView', BasicBalanceScreenView );
-export default BasicBalanceScreenView;

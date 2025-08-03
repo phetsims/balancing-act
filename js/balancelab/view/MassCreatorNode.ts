@@ -6,24 +6,20 @@
  * @author John Blanco
  */
 
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import ModelElementCreatorNode from './ModelElementCreatorNode.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
 const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
 
-class MassCreatorNode extends ModelElementCreatorNode {
+export default class MassCreatorNode extends ModelElementCreatorNode {
 
-  /**
-   * @param {BasicBalanceScreenView} screenView
-   * @param {number} massValue
-   * @param {boolean} showMassLabel
-   * @param {EnumerationDeprecatedProperty} columnStateProperty
-   * @param {Object} [options]
-   */
-  constructor( screenView, massValue, showMassLabel, columnStateProperty, options ) {
+  public constructor( screenView: BasicBalanceScreenView, massValue: number, showMassLabel: boolean, columnStateProperty: EnumerationDeprecatedProperty, options?: IntentionalAny ) {
     super( screenView, columnStateProperty, options );
     if ( showMassLabel ) {
       this.setCaption( new PatternStringProperty( pattern0Value1UnitsStringProperty, {
@@ -37,5 +33,3 @@ class MassCreatorNode extends ModelElementCreatorNode {
 }
 
 balancingAct.register( 'MassCreatorNode', MassCreatorNode );
-
-export default MassCreatorNode;

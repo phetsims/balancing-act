@@ -4,6 +4,8 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import trashCan_svg from '../../../../images/objects/trashCan_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -14,12 +16,7 @@ const HEIGHT = 0.55; // In meters
 
 class SmallTrashCan extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   * @param {Object} [options]
-   */
-  constructor( initialPosition, isMystery, options ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean, options?: IntentionalAny ) {
     super( MASS, trashCan_svg, HEIGHT, initialPosition, isMystery, options );
   }
 }

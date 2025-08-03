@@ -4,6 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import tire_svg from '../../../../images/objects/tire_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -14,11 +15,7 @@ const HEIGHT = 0.13; // In meters
 
 class Tire extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   */
-  constructor( initialPosition, isMystery ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean ) {
     super( MASS, tire_svg, HEIGHT, initialPosition, isMystery );
   }
 }

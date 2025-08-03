@@ -7,6 +7,8 @@
  * @author John Blanco
  */
 
+import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
@@ -15,13 +17,9 @@ import BalanceGameChallenge from './BalanceGameChallenge.js';
 const whatIsTheMassStringProperty = BalancingActStrings.whatIsTheMassStringProperty;
 
 class MassDeductionChallenge extends BalanceGameChallenge {
+  private viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
-  /**
-   * @param fixedMassDistancePair
-   * @param movableMass
-   * @param solutionToDisplay
-   */
-  constructor( fixedMassDistancePair, movableMass, solutionToDisplay ) {
+  public constructor( fixedMassDistancePair: IntentionalAny, movableMass: IntentionalAny, solutionToDisplay: IntentionalAny ) {
     super( ColumnState.NO_COLUMNS );
 
     this.fixedMassDistancePairs.push( fixedMassDistancePair );
@@ -41,10 +39,8 @@ class MassDeductionChallenge extends BalanceGameChallenge {
 
   /**
    * convenience factory method for creating a mass deduction challenge
-   * @returns {MassDeductionChallenge}
-   * @public
    */
-  static create( mysteryMass, mysteryMassDistanceFromCenter, knownMass ) {
+  public static create( mysteryMass: IntentionalAny, mysteryMassDistanceFromCenter: IntentionalAny, knownMass: IntentionalAny ): MassDeductionChallenge {
 
     // Create the mass-distance pair for the mystery mass.
     const mysteryMassDistancePair = { mass: mysteryMass, distance: mysteryMassDistanceFromCenter };

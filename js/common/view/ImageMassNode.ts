@@ -7,9 +7,13 @@
  * @author John Blanco
  */
 
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -20,33 +24,35 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
+import ImageMass from '../model/ImageMass.js';
 import MassDragHandler from './MassDragHandler.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
 const pattern0Value1UnitsStringProperty = BalancingActStrings.pattern0Value1UnitsStringProperty;
 const unknownMassLabelStringProperty = BalancingActStrings.unknownMassLabelStringProperty;
 
-class ImageMassNode extends Node {
+export default class ImageMassNode extends Node {
 
-  /**
-   * @param imageMass
-   * @param modelViewTransform
-   * @param {boolean} isLabeled - Flag that controls whether this note include a textual label of the mass
-   * @param massLabelVisibleProperty
-   * @param {boolean} draggable
-   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
-   */
-  constructor( imageMass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
+  // Image node made visible to descendant classes for layout purposes
+  public readonly imageNode: Image;
+
+  // Drag handler, made available for use by creator nodes
+  public readonly dragHandler?: MassDragHandler;
+
+  private readonly disposeImageMassNode: () => void;
+
+  public constructor( imageMass: ImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
     super( { cursor: 'pointer' } );
-    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
+
+    // TODO https://github.com/phetsims/balancing-act/issues/168 ColumnState
+    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: IntentionalAny ) => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );
-    const self = this;
 
-    let massLabel;
-    let massLabelContainer;
-    const massLabelVisibilityListener = visible => { massLabel.visible = visible; };
+    let massLabel: Text;
+    let massLabelContainer: Node;
+    const massLabelVisibilityListener = ( visible: boolean ): void => { massLabel.visible = visible; };
     if ( isLabeled ) {
 
       // Add the mass indicator label.  Note that it is positioned elsewhere.
@@ -72,8 +78,30 @@ class ImageMassNode extends Node {
     let mouseArea = imageNode.bounds.copy();
     let touchArea = imageNode.bounds.copy();
 
+    // Function for updating position and angle, used in multiple places below.
+    const updatePositionAndAngle = (): void => {
+      if ( this.bounds.isFinite() ) {
+
+        this.rotation = 0;
+        const imageMassPosition = imageMass.positionProperty.get();
+
+        // Set overall position.  Recall that positions in the model are defined as the center bottom of the item.
+        this.centerX = modelViewTransform.modelToViewX( imageMassPosition.x - imageMass.centerOfMassXOffset );
+        this.bottom = modelViewTransform.modelToViewY( imageMassPosition.y );
+
+        // Set the rotation.  Rotation point is the center bottom.
+        this.rotateAround(
+          new Vector2(
+            modelViewTransform.modelToViewX( imageMassPosition.x ),
+            modelViewTransform.modelToViewY( imageMassPosition.y )
+          ),
+          -imageMass.rotationAngleProperty.get()
+        );
+      }
+    };
+
     // Observe image changes.
-    const imageChangeHandler = image => {
+    const imageChangeHandler = ( image: HTMLImageElement ): void => {
       imageNode.setScaleMagnitude( 1 );
       imageNode.setImage( image );
 
@@ -109,11 +137,13 @@ class ImageMassNode extends Node {
         if ( bounds.right < massLabel.bounds.right ) {
           boundsXDilation = massLabel.bounds.right - bounds.right;
         }
-        self.setTouchArea( touchArea.dilateX( boundsXDilation ) );
-        self.setMouseArea( mouseArea.dilatedX( boundsXDilation ) );
+        this.setTouchArea( touchArea.dilateX( boundsXDilation ) );
+        this.setMouseArea( mouseArea.dilatedX( boundsXDilation ) );
       }
       updatePositionAndAngle();
     };
+
+    // @ts-expect-error
     imageMass.imageProperty.link( imageChangeHandler );
 
     // Increase the touchArea and mouseArea bounds to include the height of the massLabel.
@@ -125,31 +155,9 @@ class ImageMassNode extends Node {
         mouseArea = mouseArea.dilatedY( massLabelHeightFactor ).shiftedY( -massLabelHeightFactor );
         touchArea = touchArea.dilatedY( massLabelHeightFactor + 5 ).shiftedY( -massLabelHeightFactor + 5 );
       }
-      self.setMouseArea( mouseArea );
-      self.setTouchArea( touchArea );
+      this.setMouseArea( mouseArea );
+      this.setTouchArea( touchArea );
     } );
-
-    // Function for updating position and angle, used in multiple places below.
-    function updatePositionAndAngle() {
-      if ( self.bounds.isFinite() ) {
-
-        self.rotation = 0;
-        const imageMassPosition = imageMass.positionProperty.get();
-
-        // Set overall position.  Recall that positions in the model are defined as the center bottom of the item.
-        self.centerX = modelViewTransform.modelToViewX( imageMassPosition.x - imageMass.centerOfMassXOffset );
-        self.bottom = modelViewTransform.modelToViewY( imageMassPosition.y );
-
-        // Set the rotation.  Rotation point is the center bottom.
-        self.rotateAround(
-          new Vector2(
-            modelViewTransform.modelToViewX( imageMassPosition.x ),
-            modelViewTransform.modelToViewY( imageMassPosition.y )
-          ),
-          -imageMass.rotationAngleProperty.get()
-        );
-      }
-    }
 
     // Add the image node.
     this.addChild( imageNode );
@@ -158,7 +166,7 @@ class ImageMassNode extends Node {
     this.imageNode = imageNode;
 
     // Observe height changes.
-    const heightChangeHandler = newHeight => {
+    const heightChangeHandler = ( newHeight: number ): void => {
       imageNode.setScaleMagnitude( 1 );
       const scalingFactor = Math.abs( modelViewTransform.modelToViewDeltaY( newHeight ) ) / imageNode.height;
       imageNode.scale( scalingFactor );
@@ -173,7 +181,7 @@ class ImageMassNode extends Node {
     imageMass.rotationAngleProperty.link( updatePositionAndAngle );
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
-    const animatingStateChangeHandler = animating => {
+    const animatingStateChangeHandler = ( animating: boolean ): void => {
       if ( !this.isDisposed ) {
         this.pickable = !animating;
       }
@@ -183,7 +191,7 @@ class ImageMassNode extends Node {
     // Add the mouse event handler if this is intended to be draggable.
     if ( draggable ) {
 
-      // @public (read-only) {MassDragHandler} - drag handler, made available for use by creator nodes
+      // drag handler, made available for use by creator nodes
       this.dragHandler = new MassDragHandler( imageMass, modelViewTransform );
 
       this.addInputListener( this.dragHandler );
@@ -191,6 +199,8 @@ class ImageMassNode extends Node {
 
     // Remove any linkages that could cause memory leaks.
     this.disposeImageMassNode = () => {
+
+      // @ts-expect-error
       imageMass.imageProperty.unlink( imageChangeHandler );
       massLabel && massLabel.dispose();
       massLabelContainer && massLabelContainer.dispose();
@@ -204,16 +214,10 @@ class ImageMassNode extends Node {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     super.dispose();
     this.disposeImageMassNode();
   }
 }
 
 balancingAct.register( 'ImageMassNode', ImageMassNode );
-
-export default ImageMassNode;

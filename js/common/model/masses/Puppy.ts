@@ -4,6 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import puppy_svg from '../../../../images/objects/puppy_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -14,11 +15,7 @@ const HEIGHT = 0.6; // In meters
 
 class Puppy extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   */
-  constructor( initialPosition, isMystery ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean ) {
     super( MASS, puppy_svg, HEIGHT, initialPosition, isMystery );
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }

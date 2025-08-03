@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * Primary model class for the 'balance lab' tab in the balancing act simulation. This model depicts a plank on a
@@ -9,24 +9,28 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import balancingAct from '../../balancingAct.js';
 import BalanceModel from '../../common/model/BalanceModel.js';
+import Mass from '../../common/model/Mass.js';
 import BrickStack from '../../common/model/masses/BrickStack.js';
 import MysteryMass from '../../common/model/masses/MysteryMass.js';
 
-class BalanceLabModel extends BalanceModel {
+export default class BalanceLabModel extends BalanceModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+  // PhetioGroup for brick stacks. TODO: Type parameter, see https://github.com/phetsims/balancing-act/issues/168
+  public readonly brickStackGroup: PhetioGroup<BrickStack | Mass, [ number, Vector2 ]>;
+
+  // PhetioGroup for mystery masses TODO: Type parameter, see https://github.com/phetsims/balancing-act/issues/168
+  public readonly mysteryMassGroup: PhetioGroup<MysteryMass | Mass, [ Vector2, number ]>;
+
+  public constructor( tandem: Tandem ) {
     super( tandem );
 
-    // @public {PhetioGroup.<BrickStack>}
-    this.brickStackGroup = new PhetioGroup(
-      ( tandem, numberOfBricks, position ) => {
+    this.brickStackGroup = new PhetioGroup<BrickStack | Mass, [ number, Vector2 ]>(
+      ( tandem: Tandem, numberOfBricks: number, position: Vector2 ) => {
         const brickStack = new BrickStack( numberOfBricks, position, {
           tandem: tandem,
           phetioDynamicElement: true
@@ -42,9 +46,8 @@ class BalanceLabModel extends BalanceModel {
       }
     );
 
-    // @public {PhetioGroup.<MysteryMass>}
-    this.mysteryMassGroup = new PhetioGroup(
-      ( tandem, position, mysteryMassId ) => {
+    this.mysteryMassGroup = new PhetioGroup<MysteryMass | Mass, [ Vector2, number ]>(
+      ( tandem: Tandem, position: Vector2, mysteryMassId: number ) => {
         const mysteryMassModelElement = new MysteryMass( position, mysteryMassId, {
           tandem: tandem,
           phetioDynamicElement: true
@@ -63,10 +66,7 @@ class BalanceLabModel extends BalanceModel {
     // TODO: Add person group here too, see https://github.com/phetsims/balancing-act/issues/99
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public override reset(): void {
     super.reset();
 
     // Remove all masses from the model.  This must be done one at a time rather than clearing massList in order to
@@ -74,13 +74,9 @@ class BalanceLabModel extends BalanceModel {
     this.massList.getArrayCopy().forEach( mass => { this.removeMass( mass ); } );
   }
 
-  /**
-   * @param {Mass} mass
-   * @public
-   */
-  addMass( mass ) {
-    BalanceModel.prototype.addMass.call( this, mass );
-    mass.userControlledProperty.lazyLink( isUserControlled => {
+  public override addMass( mass: Mass ): void {
+    super.addMass( mass );
+    mass.userControlledProperty.lazyLink( ( isUserControlled: boolean ) => {
       if ( !isUserControlled ) {
 
         // The user has dropped this mass.
@@ -96,13 +92,11 @@ class BalanceLabModel extends BalanceModel {
 
   /**
    * Return a mass to the toolbox in an animated fashion, then remove it from the model.
-   * @param {Mass} mass
-   * @public
    */
-  removeMassAnimated( mass ) {
+  public removeMassAnimated( mass: Mass ): void {
 
     // Register a listener for the completion of the removal animation sequence.
-    const removeMass = ( isAnimating, wasAnimating ) => {
+    const removeMass = ( isAnimating: boolean, wasAnimating: boolean | null ) => {
       if ( wasAnimating && !isAnimating ) {
 
         // Animation sequence has completed, so remove the mass from the model.
@@ -119,10 +113,8 @@ class BalanceLabModel extends BalanceModel {
 
   /**
    * Remove a mass from the model.
-   * @public
-   * @override
    */
-  removeMass( mass ) {
+  public override removeMass( mass: Mass ): void {
     this.massList.remove( mass );
     if ( this.brickStackGroup.includes( mass ) ) {
       this.brickStackGroup.disposeElement( mass );
@@ -141,5 +133,3 @@ class BalanceLabModel extends BalanceModel {
 }
 
 balancingAct.register( 'BalanceLabModel', BalanceLabModel );
-
-export default BalanceLabModel;

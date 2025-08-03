@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * Basic model for depicting masses on a balance, meant to be used as a base
@@ -7,31 +7,36 @@
  * @author John Blanco
  */
 
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from './ColumnState.js';
 import Fulcrum from './Fulcrum.js';
 import LevelSupportColumn from './LevelSupportColumn.js';
+import Mass from './Mass.js';
 import Plank from './Plank.js';
 
 // constants
 const FULCRUM_HEIGHT = 0.85; // In meters.
 const PLANK_HEIGHT = 0.75; // In meters.
 
-class BalanceModel {
+export default class BalanceModel {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+  // Model elements
+  public readonly fulcrum: Fulcrum;
+  public readonly massList: ObservableArray<Mass>;
+  public readonly userControlledMasses: Mass[];
 
+  public readonly columnStateProperty: EnumerationDeprecatedProperty;
+  public readonly plank: Plank;
+  public readonly supportColumns: LevelSupportColumn[];
 
-    // Model elements
+  public constructor( tandem: Tandem ) {
     this.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
-    this.massList = createObservableArray();
+    this.massList = createObservableArray<Mass>();
     this.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
 
     this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
@@ -53,10 +58,8 @@ class BalanceModel {
 
   /**
    * Step function, called by the framework, clocks time-dependent behavior.
-   * @param {number} dt
-   * @public
    */
-  step( dt ) {
+  public step( dt: number ): void {
     this.plank.step( dt );
     this.massList.forEach( mass => {
       mass.step( dt );
@@ -65,14 +68,12 @@ class BalanceModel {
 
   /**
    * Add a mass to the model.  Subclasses generally do additional things.
-   * @param mass
-   * @public
    */
-  addMass( mass ) {
+  public addMass( mass: Mass ): void {
     this.massList.push( mass );
     // Add a listener that will update the list of user controlled masses
     // that is used by the plank to update the active drop positions.
-    const userControlledMassesUpdater = userControlled => {
+    const userControlledMassesUpdater = ( userControlled: boolean ) => {
       if ( userControlled ) {
         this.userControlledMasses.push( mass );
       }
@@ -88,23 +89,16 @@ class BalanceModel {
 
   /**
    * Remove a mass from the model.  Subtypes often do additional things.
-   * @param mass
-   * @public
    */
-  removeMass( mass ) {
+  public removeMass( mass: Mass ): void {
     this.massList.remove( mass );
     mass.dispose();
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.plank.removeAllMasses();
     this.columnStateProperty.reset();
   }
 }
 
 balancingAct.register( 'BalanceModel', BalanceModel );
-
-export default BalanceModel;

@@ -7,10 +7,12 @@
  * @author John Blanco
  */
 
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import balancingAct from '../../balancingAct.js';
+import Plank from '../model/Plank.js';
 
 // constants
 const PIVOT_RADIUS = 5;
@@ -18,11 +20,7 @@ const ATTACHMENT_BAR_WIDTH = PIVOT_RADIUS * 1.5;
 
 class AttachmentBarNode extends Node {
 
-  /**
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Plank} plank
-   */
-  constructor( modelViewTransform, plank ) {
+  public constructor( modelViewTransform: ModelViewTransform2, plank: Plank ) {
     super();
     const pivotPointPosInView = modelViewTransform.modelToViewPosition( plank.pivotPoint );
 

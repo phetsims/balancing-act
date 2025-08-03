@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * Main entry point for the Balancing Act simulation.
@@ -17,12 +17,16 @@ import BAIntroScreen from './intro/BAIntroScreen.js';
 
 const balancingActTitleStringProperty = BalancingActStrings[ 'balancing-act' ].titleStringProperty;
 
-// constants
 const tandem = Tandem.ROOT;
 
 simLauncher.launch( () => {
+  const sim = new Sim( balancingActTitleStringProperty, [
+    new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
+    new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
 
-  const simOptions = {
+    // Game screen not available in phet-io
+    ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
+  ], {
     credits: {
       leadDesign: 'Kathy Perkins, John Blanco, Ariel Paul',
       softwareDevelopment: 'John Blanco, Luisa Vargas',
@@ -30,18 +34,8 @@ simLauncher.launch( () => {
       qualityAssurance: 'Steele Dalton, Jaron Droder, Clifford Hardin, Liam Mulhall, Nancy Salpepi, Kathryn Woessner',
       graphicArts: 'John Blanco, Mariah Hermsmeyer, Amanda McGarry'
     }
-  };
-
-  // Create and start the sim
-  const screens = [
-    new BAIntroScreen( tandem.createTandem( 'introScreen' ) ),
-    new BalanceLabScreen( tandem.createTandem( 'balanceLabScreen' ) ),
-
-    // Game screen not available in phet-io
-    ...( Tandem.PHET_IO_ENABLED ? [] : [ new BalanceGameScreen( tandem.createTandem( 'gameScreen' ) ) ] )
-  ];
-
-  new Sim( balancingActTitleStringProperty, screens, simOptions ).start();
+  } );
+  sim.start();
 
   soundManager.setOutputLevelForCategory( 'user-interface', 0 );
 } );

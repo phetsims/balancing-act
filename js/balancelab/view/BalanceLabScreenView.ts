@@ -6,17 +6,17 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import MassCarousel from '../../common/view/MassCarousel.js';
+import BalanceLabModel from '../model/BalanceLabModel.js';
 
-class BalanceLabScreenView extends BasicBalanceScreenView {
+export default class BalanceLabScreenView extends BasicBalanceScreenView {
 
-  /**
-   * @param {BalanceLabModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+  private readonly massCarousel: MassCarousel;
+
+  public constructor( model: BalanceLabModel, tandem: Tandem ) {
     super( model, tandem );
 
     // Add the mass selection carousel.
@@ -28,12 +28,10 @@ class BalanceLabScreenView extends BasicBalanceScreenView {
     this.controlPanelVBox.addChild( this.massCarousel );
   }
 
-  // @public
-  reset() {
+  public override reset(): void {
     this.massCarousel.reset();
     super.reset();
   }
 }
 
 balancingAct.register( 'BalanceLabScreenView', BalanceLabScreenView );
-export default BalanceLabScreenView;

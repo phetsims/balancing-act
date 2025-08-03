@@ -11,6 +11,7 @@ import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js'
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -34,11 +35,9 @@ const READOUT_BACKGROUND_WIDTH = 100;
 const READOUT_BACKGROUND_HEIGHT = 24;
 
 class MassValueEntryNode extends Node {
+  public readonly massValueProperty: NumberProperty;
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public constructor( options?: IntentionalAny ) {
     super();
     this.massValueProperty = new NumberProperty( 0 );
 
@@ -84,6 +83,8 @@ class MassValueEntryNode extends Node {
         slider.addMajorTick( i, new Text( i, { font: TICK_MARK_FONT } ) );
       }
       else {
+
+        // @ts-expect-error
         slider.addMinorTick( i, null );
       }
     }
@@ -121,13 +122,11 @@ class MassValueEntryNode extends Node {
     this.mutate( options );
   }
 
-  // @public
-  clear() {
+  public clear(): void {
     this.massValueProperty.reset();
   }
 
-  // @public
-  showAnswer( massValue ) {
+  public showAnswer( massValue: number ): void {
     this.massValueProperty.value = massValue;
   }
 }

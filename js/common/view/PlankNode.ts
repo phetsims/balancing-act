@@ -9,6 +9,7 @@
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -22,13 +23,11 @@ const HIGHLIGHT_COLOR = 'white';
 const HIGHLIGHT_WIDTH = 12;
 
 class PlankNode extends Node {
+  private readonly highlights: Node[];
 
-  /**
-   * @param modelViewTransform
-   * @param plank
-   */
-  constructor( modelViewTransform, plank ) {
+  public constructor( modelViewTransform: ModelViewTransform2, plank: Plank ) {
     super();
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
     // Create and position the plank.
@@ -37,19 +36,21 @@ class PlankNode extends Node {
       {
         fill: 'rgb( 243, 203, 127 )',
         stroke: 'black',
+
+        // @ts-expect-error
         lineThickness: 1
       } );
     this.addChild( plankNode );
 
     // Function for mapping plank distance relative to the center point to a highlight.
-    function mapPositionToHighlightIndex( distanceFromCenter ) {
+    function mapPositionToHighlightIndex( distanceFromCenter: number ): number {
       return Utils.roundSymmetric(
         ( distanceFromCenter + Plank.LENGTH / 2 ) * ( ( Plank.NUM_SNAP_TO_POSITIONS + 1 ) / Plank.LENGTH )
       ) - 1;
     }
 
     // Function for updating the highlights
-    function updateHighlights() {
+    function updateHighlights(): void {
       self.highlights.forEach( highlight => {
         highlight.visible = false;
       } );

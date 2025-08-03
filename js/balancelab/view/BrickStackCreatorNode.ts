@@ -10,11 +10,15 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
+import Mass from '../../common/model/Mass.js';
 import BrickStack from '../../common/model/masses/BrickStack.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import BrickStackNode from '../../common/view/BrickStackNode.js';
+import BalanceLabModel from '../model/BalanceLabModel.js';
 import MassCreatorNode from './MassCreatorNode.js';
 
 // Model-view transform for scaling the node used in the toolbox.  This
@@ -22,15 +26,12 @@ import MassCreatorNode from './MassCreatorNode.js';
 // items in the toolbox can be sized differently (generally smaller).
 const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
-class BrickStackCreatorNode extends MassCreatorNode {
+export default class BrickStackCreatorNode extends MassCreatorNode {
 
-  /**
-   * @param {number} numBricks
-   * @param {BalanceLabModel} model
-   * @param {BasicBalanceScreenView} screenView
-   * @param {Object} [options]
-   */
-  constructor( numBricks, model, screenView, options ) {
+  private readonly numBricks: number;
+  private readonly model: BalanceLabModel;
+
+  public constructor( numBricks: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
     super( screenView, numBricks * BrickStack.BRICK_MASS, true, model.columnStateProperty, options );
     this.numBricks = numBricks;
     this.model = model;
@@ -57,13 +58,7 @@ class BrickStackCreatorNode extends MassCreatorNode {
     );
   }
 
-  /**
-   *
-   * @param {Vector2} position
-   * @returns {Mass}
-   * @public
-   */
-  addElementToModel( position ) {
+  public override addElementToModel( position: Vector2 ): Mass {
     const mass = this.model.brickStackGroup.createNextElement( this.numBricks, position );
     this.model.addMass( mass );
     return mass;
@@ -71,5 +66,3 @@ class BrickStackCreatorNode extends MassCreatorNode {
 }
 
 balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );
-
-export default BrickStackCreatorNode;

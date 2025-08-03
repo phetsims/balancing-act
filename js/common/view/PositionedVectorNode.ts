@@ -12,23 +12,21 @@
  * @author John Blanco
  */
 
+import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
 
 class PositionedVectorNode extends Node {
+  private readonly disposePositionedVectorNode: () => void;
 
-  /**
-   * @param positionedVectorProperty
-   * @param visibleProperty
-   * @param scalingFactor
-   * @param modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( positionedVectorProperty, scalingFactor, visibleProperty, modelViewTransform, options ) {
+  public constructor( positionedVectorProperty: IntentionalAny, scalingFactor: IntentionalAny, visibleProperty: IntentionalAny, modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
     super();
 
+    // eslint-disable-next-line phet/bad-typescript-text
     options = merge( {
       visibleProperty: visibleProperty,
       fill: 'white',
@@ -43,8 +41,12 @@ class PositionedVectorNode extends Node {
     const length = positionedVectorProperty.value.vector.magnitude * scalingFactor;
     this.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
-    const positionHandler = positionedVector => {
+    const positionHandler = ( positionedVector: Vector2 ) => {
+
+      // @ts-expect-error
       this.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
+
+      // @ts-expect-error
       this.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
     };
     positionedVectorProperty.link( positionHandler );
@@ -55,11 +57,7 @@ class PositionedVectorNode extends Node {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePositionedVectorNode();
     super.dispose();
   }

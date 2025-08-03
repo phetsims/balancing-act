@@ -13,69 +13,57 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import balancingAct from '../../balancingAct.js';
 import Mass from './Mass.js';
 
-class ImageMass extends Mass {
+export default class ImageMass extends Mass {
 
-  /**
-   * @param mass
-   * @param image
-   * @param height
-   * @param initialPosition
-   * @param isMystery
-   * @param {Object} [options]
-   */
-  constructor( mass, image, height, initialPosition, isMystery, options ) {
+  // Property that contains the current image.
+  public readonly imageProperty: Property<HTMLImageElement | ImageableImage>;
+
+  // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
+  // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
+  // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
+  // A property is used because the size may change during animations.
+  public readonly heightProperty: Property<number>;
+
+  // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
+  // set prior to image updates.
+  public reverseImage: boolean;
+
+  public constructor( mass: number, image: HTMLImageElement | ImageableImage, height: number, initialPosition: Vector2, isMystery: boolean, options?: IntentionalAny ) {
     super( mass, initialPosition, isMystery, options );
 
-    // Property that contains the current image.
     this.imageProperty = new Property( image );
 
-    // Property that contains the current height of the corresponding model object.  Only height is used, as opposed to
-    // both height and width, because the aspect ratio of the image is expected to be maintained, so the model element's
-    // width can be derived from a combination of its height and the aspect ratio of the image that represents it.
-    // A property is used because the size may change during animations.
     this.heightProperty = new Property( height );
 
-    // Flag that indicates whether this node should be represented by a reversed version of the current image, must be
-    // set prior to image updates.
     this.reverseImage = false;
 
     // Expected duration of the current animation.
     this.expectedAnimationTime = 0;
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public override reset(): void {
     this.heightProperty.reset();
     this.imageProperty.reset();
     super.reset();
   }
 
-  /**
-   * @returns {Vector2}
-   * @public
-   */
-  getMiddlePoint() {
+  public override getMiddlePoint(): Vector2 {
     const position = this.positionProperty.get();
     return new Vector2( position.x, position.y + this.heightProperty.get() / 2 );
   }
 
-  /**
-   * Create a copy.
-   * @returns {ImageMass}
-   * @public
-   */
-  createCopy() {
+  // TODO: https://github.com/phetsims/balancing-act/issues/168 implement in subclasses
+  public override createCopy(): ImageMass {
 
     // This is written such that it will work for subclasses.
+    // @ts-expect-error
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
 }
 
 balancingAct.register( 'ImageMass', ImageMass );
-
-export default ImageMass;

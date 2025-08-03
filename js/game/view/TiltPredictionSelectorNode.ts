@@ -9,6 +9,7 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -21,20 +22,22 @@ import TiltPredictionSelectionPanel from './TiltPredictionSelectionPanel.js';
 
 class TiltPredictionSelectorNode extends Node {
 
-  /**
-   * @param gameStateProperty
-   */
-  constructor( gameStateProperty ) {
+  // Property that tracks the selected prediction.
+  public readonly tiltPredictionProperty: EnumerationProperty<TiltPredictionState>;
+
+  public constructor( gameStateProperty: IntentionalAny ) {
     super();
 
-    // Property that tracks the selected prediction.
     this.tiltPredictionProperty = new EnumerationProperty( TiltPredictionState.NONE );
 
     const panelContents = new HBox(
       {
         children: [
+          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankTippedLeft_svg, TiltPredictionState.TILT_DOWN_ON_LEFT_SIDE, this.tiltPredictionProperty, gameStateProperty ),
+          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankBalanced_svg, TiltPredictionState.STAY_BALANCED, this.tiltPredictionProperty, gameStateProperty ),
+          // @ts-expect-error
           new TiltPredictionSelectionPanel( plankTippedRight_svg, TiltPredictionState.TILT_DOWN_ON_RIGHT_SIDE, this.tiltPredictionProperty, gameStateProperty )
         ], spacing: 5
       } );

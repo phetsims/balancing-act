@@ -7,13 +7,16 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
+import BrickStack from '../model/masses/BrickStack.js';
 import MassDragHandler from './MassDragHandler.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
@@ -23,16 +26,14 @@ const unknownMassLabelStringProperty = BalancingActStrings.unknownMassLabelStrin
 const LABEL_FONT = new PhetFont( 12 );
 const LINE_WIDTH = 1;
 
-class BrickStackNode extends VBox {
+export default class BrickStackNode extends VBox {
 
-  /**
-   * @param {BrickStack} brickStack
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {boolean} isLabeled
-   * @param {Property} labelVisibleProperty
-   * @param {boolean} draggable
-   */
-  constructor( brickStack, modelViewTransform, isLabeled, labelVisibleProperty, draggable ) {
+  public readonly modelViewTransform: ModelViewTransform2;
+  public readonly previousAngle: number;
+  public readonly dragHandler?: MassDragHandler;
+  private readonly disposeBrickStackNode: () => void;
+
+  public constructor( brickStack: BrickStack, modelViewTransform: ModelViewTransform2, isLabeled: boolean, labelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean ) {
     super( { cursor: 'pointer' } );
 
     this.modelViewTransform = modelViewTransform;
@@ -49,13 +50,13 @@ class BrickStackNode extends VBox {
     } );
 
     // We link to this below if massLabel exists.
-    const updateMassLabelVisibility = visible => {
+    const updateMassLabelVisibility = ( visible: boolean ): void => {
       massLabel.visible = visible;
     };
 
     // Create and add the mass label.
-    let massLabel;
-    let kgText;
+    let massLabel: VBox | Text;
+    let kgText: Text;
     if ( isLabeled ) {
       const maxTextWidth = bricksNode.bounds.width;
       if ( brickStack.isMystery ) {
@@ -95,11 +96,17 @@ class BrickStackNode extends VBox {
 
       const massLabelHeightFactorTouchArea = massLabel.height / 3;
       const massLabelHeightFactorMouseArea = massLabel.height / 8;
-      bricksNode.setTouchArea( bricksNode.touchArea.dilatedY( massLabelHeightFactorTouchArea )
+
+      // @ts-expect-error
+      bricksNode.setTouchArea( bricksNode.touchArea!.dilatedY( massLabelHeightFactorTouchArea )
         .shiftedY( -massLabelHeightFactorTouchArea ) );
-      bricksNode.setMouseArea( bricksNode.mouseArea.dilatedY( massLabelHeightFactorMouseArea )
+
+      // @ts-expect-error
+      bricksNode.setMouseArea( bricksNode.mouseArea!.dilatedY( massLabelHeightFactorMouseArea )
         // Mouse area ends where the bricksNode ends at the bottom.
-        .shiftedY( bricksNode.bottom - bricksNode.touchArea.bottom - massLabelHeightFactorMouseArea ) );
+
+        // @ts-expect-error
+        .shiftedY( bricksNode.bottom - bricksNode.touchArea!.bottom - massLabelHeightFactorMouseArea ) );
 
       // Control label visibility.
       labelVisibleProperty.link( updateMassLabelVisibility );
@@ -114,7 +121,7 @@ class BrickStackNode extends VBox {
     let previousRotationAngle = 0;
 
     // Define a function to update the position of the node based on the model's position and rotational angle.
-    const updateNodePositionAndRotation = ( rotationAngle, position ) => {
+    const updateNodePositionAndRotation = ( rotationAngle: number, position: Vector2 ): void => {
 
       // Handle the rotation.
       this.rotateAround( bricksNode.center.plus( offsetToBottom ), previousRotationAngle - rotationAngle );
@@ -141,11 +148,12 @@ class BrickStackNode extends VBox {
 
     Multilink.multilink(
       [ brickStack.rotationAngleProperty, brickStack.positionProperty ],
-      ( angle, position ) => {
+      ( angle: number, position: Vector2 ) => {
         updateNodePositionAndRotation( angle, position );
       }
     );
 
+    // @ts-expect-error
     if ( massLabel ) {
       this.localBoundsProperty.link( () => {
         updateNodePositionAndRotation( brickStack.rotationAngleProperty.value, brickStack.positionProperty.value );
@@ -153,7 +161,7 @@ class BrickStackNode extends VBox {
     }
 
     // Make this non-pickable when animating so that users can't grab it mid-flight.
-    const updatePickabilityWhenAnimating = animating => {
+    const updatePickabilityWhenAnimating = ( animating: boolean ): void => {
       if ( !this.isDisposed ) {
         this.pickable = !animating;
       }
@@ -163,7 +171,7 @@ class BrickStackNode extends VBox {
     // Add the drag handler if this is intended to be draggable.
     if ( draggable ) {
 
-      // @public (read-only) {MassDragHandler} - drag handler, made available for use by creator nodes
+      // drag handler, made available for use by creator nodes
       this.dragHandler = new MassDragHandler( brickStack, modelViewTransform );
 
       this.addInputListener( this.dragHandler );
@@ -183,16 +191,10 @@ class BrickStackNode extends VBox {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeBrickStackNode();
     super.dispose();
   }
 }
 
 balancingAct.register( 'BrickStackNode', BrickStackNode );
-
-export default BrickStackNode;

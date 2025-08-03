@@ -6,13 +6,15 @@
  * @author John Blanco
  */
 
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import balancingAct from '../../balancingAct.js';
+import Fulcrum from '../model/Fulcrum.js';
 
 class FulcrumNode extends Node {
 
-  constructor( modelViewTransform, fulcrum ) {
+  public constructor( modelViewTransform: ModelViewTransform2, fulcrum: Fulcrum ) {
     super();
     this.addChild( new Path( modelViewTransform.modelToViewShape( fulcrum.shape ),
       {

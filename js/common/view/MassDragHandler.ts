@@ -8,16 +8,14 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import balancingAct from '../../balancingAct.js';
+import Mass from '../model/Mass.js';
 
 class MassDragHandler extends DragListener {
 
-  /**
-   * @param {Mass} mass
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( mass, modelViewTransform ) {
+  public constructor( mass: Mass, modelViewTransform: ModelViewTransform2 ) {
 
     // {Vector2} - offset for dragging, in model coordinate frame
     let dragOffset = Vector2.ZERO;
@@ -43,7 +41,7 @@ class MassDragHandler extends DragListener {
 
         // There is a rare multi-touch case where userControlled may already be updated, and we need to handle it by
         // cycling the userControlled state, see https://github.com/phetsims/balancing-act/issues/95.
-        if ( mass.userControlledProperty.get() === false ) {
+        if ( !mass.userControlledProperty.get() ) {
           mass.userControlledProperty.set( true );
         }
 

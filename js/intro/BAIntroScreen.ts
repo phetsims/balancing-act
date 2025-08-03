@@ -9,18 +9,16 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import introIcon_svg from '../../images/introIcon_svg.js';
 import balancingAct from '../balancingAct.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';
 
-class BAIntroScreen extends Screen {
+class BAIntroScreen extends Screen<BAIntroModel, BAIntroView> {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const screenIcon = new ScreenIcon( new Image( introIcon_svg ), {
       maxIconWidthProportion: 1,

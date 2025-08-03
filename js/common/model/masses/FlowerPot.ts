@@ -4,6 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import flowerPot_svg from '../../../../images/objects/flowerPot_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -12,17 +13,11 @@ import ImageMass from '../ImageMass.js';
 const MASS = 5; // In kg
 const HEIGHT = 0.55; // In meters
 
-class FlowerPot extends ImageMass {
+export default class FlowerPot extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   */
-  constructor( initialPosition, isMystery ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean ) {
     super( MASS, flowerPot_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 
 balancingAct.register( 'FlowerPot', FlowerPot );
-
-export default FlowerPot;

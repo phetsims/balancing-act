@@ -4,6 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import fireHydrant_svg from '../../../../images/objects/fireHydrant_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -12,17 +13,11 @@ import ImageMass from '../ImageMass.js';
 const MASS = 60; // In kg
 const HEIGHT = 0.75; // In meters
 
-class FireHydrant extends ImageMass {
+export default class FireHydrant extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   */
-  constructor( initialPosition, isMystery ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean ) {
     super( MASS, fireHydrant_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 
 balancingAct.register( 'FireHydrant', FireHydrant );
-
-export default FireHydrant;

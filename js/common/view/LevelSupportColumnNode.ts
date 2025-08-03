@@ -6,6 +6,8 @@
  * @author John Blanco
  */
 
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -15,16 +17,12 @@ import ColumnState from '../model/ColumnState.js';
 
 class LevelSupportColumnNode extends Node {
 
-  /**
-   * @param modelViewTransform
-   * @param levelSupportColumn
-   * @param columnState
-   */
-  constructor( modelViewTransform, levelSupportColumn, columnState ) {
+  public constructor( modelViewTransform: ModelViewTransform2, levelSupportColumn: IntentionalAny, columnState: IntentionalAny ) {
     super();
 
     // Create and add the main body of the column.
     const transformedColumnShape = modelViewTransform.modelToViewShape( levelSupportColumn.shape );
+    // @ts-expect-error
     const mainBodyGradient = BASharedConstants.GET_COLUMN_BODY_GRADIENT( transformedColumnShape );
 
     const columnNode = new Path( transformedColumnShape,
@@ -38,6 +36,8 @@ class LevelSupportColumnNode extends Node {
     // Create and add the column support.
     const supportWidth = transformedColumnShape.bounds.width * 1.3; // Empirically determined.
     const supportHeight = transformedColumnShape.bounds.height * 0.15; // Empirically determined.
+
+    // @ts-expect-error
     const supportGradient = BASharedConstants.GET_COLUMN_SUPPORT_GRADIENT( transformedColumnShape, supportWidth );
 
     const columnSupportNode = new Rectangle(
@@ -54,6 +54,8 @@ class LevelSupportColumnNode extends Node {
       } );
     this.addChild( columnSupportNode );
 
+
+    // @ts-expect-error
     columnState.link( state => {
       this.visible = state === ColumnState.DOUBLE_COLUMNS;
     } );

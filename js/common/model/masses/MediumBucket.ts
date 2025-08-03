@@ -4,6 +4,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import yellowBucket_svg from '../../../../images/objects/yellowBucket_svg.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
@@ -12,17 +13,11 @@ import ImageMass from '../ImageMass.js';
 const MASS = 20; // In kg
 const HEIGHT = 0.4; // In meters
 
-class MediumBucket extends ImageMass {
+export default class MediumBucket extends ImageMass {
 
-  /**
-   * @param initialPosition
-   * @param isMystery
-   */
-  constructor( initialPosition, isMystery ) {
+  public constructor( initialPosition: Vector2, isMystery: boolean ) {
     super( MASS, yellowBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
 
 balancingAct.register( 'MediumBucket', MediumBucket );
-
-export default MediumBucket;

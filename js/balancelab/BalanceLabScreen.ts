@@ -9,19 +9,16 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import balancingAct from '../balancingAct.js';
 import BalancingActImages from '../BalancingActImages.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
 import BalanceLabScreenView from './view/BalanceLabScreenView.js';
 
-class BalanceLabScreen extends Screen {
+class BalanceLabScreen extends Screen<BalanceLabModel, BalanceLabScreenView> {
 
-  /**
-   * @param { Tandem } tandem
-   * @public
-   */
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const options = {
       name: BalancingActStrings.balanceLabStringProperty,

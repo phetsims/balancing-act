@@ -9,17 +9,21 @@
  * @author John Blanco
  */
 
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import stepTimer from '../../../../axon/js/stepTimer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Fulcrum from '../../common/model/Fulcrum.js';
 import LevelSupportColumn from '../../common/model/LevelSupportColumn.js';
+import Mass from '../../common/model/Mass.js';
 import Plank from '../../common/model/Plank.js';
+import BalanceGameChallenge from './BalanceGameChallenge.js';
 import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
 import BalanceMassesChallenge from './BalanceMassesChallenge.js';
 import MassDeductionChallenge from './MassDeductionChallenge.js';
@@ -35,22 +39,69 @@ const MAX_SCORE_PER_GAME = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
 const FULCRUM_HEIGHT = 0.85; // In meters.
 const PLANK_HEIGHT = 0.75; // In meters.
 
-class BalanceGameModel {
+type GameState = 'choosingLevel' | 'presentingInteractiveChallenge' | 'showingCorrectAnswerFeedback' | 'showingIncorrectAnswerFeedbackTryAgain' | 'showingIncorrectAnswerFeedbackMoveOn' | 'displayingCorrectAnswer' | 'showingLevelResults';
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+export default class BalanceGameModel {
+
+  public readonly timerEnabledProperty: Property<boolean>;
+
+  // Zero-based in the model, though levels appear to the user to start at 1
+  public readonly levelProperty: Property<number>;
+
+  public readonly challengeIndexProperty: Property<number>;
+  public readonly scoreProperty: Property<number>;
+
+  // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback', 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer', 'showingLevelResults'
+  public readonly gameStateProperty: Property<GameState>;
+
+  public readonly columnStateProperty: EnumerationDeprecatedProperty;
+  public readonly elapsedTimeProperty: Property<number>;
+
+  // Best times and scores
+  public bestTimes: ( number | null )[];
+  public readonly bestScores: Property<number>[];
+
+  // Counter used to track number of incorrect answers
+  public incorrectGuessesOnCurrentChallenge: number;
+
+  // Current set of challenges, which collectively comprise a single level, on which the user is currently working
+  public challengeList: BalanceGameChallenge[] | null;
+
+  // Fixed masses that sit on the plank and that the user must attempt to balance
+  public readonly fixedMasses: ObservableArray<Mass>;
+
+  // Masses that the user moves on to the plank to counterbalance the fixed masses
+  public readonly movableMasses: ObservableArray<Mass>;
+
+  // Masses that the user is (or users are) moving
+  public readonly userControlledMasses: Mass[];
+
+  // The plank
+  public readonly plank: Plank;
+
+  // Tilted support column. In this model, there is only one
+  public readonly tiltedSupportColumn: TiltedSupportColumn;
+
+  // Level support columns
+  public readonly levelSupportColumns: LevelSupportColumn[];
+
+  // Fulcrum on which the plank pivots
+  public readonly fulcrum: Fulcrum;
+
+  // Game timer ID
+  private gameTimerId: number | null = null;
+
+  // Flag set to indicate new best time, cleared each time a level is started
+  public newBestTime = false;
+
+  public constructor( tandem: Tandem ) {
 
     this.timerEnabledProperty = new Property( false );
-    this.levelProperty = new Property( 0 ); // Zero-based in the model, though levels appear to the user to start at 1.
+    this.levelProperty = new Property( 0 );
     this.challengeIndexProperty = new Property( 0 );
     this.scoreProperty = new Property( 0 );
 
-    // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback',
-    // 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer',
-    // 'showingLevelResults'
-    this.gameStateProperty = new Property( 'choosingLevel' );
+    this.gameStateProperty = new Property<GameState>( 'choosingLevel' );
     this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS );
     this.elapsedTimeProperty = new Property( 0 );
 
@@ -62,20 +113,14 @@ class BalanceGameModel {
       this.bestScores.push( new Property( 0 ) );
     } );
 
-    // Counter used to track number of incorrect answers.
     this.incorrectGuessesOnCurrentChallenge = 0;
 
-    // Current set of challenges, which collectively comprise a single level, on
-    // which the user is currently working.
     this.challengeList = null;
 
-    // Fixed masses that sit on the plank and that the user must attempt to balance.
     this.fixedMasses = createObservableArray();
 
-    // Masses that the user moves on to the plank to counterbalance the fixed masses.
     this.movableMasses = createObservableArray();
 
-    // Masses that the user is (or users are) moving.
     this.userControlledMasses = [];
 
     // Add the plank.
@@ -97,11 +142,7 @@ class BalanceGameModel {
     this.fulcrum = new Fulcrum( new Dimension2( 1, FULCRUM_HEIGHT ) );
   }
 
-  /**
-   * @param {number} dt
-   * @public
-   */
-  step( dt ) {
+  public step( dt: number ): void {
     this.plank.step( dt );
     this.movableMasses.forEach( mass => {
       mass.step( dt );
@@ -111,10 +152,7 @@ class BalanceGameModel {
     } );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.timerEnabledProperty.reset();
     this.levelProperty.reset();
     this.challengeIndexProperty.reset();
@@ -129,11 +167,7 @@ class BalanceGameModel {
     } );
   }
 
-  /**
-   * @param {number} level
-   * @public
-   */
-  startLevel( level ) {
+  public startLevel( level: number ): void {
     this.plank.removeAllMasses();
     this.levelProperty.set( level );
     this.scoreProperty.reset();
@@ -160,12 +194,7 @@ class BalanceGameModel {
     this.newBestTime = false;
   }
 
-  /**
-   * @param balanceChallenge
-   * @param columnState
-   * @private
-   */
-  setChallenge( balanceChallenge, columnState ) {
+  private setChallenge( balanceChallenge: BalanceGameChallenge, columnState: IntentionalAny ): void {
 
     // Clear out the previous challenge (if there was one).  Start by resetting the plank.
     this.plank.removeAllMasses();
@@ -187,7 +216,7 @@ class BalanceGameModel {
     balanceChallenge.movableMasses.forEach( mass => {
       const initialPosition = new Vector2( 3, 0 );
       mass.positionProperty.set( initialPosition );
-      mass.userControlledProperty.link( userControlled => {
+      mass.userControlledProperty.link( ( userControlled: boolean ) => {
         if ( userControlled ) {
           this.userControlledMasses.push( mass );
         }
@@ -210,32 +239,21 @@ class BalanceGameModel {
     this.columnStateProperty.set( columnState );
   }
 
-  /**
-   * @returns {BalanceMassesChallenge|null}
-   * @public
-   */
-  getCurrentChallenge() {
-    if ( this.challengeList === null || this.challengeList.size <= this.challengeIndexProperty.get() ) {
+  public getCurrentChallenge(): BalanceGameChallenge | null {
+    if ( this.challengeList === null || this.challengeList.length <= this.challengeIndexProperty.get() ) {
       return null;
     }
     return this.challengeList[ this.challengeIndexProperty.get() ];
   }
 
-  /**
-   * @returns {number}
-   * @public
-   */
-  getChallengeCurrentPointValue() {
+  public getChallengeCurrentPointValue(): number {
     return MAX_POINTS_PER_PROBLEM - this.incorrectGuessesOnCurrentChallenge;
   }
 
   /**
-   * Check the user's proposed answer.  Used overloaded functions in the original Java sim, a little ugly when ported.
-   * @param mass
-   * @param tiltPrediction
-   * @public
+   * Check the user's proposed answer. Used overloaded functions in the original Java sim, a little ugly when ported.
    */
-  checkAnswer( mass, tiltPrediction ) {
+  public checkAnswer( mass?: number, tiltPrediction?: TiltPredictionState ): void {
     if ( this.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
 
       // Turn off the column(s) so that the plank can move.
@@ -261,11 +279,7 @@ class BalanceGameModel {
     }
   }
 
-  /**
-   * @param {boolean} answerIsCorrect
-   * @private
-   */
-  handleProposedAnswer( answerIsCorrect ) {
+  private handleProposedAnswer( answerIsCorrect: boolean ): void {
     let pointsEarned = 0;
     if ( answerIsCorrect ) {
       // The user answered the challenge correctly.
@@ -283,6 +297,7 @@ class BalanceGameModel {
     else {
       // The user got it wrong.
       this.incorrectGuessesOnCurrentChallenge++;
+      // @ts-expect-error
       if ( this.incorrectGuessesOnCurrentChallenge < this.getCurrentChallenge().maxAttemptsAllowed ) {
         this.gameStateProperty.set( 'showingIncorrectAnswerFeedbackTryAgain' );
       }
@@ -292,24 +307,18 @@ class BalanceGameModel {
     }
   }
 
-  /**
-   * @public
-   */
-  newGame() {
+  public newGame(): void {
     this.stopGameTimer();
     this.gameStateProperty.set( 'choosingLevel' );
     this.incorrectGuessesOnCurrentChallenge = 0;
   }
 
-  /**
-   * @public
-   */
-  nextChallenge() {
+  public nextChallenge(): void {
     this.challengeIndexProperty.value++;
     this.incorrectGuessesOnCurrentChallenge = 0;
-    if ( this.challengeIndexProperty.get() < this.challengeList.length ) {
+    if ( this.challengeIndexProperty.get() < this.challengeList!.length ) {
       // Move to the next challenge.
-      this.setChallenge( this.getCurrentChallenge(), this.getCurrentChallenge().initialColumnState );
+      this.setChallenge( this.getCurrentChallenge()!, this.getCurrentChallenge()!.initialColumnState );
       this.gameStateProperty.set( 'presentingInteractiveChallenge' );
     }
     else {
@@ -335,28 +344,22 @@ class BalanceGameModel {
     }
   }
 
-  /**
-   * @public
-   */
-  tryAgain() {
+  public tryAgain(): void {
 
     // Restore the column(s) to the original state but don't move the masses anywhere.  This makes it easier for the
     // users to see why their answer was incorrect.
-    this.columnStateProperty.set( this.getCurrentChallenge().initialColumnState );
+    this.columnStateProperty.set( this.getCurrentChallenge()!.initialColumnState );
     this.gameStateProperty.set( 'presentingInteractiveChallenge' );
   }
 
-  /**
-   * @public
-   */
-  displayCorrectAnswer() {
+  public displayCorrectAnswer(): void {
     const currentChallenge = this.getCurrentChallenge();
 
     // Put the challenge in its initial state, but with the columns turned off.
-    this.setChallenge( currentChallenge, ColumnState.NO_COLUMNS );
+    this.setChallenge( currentChallenge!, ColumnState.NO_COLUMNS );
 
     // Add the movable mass or masses to the plank according to the solution.
-    currentChallenge.balancedConfiguration.forEach( massDistancePair => {
+    currentChallenge!.balancedConfiguration.forEach( massDistancePair => {
       this.plank.addMassToSurfaceAt( massDistancePair.mass, massDistancePair.distance );
     } );
 
@@ -364,10 +367,7 @@ class BalanceGameModel {
     this.gameStateProperty.set( 'displayingCorrectAnswer' );
   }
 
-  /**
-   * @public
-   */
-  getTipDirection() {
+  public getTipDirection(): TiltPredictionState {
     if ( this.plank.getTorqueDueToMasses() < 0 ) {
       return TiltPredictionState.TILT_DOWN_ON_RIGHT_SIDE;
     }
@@ -379,43 +379,36 @@ class BalanceGameModel {
     }
   }
 
-  /**
-   * @public
-   */
-  getTotalFixedMassValue() {
+  public getTotalFixedMassValue(): number {
     let totalMass = 0;
-    this.getCurrentChallenge().fixedMassDistancePairs.forEach( massDistancePair => {
+    this.getCurrentChallenge()!.fixedMassDistancePairs.forEach( massDistancePair => {
       totalMass += massDistancePair.mass.massValue;
     } );
     return totalMass;
   }
 
-  /**
-   * @public
-   */
-  restartGameTimer() {
+  public restartGameTimer(): void {
     if ( this.gameTimerId !== null ) {
+      // @ts-expect-error
       stepTimer.clearInterval( this.gameTimerId );
     }
     this.elapsedTimeProperty.reset();
+
+    // @ts-expect-error
     this.gameTimerId = stepTimer.setInterval( () => { this.elapsedTimeProperty.value += 1; }, 1000 );
   }
 
-  /**
-   * @public
-   */
-  stopGameTimer() {
+  public stopGameTimer(): void {
+
+    // @ts-expect-error
     stepTimer.clearInterval( this.gameTimerId );
     this.gameTimerId = null;
   }
+
+  // statics
+  public static readonly PROBLEMS_PER_LEVEL = CHALLENGES_PER_PROBLEM_SET;
+  public static readonly MAX_POSSIBLE_SCORE = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
+  public static readonly PLANK_HEIGHT = PLANK_HEIGHT;
 }
 
-
-// statics
-BalanceGameModel.PROBLEMS_PER_LEVEL = CHALLENGES_PER_PROBLEM_SET;
-BalanceGameModel.MAX_POSSIBLE_SCORE = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
-BalanceGameModel.PLANK_HEIGHT = PLANK_HEIGHT;
-
 balancingAct.register( 'BalanceGameModel', BalanceGameModel );
-
-export default BalanceGameModel;

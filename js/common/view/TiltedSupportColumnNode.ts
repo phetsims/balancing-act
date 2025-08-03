@@ -7,6 +7,8 @@
  * @author John Blanco
  */
 
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { GET_COLUMN_BODY_GRADIENT, GET_COLUMN_SUPPORT_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -16,12 +18,7 @@ import ColumnState from '../model/ColumnState.js';
 
 class TiltedSupportColumnNode extends Node {
 
-  /**
-   * @param modelViewTransform
-   * @param tiltedSupportColumn
-   * @param columnState
-   */
-  constructor( modelViewTransform, tiltedSupportColumn, columnState ) {
+  public constructor( modelViewTransform: ModelViewTransform2, tiltedSupportColumn: IntentionalAny, columnState: IntentionalAny ) {
     super();
 
     // Create and add the main body of the column.
@@ -55,6 +52,7 @@ class TiltedSupportColumnNode extends Node {
       } );
     this.addChild( columnSupportNode );
 
+    // @ts-expect-error
     columnState.link( state => {
       this.visible = state === ColumnState.SINGLE_COLUMN;
     } );

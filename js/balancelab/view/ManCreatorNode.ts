@@ -12,7 +12,9 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import balancingAct from '../../balancingAct.js';
+import BalanceLabModel from '../model/BalanceLabModel.js';
 import Man from '../../common/model/masses/Man.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import ImageMassNode from '../../common/view/ImageMassNode.js';
 import ImageMassCreatorNode from './ImageMassCreatorNode.js';
 
@@ -20,13 +22,9 @@ import ImageMassCreatorNode from './ImageMassCreatorNode.js';
 // in the model so that items in the toolbox can be sized differently (generally smaller).
 const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 80 );
 
-class ManCreatorNode extends ImageMassCreatorNode {
+export default class ManCreatorNode extends ImageMassCreatorNode {
 
-  /**
-   * @param {BalanceLabModel} model
-   * @param {BasicBalanceScreenView} screenView
-   */
-  constructor( model, screenView ) {
+  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView ) {
     super( model, screenView, new Man(), true );
     this.setSelectionNode(
       new ImageMassNode(
@@ -46,5 +44,3 @@ class ManCreatorNode extends ImageMassCreatorNode {
 }
 
 balancingAct.register( 'ManCreatorNode', ManCreatorNode );
-
-export default ManCreatorNode;

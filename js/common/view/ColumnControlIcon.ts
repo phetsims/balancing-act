@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import { GET_COLUMN_BODY_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -20,7 +21,7 @@ import balancingAct from '../../balancingAct.js';
 const CORNER_ROUNDING = 4;
 const ASPECT_RATIO = 1.6; // Ratio of width to height.
 
-function createMiniColumn( size, options ) {
+function createMiniColumn( size: Dimension2, options: IntentionalAny ): Node {
   const rootNode = new Node();
 
   // Create the gradient fill.
@@ -47,14 +48,9 @@ function createMiniColumn( size, options ) {
   return rootNode;
 }
 
-class ColumnControlIcon extends Node {
+export default class ColumnControlIcon extends Node {
 
-  /**
-   * @param width
-   * @param showColumns
-   * @param {Object} [options]
-   */
-  constructor( width, showColumns, options ) {
+  public constructor( width: number, showColumns: boolean, options?: IntentionalAny ) {
     super( options );
     const height = width / ASPECT_RATIO;
     this.addChild( new Rectangle( 0, 0, width, height, CORNER_ROUNDING, CORNER_ROUNDING,
@@ -117,5 +113,3 @@ class ColumnControlIcon extends Node {
 }
 
 balancingAct.register( 'ColumnControlIcon', ColumnControlIcon );
-
-export default ColumnControlIcon;

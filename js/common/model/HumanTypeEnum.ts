@@ -6,6 +6,7 @@
  * @author Luisa Vargas
  */
 
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import balancingAct from '../../balancingAct.js';
@@ -13,32 +14,29 @@ import BalancingActImages from '../../BalancingActImages.js';
 
 export class HumanTypeEnum extends EnumerationValue {
 
-  static BOY = new HumanTypeEnum(
+  public static readonly BOY = new HumanTypeEnum(
     BalancingActImages.boyStandingImageProperty,
     BalancingActImages.boySittingImageProperty );
 
-  static GIRL = new HumanTypeEnum(
+  public static readonly GIRL = new HumanTypeEnum(
     BalancingActImages.girlStandingImageProperty,
     BalancingActImages.girlSittingImageProperty );
 
-  static MAN = new HumanTypeEnum(
+  public static readonly MAN = new HumanTypeEnum(
     BalancingActImages.manStandingImageProperty,
     BalancingActImages.manSittingImageProperty );
 
-  static WOMAN = new HumanTypeEnum(
+  public static readonly WOMAN = new HumanTypeEnum(
     BalancingActImages.womanStandingImageProperty,
     BalancingActImages.womanSittingImageProperty );
 
-  static enumeration = new Enumeration( HumanTypeEnum );
+  public static readonly enumeration = new Enumeration( HumanTypeEnum );
 
-  /**
-   * @param standingImageProperty
-   * @param sittingImageProperty
-   */
-  constructor( standingImageProperty, sittingImageProperty ) {
+  public constructor(
+    public readonly standingImageProperty: LocalizedImageProperty,
+    public readonly sittingImageProperty: LocalizedImageProperty
+  ) {
     super();
-    this.standingImageProperty = standingImageProperty;
-    this.sittingImageProperty = sittingImageProperty;
   }
 }
 

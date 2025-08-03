@@ -7,8 +7,11 @@
  * @author John Blanco
  */
 
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -18,34 +21,38 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../../common/BAQueryParameters.js';
 import ColumnState from '../../common/model/ColumnState.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 
 // constants
 const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
 const LABEL_FONT = new PhetFont( 14 );
 const MAX_CAPTION_WIDTH_PROPORTION = 1; // max width for the caption as a proportion of the creator node
 
-class ModelElementCreatorNode extends Node {
+export default class ModelElementCreatorNode extends Node {
 
-  /**
-   * @param {BasicBalanceScreenView} screenView
-   * @param {EnumerationDeprecatedProperty} columnStateProperty
-   * @param {Object} [options]
-   */
-  constructor( screenView, columnStateProperty, options ) {
+  // Offset used when adding an element to the model.  This is useful in making sure that the newly created object
+  // isn't positioned in, shall we say, an awkward position with respect to the mouse.
+  public positioningOffset: Vector2;
+
+  private selectionNode?: Node;
+  private caption?: Text;
+
+  public constructor( screenView: BasicBalanceScreenView, columnStateProperty: EnumerationDeprecatedProperty, options?: IntentionalAny ) {
+
+    // eslint-disable-next-line phet/bad-typescript-text
     options = merge( {
       cursor: 'pointer',
       tandem: Tandem.REQUIRED
     }, options );
     super( options );
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
-    // Offset used when adding an element to the model.  This is useful in making sure that the newly created object
-    // isn't positioned in, shall we say, an awkward position with respect to the mouse.
     this.positioningOffset = Vector2.ZERO;
 
     // Function for translating click and touch events to model coordinates.
     const modelViewTransform = screenView.modelViewTransform;
-    const eventToModelPosition = pointerPosition => {
+    const eventToModelPosition = ( pointerPosition: Vector2 ) => {
       return modelViewTransform.viewToModelPosition(
         screenView.globalToLocalPoint( pointerPosition ).plus( self.positioningOffset )
       );
@@ -54,7 +61,7 @@ class ModelElementCreatorNode extends Node {
     // Create an input listener that will add the model element to the model and then forward events to the view node
     // that is created as a result.
     this.addInputListener( DragListener.createForwardingListener(
-      event => {
+      ( event: IntentionalAny ) => {
 
         // Determine the initial position where this element should move to after it's created based on the position of
         // the pointer event.
@@ -67,15 +74,18 @@ class ModelElementCreatorNode extends Node {
         const modelElementNode = screenView.getNodeForMass( modelElement );
         assert && assert( modelElementNode, 'unable to find view node for model element' );
 
-        modelElementNode.dragHandler.press( event, modelElementNode );
+        modelElementNode!.dragHandler.press( event, modelElementNode );
       },
       {
         allowTouchSnag: true,
+
+        // @ts-expect-error
         tandem: options.tandem.createTandem( 'dragListener' )
       }
     ) );
 
-    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
+    // TODO: https://github.com/phetsims/balancing-act/issues/168 ColumnState
+    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: IntentionalAny ) => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );
@@ -83,17 +93,15 @@ class ModelElementCreatorNode extends Node {
 
   /**
    * Method overridden by subclasses to add the element that they represent to the model.
-   * @public
    */
-  addElementToModel() {
+  public addElementToModel( position: Vector2 ): IntentionalAny {
     throw new Error( 'addElementToModel should be implemented in descendant classes.' );
   }
 
   /**
    * @param selectionNode
-   * @public
    */
-  setSelectionNode( selectionNode ) {
+  public setSelectionNode( selectionNode: Node ): void {
     if ( this.selectionNode ) {
       throw new Error( 'Can\'t set selectionNode more than once.' );
     }
@@ -103,22 +111,20 @@ class ModelElementCreatorNode extends Node {
   }
 
   /**
-   * @param {String} captionText
-   * @protected
+   * @param captionText
    */
-  setCaption( captionText ) {
+  protected setCaption( captionText: TReadOnlyProperty<string> ): void {
     this.caption = new Text( captionText, { font: LABEL_FONT } );
     this.addChild( this.caption );
     this.createManualConstraint();
   }
 
   /**
-   * @private
    * Create a manual constraint if both the caption and selection node are defined.
    * This code assumes that the selectionNode and caption are only being set once by each
    * instance in the constructor. If that ever changes this may create a memory leak.
    */
-  createManualConstraint() {
+  private createManualConstraint(): void {
     if ( this.selectionNode && this.caption ) {
       ManualConstraint.create( this, [ this.caption, this.selectionNode ], ( captionProxy, selectionNodeProxy ) => {
         captionProxy.maxWidth = selectionNodeProxy.width * MAX_CAPTION_WIDTH_PROPORTION;
@@ -130,5 +136,3 @@ class ModelElementCreatorNode extends Node {
 }
 
 balancingAct.register( 'ModelElementCreatorNode', ModelElementCreatorNode );
-
-export default ModelElementCreatorNode;

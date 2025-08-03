@@ -29,10 +29,7 @@ const IMAGE_SIZE = new Dimension2( 100, 65 );
 
 class GameIconNode extends VBox {
 
-  /**
-   * @param { number } levelNumber
-   */
-  constructor( levelNumber ) {
+  public constructor( levelNumber: number ) {
     const title = new Text( new PatternStringProperty( pattern0Label1ValueStringProperty, {
       0: levelStringProperty,
       1: levelNumber

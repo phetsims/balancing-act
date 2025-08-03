@@ -6,8 +6,12 @@
  * @author John Blanco
  */
 
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -22,24 +26,26 @@ import BASharedConstants from '../../common/BASharedConstants.js';
 
 const selectLevelStringProperty = VegasStrings.selectLevelStringProperty;
 
-class StartGameLevelNode extends Node {
+type StartGameLevelNodeOptions = {
+  numLevels?: number;
+  titleStringProperty?: TReadOnlyProperty<string>;
+  numStarsOnButtons?: number;
+  perfectScore?: number;
+  buttonBackgroundColor?: string;
+  highlightedButtonBackgroundColor?: string;
+  controlsInset?: number;
+  size?: Dimension2;
+  maxTitleWidth?: number;
+};
 
-  /**
-   * @param {Function} startLevelFunction - Function used to initiate a game
-   * level, will be called with a zero-based index value.
-   * @param {Function} resetFunction - Function to reset game and scores.
-   * @param {Property} timerEnabledProperty
-   * @param {Array} iconNodes - Set of iconNodes to use on the buttons, sizes
-   * should be the same, length of array must match number of levels.
-   * @param {Array} scores - Best scores, used to decide which stars to
-   * illuminate on the level start buttons, length must match number of levels.
-   * @param {Object} modelViewTransform
-   * @param {Object} [options] - See code below for options and default values.
-   */
-  constructor( startLevelFunction, resetFunction, timerEnabledProperty, iconNodes, scores, modelViewTransform, options ) {
+export default class StartGameLevelNode extends Node {
+
+  // TODO: Use StartGameLevelNodeOptions and optionize, see https://github.com/phetsims/balancing-act/issues/168
+  public constructor( startLevelFunction: ( level: number ) => void, resetFunction: () => void, timerEnabledProperty: Property<boolean>, iconNodes: Node[], scores: Property<number>[], modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
 
     super();
 
+    // eslint-disable-next-line phet/bad-typescript-text
     options = merge( {
       // Defaults
       numLevels: 4,
@@ -51,7 +57,7 @@ class StartGameLevelNode extends Node {
       controlsInset: 10,
       size: new Dimension2( 768, 504 ),
       maxTitleWidth: Number.POSITIVE_INFINITY
-    }, options );
+    }, options ) as Required<StartGameLevelNodeOptions>;
 
     // Verify parameters
     if ( iconNodes.length !== options.numLevels || scores.length !== options.numLevels ) {
@@ -63,7 +69,7 @@ class StartGameLevelNode extends Node {
     this.addChild( title );
 
     // Add the buttons
-    function createLevelStartFunction( level ) {
+    function createLevelStartFunction( level: number ): () => void {
       return () => { startLevelFunction( level ); };
     }
 
@@ -75,7 +81,7 @@ class StartGameLevelNode extends Node {
         options: {
           listener: createLevelStartFunction( i ),
           baseColor: options.buttonBackgroundColor,
-          createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
+          createScoreDisplay: ( scoreProperty: Property<number> ) => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: options.numStarsOnButtons,
             perfectScore: options.perfectScore
           } ),
@@ -83,6 +89,8 @@ class StartGameLevelNode extends Node {
         }
       };
     }
+
+    // @ts-expect-error
     const levelSelectionButtonGroup = new LevelSelectionButtonGroup( buttonItems, {
       flowBoxOptions: {
         spacing: 30
@@ -119,6 +127,3 @@ class StartGameLevelNode extends Node {
 }
 
 balancingAct.register( 'StartGameLevelNode', StartGameLevelNode );
-
-// Inherit from Node.
-export default StartGameLevelNode;

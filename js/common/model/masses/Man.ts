@@ -17,14 +17,12 @@ const STANDING_HEIGHT = 1.8; // In meters.
 const SITTING_HEIGHT = 0.9; // In meters.
 const SITTING_CENTER_OF_MASS_X_OFFSET = 0.1; // In meters, determined visually.  Update if image changes.
 
-class Man extends HumanMass {
+export default class Man extends HumanMass {
 
-  constructor() {
+  public constructor() {
     super( HumanTypeEnum.MAN, MASS, STANDING_HEIGHT, SITTING_HEIGHT,
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
 }
 
 balancingAct.register( 'Man', Man );
-
-export default Man;

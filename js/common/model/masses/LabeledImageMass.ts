@@ -8,21 +8,20 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Vector2 from '../../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
-class LabeledImageMass extends ImageMass {
+export default class LabeledImageMass extends ImageMass {
 
-  /**
-   * @param {Vector2} initialPosition
-   * @param {Object} config - configuration information for the labeled image mass
-   */
-  constructor( initialPosition, config ) {
+  public readonly labelTextProperty: TReadOnlyProperty<string>;
+
+  public constructor( initialPosition: Vector2, config: IntentionalAny ) {
     super( config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
     this.labelTextProperty = config.labelTextProperty;
   }
 }
 
 balancingAct.register( 'LabeledImageMass', LabeledImageMass );
-
-export default LabeledImageMass;

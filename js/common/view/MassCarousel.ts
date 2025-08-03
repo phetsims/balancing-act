@@ -8,6 +8,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -16,6 +17,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Carousel from '../../../../sun/js/Carousel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import BalanceLabModel from '../../balancelab/model/BalanceLabModel.js';
 import BoyCreatorNode from '../../balancelab/view/BoyCreatorNode.js';
 import BrickStackCreatorNode from '../../balancelab/view/BrickStackCreatorNode.js';
 import GirlCreatorNode from '../../balancelab/view/GirlCreatorNode.js';
@@ -25,24 +27,29 @@ import WomanCreatorNode from '../../balancelab/view/WomanCreatorNode.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
+import BasicBalanceScreenView from './BasicBalanceScreenView.js';
 
+// eslint-disable-next-line phet/require-property-suffix
 const bricksString = BalancingActStrings.bricksStringProperty;
+// eslint-disable-next-line phet/require-property-suffix
 const mysteryObjectsString = BalancingActStrings.mysteryObjectsStringProperty;
+// eslint-disable-next-line phet/require-property-suffix
 const peopleString = BalancingActStrings.peopleStringProperty;
 
 // constants
 const TITLE_FONT = new PhetFont( 16 );
 const TITLE_MAX_WIDTH = 90;
 
-class MassCarousel extends Carousel {
+type CarouselElement = {
+  title: Text;
+  content: Node;
+};
 
-  /**
-   * @param {BalanceLabModel} model
-   * @param {BasicBalanceScreenView} screenView
-   * @param {Object} [options]
-   */
-  constructor( model, screenView, options ) {
+export default class MassCarousel extends Carousel {
 
+  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
+
+    // eslint-disable-next-line phet/bad-typescript-text
     options = merge( {
 
       // we do our own layout
@@ -247,7 +254,7 @@ class MassCarousel extends Carousel {
             } ) ]
       } );
 
-    const elements = [
+    const elements: CarouselElement[] = [
       {
         title: new Text( bricksString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: brickCreatorKit
@@ -273,7 +280,7 @@ class MassCarousel extends Carousel {
     // Create the actual kit selection node.
     let maxHeight = 0;
     for ( let i = 0; i < elements.length; i++ ) {
-      const element = elements[ i ];
+      const element: CarouselElement = elements[ i ];
       const height = element.title.height + element.content.height;
       if ( height > maxHeight ) {
         maxHeight = height;
@@ -284,13 +291,13 @@ class MassCarousel extends Carousel {
     const titleAlignGroup = new AlignGroup(); // Align all titles to the top
     const contentAlignGroup = new AlignGroup(); // Align contents to the center
 
-    const pages = elements.map( element => {
+    const pages = elements.map( ( element: CarouselElement ) => {
       const vbox = new VBox( {
         spacing: 5,
         children: [ titleAlignGroup.createBox( element.title ), contentAlignGroup.createBox( element.content ) ]
       } );
       return {
-        createNode: tandem => pageAlignGroup.createBox( vbox, {
+        createNode: ( tandem: Tandem ) => pageAlignGroup.createBox( vbox, {
           yAlign: 'top'
         } )
       };
@@ -301,4 +308,3 @@ class MassCarousel extends Carousel {
 }
 
 balancingAct.register( 'MassCarousel', MassCarousel );
-export default MassCarousel;

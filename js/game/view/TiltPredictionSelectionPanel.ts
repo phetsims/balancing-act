@@ -6,6 +6,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import DownUpListener from '../../../../scenery/js/input/DownUpListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -22,17 +23,14 @@ const SELECTED_HIGHLIGHT_LINE_WIDTH = 6;
 const CORRECT_ANSWER_HIGHLIGHT_COLOR = 'rgb( 0, 255, 0 )';
 const INVISIBLE_COLOR = 'rgba( 0, 0, 0, 0 )';
 
-class TiltPredictionSelectionPanel extends Node {
+export default class TiltPredictionSelectionPanel extends Node {
 
-  /**
-   * @param image
-   * @param correspondingPrediction
-   * @param tiltPredictionProperty
-   * @param gameStateProperty
-   */
-  constructor( image, correspondingPrediction, tiltPredictionProperty, gameStateProperty ) {
+  public mouseOver: boolean;
+  public thinOutline: Rectangle;
+  public thickOutline: Rectangle;
+
+  public constructor( image: HTMLImageElement, correspondingPrediction: string, tiltPredictionProperty: Property<string>, gameStateProperty: Property<string> ) {
     super();
-    const self = this;
 
     // Add the image.
     const imagePanel = new Image( image, { cursor: 'pointer' } );
@@ -40,30 +38,30 @@ class TiltPredictionSelectionPanel extends Node {
     this.addChild( imagePanel );
 
     // Define a function for updating the highlight state
-    function updateHighlightState() {
+    const updateHighlightState = (): void => {
       if ( tiltPredictionProperty.value === correspondingPrediction ) {
-        self.thinOutline.stroke = INVISIBLE_COLOR;
+        this.thinOutline.stroke = INVISIBLE_COLOR;
         if ( gameStateProperty.value === 'displayingCorrectAnswer' ) {
-          self.thickOutline.stroke = CORRECT_ANSWER_HIGHLIGHT_COLOR;
+          this.thickOutline.stroke = CORRECT_ANSWER_HIGHLIGHT_COLOR;
         }
         else {
-          self.thickOutline.stroke = SELECTED_HIGHLIGHT_COLOR;
+          this.thickOutline.stroke = SELECTED_HIGHLIGHT_COLOR;
         }
       }
       else {
-        self.thickOutline.stroke = INVISIBLE_COLOR;
-        self.thinOutline.stroke = NON_HIGHLIGHT_COLOR;
-        if ( self.mouseOver ) {
-          self.thinOutline.lineWidth = HOVER_LINE_WIDTH;
+        this.thickOutline.stroke = INVISIBLE_COLOR;
+        this.thinOutline.stroke = NON_HIGHLIGHT_COLOR;
+        if ( this.mouseOver ) {
+          this.thinOutline.lineWidth = HOVER_LINE_WIDTH;
         }
         else {
-          self.thinOutline.lineWidth = NON_HIGHLIGHT_LINE_WIDTH;
+          this.thinOutline.lineWidth = NON_HIGHLIGHT_LINE_WIDTH;
         }
       }
-    }
+    };
 
     // Set up mouse listener that watches to see if the user has selected this option.
-    this.addInputListener( new DownUpListener( { up: event => { tiltPredictionProperty.value = correspondingPrediction; } } ) );
+    this.addInputListener( new DownUpListener( { up: () => { tiltPredictionProperty.value = correspondingPrediction; } } ) );
 
     // Set up a hover listener to update hover highlight.
     this.mouseOver = false;
@@ -95,18 +93,16 @@ class TiltPredictionSelectionPanel extends Node {
     this.addChild( this.thickOutline );
 
     // Add listener for changes to the tilt prediction.
-    tiltPredictionProperty.link( predictionValue => {
+    tiltPredictionProperty.link( () => {
       // Turn the highlight on or off.
       updateHighlightState();
     } );
 
     // Add listener for changes to the game state.
-    gameStateProperty.link( gameState => {
+    gameStateProperty.link( () => {
       updateHighlightState();
     } );
   }
 }
 
 balancingAct.register( 'TiltPredictionSelectionPanel', TiltPredictionSelectionPanel );
-
-export default TiltPredictionSelectionPanel;

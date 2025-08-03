@@ -7,19 +7,16 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 import PositionMarkerNode from './PositionMarkerNode.js';
 
-class PositionMarkerSetNode extends Node {
+export default class PositionMarkerSetNode extends Node {
 
-  /**
-   * @param {Plank} plank
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {BooleanProperty} visibleProperty
-   */
-  constructor( plank, modelViewTransform, visibleProperty ) {
+  public constructor( plank: Plank, modelViewTransform: ModelViewTransform2, visibleProperty: Property<boolean> ) {
     super();
 
     // Add the individual position markers.
@@ -28,12 +25,14 @@ class PositionMarkerSetNode extends Node {
     for ( let i = 0; i < numTickMarks; i++ ) {
       const label = Math.abs( i - Math.floor( numTickMarks / 2 ) );
       if ( label !== 0 ) {
+
+        // @ts-expect-error
         this.addChild( new PositionMarkerNode( label, { centerX: i * interMarkerDistance } ) );
       }
     }
 
     // Observe visibility.
-    visibleProperty.link( visible => {
+    visibleProperty.link( ( visible: boolean ) => {
       this.visible = visible;
     } );
 
@@ -45,7 +44,7 @@ class PositionMarkerSetNode extends Node {
     // Rotate with the plank.
     let rotationAngle = 0;
     const rotationPoint = modelViewTransform.modelToViewPosition( plank.pivotPoint );
-    plank.tiltAngleProperty.link( angle => {
+    plank.tiltAngleProperty.link( ( angle: number ) => {
       const deltaAngle = rotationAngle - angle;
       rotationAngle = angle;
       this.rotateAround( rotationPoint, deltaAngle );
@@ -54,5 +53,3 @@ class PositionMarkerSetNode extends Node {
 }
 
 balancingAct.register( 'PositionMarkerSetNode', PositionMarkerSetNode );
-
-export default PositionMarkerSetNode;

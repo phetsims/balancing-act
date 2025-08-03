@@ -8,6 +8,7 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
+import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../../balancingAct.js';
 import Mass from '../Mass.js';
 
@@ -16,14 +17,16 @@ const BRICK_WIDTH = 0.2; // In meters.
 const BRICK_HEIGHT = BRICK_WIDTH / 3;
 const BRICK_MASS = 5; // In kg.
 
-class BrickStack extends Mass {
+export default class BrickStack extends Mass {
 
-  /**
-   * @param {number} numBricks
-   * @param {Vector2} initialPosition
-   * @param {Object} [options]
-   */
-  constructor( numBricks, initialPosition, options ) {
+  public readonly numBricks: number;
+  public readonly shape: Shape;
+
+  // static constants
+  public static readonly BRICK_MASS = BRICK_MASS;
+  public static readonly BRICK_HEIGHT = BRICK_HEIGHT;
+
+  public constructor( numBricks: number, initialPosition?: Vector2, options?: IntentionalAny ) {
 
     if ( numBricks <= 0 ) { throw new Error( 'Must have at least one brick in stack' ); }
 
@@ -43,25 +46,13 @@ class BrickStack extends Mass {
     this.shape = brickStackShape;
   }
 
-  /**
-   * @public
-   */
-  createCopy() {
+  public override createCopy(): BrickStack {
     return new BrickStack( this.numBricks, this.positionProperty.get() );
   }
 
-  /**
-   * @public
-   */
-  getMiddlePoint() {
+  public override getMiddlePoint(): Vector2 {
     return this.shape.bounds.center.rotated( this.rotationAngleProperty.get() ).plus( this.positionProperty.get() );
   }
 }
 
-// static constants
-BrickStack.BRICK_MASS = BRICK_MASS;
-BrickStack.BRICK_HEIGHT = BRICK_HEIGHT;
-
 balancingAct.register( 'BrickStack', BrickStack );
-
-export default BrickStack;

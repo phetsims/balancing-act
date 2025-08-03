@@ -7,16 +7,14 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
+import BAIntroModel from '../model/BAIntroModel.js';
 
 class BAIntroView extends BasicBalanceScreenView {
 
-  /**
-   * @param model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+  public constructor( model: BAIntroModel, tandem: Tandem ) {
     super( model, tandem );
     model.massList.forEach( mass => {
       // Add a listener for when the user drops the mass.  This is done here in this case, rather than in the model,
@@ -35,7 +33,7 @@ class BAIntroView extends BasicBalanceScreenView {
               mass.positionProperty.set( new Vector2( massXPosition, 0 ) );
             }
             else {
-              // Mass is off stage.  Return it to its original position.
+              // Mass is off-stage.  Return it to its original position.
               mass.positionProperty.reset();
             }
           }

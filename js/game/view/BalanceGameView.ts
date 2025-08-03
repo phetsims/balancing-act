@@ -12,6 +12,7 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import LevelSupportColumnNode from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
@@ -23,6 +24,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
@@ -31,6 +33,7 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 import ColumnState from '../../common/model/ColumnState.js';
+import Mass from '../../common/model/Mass.js';
 import PositionIndicatorChoice from '../../common/model/PositionIndicatorChoice.js';
 import AttachmentBarNode from '../../common/view/AttachmentBarNode.js';
 import FulcrumNode from '../../common/view/FulcrumNode.js';
@@ -61,25 +64,46 @@ const tryAgainStringProperty = VegasStrings.tryAgainStringProperty;
 const BUTTON_FONT = new PhetFont( 24 );
 const BUTTON_FILL = new Color( 0, 255, 153 );
 
-class BalanceGameView extends ScreenView {
+export default class BalanceGameView extends ScreenView {
 
-  /**
-   * @param {BalanceGameModel} gameModel
-   * @param {Tandem} tandem
-   */
-  constructor( gameModel, tandem ) {
+  // Model reference
+  public readonly model: BalanceGameModel;
+
+  // View nodes
+  public readonly modelViewTransform: ModelViewTransform2;
+  public readonly rootNode: Node;
+  public readonly outsideBackgroundNode: OutsideBackgroundNode;
+  public readonly controlLayer: Node;
+  public readonly challengeLayer: Node;
+  public readonly startGameLevelNode: StartGameLevelNode;
+  public readonly scoreboard: FiniteStatusBar;
+  public readonly challengeTitleNode: Node;
+  public readonly massValueEntryNode: MassValueEntryNode;
+  public readonly tiltPredictionSelectorNode: TiltPredictionSelectorNode;
+  public readonly faceWithPointsNode: FaceWithPointsNode;
+  public readonly gameAudioPlayer: GameAudioPlayer;
+
+  // Buttons
+  public readonly buttons: TextPushButton[];
+  public readonly checkAnswerButton: TextPushButton;
+  public readonly nextButton: TextPushButton;
+  public readonly tryAgainButton: TextPushButton;
+  public readonly displayCorrectAnswerButton: TextPushButton;
+
+  // Level completed node - initialized to null
+  public levelCompletedNode: LevelCompletedNode | null;
+
+  public constructor( gameModel: BalanceGameModel, tandem: Tandem ) {
     super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
-    const self = this;
     this.model = gameModel;
 
     // Create the model-view transform.  The primary units used in the model are meters, so significant zoom is used.
     // The multipliers for the 2nd parameter can be used to adjust where the point (0, 0) in the model, which is on the
     // ground just below the center of the balance, is positioned in the view.
-    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( this.layoutBounds.width * 0.45, this.layoutBounds.height * 0.86 ),
       115 );
-    this.modelViewTransform = modelViewTransform; // Make modelViewTransform available to descendant types.
 
     // Create a root node and send to back so that the layout bounds box can
     // be made visible if needed.
@@ -90,7 +114,7 @@ class BalanceGameView extends ScreenView {
     // Add the background, which portrays the sky and ground.
     this.outsideBackgroundNode = new OutsideBackgroundNode(
       this.layoutBounds.centerX,
-      modelViewTransform.modelToViewY( 0 ),
+      this.modelViewTransform.modelToViewY( 0 ),
       this.layoutBounds.width * 2.5,
       this.layoutBounds.height * 1.5,
       this.layoutBounds.height
@@ -104,16 +128,16 @@ class BalanceGameView extends ScreenView {
     this.rootNode.addChild( this.challengeLayer );
 
     // Add the fulcrum, the columns, etc.
-    this.challengeLayer.addChild( new FulcrumNode( modelViewTransform, gameModel.fulcrum ) );
+    this.challengeLayer.addChild( new FulcrumNode( this.modelViewTransform, gameModel.fulcrum ) );
     this.challengeLayer.addChild( new TiltedSupportColumnNode(
-      modelViewTransform,
+      this.modelViewTransform,
       gameModel.tiltedSupportColumn,
       gameModel.columnStateProperty
     ) );
 
     const visibleProperty = DerivedProperty.valueEqualsConstant( gameModel.columnStateProperty, ColumnState.DOUBLE_COLUMNS );
     gameModel.levelSupportColumns.forEach( levelSupportColumn => {
-      const transformedColumnShape = modelViewTransform.modelToViewShape( levelSupportColumn );
+      const transformedColumnShape = this.modelViewTransform.modelToViewShape( levelSupportColumn );
       this.challengeLayer.addChild( new LevelSupportColumnNode(
         {
           columnWidth: transformedColumnShape.bounds.width,
@@ -124,16 +148,16 @@ class BalanceGameView extends ScreenView {
         }
       ) );
     } );
-    this.challengeLayer.addChild( new PlankNode( modelViewTransform, gameModel.plank ) );
-    this.challengeLayer.addChild( new AttachmentBarNode( modelViewTransform, gameModel.plank ) );
+    this.challengeLayer.addChild( new PlankNode( this.modelViewTransform, gameModel.plank ) );
+    this.challengeLayer.addChild( new AttachmentBarNode( this.modelViewTransform, gameModel.plank ) );
 
     // Watch the model and add/remove visual representations of masses.
-    gameModel.movableMasses.addItemAddedListener( addedMass => {
+    gameModel.movableMasses.addItemAddedListener( ( addedMass: Mass ) => {
 
       // Create and add the view representation for this mass.
       const massNode = MassNodeFactory.createMassNode(
         addedMass,
-        modelViewTransform,
+        this.modelViewTransform,
         true,
         new Property( true ),
         gameModel.columnStateProperty
@@ -141,36 +165,44 @@ class BalanceGameView extends ScreenView {
       this.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
-      addedMass.userControlledProperty.link( userControlled => {
+      addedMass.userControlledProperty.link( ( userControlled: boolean ) => {
         if ( userControlled ) {
           massNode.moveToFront();
         }
       } );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass() {
-        self.challengeLayer.removeChild( massNode );
-        massNode.dispose();
-        gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
-      } );
+      gameModel.movableMasses.addItemRemovedListener( function removeMovableMass( removedMass: Mass ) {
+        if ( removedMass === addedMass ) {
+
+          // @ts-expect-error
+          this.challengeLayer.removeChild( massNode );
+          massNode.dispose();
+          gameModel.movableMasses.removeItemRemovedListener( removeMovableMass );
+        }
+      }.bind( this ) );
     } );
-    gameModel.fixedMasses.addItemAddedListener( addedMass => {
+    gameModel.fixedMasses.addItemAddedListener( ( addedMass: Mass ) => {
       // Create and add the view representation for this mass.
-      const massNode = MassNodeFactory.createMassNode( addedMass, modelViewTransform, true, new Property( true ), gameModel.columnStateProperty );
+      const massNode = MassNodeFactory.createMassNode( addedMass, this.modelViewTransform, true, new Property( true ), gameModel.columnStateProperty );
       massNode.pickable = false; // Fixed masses can't be moved by users.
       this.challengeLayer.addChild( massNode );
 
       // Add the removal listener for if and when this mass is removed from the model.
-      gameModel.fixedMasses.addItemRemovedListener( function removeFixedMass() {
-        self.challengeLayer.removeChild( massNode );
-        massNode.dispose();
-        gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
-      } );
+      gameModel.fixedMasses.addItemRemovedListener( function removeFixedMass( removedMass: Mass ) {
+        if ( removedMass === addedMass ) {
+
+          // @ts-expect-error
+          this.challengeLayer.removeChild( massNode );
+          massNode.dispose();
+          gameModel.fixedMasses.removeItemRemovedListener( removeFixedMass );
+        }
+      }.bind( this ) );
     } );
 
     // Add the node that allows the user to choose a game level to play.
     this.startGameLevelNode = new StartGameLevelNode(
-      level => {
+      ( level: number ) => {
         gameModel.startLevel( level );
         positionMarkerStateProperty.reset();
       },
@@ -186,7 +218,7 @@ class BalanceGameView extends ScreenView {
         new GameIconNode( 4 )
       ],
       gameModel.bestScores,
-      modelViewTransform,
+      this.modelViewTransform,
       {
         numStarsOnButtons: BalanceGameModel.PROBLEMS_PER_LEVEL,
         perfectScore: BalanceGameModel.MAX_POSSIBLE_SCORE,
@@ -207,11 +239,12 @@ class BalanceGameView extends ScreenView {
       this.visibleBoundsProperty,
       gameModel.scoreProperty,
       {
-        challengeNumberProperty: new DerivedProperty( [ gameModel.challengeIndexProperty ], challengeIndex => challengeIndex + 1 ),
+        challengeNumberProperty: new DerivedProperty( [ gameModel.challengeIndexProperty ], ( challengeIndex: number ) => challengeIndex + 1 ),
         numberOfChallengesProperty: new Property( BalanceGameModel.PROBLEMS_PER_LEVEL ),
 
         // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #85.
-        levelProperty: new DerivedProperty( [ gameModel.levelProperty ], level => level + 1 ),
+        // @ts-expect-error
+        levelProperty: new DerivedProperty( [ gameModel.levelProperty ], ( level: number ) => level + 1 ),
         elapsedTimeProperty: gameModel.elapsedTimeProperty,
         timerEnabledProperty: gameModel.timerEnabledProperty,
         startOverButtonText: startOverStringProperty,
@@ -238,7 +271,7 @@ class BalanceGameView extends ScreenView {
     // Add the dialog node that is used in the mass deduction challenges
     // to enable the user to submit specific mass values.
     this.massValueEntryNode = new MassValueEntryNode( {
-      centerX: modelViewTransform.modelToViewX( 0 )
+      centerX: this.modelViewTransform.modelToViewX( 0 )
     } );
     this.challengeLayer.addChild( this.massValueEntryNode );
 
@@ -246,8 +279,8 @@ class BalanceGameView extends ScreenView {
     // way the plank will tilt.  This is used in the tilt prediction challenges.
     this.tiltPredictionSelectorNode = new TiltPredictionSelectorNode( gameModel.gameStateProperty );
     this.challengeLayer.addChild( this.tiltPredictionSelectorNode );
-    this.tiltPredictionSelectorNode.centerX = modelViewTransform.modelToViewX( 0 );
-    this.tiltPredictionSelectorNode.bottom = modelViewTransform.modelToViewY( BalanceGameModel.PLANK_HEIGHT + 0.8 );
+    this.tiltPredictionSelectorNode.centerX = this.modelViewTransform.modelToViewX( 0 );
+    this.tiltPredictionSelectorNode.bottom = this.modelViewTransform.modelToViewY( BalanceGameModel.PLANK_HEIGHT + 0.8 );
 
     // Create the 'feedback node' that is used to visually indicate correct
     // and incorrect answers.
@@ -304,7 +337,7 @@ class BalanceGameView extends ScreenView {
     const buttonCenter = this.modelViewTransform.modelToViewPosition( new Vector2( 0, -0.3 ) );
 
     ManualConstraint.create( this.rootNode, this.buttons, () => {
-      this.buttons.forEach( button => {
+      this.buttons.forEach( ( button: TextPushButton ) => {
         button.center = buttonCenter;
       } );
     } );
@@ -320,8 +353,8 @@ class BalanceGameView extends ScreenView {
 
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
-    const levelIndicator = new LevelIndicatorNode( modelViewTransform, gameModel.plank );
-    gameModel.columnStateProperty.link( columnState => {
+    const levelIndicator = new LevelIndicatorNode( this.modelViewTransform, gameModel.plank );
+    gameModel.columnStateProperty.link( ( columnState: IntentionalAny ) => {
       levelIndicator.visible = ( columnState === ColumnState.NO_COLUMNS );
     } );
     this.challengeLayer.addChild( levelIndicator );
@@ -331,21 +364,23 @@ class BalanceGameView extends ScreenView {
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( positionMarkerState => {
+    positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
-    this.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, modelViewTransform, rulersVisibleProperty ) );
+    this.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, this.modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( positionMarkerState => {
+    positionMarkerStateProperty.link( ( positionMarkerState: IntentionalAny ) => {
       positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
-    this.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, modelViewTransform, positionMarkersVisibleProperty ) );
+    this.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, this.modelViewTransform, positionMarkersVisibleProperty ) );
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
     const positionPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, this.layoutBounds.width, {
+
+      // @ts-expect-error
       right: this.layoutBounds.right - 10,
       top: this.scoreboard.bottom + 23,
 
@@ -363,12 +398,12 @@ class BalanceGameView extends ScreenView {
     } );
   }
 
-  // @private
-  updateTitle() {
+  private updateTitle(): void {
     const balanceGameChallenge = this.model.getCurrentChallenge();
     if ( balanceGameChallenge !== null ) {
       this.challengeTitleNode.children = [
-        new Text( this.model.getCurrentChallenge().viewConfig.title, {
+        // @ts-expect-error
+        new Text( this.model.getCurrentChallenge()!.viewConfig.title, {
           font: new PhetFont( { size: 60, weight: 'bold' } ),
           fill: 'white',
           stroke: 'black',
@@ -379,15 +414,14 @@ class BalanceGameView extends ScreenView {
     }
   }
 
-  // @private
-  updateCheckAnswerButtonEnabled() {
+  private updateCheckAnswerButtonEnabled(): void {
 
     if ( this.model.getCurrentChallenge() instanceof BalanceMassesChallenge ) {
 
       // The button should be enabled whenever there are masses on the
       // right side of the plank.
       let massesOnRightSide = false;
-      this.model.plank.massesOnSurface.forEach( mass => {
+      this.model.plank.massesOnSurface.forEach( ( mass: Mass ) => {
         if ( mass.positionProperty.get().x > this.model.plank.getPlankSurfaceCenter().x ) {
           massesOnRightSide = true;
         }
@@ -406,8 +440,7 @@ class BalanceGameView extends ScreenView {
     }
   }
 
-  // @private When the game state changes, update the view with the appropriate buttons and readouts.
-  handleGameStateChange( gameState ) {
+  private handleGameStateChange( gameState: string ): void {
 
     // Hide all nodes - the appropriate ones will be shown later based on
     // the current state.
@@ -426,14 +459,18 @@ class BalanceGameView extends ScreenView {
         this.updateTitle();
         this.challengeLayer.pickable = null;
         this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
-        if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
+
+        // @ts-expect-error
+        if ( this.model.getCurrentChallenge()!.viewConfig.showMassEntryDialog ) {
           if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
             this.massValueEntryNode.clear();
           }
           this.massValueEntryNode.visible = true;
         }
         else {
-          if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
+
+          // @ts-expect-error
+          if ( this.model.getCurrentChallenge()!.viewConfig.showTiltPredictionSelector ) {
             this.tiltPredictionSelectorNode.tiltPredictionProperty.reset();
             this.tiltPredictionSelectorNode.visible = true;
           }
@@ -497,10 +534,14 @@ class BalanceGameView extends ScreenView {
         this.show( [ this.scoreboard, this.nextButton ] );
 
         // Display the correct answer
+
+        // @ts-expect-error
         if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
           this.massValueEntryNode.showAnswer( this.model.getTotalFixedMassValue() );
           this.massValueEntryNode.visible = true;
         }
+
+        // @ts-expect-error
         else if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
           this.tiltPredictionSelectorNode.tiltPredictionProperty.value = this.model.getTipDirection();
           this.tiltPredictionSelectorNode.visible = true;
@@ -533,37 +574,31 @@ class BalanceGameView extends ScreenView {
     }
   }
 
-  // @private Utility method for hiding all of the game nodes whose visibility changes during the course of a challenge.
-  hideAllGameNodes() {
-    this.buttons.forEach( button => { button.visible = false; } );
+  private hideAllGameNodes(): void {
+    this.buttons.forEach( ( button: TextPushButton ) => { button.visible = false; } );
     this.setNodeVisibility( false, [ this.startGameLevelNode, this.challengeTitleNode, this.faceWithPointsNode, this.scoreboard,
       this.tiltPredictionSelectorNode, this.massValueEntryNode ] );
   }
 
-  // @private
-  show( nodesToShow ) {
-    nodesToShow.forEach( nodeToShow => { nodeToShow.visible = true; } );
+  private show( nodesToShow: Node[] ): void {
+    nodesToShow.forEach( ( nodeToShow: Node ) => { nodeToShow.visible = true; } );
   }
 
-  // @private
-  setNodeVisibility( isVisible, nodes ) {
-    nodes.forEach( node => { node.visible = isVisible; } );
+  private setNodeVisibility( isVisible: boolean, nodes: Node[] ): void {
+    nodes.forEach( ( node: Node ) => { node.visible = isVisible; } );
   }
 
-  // @private
-  hideChallenge() {
+  private hideChallenge(): void {
     this.challengeLayer.visible = false;
     this.controlLayer.visible = false;
   }
 
-  // @private Show the graphic model elements for this challenge, i.e. the plank, fulcrum, etc.
-  showChallengeGraphics() {
+  private showChallengeGraphics(): void {
     this.challengeLayer.visible = true;
     this.controlLayer.visible = true;
   }
 
-  // @private
-  showLevelResultsNode() {
+  private showLevelResultsNode(): void {
 
     // Set a new "level completed" node based on the results.
     this.levelCompletedNode = new LevelCompletedNode(
@@ -594,4 +629,3 @@ class BalanceGameView extends ScreenView {
 }
 
 balancingAct.register( 'BalanceGameView', BalanceGameView );
-export default BalanceGameView;

@@ -7,6 +7,8 @@
  * @author John Blanco
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
@@ -25,12 +27,7 @@ const UNITS_FONT = new PhetFont( 14 ); // Empirically determined
 
 class RotatingRulerNode extends Node {
 
-  /**
-   * @param {Plank} plank
-   * @param {ModelViewTransform2} modelViewTransform model-view transform
-   * @param {Property} visibleProperty
-   */
-  constructor( plank, modelViewTransform, visibleProperty ) {
+  public constructor( plank: Plank, modelViewTransform: ModelViewTransform2, visibleProperty: TReadOnlyProperty<boolean> ) {
     super();
 
     // Set up the tick mark labels.
@@ -50,6 +47,8 @@ class RotatingRulerNode extends Node {
     // Create and add the ruler node.
     const rulerLength = modelViewTransform.modelToViewDeltaX( rulerLengthInModel );
     const majorTickMarkWidth = rulerLength / ( numTickMarks - 1 );
+
+    // @ts-expect-error
     const rulerNode = new RulerNode( rulerLength, RULER_HEIGHT, majorTickMarkWidth, tickMarkLabels, '', {
       backgroundFill: 'rgba( 236, 225, 113, 0.5)',
       majorTickFont: new PhetFont( 11 ),

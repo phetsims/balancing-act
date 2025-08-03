@@ -8,6 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
@@ -23,8 +24,9 @@ const ICON_WIDTH = 60;
 
 class ColumnOnOffController extends Node {
 
-  constructor( columnState, options ) {
+  public constructor( columnState: IntentionalAny, options?: IntentionalAny ) {
 
+    // eslint-disable-next-line phet/bad-typescript-text
     options = merge( {
       tandem: Tandem.REQUIRED
     }, options );

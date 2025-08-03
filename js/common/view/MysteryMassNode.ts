@@ -6,26 +6,28 @@
  * @author John Blanco
  */
 
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
+import LabeledImageMass from '../model/masses/LabeledImageMass.js';
 import ImageMassNode from './ImageMassNode.js';
 
 // constants
 const INSET_PROPORTION = 0.25;
 
-class MysteryMassNode extends ImageMassNode {
+export default class MysteryMassNode extends ImageMassNode {
 
-  /**
-   * @param {Mass} mass
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {boolean} isLabeled
-   * @param {Property} massLabelVisibleProperty
-   * @param {boolean} draggable
-   * @param {EnumerationDeprecatedProperty.<ColumnState>} columnStateProperty
-   */
-  constructor( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty ) {
+  // Only for use in unlinking the listeners
+  private readonly mass: LabeledImageMass;
+  private readonly labelCenterListener: () => void;
+
+  // TODO: mass type should be LabeledImageMass | ImageMass ? See https://github.com/phetsims/balancing-act/issues/168
+  public constructor( mass: IntentionalAny, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
     super( mass, modelViewTransform, isLabeled, massLabelVisibleProperty, draggable, columnStateProperty );
     const inset = this.imageNode.width * INSET_PROPORTION;
 
@@ -47,9 +49,9 @@ class MysteryMassNode extends ImageMassNode {
     // Ensure the labelText stays centered within its background label rectangle for dynamic locale
     const labelCenter = label.center;
 
-    // @private - Only for use in unlinking the listeners
+    // Only for use in unlinking the listeners
     this.mass = mass;
-    this.labelCenterListener = () => { labelText.center = labelCenter; };
+    this.labelCenterListener = (): void => { labelText.center = labelCenter; };
     mass.labelTextProperty.link( this.labelCenterListener );
 
     // Scale the label to fit within the imageNode.
@@ -68,16 +70,10 @@ class MysteryMassNode extends ImageMassNode {
     this.addChild( label );
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.mass.labelTextProperty.unlink( this.labelCenterListener );
     super.dispose();
   }
 }
 
 balancingAct.register( 'MysteryMassNode', MysteryMassNode );
-
-export default MysteryMassNode;

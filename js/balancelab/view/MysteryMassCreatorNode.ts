@@ -9,26 +9,26 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import PhetioObject from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
 import MysteryMass from '../../common/model/masses/MysteryMass.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import MysteryMassNode from '../../common/view/MysteryMassNode.js';
+import BalanceLabModel from '../model/BalanceLabModel.js';
 import ImageMassCreatorNode from './ImageMassCreatorNode.js';
 
 // Model-view transform for scaling the node used in the toolbox.  This may scale the node differently than what is
 // used in the model so that items in the toolbox can be sized differently (generally smaller).
 const SCALING_MVT = ModelViewTransform2.createOffsetScaleMapping( Vector2.ZERO, 150 );
 
-class MysteryMassCreatorNode extends ImageMassCreatorNode {
+export default class MysteryMassCreatorNode extends ImageMassCreatorNode {
 
-  /**
-   * @param {number} mysteryMassID
-   * @param {BalanceLabModel} model
-   * @param {BasicBalanceScreenView} screenView
-   * @param {Object} [options]
-   */
-  constructor( mysteryMassID, model, screenView, options ) {
+  private readonly mysteryMassId: number;
+
+  public constructor( mysteryMassID: number, model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
     super( model, screenView, new MysteryMass( Vector2.ZERO, mysteryMassID, { tandem: Tandem.OPT_OUT } ), false, options );
     this.mysteryMassId = mysteryMassID;
     this.setSelectionNode(
@@ -49,11 +49,8 @@ class MysteryMassCreatorNode extends ImageMassCreatorNode {
 
   /**
    * @param position
-   * @returns {PhetioObject}
-   * @override
-   * @public
    */
-  addElementToModel( position ) {
+  public override addElementToModel( position: Vector2 ): PhetioObject {
     const mass = this.model.mysteryMassGroup.createNextElement( position, this.mysteryMassId );
     this.model.addMass( mass );
     return mass;
@@ -61,5 +58,3 @@ class MysteryMassCreatorNode extends ImageMassCreatorNode {
 }
 
 balancingAct.register( 'MysteryMassCreatorNode', MysteryMassCreatorNode );
-
-export default MysteryMassCreatorNode;

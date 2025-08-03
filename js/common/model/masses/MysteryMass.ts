@@ -7,7 +7,9 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
+import Vector2 from '../../../../../dot/js/Vector2.js';
 import merge from '../../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import mysteryObject01_svg from '../../../../images/objects/mysteryObject01_svg.js';
 import mysteryObject02_svg from '../../../../images/objects/mysteryObject02_svg.js';
 import mysteryObject03_svg from '../../../../images/objects/mysteryObject03_svg.js';
@@ -95,29 +97,19 @@ const MYSTERY_MASS_CONFIGURATIONS = [
   }
 ];
 
-class MysteryMass extends LabeledImageMass {
+export default class MysteryMass extends LabeledImageMass {
+  private readonly mysteryMassId: number;
 
-  /**
-   * @param {Vector2} initialPosition
-   * @param {number} mysteryMassId
-   * @param {Object} [options]
-   */
-  constructor( initialPosition, mysteryMassId, options ) {
-    assert && assert( typeof mysteryMassId === 'number', 'mysteryMassId must be a number' );
+  public constructor( initialPosition: Vector2, mysteryMassId: number, options?: IntentionalAny ) {
     const config = merge( options, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
 
     super( initialPosition, config );
     this.mysteryMassId = mysteryMassId;
   }
 
-  /**
-   * @public
-   */
-  createCopy() {
+  public override createCopy(): MysteryMass {
     return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
   }
 }
 
 balancingAct.register( 'MysteryMass', MysteryMass );
-
-export default MysteryMass;

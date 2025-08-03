@@ -15,15 +15,12 @@ import balancingAct from '../../balancingAct.js';
 // constants
 const COLUMN_WIDTH = 0.35; // In meters
 
-/**
- * @param height
- * @param centerX
- * @constructor
- */
-function LevelSupportColumn( height: number, centerX: number ): Shape {
-  return Shape.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
+export default class LevelSupportColumn extends Shape {
+
+  public constructor( height: number, centerX: number ) {
+    super();
+    this.rect( centerX - COLUMN_WIDTH / 2, 0, COLUMN_WIDTH, height );
+  }
 }
 
 balancingAct.register( 'LevelSupportColumn', LevelSupportColumn );
-
-export default LevelSupportColumn;

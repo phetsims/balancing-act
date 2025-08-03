@@ -8,31 +8,26 @@
  */
 
 
-// module
+import Vector2 from '../../../../dot/js/Vector2.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
+import ImageMass from '../../common/model/ImageMass.js';
+import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
+import BalanceLabModel from '../model/BalanceLabModel.js';
 import MassCreatorNode from './MassCreatorNode.js';
 
-class ImageMassCreatorNode extends MassCreatorNode {
+export default class ImageMassCreatorNode extends MassCreatorNode {
 
-  /**
-   * @param {BalanceLabModel} model
-   * @param {BasicBalanceScreenView} screenView
-   * @param {ImageMass} prototypeImageMass
-   * @param {boolean} showMassLabel
-   * @param {Object} [options]
-   */
-  constructor( model, screenView, prototypeImageMass, showMassLabel, options ) {
+  protected readonly prototypeImageMass: ImageMass;
+  protected readonly model: BalanceLabModel;
+
+  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, prototypeImageMass: ImageMass, showMassLabel: boolean, options?: IntentionalAny ) {
     super( screenView, prototypeImageMass.massValue, showMassLabel, model.columnStateProperty, options );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;
   }
 
-  /**
-   * @param position
-   * @returns {*}
-   * @public
-   */
-  addElementToModel( position ) {
+  public override addElementToModel( position: Vector2 ): IntentionalAny {
     const imageMassModelElement = this.createImageMassInstance();
     imageMassModelElement.positionProperty.set( position.copy() );
     imageMassModelElement.animationDestination = imageMassModelElement.positionProperty.get();
@@ -44,13 +39,10 @@ class ImageMassCreatorNode extends MassCreatorNode {
   /**
    * Create an instance of the image mass that corresponds to this creator node.  Overridden by subclasses to create the
    * appropriate type.
-   * @protected
    */
-  createImageMassInstance() {
+  protected createImageMassInstance(): ImageMass {
     return this.prototypeImageMass.createCopy();
   }
 }
 
 balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );
-
-export default ImageMassCreatorNode;
