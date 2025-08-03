@@ -1,15 +1,15 @@
 {
-  "comment": "# balancing-act 1.4.0-dev.1 Sat Aug 02 2025 14:51:00 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# balancing-act 1.4.0-dev.2 Sun Aug 03 2025 17:46:47 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "f6d41b399ad32df2a00ab4b329981be0c574d77a",
     "branch": "main"
   },
   "axon": {
-    "sha": "a8fbdd419047181b2e45308daa735854f9cdf107",
+    "sha": "b5fafbb935011645259e381f2558328f351885df",
     "branch": "main"
   },
   "balancing-act": {
-    "sha": "2f42e716dd06223203276ba2300788c1ee765483",
+    "sha": "b468e7d73dafcd093839b28a792b49ff090329bf",
     "branch": "main"
   },
   "brand": {
@@ -69,7 +69,7 @@
     "branch": "main"
   },
   "scenery-phet": {
-    "sha": "9fdd46f05389073fc4b5cbcb53b397957c7459e8",
+    "sha": "747d8a7e2c1805d419cc13fbd572d1bc1684e9a4",
     "branch": "main"
   },
   "sherpa": {
