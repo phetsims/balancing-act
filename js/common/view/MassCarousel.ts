@@ -7,15 +7,14 @@
  * @author John Blanco
  */
 
-import merge from '../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Carousel from '../../../../sun/js/Carousel.js';
+import Carousel, { CarouselOptions } from '../../../../sun/js/Carousel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import BalanceLabModel from '../../balancelab/model/BalanceLabModel.js';
 import BoyCreatorNode from '../../balancelab/view/BoyCreatorNode.js';
@@ -45,12 +44,17 @@ type CarouselElement = {
   content: Node;
 };
 
+type SelfOptions = {
+  // currently no self options
+};
+
+type MassCarouselOptions = SelfOptions & CarouselOptions;
+
 export default class MassCarousel extends Carousel {
 
-  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, options?: IntentionalAny ) {
+  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, providedOptions: MassCarouselOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<MassCarouselOptions, SelfOptions, CarouselOptions>()( {
 
       // we do our own layout
       itemsPerPage: 1,
@@ -66,10 +70,8 @@ export default class MassCarousel extends Carousel {
       cornerRadius: 10,
       alignBoxOptions: {
         xMargin: 8
-      },
-
-      tandem: Tandem.REQUIRED
-    }, options );
+      }
+    }, providedOptions );
 
     // Create the kit node for creating brick stacks of various sizes.
     const brickCreatorKit = new Node(
