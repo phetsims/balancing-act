@@ -44,7 +44,7 @@ export default class ImageMassNode extends Node {
   public constructor( imageMass: ImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: Property<typeof ColumnState> ) {
     super( { cursor: 'pointer' } );
 
-    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: typeof ColumnState ) => {
+    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );

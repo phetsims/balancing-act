@@ -31,7 +31,7 @@ export default class PositionMarkerSetNode extends Node {
     }
 
     // Observe visibility.
-    visibleProperty.link( ( visible: boolean ) => {
+    visibleProperty.link( visible => {
       this.visible = visible;
     } );
 

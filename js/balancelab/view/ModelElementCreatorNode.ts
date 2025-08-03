@@ -87,8 +87,7 @@ export default class ModelElementCreatorNode extends Node {
       }
     ) );
 
-    // TODO: https://github.com/phetsims/balancing-act/issues/168 ColumnState
-    BAQueryParameters.stanford && columnStateProperty.link( ( columnState: typeof ColumnState ) => {
+    BAQueryParameters.stanford && columnStateProperty.link( columnState => {
       this.cursor = columnState === ColumnState.DOUBLE_COLUMNS ? 'pointer' : 'default';
       this.pickable = columnState === ColumnState.DOUBLE_COLUMNS;
     } );

@@ -153,7 +153,7 @@ export default class BasicBalanceScreenView extends ScreenView {
       this.massesToNodesMap.set( addedMass, massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
-      addedMass.userControlledProperty.link( ( userControlled: boolean ) => {
+      addedMass.userControlledProperty.link( userControlled => {
         if ( userControlled ) {
           massNode.moveToFront();
         }
@@ -211,7 +211,7 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
 
-    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
+    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     this.nonMassLayer.addChild( new RotatingRulerNode( model.plank, modelViewTransform, rulersVisibleProperty ) );
@@ -219,14 +219,14 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
 
-    this.viewProperties.positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
+    this.viewProperties.positionMarkerStateProperty.link( positionMarkerState => {
       positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     this.nonMassLayer.addChild( new PositionMarkerSetNode( model.plank, modelViewTransform, positionMarkersVisibleProperty ) );
 
     // Add the level indicator node which will show whether the plank is balanced or not
     const levelIndicatorNode = new LevelIndicatorNode( modelViewTransform, model.plank );
-    this.viewProperties.levelIndicatorVisibleProperty.link( ( visible: boolean ) => {
+    this.viewProperties.levelIndicatorVisibleProperty.link( visible => {
       levelIndicatorNode.visible = visible;
     } );
     this.nonMassLayer.addChild( levelIndicatorNode );

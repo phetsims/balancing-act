@@ -164,7 +164,7 @@ export default class BalanceGameView extends ScreenView {
       this.challengeLayer.addChild( massNode );
 
       // Move the mass to the front when grabbed so that layering stays reasonable.
-      addedMass.userControlledProperty.link( ( userControlled: boolean ) => {
+      addedMass.userControlledProperty.link( userControlled => {
         if ( userControlled ) {
           massNode.moveToFront();
         }
@@ -350,7 +350,7 @@ export default class BalanceGameView extends ScreenView {
     // Show the level indicator to help the user see if the plank is perfectly
     // balanced, but only show it when the support column has been removed.
     const levelIndicator = new LevelIndicatorNode( this.modelViewTransform, gameModel.plank );
-    gameModel.columnStateProperty.link( ( columnState: typeof ColumnState ) => {
+    gameModel.columnStateProperty.link( columnState => {
       levelIndicator.visible = ( columnState === ColumnState.NO_COLUMNS );
     } );
     this.challengeLayer.addChild( levelIndicator );
@@ -360,14 +360,14 @@ export default class BalanceGameView extends ScreenView {
 
     // Add the ruler.
     const rulersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
+    positionMarkerStateProperty.link( positionMarkerState => {
       rulersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.RULERS;
     } );
     this.challengeLayer.addChild( new RotatingRulerNode( gameModel.plank, this.modelViewTransform, rulersVisibleProperty ) );
 
     // Add the position markers.
     const positionMarkersVisibleProperty = new Property( false );
-    positionMarkerStateProperty.link( ( positionMarkerState: typeof PositionIndicatorChoice ) => {
+    positionMarkerStateProperty.link( positionMarkerState => {
       positionMarkersVisibleProperty.value = positionMarkerState === PositionIndicatorChoice.MARKS;
     } );
     this.challengeLayer.addChild( new PositionMarkerSetNode( gameModel.plank, this.modelViewTransform, positionMarkersVisibleProperty ) );
