@@ -9,6 +9,7 @@
 
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -30,7 +31,7 @@ export default class BalanceModel {
   public readonly massList: ObservableArray<Mass>;
   public readonly userControlledMasses: Mass[];
 
-  public readonly columnStateProperty: EnumerationDeprecatedProperty;
+  public readonly columnStateProperty: Property<typeof ColumnState>;
   public readonly plank: Plank;
   public readonly supportColumns: LevelSupportColumn[];
 

@@ -7,8 +7,8 @@
  * @author John Blanco
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -40,7 +40,7 @@ export default class ImageMassNode extends Node {
 
   private readonly disposeImageMassNode: () => void;
 
-  public constructor( imageMass: ImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: EnumerationDeprecatedProperty ) {
+  public constructor( imageMass: ImageMass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, massLabelVisibleProperty: TReadOnlyProperty<boolean>, draggable: boolean, columnStateProperty: Property<typeof ColumnState> ) {
     super( { cursor: 'pointer' } );
 
     BAQueryParameters.stanford && columnStateProperty.link( ( columnState: typeof ColumnState ) => {

@@ -69,7 +69,7 @@ export default class Plank {
 
   // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally
   // eslint-disable-next-line phet/require-property-suffix
-  private readonly columnState: Property<IntentionalAny>; // TODO https://github.com/phetsims/balancing-act/issues/168 should be ColumnState
+  private readonly columnState: Property<typeof ColumnState>;
   private angularVelocity: number;
   private currentNetTorque: number;
 
@@ -79,7 +79,7 @@ export default class Plank {
   // Unrotated shape of the plank
   public readonly unrotatedShape: Shape;
 
-  public constructor( position: Vector2, pivotPoint: Vector2, columnState: Property<IntentionalAny>, userControlledMasses: Mass[], tandem: Tandem ) {
+  public constructor( position: Vector2, pivotPoint: Vector2, columnState: Property<typeof ColumnState>, userControlledMasses: Mass[], tandem: Tandem ) {
     this.userControlledMasses = userControlledMasses;
 
     this.tiltAngleProperty = new NumberProperty( 0, {

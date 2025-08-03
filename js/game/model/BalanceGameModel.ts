@@ -53,7 +53,7 @@ export default class BalanceGameModel {
   // Valid values for gameState are 'choosingLevel', 'presentingInteractiveChallenge', 'showingCorrectAnswerFeedback', 'showingIncorrectAnswerFeedbackTryAgain', 'showingIncorrectAnswerFeedbackMoveOn', 'displayingCorrectAnswer', 'showingLevelResults'
   public readonly gameStateProperty: Property<GameState>;
 
-  public readonly columnStateProperty: EnumerationDeprecatedProperty;
+  public readonly columnStateProperty: Property<typeof ColumnState>;
   public readonly elapsedTimeProperty: Property<number>;
 
   // Best times and scores

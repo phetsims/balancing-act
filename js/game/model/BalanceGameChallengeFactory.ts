@@ -20,7 +20,6 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 import Mass from '../../common/model/Mass.js';
@@ -74,7 +73,7 @@ const MAX_CHALLENGE_HISTORY_LENGTH = 60;
 
 // List of masses that can be used on either side of the balance challenges
 // or as the fixed masses in mass deduction challenges.
-const BALANCE_CHALLENGE_MASSES = [
+const BALANCE_CHALLENGE_MASSES: Mass[] = [
   new BrickStack( 1, Vector2.ZERO ),
   new BrickStack( 2, Vector2.ZERO ),
   new BrickStack( 3, Vector2.ZERO ),
@@ -97,7 +96,7 @@ const BALANCE_CHALLENGE_MASSES = [
 // List of masses that can be used as "mystery masses" in the mass
 // deduction challenges.  These should not appear in other tabs, lest the
 // user could already know their mass.
-const MYSTERY_MASSES = [
+const MYSTERY_MASSES: Mass[] = [
   new FireHydrant( Vector2.ZERO, true ),
   new Television( Vector2.ZERO, true ),
   new LargeTrashCan( Vector2.ZERO, true ),
@@ -113,7 +112,7 @@ const MYSTERY_MASSES = [
 // List of masses that are "low profile", meaning that they are short.
 // This is needed for the tilt-prediction style of problem, since taller
 // masses end up going behind the tilt prediction selector.
-const LOW_PROFILE_MASSES = [
+const LOW_PROFILE_MASSES: Mass[] = [
   new TinyRock( Vector2.ZERO, false ),
   new SmallRock( Vector2.ZERO, false ),
   new MediumRock( Vector2.ZERO, false ),
@@ -815,9 +814,9 @@ class BalanceGameChallengeFactory {
    * whether to dispose a mass when a challenge is completed.
    */
   public static isReusableMass( mass: Mass ): boolean {
-    return BALANCE_CHALLENGE_MASSES.includes( mass as IntentionalAny ) ||
-           MYSTERY_MASSES.includes( mass as IntentionalAny ) ||
-           LOW_PROFILE_MASSES.includes( mass as IntentionalAny );
+    return BALANCE_CHALLENGE_MASSES.includes( mass ) ||
+           MYSTERY_MASSES.includes( mass ) ||
+           LOW_PROFILE_MASSES.includes( mass );
   }
 }
 

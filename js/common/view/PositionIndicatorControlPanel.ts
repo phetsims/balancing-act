@@ -10,7 +10,6 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
@@ -41,8 +40,7 @@ type PositionIndicatorControlPanelOptions = SelfOptions & PanelOptions;
 
 export default class PositionIndicatorControlPanel extends Panel {
 
-  // TODO: typeof PositionIndicatorChoice probably, see https://github.com/phetsims/balancing-act/issues/168
-  public constructor( positionIndicatorStateProperty: Property<IntentionalAny>, layoutBoundsWidth: number, providedOptions?: PositionIndicatorControlPanelOptions ) {
+  public constructor( positionIndicatorStateProperty: Property<typeof PositionIndicatorChoice>, layoutBoundsWidth: number, providedOptions?: PositionIndicatorControlPanelOptions ) {
 
     const options = optionize<PositionIndicatorControlPanelOptions, SelfOptions, PanelOptions>()( {
       titleToControlsVerticalSpace: 5,

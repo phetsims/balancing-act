@@ -7,7 +7,7 @@
  * @author John Blanco
  */
 
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -44,7 +44,7 @@ export default class ModelElementCreatorNode extends Node {
   private selectionNode?: Node;
   private caption?: Text;
 
-  public constructor( screenView: BasicBalanceScreenView, columnStateProperty: EnumerationDeprecatedProperty, providedOptions?: ModelElementCreatorNodeOptions ) {
+  public constructor( screenView: BasicBalanceScreenView, columnStateProperty: Property<typeof ColumnState>, providedOptions?: ModelElementCreatorNodeOptions ) {
 
     const options = optionize<ModelElementCreatorNodeOptions, SelfOptions, NodeOptions>()( {
       cursor: 'pointer',

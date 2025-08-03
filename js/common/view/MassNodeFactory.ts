@@ -8,6 +8,7 @@
  * @author John Blanco
  */
 
+import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -24,7 +25,7 @@ import ImageMassNode from './ImageMassNode.js';
 import MysteryMassNode from './MysteryMassNode.js';
 
 const MassNodeFactory = {
-  createMassNode( mass: Mass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, labelVisibleProperty: TReadOnlyProperty<boolean>, columnStateProperty: typeof ColumnState ): Node {
+  createMassNode( mass: Mass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, labelVisibleProperty: TReadOnlyProperty<boolean>, columnStateProperty: Property<typeof ColumnState> ): Node {
     let massNode;
     if ( mass instanceof MysteryMass ) {
       massNode = new MysteryMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true, columnStateProperty );
