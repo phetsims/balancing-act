@@ -5,7 +5,7 @@
  * the plank.  This shape looks sort of like a swing set, with angled legs
  * that go from the ground up to apex in a sort of A-frame arrangement.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';

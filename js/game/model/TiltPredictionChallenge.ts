@@ -4,7 +4,7 @@
  * A challenge, used in the balance game, in which the user must predict which
  * way the plank will tilt when the supports are removed.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';

@@ -3,7 +3,7 @@
 /**
  * This type represents a mystery mass in the view.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

@@ -5,7 +5,7 @@
  * to select one of three possible ways in which the balance might behave -
  * tilt left, tilt right, or stay balanced.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';

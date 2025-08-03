@@ -9,7 +9,7 @@
  * needed for Balancing Act.  This would need to be generalized to support
  * vectors pointing in other directions.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

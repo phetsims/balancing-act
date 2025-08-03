@@ -4,7 +4,7 @@
  * The level indicator shows triangles to the left and right of the plank to
  * help indicate whether the plank is at exactly 0 degrees.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Matrix3 from '../../../../dot/js/Matrix3.js';

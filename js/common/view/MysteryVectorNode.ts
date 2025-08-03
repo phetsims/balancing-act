@@ -5,7 +5,7 @@
  * the user in the appropriate position but that has a fixed size and is labeled
  * with a question mark (or some other symbol).
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';

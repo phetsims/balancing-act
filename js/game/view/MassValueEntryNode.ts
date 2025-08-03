@@ -3,7 +3,7 @@
 /**
  * This class presents a dialog to the user that allows them to enter a mass value.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';

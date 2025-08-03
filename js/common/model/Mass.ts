@@ -3,7 +3,7 @@
 /**
  * Base class for all objects that can be placed on the balance.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

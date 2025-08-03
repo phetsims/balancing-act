@@ -4,7 +4,7 @@
  * A node which allows the user to scroll through the various mass kits and
  * select individual masses for putting on the balance.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';

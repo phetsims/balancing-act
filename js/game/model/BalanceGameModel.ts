@@ -6,7 +6,7 @@
  * Note: Levels in this model are zero-indexed, even though they are often
  * presented to the user as starting at level 1.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';

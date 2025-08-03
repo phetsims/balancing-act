@@ -4,7 +4,7 @@
  * This type defines a control panel that selects between the various types of
  * position markers, i.e. ruler, position markers, or nothing.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

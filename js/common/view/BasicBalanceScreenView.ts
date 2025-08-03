@@ -4,7 +4,7 @@
  * ScreenView that displays items in the balance model, primarily the balance beam (i.e. the plank), the various masses,
  * and a floating control panel for controlling the visibility of labels, rulers, etc.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';

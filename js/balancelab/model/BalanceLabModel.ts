@@ -4,7 +4,7 @@
  * Primary model class for the 'balance lab' tab in the balancing act simulation. This model depicts a plank on a
  * fulcrum with a collection of masses that the user can put on and remove from the plank.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';

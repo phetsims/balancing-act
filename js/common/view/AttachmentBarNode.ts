@@ -4,7 +4,7 @@
  * View representation for the attachment bar which goes from the pivot point
  * to the bottom center of the plank.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';

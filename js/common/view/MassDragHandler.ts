@@ -4,7 +4,7 @@
  * Common drag handler for mass nodes.  Positions the corresponding model element based on the movement of the mouse or
  * finger, and also sets and clears the property that indicates whether the mass is being controlled by the user.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';

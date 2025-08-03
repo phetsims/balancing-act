@@ -3,7 +3,7 @@
 /**
  * Base class for PNodes that create masses in the model when clicked upon.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';

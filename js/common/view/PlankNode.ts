@@ -3,7 +3,7 @@
 /**
  * View representation for the plank.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';

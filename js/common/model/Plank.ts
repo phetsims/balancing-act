@@ -3,7 +3,7 @@
 /**
  * This is the model for the plank upon which masses can be placed.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';

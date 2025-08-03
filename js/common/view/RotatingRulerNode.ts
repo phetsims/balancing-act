@@ -4,7 +4,7 @@
  * This type represents a ruler that sits on the bottom of the plank and
  * rotates as the plank rotates.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';

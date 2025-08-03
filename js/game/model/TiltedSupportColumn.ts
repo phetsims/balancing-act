@@ -6,7 +6,7 @@
  * always used alone and holds the plank in a position where the other end is
  * on the ground.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Shape from '../../../../kite/js/Shape.js';

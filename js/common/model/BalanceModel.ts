@@ -4,7 +4,7 @@
  * Basic model for depicting masses on a balance, meant to be used as a base
  * type.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';

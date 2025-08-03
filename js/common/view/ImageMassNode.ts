@@ -4,7 +4,7 @@
  * This class defines a Scenery node that represents a model element in the view, and the particular model element
  * itself contains an image that is used as the primary representation.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';

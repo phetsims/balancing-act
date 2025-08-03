@@ -3,7 +3,7 @@
 /**
  * Screen that allows the user to select the game level that they wish to play.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

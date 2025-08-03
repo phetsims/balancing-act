@@ -5,7 +5,7 @@
  * on this node, the corresponding model element is added to the model at the
  * user's mouse position.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

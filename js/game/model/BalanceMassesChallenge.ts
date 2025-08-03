@@ -6,7 +6,7 @@
  * removed, the movable mass will balance the fixed mass that is initially on
  * the plank.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';

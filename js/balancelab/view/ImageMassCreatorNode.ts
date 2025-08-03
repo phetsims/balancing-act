@@ -4,7 +4,7 @@
  * A node that can be used to add an image-based mass element to the model by
  * clicking on it.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 

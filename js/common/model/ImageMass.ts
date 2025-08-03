@@ -8,7 +8,7 @@
  * center of the image.  In order to make this work for an image, it may be necessary to have some blank transparent
  * space on one side.
  * <p/>
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

@@ -4,7 +4,7 @@
  * Base type for the Scenery nodes that appear in the view, generally in some sort of toolbox, and that can be clicked
  * on by the user in order to add model elements to the model.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

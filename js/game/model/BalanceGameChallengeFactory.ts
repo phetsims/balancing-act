@@ -13,7 +13,7 @@
  * not necessarily a direct correspondence between the numerical levels and
  * all challenges generated for that level.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import dotRandom from '../../../../dot/js/dotRandom.js';

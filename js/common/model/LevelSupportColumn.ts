@@ -6,7 +6,7 @@
  * always used in conjunction with another that is holding up the other side of
  * the plank.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Shape from '../../../../kite/js/Shape.js';

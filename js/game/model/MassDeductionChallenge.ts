@@ -4,7 +4,7 @@
  * A challenge, used in the balance game, in which the user attempts to
  * deduce the mass of a "mystery mass" using another mass of a known value.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';

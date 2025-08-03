@@ -5,7 +5,7 @@
  * basically does the type identification necessary to match the model
  * representation with the appropriate view representation (i.e. node).
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Property from '../../../../axon/js/Property.js';

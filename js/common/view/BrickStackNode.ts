@@ -3,7 +3,7 @@
 /**
  * A node that represents a stack of bricks in the view.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';

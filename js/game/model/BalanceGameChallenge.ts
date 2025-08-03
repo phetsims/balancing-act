@@ -3,7 +3,7 @@
 /**
  * Base type for a single "challenge" (a.k.a. problem) that is presented to the user during the balance game.
  *
- * @author John Blanco
+ * @author John Blanco (PhET Interactive Simulations)
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
