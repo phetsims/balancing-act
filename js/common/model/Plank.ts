@@ -77,7 +77,7 @@ export default class Plank {
   public readonly maxTiltAngle: number;
 
   // Unrotated shape of the plank
-  public readonly unrotatedShape: IntentionalAny;
+  public readonly unrotatedShape: Shape;
 
   public constructor( position: Vector2, pivotPoint: Vector2, columnState: Property<IntentionalAny>, userControlledMasses: Mass[], tandem: Tandem ) {
     this.userControlledMasses = userControlledMasses;
@@ -361,7 +361,9 @@ export default class Plank {
   }
 
   private updatePlank(): void {
-    if ( this.pivotPoint.y < this.unrotatedShape.minY ) {
+
+    // TODO: Note the runtime behavior change in https://github.com/phetsims/balancing-act/issues/168
+    if ( this.pivotPoint.y < this.unrotatedShape.bounds.minY ) {
       throw new Error( 'Pivot point cannot be below the plank.' );
     }
     let attachmentBarVector = new Vector2( 0, this.unrotatedShape.bounds.y - this.pivotPoint.y );

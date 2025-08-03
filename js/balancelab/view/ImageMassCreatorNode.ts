@@ -9,20 +9,20 @@
 
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import ImageMass from '../../common/model/ImageMass.js';
 import Mass from '../../common/model/Mass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import BalanceLabModel from '../model/BalanceLabModel.js';
 import MassCreatorNode from './MassCreatorNode.js';
+import { ModelElementCreatorNodeOptions } from './ModelElementCreatorNode.js';
 
 export default class ImageMassCreatorNode extends MassCreatorNode {
 
   protected readonly prototypeImageMass: ImageMass;
   protected readonly model: BalanceLabModel;
 
-  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, prototypeImageMass: ImageMass, showMassLabel: boolean, options?: IntentionalAny ) {
+  public constructor( model: BalanceLabModel, screenView: BasicBalanceScreenView, prototypeImageMass: ImageMass, showMassLabel: boolean, options?: ModelElementCreatorNodeOptions ) {
     super( screenView, prototypeImageMass.massValue, showMassLabel, model.columnStateProperty, options );
     this.prototypeImageMass = prototypeImageMass;
     this.model = model;

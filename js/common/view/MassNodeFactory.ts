@@ -9,12 +9,12 @@
  */
 
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import balancingAct from '../../balancingAct.js';
+import ColumnState from '../model/ColumnState.js';
 import ImageMass from '../model/ImageMass.js';
 import Mass from '../model/Mass.js';
 import BrickStack from '../model/masses/BrickStack.js';
@@ -24,7 +24,7 @@ import ImageMassNode from './ImageMassNode.js';
 import MysteryMassNode from './MysteryMassNode.js';
 
 const MassNodeFactory = {
-  createMassNode( mass: Mass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, labelVisibleProperty: TReadOnlyProperty<boolean>, columnStateProperty: IntentionalAny ): Node {
+  createMassNode( mass: Mass, modelViewTransform: ModelViewTransform2, isLabeled: boolean, labelVisibleProperty: TReadOnlyProperty<boolean>, columnStateProperty: typeof ColumnState ): Node {
     let massNode;
     if ( mass instanceof MysteryMass ) {
       massNode = new MysteryMassNode( mass, modelViewTransform, isLabeled, labelVisibleProperty, true, columnStateProperty );

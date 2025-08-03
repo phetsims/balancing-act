@@ -503,8 +503,8 @@ class BalanceGameChallengeFactory {
 
   private generateModerateTiltPredictionChallenge(): TiltPredictionChallenge {
     // Select the masses, bricks on one side, non bricks on the other.
-    let leftMass: IntentionalAny = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
-    let rightMass: IntentionalAny = new BrickStack( this.randInt( 4 ) + 1 );
+    let leftMass: Mass = LOW_PROFILE_MASSES[ this.randInt( LOW_PROFILE_MASSES.length ) ].createCopy();
+    let rightMass: Mass = new BrickStack( this.randInt( 4 ) + 1 );
     if ( dotRandom.nextDouble() >= 0.5 ) {
       // Switch the masses.
       const tempMassPrototype = leftMass;
