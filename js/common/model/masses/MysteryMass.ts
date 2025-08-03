@@ -8,8 +8,7 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
+import optionize from '../../../../../phet-core/js/optionize.js';
 import mysteryObject01_svg from '../../../../images/objects/mysteryObject01_svg.js';
 import mysteryObject02_svg from '../../../../images/objects/mysteryObject02_svg.js';
 import mysteryObject03_svg from '../../../../images/objects/mysteryObject03_svg.js';
@@ -97,11 +96,17 @@ const MYSTERY_MASS_CONFIGURATIONS = [
   }
 ];
 
+type SelfOptions = {
+  // Currently no self options
+};
+
+type MysteryMassOptions = SelfOptions;
+
 export default class MysteryMass extends LabeledImageMass {
   private readonly mysteryMassId: number;
 
-  public constructor( initialPosition: Vector2, mysteryMassId: number, options?: IntentionalAny ) {
-    const config = merge( options, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+  public constructor( initialPosition: Vector2, mysteryMassId: number, providedOptions?: MysteryMassOptions ) {
+    const config = optionize<MysteryMassOptions, SelfOptions>()( providedOptions || {}, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
 
     super( initialPosition, config );
     this.mysteryMassId = mysteryMassId;

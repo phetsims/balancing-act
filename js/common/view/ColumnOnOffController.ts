@@ -7,9 +7,9 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -22,15 +22,20 @@ import ColumnControlIcon from './ColumnControlIcon.js';
 // constants
 const ICON_WIDTH = 60;
 
+type SelfOptions = {
+  // Currently no self options
+};
+
+type ColumnOnOffControllerOptions = SelfOptions & NodeOptions;
+
 class ColumnOnOffController extends Node {
 
-  public constructor( columnState: IntentionalAny, options?: IntentionalAny ) {
+  public constructor( columnState: IntentionalAny, providedOptions?: ColumnOnOffControllerOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<ColumnOnOffControllerOptions, SelfOptions, NodeOptions>()( {
       tandem: Tandem.REQUIRED
-    }, options );
-    super();
+    }, providedOptions );
+    super( options );
 
     const columnSwitchTandem = options.tandem.createTandem( 'columnSwitch' );
     const columnsOnNode = new ColumnControlIcon( ICON_WIDTH, true, {
@@ -55,18 +60,18 @@ class ColumnOnOffController extends Node {
       const MARGIN = 10;
       const FONT_SIZE = 18;
       const FILL = 'black';
-      const textOptions = {
+      this.addChild( new Text( 'Setup', {
+        right: panel.left - MARGIN,
+        bottom: panel.bottom,
         fill: FILL,
         fontSize: FONT_SIZE
-      };
-      this.addChild( new Text( 'Setup', merge( {
-        right: panel.left - MARGIN,
-        bottom: panel.bottom
-      }, textOptions ) ) );
-      this.addChild( new Text( 'Test', merge( {
+      } ) );
+      this.addChild( new Text( 'Test', {
         left: panel.right + MARGIN,
-        bottom: panel.bottom
-      }, textOptions ) ) );
+        bottom: panel.bottom,
+        fill: FILL,
+        fontSize: FONT_SIZE
+      } ) );
     }
 
     this.mutate( options );

@@ -10,12 +10,12 @@
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
@@ -28,6 +28,12 @@ const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
 const LABEL_FONT = new PhetFont( 14 );
 const MAX_CAPTION_WIDTH_PROPORTION = 1; // max width for the caption as a proportion of the creator node
 
+type SelfOptions = {
+  cursor?: string;
+};
+
+type ModelElementCreatorNodeOptions = SelfOptions & NodeOptions;
+
 export default class ModelElementCreatorNode extends Node {
 
   // Offset used when adding an element to the model.  This is useful in making sure that the newly created object
@@ -37,13 +43,12 @@ export default class ModelElementCreatorNode extends Node {
   private selectionNode?: Node;
   private caption?: Text;
 
-  public constructor( screenView: BasicBalanceScreenView, columnStateProperty: EnumerationDeprecatedProperty, options?: IntentionalAny ) {
+  public constructor( screenView: BasicBalanceScreenView, columnStateProperty: EnumerationDeprecatedProperty, providedOptions?: ModelElementCreatorNodeOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<ModelElementCreatorNodeOptions, SelfOptions, NodeOptions>()( {
       cursor: 'pointer',
       tandem: Tandem.REQUIRED
-    }, options );
+    }, providedOptions );
     super( options );
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;

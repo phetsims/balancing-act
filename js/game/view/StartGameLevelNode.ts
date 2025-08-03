@@ -9,13 +9,12 @@
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
@@ -26,7 +25,7 @@ import BASharedConstants from '../../common/BASharedConstants.js';
 
 const selectLevelStringProperty = VegasStrings.selectLevelStringProperty;
 
-type StartGameLevelNodeOptions = {
+type SelfOptions = {
   numLevels?: number;
   titleStringProperty?: TReadOnlyProperty<string>;
   numStarsOnButtons?: number;
@@ -38,15 +37,15 @@ type StartGameLevelNodeOptions = {
   maxTitleWidth?: number;
 };
 
+type StartGameLevelNodeOptions = SelfOptions & NodeOptions;
+
 export default class StartGameLevelNode extends Node {
 
-  // TODO: Use StartGameLevelNodeOptions and optionize, see https://github.com/phetsims/balancing-act/issues/168
-  public constructor( startLevelFunction: ( level: number ) => void, resetFunction: () => void, timerEnabledProperty: Property<boolean>, iconNodes: Node[], scores: Property<number>[], modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
+  public constructor( startLevelFunction: ( level: number ) => void, resetFunction: () => void, timerEnabledProperty: Property<boolean>, iconNodes: Node[], scores: Property<number>[], modelViewTransform: ModelViewTransform2, providedOptions?: StartGameLevelNodeOptions ) {
 
     super();
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<StartGameLevelNodeOptions, SelfOptions, NodeOptions>()( {
       // Defaults
       numLevels: 4,
       titleStringProperty: selectLevelStringProperty,
@@ -57,7 +56,7 @@ export default class StartGameLevelNode extends Node {
       controlsInset: 10,
       size: new Dimension2( 768, 504 ),
       maxTitleWidth: Number.POSITIVE_INFINITY
-    }, options ) as Required<StartGameLevelNodeOptions>;
+    }, providedOptions );
 
     // Verify parameters
     if ( iconNodes.length !== options.numLevels || scores.length !== options.numLevels ) {

@@ -8,9 +8,8 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
-import PhetioObject from '../../../../tandem/js/PhetioObject.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioObject.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
@@ -19,6 +18,12 @@ import balancingAct from '../../balancingAct.js';
 // constants
 const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
 const MAX_REMOVAL_ANIMATION_DURATION = 0.75; // In seconds.
+
+type SelfOptions = {
+  // Currently no self options
+};
+
+type MassOptions = SelfOptions & PhetioObjectOptions;
 
 export default class Mass extends PhetioObject {
 
@@ -58,14 +63,13 @@ export default class Mass extends PhetioObject {
   // This is the horizontal offset from the center of the shape or image.
   public centerOfMassXOffset: number;
 
-  public constructor( massValue: number, initialPosition: Vector2, isMystery: boolean, options: IntentionalAny ) {
+  public constructor( massValue: number, initialPosition: Vector2, isMystery: boolean, providedOptions: MassOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<MassOptions, SelfOptions, PhetioObjectOptions>()( {
       tandem: Tandem.REQUIRED,
       phetioType: ReferenceIO( IOType.ObjectIO ),
       phetioState: false
-    }, options );
+    }, providedOptions );
 
     // instrumented so it can be phetioDynamicElement: true for PhetioGroups
     super( options );

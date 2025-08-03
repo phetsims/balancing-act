@@ -339,7 +339,6 @@ export default class BasicBalanceScreenView extends ScreenView {
     const positionPanel = new PositionIndicatorControlPanel(
       this.viewProperties.positionMarkerStateProperty, this.layoutBounds.width, {
 
-        // @ts-expect-error
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 5,
         minWidth: minControlPanelWidth,

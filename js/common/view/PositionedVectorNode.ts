@@ -13,22 +13,30 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
 import PositionedVector from '../model/PositionedVector.js';
+
+type SelfOptions = {
+  fill?: string;
+  stroke?: string;
+  lineWidth?: number;
+  headHeight?: number;
+  headWidth?: number;
+  tailWidth?: number;
+};
+
+type PositionedVectorNodeOptions = SelfOptions & NodeOptions;
 
 class PositionedVectorNode extends Node {
   private readonly disposePositionedVectorNode: () => void;
 
-  public constructor( positionedVectorProperty: Property<PositionedVector>, scalingFactor: number, visibleProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
-    super();
+  public constructor( positionedVectorProperty: Property<PositionedVector>, scalingFactor: number, visibleProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, providedOptions?: PositionedVectorNodeOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<PositionedVectorNodeOptions, SelfOptions, NodeOptions>()( {
       visibleProperty: visibleProperty,
       fill: 'white',
       stroke: 'black',
@@ -36,7 +44,9 @@ class PositionedVectorNode extends Node {
       headHeight: 8,
       headWidth: 12,
       tailWidth: 5
-    }, options );
+    }, providedOptions );
+
+    super( options );
 
     // Create the vector node and add it as a child.
     const length = positionedVectorProperty.value.vector.magnitude * scalingFactor;

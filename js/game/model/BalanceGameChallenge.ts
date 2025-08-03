@@ -6,7 +6,7 @@
  * @author John Blanco
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import Mass from '../../common/model/Mass.js';
@@ -17,9 +17,11 @@ type MassDistancePair = {
   distance: number;
 };
 
-type BalanceGameChallengeOptions = {
+type SelfOptions = {
   maxAttemptsAllowed?: number;
 };
+
+type BalanceGameChallengeOptions = SelfOptions;
 
 export default class BalanceGameChallenge {
 
@@ -41,17 +43,14 @@ export default class BalanceGameChallenge {
   // Disposal function to clean up memory references
   private readonly disposeBalanceGameChallenge: () => void;
 
-  public constructor( initialColumnState: IntentionalAny, options?: BalanceGameChallengeOptions ) {
+  public constructor( initialColumnState: IntentionalAny, providedOptions?: BalanceGameChallengeOptions ) {
 
-
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<BalanceGameChallengeOptions, SelfOptions>()( {
       maxAttemptsAllowed: 2
-    }, options ) as Required<BalanceGameChallengeOptions>;
+    }, providedOptions );
 
     this.initialColumnState = initialColumnState;
 
-    // @ts-expect-error
     this.maxAttemptsAllowed = options.maxAttemptsAllowed;
     this.fixedMassDistancePairs = [];
     this.movableMasses = [];

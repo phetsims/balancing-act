@@ -380,7 +380,6 @@ export default class BalanceGameView extends ScreenView {
     // various position markers, i.e. ruler, position markers, or nothing.
     const positionPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, this.layoutBounds.width, {
 
-      // @ts-expect-error
       right: this.layoutBounds.right - 10,
       top: this.scoreboard.bottom + 23,
 

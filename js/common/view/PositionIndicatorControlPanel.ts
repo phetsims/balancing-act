@@ -9,7 +9,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
@@ -17,7 +17,7 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import balancingAct from '../../balancingAct.js';
@@ -33,28 +33,24 @@ const rulersStringProperty = BalancingActStrings.rulersStringProperty;
 const RADIO_BUTTON_TEXT_OPTIONS = { font: new PhetFont( 14 ), maxWidth: 100 };
 const TITLE_TEXT_OPTIONS = { font: new PhetFont( 16 ), maxWidth: 140 };
 
-type PositionIndicatorControlPanelOptions = {
+type SelfOptions = {
   titleToControlsVerticalSpace?: number;
-  fill?: string;
-  xMargin?: number;
-  align?: string;
-  // eslint-disable-next-line phet/bad-sim-text
-  tandem?: Tandem;
 };
+
+type PositionIndicatorControlPanelOptions = SelfOptions & PanelOptions;
 
 export default class PositionIndicatorControlPanel extends Panel {
 
   // TODO: PositionIndicatorChoice probably, see https://github.com/phetsims/balancing-act/issues/168
-  public constructor( positionIndicatorStateProperty: Property<IntentionalAny>, layoutBoundsWidth: number, options?: PositionIndicatorControlPanelOptions ) {
+  public constructor( positionIndicatorStateProperty: Property<IntentionalAny>, layoutBoundsWidth: number, providedOptions?: PositionIndicatorControlPanelOptions ) {
 
-    // eslint-disable-next-line phet/bad-typescript-text
-    options = merge( {
+    const options = optionize<PositionIndicatorControlPanelOptions, SelfOptions, PanelOptions>()( {
       titleToControlsVerticalSpace: 5,
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       align: 'left',
       tandem: Tandem.REQUIRED
-    }, options ) as Required<PositionIndicatorControlPanelOptions>;
+    }, providedOptions );
 
     const positionRadioButtonGroup = new VerticalAquaRadioButtonGroup( positionIndicatorStateProperty, [
       {
@@ -75,10 +71,7 @@ export default class PositionIndicatorControlPanel extends Panel {
     ], {
       radioButtonOptions: { radius: 6 },
 
-      // @ts-expect-error
-      touchAreaDilation: 5,
-
-      // @ts-expect-error
+      touchAreaXDilation: 5,
       tandem: options.tandem.createTandem( 'positionRadioButtonGroup' )
     } );
 
@@ -86,14 +79,12 @@ export default class PositionIndicatorControlPanel extends Panel {
       children: [
         new Text( positionStringProperty, TITLE_TEXT_OPTIONS ),
 
-        // @ts-expect-error
         new VStrut( options.titleToControlsVerticalSpace ),
         new HBox( { children: [ new HStrut( 10 ), positionRadioButtonGroup ] } )
       ],
       align: 'left'
     } );
 
-    // @ts-expect-error
     super( positionMarkerVBox, options );
 
     // Ensure the panel doesn't extend past the layout bounds when any of the strings change for dynamic locale
