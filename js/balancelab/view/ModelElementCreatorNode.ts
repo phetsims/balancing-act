@@ -51,16 +51,13 @@ export default class ModelElementCreatorNode extends Node {
       tandem: Tandem.REQUIRED
     }, providedOptions );
     super( options );
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
-
     this.positioningOffset = Vector2.ZERO;
 
     // Function for translating click and touch events to model coordinates.
     const modelViewTransform = screenView.modelViewTransform;
     const eventToModelPosition = ( pointerPosition: Vector2 ) => {
       return modelViewTransform.viewToModelPosition(
-        screenView.globalToLocalPoint( pointerPosition ).plus( self.positioningOffset )
+        screenView.globalToLocalPoint( pointerPosition ).plus( this.positioningOffset )
       );
     };
 

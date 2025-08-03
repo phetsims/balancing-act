@@ -28,12 +28,6 @@ import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import BasicBalanceScreenView from './BasicBalanceScreenView.js';
 
-// eslint-disable-next-line phet/require-property-suffix
-const bricksString = BalancingActStrings.bricksStringProperty;
-// eslint-disable-next-line phet/require-property-suffix
-const mysteryObjectsString = BalancingActStrings.mysteryObjectsStringProperty;
-// eslint-disable-next-line phet/require-property-suffix
-const peopleString = BalancingActStrings.peopleStringProperty;
 
 // constants
 const TITLE_FONT = new PhetFont( 16 );
@@ -258,23 +252,23 @@ export default class MassCarousel extends Carousel {
 
     const elements: CarouselElement[] = [
       {
-        title: new Text( bricksString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
+        title: new Text( BalancingActStrings.bricksStringProperty, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: brickCreatorKit
       },
       ...BAQueryParameters.stanford ? [] : [ {
-        title: new Text( peopleString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
+        title: new Text( BalancingActStrings.peopleStringProperty, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: peopleKit1
       },
         {
-          title: new Text( peopleString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
+          title: new Text( BalancingActStrings.peopleStringProperty, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
           content: peopleKit2
         } ],
       {
-        title: new Text( mysteryObjectsString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
+        title: new Text( BalancingActStrings.mysteryObjectsStringProperty, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: mysteryMassesKit1
       },
       {
-        title: new Text( mysteryObjectsString, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
+        title: new Text( BalancingActStrings.mysteryObjectsStringProperty, { font: TITLE_FONT, maxWidth: TITLE_MAX_WIDTH } ),
         content: mysteryMassesKit2
       }
     ];

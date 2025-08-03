@@ -27,8 +27,6 @@ class PlankNode extends Node {
 
   public constructor( modelViewTransform: ModelViewTransform2, plank: Plank ) {
     super();
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
 
     // Create and position the plank.
     const plankViewBounds = modelViewTransform.modelToViewShape( plank.unrotatedShape ).bounds;
@@ -48,14 +46,14 @@ class PlankNode extends Node {
     }
 
     // Function for updating the highlights
-    function updateHighlights(): void {
-      self.highlights.forEach( highlight => {
+    const updateHighlights = (): void => {
+      this.highlights.forEach( highlight => {
         highlight.visible = false;
       } );
       plank.activeDropPositions.forEach( position => {
-        self.highlights[ mapPositionToHighlightIndex( position ) ].visible = true;
+        this.highlights[ mapPositionToHighlightIndex( position ) ].visible = true;
       } );
-    }
+    };
 
     // Update the tick mark highlights as the active drop positions change.
     plank.activeDropPositions.addItemAddedListener( updateHighlights );

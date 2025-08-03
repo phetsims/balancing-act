@@ -49,15 +49,6 @@ import PositionIndicatorControlPanel from './PositionIndicatorControlPanel.js';
 import PositionMarkerSetNode from './PositionMarkerSetNode.js';
 import RotatingRulerNode from './RotatingRulerNode.js';
 
-// strings
-// eslint-disable-next-line phet/require-property-suffix
-const forcesFromObjectsString = BalancingActStrings.forcesFromObjectsStringProperty;
-// eslint-disable-next-line phet/require-property-suffix
-const levelString = BalancingActStrings.levelStringProperty;
-// eslint-disable-next-line phet/require-property-suffix
-const massLabelsString = BalancingActStrings.massLabelsStringProperty;
-// eslint-disable-next-line phet/require-property-suffix
-const showString = BalancingActStrings.showStringProperty;
 
 // constants
 const X_MARGIN_IN_PANELS = 5;
@@ -89,8 +80,6 @@ export default class BasicBalanceScreenView extends ScreenView {
 
   public constructor( model: BalanceModel, tandem: Tandem ) {
     super( { layoutBounds: BASharedConstants.LAYOUT_BOUNDS } );
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const self = this;
     this.model = model;
 
     // Define the properties that control visibility of various display elements.
@@ -155,7 +144,7 @@ export default class BasicBalanceScreenView extends ScreenView {
         addedMass,
         modelViewTransform,
         true,
-        self.viewProperties.massLabelsVisibleProperty,
+        this.viewProperties.massLabelsVisibleProperty,
         model.columnStateProperty
       );
       massesLayer.addChild( massNode );
@@ -287,25 +276,25 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the control panel that will allow users to control the visibility of the various indicators.
     const showPanelTandem = tandem.createTandem( 'showPanel' );
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      createNode: () => new Text( massLabelsString, PANEL_OPTION_FONT ),
+      createNode: () => new Text( BalancingActStrings.massLabelsStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.massLabelsVisibleProperty,
 
       // @ts-expect-error
-      label: massLabelsString,
+      label: BalancingActStrings.massLabelsStringProperty,
       tandemName: 'massLabelsCheckbox'
     }, {
-      createNode: () => new Text( forcesFromObjectsString, PANEL_OPTION_FONT ),
+      createNode: () => new Text( BalancingActStrings.forcesFromObjectsStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.forceVectorsFromObjectsVisibleProperty,
 
       // @ts-expect-error
-      label: forcesFromObjectsString,
+      label: BalancingActStrings.forcesFromObjectsStringProperty,
       tandemName: 'forcesFromObjectsCheckbox'
     }, {
-      createNode: () => new Text( levelString, PANEL_OPTION_FONT ),
+      createNode: () => new Text( BalancingActStrings.levelStringProperty, PANEL_OPTION_FONT ),
       property: this.viewProperties.levelIndicatorVisibleProperty,
 
       // @ts-expect-error
-      label: levelString,
+      label: BalancingActStrings.levelStringProperty,
       tandemName: 'levelCheckbox'
     }
     ], {
@@ -316,7 +305,7 @@ export default class BasicBalanceScreenView extends ScreenView {
     const titleToControlsVerticalSpace = 7;
     const indicatorVisibilityControlsVBox = new VBox( {
       children: [
-        new Text( showString, { font: PANEL_TITLE_FONT, maxWidth: PANEL_TEXT_MAX_WIDTH } ),
+        new Text( BalancingActStrings.showStringProperty, { font: PANEL_TITLE_FONT, maxWidth: PANEL_TEXT_MAX_WIDTH } ),
         new VStrut( titleToControlsVerticalSpace ),
         new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckboxGroup ] } )
       ],
@@ -356,12 +345,8 @@ export default class BasicBalanceScreenView extends ScreenView {
     this.controlPanelVBox = controlPanelsVBox;
 
     // Reset All button.
-    function resetClosure(): void {
-      self.reset();
-    }
-
     this.nonMassLayer.addChild( new ResetAllButton( {
-      listener: resetClosure,
+      listener: () => this.reset(),
       scale: BASharedConstants.RESET_ALL_BUTTON_SCALE,
       right: controlPanelsVBox.right,
       bottom: this.layoutBounds.height - 10,

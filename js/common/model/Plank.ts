@@ -67,8 +67,7 @@ export default class Plank {
   private readonly massRemovedFromPlankEmitter: Emitter<[ string, number, number, Plank ]>;
 
   // Variables that need to be retained for dynamic behavior, but are not intended to be accessed externally
-  // eslint-disable-next-line phet/require-property-suffix
-  private readonly columnState: Property<typeof ColumnState>;
+  private readonly columnStateProperty: Property<typeof ColumnState>;
   private angularVelocity: number;
   private currentNetTorque: number;
 
@@ -78,7 +77,7 @@ export default class Plank {
   // Unrotated shape of the plank
   public readonly unrotatedShape: Shape;
 
-  public constructor( position: Vector2, pivotPoint: Vector2, columnState: Property<typeof ColumnState>, userControlledMasses: Mass[], tandem: Tandem ) {
+  public constructor( position: Vector2, pivotPoint: Vector2, columnStateProperty: Property<typeof ColumnState>, userControlledMasses: Mass[], tandem: Tandem ) {
     this.userControlledMasses = userControlledMasses;
 
     this.tiltAngleProperty = new NumberProperty( 0, {
@@ -118,7 +117,7 @@ export default class Plank {
         { name: 'fullState', phetioType: Plank.PlankIO } ]
     } );
 
-    this.columnState = columnState;
+    this.columnStateProperty = columnStateProperty;
     this.angularVelocity = 0;
     this.currentNetTorque = 0;
 
@@ -128,7 +127,7 @@ export default class Plank {
 
     // Listen to the support column property.  The plank goes to the level position whenever there are two columns
     // present, and into a tilted position when only one is present.
-    columnState.link( newColumnState => {
+    columnStateProperty.link( newColumnState => {
       if ( newColumnState === ColumnState.SINGLE_COLUMN ) {
         this.forceToMaxAndStill();
       }
@@ -149,14 +148,13 @@ export default class Plank {
       addedMass.userControlledProperty.link( userControlledListener );
 
       // Remove the listener when the mass is removed.
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      const self = this;
-      this.massesOnSurface.addItemRemovedListener( function massRemovalListener( removedMass ) {
+      const massRemovalListener = ( removedMass: Mass ) => {
         if ( removedMass === addedMass ) {
           removedMass.userControlledProperty.unlink( userControlledListener );
-          self.massesOnSurface.removeItemRemovedListener( massRemovalListener );
+          this.massesOnSurface.removeItemRemovedListener( massRemovalListener );
         }
-      } );
+      };
+      this.massesOnSurface.addItemRemovedListener( massRemovalListener );
     } );
   }
 
@@ -498,7 +496,7 @@ export default class Plank {
 
   private updateNetTorque(): void {
     this.currentNetTorque = 0;
-    if ( this.columnState.value === ColumnState.NO_COLUMNS ) {
+    if ( this.columnStateProperty.value === ColumnState.NO_COLUMNS ) {
 
       // Add the torque due to the masses on the surface of the plank.
       this.currentNetTorque += this.getTorqueDueToMasses();

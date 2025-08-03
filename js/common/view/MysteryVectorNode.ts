@@ -17,9 +17,6 @@ import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import PositionedVector from '../model/PositionedVector.js';
 
-// eslint-disable-next-line phet/require-property-suffix
-const unknownMassLabelString = BalancingActStrings.unknownMassLabelStringProperty;
-
 // constants
 const FONT = new PhetFont( { size: 36 } );
 const Y_DIST_FROM_POSITION = 3; // In screen units.
@@ -34,7 +31,7 @@ class MysteryVectorNode extends Node {
     } );
 
     // Create the 'mystery vector' node and add it as a child.
-    this.addChild( new Text( unknownMassLabelString, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
+    this.addChild( new Text( BalancingActStrings.unknownMassLabelStringProperty, { font: FONT, fill: 'white', stroke: 'black', lineWidth: 1 } ) );
 
     // Follow the position as it changes
     const positionHandler = ( positionedVector: PositionedVector ) => {
