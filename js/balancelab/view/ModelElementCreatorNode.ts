@@ -77,7 +77,7 @@ export default class ModelElementCreatorNode extends Node {
         const modelElementNode = screenView.getNodeForMass( modelElement );
         assert && assert( modelElementNode, 'unable to find view node for model element' );
 
-        // @ts-expect-error - dragHandler exists on mass node types
+        // @ts-expect-error - dragHandler exists on mass node types, but not Rectangle, see MassNodeFactory
         modelElementNode!.dragHandler.press( event, modelElementNode );
       }, {
         allowTouchSnag: true
