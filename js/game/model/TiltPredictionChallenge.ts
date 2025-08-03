@@ -8,18 +8,18 @@
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
-import BalanceGameChallenge from './BalanceGameChallenge.js';
+import Mass from '../../common/model/Mass.js';
+import BalanceGameChallenge, { type MassDistancePair } from './BalanceGameChallenge.js';
 
 const whatWillHappenStringProperty = BalancingActStrings.whatWillHappenStringProperty;
 
 class TiltPredictionChallenge extends BalanceGameChallenge {
   private viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
-  public constructor( fixedMasses: IntentionalAny ) {
+  public constructor( fixedMasses: MassDistancePair[] ) {
     super( ColumnState.DOUBLE_COLUMNS );
     Array.prototype.push.apply( this.fixedMassDistancePairs, fixedMasses );
 
@@ -37,7 +37,7 @@ class TiltPredictionChallenge extends BalanceGameChallenge {
   /**
    * convenience factory method for creating a mass deduction challenge
    */
-  public static create( fixedMass1: IntentionalAny, fixedMass1DistanceFromCenter: IntentionalAny, fixedMass2: IntentionalAny, fixedMass2DistanceFromCenter: IntentionalAny ): TiltPredictionChallenge {
+  public static create( fixedMass1: Mass, fixedMass1DistanceFromCenter: number, fixedMass2: Mass, fixedMass2DistanceFromCenter: number ): TiltPredictionChallenge {
 
     // Add the fixed masses and their distances from the center of the balance.
     const fixedMassesList = [];

@@ -10,15 +10,24 @@
 
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
+import { ImageableImage } from '../../../../../scenery/js/nodes/Imageable.js';
 import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
+import { MassOptions } from '../Mass.js';
+
+export type LabeledImageMassConfig = {
+  massValue: number;
+  image: HTMLImageElement | ImageableImage;
+  height: number;
+  isMystery: boolean;
+  labelTextProperty: TReadOnlyProperty<string>;
+} & MassOptions;
 
 export default class LabeledImageMass extends ImageMass {
 
   public readonly labelTextProperty: TReadOnlyProperty<string>;
 
-  public constructor( initialPosition: Vector2, config: IntentionalAny ) {
+  public constructor( initialPosition: Vector2, config: LabeledImageMassConfig ) {
     super( config.massValue, config.image, config.height, initialPosition, config.isMystery, config );
     this.labelTextProperty = config.labelTextProperty;
   }

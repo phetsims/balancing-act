@@ -20,7 +20,7 @@ import mysteryObject08_svg from '../../../../images/objects/mysteryObject08_svg.
 import balancingAct from '../../../balancingAct.js';
 import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
-import LabeledImageMass from './LabeledImageMass.js';
+import LabeledImageMass, { type LabeledImageMassConfig } from './LabeledImageMass.js';
 
 const massLabelAStringProperty = BalancingActStrings.massLabelAStringProperty;
 const massLabelBStringProperty = BalancingActStrings.massLabelBStringProperty;
@@ -106,7 +106,7 @@ export default class MysteryMass extends LabeledImageMass {
   private readonly mysteryMassId: number;
 
   public constructor( initialPosition: Vector2, mysteryMassId: number, providedOptions?: MysteryMassOptions ) {
-    const config = optionize<MysteryMassOptions, SelfOptions>()( providedOptions || {}, MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ] );
+    const config = optionize<MysteryMassOptions, SelfOptions>()( MYSTERY_MASS_CONFIGURATIONS[ mysteryMassId ], providedOptions ) as LabeledImageMassConfig;
 
     super( initialPosition, config );
     this.mysteryMassId = mysteryMassId;

@@ -10,7 +10,6 @@
 
 import Multilink from '../../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import IntentionalAny from '../../../../../phet-core/js/types/IntentionalAny.js';
 import type { ImageableImage } from '../../../../../scenery/js/nodes/Imageable.js';
 import balancingAct from '../../../balancingAct.js';
 import HumanTypeEnum from '../HumanTypeEnum.js';
@@ -27,7 +26,7 @@ export default class HumanMass extends ImageMass {
     // Monitor the 'onPlank' property and update the image as changes occur.
     const imageUpdateMultilink = Multilink.multilink(
       [ this.onPlankProperty, humanType.standingImageProperty, humanType.sittingImageProperty ],
-      ( onPlank: boolean, standingImage: ImageableImage, sittingImage: IntentionalAny ) => {
+      ( onPlank: boolean, standingImage: ImageableImage, sittingImage: ImageableImage ) => {
         if ( onPlank ) {
           const xPosition = this.positionProperty.get().x;
           this.centerOfMassXOffset = sittingCenterOfMassXOffset * ( xPosition < 0 ? -1 : 1 );

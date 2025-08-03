@@ -10,12 +10,12 @@
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
+import Mass from '../../common/model/Mass.js';
 import Plank from '../../common/model/Plank.js';
-import BalanceGameChallenge from './BalanceGameChallenge.js';
+import BalanceGameChallenge, { type MassDistancePair } from './BalanceGameChallenge.js';
 
 const balanceMeStringProperty = BalancingActStrings.balanceMeStringProperty;
 
@@ -27,7 +27,7 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
    * @param Array.<Mass> movableMasses - Masses that can be moved by the user.
    * @param Array.<{mass:{Mass}, distance:{number}}> solutionToDisplay - Positions for the movable masses that will balance the fixed masses.
    */
-  public constructor( fixedMasses: IntentionalAny, movableMasses: IntentionalAny, solutionToDisplay: IntentionalAny ) {
+  public constructor( fixedMasses: MassDistancePair[], movableMasses: Mass[], solutionToDisplay: MassDistancePair[] ) {
     super( ColumnState.SINGLE_COLUMN );
     this.fixedMassDistancePairs = this.fixedMassDistancePairs.concat( fixedMasses );
     this.movableMasses = this.movableMasses.concat( movableMasses );
@@ -45,7 +45,7 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
   /**
    * Convenience method for creating this type of challenge.
    */
-  public static create1Fixed1Movable( fixedMass: IntentionalAny, fixedMassDistanceFromCenter: IntentionalAny, movableMass: IntentionalAny ): BalanceMassesChallenge {
+  public static create1Fixed1Movable( fixedMass: Mass, fixedMassDistanceFromCenter: number, movableMass: Mass ): BalanceMassesChallenge {
 
     // Add the fixed mass and its distance from the center of the balance.
     const fixedMassesList = [
@@ -70,7 +70,7 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
   /**
    * Convenience method for creating this type of challenge.
    */
-  public static create2Fixed1Movable( fixedMass1: IntentionalAny, fixedMass1DistanceFromCenter: IntentionalAny, fixedMass2: IntentionalAny, fixedMass2DistanceFromCenter: IntentionalAny, movableMass: IntentionalAny ): BalanceMassesChallenge {
+  public static create2Fixed1Movable( fixedMass1: Mass, fixedMass1DistanceFromCenter: number, fixedMass2: Mass, fixedMass2DistanceFromCenter: number, movableMass: Mass ): BalanceMassesChallenge {
     // Add the fixed masses and their distances from the center of the balance.
     const fixedMassesList = [];
     fixedMassesList.push( { mass: fixedMass1, distance: -fixedMass1DistanceFromCenter } );

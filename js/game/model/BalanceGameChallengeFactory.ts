@@ -814,10 +814,10 @@ class BalanceGameChallengeFactory {
    * Test to see if the provided mass is one of the pre-allocated reusable ones.  This is generally used before deciding
    * whether to dispose a mass when a challenge is completed.
    */
-  public static isReusableMass( mass: IntentionalAny ): boolean {
-    return BALANCE_CHALLENGE_MASSES.includes( mass ) ||
-           MYSTERY_MASSES.includes( mass ) ||
-           LOW_PROFILE_MASSES.includes( mass );
+  public static isReusableMass( mass: Mass ): boolean {
+    return BALANCE_CHALLENGE_MASSES.includes( mass as IntentionalAny ) ||
+           MYSTERY_MASSES.includes( mass as IntentionalAny ) ||
+           LOW_PROFILE_MASSES.includes( mass as IntentionalAny );
   }
 }
 

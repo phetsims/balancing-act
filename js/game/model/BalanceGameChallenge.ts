@@ -12,7 +12,7 @@ import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
 import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
 
-type MassDistancePair = {
+export type MassDistancePair = {
   mass: Mass;
   distance: number;
 };

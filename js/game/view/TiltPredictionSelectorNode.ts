@@ -9,7 +9,7 @@
  */
 
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import Property from '../../../../axon/js/Property.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -25,7 +25,7 @@ class TiltPredictionSelectorNode extends Node {
   // Property that tracks the selected prediction.
   public readonly tiltPredictionProperty: EnumerationProperty<TiltPredictionState>;
 
-  public constructor( gameStateProperty: IntentionalAny ) {
+  public constructor( gameStateProperty: Property<string> ) {
     super();
 
     this.tiltPredictionProperty = new EnumerationProperty( TiltPredictionState.NONE );

@@ -7,18 +7,18 @@
  * @author John Blanco
  */
 
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import { GET_COLUMN_BODY_GRADIENT, GET_COLUMN_SUPPORT_GRADIENT } from '../../../../scenery-phet/js/LevelSupportColumnNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import balancingAct from '../../balancingAct.js';
+import TiltedSupportColumn from '../../game/model/TiltedSupportColumn.js';
 import ColumnState from '../model/ColumnState.js';
 
 class TiltedSupportColumnNode extends Node {
 
-  public constructor( modelViewTransform: ModelViewTransform2, tiltedSupportColumn: IntentionalAny, columnState: typeof ColumnState ) {
+  public constructor( modelViewTransform: ModelViewTransform2, tiltedSupportColumn: TiltedSupportColumn, columnState: typeof ColumnState ) {
     super();
 
     // Create and add the main body of the column.

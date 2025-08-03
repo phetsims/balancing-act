@@ -16,7 +16,7 @@ import balancingAct from '../../balancingAct.js';
 const COLUMN_WIDTH = 0.35; // In meters
 
 export default class TiltedSupportColumn {
-  private shape: Shape;
+  public readonly shape: Shape;
 
   public constructor( height: number, centerX: number, topAngle: number ) {
     this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, 0 ).close();
