@@ -1,4 +1,4 @@
-// Copyright 2024, University of Colorado Boulder
+// Copyright 2024-2025, University of Colorado Boulder
 
 /**
  * Enumerates the state of the tilt prediction of the plank in the game. Valid values are 'none', 'tiltDownOnLeftSide',
