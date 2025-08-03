@@ -38,8 +38,10 @@ import Mass from '../model/Mass.js';
 import MassForceVector from '../model/MassForceVector.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 import AttachmentBarNode from './AttachmentBarNode.js';
+import BrickStackNode from './BrickStackNode.js';
 import ColumnOnOffController from './ColumnOnOffController.js';
 import FulcrumNode from './FulcrumNode.js';
+import ImageMassNode from './ImageMassNode.js';
 import LevelIndicatorNode from './LevelIndicatorNode.js';
 import MassNodeFactory from './MassNodeFactory.js';
 import MysteryVectorNode from './MysteryVectorNode.js';
@@ -158,8 +160,10 @@ export default class BasicBalanceScreenView extends ScreenView {
       } );
 
       const interruptListener = () => {
-        // @ts-expect-error
-        massNode.dragHandler && massNode.dragHandler.interrupt();
+
+        if ( massNode instanceof BrickStackNode || massNode instanceof ImageMassNode ) {
+          massNode.dragHandler && massNode.dragHandler.interrupt();
+        }
       };
 
       this.interruptDragHandlerEmitter.addListener( interruptListener );

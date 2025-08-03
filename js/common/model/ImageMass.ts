@@ -59,8 +59,10 @@ export default class ImageMass extends Mass {
   // TODO: https://github.com/phetsims/balancing-act/issues/168 implement in subclasses
   public override createCopy(): ImageMass {
 
-    // This is written such that it will work for subclasses.
-    // @ts-expect-error
+    // TODO: This is written such that it will work for the subclasses in the masses/directory, but only because it assumes they
+    // all have the same constructor signature. This method should be made abstract and implemented
+    // properly in each subclass. See https://github.com/phetsims/balancing-act/issues/168
+    // @ts-expect-error - TypeScript correctly identifies that this.constructor cannot be properly typed for polymorphic instantiation
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
 }

@@ -10,6 +10,7 @@
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualConstraint.js';
@@ -23,6 +24,8 @@ import BAQueryParameters from '../../common/BAQueryParameters.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
+import BrickStackNode from '../../common/view/BrickStackNode.js';
+import ImageMassNode from '../../common/view/ImageMassNode.js';
 
 // constants
 const CAPTION_OFFSET_FROM_SELECTION_NODE = 4;
@@ -77,8 +80,8 @@ export default class ModelElementCreatorNode extends Node {
         const modelElementNode = screenView.getNodeForMass( modelElement );
         assert && assert( modelElementNode, 'unable to find view node for model element' );
 
-        // @ts-expect-error - dragHandler exists on mass node types, but not Rectangle, see MassNodeFactory
-        modelElementNode!.dragHandler.press( event, modelElementNode );
+        affirm( modelElementNode instanceof BrickStackNode || modelElementNode instanceof ImageMassNode, 'must have a drag handler to forward to' );
+        modelElementNode.dragHandler!.press( event, modelElementNode );
       }, {
         allowTouchSnag: true
       }
