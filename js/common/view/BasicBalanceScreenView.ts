@@ -248,7 +248,6 @@ export default class BasicBalanceScreenView extends ScreenView {
       let forceVectorNode;
       if ( addedMassForceVector.isObfuscated() ) {
         forceVectorNode = new MysteryVectorNode(
-          // @ts-expect-error
           addedMassForceVector.forceVectorProperty,
           this.viewProperties.forceVectorsFromObjectsVisibleProperty,
           modelViewTransform

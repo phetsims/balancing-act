@@ -12,18 +12,19 @@
  * @author John Blanco
  */
 
-import Vector2 from '../../../../dot/js/Vector2.js';
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import balancingAct from '../../balancingAct.js';
+import PositionedVector from '../model/PositionedVector.js';
 
 class PositionedVectorNode extends Node {
   private readonly disposePositionedVectorNode: () => void;
 
-  public constructor( positionedVectorProperty: IntentionalAny, scalingFactor: IntentionalAny, visibleProperty: IntentionalAny, modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
+  public constructor( positionedVectorProperty: Property<PositionedVector>, scalingFactor: number, visibleProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, options?: IntentionalAny ) {
     super();
 
     // eslint-disable-next-line phet/bad-typescript-text
@@ -41,12 +42,8 @@ class PositionedVectorNode extends Node {
     const length = positionedVectorProperty.value.vector.magnitude * scalingFactor;
     this.addChild( new ArrowNode( 0, 0, 0, length, options ) );
 
-    const positionHandler = ( positionedVector: Vector2 ) => {
-
-      // @ts-expect-error
+    const positionHandler = ( positionedVector: PositionedVector ) => {
       this.centerX = modelViewTransform.modelToViewX( positionedVector.origin.x );
-
-      // @ts-expect-error
       this.top = modelViewTransform.modelToViewY( positionedVector.origin.y );
     };
     positionedVectorProperty.link( positionHandler );
