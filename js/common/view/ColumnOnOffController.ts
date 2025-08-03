@@ -35,7 +35,7 @@ class ColumnOnOffController extends Node {
     const options = optionize<ColumnOnOffControllerOptions, SelfOptions, NodeOptions>()( {
       tandem: Tandem.REQUIRED
     }, providedOptions );
-    super( options );
+    super();
 
     const columnSwitchTandem = options.tandem.createTandem( 'columnSwitch' );
     const columnsOnNode = new ColumnControlIcon( ICON_WIDTH, true, {
