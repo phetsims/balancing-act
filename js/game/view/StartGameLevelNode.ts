@@ -89,12 +89,12 @@ export default class StartGameLevelNode extends Node {
       };
     }
 
-    // @ts-expect-error
     const levelSelectionButtonGroup = new LevelSelectionButtonGroup( buttonItems, {
       flowBoxOptions: {
         spacing: 30
       },
-      gameLevels: BAQueryParameters.gameLevels
+      gameLevels: BAQueryParameters.gameLevels,
+      tandem: options.tandem?.createTandem( 'levelSelectionButtonGroup' )
     } );
     this.addChild( levelSelectionButtonGroup );
 

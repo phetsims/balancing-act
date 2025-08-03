@@ -398,7 +398,6 @@ export default class BalanceGameView extends ScreenView {
     const balanceGameChallenge = this.model.getCurrentChallenge();
     if ( balanceGameChallenge !== null ) {
       this.challengeTitleNode.children = [
-        // @ts-expect-error
         new Text( this.model.getCurrentChallenge()!.viewConfig.title, {
           font: new PhetFont( { size: 60, weight: 'bold' } ),
           fill: 'white',
@@ -456,7 +455,6 @@ export default class BalanceGameView extends ScreenView {
         this.challengeLayer.pickable = null;
         this.show( [ this.challengeTitleNode, this.scoreboard, this.checkAnswerButton ] );
 
-        // @ts-expect-error
         if ( this.model.getCurrentChallenge()!.viewConfig.showMassEntryDialog ) {
           if ( this.model.incorrectGuessesOnCurrentChallenge === 0 ) {
             this.massValueEntryNode.clear();
@@ -465,7 +463,6 @@ export default class BalanceGameView extends ScreenView {
         }
         else {
 
-          // @ts-expect-error
           if ( this.model.getCurrentChallenge()!.viewConfig.showTiltPredictionSelector ) {
             this.tiltPredictionSelectorNode.tiltPredictionProperty.reset();
             this.tiltPredictionSelectorNode.visible = true;
@@ -530,15 +527,12 @@ export default class BalanceGameView extends ScreenView {
         this.show( [ this.scoreboard, this.nextButton ] );
 
         // Display the correct answer
-
-        // @ts-expect-error
-        if ( this.model.getCurrentChallenge().viewConfig.showMassEntryDialog ) {
+        if ( this.model.getCurrentChallenge()!.viewConfig.showMassEntryDialog ) {
           this.massValueEntryNode.showAnswer( this.model.getTotalFixedMassValue() );
           this.massValueEntryNode.visible = true;
         }
 
-        // @ts-expect-error
-        else if ( this.model.getCurrentChallenge().viewConfig.showTiltPredictionSelector ) {
+        else if ( this.model.getCurrentChallenge()!.viewConfig.showTiltPredictionSelector ) {
           this.tiltPredictionSelectorNode.tiltPredictionProperty.value = this.model.getTipDirection();
           this.tiltPredictionSelectorNode.visible = true;
         }

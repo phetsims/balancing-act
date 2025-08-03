@@ -83,8 +83,7 @@ class MassValueEntryNode extends Node {
       }
       else {
 
-        // @ts-expect-error
-        slider.addMinorTick( i, null );
+        slider.addMinorTick( i );
       }
     }
 

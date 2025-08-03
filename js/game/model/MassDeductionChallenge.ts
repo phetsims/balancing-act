@@ -17,7 +17,7 @@ import BalanceGameChallenge, { type MassDistancePair } from './BalanceGameChalle
 const whatIsTheMassStringProperty = BalancingActStrings.whatIsTheMassStringProperty;
 
 class MassDeductionChallenge extends BalanceGameChallenge {
-  private viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
+  public readonly viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
   public constructor( fixedMassDistancePair: MassDistancePair, movableMass: Mass, solutionToDisplay: MassDistancePair ) {
     super( ColumnState.NO_COLUMNS );

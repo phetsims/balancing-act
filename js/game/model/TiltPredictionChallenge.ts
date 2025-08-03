@@ -17,7 +17,7 @@ import BalanceGameChallenge, { type MassDistancePair } from './BalanceGameChalle
 const whatWillHappenStringProperty = BalancingActStrings.whatWillHappenStringProperty;
 
 class TiltPredictionChallenge extends BalanceGameChallenge {
-  private viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
+  public readonly viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
   public constructor( fixedMasses: MassDistancePair[] ) {
     super( ColumnState.DOUBLE_COLUMNS );

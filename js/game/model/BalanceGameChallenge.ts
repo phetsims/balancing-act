@@ -6,6 +6,7 @@
  * @author John Blanco
  */
 
+import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
@@ -23,7 +24,7 @@ type SelfOptions = {
 
 type BalanceGameChallengeOptions = SelfOptions;
 
-export default class BalanceGameChallenge {
+export default abstract class BalanceGameChallenge {
 
   // The initial state of the support columns for this challenge
   public readonly initialColumnState: typeof ColumnState;
@@ -43,7 +44,9 @@ export default class BalanceGameChallenge {
   // Disposal function to clean up memory references
   private readonly disposeBalanceGameChallenge: () => void;
 
-  public constructor( initialColumnState: typeof ColumnState, providedOptions?: BalanceGameChallengeOptions ) {
+  public abstract readonly viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
+
+  protected constructor( initialColumnState: typeof ColumnState, providedOptions?: BalanceGameChallengeOptions ) {
 
     const options = optionize<BalanceGameChallengeOptions, SelfOptions>()( {
       maxAttemptsAllowed: 2

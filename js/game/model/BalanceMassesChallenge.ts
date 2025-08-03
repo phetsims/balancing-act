@@ -20,7 +20,7 @@ import BalanceGameChallenge, { type MassDistancePair } from './BalanceGameChalle
 const balanceMeStringProperty = BalancingActStrings.balanceMeStringProperty;
 
 class BalanceMassesChallenge extends BalanceGameChallenge {
-  private viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
+  public readonly viewConfig: { title: LocalizedStringProperty; showMassEntryDialog: boolean; showTiltPredictionSelector: boolean };
 
   /**
    * @param Array.<{mass:{Mass}, distance:{number}}> fixedMasses - Mass-distance pairs that describe the fixed masses.
