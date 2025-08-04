@@ -359,7 +359,6 @@ export default class Plank {
 
   private updatePlank(): void {
 
-    // TODO: Note the runtime behavior change in https://github.com/phetsims/balancing-act/issues/168
     if ( this.pivotPoint.y < this.unrotatedShape.bounds.minY ) {
       throw new Error( 'Pivot point cannot be below the plank.' );
     }
@@ -406,7 +405,6 @@ export default class Plank {
         if ( this.massesOnSurface.get( j ).positionProperty.get().distance( copyOfCandidatePositions[ i ] ) < INTER_SNAP_TO_MARKER_DISTANCE / 10 ) {
 
           // This position is already occupied.
-          // TODO: Runtime behavior change, see https://github.com/phetsims/balancing-act/issues/168
           candidateOpenPositions = _.without( candidateOpenPositions, this.massesOnSurface[ j ].positionProperty.value );
         }
       }
