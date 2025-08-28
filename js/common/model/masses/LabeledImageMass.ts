@@ -8,7 +8,7 @@
  * @author John Blanco (PhET Interactive Simulations)
  */
 
-import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../../axon/js/TReadOnlyProperty.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import { ImageableImage } from '../../../../../scenery/js/nodes/Imageable.js';
 import balancingAct from '../../../balancingAct.js';
