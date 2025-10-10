@@ -77,8 +77,10 @@ export default class StartGameLevelNode extends Node {
       buttonItems[ i ] = {
         icon: iconNodes[ i ],
         scoreProperty: scores[ i ],
+        buttonListener: () => {
+          createLevelStartFunction( i );
+        },
         options: {
-          listener: createLevelStartFunction( i ),
           baseColor: options.buttonBackgroundColor,
           createScoreDisplay: ( scoreProperty: Property<number> ) => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: options.numStarsOnButtons,
