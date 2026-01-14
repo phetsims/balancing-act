@@ -102,6 +102,8 @@ export default class BalanceGameModel {
     this.scoreProperty = new Property( 0 );
 
     this.gameStateProperty = new Property<GameState>( 'choosingLevel' );
+
+    // @ts-expect-error
     this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS );
     this.elapsedTimeProperty = new Property( 0 );
 

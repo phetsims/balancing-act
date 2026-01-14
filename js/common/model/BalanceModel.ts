@@ -40,6 +40,7 @@ export default class BalanceModel {
     this.massList = createObservableArray<Mass>();
     this.userControlledMasses = []; // Masses being controlled by user(s), potentially more than one in touch environment.
 
+    // @ts-expect-error
     this.columnStateProperty = new EnumerationDeprecatedProperty( ColumnState, ColumnState.DOUBLE_COLUMNS, {
       tandem: tandem.createTandem( 'columnStateProperty' ),
       phetioReadOnly: true

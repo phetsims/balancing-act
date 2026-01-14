@@ -95,6 +95,8 @@ export default class BasicBalanceScreenView extends ScreenView {
       levelIndicatorVisibleProperty: new BooleanProperty( false, {
         tandem: tandem.createTandem( 'levelIndicatorVisibleProperty' )
       } ),
+
+      // @ts-expect-error
       positionMarkerStateProperty: new EnumerationDeprecatedProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE, {
         tandem: tandem.createTandem( 'positionMarkerStateProperty' )
       } )
@@ -318,6 +320,8 @@ export default class BasicBalanceScreenView extends ScreenView {
     // Add the control panel that will allow users to select between the various position markers, i.e. ruler, position
     // markers, or nothing.
     const positionPanel = new PositionIndicatorControlPanel(
+
+      // @ts-expect-error
       this.viewProperties.positionMarkerStateProperty, this.layoutBounds.width, {
 
         left: indicatorVisibilityControlPanel.left,

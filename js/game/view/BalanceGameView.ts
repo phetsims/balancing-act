@@ -358,6 +358,7 @@ export default class BalanceGameView extends ScreenView {
     this.challengeLayer.addChild( levelIndicator );
 
     // Add a panel for controlling whether the ruler or marker set are visible.
+    // @ts-expect-error
     const positionMarkerStateProperty = new EnumerationDeprecatedProperty( PositionIndicatorChoice, PositionIndicatorChoice.NONE );
 
     // Add the ruler.
@@ -376,6 +377,7 @@ export default class BalanceGameView extends ScreenView {
 
     // Add the control panel that will allow users to select between the
     // various position markers, i.e. ruler, position markers, or nothing.
+    // @ts-expect-error
     const positionPanel = new PositionIndicatorControlPanel( positionMarkerStateProperty, this.layoutBounds.width, {
 
       right: this.layoutBounds.right - 10,
