@@ -11,7 +11,6 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import introIcon_svg from '../../images/introIcon_svg.js';
-import balancingAct from '../balancingAct.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BAIntroModel from './model/BAIntroModel.js';
 import BAIntroView from './view/BAIntroView.js';
@@ -40,5 +39,4 @@ class BAIntroScreen extends Screen<BAIntroModel, BAIntroView> {
   }
 }
 
-balancingAct.register( 'BAIntroScreen', BAIntroScreen );
 export default BAIntroScreen;

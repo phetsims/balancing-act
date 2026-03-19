@@ -13,7 +13,6 @@ import PhetioObject, { PhetioObjectOptions } from '../../../../tandem/js/PhetioO
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import balancingAct from '../../balancingAct.js';
 
 // constants
 const MIN_ANIMATION_VELOCITY = 3; // In meters/sec.
@@ -162,5 +161,3 @@ export default class Mass extends PhetioObject {
 
   public createCopy(): Mass { throw new Error( 'createCopy should be implemented in descendant types.' ); }
 }
-
-balancingAct.register( 'Mass', Mass );

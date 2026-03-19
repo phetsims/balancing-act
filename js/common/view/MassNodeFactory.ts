@@ -14,7 +14,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from '../model/ColumnState.js';
 import ImageMass from '../model/ImageMass.js';
 import Mass from '../model/Mass.js';
@@ -51,7 +50,5 @@ const MassNodeFactory = {
     return massNode;
   }
 };
-
-balancingAct.register( 'MassNodeFactory', MassNodeFactory );
 
 export default MassNodeFactory;

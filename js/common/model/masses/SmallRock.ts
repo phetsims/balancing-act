@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import rock4_svg from '../../../../images/objects/rock4_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class SmallRock extends ImageMass {
     super( MASS, rock4_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'SmallRock', SmallRock );
 
 export default SmallRock;

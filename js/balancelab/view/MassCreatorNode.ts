@@ -8,7 +8,6 @@
 
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
@@ -31,5 +30,3 @@ export default class MassCreatorNode extends ModelElementCreatorNode {
     }
   }
 }
-
-balancingAct.register( 'MassCreatorNode', MassCreatorNode );

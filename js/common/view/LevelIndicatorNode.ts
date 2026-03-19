@@ -14,7 +14,6 @@ import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 
 // constants
@@ -72,7 +71,5 @@ class LevelIndicatorNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'LevelIndicatorNode', LevelIndicatorNode );
 
 export default LevelIndicatorNode;

@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import fireHydrant_svg from '../../../../images/objects/fireHydrant_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class FireHydrant extends ImageMass {
     super( MASS, fireHydrant_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'FireHydrant', FireHydrant );

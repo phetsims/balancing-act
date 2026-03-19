@@ -13,7 +13,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import PositionedVector from '../model/PositionedVector.js';
 
@@ -51,7 +50,5 @@ class MysteryVectorNode extends Node {
     super.dispose();
   }
 }
-
-balancingAct.register( 'MysteryVectorNode', MysteryVectorNode );
 
 export default MysteryVectorNode;

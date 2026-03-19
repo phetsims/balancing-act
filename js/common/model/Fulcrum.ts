@@ -10,7 +10,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import balancingAct from '../../balancingAct.js';
 
 // constants
 const LEG_THICKNESS_FACTOR = 0.09; // Thickness of legs proportional to overall width, empirically determined.
@@ -42,5 +41,3 @@ export default class Fulcrum {
     this.shape = fulcrumShape;
   }
 }
-
-balancingAct.register( 'Fulcrum', Fulcrum );

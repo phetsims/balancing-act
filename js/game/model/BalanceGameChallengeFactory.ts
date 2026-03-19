@@ -20,7 +20,6 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 import Mass from '../../common/model/Mass.js';
 import Barrel from '../../common/model/masses/Barrel.js';
@@ -810,5 +809,3 @@ export default class BalanceGameChallengeFactory {
 
 // Create a singleton instance for use throughout the application
 export const balanceGameChallengeFactorySingleton = new BalanceGameChallengeFactory();
-
-balancingAct.register( 'BalanceGameChallengeFactory', BalanceGameChallengeFactory );

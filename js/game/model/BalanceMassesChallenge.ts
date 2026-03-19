@@ -10,7 +10,6 @@
  */
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
@@ -89,7 +88,5 @@ class BalanceMassesChallenge extends BalanceGameChallenge {
     return new BalanceMassesChallenge( fixedMassesList, movableMassesList, [ solution ] );
   }
 }
-
-balancingAct.register( 'BalanceMassesChallenge', BalanceMassesChallenge );
 
 export default BalanceMassesChallenge;

@@ -12,7 +12,6 @@ import { GET_COLUMN_BODY_GRADIENT, GET_COLUMN_SUPPORT_GRADIENT } from '../../../
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from '../model/ColumnState.js';
 import LevelSupportColumn from '../model/LevelSupportColumn.js';
 
@@ -59,5 +58,3 @@ export default class LevelSupportColumnNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'LevelSupportColumnNode', LevelSupportColumnNode );

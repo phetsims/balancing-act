@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import pottedPlant_svg from '../../../../images/objects/pottedPlant_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class PottedPlant extends ImageMass {
     super( MASS, pottedPlant_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'PottedPlant', PottedPlant );
 
 export default PottedPlant;

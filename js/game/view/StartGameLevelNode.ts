@@ -19,7 +19,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
-import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../../common/BAQueryParameters.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 
@@ -126,5 +125,3 @@ export default class StartGameLevelNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'StartGameLevelNode', StartGameLevelNode );

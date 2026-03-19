@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import puppy_svg from '../../../../images/objects/puppy_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -20,7 +19,5 @@ class Puppy extends ImageMass {
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 }
-
-balancingAct.register( 'Puppy', Puppy );
 
 export default Puppy;

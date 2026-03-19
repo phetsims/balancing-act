@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import woodCrateTall_svg from '../../../../images/objects/woodCrateTall_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class Crate extends ImageMass {
     super( MASS, woodCrateTall_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'Crate', Crate );

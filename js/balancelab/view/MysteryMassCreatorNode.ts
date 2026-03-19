@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import Mass from '../../common/model/Mass.js';
 import MysteryMass from '../../common/model/masses/MysteryMass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
@@ -56,5 +55,3 @@ export default class MysteryMassCreatorNode extends ImageMassCreatorNode {
     return mass;
   }
 }
-
-balancingAct.register( 'MysteryMassCreatorNode', MysteryMassCreatorNode );

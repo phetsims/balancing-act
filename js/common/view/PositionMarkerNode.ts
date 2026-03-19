@@ -11,7 +11,6 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 
 // constants
 const color = 'rgb( 255, 153, 0 )';
@@ -37,7 +36,5 @@ class PositionMarkerNode extends Node {
     this.mutate( options );
   }
 }
-
-balancingAct.register( 'PositionMarkerNode', PositionMarkerNode );
 
 export default PositionMarkerNode;

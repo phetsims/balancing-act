@@ -17,7 +17,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
-import balancingAct from '../../balancingAct.js';
 import PositionedVector from '../model/PositionedVector.js';
 
 type SelfOptions = {
@@ -69,7 +68,5 @@ class PositionedVectorNode extends Node {
     super.dispose();
   }
 }
-
-balancingAct.register( 'PositionedVectorNode', PositionedVectorNode );
 
 export default PositionedVectorNode;

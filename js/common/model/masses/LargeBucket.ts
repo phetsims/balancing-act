@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import metalBucket_svg from '../../../../images/objects/metalBucket_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class LargeBucket extends ImageMass {
     super( MASS, metalBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'LargeBucket', LargeBucket );

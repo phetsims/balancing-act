@@ -7,7 +7,6 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import balancingAct from '../../../balancingAct.js';
 import HumanTypeEnum from '../HumanTypeEnum.js';
 import HumanMass from './HumanMass.js';
 
@@ -23,5 +22,3 @@ export default class Woman extends HumanMass {
       Vector2.ZERO, SITTING_CENTER_OF_MASS_X_OFFSET, false );
   }
 }
-
-balancingAct.register( 'Woman', Woman );

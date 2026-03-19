@@ -16,7 +16,6 @@ import Panel from '../../../../sun/js/Panel.js';
 import plankBalanced_svg from '../../../images/plankBalanced_svg.js';
 import plankTippedLeft_svg from '../../../images/plankTippedLeft_svg.js';
 import plankTippedRight_svg from '../../../images/plankTippedRight_svg.js';
-import balancingAct from '../../balancingAct.js';
 import TiltPredictionState from '../model/TiltPredictionState.js';
 import TiltPredictionSelectionPanel from './TiltPredictionSelectionPanel.js';
 
@@ -42,7 +41,5 @@ class TiltPredictionSelectorNode extends Node {
     this.addChild( new Panel( panelContents, { cornerRadius: 5 } ) );
   }
 }
-
-balancingAct.register( 'TiltPredictionSelectorNode', TiltPredictionSelectorNode );
 
 export default TiltPredictionSelectorNode;

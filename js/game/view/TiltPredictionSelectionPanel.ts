@@ -11,7 +11,6 @@ import DownUpListener from '../../../../scenery/js/input/DownUpListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import balancingAct from '../../balancingAct.js';
 import TiltPredictionState from '../model/TiltPredictionState.js';
 
 // constants, collected here for easy appearance tweaking.
@@ -105,5 +104,3 @@ export default class TiltPredictionSelectionPanel extends Node {
     } );
   }
 }
-
-balancingAct.register( 'TiltPredictionSelectionPanel', TiltPredictionSelectionPanel );

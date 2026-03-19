@@ -9,7 +9,6 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import balancingAct from '../../balancingAct.js';
 
 class TiltPredictionState extends EnumerationValue {
 
@@ -25,5 +24,4 @@ class TiltPredictionState extends EnumerationValue {
   }
 }
 
-balancingAct.register( 'TiltPredictionState', TiltPredictionState );
 export default TiltPredictionState;

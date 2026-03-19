@@ -19,7 +19,6 @@ import { PressListenerEvent } from '../../../../scenery/js/listeners/PressListen
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../../common/BAQueryParameters.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
@@ -136,5 +135,3 @@ export default class ModelElementCreatorNode extends Node {
     }
   }
 }
-
-balancingAct.register( 'ModelElementCreatorNode', ModelElementCreatorNode );

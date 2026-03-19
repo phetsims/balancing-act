@@ -8,7 +8,6 @@
 
 import LocalizedStringProperty from '../../../../chipper/js/browser/LocalizedStringProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Mass from '../../common/model/Mass.js';
 import BalanceGameChallengeFactory from './BalanceGameChallengeFactory.js';
@@ -197,5 +196,3 @@ export default abstract class BalanceGameChallenge {
     this.disposeBalanceGameChallenge();
   }
 }
-
-balancingAct.register( 'BalanceGameChallenge', BalanceGameChallenge );

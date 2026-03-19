@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import balancingAct from '../../balancingAct.js';
 import Mass from './Mass.js';
 import PositionedVector from './PositionedVector.js';
 
@@ -42,7 +41,5 @@ class MassForceVector {
     };
   }
 }
-
-balancingAct.register( 'MassForceVector', MassForceVector );
 
 export default MassForceVector;

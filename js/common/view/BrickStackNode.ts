@@ -15,7 +15,6 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BrickStack from '../model/masses/BrickStack.js';
 import MassDragHandler from './MassDragHandler.js';
@@ -193,5 +192,3 @@ export default class BrickStackNode extends VBox {
     super.dispose();
   }
 }
-
-balancingAct.register( 'BrickStackNode', BrickStackNode );

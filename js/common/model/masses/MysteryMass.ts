@@ -17,7 +17,6 @@ import mysteryObject05_svg from '../../../../images/objects/mysteryObject05_svg.
 import mysteryObject06_svg from '../../../../images/objects/mysteryObject06_svg.js';
 import mysteryObject07_svg from '../../../../images/objects/mysteryObject07_svg.js';
 import mysteryObject08_svg from '../../../../images/objects/mysteryObject08_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import BalancingActStrings from '../../../BalancingActStrings.js';
 import BAQueryParameters from '../../BAQueryParameters.js';
 import LabeledImageMass, { type LabeledImageMassConfig } from './LabeledImageMass.js';
@@ -116,5 +115,3 @@ export default class MysteryMass extends LabeledImageMass {
     return new MysteryMass( this.positionProperty.get(), this.mysteryMassId );
   }
 }
-
-balancingAct.register( 'MysteryMass', MysteryMass );

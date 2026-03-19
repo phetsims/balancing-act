@@ -14,7 +14,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
-import balancingAct from '../../balancingAct.js';
 import Mass, { MassOptions } from './Mass.js';
 
 export default class ImageMass extends Mass {
@@ -65,5 +64,3 @@ export default class ImageMass extends Mass {
     return new this.constructor( this.positionProperty.get().copy(), this.isMystery );
   }
 }
-
-balancingAct.register( 'ImageMass', ImageMass );

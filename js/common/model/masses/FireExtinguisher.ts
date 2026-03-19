@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import fireExtinguisher_svg from '../../../../images/objects/fireExtinguisher_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 import { MassOptions } from '../Mass.js';
 
@@ -21,5 +20,3 @@ export default class FireExtinguisher extends ImageMass {
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 }
-
-balancingAct.register( 'FireExtinguisher', FireExtinguisher );

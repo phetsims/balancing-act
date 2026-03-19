@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import barrel_svg from '../../../../images/objects/barrel_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class Barrel extends ImageMass {
     super( MASS, barrel_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'Barrel', Barrel );

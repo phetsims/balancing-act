@@ -19,7 +19,6 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import VerticalAquaRadioButtonGroup from '../../../../sun/js/VerticalAquaRadioButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import PositionIndicatorChoice from '../model/PositionIndicatorChoice.js';
 
@@ -91,5 +90,3 @@ export default class PositionIndicatorControlPanel extends Panel {
     } );
   }
 }
-
-balancingAct.register( 'PositionIndicatorControlPanel', PositionIndicatorControlPanel );

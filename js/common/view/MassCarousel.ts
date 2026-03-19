@@ -22,7 +22,6 @@ import GirlCreatorNode from '../../balancelab/view/GirlCreatorNode.js';
 import ManCreatorNode from '../../balancelab/view/ManCreatorNode.js';
 import MysteryMassCreatorNode from '../../balancelab/view/MysteryMassCreatorNode.js';
 import WomanCreatorNode from '../../balancelab/view/WomanCreatorNode.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import BasicBalanceScreenView from './BasicBalanceScreenView.js';
@@ -301,5 +300,3 @@ export default class MassCarousel extends Carousel {
     super( pages, options );
   }
 }
-
-balancingAct.register( 'MassCarousel', MassCarousel );

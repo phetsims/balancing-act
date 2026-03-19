@@ -28,7 +28,6 @@ import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../../common/BASharedConstants.js';
 import ColumnState from '../../common/model/ColumnState.js';
@@ -620,5 +619,3 @@ export default class BalanceGameView extends ScreenView {
     this.rootNode.addChild( levelCompletedAlignBox );
   }
 }
-
-balancingAct.register( 'BalanceGameView', BalanceGameView );

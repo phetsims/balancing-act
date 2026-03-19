@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import sodaBottle_svg from '../../../../images/objects/sodaBottle_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class SodaBottle extends ImageMass {
     super( MASS, sodaBottle_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'SodaBottle', SodaBottle );
 
 export default SodaBottle;

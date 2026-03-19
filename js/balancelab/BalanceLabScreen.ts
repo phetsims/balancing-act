@@ -10,7 +10,6 @@ import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
-import balancingAct from '../balancingAct.js';
 import BalancingActImages from '../BalancingActImages.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceLabModel from './model/BalanceLabModel.js';
@@ -41,5 +40,4 @@ class BalanceLabScreen extends Screen<BalanceLabModel, BalanceLabScreenView> {
   }
 }
 
-balancingAct.register( 'BalanceLabScreen', BalanceLabScreen );
 export default BalanceLabScreen;

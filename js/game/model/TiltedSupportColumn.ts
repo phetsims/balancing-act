@@ -10,7 +10,6 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import balancingAct from '../../balancingAct.js';
 
 // constants
 const COLUMN_WIDTH = 0.35; // In meters
@@ -22,5 +21,3 @@ export default class TiltedSupportColumn {
     this.shape = new Shape().moveTo( centerX - COLUMN_WIDTH / 2, 0 ).lineTo( centerX - COLUMN_WIDTH / 2, height - COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, height + COLUMN_WIDTH / 2 * Math.tan( -topAngle ) ).lineTo( centerX + COLUMN_WIDTH / 2, 0 ).close();
   }
 }
-
-balancingAct.register( 'TiltedSupportColumn', TiltedSupportColumn );

@@ -9,7 +9,6 @@
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import balancingAct from '../../balancingAct.js';
 import Fulcrum from '../model/Fulcrum.js';
 
 class FulcrumNode extends Node {
@@ -23,7 +22,5 @@ class FulcrumNode extends Node {
       } ) );
   }
 }
-
-balancingAct.register( 'FulcrumNode', FulcrumNode );
 
 export default FulcrumNode;

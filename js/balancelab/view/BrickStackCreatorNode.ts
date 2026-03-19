@@ -12,7 +12,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import Mass from '../../common/model/Mass.js';
 import BrickStack from '../../common/model/masses/BrickStack.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
@@ -64,5 +63,3 @@ export default class BrickStackCreatorNode extends MassCreatorNode {
     return mass;
   }
 }
-
-balancingAct.register( 'BrickStackCreatorNode', BrickStackCreatorNode );

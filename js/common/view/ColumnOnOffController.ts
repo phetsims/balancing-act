@@ -14,7 +14,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import ABSwitch from '../../../../sun/js/ABSwitch.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
 import ColumnControlIcon from './ColumnControlIcon.js';
@@ -77,7 +76,5 @@ class ColumnOnOffController extends Node {
     this.mutate( options );
   }
 }
-
-balancingAct.register( 'ColumnOnOffController', ColumnOnOffController );
 
 export default ColumnOnOffController;

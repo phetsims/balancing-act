@@ -8,7 +8,6 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import BAIntroModel from '../model/BAIntroModel.js';
 
@@ -43,5 +42,4 @@ class BAIntroView extends BasicBalanceScreenView {
   }
 }
 
-balancingAct.register( 'BAIntroView', BAIntroView );
 export default BAIntroView;

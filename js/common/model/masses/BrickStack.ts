@@ -8,7 +8,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import Shape from '../../../../../kite/js/Shape.js';
-import balancingAct from '../../../balancingAct.js';
 import Mass, { MassOptions } from '../Mass.js';
 
 // constants
@@ -53,5 +52,3 @@ export default class BrickStack extends Mass {
     return this.shape.bounds.center.rotated( this.rotationAngleProperty.get() ).plus( this.positionProperty.get() );
   }
 }
-
-balancingAct.register( 'BrickStack', BrickStack );

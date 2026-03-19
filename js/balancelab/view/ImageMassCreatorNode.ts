@@ -9,7 +9,6 @@
 
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import balancingAct from '../../balancingAct.js';
 import ImageMass from '../../common/model/ImageMass.js';
 import Mass from '../../common/model/Mass.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
@@ -45,5 +44,3 @@ export default class ImageMassCreatorNode extends MassCreatorNode {
     return this.prototypeImageMass.createCopy();
   }
 }
-
-balancingAct.register( 'ImageMassCreatorNode', ImageMassCreatorNode );

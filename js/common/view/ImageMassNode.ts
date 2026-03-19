@@ -20,7 +20,6 @@ import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import defaultImage_png from '../../../images/objects/defaultImage_png.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BAQueryParameters from '../BAQueryParameters.js';
 import ColumnState from '../model/ColumnState.js';
@@ -216,5 +215,3 @@ export default class ImageMassNode extends Node {
     this.disposeImageMassNode();
   }
 }
-
-balancingAct.register( 'ImageMassNode', ImageMassNode );

@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import tire_svg from '../../../../images/objects/tire_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class Tire extends ImageMass {
     super( MASS, tire_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'Tire', Tire );
 
 export default Tire;

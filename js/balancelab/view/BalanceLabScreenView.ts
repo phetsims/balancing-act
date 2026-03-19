@@ -7,7 +7,6 @@
  */
 
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import MassCarousel from '../../common/view/MassCarousel.js';
 import BalanceLabModel from '../model/BalanceLabModel.js';
@@ -33,5 +32,3 @@ export default class BalanceLabScreenView extends BasicBalanceScreenView {
     super.reset();
   }
 }
-
-balancingAct.register( 'BalanceLabScreenView', BalanceLabScreenView );

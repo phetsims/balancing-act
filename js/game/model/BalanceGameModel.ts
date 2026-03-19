@@ -17,7 +17,6 @@ import { TimerListener } from '../../../../axon/js/Timer.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from '../../common/model/ColumnState.js';
 import Fulcrum from '../../common/model/Fulcrum.js';
 import LevelSupportColumn from '../../common/model/LevelSupportColumn.js';
@@ -407,5 +406,3 @@ export default class BalanceGameModel {
   public static readonly MAX_POSSIBLE_SCORE = MAX_POINTS_PER_PROBLEM * CHALLENGES_PER_PROBLEM_SET;
   public static readonly PLANK_HEIGHT = PLANK_HEIGHT;
 }
-
-balancingAct.register( 'BalanceGameModel', BalanceGameModel );

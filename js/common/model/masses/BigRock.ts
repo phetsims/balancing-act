@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import rock6_svg from '../../../../images/objects/rock6_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class BigRock extends ImageMass {
     super( MASS, rock6_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'BigRock', BigRock );

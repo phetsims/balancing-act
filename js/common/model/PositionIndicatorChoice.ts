@@ -9,13 +9,11 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import balancingAct from '../../balancingAct.js';
 
 const PositionIndicatorChoice = EnumerationDeprecated.byKeys( [ 'NONE', 'RULERS', 'MARKS' ] ) as unknown as {
   NONE: typeof PositionIndicatorChoice;
   RULERS: typeof PositionIndicatorChoice;
   MARKS: typeof PositionIndicatorChoice;
 };
-balancingAct.register( 'PositionIndicatorChoice', PositionIndicatorChoice );
 
 export default PositionIndicatorChoice;

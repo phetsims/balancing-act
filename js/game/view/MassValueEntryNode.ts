@@ -19,7 +19,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import ArrowButton from '../../../../sun/js/buttons/ArrowButton.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 
 const kgStringProperty = BalancingActStrings.kgStringProperty;
@@ -128,7 +127,5 @@ class MassValueEntryNode extends Node {
     this.massValueProperty.value = massValue;
   }
 }
-
-balancingAct.register( 'MassValueEntryNode', MassValueEntryNode );
 
 export default MassValueEntryNode;

@@ -12,7 +12,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from '../model/ColumnState.js';
 import LabeledImageMass from '../model/masses/LabeledImageMass.js';
 import ImageMassNode from './ImageMassNode.js';
@@ -74,5 +73,3 @@ export default class MysteryMassNode extends ImageMassNode {
     super.dispose();
   }
 }
-
-balancingAct.register( 'MysteryMassNode', MysteryMassNode );

@@ -10,7 +10,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
-import balancingAct from '../../balancingAct.js';
 import Mass from '../model/Mass.js';
 
 class MassDragHandler extends DragListener {
@@ -50,7 +49,5 @@ class MassDragHandler extends DragListener {
     } );
   }
 }
-
-balancingAct.register( 'MassDragHandler', MassDragHandler );
 
 export default MassDragHandler;

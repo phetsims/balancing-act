@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import rock1_svg from '../../../../images/objects/rock1_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class MediumRock extends ImageMass {
     super( MASS, rock1_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'MediumRock', MediumRock );
 
 export default MediumRock;

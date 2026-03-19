@@ -11,7 +11,6 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import gameIcon_svg from '../../images/gameIcon_svg.js';
-import balancingAct from '../balancingAct.js';
 import BalancingActStrings from '../BalancingActStrings.js';
 import BalanceGameModel from './model/BalanceGameModel.js';
 import BalanceGameView from './view/BalanceGameView.js';
@@ -40,5 +39,4 @@ class BalanceGameScreen extends Screen<BalanceGameModel, BalanceGameView> {
   }
 }
 
-balancingAct.register( 'BalanceGameScreen', BalanceGameScreen );
 export default BalanceGameScreen;

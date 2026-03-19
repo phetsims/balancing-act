@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import cinderBlock_svg from '../../../../images/objects/cinderBlock_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class CinderBlock extends ImageMass {
     super( MASS, cinderBlock_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'CinderBlock', CinderBlock );

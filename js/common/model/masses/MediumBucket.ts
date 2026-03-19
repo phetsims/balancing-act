@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import yellowBucket_svg from '../../../../images/objects/yellowBucket_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class MediumBucket extends ImageMass {
     super( MASS, yellowBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'MediumBucket', MediumBucket );

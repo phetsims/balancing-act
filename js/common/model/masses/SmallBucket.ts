@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import blueBucket_svg from '../../../../images/objects/blueBucket_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class SmallBucket extends ImageMass {
     super( MASS, blueBucket_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'SmallBucket', SmallBucket );
 
 export default SmallBucket;

@@ -13,7 +13,6 @@ import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import ColumnState from './ColumnState.js';
 import Fulcrum from './Fulcrum.js';
 import LevelSupportColumn from './LevelSupportColumn.js';
@@ -102,5 +101,3 @@ export default class BalanceModel {
     this.columnStateProperty.reset();
   }
 }
-
-balancingAct.register( 'BalanceModel', BalanceModel );

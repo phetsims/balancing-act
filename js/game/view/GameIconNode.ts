@@ -17,7 +17,6 @@ import gameLevel1Icon_svg from '../../../images/gameLevel1Icon_svg.js';
 import gameLevel2Icon_svg from '../../../images/gameLevel2Icon_svg.js';
 import gameLevel3Icon_svg from '../../../images/gameLevel3Icon_svg.js';
 import gameLevel4Icon_svg from '../../../images/gameLevel4Icon_svg.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 
 const levelStringProperty = BalancingActStrings.levelStringProperty;
@@ -68,7 +67,5 @@ class GameIconNode extends VBox {
     } );
   }
 }
-
-balancingAct.register( 'GameIconNode', GameIconNode );
 
 export default GameIconNode;

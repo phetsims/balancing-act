@@ -13,7 +13,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 
 // constants
@@ -105,7 +104,5 @@ class PlankNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'PlankNode', PlankNode );
 
 export default PlankNode;

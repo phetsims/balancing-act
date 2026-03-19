@@ -11,7 +11,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import balancingAct from '../../balancingAct.js';
 import Girl from '../../common/model/masses/Girl.js';
 import BasicBalanceScreenView from '../../common/view/BasicBalanceScreenView.js';
 import ImageMassNode from '../../common/view/ImageMassNode.js';
@@ -42,5 +41,3 @@ export default class GirlCreatorNode extends ImageMassCreatorNode {
     );
   }
 }
-
-balancingAct.register( 'GirlCreatorNode', GirlCreatorNode );

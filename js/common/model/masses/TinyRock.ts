@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import tinyRock_svg from '../../../../images/objects/tinyRock_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class TinyRock extends ImageMass {
     super( MASS, tinyRock_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'TinyRock', TinyRock );
 
 export default TinyRock;

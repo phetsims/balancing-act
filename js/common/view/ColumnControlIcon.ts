@@ -14,7 +14,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import balancingAct from '../../balancingAct.js';
 
 // constants
 const CORNER_ROUNDING = 4;
@@ -110,5 +109,3 @@ export default class ColumnControlIcon extends Node {
     }
   }
 }
-
-balancingAct.register( 'ColumnControlIcon', ColumnControlIcon );

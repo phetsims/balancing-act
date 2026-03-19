@@ -12,7 +12,6 @@ import PhetioGroup from '../../../../tandem/js/PhetioGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import balancingAct from '../../balancingAct.js';
 import BalanceModel from '../../common/model/BalanceModel.js';
 import Mass from '../../common/model/Mass.js';
 import BrickStack from '../../common/model/masses/BrickStack.js';
@@ -128,5 +127,3 @@ export default class BalanceLabModel extends BalanceModel {
     }
   }
 }
-
-balancingAct.register( 'BalanceLabModel', BalanceLabModel );

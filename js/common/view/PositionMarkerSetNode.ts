@@ -10,7 +10,6 @@
 import Property from '../../../../axon/js/Property.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import balancingAct from '../../balancingAct.js';
 import Plank from '../model/Plank.js';
 import PositionMarkerNode from './PositionMarkerNode.js';
 
@@ -50,5 +49,3 @@ export default class PositionMarkerSetNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'PositionMarkerSetNode', PositionMarkerSetNode );

@@ -10,7 +10,6 @@
 
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BalanceModel from '../../common/model/BalanceModel.js';
 import FireExtinguisher from '../../common/model/masses/FireExtinguisher.js';
 import SmallTrashCan from '../../common/model/masses/SmallTrashCan.js';
@@ -34,7 +33,5 @@ class BAIntroModel extends BalanceModel {
     super.reset();
   }
 }
-
-balancingAct.register( 'BAIntroModel', BAIntroModel );
 
 export default BAIntroModel;

@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import oldTelevision_svg from '../../../../images/objects/oldTelevision_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,7 +18,5 @@ class Television extends ImageMass {
     super( MASS, oldTelevision_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'Television', Television );
 
 export default Television;

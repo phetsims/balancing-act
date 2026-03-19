@@ -28,7 +28,6 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import BASharedConstants from '../BASharedConstants.js';
 import BalanceModel from '../model/BalanceModel.js';
@@ -366,5 +365,3 @@ export default class BasicBalanceScreenView extends ScreenView {
     _.values( this.viewProperties ).forEach( viewProperty => { viewProperty.reset(); } );
   }
 }
-
-balancingAct.register( 'BasicBalanceScreenView', BasicBalanceScreenView );

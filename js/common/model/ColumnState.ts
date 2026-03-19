@@ -9,13 +9,11 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import balancingAct from '../../balancingAct.js';
 
 const ColumnState = EnumerationDeprecated.byKeys( [ 'DOUBLE_COLUMNS', 'SINGLE_COLUMN', 'NO_COLUMNS' ] ) as unknown as {
   DOUBLE_COLUMNS: typeof ColumnState;
   SINGLE_COLUMN: typeof ColumnState;
   NO_COLUMNS: typeof ColumnState;
 };
-balancingAct.register( 'ColumnState', ColumnState );
 
 export default ColumnState;

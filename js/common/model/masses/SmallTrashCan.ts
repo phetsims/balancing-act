@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import trashCan_svg from '../../../../images/objects/trashCan_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 import { MassOptions } from '../Mass.js';
 
@@ -20,7 +19,5 @@ class SmallTrashCan extends ImageMass {
     super( MASS, trashCan_svg, HEIGHT, initialPosition, isMystery, options );
   }
 }
-
-balancingAct.register( 'SmallTrashCan', SmallTrashCan );
 
 export default SmallTrashCan;

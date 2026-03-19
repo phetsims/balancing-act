@@ -6,7 +6,6 @@
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import flowerPot_svg from '../../../../images/objects/flowerPot_svg.js';
-import balancingAct from '../../../balancingAct.js';
 import ImageMass from '../ImageMass.js';
 
 // constants
@@ -19,5 +18,3 @@ export default class FlowerPot extends ImageMass {
     super( MASS, flowerPot_svg, HEIGHT, initialPosition, isMystery );
   }
 }
-
-balancingAct.register( 'FlowerPot', FlowerPot );

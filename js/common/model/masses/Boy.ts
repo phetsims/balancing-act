@@ -8,7 +8,6 @@
  */
 
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import balancingAct from '../../../balancingAct.js';
 import HumanTypeEnum from '../HumanTypeEnum.js';
 import HumanMass from './HumanMass.js';
 
@@ -26,5 +25,3 @@ export default class Boy extends HumanMass {
     this.centerOfMassXOffset = 0.03; // Empirically determined.
   }
 }
-
-balancingAct.register( 'Boy', Boy );

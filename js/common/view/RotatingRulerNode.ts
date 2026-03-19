@@ -15,7 +15,6 @@ import ManualConstraint from '../../../../scenery/js/layout/constraints/ManualCo
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import balancingAct from '../../balancingAct.js';
 import BalancingActStrings from '../../BalancingActStrings.js';
 import Plank from '../model/Plank.js';
 
@@ -100,7 +99,5 @@ class RotatingRulerNode extends Node {
     } );
   }
 }
-
-balancingAct.register( 'RotatingRulerNode', RotatingRulerNode );
 
 export default RotatingRulerNode;

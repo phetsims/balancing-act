@@ -11,7 +11,6 @@
 import Multilink from '../../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import type { ImageableImage } from '../../../../../scenery/js/nodes/Imageable.js';
-import balancingAct from '../../../balancingAct.js';
 import HumanTypeEnum from '../HumanTypeEnum.js';
 import ImageMass from '../ImageMass.js';
 
@@ -52,5 +51,3 @@ export default class HumanMass extends ImageMass {
     super.dispose();
   }
 }
-
-balancingAct.register( 'HumanMass', HumanMass );

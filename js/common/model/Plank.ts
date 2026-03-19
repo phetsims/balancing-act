@@ -19,7 +19,6 @@ import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ObjectLiteralIO from '../../../../tandem/js/types/ObjectLiteralIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
-import balancingAct from '../../balancingAct.js';
 import BASharedConstants from '../BASharedConstants.js';
 import ColumnState from './ColumnState.js';
 import Mass from './Mass.js';
@@ -544,5 +543,3 @@ export default class Plank {
     toStateObject: ( plank: Plank ) => plank.toStateObject()
   } );
 }
-
-balancingAct.register( 'Plank', Plank );

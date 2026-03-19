@@ -9,7 +9,6 @@
 
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import getGameLevelsSchema from '../../../vegas/js/getGameLevelsSchema.js';
-import balancingAct from '../balancingAct.js';
 
 const BAQueryParameters = QueryStringMachine.getAll( {
 
@@ -20,5 +19,4 @@ const BAQueryParameters = QueryStringMachine.getAll( {
   stanford: { type: 'flag' }
 } );
 
-balancingAct.register( 'BAQueryParameters', BAQueryParameters );
 export default BAQueryParameters;
