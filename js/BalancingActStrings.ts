@@ -50,4 +50,6 @@ type StringsType = {
 
 const BalancingActStrings = getStringModule( 'BALANCING_ACT' ) as StringsType;
 
+balancingAct.register( 'BalancingActStrings', BalancingActStrings );
+
 export default BalancingActStrings;

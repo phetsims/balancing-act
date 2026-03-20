@@ -132,4 +132,6 @@ const BalancingActImages = {
   } )
 };
 
+balancingAct.register( 'BalancingActImages', BalancingActImages );
+
 export default BalancingActImages;
